@@ -10,14 +10,13 @@
 
 input int TimerInterval = 3600; // každou hodinu
 string suffix = "_ecn";
-string pairs[] = {"NZDJPY", "GBPUSD", "GBPNZD", "EURJPY", "EURGBP", "EURNZD"};
+//string pairs[] = {"NZDJPY", "GBPUSD", "GBPNZD", "EURJPY", "EURGBP", "EURNZD"};
 
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
 void OnInit()
   {
-   Print("EA inicializován");
    EventSetTimer(TimerInterval);
    OnTimer(); // Spustí se ihned po nasazení
   }
@@ -35,9 +34,12 @@ void OnDeinit(const int reason)
 //+------------------------------------------------------------------+
 void OnTimer()
   {
+   string pairs[]; // pole, které bude naplněno
+   
+   GetValidSymbols(pairs);
+   
    datetime now = TimeCurrent();
    datetime from = now - 30 * 24 * 60 * 60; // posledních 30 dní
-
 
    CJAVal json(jtOBJ, "");
 
@@ -46,9 +48,7 @@ void OnTimer()
       string symbol = pairs[i] + suffix;
       MqlRates rates[];
 
-      Print("Načítám ", symbol);
       int copied = CopyRates(symbol, PERIOD_D1, from, now, rates);
-      Print("Počet svíček pro ", symbol, ": ", copied);
 
       if(copied > 0)
         {
@@ -64,7 +64,6 @@ void OnTimer()
             candle["close"]  = rates[j].close;
             candle["volume"] = rates[j].tick_volume;
             pairData.Add(candle);
-            Print("Přidávám svíčku: ", candle.Serialize());
            }
 
          CJAVal *target = json[symbol];
@@ -76,9 +75,7 @@ void OnTimer()
      }
 
    string jsonText = json.Serialize();
-   Print("JSON výstup: ", jsonText);
    SaveToFile("tHistory.json", jsonText);
-
   }
 
 //+------------------------------------------------------------------+
@@ -91,11 +88,44 @@ void SaveToFile(string filename, string content)
      {
       FileWrite(handle, content);
       FileClose(handle);
-      Print("Soubor uložen: ", filename);
      }
    else
      {
       Print("Nelze otevřít soubor: ", filename);
      }
+  }
+//+------------------------------------------------------------------+
+
+//+------------------------------------------------------------------+
+//| Vrací pole měnových párů s 6 písmeny po odstranění suffix        |
+//+------------------------------------------------------------------+
+void GetValidSymbols(string &pairs[])
+  {
+   int total = SymbolsTotal(false); // false = pouze symboly v Market Watch, jinak symboly dostupné v otevřených oknech
+
+   for(int i = 0; i < total; i++)
+     {
+      string symbol = SymbolName(i, false);
+      bool cleaned = StringReplace(symbol, suffix, "");
+
+      if(StringLen(symbol) == 6 && IsAlpha(symbol))
+        {
+         int size = ArraySize(pairs);
+         ArrayResize(pairs, size + 1);
+         pairs[size] = symbol;
+        }
+     }
+  }
+//+------------------------------------------------------------------+
+// Pomocná funkce pro kontrolu, zda je řetězec tvořen pouze písmeny
+bool IsAlpha(string text)
+  {
+   for(int i = 0; i < StringLen(text); i++)
+     {
+      ushort ch = StringGetCharacter(text, i);
+      if((ch < 'A' || ch > 'Z') && (ch < 'a' || ch > 'z'))
+         return false;
+     }
+   return true;
   }
 //+------------------------------------------------------------------+

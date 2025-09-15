@@ -1,0 +1,32 @@
+{
+    "NZDJPY_ecn": {
+        "BUY": 59.09,
+        "SELL": 40.91,
+        "HOLD": 0.0
+    },
+    "GBPUSD_ecn": {
+        "BUY": 50.0,
+        "SELL": 50.0,
+        "HOLD": 0.0
+    },
+    "GBPNZD_ecn": {
+        "BUY": 59.09,
+        "SELL": 40.91,
+        "HOLD": 0.0
+    },
+    "EURJPY_ecn": {
+        "BUY": 59.09,
+        "SELL": 40.91,
+        "HOLD": 0.0
+    },
+    "EURGBP_ecn": {
+        "BUY": 63.64,
+        "SELL": 36.36,
+        "HOLD": 0.0
+    },
+    "EURNZD_ecn": {
+        "BUY": 50.0,
+        "SELL": 50.0,
+        "HOLD": 0.0
+    }
+}
