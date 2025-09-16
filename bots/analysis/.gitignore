@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+
+# Logy
+*.log
+npm-debug.log*
+
+# OS soubory
+.DS_Store
+Thumbs.db
+
+# Env proměnné
+.env
+
+# Build výstupy
+dist/
+build/
+
+# IDE nastavení
+.vscode/
+.idea/

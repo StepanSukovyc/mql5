@@ -1,0 +1,37 @@
+```json
+{
+  "EURSGD_ecn": {
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  "EURUSD_ecn": {
+    "BUY": 40,
+    "SELL": 10,
+    "HOLD": 50
+  },
+  "EURZAR_ecn": {
+    "BUY": 10,
+    "SELL": 40,
+    "HOLD": 50
+  },
+  "GBPAUD_ecn": {
+    "BUY": 20,
+    "SELL": 30,
+    "HOLD": 50
+  },
+  "GBPCAD_ecn": {
+    "BUY": 35,
+    "SELL": 15,
+    "HOLD": 50
+  },
+  "GBPCHF_ecn": {
+    "BUY": 25,
+    "SELL": 25,
+    "HOLD": 50
+  }
+}
+```
+**Zdůvodnění (stručné):**
+
+Hodnocení je založeno na kombinaci faktorů. 50% HOLD reflexuje obecnou nejistotu a krátký časový horizont dat (1 měsíc). Zbylá část je rozdělena mezi BUY/SELL na základě trendu a svíčkových formací v datech a fundamentální situace (neviditelné v samotných datech). Např. u EURZAR vidíme sestupný trend, což podporuje SELL. U EURUSD je trend rostoucí. U GBPCHF je trend nejasný. Fundamentální analýza by vyžadovala přístup k aktuálním zprávám a ekonomickým údajům, které zde nejsou k dispozici. Proto je rozdělení BUY/SELL spíše ilustrativní.
