@@ -34,48 +34,56 @@ void OnDeinit(const int reason)
 //+------------------------------------------------------------------+
 void OnTimer()
   {
-   string pairs[]; // pole, které bude naplněno
-   
+   string pairs[];
    GetValidSymbols(pairs);
-   
+
    datetime now = TimeCurrent();
    datetime from = now - 30 * 24 * 60 * 60; // posledních 30 dní
 
-   CJAVal json(jtOBJ, "");
+   int groupSize = 6;
+   int totalPairs = ArraySize(pairs);
+   int fileIndex = 0;
 
-   for(int i = 0; i < ArraySize(pairs); i++)
+   for(int i = 0; i < totalPairs; i += groupSize)
      {
-      string symbol = pairs[i] + suffix;
-      MqlRates rates[];
+      CJAVal json(jtOBJ, "");
 
-      int copied = CopyRates(symbol, PERIOD_D1, from, now, rates);
-
-      if(copied > 0)
+      for(int k = 0; k < groupSize && (i + k) < totalPairs; k++)
         {
-         CJAVal pairData(jtARRAY, "");
+         string symbol = pairs[i + k] + suffix;
+         MqlRates rates[];
 
-         for(int j = 0; j < ArraySize(rates); j++)
-           {
-            CJAVal candle(jtOBJ, "");
-            candle["time"]   = (int)rates[j].time;
-            candle["open"]   = rates[j].open;
-            candle["high"]   = rates[j].high;
-            candle["low"]    = rates[j].low;
-            candle["close"]  = rates[j].close;
-            candle["volume"] = rates[j].tick_volume;
-            pairData.Add(candle);
-           }
+         int copied = CopyRates(symbol, PERIOD_D1, from, now, rates);
 
-         CJAVal *target = json[symbol];
-         if(target != NULL)
+         if(copied > 0)
            {
-            target.Set(pairData);
+            CJAVal pairData(jtARRAY, "");
+
+            for(int j = 0; j < ArraySize(rates); j++)
+              {
+               CJAVal candle(jtOBJ, "");
+               candle["time"]   = (int)rates[j].time;
+               candle["open"]   = rates[j].open;
+               candle["high"]   = rates[j].high;
+               candle["low"]    = rates[j].low;
+               candle["close"]  = rates[j].close;
+               candle["volume"] = rates[j].tick_volume;
+               pairData.Add(candle);
+              }
+
+            CJAVal *target = json[symbol];
+            if(target != NULL)
+              {
+               target.Set(pairData);
+              }
            }
         }
-     }
 
-   string jsonText = json.Serialize();
-   SaveToFile("tHistory.json", jsonText);
+      string jsonText = json.Serialize();
+      string filename = StringFormat("tHistory_%d.json", fileIndex);
+      SaveToFile(filename, jsonText);
+      fileIndex++;
+     }
   }
 
 //+------------------------------------------------------------------+
