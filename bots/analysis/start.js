@@ -1,5 +1,6 @@
 require('dotenv').config();
 const fs = require('fs/promises');
+const fse = require('fs-extra');
 const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
@@ -25,11 +26,14 @@ async function copyFiles() {
     return targetFolder;
 }
 
-async function processFilesWithGemini(folder) {
-    const targetFolder = path.join(folder, "processed");
-    await fs.mkdir(targetFolder, { recursive: true });
+async function processFilesWithGemini(folder, proceedFolder) {
+    const files = await fs.readdir(folder, { withFileTypes: true });
 
-    const files = await fs.readdir(folder, { withFileTypes: true })
+    if (files.length === 0) {
+        console.log(`Složka "${folder}" je prázdná. Přeskakuji.`);
+        return;
+    }
+
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
 
     for (const file of files) {
@@ -62,7 +66,7 @@ Ohodnoť všechny poslané páry`;
             //const jsonMatch = response.match(/\{[\s\S]*?\}/);
             const jsonMatch = response;
             if (jsonMatch) {
-                const outputPath = path.join(targetFolder, `o${fileName}`);
+                const outputPath = path.join(proceedFolder, `o${fileName}`);
                 await fs.writeFile(outputPath, jsonMatch);
                 console.log(`Výstup uložen: ${outputPath}`);
             } else {
@@ -83,12 +87,102 @@ Ohodnoť všechny poslané páry`;
     }
 }
 
-async function mainCycle() {
+function extractJsonFromText(text) {
+    const start = text.indexOf('{');
+    const end = text.lastIndexOf('}');
+
+    if (start === -1 || end === -1 || end <= start) {
+        throw new Error('JSON objekt nebyl nalezen.');
+    }
+
+    const jsonString = text.substring(start, end + 1);
+
     try {
-        const folder = await copyFiles();
-        await processFilesWithGemini(folder);
+        return JSON.parse(jsonString);
     } catch (err) {
-        console.error('Chyba v cyklu:', err);
+        throw new Error('Chybný formát JSON: ' + err.message);
+    }
+}
+
+async function mergeAndAnalyzeJson(targetFolder) {
+    const files = await fs.readdir(targetFolder, { withFileTypes: true });
+
+    if (files.length === 0) {
+        console.log(`Složka "${targetFolder}" je prázdná. Přeskakuji.`);
+        return;
+    }
+
+    const merged = {};
+
+    for (const file of files) {
+        if (!file.isFile() || !file.name.endsWith('.json') || !file.name.startsWith('o')) {
+            continue;
+        }
+        const filePath = path.join(targetFolder, file.name);
+        const content = await fs.readFile(filePath, 'utf-8');
+
+        try {
+            //const json = JSON.parse(content);
+            const json = extractJsonFromText(content);
+            for (const [symbol, data] of Object.entries(json)) {
+                merged[symbol] = data;
+            }
+        } catch (err) {
+            console.warn(`Soubor ${file.name} není validní JSON:`, err.message);
+        }
+    }
+
+    // Vytvořit pole z objektu
+    const array = Object.entries(merged).map(([symbol, data]) => ({
+        symbol,
+        ...data
+    }));
+
+    // Seřadit podle největší hodnoty BUY nebo SELL
+    array.sort((a, b) => {
+        const maxA = Math.max(a.BUY ?? 0, a.SELL ?? 0);
+        const maxB = Math.max(b.BUY ?? 0, b.SELL ?? 0);
+        return maxB - maxA;
+    });
+
+    // Uložit do aResult.json
+    const outputPath = path.join(targetFolder, 'aResult.json');
+    await fs.writeFile(outputPath, JSON.stringify(array, null, 2));
+    const aFile = path.join(process.env.MQL_SOURCE_FOLDER, 'aResult.json');
+    await fse.copy(outputPath, aFile);
+    console.log(`Sloučený výstup uložen do: ${outputPath}`);
+}
+
+async function checkAnalyzeJsonExists(filePath) {
+    try {
+        await fs.access(filePath);
+        return 1;
+    } catch (err) {
+        return 0;
+    }
+}
+
+async function mainCycle() {
+    const sourceFolder = process.env.MQL_SOURCE_FOLDER;
+    const filePath = path.join(sourceFolder, 'analyze.json');
+
+    const acc = await checkAnalyzeJsonExists(filePath);
+    if (acc === 1) {
+        try {
+            const folder = await copyFiles();
+
+            const targetFolder = path.join(folder, "processed");
+            await fs.mkdir(targetFolder, { recursive: true });
+
+            await processFilesWithGemini(folder, targetFolder);
+            //const targetFolder = "C:\\Users\\Stepa\\GitHub\\mql5\\analysis\\2025-09-16T18-57-30-452Z\\processed";
+            await mergeAndAnalyzeJson(targetFolder);
+        } catch (err) {
+            console.error('Chyba v cyklu:', err);
+        }
+    }
+    else {
+        console.log(`Soubor "${filePath}" neexistuje. Čekám na další cyklus.`);
     }
 
     console.log('Čekám 1 minutu na další cyklus...');
