@@ -2,6 +2,7 @@
   "name": "file-copy-service",
   "version": "1.0.0",
   "main": "start.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node start.js"
   },

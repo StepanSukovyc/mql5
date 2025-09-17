@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { ensurePredictJson } = require('./util.js'); 
 const fs = require('fs/promises');
 const fse = require('fs-extra');
 const path = require('path');
@@ -148,8 +149,11 @@ async function mergeAndAnalyzeJson(targetFolder) {
     // Uložit do aResult.json
     const outputPath = path.join(targetFolder, 'aResult.json');
     await fs.writeFile(outputPath, JSON.stringify(array, null, 2));
-    const aFile = path.join(process.env.MQL_SOURCE_FOLDER, 'aResult.json');
-    await fse.copy(outputPath, aFile);
+
+    const predictFolder = process.env.PREDICT_DEST_FOLDER;
+    await fs.mkdir(predictFolder, { recursive: true });
+    const aPredict = path.join(predictFolder, 'aPredict.json');
+    await fse.copy(outputPath, aPredict);
     console.log(`Sloučený výstup uložen do: ${outputPath}`);
 }
 
@@ -167,6 +171,7 @@ async function mainCycle() {
     const filePath = path.join(sourceFolder, 'analyze.json');
 
     const acc = await checkAnalyzeJsonExists(filePath);
+    // const acc = 1; // for test
     if (acc === 1) {
         try {
             const folder = await copyFiles();
@@ -175,8 +180,10 @@ async function mainCycle() {
             await fs.mkdir(targetFolder, { recursive: true });
 
             await processFilesWithGemini(folder, targetFolder);
-            //const targetFolder = "C:\\Users\\Stepa\\GitHub\\mql5\\analysis\\2025-09-16T18-57-30-452Z\\processed";
+            // const targetFolder = "C:\\Users\\Stepa\\GitHub\\mql5\\analysis\\2025-09-16T18-57-30-452Z\\processed";
             await mergeAndAnalyzeJson(targetFolder);
+            ensurePredictJson();
+
         } catch (err) {
             console.error('Chyba v cyklu:', err);
         }

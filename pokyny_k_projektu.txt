@@ -1,0 +1,35 @@
+Potřebuji vytvořit službu v Node.js, kterou spouštím ručně, třeba node start... nebo npm run start...
+Služba by měla zjistit, zda v konfigurovaé složce (process.env.MQL_SOURCE_FOLDER) jsou soubory začínající na 'tHistory' s příponou json
+pokud existuji, tak je kopírovat do konfigurované složky (process.env.SERVICE_DEST_FOLDER)
+po ukončení běhu by se spustit za minutu znovu
+------------------
+po kopírování souborů potřebuji projit všechny soubory a zavolat Gemini s dotazem, kdy obsah soubor vložím do těla dotazu mezí textem
+ahoj
+`obsa souboru`
+konec
+
+počkat na odpověď, v odpovědi najit JSON objekt a zapsat ho do souboru o<nazev_zpracovaneho_souboru>.json
+-----
+potom, co proběhne await processFilesWithGemini(folder, targetFolder);
+je zapotřebí projit složku targetFolder, přečíst všechny soubory, které by měly mít format
+```json
+{
+  "AUDCAD_ecn": {
+    "BUY": 60,
+    "SELL": 10,
+    "HOLD": 30
+  },
+  ...
+}
+```
+a vytáhnout z ně JSON objekt
+všechyn JSON objekty takto získané, je zapotřebí sloučit do jednoho většího JSON objektu 
+
+Potom analyzovat tento jediný JSON objekt tak, že kopírujeme větve tohoto objektu do JSONArray objektu, kdy větve seřadíme dle největší hodnoty BUY nebo SELL...
+Tento JSONArray uložíme do souboru common.json
+----
+zjistíme, zda ve složce process.env.PREDICT_DEST_FOLDER se nachází soubor cPredict.json
+pokud ne, potom podíváme se, zda se ve stejné složce nachází soubor aPredict.json
+pokud ne, potom vytvoříme prázdný JSON objekt a uložíme ho do souboru predict.json složky process.env.PREDICT_DEST_FOLDER a kopírujeme ho i do umístění process.env.MQL_SOURCE_FOLDER 
+
+doplň logiku, že pokud neexistuje cPredict.json ale existuje aPredict.json, potom kopíruješ obsah aPredict.json do cPredict.json
