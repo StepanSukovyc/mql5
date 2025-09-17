@@ -32,7 +32,7 @@ async function processFilesWithGemini(folder, proceedFolder) {
 
     if (files.length === 0) {
         console.log(`Složka "${folder}" je prázdná. Přeskakuji.`);
-        return;
+        return false;
     }
 
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
@@ -86,6 +86,7 @@ Ohodnoť všechny poslané páry`;
             }
         }
     }
+    return true;
 }
 
 async function emptyFolder(folderPath) {
@@ -196,11 +197,15 @@ async function mainCycle() {
             const targetFolder = path.join(folder, "processed");
             await fs.mkdir(targetFolder, { recursive: true });
 
-            await processFilesWithGemini(folder, targetFolder);
+            const isExists = await processFilesWithGemini(folder, targetFolder);
             // const targetFolder = "C:\\Users\\Stepa\\GitHub\\mql5\\analysis\\2025-09-16T18-57-30-452Z\\processed";
-            await mergeAndAnalyzeJson(targetFolder);
+            if (isExists) {
+                await mergeAndAnalyzeJson(targetFolder);
+            }
             ensurePredictJson();
-
+            // odstranění analyze.json
+            await fs.unlink(filePath);
+            console.log(`Soubor "${filePath}" byl odstraněn po zpracování.`);
         } catch (err) {
             console.error('Chyba v cyklu:', err);
         }
