@@ -33,3 +33,14 @@ pokud ne, potom podíváme se, zda se ve stejné složce nachází soubor aPredi
 pokud ne, potom vytvoříme prázdný JSON objekt a uložíme ho do souboru predict.json složky process.env.PREDICT_DEST_FOLDER a kopírujeme ho i do umístění process.env.MQL_SOURCE_FOLDER 
 
 doplň logiku, že pokud neexistuje cPredict.json ale existuje aPredict.json, potom kopíruješ obsah aPredict.json do cPredict.json
+
+----
+obsah soubrou cPredict.json je pole objektů
+  {
+    "symbol": "AUDUSD_ecn",
+    "BUY": 75,
+    "SELL": 5,
+    "HOLD": 20
+  }
+  potřebuji z pole vytáhnout první objekt, a z tohoto objektu vytvořit nový JSON objekt, kde hodnota symbol bude stejná 
+  ale v novém objektu bude vlastnot `typ`, která bude rovná BUY pokud hodnota BUY prvního objektu je větší než SELL jinak SELL
