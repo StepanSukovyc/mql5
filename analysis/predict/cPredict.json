@@ -1,27 +1,27 @@
 [
   {
-    "symbol": "AUDCHF_ecn",
+    "symbol": "NZDUSD_ecn",
     "BUY": 70,
     "SELL": 10,
     "HOLD": 20
   },
   {
-    "symbol": "CHFJPY_ecn",
-    "BUY": 70,
-    "SELL": 10,
-    "HOLD": 20
-  },
-  {
-    "symbol": "AUDSGD_ecn",
+    "symbol": "AUDUSD_ecn",
     "BUY": 65,
     "SELL": 10,
     "HOLD": 25
   },
   {
-    "symbol": "BCHUSD_ecn",
+    "symbol": "EURZAR_ecn",
+    "BUY": 15,
+    "SELL": 65,
+    "HOLD": 20
+  },
+  {
+    "symbol": "NZDSGD_ecn",
     "BUY": 65,
-    "SELL": 5,
-    "HOLD": 30
+    "SELL": 10,
+    "HOLD": 25
   },
   {
     "symbol": "AUDCAD_ecn",
@@ -36,16 +36,10 @@
     "HOLD": 30
   },
   {
-    "symbol": "CHFHUF_ecn",
-    "BUY": 10,
-    "SELL": 60,
-    "HOLD": 30
-  },
-  {
-    "symbol": "CHFZAR_ecn",
+    "symbol": "CHFJPY_ecn",
     "BUY": 60,
-    "SELL": 15,
-    "HOLD": 25
+    "SELL": 10,
+    "HOLD": 30
   },
   {
     "symbol": "XPTUSD_ecn",
@@ -54,7 +48,25 @@
     "HOLD": 30
   },
   {
-    "symbol": "USDMXN_ecn",
+    "symbol": "EURSGD_ecn",
+    "BUY": 60,
+    "SELL": 10,
+    "HOLD": 30
+  },
+  {
+    "symbol": "GBPCAD_ecn",
+    "BUY": 60,
+    "SELL": 15,
+    "HOLD": 25
+  },
+  {
+    "symbol": "NZDCAD_ecn",
+    "BUY": 60,
+    "SELL": 10,
+    "HOLD": 30
+  },
+  {
+    "symbol": "USDCHF_ecn",
     "BUY": 10,
     "SELL": 60,
     "HOLD": 30
@@ -66,13 +78,13 @@
     "HOLD": 20
   },
   {
-    "symbol": "USDCZK_ecn",
-    "BUY": 15,
-    "SELL": 55,
+    "symbol": "AUDSGD_ecn",
+    "BUY": 55,
+    "SELL": 15,
     "HOLD": 30
   },
   {
-    "symbol": "USDNOK_ecn",
+    "symbol": "USDCZK_ecn",
     "BUY": 15,
     "SELL": 55,
     "HOLD": 30
@@ -84,25 +96,25 @@
     "HOLD": 25
   },
   {
-    "symbol": "LTCUSD_ecn",
-    "BUY": 50,
-    "SELL": 10,
-    "HOLD": 40
+    "symbol": "EURNOK_ecn",
+    "BUY": 25,
+    "SELL": 50,
+    "HOLD": 25
   },
   {
-    "symbol": "USDCHF_ecn",
+    "symbol": "EURNZD_ecn",
     "BUY": 20,
     "SELL": 50,
     "HOLD": 30
   },
   {
-    "symbol": "USDHUF_ecn",
-    "BUY": 15,
+    "symbol": "GBPAUD_ecn",
+    "BUY": 25,
     "SELL": 50,
-    "HOLD": 35
+    "HOLD": 25
   },
   {
-    "symbol": "USDSEK_ecn",
+    "symbol": "USDHUF_ecn",
     "BUY": 20,
     "SELL": 50,
     "HOLD": 30
@@ -114,37 +126,19 @@
     "HOLD": 25
   },
   {
-    "symbol": "ETHUSD_ecn",
-    "BUY": 45,
-    "SELL": 15,
+    "symbol": "AUDJPY_ecn",
+    "BUY": 20,
+    "SELL": 40,
     "HOLD": 40
   },
   {
-    "symbol": "NOKSEK_ecn",
-    "BUY": 45,
-    "SELL": 5,
-    "HOLD": 50
-  },
-  {
-    "symbol": "NZDSGD_ecn",
-    "BUY": 45,
-    "SELL": 5,
-    "HOLD": 50
-  },
-  {
-    "symbol": "USDPLN_ecn",
-    "BUY": 25,
-    "SELL": 45,
-    "HOLD": 30
-  },
-  {
-    "symbol": "AUDJPY_ecn",
+    "symbol": "BTCUSD_ecn",
     "BUY": 40,
     "SELL": 20,
     "HOLD": 40
   },
   {
-    "symbol": "BTCUSD_ecn",
+    "symbol": "ETHUSD_ecn",
     "BUY": 40,
     "SELL": 20,
     "HOLD": 40
@@ -156,61 +150,55 @@
     "HOLD": 50
   },
   {
-    "symbol": "EURNOK_ecn",
-    "BUY": 10,
-    "SELL": 40,
-    "HOLD": 50
-  },
-  {
-    "symbol": "EURUSD_ecn",
-    "BUY": 40,
-    "SELL": 10,
-    "HOLD": 50
-  },
-  {
-    "symbol": "EURZAR_ecn",
-    "BUY": 10,
-    "SELL": 40,
-    "HOLD": 50
-  },
-  {
-    "symbol": "GBPSGD_ecn",
-    "BUY": 40,
-    "SELL": 10,
-    "HOLD": 50
-  },
-  {
-    "symbol": "NZDCHF_ecn",
-    "BUY": 40,
-    "SELL": 10,
-    "HOLD": 50
-  },
-  {
-    "symbol": "NZDUSD_ecn",
-    "BUY": 40,
-    "SELL": 10,
-    "HOLD": 50
-  },
-  {
-    "symbol": "USDCAD_ecn",
-    "BUY": 25,
-    "SELL": 40,
-    "HOLD": 35
-  },
-  {
-    "symbol": "USDJPY_ecn",
-    "BUY": 15,
-    "SELL": 40,
-    "HOLD": 45
-  },
-  {
-    "symbol": "USDZAR_ecn",
+    "symbol": "EURMXN_ecn",
     "BUY": 20,
     "SELL": 40,
     "HOLD": 40
   },
   {
-    "symbol": "EURCZK_ecn",
+    "symbol": "GBPCHF_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "GBPUSD_ecn",
+    "BUY": 40,
+    "SELL": 10,
+    "HOLD": 50
+  },
+  {
+    "symbol": "GBPZAR_ecn",
+    "BUY": 10,
+    "SELL": 40,
+    "HOLD": 50
+  },
+  {
+    "symbol": "USDCAD_ecn",
+    "BUY": 20,
+    "SELL": 40,
+    "HOLD": 40
+  },
+  {
+    "symbol": "USDMXN_ecn",
+    "BUY": 10,
+    "SELL": 40,
+    "HOLD": 50
+  },
+  {
+    "symbol": "USDZAR_ecn",
+    "BUY": 40,
+    "SELL": 40,
+    "HOLD": 20
+  },
+  {
+    "symbol": "AUDNZD_ecn",
+    "BUY": 35,
+    "SELL": 15,
+    "HOLD": 50
+  },
+  {
+    "symbol": "CHFHUF_ecn",
     "BUY": 15,
     "SELL": 35,
     "HOLD": 50
@@ -222,49 +210,49 @@
     "HOLD": 50
   },
   {
-    "symbol": "EURMXN_ecn",
+    "symbol": "EURPLN_ecn",
     "BUY": 15,
     "SELL": 35,
     "HOLD": 50
   },
   {
     "symbol": "EURSEK_ecn",
+    "BUY": 35,
+    "SELL": 35,
+    "HOLD": 30
+  },
+  {
+    "symbol": "GBPNZD_ecn",
     "BUY": 15,
     "SELL": 35,
     "HOLD": 50
   },
   {
-    "symbol": "GBPCAD_ecn",
+    "symbol": "NOKSEK_ecn",
     "BUY": 35,
     "SELL": 15,
-    "HOLD": 50
-  },
-  {
-    "symbol": "GBPUSD_ecn",
-    "BUY": 35,
-    "SELL": 15,
-    "HOLD": 50
-  },
-  {
-    "symbol": "GBPZAR_ecn",
-    "BUY": 15,
-    "SELL": 35,
     "HOLD": 50
   },
   {
     "symbol": "NZDSEK_ecn",
-    "BUY": 35,
-    "SELL": 15,
+    "BUY": 15,
+    "SELL": 35,
     "HOLD": 50
   },
   {
-    "symbol": "ZARJPY_ecn",
-    "BUY": 35,
-    "SELL": 25,
+    "symbol": "USDHKD_ecn",
+    "BUY": 25,
+    "SELL": 35,
     "HOLD": 40
   },
   {
-    "symbol": "AUDNZD_ecn",
+    "symbol": "USDJPY_ecn",
+    "BUY": 15,
+    "SELL": 35,
+    "HOLD": 50
+  },
+  {
+    "symbol": "AUDCHF_ecn",
     "BUY": 30,
     "SELL": 20,
     "HOLD": 50
@@ -276,7 +264,13 @@
     "HOLD": 50
   },
   {
-    "symbol": "CADJPY_ecn",
+    "symbol": "BCHUSD_ecn",
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  {
+    "symbol": "LTCUSD_ecn",
     "BUY": 30,
     "SELL": 20,
     "HOLD": 50
@@ -288,49 +282,31 @@
     "HOLD": 50
   },
   {
-    "symbol": "EURCAD_ecn",
+    "symbol": "EURCHF_ecn",
     "BUY": 30,
     "SELL": 20,
     "HOLD": 50
   },
   {
     "symbol": "EURJPY_ecn",
-    "BUY": 20,
+    "BUY": 30,
     "SELL": 30,
-    "HOLD": 50
+    "HOLD": 40
   },
   {
-    "symbol": "EURPLN_ecn",
-    "BUY": 30,
-    "SELL": 20,
-    "HOLD": 50
-  },
-  {
-    "symbol": "EURSGD_ecn",
-    "BUY": 30,
-    "SELL": 20,
-    "HOLD": 50
-  },
-  {
-    "symbol": "GBPAUD_ecn",
+    "symbol": "EURUSD_ecn",
     "BUY": 20,
     "SELL": 30,
     "HOLD": 50
   },
   {
     "symbol": "GBPJPY_ecn",
-    "BUY": 30,
-    "SELL": 20,
-    "HOLD": 50
-  },
-  {
-    "symbol": "GBPNZD_ecn",
     "BUY": 20,
     "SELL": 30,
     "HOLD": 50
   },
   {
-    "symbol": "NZDCAD_ecn",
+    "symbol": "GBPSGD_ecn",
     "BUY": 30,
     "SELL": 20,
     "HOLD": 50
@@ -338,8 +314,8 @@
   {
     "symbol": "SGDJPY_ecn",
     "BUY": 30,
-    "SELL": 20,
-    "HOLD": 50
+    "SELL": 30,
+    "HOLD": 40
   },
   {
     "symbol": "USDILS_ecn",
@@ -348,25 +324,43 @@
     "HOLD": 50
   },
   {
-    "symbol": "USDSGD_ecn",
-    "BUY": 30,
+    "symbol": "USDPLN_ecn",
+    "BUY": 20,
     "SELL": 30,
-    "HOLD": 40
+    "HOLD": 50
   },
   {
-    "symbol": "EURCHF_ecn",
+    "symbol": "USDSEK_ecn",
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  {
+    "symbol": "USDSGD_ecn",
+    "BUY": 20,
+    "SELL": 30,
+    "HOLD": 50
+  },
+  {
+    "symbol": "ZARJPY_ecn",
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  {
+    "symbol": "CADJPY_ecn",
     "BUY": 25,
     "SELL": 25,
     "HOLD": 50
   },
   {
-    "symbol": "EURNZD_ecn",
-    "BUY": 25,
+    "symbol": "EURCAD_ecn",
+    "BUY": 15,
     "SELL": 25,
-    "HOLD": 50
+    "HOLD": 60
   },
   {
-    "symbol": "GBPCHF_ecn",
+    "symbol": "EURCZK_ecn",
     "BUY": 25,
     "SELL": 25,
     "HOLD": 50
@@ -378,9 +372,15 @@
     "HOLD": 50
   },
   {
-    "symbol": "USDHKD_ecn",
-    "BUY": 10,
-    "SELL": 10,
-    "HOLD": 80
+    "symbol": "USDNOK_ecn",
+    "BUY": 25,
+    "SELL": 25,
+    "HOLD": 50
+  },
+  {
+    "symbol": "NZDCHF_ecn",
+    "BUY": 20,
+    "SELL": 20,
+    "HOLD": 60
   }
 ]

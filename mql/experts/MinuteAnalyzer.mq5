@@ -63,21 +63,28 @@ void OnTimer()
 
       FileClose(handle);
 
-      string symbol = ExtractJsonValue(jsonText, "symbol");
-      string typ    = ExtractJsonValue(jsonText, "typ");
-      string volumeStr = ExtractJsonValue(jsonText, "volume");
+      string symbol = CleanString(ExtractJsonValue(jsonText, "symbol"));
+      string typ    = CleanString(ExtractJsonValue(jsonText, "typ"));
+      string volumeStr = CleanString(ExtractJsonValue(jsonText, "volume"));
 
       double volume = defaultVolume;
       if(StringToDouble(volumeStr) > 0)
          volume = StringToDouble(volumeStr);
 
+      Print("SYMBOL:", symbol, ";TYP:", typ, ";VOLUME:", volume);
       bool result = false;
 
-      if(typ == "BUY")
+      if(StringCompare(typ, "BUY") == 0)
+        {
          result = trade.Buy(volume, symbol);
+         Print("BUY result: ", result);
+        }
       else
-         if(typ == "SELL")
+         if(StringCompare(typ, "SELL") == 0)
+           {
             result = trade.Sell(volume, symbol);
+            Print("SELL result: ", result);
+           }
 
       // Pokud se obchod podařil, smažeme soubor
       if(result)
@@ -89,6 +96,18 @@ void OnTimer()
            }
         }
      }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+string CleanString(string s)
+  {
+   s = TrimString(s);           // odstraní mezery na začátku a konci
+   StringReplace(s, "\"", "");  // odstraní uvozovky
+   StringReplace(s, "\r", "");  // odstraní carriage return
+   StringReplace(s, "\n", "");  // odstraní nový řádek
+   return s;
   }
 
 //+------------------------------------------------------------------+

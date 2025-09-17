@@ -44,3 +44,23 @@ obsah soubrou cPredict.json je pole objektů
   }
   potřebuji z pole vytáhnout první objekt, a z tohoto objektu vytvořit nový JSON objekt, kde hodnota symbol bude stejná 
   ale v novém objektu bude vlastnot `typ`, která bude rovná BUY pokud hodnota BUY prvního objektu je větší než SELL jinak SELL
+  -----------------------
+  
+  potřebuji v MQL5 vytvořit experta, který každou minut zkontroluje volné prostředky na účtu a pokud je jich více než 20%
+  // --- kontrola volných prostředků ---
+   double freeMargin = AccountInfoDouble(ACCOUNT_MARGIN_FREE);
+   double equity     = AccountInfoDouble(ACCOUNT_EQUITY);
+
+   if(freeMargin > (0.2 * equity))
+   
+   tak zjistí, zda existuje souboru predict.json
+   
+   pokud neexistuje, tak vytvoří prázdný subor analyze.json
+   pokud predict.json existuje, tak ho přečte - obsah je ve formátu JSON
+   a má vlastnosti symbol a typ
+   {
+  "symbol": "AUDUSD_ecn",
+  "typ": "BUY"
+}
+
+otevře obchod dle dly symbolu a typu - pokud typ je BUY, tak otevře dlouhou pozici, pokud SELL tak krátkou, pokud není uvedená vlastnot volume, tak objem ať je 0.01
