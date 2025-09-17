@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { ensurePredictJson } = require('./util.js'); 
+const { ensurePredictJson } = require('./util.js');
 const fs = require('fs/promises');
 const fse = require('fs-extra');
 const path = require('path');
@@ -88,6 +88,19 @@ Ohodnoť všechny poslané páry`;
     }
 }
 
+async function emptyFolder(folderPath) {
+    try {
+        const files = await fs.readdir(folderPath);
+        for (const file of files) {
+            const filePath = path.join(folderPath, file);
+            await fs.rm(filePath, { recursive: true, force: true });
+        }
+        console.log(`Složka ${folderPath} byla vyprázdněna.`);
+    } catch (err) {
+        console.error("Chyba při mazání obsahu složky:", err);
+    }
+}
+
 function extractJsonFromText(text) {
     const start = text.indexOf('{');
     const end = text.lastIndexOf('}');
@@ -152,6 +165,10 @@ async function mergeAndAnalyzeJson(targetFolder) {
 
     const predictFolder = process.env.PREDICT_DEST_FOLDER;
     await fs.mkdir(predictFolder, { recursive: true });
+
+    // Vymazání obsahu složky
+    await emptyFolder(predictFolder);
+
     const aPredict = path.join(predictFolder, 'aPredict.json');
     await fse.copy(outputPath, aPredict);
     console.log(`Sloučený výstup uložen do: ${outputPath}`);
