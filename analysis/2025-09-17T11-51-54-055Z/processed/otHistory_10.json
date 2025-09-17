@@ -1,0 +1,44 @@
+```json
+{
+  "XPTUSD_ecn": {
+    "BUY": 60,
+    "SELL": 10,
+    "HOLD": 30
+  },
+  "BCHUSD_ecn": {
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  "BTCUSD_ecn": {
+    "BUY": 40,
+    "SELL": 20,
+    "HOLD": 40
+  },
+  "ETHUSD_ecn": {
+    "BUY": 40,
+    "SELL": 20,
+    "HOLD":40
+  },
+  "LTCUSD_ecn": {
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  }
+}
+```
+**Zdůvodnění:**
+
+Pouze na základě poskytnutých dat a bez přístupu k fundamentální analýze v reálném čase nemohu poskytnout přesné a spolehlivé rizikové hodnocení.  Uvedené hodnoty jsou tedy pouze ilustrativní a vychází z jednoduché technické analýzy (svíčkové formace a trend) z poskytnutých dat. Pro skutečné investiční rozhodnutí je nezbytné provést důkladnou fundamentální analýzu a zvážit aktuální tržní situaci.
+
+**XPTUSD_ecn:** Platina vykazuje v datech rostoucí trend, což podporuje BUY. Nicméně trh s drahými kovy je ovlivňován mnoha faktory, proto je zde i nezanedbatelná složka HOLD.
+
+**BCHUSD_ecn:** Bitcoin Cash v datech osciluje, bez jasného trendu. Vyšší podíl HOLD reflektuje tuto nejistotu.
+
+**BTCUSD_ecn:** Bitcoin  také osciluje, proto je rozložení mezi BUY a HOLD spíše vyrovnané, s menší složkou SELL z důvodu možné korekce.
+
+**ETHUSD_ecn:**  Ethereum v datech osciluje s náznaky možného růstu, ale i poklesu, proto je zde rovnoměrné rozložení mezi BUY a HOLD.
+
+**LTCUSD_ecn:** Litecoin v datech spíše stagnuje, proto převažuje HOLD.
+
+**Důležité:**  Toto hodnocení je pouze orientační.  Neberte ho jako investiční doporučení. Před jakýmkoli investičním rozhodnutím se poraďte s kvalifikovaným finančním poradcem.

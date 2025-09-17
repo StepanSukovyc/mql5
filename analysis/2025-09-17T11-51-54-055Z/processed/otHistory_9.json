@@ -1,0 +1,55 @@
+```json
+{
+  "USDSGD_ecn": {
+    "BUY": 20,
+    "SELL": 30,
+    "HOLD": 50
+  },
+  "USDZAR_ecn": {
+    "BUY": 40,
+    "SELL": 40,
+    "HOLD": 20
+  },
+  "ZARJPY_ecn": {
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  "XAUUSD_ecn": {
+    "BUY": 60,
+    "SELL": 20,
+    "HOLD": 20
+  },
+  "XAGUSD_ecn": {
+    "BUY": 50,
+    "SELL": 25,
+    "HOLD": 25
+  },
+  "XPDUSD_ecn": {
+    "BUY": 55,
+    "SELL": 20,
+    "HOLD": 25
+  }
+}
+```
+
+**Zdůvodnění (stručné):**
+
+Pouze na základě poskytnutých dat a bez přístupu k fundamentální analýze v reálném čase nemohu poskytnout přesné a spolehlivé rizikové hodnocení. Hodnocení v JSONu je proto ilustrativní.
+
+**Obecný postup pro fundamentální analýzu a rizikové hodnocení:**
+
+1. **Fundamentální analýza:** Prozkoumat ekonomické indikátory, úrokové sazby, politickou situaci a další faktory ovlivňující dané měny. Zdroje jako Bloomberg, Trading Economics, zprávy centrálních bank.
+2. **Technická analýza (svíčkové formace):** Identifikovat trendy, support/resistance úrovně a svíčkové formace (např. doji, hammer, engulfing) v poskytnutých datech.
+3. **Kombinace analýz:** Spojit fundamentální a technickou analýzu pro komplexní pohled.
+4. **Rizikové hodnocení:** Na základě analýz přiřadit procentuální pravděpodobnost pro BUY/SELL/HOLD. Důležité je brát v úvahu i aktuální tržní sentiment a volatilitu.
+
+**Příklad USDSGD_ecn:**
+
+* **Data:** Relativně stabilní kurz s mírným růstem.
+* **Fundamentální analýza (hypotetická):**  Pokud by ekonomika Singapuru vykazovala známky zpomalení a americká ekonomika posilovala, predikoval bych spíše posílení USD.
+* **Svíčkové formace (z dat):**  Absence výrazných formací signalizuje spíše konsolidaci.
+* **Rizikové hodnocení (ilustrativní):** BUY: 20%, SELL: 30%, HOLD: 50% (kvůli nejistotě a absenci silných signálů).
+
+
+Pro skutečné obchodování je nezbytné provést důkladnou analýzu a používat stop-lossy pro řízení rizika.

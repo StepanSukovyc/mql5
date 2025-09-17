@@ -1,0 +1,46 @@
+```json
+{
+  "EURSGD_ecn": {
+    "BUY": 60,
+    "SELL": 10,
+    "HOLD": 30
+  },
+  "EURUSD_ecn": {
+    "BUY": 20,
+    "SELL": 30,
+    "HOLD": 50
+  },
+  "EURZAR_ecn": {
+    "BUY": 15,
+    "SELL": 65,
+    "HOLD": 20
+  },
+  "GBPAUD_ecn": {
+    "BUY": 25,
+    "SELL": 50,
+    "HOLD": 25
+  },
+  "GBPCAD_ecn": {
+    "BUY": 60,
+    "SELL": 15,
+    "HOLD": 25
+  },
+  "GBPCHF_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+**Zdůvodnění (nebylo požadováno v JSON, ale pro pochopení):**
+
+Toto hodnocení je zjednodušené a vychází pouze z omezených historických dat za jeden měsíc a bez přístupu k fundamentální analýze v reálném čase. 
+
+* **EURSGD:** Mírný růstový trend v posledních dnech naznačuje potenciál pro BUY, ale celková volatilita je nízká, proto vysoký podíl HOLD.
+* **EURUSD:**  Relativně stabilní, mírný pokles v posledních dnech. Vyšší pravděpodobnost SELL než BUY, ale nejistota vede k vysokému HOLD.
+* **EURZAR:** Klesající trend naznačuje SELL.
+* **GBPAUD:**  Klesající trend, silnější SELL.
+* **GBPCAD:**  Relativně stabilní s potenciálem pro růst (BUY).
+* **GBPCHF:**  Trend nejasný,  vyšší pravděpodobnost poklesu (SELL), ale velká nejistota.
+
+**Důležité upozornění:** Toto je pouze hypotetické rizikové hodnocení založené na omezených datech. Pro skutečné investiční rozhodnutí je nezbytné provést důkladnou fundamentální a technickou analýzu, zvážit aktuální tržní situaci a konzultovat s profesionálním finančním poradcem.

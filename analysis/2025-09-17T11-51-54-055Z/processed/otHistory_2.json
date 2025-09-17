@@ -1,0 +1,35 @@
+```json
+{
+  "EURAUD_ecn": {
+    "BUY": 20,
+    "SELL": 30,
+    "HOLD": 50
+  },
+  "EURCAD_ecn": {
+    "BUY": 15,
+    "SELL": 25,
+    "HOLD": 60
+  },
+  "EURCHF_ecn": {
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  "EURCZK_ecn": {
+    "BUY": 25,
+    "SELL": 25,
+    "HOLD": 50
+  },
+  "EURGBP_ecn": {
+    "BUY": 35,
+    "SELL": 15,
+    "HOLD": 50
+  },
+  "EURHUF_ecn": {
+    "BUY": 10,
+    "SELL": 40,
+    "HOLD": 50
+  }
+}
+```
+**Důležité upozornění:** Toto hodnocení je pouze ilustrační a zjednodušené. V reálné situaci by bylo nutné provést mnohem detailnější analýzu, zahrnující aktuální makroekonomické události, politické faktory a další relevantní informace.  Použití tohoto hodnocení pro reálné investování je na vlastní nebezpečí.

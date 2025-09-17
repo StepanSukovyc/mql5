@@ -1,0 +1,47 @@
+```json
+{
+  "AUDCAD_ecn": {
+    "BUY": 60,
+    "SELL": 10,
+    "HOLD": 30
+  },
+  "AUDCHF_ecn": {
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  "AUDJPY_ecn": {
+    "BUY": 20,
+    "SELL": 40,
+    "HOLD": 40
+  },
+  "AUDNZD_ecn": {
+    "BUY": 35,
+    "SELL": 15,
+    "HOLD": 50
+  },
+  "AUDSGD_ecn": {
+    "BUY": 55,
+    "SELL": 15,
+    "HOLD": 30
+  },
+  "AUDUSD_ecn": {
+    "BUY": 65,
+    "SELL": 10,
+    "HOLD": 25
+  }
+}
+```
+**Zdůvodnění (pro ilustraci, v JSONu není potřeba):**
+
+Zadaná data pokrývají zhruba jeden měsíc a ukazují převážně rostoucí trend u většiny párů. Pro fundamentální analýzu bych v reálné situaci zkoumal ekonomické ukazatele Austrálie (inflace, HDP, zaměstnanost) a druhé měny v páru (Kanada, Švýcarsko, Japonsko, Nový Zéland, Singapur, USA). Dále bych sledoval ceny komodit (zlato, ropa), jelikož Austrálie je na ně silně závislá, a měnovou politiku centrálních bank.
+
+Svíčkové formace v zadaných datech naznačují u některých párů možný obrat trendu, ale pro přesnější analýzu by bylo potřeba delší časové období.  
+
+**Příklad AUDUSD_ecn:**
+
+* **BUY: 65%** - Rostoucí trend v posledních týdnech dat, fundamentálně by se dalo očekávat spíše posilování USD, ale i AUD.
+* **SELL: 10%** -  Existuje riziko korekce, ale pravděpodobnost silného poklesu je menší.
+* **HOLD: 25%** -  Vhodná strategie pro investory s averzí k riziku, kteří čekají na potvrzení trendu.
+
+**Upozornění:** Toto je zjednodušená analýza založená na omezeném množství dat. V reálném obchodování je nutné provést detailnější fundamentální a technickou analýzu a zohlednit aktuální tržní situaci a rizikovou toleranci.
