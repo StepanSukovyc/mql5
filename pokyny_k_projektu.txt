@@ -64,3 +64,19 @@ obsah soubrou cPredict.json je pole objektů
 }
 
 otevře obchod dle dly symbolu a typu - pokud typ je BUY, tak otevře dlouhou pozici, pokud SELL tak krátkou, pokud není uvedená vlastnot volume, tak objem ať je 0.01
+-------------
+zjistíme, zda existuje soubor
+    const outputPath = path.join(targetFolder, 'aDaysResult.json');
+tento soubor obsahuje JSONArray seřazených měnových párů tvaru
+  {
+    "symbol": "CHFZAR_ecn",
+    "BUY": 70,
+    "SELL": 10,
+    "HOLD": 20
+  }
+
+potřebuji projit od shora 10 objektů, pro které ve složce `folder` existuji odpovídající soubory s názvem `4H-<symbol>.json`
+a pro každý soubor zavolat metodu s dotazem na gemini
+const prompt = 'ahoj <content> pa'
+a výsledek dotazu uložit do souboru s názvem `o4H-<symbol>.json` do složky `folder/proceed`
+

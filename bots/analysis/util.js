@@ -62,5 +62,5 @@ function ensurePredictJson() {
 
 
 module.exports = {
-  ensurePredictJson
+    ensurePredictJson
 };
