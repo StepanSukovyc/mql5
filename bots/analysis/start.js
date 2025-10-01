@@ -3,7 +3,7 @@ require('dotenv').config();
 const { ensurePredictJson } = require('./util.js');
 const fs = require('fs/promises');
 const path = require('path');
-const { processDaysWithGemini, process4HWithGemini } = require('./gemini.js');
+const { processDaysWithGemini, process4HWithGemini } = require('./gemini_v1.js');
 const { analyzeDaysData, analyze4HData } = require('./analysis.js');
 
 async function copyFiles() {
