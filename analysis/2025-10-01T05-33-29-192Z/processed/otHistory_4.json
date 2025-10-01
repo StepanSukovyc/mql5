@@ -1,0 +1,34 @@
+```json
+{
+  "EURNOK_ecn": {
+    "BUY": 20,
+    "SELL": 40,
+    "HOLD": 40
+  },
+  "EURNZD_ecn": {
+    "BUY": 45,
+    "SELL": 15,
+    "HOLD": 40
+  },
+  "EURPLN_ecn": {
+    "BUY": 30,
+    "SELL": 25,
+    "HOLD": 45
+  },
+  "EURSEK_ecn": {
+    "BUY": 35,
+    "SELL": 20,
+    "HOLD": 45
+  },
+  "EURSGD_ecn": {
+    "BUY": 40,
+    "SELL": 15,
+    "HOLD": 45
+  },
+  "EURUSD_ecn": {
+    "BUY": 35,
+    "SELL": 25,
+    "HOLD": 40
+  }
+}
+```
