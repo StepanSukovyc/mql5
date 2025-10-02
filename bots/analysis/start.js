@@ -13,7 +13,7 @@ async function copyFiles() {
 
     const sourceFolder = process.env.MQL_SOURCE_FOLDER;
     const files = await fs.readdir(sourceFolder);
-    const matchingFiles = files.filter(f => f.startsWith('tHistory') && f.endsWith('.json'));
+    const matchingFiles = files.filter(f => (f.startsWith('tHistory') || f.startsWith('4H-')) && f.endsWith('.json'));
 
     for (const file of matchingFiles) {
         const src = path.join(sourceFolder, file);
@@ -40,16 +40,13 @@ async function mainCycle() {
     const filePath = path.join(sourceFolder, 'analyze.json');
 
     const acc = await checkAnalyzeJsonExists(filePath);
-    // const acc = 1; // for test
     if (acc === 1) {
         try {
             const folder = await copyFiles();
-
             const targetFolder = path.join(folder, "processed");
             await fs.mkdir(targetFolder, { recursive: true });
 
             let isExists = await processDaysWithGemini(folder, targetFolder);
-            // const targetFolder = "C:\\Users\\Stepa\\GitHub\\mql5\\analysis\\2025-09-16T18-57-30-452Z\\processed";
             if (isExists) {
                 await analyzeDaysData(targetFolder);
                 let isExists = await process4HWithGemini(folder, targetFolder);

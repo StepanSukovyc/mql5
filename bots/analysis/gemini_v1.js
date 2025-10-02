@@ -63,9 +63,10 @@ async function processDaysWithGemini(folder, proceedFolder) {
         }
 
         const fileName = file.name;
-        if (!fileName.endsWith('.json')) {
+        if (!(fileName.endsWith('.json') && fileName.startsWith('tHistory'))) {
             continue;
         }
+        console.log(`Zpracovávám soubor: ${fileName}`);
 
         const filePath = path.join(folder, fileName);
         const content = await fs.readFile(filePath, 'utf-8');

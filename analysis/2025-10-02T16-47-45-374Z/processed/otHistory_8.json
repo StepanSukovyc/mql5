@@ -1,0 +1,34 @@
+```json
+{
+  "USDCHF_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  },
+  "USDCZK_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  "USDHKD_ecn": {
+    "BUY": 35,
+    "SELL": 35,
+    "HOLD": 30
+  },
+  "USDHUF_ecn": {
+    "BUY": 40,
+    "SELL": 30,
+    "HOLD": 30
+  },
+  "USDILS_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  "USDJPY_ecn": {
+    "BUY": 45,
+    "SELL": 25,
+    "HOLD": 30
+  }
+}
+```

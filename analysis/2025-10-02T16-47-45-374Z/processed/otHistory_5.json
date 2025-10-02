@@ -1,0 +1,34 @@
+```json
+{
+  "EURZAR_ecn": {
+    "BUY": 15,
+    "SELL": 65,
+    "HOLD": 20
+  },
+  "GBPAUD_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  },
+  "GBPCAD_ecn": {
+    "BUY": 40,
+    "SELL": 30,
+    "HOLD": 30
+  },
+  "GBPCHF_ecn": {
+    "BUY": 35,
+    "SELL": 35,
+    "HOLD": 30
+  },
+  "GBPJPY_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  },
+  "GBPNZD_ecn": {
+    "BUY": 50,
+    "SELL": 20,
+    "HOLD": 30
+  }
+}
+```
