@@ -1,0 +1,62 @@
+[
+  {
+    "symbol": "AUDJPY_ecn",
+    "BUY": 60,
+    "SELL": 15,
+    "HOLD": 25
+  },
+  {
+    "symbol": "XPTUSD_ecn",
+    "BUY": 60,
+    "SELL": 20,
+    "HOLD": 20
+  },
+  {
+    "symbol": "BCHUSD_ecn",
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  },
+  {
+    "symbol": "XAGUSD_ecn",
+    "BUY": 45,
+    "SELL": 25,
+    "HOLD": 30
+  },
+  {
+    "symbol": "XAUUSD",
+    "BUY": 45,
+    "SELL": 25,
+    "HOLD": 30
+  },
+  {
+    "symbol": "ETHUSD_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "LTCUSD_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "BTCUSD_ecn",
+    "BUY": 35,
+    "SELL": 25,
+    "HOLD": 40
+  },
+  {
+    "symbol": "XPDUSD_ecn",
+    "BUY": 35,
+    "SELL": 30,
+    "HOLD": 35
+  },
+  {
+    "symbol": "ZARJPY_ecn",
+    "BUY": 35,
+    "SELL": 25,
+    "HOLD": 40
+  }
+]

@@ -1,0 +1,29 @@
+```json
+{
+  "AUDCHF_ecn": {
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  },
+  "AUDJPY_ecn": {
+    "BUY": 60,
+    "SELL": 10,
+    "HOLD": 30
+  },
+  "AUDNZD_ecn": {
+    "BUY": 40,
+    "SELL": 30,
+    "HOLD": 30
+  },
+  "AUDSGD_ecn": {
+    "BUY": 50,
+    "SELL": 20,
+    "HOLD": 30
+  },
+  "AUDUSD_ecn": {
+    "BUY": 55,
+    "SELL": 15,
+    "HOLD": 30
+  }
+}
+```

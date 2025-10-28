@@ -1,0 +1,34 @@
+```json
+{
+  "USDILS_ecn": {
+    "BUY": 20,
+    "SELL": 40,
+    "HOLD": 40
+  },
+  "USDJPY_ecn": {
+    "BUY": 60,
+    "SELL": 20,
+    "HOLD": 20
+  },
+  "USDMXN_ecn": {
+    "BUY": 30,
+    "SELL": 30,
+    "HOLD": 40
+  },
+  "USDNOK_ecn": {
+    "BUY": 40,
+    "SELL": 30,
+    "HOLD": 30
+  },
+  "USDPLN_ecn": {
+    "BUY": 35,
+    "SELL": 30,
+    "HOLD": 35
+  },
+  "USDSEK_ecn": {
+    "BUY": 35,
+    "SELL": 30,
+    "HOLD": 35
+  }
+}
+```

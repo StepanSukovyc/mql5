@@ -1,0 +1,24 @@
+```json
+{
+  "BTCUSD_ecn": {
+    "BUY": 35,
+    "SELL": 25,
+    "HOLD": 40
+  }
+}
+```
+
+**Vysvětlení:**
+
+Hodnocení je založeno na kombinaci technické a hypotetické fundamentální analýzy (protože nemám přístup k aktuálním fundamentálním datům).  Reálné hodnocení by vyžadovalo analýzu aktuálních zpráv, ekonomických ukazatelů, regulací, sentimentu trhu atd.
+
+*   **BUY (35%):** Celkově data vykazují silný rostoucí trend v průběhu měsíce. Zvláště silný je růst na konci období. I přes korekce, je vidět snaha o růst. Předpokládám pozitivní sentiment (hypoteticky).
+*   **SELL (25%):** Jsou zde i korekce v průběhu měsíce. Nejsou známy žádné konkrétní negativní fundamentální faktory (opět hypoteticky), ale existuje riziko korekce, zvláště po tak silném růstu. Možná je trh překoupený.
+*   **HOLD (40%):** Vzhledem k volatilitě a nejistotě na trhu (absence konkrétních fundamentálních dat) je relativně vysoká váha přiřazena opatrné strategii HOLD. Trh potřebuje konsolidaci po takovém růstu.
+
+**Důležité upozornění:**
+
+*   Toto je **pouze příklad** hodnocení na základě omezených historických dat a bez reálné fundamentální analýzy.
+*   Nenabízím investiční poradenství. Každá investice je riziková a je potřeba provést vlastní důkladnou analýzu.
+*   Hodnocení by se významně změnilo s ohledem na aktuální fundamentální data a širší kontext trhu.
+*   Použití svíčkových formací by vyžadovalo podrobnější analýzu jednotlivých formací v datech a mohlo by ovlivnit rozložení procent. Pro jednoduchost jsem se zaměřil na celkový trend.

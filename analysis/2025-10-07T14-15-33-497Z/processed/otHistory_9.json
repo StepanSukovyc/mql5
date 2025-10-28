@@ -1,0 +1,34 @@
+```json
+{
+  "USDSGD_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  },
+  "USDZAR_ecn": {
+    "BUY": 10,
+    "SELL": 60,
+    "HOLD": 30
+  },
+  "ZARJPY_ecn": {
+    "BUY": 70,
+    "SELL": 10,
+    "HOLD": 20
+  },
+  "XAUUSD_ecn": {
+    "BUY": 80,
+    "SELL": 5,
+    "HOLD": 15
+  },
+  "XAGUSD_ecn": {
+    "BUY": 75,
+    "SELL": 5,
+    "HOLD": 20
+  },
+  "XPDUSD_ecn": {
+    "BUY": 85,
+    "SELL": 5,
+    "HOLD": 10
+  }
+}
+```

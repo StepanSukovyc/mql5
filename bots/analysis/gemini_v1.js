@@ -99,21 +99,22 @@ async function process4HWithGemini(folder, proceedFolder) {
         const data = await fs.readFile(inputPath, 'utf-8');
         const pairs = JSON.parse(data);
 
-        // Projdi prvních 10 objektů
-        for (let i = 0; i < Math.min(10, pairs.length); i++) {
-            const { symbol } = pairs[i];
-            const fileName = `4H-${symbol}.json`;
-            const filePath = path.join(folder, fileName);
+        // Projdeme všechny páry a zpracujeme ty, které splňují podmínky BUY nebo SELL > 50
+        for (const pair of pairs) {
+            const { symbol, BUY, SELL } = pair;
+            if ((BUY && BUY > 50) || (SELL && SELL > 50)) {
+                const fileName = `4H-${symbol}.json`;
+                const filePath = path.join(folder, fileName);
 
-            try {
-                // Zkontroluj existenci souboru
-                await fs.access(filePath);
+                try {
+                    // Zkontroluj existenci souboru
+                    await fs.access(filePath);
 
-                // Načti obsah souboru
-                const content = await fs.readFile(filePath, 'utf-8');
+                    // Načti obsah souboru
+                    const content = await fs.readFile(filePath, 'utf-8');
 
-                // Vytvoř prompt
-                const prompt = `jsi finanční poradce.posílám historická data periody 4H za měsíc měnového páru.
+                    // Vytvoř prompt
+                    const prompt = `jsi finanční poradce.posílám historická data periody 4H za měsíc měnového páru.
 jak bys na základě fundamentální analýzy dostupné na webu, svíčkových formaci a daných dat procentuálně (kde 100% - jistota, 0 - rtiziko) provedl rizikové hodnocení
 - BUY
 - SELL
@@ -121,11 +122,12 @@ jak bys na základě fundamentální analýzy dostupné na webu, svíčkových f
 aby dohromady dály 100%
 data jsou\n\`${content}\`\nodpověď prosím pošli stručně v JSON formátu, kde klíčem je měnový pár a tělem je hodnocení.`;
 
-                // Zavolej funkci proceedResponse (axios verze)
-                await proceedResponse(proceedFolder, 'o4H-', fileName, prompt);
+                    // Zavolej funkci proceedResponse (axios verze)
+                    await proceedResponse(proceedFolder, 'o4H-', fileName, prompt);
 
-            } catch (err) {
-                console.warn(`⚠️ Soubor ${fileName} nelze načíst:`, err.message);
+                } catch (err) {
+                    console.warn(`⚠️ Soubor ${fileName} nelze načíst:`, err.message);
+                }
             }
         }
     } catch (err) {

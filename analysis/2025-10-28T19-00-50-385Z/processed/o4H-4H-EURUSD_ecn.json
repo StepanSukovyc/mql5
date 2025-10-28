@@ -1,0 +1,27 @@
+```json
+{
+  "EURUSD_ecn": {
+    "BUY": 30,
+    "SELL": 50,
+    "HOLD": 20
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k omezenému množství dat a absence aktuální fundamentální analýzy a hlubší technické analýzy (což by vyžadovalo složitější skripty a připojení k API s daty a zprávami) jsem provedl následující kroky:
+
+1.  **Celkový trend:** Data ukazují převážně klesající trend během daného měsíce. Proto je SELL upřednostňován.
+2.  **Svíčkové formace:**  Analyzoval jsem data pro základní svíčkové formace (např. Doji, Hammer, Engulfing patterns). Identifikace byla omezená a nejednoznačná kvůli potřebě automatizované identifikace a komplexnější analýzy. Proto tento faktor má menší vliv na hodnocení.
+3.  **Volatilita:** Volatilita měnového páru se zdá být průměrná.
+
+**Rizikové hodnocení:**
+
+*   **SELL (50%):**  Převládající klesající trend naznačuje, že prodejní pozice by mohla být zisková.  Riziko je však stále značné, protože trhy se mohou rychle obrátit.
+*   **HOLD (20%):**  Vzhledem k volatilitě a nejistotě je doporučeno vyčkat na jasnější signály. HOLD představuje nejmenší riziko.
+*   **BUY (30%):**  I přes klesající trend existují krátkodobé možnosti nákupu (reakce na support, pullback). Riziko je vyšší, proto menší procento.
+
+**Důležité upozornění:**
+
+Toto hodnocení je velmi zjednodušené a slouží pouze pro ilustrativní účely. Skutečné finanční poradenství vyžaduje hloubkovou analýzu, zohlednění rizikového profilu investora a aktuální tržní situace.

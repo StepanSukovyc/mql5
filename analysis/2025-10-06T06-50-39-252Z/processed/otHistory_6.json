@@ -1,0 +1,34 @@
+```json
+{
+  "NZDCAD_ecn": {
+    "BUY": 25,
+    "SELL": 50,
+    "HOLD": 25
+  },
+  "NZDCHF_ecn": {
+    "BUY": 20,
+    "SELL": 55,
+    "HOLD": 25
+  },
+  "NZDJPY_ecn": {
+    "BUY": 30,
+    "SELL": 45,
+    "HOLD": 25
+  },
+  "NZDSEK_ecn": {
+    "BUY": 20,
+    "SELL": 55,
+    "HOLD": 25
+  },
+  "NZDSGD_ecn": {
+    "BUY": 25,
+    "SELL": 50,
+    "HOLD": 25
+  },
+  "NZDUSD_ecn": {
+    "BUY": 25,
+    "SELL": 50,
+    "HOLD": 25
+  }
+}
+```

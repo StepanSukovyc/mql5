@@ -1,0 +1,17 @@
+```json
+{
+  "GBPCHF_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+Toto hodnocení je *velmi* zjednodušené a vychází pouze z poskytnutých historických dat a obecných principů. Bez fundamentální analýzy a pokročilejšího technického posouzení je jakýkoliv odhad velmi orientační.
+
+*   **SELL (50%):** Na základě dat z posledního měsíce 4H intervalů je vidět výrazný klesající trend. Cena se dostala na nejnižší hodnoty. Tato data naznačují pokračování prodejního tlaku.
+*   **HOLD (30%):**  Určitá stabilizace na konci měsíce naznačuje možnost dočasného vyčkávání na trhu.
+*   **BUY (20%):** Extrémní pokles ceny by mohl lákat k nákupu s vidinou budoucího odrazu. Vzhledem k silnému klesajícímu trendu je ale tato varianta riziková.

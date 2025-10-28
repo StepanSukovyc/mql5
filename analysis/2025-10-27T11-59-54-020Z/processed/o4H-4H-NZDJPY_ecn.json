@@ -1,0 +1,31 @@
+```json
+{
+  "NZDJPY_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení:**
+
+Toto hodnocení je *velmi* orientační a založené na omezených informacích.  Jako finanční poradce bych nikdy nevydal doporučení jen na základě těchto dat a bez důkladné analýzy a znalosti individuální situace klienta.  Toto je *pouze* ilustrativní příklad toho, jak by se dalo k problému přistoupit.
+
+* **SELL (40%):**
+    * **Technická analýza:** Data ukazují střídavý pohyb nahoru a dolů, ovšem s tendencí klesání ke konci období. Vyskytly se medvědí svíčkové formace, což by mohlo naznačovat pokračování downtrendu.
+    * **Opatrnost:** Bez fundamentální analýzy a širšího kontextu je prodej rizikový, proto je hodnocení jen 40%.
+* **HOLD (30%):**
+    * **Nejasný trend:** Data sama o sobě nenaznačují jednoznačný trend.
+    * **Čekání na potvrzení:** Doporučuje se vyčkat na další vývoj situace a získat více informací.
+* **BUY (30%):**
+    * **Potenciální odraz:** Po poklesu by mohlo dojít k odrazu.
+    * **Riziko:** Nízké procento odráží vyšší míru rizika spojenou s nákupem za dané situace.
+
+**Důležité upozornění:**
+
+* **Fundamentální analýza je nutná:** Toto hodnocení zcela postrádá fundamentální analýzu.  Bez znalosti ekonomické situace Nového Zélandu a Japonska, úrokových sazeb, politických událostí a dalších faktorů je jakékoli hodnocení velmi spekulativní.
+* **Svíčkové formace:** Identifikace svíčkových formací je subjektivní a vyžaduje zkušenosti. Automatická detekce bez kontextu může být zavádějící.
+* **Riziko:** Investování do měnových párů je vysoce rizikové a vyžaduje důkladnou analýzu a znalosti.
+* **Časové období:** Jeden měsíc dat v periodě 4H je velmi krátká doba pro relevantní analýzu.
+* **Nejedná se o investiční doporučení:** Toto není investiční doporučení a nemělo by být bráno jako takové.  Vždy se poraďte s kvalifikovaným finančním poradcem.

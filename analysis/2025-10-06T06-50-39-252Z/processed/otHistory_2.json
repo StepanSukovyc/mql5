@@ -1,0 +1,34 @@
+```json
+{
+  "EURAUD_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  },
+  "EURCAD_ecn": {
+    "BUY": 40,
+    "SELL": 25,
+    "HOLD": 35
+  },
+  "EURCHF_ecn": {
+    "BUY": 30,
+    "SELL": 35,
+    "HOLD": 35
+  },
+  "EURCZK_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  },
+  "EURGBP_ecn": {
+    "BUY": 35,
+    "SELL": 30,
+    "HOLD": 35
+  },
+  "EURHUF_ecn": {
+    "BUY": 15,
+    "SELL": 55,
+    "HOLD": 30
+  }
+}
+```

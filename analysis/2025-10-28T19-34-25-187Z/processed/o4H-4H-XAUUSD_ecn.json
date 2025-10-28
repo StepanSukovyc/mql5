@@ -1,0 +1,31 @@
+```json
+{
+  "XAUUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+Toto hodnocení je velmi orientační a zjednodušené, vychází pouze z dodaných dat a základní logiky. Pro reálné obchodování je potřeba mnohem komplexnější analýza.
+
+*   **SELL (40%):** Trend je v posledních dnech spíše klesající. Navíc se objevují svíčkové formace naznačující možný další pokles (např. delší svíčky s větším rozpětím, hlavně na konci periody). Vyšší objemy při poklesech naznačují prodejní tlak. Fundamentální analýza by mohla hrát důležitou roli – pokud existují zprávy o posilování dolaru (což je inverzně korelované se zlatem), SELL pozice by mohla být rozumnější.
+*   **HOLD (30%):** Vzhledem k volatilitě a proměnlivosti trhu je vždy rozumné zvážit pozici HOLD. Aktuální data naznačují určitou nejistotu. Dokud nebudou k dispozici další potvrzující signály (z technické nebo fundamentální analýzy), je rozumné vyčkat.
+*   **BUY (30%):** I přes klesající trend se objevily i období růstu, což naznačuje možnou korekci směrem vzhůru. Nízké objemy v některých obdobích poklesu by mohly naznačovat oslabování prodejního tlaku. Opět zde hraje roli fundament – pokud se očekává oslabování dolaru nebo nárůst inflace, BUY pozice by mohla být zajímavá.
+
+**Důležité upozornění:**
+
+*   **Fundamentální analýza CHYBÍ:** Toto hodnocení je *bez znalosti fundamentální analýzy* jen velmi hrubým odhadem. Bez fundamentálních dat (ekonomické ukazatele, geopolitická rizika, úrokové sazby, inflace, zprávy centrálních bank, apod.) je rizikové hodnocení velmi omezené. Proto se zaměřujeme pouze na svíčkové formace a pohyb ceny v datech.
+*   **Časový rámec:** Toto hodnocení se týká *pouze* dodané historické periody. Z dlouhodobého hlediska se situace může dramaticky lišit.
+*   **Osobní tolerance rizika:** Hodnocení zohledňuje průměrnou toleranci k riziku. Každý obchodník by si měl nastavit limity sám.
+*   **Není investiční doporučení:** Toto hodnocení není investiční doporučení. Obchodování s finančními instrumenty je rizikové a můžete ztratit veškeré investované prostředky. Vždy si udělejte vlastní analýzu.
+*   **Chybějící data:** Hodnocení vychází pouze z dodaných dat. Chybí mi kontext širšího trhu, denní data, týdenní data, zprávy a další relevantní informace.
+
+Abych mohl poskytnout přesnější a užitečnější hodnocení, potřebuji:
+
+1.  **Přístup k aktuální fundamentální analýze:** (Zprávy, ekonomické kalendáře, analýzy expertů).
+2.  **Širší historická data:** (Denní, týdenní data pro identifikaci trendů).
+3.  **Informace o Vašem investičním horizontu a toleranci k riziku.**

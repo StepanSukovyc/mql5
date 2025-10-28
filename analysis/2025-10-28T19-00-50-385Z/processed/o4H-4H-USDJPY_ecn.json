@@ -1,0 +1,37 @@
+```json
+{
+  "USDJPY_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+**Základní premisy:**
+
+*   **Časový rámec:** Analyzujeme 4H data za měsíc, což je krátkodobý až střednědobý horizont.
+*   **Dostupnost dat:** Máme pouze historická cenová data a předpokládáme dostupnost aktuálních fundamentálních dat z webu (ekonomické ukazatele, zprávy centrálních bank, geopolitické události atd.). Bez reálných fundamentálních dat se musíme opřít o obecné předpoklady.
+*   **Riziko:** Hodnocení zohledňuje riziko spojené s obchodováním měnových párů.
+
+**Hodnocení a odůvodnění:**
+
+*   **SELL: 40%**
+    *   **Technická analýza (na základě dodaných dat):** V datech vidíme oscilaci a tendenci k klesání v posledních dnech (zejména od 1761120000). Mohou se tvořit klesající trendové linie na menších timeframech (ale je to třeba ověřit). Zvažoval bych prodejní pozici s ohledem na to.
+    *   **Fundamentální analýza (hypotetická):**  Zde se předpokládá, že by fundamentální data (která nemám) ukazovala na posilování USD (např. vyšší úrokové sazby FEDu než BOJ) nebo oslabování JPY (např. slabá japonská ekonomika).
+
+*   **HOLD: 30%**
+    *   **Technická analýza:**  Trh se může konsolidovat, pokud nenastanou silné fundamentální změny. Data nejsou úplně jednoznačná na silný trend.
+    *   **Fundamentální analýza:** Pokud by existovaly protichůdné fundamentální signály (např. smíšené ekonomické ukazatele), nebo významné události v budoucnu, které by mohly ovlivnit měnový pár, je rozumné vyčkat.
+
+*   **BUY: 30%**
+    *   **Technická analýza:** Možná korekce po poklesu.
+    *   **Fundamentální analýza (hypotetická):**  Pokud by se například objevily zprávy o intervenci Japonské centrální banky na podporu jenu, nebo pokud by data z USA byla slabší, mohlo by to vést k posílení JPY.
+
+**Důležité upozornění:**
+
+*   **Toto je pouze hypotetické hodnocení založené na omezených datech a předpokladech.** Skutečné hodnocení by vyžadovalo podrobnou analýzu aktuálních fundamentálních dat, technických indikátorů a dalších faktorů.
+*   **Obchodování na forexu je rizikové a může vést ke ztrátě kapitálu.** Vždy používejte řízení rizik a obchodujte pouze s penězi, které si můžete dovolit ztratit.
+*   **Toto není investiční poradenství.**

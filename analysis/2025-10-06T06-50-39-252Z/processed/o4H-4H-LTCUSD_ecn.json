@@ -1,0 +1,29 @@
+```json
+{
+  "LTCUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Analýza je provedena s ohledem na omezené informace (pouze historická data) a chybějící fundamentální data.  Proto je odhad konzervativní.
+
+*   **Technická Analýza (Svíčkové formace & Historická data):**
+    *   **Celkový trend:** Data vykazují vysokou volatilitu. Začátek měsíce s cenou okolo 114 USD, výrazný pokles až na cca 100 USD a následný růst k 122 USD a nakonec menší propad a stabilizace okolo 120 USD.
+    *   **Momentum:** Poslední úsek dat (poslední 2 dny) vykazuje stagnaci. Po výrazném růstu nastalo mírné zchlazení.
+    *   **Svíčkové formace:** Bez detailnějšího zkoumání svíček na daném timeframe nelze s jistotou identifikovat klíčové patterny. Obecně, kolísání cen naznačuje nevyhraněnost trhu.
+
+*   **Fundamentální Analýza (NEDOSTUPNÁ):**
+    *   **Zcela chybí:** Bez fundamentálních dat (zprávy o Litecoinu, Bitcoinu, celkové náladě na trhu, regulacích atd.) je jakékoliv seriózní hodnocení obtížné.
+
+*   **Rizikové Hodnocení:**
+
+    *   **BUY (30%):** Na základě posledního růstu se dá spekulovat na pokračování trendu. Nicméně bez fundamentálních dat je riziko značné.
+    *   **SELL (40%):** Předchozí rychlý nárůst ceny mohl být přehnaný. Současná konsolidace by mohla signalizovat korekci, proto dáváme přednost prodeji.
+    *   **HOLD (30%):** Zůstat stranou je rozumná strategie v situaci, kdy nemáme dostatek informací. Trh je nevyzpytatelný a je nutné sledovat další vývoj.
+
+**Důležité upozornění:** Toto je pouze orientační hodnocení na základě velmi omezených informací.  Před jakýmkoliv investičním rozhodnutím doporučuji provést důkladnou fundamentální a technickou analýzu, případně se poradit s kvalifikovaným finančním poradcem.  Riziko spojené s obchodováním kryptoměn je vysoké.

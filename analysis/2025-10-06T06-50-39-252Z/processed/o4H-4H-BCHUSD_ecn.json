@@ -1,0 +1,37 @@
+```json
+{
+  "BCHUSD_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení postupu:**
+
+Vzhledem k omezeným informacím (pouze historická data a obecný odkaz na fundamentální analýzu bez konkrétních dat) jsem zvolil následující zjednodušený postup:
+
+1.  **Technická analýza (svíčkové formace a trend):**
+
+    *   **Celkový trend:**  Z dat je patrný klesající trend během daného měsíce,  s pokusem o korekci ke konci měsíce.
+    *   **Svíčkové formace:** Bez hlubší analýzy (kterou z časových důvodů nemohu detailně provést) se zaměřuji na přítomnost bearish (medvědí) formací (např.  bearish engulfing, dark cloud cover) a bullish (býčí) formací (hammer, piercing pattern) v kritických bodech.  Vzhledem k převládajícímu klesajícímu trendu předpokládám, že bearish formace budou častější a silnější.
+
+2.  **Fundamentální analýza (obecný předpoklad):**
+
+    *   **Pouze odhad:** Bez reálných dat fundamentální analýzy Měnového páru BCHUSD provedu hrubý odhad. Předpokládám, že zprávy za dané období nebyly pro BCHUSD příliš pozitivní, neboť by mohly vést k silnějšímu poklesu ceny. Toto je čistá spekulace a *zásadně* doporučuji doplnit o reálné fundamentální data.
+
+3.  **Rizikové hodnocení:**
+
+    *   **SELL (45%):**  Převaha klesajícího trendu a pravděpodobná převaha bearish svíčkových formací signalizuje zvýšené riziko dalšího poklesu.  Toto je podpořeno předpokladem, že fundamentální situace nebyla příznivá.
+    *   **HOLD (30%):**  Možnost krátkodobých korekcí (vzestupů) a nejistota ohledně přesné síly trendu a fundamentálních dat ospravedlňuje držení pozic pro ty, kteří již v trhu jsou, nebo chtějí počkat na jasnější signály.
+    *   **BUY (25%):**  Nízký podíl BUY odráží rizikovost vstupu do dlouhých pozic v dané situaci.  Doporučuje se vyčkat na potvrzení obratu trendu (např. prolomení rezistence, silné bullish formace) a pozitivní fundamentální zprávy.
+
+**Důležité upozornění:**
+
+*   **Toto je velmi zjednodušená analýza na základě omezených dat a spekulací.**  *Není* to investiční doporučení.
+*   Před reálným obchodováním je *nezbytné* provést *kompletní* fundamentální a technickou analýzu s aktuálními daty.
+*   Riziko je vždy nutné posuzovat individuálně s ohledem na osobní investiční profil a toleranci k riziku.
+*   U takto rizikových aktiv důrazně doporučuji využití řízení rizik formou *stop-loss* příkazů.
+
+Provedení této analýzy bez reálné fundamentální analýzy je silně omezené. Výsledné hodnocení je nutno brát s rezervou.

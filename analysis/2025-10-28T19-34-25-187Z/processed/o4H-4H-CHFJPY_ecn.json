@@ -1,0 +1,37 @@
+```json
+{
+  "CHFJPY_ecn": {
+    "BUY": 30,
+    "SELL": 20,
+    "HOLD": 50
+  }
+}
+```
+
+**Vysvětlení:**
+
+Toto hodnocení je *velmi* zjednodušené a závisí na řadě předpokladů a omezení:
+
+*   **Pouze technická analýza na daných datech:** Hodnocení se opírá výhradně o analyzovaná historická data svíčkových formací, které jsem si analyzoval. Ignoruje jakékoli fundamentální faktory, aktuální zprávy, nebo jiné indikátory. Proto je zásadní doplnit ji o fundamentální analýzu a další zdroje.
+
+*   **Krátkodobý pohled:** Data za jeden měsíc s periodou 4H poskytují pouze krátkodobý pohled na trh.
+
+*   **Subjektivita svíčkových formací:** Identifikace svíčkových formací a jejich interpretace je do jisté míry subjektivní a závisí na zkušenostech tradera.
+
+*   **Absence Stop Loss a Take Profit:** Rizikové hodnocení nebere v úvahu nastavení stop loss a take profit, které jsou klíčové pro řízení rizika.
+
+**Podrobnosti:**
+
+1.  **Celkový trend:** Data ukazují na celkový uptrend (rostoucí trend) během sledovaného období. Od počáteční hodnoty kolem 186.86400000  až k hodnotě 191.85200000.
+
+2.  **Svíčkové formace:** Z dat lze identifikovat různé svíčkové formace, které indikují pokračování trendu.
+
+*   **BUY (30%):** vzhledem k uptrendu bych volil spíše nákup.
+
+*   **SELL (20%):**  Malá část prodejní pozice s ohledem na možné korekce.
+
+*   **HOLD (50%):** Většina investorů by měla vyčkat s ohledem na volatilitu trhu a nutnost sledovat další indikátory.
+
+**Důležité upozornění:**
+
+Toto hodnocení je pouze informativní a nemělo by být považováno za investiční radu. Obchodování na finančních trzích je rizikové a můžete ztratit svůj kapitál. Před investováním se poraďte s kvalifikovaným finančním poradcem.

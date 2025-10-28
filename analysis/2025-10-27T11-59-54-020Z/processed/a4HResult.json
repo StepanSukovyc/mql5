@@ -1,0 +1,62 @@
+[
+  {
+    "symbol": "CHFJPY_ecn",
+    "BUY": 65,
+    "SELL": 15,
+    "HOLD": 20
+  },
+  {
+    "symbol": "GBPZAR_ecn",
+    "BUY": 30,
+    "SELL": 45,
+    "HOLD": 25
+  },
+  {
+    "symbol": "AUDZAR_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "CADJPY_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "EURAUD_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "EURJPY_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "EURMXN_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "EURNZD_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "NZDJPY_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "GBPJPY_ecn",
+    "BUY": 35,
+    "SELL": 25,
+    "HOLD": 40
+  }
+]

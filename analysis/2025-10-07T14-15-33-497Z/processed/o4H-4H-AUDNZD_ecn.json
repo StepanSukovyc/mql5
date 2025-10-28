@@ -1,0 +1,33 @@
+```json
+{
+  "AUDNZD": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení (proč dané procentuální rozložení):**
+
+*   **Technická analýza (Svíčkové formace a historická data):**
+    *   **Období:** Data naznačují, že měnový pár se pohybuje v určitém rozsahu (range-bound). Z počátečních hodnot okolo 1.11 se dostal až k 1.14, poté opět klesal. Poslední data ukazují konsolidaci kolem 1.133-1.135.
+    *   **Svíčkové formace:**  Bez grafického znázornění je obtížné identifikovat přesné formace, ale lze pozorovat mnoho menších svíček, což naznačuje nerozhodnost na trhu. Výraznější pohyby (např. okolo času 1758153600) mohly vytvořit formace, které by indikovaly buď pokračování trendu, nebo obrat. Absence výrazných formací podporuje spíše boční pohyb.
+    *   **Volume:** Objem se v průběhu měsíce liší, avšak nenaznačuje žádné výrazné trendy.
+
+*   **Fundamentální analýza (implicitní předpoklady):**
+    *   **Neutrální nastavení:** Bez konkrétních fundamentálních dat předpokládám, že ekonomické zprávy a politické události jak v Austrálii, tak na Novém Zélandu, jsou víceméně neutrální nebo mají protichůdné dopady. Jinak by váha byla posunuta k BUY nebo SELL.
+
+*   **Rizikové hodnocení a procentuální rozložení:**
+    *   **SELL (40%):** Vzhledem k tomu, že cena již dosáhla určitých maxim během daného měsíce a konsoliduje, je zde mírně vyšší pravděpodobnost, že dojde k poklesu.
+    *   **BUY (30%):** Možnost průrazu výše nelze vyloučit, zejména pokud by se objevily pozitivní zprávy z Austrálie nebo negativní zprávy z Nového Zélandu.
+    *   **HOLD (30%):** Nejistota na trhu a nedostatek jednoznačných signálů z technické analýzy i absence detailní fundamentální analýzy vede k poměrně vysoké pravděpodobnosti, že se cena bude pohybovat v existujícím rozsahu.
+
+**Důležité upozornění:**
+
+*   Toto hodnocení je *velmi zjednodušené* a vychází z omezeného souboru dat a implicitních předpokladů.
+*   Skutečný finanční poradce by provedl mnohem hlubší analýzu, včetně:
+    *   Důkladné fundamentální analýzy s použitím aktuálních ekonomických dat.
+    *   Podrobné technické analýzy s použitím různých indikátorů.
+    *   Zohlednění rizikového profilu investora.
+*   Toto hodnocení *není investiční doporučení*.  Před jakýmkoli obchodováním se poraďte s kvalifikovaným finančním poradcem.

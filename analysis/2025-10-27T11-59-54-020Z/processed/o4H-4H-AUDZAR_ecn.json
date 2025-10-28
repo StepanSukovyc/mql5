@@ -1,0 +1,23 @@
+```json
+{
+  "AUDZAR_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k tomu, že mám k dispozici pouze historická data a nemám přístup k aktuálním fundamentálním datům, hodnotím situaci pouze na základě poskytnutých svíček a jejich formací:
+
+*   **Celkový trend:** Data naznačují downtrend. Proto dáváme větší procento na **SELL.**
+
+*   **Svíčkové formace:**  Na základě pohledu na data se objevují formace naznačující nejistotu a možný odraz směrem nahoru.
+
+*   **Objemy:**  V některých obdobích downtrendu je vidět nárůst objemu, což potvrzuje sílu trendu.
+
+*   **Fundamentální analýza (hypotetická):** Bez aktuálních dat je těžké posoudit. Nicméně, pokud by fundamentální analýza ukazovala na posílení AUD nebo oslabení ZAR, BUY by se mohlo zvýšit. Pokud by to bylo naopak, SELL by posílilo.
+
+**Disclaimer:** Toto hodnocení je orientační a založené pouze na poskytnutých historických datech. Skutečné obchodní rozhodnutí by mělo být vždy založeno na komplexní analýze, včetně aktuálních fundamentálních dat, technické analýzy a zvážení rizik.  **Toto není investiční poradenství.**

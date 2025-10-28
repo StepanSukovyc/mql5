@@ -1,0 +1,32 @@
+```json
+{
+  "XAUUSD_ecn": {
+    "BUY": 45,
+    "SELL": 25,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+Toto hodnocení je orientační a vychází z následujících faktorů, které jsou **nutně zjednodušené kvůli absenci reálné fundamentální analýzy a detailnějšího technického rozboru**:
+
+*   **Obecný trend:** Data naznačují celkově rostoucí trend v průběhu měsíce. To by naznačovalo mírnou převahu pro `BUY` pozice.
+*   **Svíčkové formace:** Z pouhého pohledu na data se dají identifikovat svíčky s dlouhými těly a knoty, které mohou signalizovat obrat trendu. Pro přesnější analýzu by bylo potřeba identifikovat konkrétní formace jako Hammer, Engulfing, atd., které by mohly indikovat buď `BUY` nebo `SELL` signály.
+*   **Volatilita:** Měna vykazuje poměrně vysokou volatilitu (rozdíl mezi high a low cenou v rámci 4H periody). To zvyšuje riziko, a proto je část alokována pro `HOLD` pozici (čekání na jasnější signály) a omezena potencionalita BUY/SELL.
+*   **Fundamentální analýza (simulace):** Pro simulaci vlivu fundamentální analýzy si představme, že zprávy z trhu naznačují zvýšenou nejistotu v globální ekonomice, což by mohlo vést k mírnému posílení zlata jako bezpečného přístavu. To by zvýšilo pravděpodobnost `BUY` pozic. Ovšem i negativní výsledky mohou krátkodobě oslabit pozici, takže to indikuje i přítomnost SELL.
+
+**Důležité upozornění:**
+
+*   **Toto je simulace a neměla by být brána jako investiční rada.**
+*   Reálná analýza by vyžadovala:
+    *   Detailní fundamentální analýzu (ekonomické ukazatele, geopolitické události, zprávy centrálních bank atd.)
+    *   Pokročilé technické indikátory (klouzavé průměry, RSI, MACD, Fibonacciho úrovně atd.)
+    *   Analýzu objemu obchodů
+    *   Znalost kontextu trhu
+
+*   Procentuální rozdělení by se dynamicky měnilo v závislosti na nových datech a informacích.
+*   Rizikové hodnocení je subjektivní a závisí na rizikovém profilu investora.
+*   Použitá data jsou omezena na jeden měsíc, což je nedostatečné pro dlouhodobé rozhodování.
+*   Nepřítomnost poplatků a spreadů na datech.

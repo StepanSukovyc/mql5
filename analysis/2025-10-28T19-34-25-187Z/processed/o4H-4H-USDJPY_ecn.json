@@ -1,0 +1,26 @@
+```json
+{
+  "USDJPY_ecn": {
+    "BUY": 30,
+    "SELL": 35,
+    "HOLD": 35
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+Toto hodnocení je *velmi* orientační a založené na *omezených* datech a zjednodušeném pohledu.  Profesionální analýza by vyžadovala mnohem hlubší prozkoumání a sofistikovanější modely.
+
+*   **SELL (35%):** Během daného měsíce je vidět klesající trend. Ke konci měsíce měnový pár klesá, což naznačuje, že SELL pozice má smysl.
+*   **BUY (30%):** Vidíme momenty kdy cena roste, ale celkově se nedá říct, že by byl růst vyrazný a dlouhodobý.
+*   **HOLD (35%):** Vzhledem k smíšeným signálům a nedostatku jasného trendu,  při nejistotě je často rozumné *držet* stávající pozice a vyčkat na jasnější signály.
+
+**Důležité upozornění:**
+
+*   **Toto není investiční rada!** Berte toto hodnocení jako ilustrativní příklad a nikdy se nerozhodujte o investicích pouze na základě jedné analýzy.
+*   **Fundamentální analýza:** Zahrnutí fundamentální analýzy by vyžadovalo přístup k ekonomickým datům, politickým událostem a dalším faktorům ovlivňujícím měny USD a JPY.  Hodnocení výše se bez toho neobejde.
+*   **Svíčkové formace:** Identifikace svíčkových formací (např. Doji, Hammer, Engulfing pattern) by vyžadovala jejich automatickou detekci v datech a interpretaci, což přesahuje rámec této jednoduché odpovědi.
+*   **Časový rámec:** Analýza v delším časovém rámci (např. denní, týdenní) by mohla odhalit odlišné trendy a signály.
+*   **Risk management:** Správný risk management je klíčový pro každou investici.  Nastavte si stop-loss a take-profit úrovně a investujte pouze peníze, které si můžete dovolit ztratit.
+

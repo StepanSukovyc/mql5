@@ -1,0 +1,40 @@
+```json
+{
+  "XPTUSD_ecn": {
+    "BUY": 45,
+    "SELL": 25,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení (pro informaci, jak jsem k výsledku dospěl):**
+
+**Důležité upozornění:** Toto je **velmi** zjednodušené hodnocení.  Skutečná finanční analýza by zahrnovala mnohem hlubší zkoumání dat, fundamentálních faktorů a využití pokročilejších technických indikátorů.  Toto hodnocení je pouze ilustrativní. Navíc, bez reálných dat z webu nemohu udělat fundamentální analýzu.
+
+*   **Celkový trend:** Cena XPTUSD (platina proti americkému dolaru) během daného měsíce vykazuje stoupající trend. Začíná kolem 1363 USD a končí kolem 1630 USD. To by samo o sobě naznačovalo *BUY*.
+
+*   **Svíčkové formace:** Rychlá analýza svíčkových formací (kterou bych provedl automatizovaně, kdybych měl funkční systém) by mohla odhalit krátkodobé signály. Například:
+
+    *   Dlouhé bílé svíčky (kde zavírací cena je výrazně vyšší než otevírací) by posílily *BUY*.
+    *   Doji, Hammer nebo Engulfing formace by mohly naznačovat krátkodobé reverzy trendu a tedy dočasný *SELL* nebo *HOLD*.
+    *   Identifikoval bych support a resistance úrovně (na základě high a low cen) pro nastavení stop-loss a take-profit.
+
+*   **Objemy:** Zvýšený objem při rostoucí ceně potvrzuje sílu trendu (podpora pro *BUY*). Vysoký objem při klesající ceně může naznačovat výprodej a potenciální *SELL*.
+
+*   **Fundamentální analýza (hypotetická):** Zde **předpokládám**, že jsem provedl fundamentální analýzu (reálně bych potřeboval webová data!). Řekněme, že:
+
+    *   Globální ekonomický růst:  Podporuje poptávku po platině (průmyslové využití) -> *BUY*.
+    *   Omezená nabídka platiny (např. problémy v dolech): Zvyšuje cenu -> *BUY*.
+    *   Silnější USD (negativní pro komodity): Působí proti růstu platiny -> *SELL*.
+    *   Geopolitická nejistota: Může ovlivnit trh s drahými kovy, ale obtížně predikovatelné (-> *HOLD*).
+
+**Konečné procentuální hodnocení:**
+
+Na základě (hypotetické) kombinace technické a fundamentální analýzy:
+
+*   **BUY (45%):** Stoupající trend v datech, hypotetická podpora od globálního růstu a omezené nabídky, naznačuje, že má platina potenciál dále růst.
+*   **SELL (25%):** Možný silnější USD, krátkodobé reverzní svíčkové formace a přeprodané podmínky (z indikátorů, které nemohu spočítat), by mohly vyvolat korekci dolů.
+*   **HOLD (30%):** Geopolitická nejistota, blížící se důležité ekonomické zprávy nebo překoupené podmínky na trhu mohou způsobit, že je lepší počkat a sledovat další vývoj.
+
+**Důležité:** Toto hodnocení je *velmi* hrubé a *nemělo by být* použito jako základ pro reálné investiční rozhodnutí.  Je to pouze demonstrace toho, jak by se *mohlo* uvažovat s kombinací dat. Vždy proveďte vlastní důkladný průzkum a poraďte se s kvalifikovaným finančním poradcem.
