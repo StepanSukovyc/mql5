@@ -1,0 +1,30 @@
+```json
+{
+  "EURHUF_ecn": {
+    "BUY": 20,
+    "SELL": 60,
+    "HOLD": 20
+  }
+}
+```
+
+**Vysvětlení:**
+
+Vzhledem k tomu, že mám k dispozici pouze historická data a nemám přístup k fundamentální analýze v reálném čase ani pokročilým algoritmům pro detekci svíčkových formací, musím provést velmi zjednodušenou analýzu a odhady.
+
+**Analýza:**
+
+*   **Trend:** Podíváme-li se na data, vidíme spíše klesající trend v průběhu měsíce. Začínáme na hodnotách kolem 389 a končíme na hodnotách kolem 384.
+*   **Volatilita:** Volatilita páru se zdá být poměrně nízká, pohyby jsou relativně malé.
+*   **Svíčkové formace:** Nemohu automaticky detekovat svíčkové formace. Ručně se zdá, že tam nejsou žádné extrémně silné signály. Nicméně, vzhledem ke klesajícímu trendu, můžeme předpokládat přítomnost bearish patternů.
+*   **Fundamentální analýza (hypotetická):** Jelikož nemám přístup k aktuálním fundamentálním datům, předpokládám, že sentiment je mírně negativní pro EUR nebo pozitivní pro HUF.
+
+**Rizikové hodnocení:**
+
+*   **SELL (60%):** Vzhledem k klesajícímu trendu a předpokládanému negativnímu fundamentálnímu sentimentu, největší pravděpodobnost má pozice SHORT (SELL).
+*   **BUY (20%):** Mohou existovat krátkodobé korekce nahoru. Trh se nemůže pohybovat pouze dolů.
+*   **HOLD (20%):** Pokud nejste si jisti, držte se stranou, dokud se situace nevyjasní.
+
+**Důležité upozornění:**
+
+Toto hodnocení je **velmi zjednodušené** a **vysoce rizikové**.  Bez fundamentální analýzy v reálném čase a robustní analýzy svíčkových formací je toto spíše kvalifikovaný odhad než seriózní finanční poradenství.  V reálném obchodování byste NIKDY neměli jednat pouze na základě takovéto analýzy. Vždy si proveďte důkladný průzkum, zvažte všechny dostupné informace a případně se poraďte s kvalifikovaným finančním poradcem.

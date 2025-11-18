@@ -1,0 +1,41 @@
+```json
+{
+  "NZDUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení:**
+
+Toto hodnocení je **velmi orientační** a vychází pouze z poskytnutých 4H dat a obecných principů. Bez reálné fundamentální analýzy a hlubší analýzy svíčkových formací je přesné hodnocení nemožné. Níže popisuji, jak jsem k tomuto hodnocení dospěl a jak by se dalo zlepšit s více informacemi.
+
+**Základní zjednodušený postup:**
+
+1.  **Trend**: Trend na poskytnutých datech je klesající.
+2.  **Svíčkové formace**:
+    *   Vzhledem k rozsahu dat (1 měsíc) a 4H periodě nemám dostatečný kontext pro identifikaci silných dlouhodobých svíčkových formací. Existuje spousta malých svíčkových formací, ale jejich vypovídající hodnota je bez kontextu sporná.
+3.  **Fundamentální analýza (hypotetická)**:
+    *   **Předpoklad:** Pro jednoduchost budu předpokládat, že fundamentální faktory jsou víceméně neutrální.  Pokud by fundamentální analýza indikovala například silnější ekonomiku USA a slabší NZ, riziko pro SELL by bylo výrazně vyšší.
+
+**Proč dané procentuální rozdělení:**
+
+*   **SELL: 40%** - Krátkodobý klesající trend,  nedostatek silných signálů pro obrat.
+*   **BUY: 30%** - Vzhledem k tomu, že trh nikdy neklesá (ani neroste) věčně, je zde potenciál pro korekci nebo obrat. Nutné je sledovat support a resistance úrovně a případné signály pro BUY pozici.
+*   **HOLD: 30%** -  Vzhledem k nedostatku jasných signálů z dat a absenci fundamentální analýzy, je rozumné držet se stranou a čekat na jasnější signály.
+
+**Jak by se dalo hodnocení zlepšit:**
+
+1.  **Reálná Fundamentální Analýza**: Zahrnutí dat z ekonomického kalendáře, úrokových sazeb, politických událostí atd., specifických pro NZD a USD.
+2.  **Širší Časový Rámec**: Analýza dat z delšího období (např. týdenní, denní grafy) pro identifikaci silnějších trendů a support/resistance úrovní.
+3.  **Pokročilejší Svíčkové Formace**: Identifikace a analýza svíčkových formací, které signalizují obrat trendu nebo pokračování trendu (např. Engulfing, Morning/Evening Star, Hammer/Hanging Man).
+4.  **Objemová Analýza**: Sledování objemu obchodů v souvislosti s cenovými pohyby. Vysoký objem při průrazu klíčové úrovně posiluje signál.
+5.  **Indikátory Technické Analýzy**: Použití technických indikátorů (např. RSI, MACD, klouzavé průměry) pro potvrzení trendů a identifikaci potenciálních vstupních/výstupních bodů.
+6.  **Sentiment Analýza**: Zahrnutí analýzy tržního sentimentu (např. pomocí COT reportů) pro posouzení nálady investorů.
+
+**Důležité upozornění:**
+
+*   Toto je pouze ukázka toho, jak by se dalo k rizikovému hodnocení přistoupit. Reálné investiční rozhodnutí by mělo být založeno na důkladné analýze a zohlednění individuálního rizikového profilu investora.
+*   Obchodování na finančních trzích je spojeno s rizikem ztráty kapitálu. Nikdy neinvestujte peníze, které si nemůžete dovolit ztratit.

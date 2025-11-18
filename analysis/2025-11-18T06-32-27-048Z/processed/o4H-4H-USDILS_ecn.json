@@ -1,0 +1,45 @@
+```json
+{
+  "USDILS_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+**Základní Analýza Dat:**
+
+*   **Celkový Trend:** Data vykazují klesající trend s mírnými korekcemi, především v první polovině měsíce a poté opět pokles.
+*   **Volatilita:** Poměrně vysoká volatilita, indikovaná velkými rozpětími mezi high a low v jednotlivých 4H periodách.
+*   **Volume:** Objem obchodů je proměnlivý, ale obecně vyšší během poklesů a korekcí.
+
+**Svíčkové Formace (pouze orientačně, bez hlubší analýzy):**
+
+*   Vzhledem k chybějící vizualizaci a detailnějšímu prozkoumání jednotlivých svíček nelze přesně identifikovat specifické formace.
+*   Nicméně, časté dlouhé spodní stíny (knots/tails) naznačují určitý nákupní tlak při poklesech.
+
+**Fundamentální Analýza (nutná pro přesnější hodnocení):**
+
+*   **Absolutně Nezbytné:** Pro reálné hodnocení je nutné prozkoumat fundamentální data z webu, týkající se ekonomické situace USA a Izraele. Mezi klíčové faktory patří:
+    *   **Úrokové sazby:** Rozdíl v úrokových sazbách mezi USA a Izraelem má velký vliv.
+    *   **Inflace:** Inflační tlaky v obou zemích.
+    *   **HDP:** Vývoj HDP.
+    *   **Nezaměstnanost:** Míra nezaměstnanosti.
+    *   **Geopolitické Rizika:** Aktuální politická a ekonomická rizika v regionu.
+*   **Příklad:** Pokud by fundamentální data ukazovala na silnější ekonomiku USA a slabší ekonomiku Izraele (např. vyšší úrokové sazby v USA, nižší inflace, silnější HDP), pak by to podpořilo "BUY".  Naopak, silnější Izrael a slabší USA by podpořily "SELL".
+
+**Rizikové Hodnocení a Procentuální Rozdělení (bez fundamentálních dat):**
+
+*   **SELL (40%):** Vzhledem k celkovému klesajícímu trendu a proměnlivé volatilitě, je zde slušná šance na pokračování tohoto trendu.
+*   **HOLD (30%):**  Volatilita a neurčitost naznačují, že by se mohlo vyplatit vyčkat na další potvrzení trendu. Je zde šance, že trh konsoliduje.
+*   **BUY (30%):**  Dlouhé spodní stíny naznačují, že při poklesech se objevují kupci. Pokud by fundamentální analýza naznačovala zlepšení ekonomické situace Izraele, pak by se procento pro "BUY" mohlo navýšit.
+
+**Důležité Poznámky:**
+
+*   **Omezení:** Toto hodnocení je velmi hrubé a založené pouze na technické analýze omezeného datasetu. Bez fundamentálních dat je přesnost predikce velmi nízká.
+*   **Doporučení:** Před jakýmkoli obchodem proveďte důkladnou fundamentální analýzu a zvažte konzultaci s licencovaným finančním poradcem.
+*   **Řízení Rizik:** Vždy používejte stop-loss příkazy a spravujte svou pozici zodpovědně.
+*   **Časový Rámec:** Toto hodnocení platí pro velmi krátkodobý horizont.

@@ -1,0 +1,24 @@
+```json
+{
+  "NZDCHF_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+*   **Technická analýza (data):** Obecně klesající trend v datech, zejména ke konci měsíce. Objevují se svíčkové formace naznačující možný pokračující pokles (např. delší těla svíček s menšími knoty na konci období, což naznačuje silnější tlak prodejců). Absence silných býčích formací.
+*   **Fundamentální analýza (nedostupná - předpoklad):** *Nutný předpoklad pro hodnocení.* Vzhledem k tomu, že nemám přístup k aktuálním fundamentálním datům, předpokládám, že zprávy (např. úrokové sazby, inflace, HDP) jsou spíše negativní pro NZD nebo pozitivní pro CHF, což by podpořilo SELL. Toto je klíčové! Pokud by fundamenty byly protichůdné, hodnocení by se výrazně změnilo.
+*   **Rizikové hodnocení:**
+    *   **SELL (45%):** Kombinace klesajícího trendu v datech a předpokládaných fundamentálních faktorů upřednostňuje SELL.
+    *   **HOLD (30%):**  Nejasná situace vyžaduje opatrnost. Možnost, že klesající trend je již "započítán" v ceně, nebo že se fundamentální situace změní.
+    *   **BUY (25%):** Malá šance na korekci směrem nahoru (odraz od supportu). Fundamenty by musely být neočekávaně příznivé pro NZD nebo nepříznivé pro CHF, aby se toto hodnocení změnilo.
+
+**Důležité upozornění:**
+
+*   Toto hodnocení je *velmi* zjednodušené a závisí na *předpokladech* o fundamentálních datech. Bez přístupu k reálným datům je jakékoliv hodnocení značně spekulativní.
+*   Hodnocení vychází z pouhého jednoho měsíce 4H dat, což je relativně krátká doba.
+*   Toto není investiční poradenství. Investujte pouze prostředky, které si můžete dovolit ztratit, a vždy proveďte vlastní důkladný průzkum.

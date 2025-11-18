@@ -1,0 +1,26 @@
+```json
+{
+  "BTCUSD_ecn": {
+    "BUY": 20,
+    "SELL": 60,
+    "HOLD": 20
+  }
+}
+```
+
+**Zdůvodnění (pro informaci, nemusí být součástí JSON):**
+
+Toto hodnocení je hrubý odhad a je nutné jej brát s rezervou, protože vychází pouze z omezeného technického pohledu (poskytnutá data) a hypotetického stavu fundamentů. Skutečné hodnocení by vyžadovalo podrobnou fundamentální analýzu a komplexnější technickou analýzu.
+*   **Technická analýza (svíčkové formace a trend):**
+    *   **Klesající trend:** Data vykazují zřetelný klesající trend v průběhu daného měsíce. Cena se dostala z rozpětí 108 000 - 111 000 na hodnotu 90 000.
+    *   **Smíšené svíčkové formace:** Identifikace konkrétních svíčkových formací je obtížná bez vizualizace, ale obecně platí, že v klesajícím trendu se objevují formace naznačující pokračování trendu (např. dlouhé červené svíčky, patterny pokračování). Nicméně existuje i mnoho svíček, které nedávají jasné vodítko, nebo mají protichůdné významy.
+*   **Fundamentální analýza (hypotetická):**
+    *   **Předpoklad:** Z hypotetické fundamentální analýzy budeme vycházet z toho, že trh má v daném období spíše negativní náladu. Například kvůli špatným zprávám z regulace, nedostatečné adopci a zklamáním investorů.
+
+**Vliv na hodnocení:**
+
+*   **SELL (60%):** Dominantní klesající trend naznačuje, že prodejní tlak převládá. Negativní fundamentální výhled podporuje prodej.
+*   **HOLD (20%):** Je zde potenciál pro krátkodobé korekce (odrazy) nebo konsolidaci ceny.  Je potřeba sledovat další vývoj, než se rozhodnout pro jednoznačný směr.
+*   **BUY (20%):** I v klesajícím trendu se mohou objevit příležitosti k nákupu, například na supportech nebo po silných propadech, kdy je trh přeprodaný.  Ale s ohledem na trend a fundamenty je toto rizikové.
+
+**Důležité upozornění:** Toto je pouze ilustrativní příklad. Skutečné rizikové hodnocení by vyžadovalo mnohem více informací a komplexní analýzu.  Berte v potaz svou rizikovou toleranci, investiční horizont a diverzifikujte své portfolio.

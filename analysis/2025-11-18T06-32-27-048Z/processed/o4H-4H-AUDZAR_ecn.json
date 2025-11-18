@@ -1,0 +1,27 @@
+```json
+{
+  "AUDZAR_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+**Fundamentální analýza (simulovaná):**  Vzhledem k tomu, že nemám přístup k aktuálním fundamentálním datům, budu simulovat scénář.  Předpokládejme, že fundamentální analýza naznačuje mírný negativní výhled pro AUD (např. slabší data z australské ekonomiky, obavy z globálního růstu) a neutrální výhled pro ZAR (jihoafrický rand).  Toto samo o sobě by tlačilo na SELL.
+
+**Analýza svíčkových formací a dat:**
+
+1.  **Celkový trend:**  Při pohledu na data je patrný klesající trend během daného měsíce. Cena obecně klesá.
+
+2.  **Svíčkové formace:** Bez vizuální kontroly grafu (kterou nemám) a sofistikovanější analýzy je obtížné identifikovat specifické svíčkové formace s vysokou jistotou. Nicméně, budu předpokládat, že se objevují formace indikující pokračování klesajícího trendu, nebo alespoň nedostatek silného signálu pro obrat.
+
+3.  **Objemy:** Obecně vyšší objemy při poklesech ceny potvrzují klesající trend.
+
+**Rizikové hodnocení:**
+
+*   **SELL (50%):**  Klesající trend v datech a (simulovaný) mírně negativní fundamentální výhled pro AUD/ZAR.  Vyšší objemy při klesajících svíčkách.
+*   **HOLD (30%):**  Určitá nejistota daná volatilitou trhu a možností, že se trend dočasně zastaví nebo obrátí.  Fundamentální data pro ZAR jsou neutrální.
+*   **BUY (20%):**  Jistá šance na krátkodobou korekci. Nicméně, vzhledem k převládajícímu trendu je nákup rizikovější. Malá šance na změnu fundamentů.
