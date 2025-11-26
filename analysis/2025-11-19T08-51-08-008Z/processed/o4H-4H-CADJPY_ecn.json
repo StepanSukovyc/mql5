@@ -1,0 +1,36 @@
+```json
+{
+  "CADJPY_ecn": {
+    "BUY": 60,
+    "SELL": 15,
+    "HOLD": 25
+  }
+}
+```
+
+**Zdůvodnění:**
+
+**Technická Analýza (Svíčkové formace & Data):**
+
+*   **Celkový Trend:** Z dat vyplývá, že za dané období existuje zřetelný rostoucí trend (uptrend). Cena se zpočátku pohybovala kolem 107.30 a končí u hodnoty 111.14, což ukazuje na silný tlak kupujících.
+*   **Momentum:** Na konci období vidíme určité zpomalení růstu, ale uptrend se udržuje.
+*   **Svíčkové formace:** Bez detailní analýzy jednotlivých svíček (což je obtížné bez vizualizace) se zaměřuji na celkový dojem. Vidíme střídání býčích a medvědích svíček, ale převážně býčí svíčky dominují, což potvrzuje uptrend.
+
+**Fundamentální Analýza (zástupná):**
+
+*   **Zjednodušené předpoklady:** Protože nemám přístup k aktuálním fundamentálním datům, zkusím vytvořit hypotetický scénář:
+    *   **CAD (Kanadský dolar):** Předpokládejme, že Kanada zveřejnila pozitivní ekonomická data (např. růst HDP, snížení nezaměstnanosti, zvýšení cen ropy - důležité pro Kanadu). To by posílilo CAD.
+    *   **JPY (Japonský jen):** Předpokládejme, že Japonsko má nejistou ekonomickou situaci (nízký růst, deflace, intervence centrální banky). To by oslabilo JPY.
+*   **Vliv na CAD/JPY:** Silnější CAD a slabší JPY vytvářejí tlak na růst páru CAD/JPY.
+
+**Rizikové Hodnocení:**
+
+*   **BUY (60%):** S ohledem na zřetelný rostoucí trend a za předpokladu pozitivního fundamentálního pozadí pro CAD a negativního pro JPY, je nejpravděpodobnější, že pár bude pokračovat v růstu. Riziko je však značné, protože trendy se mohou otočit a fundamentální faktory se mohou rychle změnit.
+*   **SELL (15%):**  I přes rostoucí trend nelze vyloučit korekci. Pár je již poměrně vysoko, takže existuje možnost, že dojde k vybírání zisků a krátkodobému poklesu.  Fundamentální faktory se mohou rychle změnit, například zprávy o zlepšení japonské ekonomiky nebo zhoršení situace v Kanadě.
+*   **HOLD (25%):** Vzhledem k nejistotě spojené s fundamentální analýzou (která je v tomto případě hypotetická) a možné volatilitě je vhodné vyčkat na další potvrzení trendu nebo na objasnění fundamentálních faktorů.  Nejlepší je sledovat další vývoj situace a nereagovat unáhleně.
+
+**Důležité upozornění:**
+
+*   Toto hodnocení je pouze orientační a založené na omezených informacích a hypotetických předpokladech.  **Nenahrazuje profesionální finanční poradenství.**
+*   Při obchodování měnových párů je vždy nutné zohlednit individuální rizikový profil, investiční horizont a diverzifikovat portfolio.
+*   Důkladně studujte aktuální fundamentální data a provádějte detailní technickou analýzu, než učiníte jakékoli investiční rozhodnutí.

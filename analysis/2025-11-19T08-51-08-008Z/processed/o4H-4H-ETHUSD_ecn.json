@@ -1,0 +1,41 @@
+```json
+{
+  "ETHUSD_ecn": {
+    "BUY": 25,
+    "SELL": 55,
+    "HOLD": 20
+  }
+}
+```
+
+**Vysvětlení:**
+
+**Důležité upozornění:** Toto hodnocení je **velmi zjednodušené** a slouží pouze jako ilustrace. Skutečná finanční analýza by byla mnohem komplexnější a zahrnovala by mnohem více dat a faktorů. Navíc, v reálném světě bych ti nikdy nedal hodnocení bez důkladné znalosti tvé finanční situace a rizikového profilu.
+
+**Proč takové hodnocení:**
+
+*   **SELL (55%):**
+    *   **Dominantní klesající trend:** Data ukazují na celkový klesající trend za dané období. I když se objevují i růstové úseky, ty nedokáží zvrátit dominantní trend.
+    *   **Svíčkové formace:** (Bez detailnějšího rozboru konkrétních svíček - jen obecně) Kombinace mnoha medvědích svíček (dlouhé tělo směřující dolů) a formací naznačujících oslabení býčího trendu.
+    *   **Fundamentální analýza (předpoklad):** Bez konkrétních fundamentálních dat předpokládám spíše neutrální až negativní sentiment kolem ETH v daném období (např. zprávy o regulaci, nižší zájem o DeFi atd.).
+
+*   **BUY (25%):**
+    *   **Potenciální oversold podmínky:** Po silném poklesu by mohlo dojít k dočasné korekci směrem nahoru.
+    *   **Objem:** Nárůst objemu při některých růstových svíčkách by mohl naznačovat sílu kupujících (ale je potřeba detailněji analyzovat kontext).
+    *   **Fundamentální analýza (předpoklad):** Některé fundamentální faktory by mohly hrát pro ETH v dlouhodobém horizontu (např. blížící se upgrady, rostoucí adopce).
+
+*   **HOLD (20%):**
+    *   **Nejistota:** Vzhledem k volatilitě ETH a neúplným informacím je rozumné ponechat si otevřenou možnost, že trh se může vyvíjet různými směry.
+    *   **Čekání na další data:** Před provedením výraznějších akcí je vhodné počkat na další data a vývoj fundamentálních faktorů.
+
+**Jak bych postupoval v reálném světě:**
+
+1.  **Detailní sběr dat:** Shromáždil bych data z více zdrojů (nejen cenová historie, ale i objem, open interest, sentiment, atd.).
+2.  **Fundamentální analýza:** Provedl bych hloubkovou fundamentální analýzu ETH a celého trhu s kryptoměnami (regulace, adopce, technologie, konkurence, makroekonomické faktory).
+3.  **Technická analýza:** Identifikoval bych klíčové úrovně podpory a odporu, trendy, patterny, indikátory (RSI, MACD, atd.).
+4.  **Rizikový profil:** Zjistil bych tvůj rizikový profil, investiční cíle a časový horizont.
+5.  **Scénáře:** Analyzoval bych různé scénáře (býčí, medvědí, neutrální) a pravděpodobnost jejich naplnění.
+6.  **Alokace:** Navrhl bych optimální alokaci kapitálu s ohledem na tvé cíle a rizika.
+7.  **Monitoring:** Průběžně bych monitoroval trh a v případě potřeby upravoval strategii.
+
+Doufám, že toto vysvětlení je užitečné!

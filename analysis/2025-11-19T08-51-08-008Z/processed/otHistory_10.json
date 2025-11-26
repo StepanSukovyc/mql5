@@ -1,0 +1,29 @@
+```json
+{
+  "XPTUSD_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  },
+  "BCHUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  "BTCUSD_ecn": {
+    "BUY": 15,
+    "SELL": 65,
+    "HOLD": 20
+  },
+  "ETHUSD_ecn": {
+    "BUY": 20,
+    "SELL": 60,
+    "HOLD": 20
+  },
+  "LTCUSD_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  }
+}
+```

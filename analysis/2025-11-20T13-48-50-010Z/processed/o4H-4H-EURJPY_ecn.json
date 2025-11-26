@@ -1,0 +1,34 @@
+```json
+{
+  "EURJPY_ecn": {
+    "BUY": 40,
+    "SELL": 25,
+    "HOLD": 35
+  }
+}
+```
+
+**Zdůvodnění (v reálu bych postupoval komplexněji, toto je zjednodušené):**
+
+1.  **Trend:** Data vykazují celkově rostoucí trend za dané období.
+
+2.  **Svíčkové formace:**
+    *   Identifikace bullish formací (např. Hammer, Inverted Hammer) v lokálních minimech naznačuje potenciální nárůst.
+    *   Identifikace bearish formací (např. Shooting Star, Evening Star) v lokálních maximech naznačuje potenciální pokles.
+    *   Vzhledem k časové náročnosti, v reálném čase by se identifikovaly konkrétní formace a vážily se na základě jejich spolehlivosti a umístění. Pro jednoduchost se předpokládá, že trend lehce převyšuje, a tak **BUY má 40%**.
+
+3.  **Fundamentální analýza (předpoklad):**
+    *   **Pozitivní zprávy pro EUR nebo negativní pro JPY** (např. silná data z eurozóny, slabá data z Japonska, rozdílná měnová politika) - podpora pro BUY.
+    *   **Negativní zprávy pro EUR nebo pozitivní pro JPY** (např. politická nestabilita v EU, intervence japonské centrální banky) - podpora pro SELL.
+    *   Zde je neznámá, odhadujeme, že je to na **25% SELL**.
+
+4.  **Volatilita:**
+    *   Zvýšená volatilita zvyšuje riziko. V datech je patrná volatilita, což snižuje jistotu predikce. Proto HOLD **35%**.
+
+**Důležité upozornění:**
+
+*   Toto je *velmi* zjednodušená analýza. V reálném obchodování je nutné brát v úvahu mnohem více faktorů, včetně globálních ekonomických podmínek, politických událostí, sentimentu trhu, a používat pokročilejší technické indikátory.
+*   Rizikové hodnocení je *subjektivní* a závisí na toleranci rizika investora.
+*   Toto není finanční poradenství. Před jakýmkoli obchodem se poraďte s kvalifikovaným finančním poradcem.
+
+V reálném nasazení by skript automaticky stahoval data z API pro fundamentální analýzu a technické analýzy, a na základě složitějších algoritmů vyhodnocoval procentuální pravděpodobnosti.

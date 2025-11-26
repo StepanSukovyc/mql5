@@ -1,0 +1,9 @@
+```json
+{
+  "USDJPY_ecn": {
+    "BUY": 60,
+    "SELL": 10,
+    "HOLD": 30
+  }
+}
+```

@@ -1,0 +1,30 @@
+```json
+{
+  "SGDJPY_ecn": {
+    "BUY": 40,
+    "SELL": 20,
+    "HOLD": 40
+  }
+}
+```
+
+**Vysvětlení:**
+
+**Důležité upozornění:** Toto hodnocení je vysoce spekulativní a zjednodušené. Opírá se o omezená data a chybí mu hluboká fundamentální analýza a pokročilé technické indikátory.  Je to pouze ilustrace toho, jak by se dalo k problému přistoupit. Skutečná investiční rozhodnutí by měla být založena na komplexním výzkumu a individuální toleranci rizika.  Dále je nutné poznamenat, že jsem AI a nemohu poskytovat finanční poradenství.
+
+**Kritéria a váhy (ilustrativní):**
+
+*   **Fundamentální analýza (30%):** Protože nemám přístup k aktuálním fundamentálním datům, předpokládám neutrální postoj. To znamená, že žádná z měn (SGD, JPY) nemá výraznou převahu na základě fundamentů.
+
+*   **Technická analýza (70%):**
+
+    *   **Trend (30%):** Celkově, za poslední měsíc, vidíme růst. Počínaje přibližně 117 a konče blízko 120.  To naznačuje býčí trend.
+    *   **Svíčkové formace (20%):** Při bližším zkoumání jednotlivých svíček bych hledal formace jako "bullish engulfing", "morning star" (signály BUY) nebo "bearish engulfing", "evening star" (signály SELL). Z tohoto datasetu je složité automaticky identifikovat tyto formace bez dodatečného programování, proto zjednodušuji a počítám s mírnou převahou BUY signálů.
+    *   **Momentum (20%):** RSI a MACD bych použil k posouzení překoupenosti/přeprodanosti a síly trendu.  Opět, bez výpočtu těchto indikátorů je to odhad, ale vzhledem k rostoucímu trendu předpokládám, že RSI se blíží překoupené zóně (což snižuje jistotu BUY pozice).
+
+**Výpočet (velmi zjednodušený):**
+
+*   **BUY (40%):** Býčí trend + mírná převaha BUY signálů ze svíčkových formací, ale RSI se blíží překoupené zóně.
+*   **SELL (20%):** Potenciální korekce po růstu (RSI v překoupené zóně by mohl znamenat obrat).
+*   **HOLD (40%):** Fundamentální nejistota + potřeba sledovat další vývoj trhu.
+

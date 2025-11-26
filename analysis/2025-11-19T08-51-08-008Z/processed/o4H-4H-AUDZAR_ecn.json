@@ -1,0 +1,35 @@
+```json
+{
+  "AUDZAR_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení:**
+
+**Analýza dat:**
+
+*   **Trend:**  Během daného měsíce byl zaznamenán převážně klesající trend s občasnými korekcemi. Závěr měsíce se pohybuje na nejnižších hodnotách období.
+*   **Volatilita:**  Volatilita páru je poměrně vysoká, jak je vidět z rozpětí mezi high a low cenami v jednotlivých 4H svíčkách.
+*   **Svíčkové formace:** Zkoumání jednotlivých svíček a patternů by vyžadovalo podrobnější analýzu, ale rychlý pohled neodhaluje žádné extrémně silné signály. Prevaha bearish svíček.
+*   **Objemy:** Objem transakcí je proměnlivý, ale vyšší objemy se objevují spíše při poklesech, což potvrzuje klesající trend.
+
+**Fundamentální analýza (obecné poznámky):**
+
+*   **AUD (Australský dolar):** Australský dolar je komoditní měna, citlivá na ceny surovin (zejména železné rudy a uhlí, které jsou pro Austrálii klíčové exportní artikly).  Také je ovlivňován globálním ekonomickým sentimentem, zejména vývojem v Číně.
+*   **ZAR (Jihoafrický rand):** Jihoafrický rand je také komoditní měna, ovlivněná cenami kovů (zlato, platina) a politickou a ekonomickou stabilitou Jihoafrické republiky.
+
+**Rizikové hodnocení:**
+
+Vzhledem k převážně klesajícímu trendu, vysoké volatilitě a slabým bullish signálům dávám přednost opatrnějšímu hodnocení:
+
+*   **SELL (50%):** Klesající trend je silný.
+*   **HOLD (30%):** Vzhledem k volatilitě a potenciálním korekcím je rozumné pozice nedržet, ale ani neotvírat. Zvážit čekání na jasnější signály.
+*   **BUY (20%):** Nákupní pozice jsou rizikové vzhledem k celkovému trendu, ale krátkodobé korekce směrem nahoru jsou možné.
+
+**Důležité upozornění:**
+
+Toto hodnocení je založeno pouze na poskytnutých datech a velmi obecných informacích o fundamentálních faktorech. **Není to investiční doporučení.**  Pro reálné obchodování je nutné provést hlubší fundamentální analýzu (sledování ekonomických ukazatelů, zpráv centrálních bank, politických událostí atd.) a technickou analýzu (identifikace supportů, rezistencí, trendových linií, indikátorů atd.). Navíc, zvažte svůj rizikový profil a finanční situaci.
