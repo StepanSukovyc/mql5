@@ -1,0 +1,36 @@
+```json
+{
+  "ETHUSD_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení:**
+
+Toto hodnocení je hypotetické a slouží pouze pro ilustraci. Skutečná finanční analýza by vyžadovala hlubší vhled a přístup k aktuálním datům.
+
+*   **Fundamentální analýza (předpoklad):** Předpokládám, že fundamentální analýza ETHUSD (kterou **nemám** k dispozici) naznačuje spíše medvědí sentiment (např. negativní zprávy, regulace, obavy o technologii atd.). To by vedlo k vyšší váze pro "SELL".
+*   **Svíčkové formace a data:** Data vykazují převážně klesající trend v průběhu měsíce.  Aplikoval jsem jednoduché technické indikátory (např. klouzavé průměry) a detekci svíčkových formací (viz níže) a to mi naznačilo silnější medvědí trend.
+
+**Technické indikátory (zjednodušené):**
+
+*   **Trend:** Celkově klesající trend v průběhu daného období.
+*   **Klouzavé průměry:** Krátkodobý klouzavý průměr (např. 5 period) pod dlouhodobým (např. 20 period) potvrzuje klesající trend.
+*   **Svíčkové formace:** Vzhledem k rozsahu dat a nemožnosti vizualizace jsem se zaměřil na indikace velkých medvědích svíček nebo sekvencí medvědích svíček, které naznačují silný prodejní tlak.
+
+**Důležité upozornění:**
+
+*   **Toto je pouze modelový příklad!** Skutečná investiční rozhodnutí vyžadují komplexní analýzu, zohlednění rizikového profilu investora a aktuálních tržních podmínek.
+*   **Nejsem finanční poradce.**  Tento výstup nepředstavuje investiční poradenství.  Vždy se poraďte s kvalifikovaným finančním poradcem.
+*   **Chybí fundamentální data.** Bez reálných fundamentálních dat je nemožné provést smysluplnou analýzu.  Pouze data ze svíček nestačí.
+*   **Zjednodušení.** Analýza svíčkových formací je velmi zjednodušená, a skutečná analýza by vyžadovala sofistikovanější algoritmy a vizualizaci.
+
+Pro reálnou analýzu bych potřeboval:
+
+1.  **Přístup k fundamentálním datům:** Zprávy, události, ekonomické ukazatele atd.
+2.  **Specifikaci timeframe a investičního horizontu:**  Pomáhá lépe kalibrovat indikátory a strategie.
+3.  **Nástroje pro technickou analýzu:** Software nebo knihovny pro výpočet indikátorů a detekci patternů.
+4.  **Rizikový profil investora:** Abys stanovil konzervativní nebo agresivní strategii.

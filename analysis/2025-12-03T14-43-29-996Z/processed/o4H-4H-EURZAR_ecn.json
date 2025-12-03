@@ -1,0 +1,27 @@
+```json
+{
+  "EURZAR_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k omezeným informacím a absenci fundamentální analýzy a možnosti detailní analýzy svíčkových formací se jedná o velmi orientační odhad.
+
+*   **Technická Analýza (Data):** Celkově data ukazují na klesající trend v průběhu měsíce. Vidíme pokles z cca 20.15 na 19.80.  Posledních pár 4H úseků je spíše do strany.
+*   **Absence Fundamentální Analýzy:** Bez znalosti fundamentálních faktorů (ekonomické zprávy, úrokové sazby, politická situace v eurozóně a Jihoafrické republice) je rizikové hodnocení velmi omezené.
+*   **Svíčkové formace:** Bez podrobné vizuální inspekce grafu nelze identifikovat spolehlivé svíčkové formace.
+
+**Proč dané procenta:**
+
+*   **SELL (40%):** Klesající trend v datech naznačuje, že pokles by mohl pokračovat.  Proto je SELL nejrizikovější, ale potenciálně nejvýnosnější varianta (pokud se trend potvrdí).
+*   **HOLD (30%):** Vzhledem k chybějícím fundamentálním datům a nejasným svíčkovým formacím je rozumné zaujmout neutrální postoj (HOLD). Poslední data nenaznačují jasný směr.
+*   **BUY (30%):**  Možnost menší korekce (růstu) po předchozím poklesu, ale bez fundamentů těžko odhadnout sílu tohoto potenciálního pohybu.
+
+**Důležité upozornění:**
+
+Toto je pouze orientační hodnocení založené na omezených datech. Před jakýmkoli obchodním rozhodnutím je nezbytné provést důkladnou fundamentální a technickou analýzu a zohlednit svůj vlastní rizikový profil.

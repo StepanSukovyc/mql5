@@ -1,0 +1,56 @@
+[
+  {
+    "symbol": "CHFHUF_ecn",
+    "BUY": 15,
+    "SELL": 65,
+    "HOLD": 20
+  },
+  {
+    "symbol": "LTCUSD_ecn",
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  },
+  {
+    "symbol": "ETHUSD_ecn",
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  },
+  {
+    "symbol": "BCHUSD",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "BTCUSD_ecn",
+    "BUY": 20,
+    "SELL": 40,
+    "HOLD": 40
+  },
+  {
+    "symbol": "CADJPY_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "CHFJPY_ecn",
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  {
+    "symbol": "GBPCHF_ecn",
+    "BUY": 35,
+    "SELL": 40,
+    "HOLD": 25
+  },
+  {
+    "symbol": "GBPJPY_ecn",
+    "BUY": 35,
+    "SELL": 25,
+    "HOLD": 40
+  }
+]

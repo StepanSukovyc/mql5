@@ -1,0 +1,44 @@
+```json
+{
+  "BTCUSD_ecn": {
+    "BUY": 20,
+    "SELL": 40,
+    "HOLD": 40
+  }
+}
+```
+
+**Vysvětlení (proč takto a ne jinak):**
+
+Vzhledem k omezeným informacím (pouze 4H data za měsíc a žádná fundamentální analýza) a s ohledem na Vaše zadání, se rizikové hodnocení provádí **velmi zjednodušeně** s *vysokou mírou subjektivity*.  Nemám přístup k reálným datům fundamentální analýzy.  Tato analýza se zaměřuje **primárně na technickou analýzu z poskytnutých dat.**
+
+1.  **Celkový trend:** Z dat je patrný *výrazný klesající trend* během daného měsíce.  Začínáme nad 115 000 a končíme pod 91 000.
+
+2.  **Svíčkové formace:** Identifikace svíčkových formací vyžaduje složitější analýzu a delší časové období.  Z pouhého pohledu na data není možné spolehlivě identifikovat významné patterny.
+
+3.  **Objemy:** Vyšší objemy v období poklesu naznačují silnější prodejní tlak.
+
+4.  **Fundamentální analýza (hypotetická):**  Zde je *největší nejistota*. Představme si, že fundamentální zprávy jsou smíšené – některé ukazují na potenciální růst v budoucnu (např. zlepšení regulace), jiné na přetrvávající problémy (např. obavy z inflace, regulace atd.). *Tato skutečnost snižuje sílu SELL.*
+
+**Rizikové hodnocení a zdůvodnění:**
+
+*   **SELL (40%):** Silný klesající trend, a relativně vyšší objemy v obdobích propadů podporují spíše prodejní pozici.  Trend je stále směrem dolů.
+*   **HOLD (40%):** Smíšené fundamentální zprávy a krátké časové okno pro analýzu (pouze jeden měsíc) naznačují, že by bylo rozumné vyčkat na další vývoj.  Konsolidace v posledních dnech měsíce.
+*   **BUY (20%):**  Malá šance na nákup je dána tím, že i přes klesající trend, se může vyskytnout krátkodobá korekce směrem nahoru. Nízká, protože celkový trend je dolů.
+
+**Důležité upozornění:**
+
+*   **Toto je pouze *velmi hrubý odhad* založený na omezených informacích.**
+*   **Investiční rozhodnutí by měly být vždy podloženy důkladnou analýzou a zvážením všech rizik.**
+*   **Nejsem kvalifikovaný finanční poradce a toto hodnocení neslouží jako investiční doporučení.**
+*   **Je nutné provést fundamentální analýzu z dostupných zdrojů (zprávy, ekonomické ukazatele, regulace) a kombinovat ji s technickou analýzou.**
+*   **Při reálném obchodování používejte *stop-loss* příkazy pro minimalizaci rizik.**
+* Časové razítko je potřeba upravit. Nejspíš to není správný timestamp.
+
+**Doporučení:**
+
+1.  **Získejte aktuální informace z důvěryhodných zdrojů fundamentální analýzy.**
+2.  **Prohlédněte si data v grafu a identifikujte klíčové supporty a rezistence.**
+3.  **Použijte indikátory technické analýzy (např. RSI, MACD, klouzavé průměry) k potvrzení trendu a identifikaci potenciálních vstupních a výstupních bodů.**
+4.  **Zvažte použití menší pozice vzhledem k nejistotě.**
+5. **Sledujte sentiment na trhu**

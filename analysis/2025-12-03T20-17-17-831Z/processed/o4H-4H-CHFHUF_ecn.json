@@ -1,0 +1,30 @@
+```json
+{
+  "CHFHUF_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+**Technická analýza (Svíčkové formace a data):**
+
+*   **Převažující downtrend:**  V datech je patrný převážně klesající trend během daného měsíce.  Začátek měsíce okolo 415.5 a konec pod 408.  To naznačuje silný prodejní tlak.
+*   **Chybí jasné signály:** Analyzovat svíčkové formace efektivněji vyžaduje více kontextu a delší časové rámce. Zde nemáme dostatek informací pro spolehlivé určení. Z dat je ale zřejmá vysoká volatilita.
+*   **Objemy:** Vyšší objemy při propadech cen (např. kolem času 1762545600 a 1764072000) posilují signál prodejního tlaku.
+
+**Fundamentální analýza (NEDOSTUPNÁ):**
+
+*   **NEZNÁM aktuální fundamentální data.** Bez znalosti makroekonomických událostí (inflace, úrokové sazby, politická stabilita ve Švýcarsku a Maďarsku), nemohu relevantně fundamentálně posoudit situaci.  Hodnocení by se změnilo s ohledem na tyto faktory. Například, pokud by Maďarsko oznámilo zvýšení úrokových sazeb, mohlo by to posílit HUF a podpořit prodej (SELL) CHFHUF.
+
+**Rizikové hodnocení:**
+
+*   **SELL (50%):** Vzhledem k downtrendu a nedostatku silných signálů pro obrat, je nejpravděpodobnější pokračování klesajícího trendu. Riziko prodejní pozice je ale velké vzhledem k volatilitě.
+*   **HOLD (30%):** Bez znalosti fundamentálních faktorů a jednoznačných signálů, je lepší vyčkat a sledovat vývoj. Trh může konsolidovat nebo se otočit.
+*   **BUY (20%):**  I přes downtrend existuje malá šance na korekci nebo obrat. Je to ale nejrizikovější strategie bez podpory fundamentálních dat.
+
+**Důležité upozornění:** Toto hodnocení je *velmi* orientační a založené pouze na poskytnutých datech.  **Neberte to jako investiční radu.** Finanční rozhodnutí by měla být vždy založena na důkladném průzkumu, znalosti Vašeho rizikového profilu a konzultaci s kvalifikovaným finančním poradcem.  Bez znalosti fundamentálních dat je toto hodnocení velmi omezené.
+

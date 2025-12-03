@@ -1,0 +1,34 @@
+```json
+{
+  "ZARJPY_ecn": {
+    "BUY": 20,
+    "SELL": 40,
+    "HOLD": 40
+  },
+  "XAGUSD_ecn": {
+    "BUY": 60,
+    "SELL": 20,
+    "HOLD": 20
+  },
+  "XAUUSD_ecn": {
+    "BUY": 50,
+    "SELL": 25,
+    "HOLD": 25
+  },
+  "XPDUSD_ecn": {
+    "BUY": 40,
+    "SELL": 30,
+    "HOLD": 30
+  },
+  "XPTUSD_ecn": {
+    "BUY": 55,
+    "SELL": 20,
+    "HOLD": 25
+  },
+  "XALUSD_ecn": {
+    "BUY": 45,
+    "SELL": 30,
+    "HOLD": 25
+  }
+}
+```

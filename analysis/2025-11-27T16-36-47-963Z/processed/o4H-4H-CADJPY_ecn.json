@@ -1,0 +1,29 @@
+```json
+{
+  "CADJPY_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k absenci fundamentální analýzy a omezenému časovému rámci historických dat (měsíc v 4H periodě) je hodnocení zjednodušené a bere v úvahu pouze základní faktory:
+
+*   **Trend:** Data vykazují **smíšený trend**. První polovina měsíce rostoucí, druhá spíše klesající. (neutrální faktor, spíše pro HOLD)
+*   **Volatilita:** Měnový pár vykazuje **střední volatilitu**. Silný pokles v prostředku dat, ale celkově stabilní. (neutrální faktor)
+*   **Svíčkové formace:** Bez hlubší analýzy svíčkových formací, data naznačují **nejistotu** na trhu. Dlouhé svíčky s knoty nahoru i dolů. (dává více SELL)
+
+*Fundamentální analýza:* Bez dat fundamentů je odhad velice obtížný. Globálně rostou obavy z recese a obě měny jsou vnímány jako bezpečný přístav.
+
+**Proč takové rozdělení procent:**
+
+*   **BUY (30%):** Vzhledem k dřívějšímu uptrendu je zde stále šance na odraz a pokračování růstu, i když menší.
+*   **SELL (40%):** Poslední data naznačují mírný downtrend.
+*   **HOLD (30%):** Kvůli absenci fundamentální analýzy a nejistotě na trhu je vhodné vyčkat na další vývoj. Lepší je držet pozici a sledovat trh.
+
+**Důležité upozornění:**
+
+Toto je **pouze orientační** hodnocení na základě omezených dat. Pro kvalitní rozhodnutí je nutné provést hloubkovou fundamentální analýzu a technickou analýzu s ohledem na aktuální tržní podmínky. Stejně tak, je nutné zohlednit osobní rizikový profil.

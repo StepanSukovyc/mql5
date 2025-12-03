@@ -1,0 +1,25 @@
+```json
+{
+  "NZDUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Berte prosím na vědomí, že toto hodnocení je velmi zjednodušené a založené pouze na poskytnutých datech a obecných principech. Skutečné finanční poradenství vyžaduje hlubší analýzu a zohlednění mnoha dalších faktorů.
+
+*   **Technická analýza (svíčkové formace a cenový vývoj):**
+    *   **Klesající trend:** Data ukazují převážně klesající trend během sledovaného období.
+    *   **Svíčkové formace:** Bez podrobnějšího zkoumání jednotlivých svíček je obtížné identifikovat silné signály, ale celkový dojem je spíše medvědí.
+*   **Fundamentální analýza:**
+    *   Fundamentální analýza by vyžadovala aktuální ekonomické zprávy a data z Nového Zélandu a USA.  Obecně, pokud jsou ekonomická data z USA silnější než z Nového Zélandu, posiluje to USD a oslabuje NZD (a tedy "SELL" by bylo pravděpodobnější). Opačný případ by vedl k "BUY".
+*   **Rizikové hodnocení:**
+    *   **SELL (40%):** Vzhledem k převažujícímu klesajícímu trendu a neurčitému stavu fundamentů je "SELL" o něco pravděpodobnější.
+    *   **HOLD (30%):**  Je zde stále možnost, že se trend obrátí nebo že fundamentální faktory působí proti technickým. Zůstat "HOLD" je rozumné v nejisté situaci.
+    *   **BUY (30%):**  Šance na nárůst existuje, ale je menší než šance na pokles.  Možná korekce nebo neočekávaná pozitivní zpráva z Nového Zélandu by mohla vést k růstu.
+
+Je důležité zdůraznit, že se jedná o velmi hrubý odhad a je nezbytné provést důkladnější analýzu, než se rozhodnete pro jakékoli investiční kroky.

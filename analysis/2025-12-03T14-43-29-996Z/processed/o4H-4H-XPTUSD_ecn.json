@@ -1,0 +1,24 @@
+```json
+{
+  "XPTUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění hodnocení:**
+
+Vzhledem k tomu, že mi nebyla poskytnuta žádná fundamentální data z webu ani nemám možnost provádět web scraping, hodnocení je založeno pouze na analyzovaných svíčkových formacích a datech, které jsi poskytl, s důrazem na poslední vývoj a celkový trend za poslední dny měsíce. Ber v úvahu, že bez fundamentálních dat je toto hodnocení velmi orientační a mělo by být bráno s rezervou.
+
+*   **Celkový trend:** Z dat je patrný pokles ceny v průběhu měsíce, i když ke konci měsíce se objevuje i růst, ale s následnou korekcí.
+*   **Svíčkové formace:** Identifikace svíčkových formací na 4H grafu (např. Doji, engulfing patterns, hammer, shooting star) by pomohla určit potenciální body obratu trendu. Vzhledem k rozsahu dat a popisu by to vyžadovalo kompletní manuální revizi, která není možná v jednom kroku. Nicméně na základě dat, kde vidím pokles ceny v posledních dnech, bych očekával, že medvědí formace budou častější.
+*   **Volatilita:** Poměrně vysoká volatilita, což se dá vidět z větších rozpětí high-low, indikuje nejistotu na trhu.
+*   **Objemy:** Objem je značně kolísavý, ale v některých dnech, kdy cena klesala, byl i objem vyšší, což značí silnější tlak prodejců.
+
+**Kalkulace procent:**
+
+*   **SELL (40%):** Vzhledem k klesajícímu trendu, volatilitě a objemům v některých obdobích se domnívám, že je zde solidní šance na další pokles ceny.
+*   **HOLD (30%):** Volatilita a obraty trendu z historie naznačují nejistotu, tudíž držení pozice (HOLD) může být rozumné pro ty, kteří již pozici mají a nechtějí ji uzavřít za současných podmínek.
+*   **BUY (30%):** Korekce ceny už proběhla a při správném načasování a sledování fundamentální analýzy by mohla býti býčí.
