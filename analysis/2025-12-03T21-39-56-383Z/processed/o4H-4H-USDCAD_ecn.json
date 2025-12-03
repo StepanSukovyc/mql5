@@ -1,0 +1,33 @@
+```json
+{
+  "USDCAD_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení:**
+
+*   **SELL: 45%** - Celkový trend za dané období (přibližně jeden měsíc) je klesající (od 1.40539 na 1.39493).  Svíčkové formace (zejména na konci datové sady) naznačují medvědí momentum. Bez znalosti fundamentálních dat, klesající trend a medvědí svíčkové formace posilují přesvědčení pro SELL.
+*   **HOLD: 30%** - Bez znalosti fundamentálních dat a dalších technických indikátorů (klouzavé průměry, RSI, MACD atd.) je obtížné s jistotou určit směr. Trh může konsolidovat nebo se otočit.  Rovněž je nutné brát v úvahu volatilitu a potenciální falešné signály.
+*   **BUY: 25%** - Po prudkých poklesech často následuje korekce.  Objem obchodů je značně volatilní. I kdyz dominuje klesající trend, můžou se objevit krátkodobé příležitosti pro BUY (zejména pokud by fundamentální data naznačovala oslabení CAD nebo posílení USD). Navíc, cena se může odrazit od supportní úrovně.
+
+**Důležité upozornění:**
+
+*   **Toto hodnocení je orientační a vysoce rizikové.** Je založeno pouze na poskytnutých historických datech a **předpokládaných** svíčkových formacích.
+*   **Chybí zásadní informace:**
+    *   **Fundamentální analýza:** Ekonomické ukazatele, politické události, zprávy centrálních bank, atd. mají zásadní vliv na měnové páry.
+    *   **Širší kontext trhu:** Trend na vyšších časových rámcích (denní, týdenní, měsíční) může být opačný a ovlivnit krátkodobý trend.
+    *   **Další technické indikátory:** Použití klouzavých průměrů, RSI, MACD, Fibonacciho úrovní by mohlo poskytnout přesnější pohled.
+*   **Řízení rizik:** Vždy používejte stop-loss příkazy a dodržujte zásady řízení rizik.
+*   **Profesionální poradenství:** Před jakýmkoli investičním rozhodnutím se poraďte s kvalifikovaným finančním poradcem.
+*   **Časové razítko:** Chybí informace k jakému datu se data vztahují, čímž je analýza jen akademická.
+*   **Objem:** Je důležité si uvědomit, že objem je relativní a závisí na konkrétní burze a brokerovi. Proto je interpretace objemu bez kontextu omezena.
+*   **Svíčkové formace:** Interpretace svíčkových formací vyžaduje vizuální analýzu a je subjektivní. Automatická identifikace z číselných dat může být nepřesná.
+*   **Likvidita:** Je potřeba ověřit likviditu daného měnového páru u brokera.
+
+**Závěr:**
+
+S ohledem na omezené informace je doporučeno být opatrný a před provedením jakéhokoli obchodu provést důkladnější analýzu.

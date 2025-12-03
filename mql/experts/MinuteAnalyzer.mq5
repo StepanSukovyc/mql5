@@ -1,3 +1,8 @@
+//+------------------------------------------------------------------+
+//|                                                      ProjectName |
+//|                                      Copyright 2020, CompanyName |
+//|                                       http://www.companyname.net |
+//+------------------------------------------------------------------+
 
 //+------------------------------------------------------------------+
 //|                                                   MinuteAnalyzer |
@@ -34,21 +39,50 @@ void OnTimer()
    if(freeMargin > 0.2 * equity)
      {
       string predictPath = TerminalInfoString(TERMINAL_DATA_PATH) + "\\MQL5\\Files\\" + predictFile;
-      string analyzePath = TerminalInfoString(TERMINAL_DATA_PATH) + "\\MQL5\\Files\\" + analyzeFile;
+      string fileToUse = predictPath;
 
+      // Nejprve zkusíme absolutní cestu
       if(!FileIsExist(predictPath))
         {
-         Print("Soubor predict.json neexistuje, vytvářím analyze.json...");
-         int handle = FileOpen(analyzePath, FILE_WRITE | FILE_TXT | FILE_ANSI);
-         if(handle != INVALID_HANDLE)
+         Print("Soubor na absolutní cestě nenalezen, zkouším relativní cestu...");
+         if(FileIsExist(predictFile))
            {
-            FileWrite(handle, "{}");
-            FileClose(handle);
+            fileToUse = predictFile;
+            Print("Soubor nalezen v MQL5\\Files pomocí relativní cesty.");
            }
-         return;
+         else
+           {
+            Print("Soubor predict.json neexistuje ani na absolutní, ani na relativní cestě.");
+            // Vytvoříme analyze.json
+
+
+            string analyzePath = TerminalInfoString(TERMINAL_DATA_PATH) + "\\MQL5\\Files\\" + analyzeFile;
+            string analyzeToUse = analyzePath;
+
+            // Zkusíme absolutní cestu
+            int handle = FileOpen(analyzeToUse, FILE_WRITE | FILE_TXT | FILE_ANSI);
+            if(handle == INVALID_HANDLE)
+              {
+               Print("Absolutní cesta selhala, zkouším relativní...");
+               handle = FileOpen(analyzeFile, FILE_WRITE | FILE_TXT | FILE_ANSI);
+              }
+
+            if(handle != INVALID_HANDLE)
+              {
+               FileWrite(handle, "{}");
+               FileClose(handle);
+               Print("Soubor analyze.json byl vytvořen.");
+              }
+            else
+              {
+               Print("Chyba: nelze vytvořit analyze.json. Error:", _LastError);
+              }
+           }
         }
 
-      int handle = FileOpen(predictPath, FILE_READ | FILE_TXT | FILE_ANSI);
+      // ✅ Otevření souboru
+      int handle = FileOpen(fileToUse, FILE_READ | FILE_TXT | FILE_ANSI);
+
       if(handle == INVALID_HANDLE)
         {
          Print("Chyba: nelze otevřít predict.json. Error:", _LastError);
@@ -88,16 +122,17 @@ void OnTimer()
          result = trade.Buy(volume, symbol);
          Print("BUY result:", result, "; Error:", _LastError);
         }
-      else if(StringCompare(typ, "SELL") == 0)
-        {
-         result = trade.Sell(volume, symbol);
-         Print("SELL result:", result, "; Error:", _LastError);
-        }
       else
-        {
-         Print("Neznámý typ obchodu:", typ);
-         return;
-        }
+         if(StringCompare(typ, "SELL") == 0)
+           {
+            result = trade.Sell(volume, symbol);
+            Print("SELL result:", result, "; Error:", _LastError);
+           }
+         else
+           {
+            Print("Neznámý typ obchodu:", typ);
+            return;
+           }
 
       // ✅ Pokud se obchod podařil, smažeme soubor
       if(result)
@@ -107,7 +142,7 @@ void OnTimer()
             FileDelete(predictPath);
             Print("Soubor predict.json byl úspěšně odstraněn po otevření obchodu.");
            }
-      }
+        }
       else
         {
          Print("Obchod se nepodařil. Error:", _LastError);
@@ -139,16 +174,19 @@ string TrimString(string str)
 string ExtractJsonValue(string json, string key)
   {
    int keyPos = StringFind(json, "\"" + key + "\"");
-   if(keyPos < 0) return "";
+   if(keyPos < 0)
+      return "";
    int colonPos = StringFind(json, ":", keyPos);
-   if(colonPos < 0) return "";
+   if(colonPos < 0)
+      return "";
    int valueStart = colonPos + 1;
 
    if(StringGetCharacter(json, valueStart) == '\"')
      {
       int quoteStart = StringFind(json, "\"", valueStart);
       int quoteEnd = StringFind(json, "\"", quoteStart + 1);
-      if(quoteStart < 0 || quoteEnd < 0) return "";
+      if(quoteStart < 0 || quoteEnd < 0)
+         return "";
       return StringSubstr(json, quoteStart + 1, quoteEnd - quoteStart - 1);
      }
    else
@@ -156,7 +194,8 @@ string ExtractJsonValue(string json, string key)
       int commaPos = StringFind(json, ",", valueStart);
       int bracePos = StringFind(json, "}", valueStart);
       int endPos = (commaPos > 0) ? commaPos : bracePos;
-      if(endPos < 0) return "";
+      if(endPos < 0)
+         return "";
       return TrimString(StringSubstr(json, valueStart, endPos - valueStart));
      }
   }

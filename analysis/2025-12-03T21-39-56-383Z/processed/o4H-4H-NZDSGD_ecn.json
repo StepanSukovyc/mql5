@@ -1,0 +1,34 @@
+```json
+{
+  "NZDSGD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Je důležité si uvědomit, že bez reálných fundamentálních dat a hlubší analýzy, je toto hodnocení *velmi* orientační a založené *pouze* na omezených historických datech svíček.  Skutečný finanční poradce by toto hodnocení prováděl úplně jinak. Následující zohledňuje pouze principy a je *vysoce hypotetické*.
+
+*   **Technická Analýza na základě dat:**
+    *   **Celkový trend:** Během měsíce vidíme celkový klesající trend s následnou konsolidací a mírným nárůstem ke konci.
+    *   **Svíčkové formace:** Identifikace formací jako "Doji", "Hammer", "Shooting Star", "Engulfing Patterns", atd., by poskytla signály o potenciálních obratech trendu nebo pokračování. Vzhledem k omezeným datům a automatizaci, přesnou identifikaci formací provést nelze, ale vidíme kolísavost.
+    *   **Objem:** Vyšší objem při poklesech by naznačoval silnější prodejní tlak, zatímco vyšší objem při růstech by signalizoval silnější nákupní zájem.
+
+*   **Fundamentální analýza (Hypotetická):**
+
+    *   **Předpokládejme (hypoteticky) pozitivní zprávy pro NZD:** Pokud by fundamentální analýza (kterou nemám k dispozici) ukazovala na posílení novozélandského dolaru (např. zvýšení úrokových sazeb, silná ekonomická data), podpořilo by to scénář BUY.
+    *   **Předpokládejme (hypoteticky) negativní zprávy pro SGD:** Negativní zprávy pro singapurský dolar (např. politická nestabilita, ekonomická recese) by také podpořily BUY.
+    *   **Smíšené nebo neutrální zprávy:** Pokud by fundamentální data byla smíšená nebo neutrální, HOLD by byl rozumnější.
+
+*   **Hodnocení (Pouze na základě dostupných indicií):**
+
+    *   **BUY (30%):** Vzhledem k nárůstu v posledních datech. *Bez fundamentů je to spekulativní.*
+    *   **SELL (40%):** Celkově byl trend klesající, takže existuje stále riziko, že se tento trend obnoví.
+    *   **HOLD (30%):** Nejbezpečnější varianta vzhledem k nejistotě a chybějícím fundamentálním datům. Konsolidace může pokračovat.
+
+**Důležité upozornění:** Toto hodnocení je *vysoce* zjednodušené a nemělo by být používáno pro reálné obchodování. Skutečná finanční analýza je mnohem komplexnější a vyžaduje hluboké znalosti fundamentálních faktorů, technické analýzy a řízení rizik.
+
+V reálné situaci bych potřeboval detailní fundamentální data, provést podrobnější technickou analýzu a zohlednit celkovou tržní situaci.

@@ -1,0 +1,29 @@
+```json
+{
+  "XCUUSD_ecn": {
+    "BUY": 40,
+    "SELL": 25,
+    "HOLD": 35
+  },
+  "XNIUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  },
+  "XPBUSD_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  },
+  "XZNUSD_ecn": {
+    "BUY": 35,
+    "SELL": 30,
+    "HOLD": 35
+  },
+  "CHINAH_ecn": {
+    "BUY": 30,
+    "SELL": 35,
+    "HOLD": 35
+  }
+}
+```

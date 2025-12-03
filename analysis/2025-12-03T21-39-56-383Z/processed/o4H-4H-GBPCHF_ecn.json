@@ -1,0 +1,23 @@
+```json
+{
+  "GBPCHF_ecn": {
+    "BUY": 35,
+    "SELL": 40,
+    "HOLD": 25
+  }
+}
+```
+
+**Vysvětlení:**
+
+Toto hodnocení je *hypotetické* a založené na *omezené* informaci. Skutečné hodnocení by vyžadovalo hlubokou fundamentální analýzu, detailní prozkoumání svíčkových formací a další technické indikátory. Zde je shrnutí předpokladů, které jsem udělal:
+
+*   **Obecný Trend:** Na základě poskytnutých dat je viditelný klesající trend a následná konsolidace, a pak růst v poslední třetině dat.
+*   **Svíčkové Formace:** Analýza svíčkových formací je nemožná bez vizualizace dat a kontextu.
+*   **Fundamentální Analýza (Hypotetická):** Představme si, že fundamentální analýza (kterou nemám k dispozici) naznačuje nejistotu.  Možná jsou smíšené ekonomické zprávy z Británie a Švýcarska, nebo politická nestabilita.  Důvěra v obě měny je nízká.
+
+**Odůvodnění Procent:**
+
+*   **SELL (40%):**  Převaha medvědího sentimentu v datech spolu s nejistou fundamentální situací (hypoteticky) naznačují vyšší pravděpodobnost dalšího poklesu. Proto nejvyšší procento pro SELL.
+*   **BUY (35%):**  Oživení ceny v poslední třetině měsíce dává naději na další růst.
+*   **HOLD (25%):**  Kvůli fundamentální nejistotě a konsolidaci ceny v některých obdobích je zde šance, že se trh nebude hýbat výrazným směrem. Proto je HOLD jako opatrná možnost.
