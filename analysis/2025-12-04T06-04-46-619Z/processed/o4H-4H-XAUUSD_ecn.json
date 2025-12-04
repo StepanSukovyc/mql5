@@ -1,0 +1,32 @@
+```json
+{
+  "XAUUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Odůvodnění (pro vysvětlení postupu, ne pro odpověď v JSON):**
+
+Provedení komplexní analýzy vyžaduje přístup k aktuálním fundamentálním datům a sofistikovanější technické nástroje, než je možné v tomto prostředí. Proto je toto hodnocení založeno na omezeném pohledu, který je realisticky proveditelný s dostupnými informacemi a nástroji.
+
+1.  **Trend a momentum:** Surová data ukazují na výrazný růst (3973 na 4255) a následnou konsolidaci až korekci. Momentum se zdá být slabší, protože se cena stabilizovala a klesala ke konci období.
+2.  **Svíčkové formace:** Bez vizualizace svíček a hlubší analýzy je obtížné přesně identifikovat významné formace. Nicméně:
+
+    *   Vysoký objem během určitých poklesů může naznačovat silný tlak prodejců.
+    *   Menší svíčky na konci období by naznačovaly nerozhodnost.
+3.  **Fundamentální faktory (hypoteticky):**  Protože nemám přístup k aktuálním datům, představím si scénář:
+
+    *   *Pokud fundamenty naznačují silnější USD a nižší inflaci:*  To by podporovalo *SELL*.
+    *   *Pokud fundamenty naznačují slabší USD a rostoucí inflaci/geopolitické napětí:* To by podporovalo *BUY*.
+    *   *Pokud fundamenty jsou smíšené a nejasné:* To by podporovalo *HOLD*.
+
+**Výsledné hodnocení (předpoklad silnějšího USD a klesající inflace):**
+
+*   **SELL (40%):** Během konsolidace ke konci sledovaného období dochází k mírnému poklesu ceny.
+*   **BUY (30%):**  Předpokládá se, že se trh stabilizuje a odrazí se od support levelů.
+*   **HOLD (30%):**  Zůstat mimo trh a čekat na další potvrzení trendu.
+
+**Důležité upozornění:** Toto hodnocení je hrubě odhadnuto a slouží pouze pro ilustrativní účely.  Pro reálné obchodování je nutné provést hloubkovou analýzu s aktuálními daty a nástroji. Vždy zvažte svou toleranci k riziku a konzultujte se s kvalifikovaným finančním poradcem.

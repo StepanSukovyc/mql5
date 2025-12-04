@@ -1,0 +1,23 @@
+```json
+{
+  "USDPLN_ecn": {
+    "BUY": 30,
+    "SELL": 45,
+    "HOLD": 25
+  }
+}
+```
+
+**Vysvětlení hodnocení (pro informaci, toto není součástí JSON):**
+
+Toto hodnocení je *vysoce* orientační a zjednodušené. Pro komplexnější analýzu je třeba zohlednit mnohem více faktorů.
+
+*   **Technická analýza (zjednodušená):** Na základě poskytnutých dat lze pozorovat klesající trend v průběhu měsíce. Ačkoliv v závěru se vyskytly pokusy o korekci, celkově převládá spíše sestupný směr. Různé svíčkové formace (které lze detailněji analyzovat s lepším zobrazením dat) mohly naznačovat momenty obratu, ale ty byly zřejmě slabé.
+*   **Fundamentální analýza (hypotetická):** Pro toto hodnocení se *předpokládá*, že:
+    *   Polská ekonomika vykazuje mírné známky zpomalení (posiluje SELL).
+    *   USD je oslabován nejistotou ohledně úrokových sazeb (posiluje SELL).
+    *   Žádné zásadní politické nebo ekonomické události v Polsku nebo USA, které by dramaticky ovlivnily měnový pár v krátkodobém horizontu (omezuje BUY).
+*   **Rizikové hodnocení:**
+    *   **SELL (45%):** Klesající trend v datech a předpokládané negativní fundamenty (oslabení PLN, nejistota USD) posilují pozici SELL.
+    *   **BUY (30%):** Potenciál pro korekci (drobné nárůsty) nebo nečekané pozitivní zprávy pro USD nebo PLN dávají šanci na BUY, ale s nižší pravděpodobností.
+    *   **HOLD (25%):** Vzhledem k volatilitě a nejistotě ohledně fundamentů a potenciálu krátkodobé změny trendu je doporučeno HOLD pro část portfolia, čekající na jasnější signály.

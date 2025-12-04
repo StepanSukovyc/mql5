@@ -1,0 +1,34 @@
+```json
+{
+  "BCHUSD_ecn": {
+    "BUY": 40,
+    "SELL": 30,
+    "HOLD": 30
+  },
+  "BTCUSD_ecn": {
+    "BUY": 35,
+    "SELL": 35,
+    "HOLD": 30
+  },
+  "ETHUSD_ecn": {
+    "BUY": 38,
+    "SELL": 32,
+    "HOLD": 30
+  },
+  "LTCUSD_ecn": {
+    "BUY": 33,
+    "SELL": 37,
+    "HOLD": 30
+  },
+  "AUDCAD_ecn": {
+    "BUY": 45,
+    "SELL": 25,
+    "HOLD": 30
+  },
+  "AUDCHF_ecn": {
+    "BUY": 42,
+    "SELL": 28,
+    "HOLD": 30
+  }
+}
+```

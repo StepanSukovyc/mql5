@@ -1,0 +1,17 @@
+```json
+{
+  "EURJPY_ecn": {
+    "BUY": 40,
+    "SELL": 25,
+    "HOLD": 35
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+*   **BUY (40%):**  Poslední část dat vykazuje rostoucí trend, s novými maximy a minimy. Svíčkové formace mohou naznačovat pokračování tohoto trendu, nicméně chybí mi podrobnější analýza svíček. Zároveň, fundamentální analýza (kterou provádím pouze hypoteticky, nemám aktuální data) by mohla naznačovat oslabování JPY, což by podpořilo nákup EUR/JPY.
+
+*   **SELL (25%):**  Trh se může překupovat a dojít ke korekci. Fundamentální rizika spojená s EUR nebo posílení JPY by mohly vést k poklesu.
+
+*   **HOLD (35%):**  Je potřeba sledovat trh a čekat na jasnější signály. Konsolidace v určitém rozmezí. Zvažuji vliv zpráv a indikátorů na další vývoj.

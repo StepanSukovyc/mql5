@@ -31,7 +31,7 @@ void OnDeinit(const int reason)
 void OnTimer()
   {
    double freeMargin = AccountInfoDouble(ACCOUNT_MARGIN_FREE);
-   double equity     = AccountInfoDouble(ACCOUNT_EQUITY);
+   double equity     = AccountInfoDouble(ACCOUNT_BALANCE);
 
    Print("=== TIMER START ===");
    Print("freeMargin:", freeMargin, "; equity:", equity);
@@ -137,9 +137,9 @@ void OnTimer()
       // ✅ Pokud se obchod podařil, smažeme soubor
       if(result)
         {
-         if(FileIsExist(predictPath))
+         if(FileIsExist(fileToUse))
            {
-            FileDelete(predictPath);
+            FileDelete(fileToUse);
             Print("Soubor predict.json byl úspěšně odstraněn po otevření obchodu.");
            }
         }
