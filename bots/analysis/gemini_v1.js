@@ -32,9 +32,8 @@ async function proceedResponse(proceedFolder, prefix, fileName, prompt) {
         if (textResponse) {
             await fs.writeFile(outputPath, textResponse);
             console.log(`✅ Výstup uložen: ${outputPath}`);
-        } else {
+        } else
             console.warn(`⚠️ JSON nebyl nalezen v odpovědi pro: ${fileName}`);
-        }
 
         await new Promise(resolve => setTimeout(resolve, 5000)); // zpomalení kvůli limitům
 
@@ -43,9 +42,8 @@ async function proceedResponse(proceedFolder, prefix, fileName, prompt) {
             const retry = 36000;
             console.warn(`⚠️ Quota překročena, čekám ${retry / 1000} sekund...`);
             await new Promise(resolve => setTimeout(resolve, retry));
-        } else {
+        } else
             console.error(`❌ Chyba při zpracování souboru ${fileName}:`, err.response?.data || err.message);
-        }
     }
 }
 
@@ -166,6 +164,42 @@ async function testGemini() {
     }
 }
 
+async function processTradeInfoWithGemini(traderData, firstFive, proceedFolder) {
+    try {
+        const fileName = `Info.json`;
+
+        try {
+            // Vytvoř prompt
+            const prompt = `Máš k dispozici následující data:
+
+1. Aktuální stav obchodního účtu:
+${traderData}
+
+2. Predikce obchodování s měnovými páry dle svíčkových formací:
+${JSON.stringify(firstFive)}
+
+Jedná se o několik titulů vybraných jako nejpravděpodobnější pro obchod.
+
+Úkol:
+- Analyzuj predikce v kontextu aktuálního stavu účtu a otevřených pozic.
+- Vyber pouze jeden měnový pár, který je aktuálně nejvhodnější k realizaci.
+- Dbej na to, aby součet otevřených pozic nebyl příliš rizikový.
+- odpověď prosím pošli stručně v JSON formátu, kde klíčem je měnový pár a tělem je hodnocení přesně tak, jak je uvedeno v predikci, např. {"EURNZD_enc": {"symbol":..., "typ":...}}, prosím strukturu přesně tak, jak je příklad s vlastnosti 'symbol' a 'typ', je na to vázaná další logika`;
+
+            // Zavolej funkci proceedResponse (axios verze)
+            await proceedResponse(proceedFolder, 'trader', fileName, prompt);
+
+        } catch (err) {
+            console.warn(`⚠️ Soubor ${fileName} nelze načíst:`, err.message);
+        }
+    } catch (err) {
+        console.error('❌ Soubor aDaysResult.json neexistuje nebo nelze načíst:', err.message);
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
-    processDaysWithGemini, process4HWithGemini, testGemini
+    processTradeInfoWithGemini, processDaysWithGemini, process4HWithGemini, testGemini
 }

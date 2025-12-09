@@ -42,6 +42,11 @@ async function mainCycle() {
     const acc = await checkAnalyzeJsonExists(filePath);
     if (acc === 1) {
         try {
+            // analyze.json obshauje aktuální data obchodní platformy
+            // přečteme soubor, a data pošleme k analýze
+            const traderData = await fs.readFile(filePath, 'utf-8');
+            console.log("Obsah analyze.json:", traderData);
+
             const folder = await copyFiles();
             const targetFolder = path.join(folder, "processed");
             await fs.mkdir(targetFolder, { recursive: true });
@@ -50,11 +55,10 @@ async function mainCycle() {
             if (isExists) {
                 await analyzeDaysData(targetFolder);
                 let isExists = await process4HWithGemini(folder, targetFolder);
-                if (isExists) {
+                if (isExists)
                     await analyze4HData(targetFolder);
-                }
             }
-            ensurePredictJson();
+            ensurePredictJson(traderData, targetFolder);
             // odstranění analyze.json
             await fs.unlink(filePath);
             console.log(`Soubor "${filePath}" byl odstraněn po zpracování.`);
