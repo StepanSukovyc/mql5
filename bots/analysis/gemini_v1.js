@@ -184,7 +184,10 @@ Jedná se o několik titulů vybraných jako nejpravděpodobnější pro obchod.
 - Analyzuj predikce v kontextu aktuálního stavu účtu a otevřených pozic.
 - Vyber pouze jeden měnový pár, který je aktuálně nejvhodnější k realizaci.
 - Dbej na to, aby součet otevřených pozic nebyl příliš rizikový.
-- odpověď prosím pošli stručně v JSON formátu, kde klíčem je měnový pár a tělem je hodnocení přesně tak, jak je uvedeno v predikci, např. {"EURNZD_enc": {"symbol":..., "typ":...}}, prosím strukturu přesně tak, jak je příklad s vlastnosti 'symbol' a 'typ', je na to vázaná další logika`;
+- Odpověď pošli **pouze** ve validním JSON formátu, bez dalšího textu ani komentářů.
+- Struktura musí být přesně takto:
+  {"EURNZD_enc": {"symbol":"EURNZD","typ":"BUY"}}
+- Použij klíč měnového páru (např. "EURNZD_enc") a jako hodnotu objekt s vlastnostmi `symbol` a `typ` převzatými z predikce.`;
 
             // Zavolej funkci proceedResponse (axios verze)
             await proceedResponse(proceedFolder, 'trader', fileName, prompt);
