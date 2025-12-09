@@ -187,7 +187,7 @@ Jedná se o několik titulů vybraných jako nejpravděpodobnější pro obchod.
 - Odpověď pošli **pouze** ve validním JSON formátu, bez dalšího textu ani komentářů.
 - Struktura musí být přesně takto:
   {"EURNZD_enc": {"symbol":"EURNZD","typ":"BUY"}}
-- Použij klíč měnového páru (např. "EURNZD_enc") a jako hodnotu objekt s vlastnostmi `symbol` a `typ` převzatými z predikce.`;
+- Použij klíč měnového páru (např. "EURNZD_enc") a jako hodnotu objekt s vlastnostmi 'symbol' a 'typ' převzatými z predikce.`;
 
             // Zavolej funkci proceedResponse (axios verze)
             await proceedResponse(proceedFolder, 'trader', fileName, prompt);
