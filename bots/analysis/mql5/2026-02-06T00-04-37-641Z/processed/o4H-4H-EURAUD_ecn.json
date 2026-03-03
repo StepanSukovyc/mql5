@@ -1,0 +1,23 @@
+```json
+{
+  "EURAUD_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení a odůvodnění:**
+
+*   **Fundamentální Analýza (Hypotetická):**  Protože nemám přístup k aktuálním fundamentálním datům, musím udělat předpoklady. Představme si, že fundamentální data (zprávy o úrokových sazbách, HDP, inflace, politické události v eurozóně a Austrálii) ukazují mírně negativní výhled pro euro a relativně stabilní pro australský dolar. To by naznačovalo tlak na pokles EURAUD.
+*   **Svíčkové Formace a Technická Analýza:**
+
+    *   **Celkový Trend:** Data ukazují převážně klesající trend v průběhu měsíce, s významnými poklesy a následnými korekcemi.  Poslední část dat ukazuje na konsolidaci.
+    *   **Identifikace Formací (Příklad):**  Potenciální bearish engulfing, doji a spinning top formace v průběhu dat naznačují nejistotu a potenciální pokračování klesajícího trendu. Poslední formace spíše indikují nerozhodnost trhu.
+
+*   **Rizikové Hodnocení:**
+
+    *   **SELL (45%):** Vzhledem k potenciálnímu klesajícímu trendu a hypotetickým negativním fundamentům pro euro, *Sell* pozice by mohla být vhodnější. Vyšší procento odráží relativně silnější signál k prodeji.
+    *   **HOLD (30%):**  Poslední dny ukazují na konsolidaci, a proto *Hold* dává smysl, pokud už mám otevřenou pozici, nebo čekám na jasnější signál.
+    *   **BUY (25%):** Korekce proti klesajícímu trendu jsou možné. Nicméně, s ohledem na celkový medvědí sentiment, *Buy* pozice by byla rizikovější. Nižší procento reflektuje vyšší riziko.

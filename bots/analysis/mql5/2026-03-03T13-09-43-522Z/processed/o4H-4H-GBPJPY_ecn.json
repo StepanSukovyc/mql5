@@ -1,0 +1,37 @@
+```json
+{
+  "GBPJPY_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+**Technická Analýza (Svíčkové Formace & Data):**
+
+*   **Celkový Trend:** V datech vidím klesající trend. Od horních hodnot okolo 214 se pár propadl k 208 a v závěru měsíce konsoliduje v pásmu 208-211.
+*   **Svíčkové Formace:** Svíčky ukazují jak býčí tak medvědí aktivity. Identifikace konkrétních signálů by vyžadovala hlubší analýzu jednotlivých svíček a jejich kontextu (např. Doji, Hammer, Engulfing patterns).
+*   **Momentum:** RSI indikátor by ukázal na překoupenost či přeprodanost, což naznačuje možnost zvratu. MACD indikátor by odhalil změny v trendu.
+
+**Fundamentální Analýza (Nutná rešerše na webu):**
+
+*   **Ekonomická Data (nezahrnuto):** Hrubý domácí produkt, inflace, nezaměstnanost, úrokové sazby, obchodní bilance (UK a Japonsko) – *Toto je klíčové a na datech samotných nezjistitelné.*
+*   **Politické Události (nezahrnuto):** Volby, Brexit dopady, geopolitické rizika – *Toto je klíčové a na datech samotných nezjistitelné.*
+*   **Monetární Politika (nezahrnuto):** Zasedání centrálních bank (Bank of England, Bank of Japan), vyjádření představitelů – *Toto je klíčové a na datech samotných nezjistitelné.*
+
+**Rizikové Hodnocení (s hypotetickými fundamenty):**
+
+*   **SELL (40%):** Historická data ukazují klesající trend, pokud fundamentální analýza naznačuje, že japonská ekonomika je silnější než britská (nebo že BoJ zpřísňuje politiku a BoE uvolňuje), SELL je rozumná volba.
+*   **BUY (30%):** Pár se v závěru měsíce mírně stabilizoval. Pokud fundamentální analýza naznačuje, že britská ekonomika se zotavuje (nebo BoE je jestřábí), může se objevit prostor pro nákup.
+*   **HOLD (30%):** Vzhledem k proměnlivosti trhu a nutnosti rešerše fundamentálních dat je HOLD rozumná volba pro ty, kteří si nejsou jisti směrem.
+
+**Důležité Upozornění:**
+
+*   **Toto NENÍ investiční poradenství.** Jedná se pouze o demonstraci přístupu k rizikovému hodnocení.
+*   Fundamentální analýza je *absolutně kritická* a *vyžaduje reálné data* z finančních zpravodajských serverů. Bez ní je tato analýza silně omezená.
+*   Je nutné používat *více technických indikátorů* (RSI, MACD, klouzavé průměry, Fibonacciho úrovně atd.) pro potvrzení signálů.
+*   Stanovení stop-loss a take-profit úrovní je nezbytné pro řízení rizik.
+*   Ber v úvahu svůj rizikový profil a investiční horizont.

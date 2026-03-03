@@ -1,0 +1,35 @@
+```json
+{
+  "XPBUSD_ecn": {
+    "BUY": 20,
+    "SELL": 60,
+    "HOLD": 20
+  }
+}
+```
+
+**Vysvětlení:**
+
+**Důležité upozornění:** Toto je pouze *hrubý* odhad založený na *velmi omezených* datech a **nenahrazuje kvalifikované finanční poradenství**. Je nutné provést mnohem hlubší analýzu, aby se dospělo k rozumným závěrům.  Fundamentální analýza je prováděna na základě informací dostupných na webu (např. ekonomické kalendáře, zprávy centrálních bank, geopolitické události).
+
+*   **SELL (60%):**
+    *   **Klesající trend:** Celkově data ukazují klesající trend za sledované období.  Začátek měsíce je na vyšších hodnotách a konec měsíce je výrazně níže.
+    *   **Svíčkové formace:** Identifikace převážně bearish svíčkových formací (i když bez vizuální kontroly je to obtížné).  Dlouhé stíny pod tělem svíčky naznačují silný prodejní tlak.
+    *   **Fundamentální analýza:** Bez přístupu k aktuálním zprávám a ekonomickým datům nelze Fundamentální analýzu udělat. V současné době se trhy mění velmi rychle, data, ktera máš k dispozici mohou být neaktuální. V současnosti geopolitická situace hraje velkou roli.
+*   **HOLD (20%):**
+    *   **Boční trend v závěru:** V posledních dnech je patrná konsolidace, která může naznačovat nerozhodnost trhu.  Je možné, že trh hledá nový směr.
+*   **BUY (20%):**
+    *   **Potenciální korekce:** Po výrazném poklesu je možné očekávat krátkodobou korekci směrem nahoru.
+    *   **Extrémní přeprodanost:** Indikátory přeprodanosti (RSI, Stochastic) by mohly naznačovat příležitost pro nákup, ale k tomu nemám data.
+
+**Důležité kroky pro kvalitnější analýzu:**
+
+1.  **Fundamentální analýza:**  Pečlivě prostudovat ekonomické kalendáře, zprávy centrálních bank (pro měny XPB a USD), geopolitickou situaci a další relevantní makroekonomické ukazatele. Jaké jsou úrokové sazby? Jaká je inflace? Jak se vyvíjí HDP?
+2.  **Technická analýza (rozšířená):** Použít další technické indikátory (klouzavé průměry, RSI, MACD, Fibonacciho úrovně) pro potvrzení trendů a potenciálních vstupních/výstupních bodů.
+3.  **Objemy:** Analyzovat objemy obchodů. Zvýšené objemy při prolomení určitých úrovní mohou potvrdit sílu trendu.
+4.  **Širší časový rámec:** Analyzovat data i v delších časových rámcích (denní, týdenní) pro získání lepšího obrazu o celkovém trendu.
+5.  **Sentiment trhu:** Zjistit, jaký je obecný sentiment trhu vůči danému měnovému páru.
+
+**Závěr:**
+
+Rizikové hodnocení je dynamické a závisí na mnoha faktorech.  Před provedením jakéhokoli obchodního rozhodnutí je nezbytné provést důkladnou analýzu a zvážit všechny dostupné informace.  Tento odhad je pouze *orientační*.

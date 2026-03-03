@@ -1,0 +1,27 @@
+```json
+{
+  "ETHUSD_ecn": {
+    "BUY": "15%",
+    "SELL": "65%",
+    "HOLD": "20%"
+  }
+}
+```
+
+**Vysvětlení hodnocení (Disclaimer):**
+
+**Toto je pouze orientační hodnocení na základě omezených dat a zjednodušené analýzy.  Nejedná se o finanční poradenství. Investujte vždy s rozmyslem a na základě vlastního průzkumu.**
+
+*   **SELL (65%):** Data ukazují na výrazný sestupný trend v daném měsíci. Uzavírací ceny se snižují a objemy v klesajících obdobích jsou často vyšší, což naznačuje silný prodejní tlak. Svíčkové formace (bez jejich hlubší analýzy) by pravděpodobně potvrdily medvědí (bearish) sentiment.  Navíc, od původní ceny 3243,25 došlo k poklesu až na 1841,05. Pokud by fundamentální analýza (kterou nemám k dispozici) potvrzovala negativní zprávy, nebo slabé fundamenty pro ETH (například problémy s technologiemi, regulací, nebo pokles zájmu investorů),  posiluje to argument pro prodej.
+*   **HOLD (20%):**  Určitá stabilizace ceny na konci období může naznačovat potenciální zpomalení klesajícího trendu. Bez fundamentální analýzy a dalších dat (např. širší pohled na trh, sentiment investorů, atd.) je obtížné říci, zda se jedná o skutečný obrat, nebo jen krátkodobou konsolidaci před dalším poklesem.  Proto "HOLD" poskytuje opatrnou pozici pro ty, kteří již ETH vlastní a chtějí vyčkat na další vývoj.
+*   **BUY (15%):**  Nákup je v tomto momentě rizikový. Pouze silné pozitivní fundamentální zprávy, nebo zřetelné signály obratu trendu (např. silné býčí svíčkové formace, překonání klíčových rezistencí) by mohly ospravedlnit nákup.  Zatím data naznačují, že je pravděpodobnější další pokles. Těchto 15% zohledňuje možnost neočekávaných událostí, nebo spekulativních nákupů.
+
+**Důležité aspekty, které by se musely zohlednit pro reálnější hodnocení:**
+
+1.  **Fundamentální analýza:** Klíčová. Zahrnuje zkoumání zpráv, ekonomických dat, politických událostí, technologického vývoje,  regulace a celkového sentimentu trhu, které ovlivňují ETH a obecně kryptoměny.
+2.  **Technická analýza:** Hlubší analýza svíčkových formací (např.  Doji, Hammer, Engulfing patterns), indikátorů (RSI, MACD, Moving Averages),  trendových linií a support/resistance úrovní.
+3.  **Širší kontext trhu:** Analýza celkového kryptoměnového trhu a porovnání s ostatními aktivy.
+4.  **Likvidita a objem:** Vyšší objemy během trendů mohou znamenat silnější potvrzení daného trendu.
+5.  **Risk management:**  Nastavení stop-loss příkazů a money management.
+
+**Poznámka:** Časové razítko ve vašich datech je ve formátu Unix timestamp. Pro lepší analýzu by bylo vhodné je převést na srozumitelnější datum a čas.

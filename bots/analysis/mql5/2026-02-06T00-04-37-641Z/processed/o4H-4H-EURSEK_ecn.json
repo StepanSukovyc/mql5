@@ -1,0 +1,19 @@
+```json
+{
+  "EURSEK_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+*   **SELL (40%):** Data vykazují převážně klesající trend v průběhu měsíce. Ke konci měsíce došlo sice k mírnému posílení, ale celkový sentiment naznačuje spíše prodejní tlak. Objevilo se i několik svíčkových formací naznačujících medvědí obrat (např. v závěru dat).
+*   **BUY (30%):** Poslední dny ukazují na mírný růstový trend, takže ne zcela vylučuji býčí scénář. Navíc je zde prostor pro krátkodobé korekce vzhůru.
+*   **HOLD (30%):** Vzhledem k volatilitě a nejednoznačnosti signálů, doporučuji opatrnost a vyčkávání na jasnější signály. Také zohledňuji fundamentální faktory (které nemám k dispozici), které mohou mít na měnový pár vliv, a proto doporučuji část portfolia držet.
+
+**Důležité upozornění:**
+
+Toto je pouze hrubý odhad na základě omezených technických dat a **BEZ FUNDAMENTÁLNÍ ANALÝZY**. Fundamentální analýza je **ZÁSADNÍ** pro informované rozhodnutí. Také pamatuj, že obchodování s měnami je rizikové a minulá výkonnost není zárukou budoucích výsledků. Před jakýmkoli obchodováním doporučuji provést důkladný průzkum a zvážit svou toleranci k riziku.

@@ -1,0 +1,31 @@
+```json
+{
+  "EURNOK_ecn": {
+    "BUY": 25,
+    "SELL": 55,
+    "HOLD": 20
+  }
+}
+```
+
+**Zdůvodnění (pro informaci, není součástí JSON odpovědi):**
+
+**Technická Analýza (pouze na základě poskytnutých dat):**
+
+*   **Trend:** Během měsíce je patrný klesající trend. Od počátečních hodnot kolem 11.75 klesla cena k 11.55 a dále k 11.40 a níže.  Posledních pár dní se ale zdá, že dochází ke korekci směrem nahoru.
+
+*   **Svíčkové Formace:** Pouze se samotnými daty nemohu identifikovat specifické svíčkové formace s vysokou přesností, protože nemám k dispozici kontext z delšího časového rámce.  Ale, klesající trend v kombinaci s  relativně velkými svícemi směrem dolů naznačuje prodejní tlak.
+
+**Fundamentální Analýza (NEMÁM přístup k aktuálním datům):**
+
+*   **Dostupnost dat:** Nemám přístup k aktuálním ekonomickým datům a zprávám, které by ovlivnily EUR/NOK. Reálná analýza by vyžadovala zkoumání rozdílů v úrokových sazbách, inflaci, HDP, politické stabilitě a dalších faktorech mezi eurozónou a Norskem.
+
+**Hodnocení a Riziko:**
+
+Vzhledem ke klesajícímu trendu z dat, absence pozitivních signálů ze svíčkových formací a nedostupnosti fundamentálních dat, hodnotím:
+
+*   **SELL: 55%**  (Relativně vysoká pravděpodobnost dalšího poklesu, ale už ne tak jistá vzhledem k možné korekci)
+*   **HOLD: 20%** (Čekání na potvrzení trendu, případně na změnu fundamentální situace.)
+*   **BUY: 25%** (Malá šance na růst, možná korekce, ale riziko pokračování klesajícího trendu je vyšší.)
+
+**Důležité upozornění:**  Toto hodnocení je **extrémně omezené** kvůli nedostatku aktuálních fundamentálních dat a kontextu z širšího časového rámce.  Použijte jej **pouze jako ilustraci** toho, jak by se dal kombinovat technický a fundamentální pohled. Před jakýmkoli obchodem proveďte důkladnou analýzu s aktuálními informacemi!

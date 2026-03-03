@@ -1,0 +1,44 @@
+```json
+{
+  "NZDCAD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+**Analýza dat a formací:**
+
+*   **Celkový trend:** Během analyzovaného období vykazuje měnový pár NZDCAD obecně rostoucí trend, ale s výraznými korekcemi.
+*   **Svíčkové formace:** Identifikace konkrétních svíčkových formací v datech je složitá bez vizuální reprezentace. Nicméně, na základě čísel lze odhadovat např. existence Doji svíček (indikující nerozhodnost) nebo Engulfing pattern (indikující obrat trendu). Z dat lze vidět časté střídání zelených a červených svíček, což značí nestabilitu.
+*   **Volume:** Volume je důležité pro potvrzení trendu. Výrazné zvýšení volume při určitých svíčkách může signalizovat silnější momentum.
+*   **Nedávný pokles:** Ke konci analyzovaného období data naznačují spíše klesající trend.
+
+**Fundamentální analýza (obecně, bez konkrétních aktuálních dat):**
+
+*   **NZD (Novozélandský dolar):**
+    *   Sledujeme ekonomické ukazatele Nového Zélandu (HDP, inflace, nezaměstnanost).
+    *   Zajímá nás politika Reserve Bank of New Zealand (RBNZ) – úrokové sazby, kvantitativní uvolňování.
+    *   Sledujeme ceny mléčných výrobků (klíčový export Nového Zélandu).
+*   **CAD (Kanadský dolar):**
+    *   Sledujeme ekonomické ukazatele Kanady (HDP, inflace, nezaměstnanost).
+    *   Zajímá nás politika Bank of Canada (BoC) – úrokové sazby, kvantitativní uvolňování.
+    *   Sledujeme ceny ropy (klíčový export Kanady).
+
+**Hodnocení (procentuální rozdělení):**
+
+*   **BUY (30%):** Vzhledem k obecnému uptrendu. Pokud fundamentální analýza naznačuje silnější NZD nebo slabší CAD, nebo formace naznačují obrat.
+*   **SELL (40%):** Vzhledem k nedávnému poklesu a větší nestabilitě. Pokud fundamentální analýza naznačuje slabší NZD nebo silnější CAD, nebo formace naznačují pokračování poklesu.
+*   **HOLD (30%):** Vysoká volatilita a protichůdné signály vyžadují opatrnost. HOLD je rozumná strategie pro ty, kteří již pozici mají, dokud se situace nevyjasní.
+
+**Důležité upozornění:**
+
+*   Toto je pouze **orientační** hodnocení na základě omezených dat a obecných principů.
+*   **Neberte to jako investiční radu.**
+*   Před jakýmkoli obchodem si proveďte **vlastní důkladnou analýzu** a zohledněte svou rizikovou toleranci.
+*   **Fundamentální analýza vyžaduje aktuální data**, která jsem neměl k dispozici. Místo toho jsem popsal, jak by se měla provádět.
+*   **Svíčkové formace se analyzují lépe vizuálně.** Z pouhých čísel je identifikace obtížná a méně spolehlivá.
+*   Je důležité používat i další indikátory, jako jsou klouzavé průměry, RSI, MACD a další pro validaci.

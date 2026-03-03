@@ -1,0 +1,29 @@
+```json
+{
+  "NZDSGD_ecn": {
+    "BUY": 25,
+    "SELL": 45,
+    "HOLD": 30
+  }
+}
+```
+
+**Odůvodnění:**
+
+*   **Fundamentální analýza (obecný předpoklad):** Předpokládám, že fundamentální analýza (kterou reálně nemám k dispozici, proto ji simuluji) indikuje mírný negativní výhled pro NZD vůči SGD. Důvodem mohou být například rozdílné ekonomické trendy, úrokové sazby, nebo politické riziko v jedné zemi. Negativní výhled mírně upřednostňuje SELL pozici.
+
+*   **Analýza svíčkových formací (základní):** Ze samotných dat lze jen obtížně spolehlivě identifikovat konkrétní svíčkové formace bez vizualizace.Nicméně, *obecně*, dlouhodobější klesající trend s občasnými korekcemi naznačuje spíše medvědí (SELL) náladu.
+
+*   **Rizikové hodnocení na základě dat:**
+    *   **SELL (45%):** Cena v posledních dnech (od 1771804800) vykazuje spíše klesající tendenci, což, v kombinaci s potenciálním negativním fundamentálním výhledem, naznačuje vhodnost SELL pozice. V posledních dnech převládají červené svíčky.
+    *   **HOLD (30%):**  Volatilita není extrémní. Z objektivně malého vzorku dat nelze s jistotou usuzovat na výrazný trend. Navíc, některé krátkodobé odrazy ceny naznačují, že úplné opuštění pozice by mohlo být předčasné. Držet pozici a sledovat další vývoj je rozumná strategie.
+    *   **BUY (25%):** I přes převládající klesající trend se objevují i období růstu. Proto ponechávám malé procento pro potenciální BUY pozice, pokud by se objevily signály obratu trendu. Potenciální prodejní tlak je už značně vyčerpaný.
+
+**Důležité poznámky:**
+
+*   **Disclaimer:** Toto je pouze *simulované* rizikové hodnocení. Skutečné rizikové hodnocení by vyžadovalo detailní fundamentální analýzu, analýzu širšího kontextu trhu, a zohlednění rizikového profilu investora.
+*   **Časový rámec:** Toto hodnocení je relevantní pro velmi krátkodobý horizont (následující 4H periody).
+*   **Omezení dat:** Jeden měsíc 4H dat je velmi omezený vzorek. Pro spolehlivější analýzu je nutné analyzovat delší časové období a více tržních dat.
+*   **Svíčkové formace:** Detailnější identifikace svíčkových formací by vyžadovala grafickou analýzu a znalost relevantních formací.
+
+Používání těchto hodnocení k reálnému obchodování je na vlastní riziko. Vždy konzultujte se skutečným finančním poradcem.

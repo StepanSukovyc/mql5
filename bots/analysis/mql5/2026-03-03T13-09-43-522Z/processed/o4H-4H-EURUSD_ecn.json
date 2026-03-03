@@ -1,0 +1,9 @@
+```json
+{
+  "EURUSD_ecn": {
+    "BUY": 20,
+    "SELL": 60,
+    "HOLD": 20
+  }
+}
+```

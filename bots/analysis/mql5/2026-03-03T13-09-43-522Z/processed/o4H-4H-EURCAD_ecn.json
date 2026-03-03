@@ -1,0 +1,25 @@
+```json
+{
+  "EURCAD_ecn": {
+    "BUY": 20,
+    "SELL": 60,
+    "HOLD": 20
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+Toto hodnocení je **velmi hrubé** a vychází pouze z poskytnutých dat a omezeného pohledu na svíčkové formace a potenciální fundamentální analýzu.  Profesionální finanční poradenství vyžaduje hloubkovou analýzu a individuální posouzení rizik.
+
+*   **SELL (60%):** Silný downtrend na konci datového souboru (od času 1772409600) naznačuje prodejní tlak. Velké červené svíčky s dlouhými těly a objemy potvrzují sestupný trend.
+*   **HOLD (20%):** Předcházející období vykazovalo boční trend s mírnými pohyby nahoru a dolů.  V takovém případě, pokud už má někdo otevřenou pozici, může být vhodné ji držet a sledovat, jak se situace vyvine, zvláště pokud fundamentální analýza naznačuje potenciál pro obrat.
+*   **BUY (20%):**  Downtrend se může v budoucnu zastavit, ale fundamentální analýza a budoucí data musí potvrdit znovunastolení růstu. Je důležité si uvědomit, že proti trendu se obchoduje jen s vysokou mírou opatrnosti.
+
+**Důležité poznámky:**
+
+*   **Fundamentální analýza:** Pro správné hodnocení *nutně* chybí fundamentální analýza.  Je třeba brát v úvahu ekonomické ukazatele, politické události a další faktory ovlivňující EUR a CAD. Bez těchto informací je hodnocení pouze technické a značně omezené.
+*   **Časový rámec:** Hodnocení je provedeno pro 4H graf. Dlouhodobější (denní, týdenní) grafy mohou ukázat odlišný trend.
+*   **Riziková tolerance:** Toto hodnocení ignoruje individuální rizikovou toleranci investora.
+
+Používejte toto hodnocení jako *výchozí bod* pro další analýzu a *nikoliv* jako investiční radu.

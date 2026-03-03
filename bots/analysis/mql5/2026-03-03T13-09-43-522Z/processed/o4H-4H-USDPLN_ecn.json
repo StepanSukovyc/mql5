@@ -1,0 +1,31 @@
+```json
+{
+  "USDPLN_ecn": {
+    "BUY": 60,
+    "SELL": 15,
+    "HOLD": 25
+  }
+}
+```
+
+**Odůvodnění:**
+
+Vzhledem k omezeným možnostem automatizované fundamentální analýzy a absenci živých dat, vycházím z následujících předpokladů a pozorování na základě poskytnutých dat:
+
+*   **Technická Analýza (Svíčkové formace a cenový vývoj):**
+
+    *   **Uptrend:** Celkově data ukazují na poměrně silný uptrend v průběhu měsíce. Zejména v druhé polovině měsíce je zřetelný nárůst ceny.
+    *   **Formace:** Analýza svíčkových formací by vyžadovala hlubší pohled na jednotlivé svíčky a jejich kontext, což je s těmito daty obtížné. Nicméně, celkově převaha býčích svíček v posledních datech naznačuje pokračující tlak na růst.
+
+*   **Fundamentální Analýza (Simulace):**
+
+    *   **Nejistota:** Bez aktuálních fundamentálních dat je obtížné posoudit vliv ekonomických zpráv, politických událostí a úrokových sazeb. Předpokládám tedy určitou míru nejistoty.
+    *   **Růstový potenciál:**  Vzhledem k rostoucímu trendu v datech je pravděpodobné, že fundamentální faktory podporují posilování USD vůči PLN nebo oslabování PLN vůči USD. (bez znalosti konkrétních událostí je to jen odhad)
+
+**Rizikové Hodnocení:**
+
+*   **BUY (60%):** Silný uptrend a předpoklad, že fundamentální faktory jsou pro USD/PLN spíše pozitivní, naznačují, že BUY pozice by mohla být zisková.
+*   **SELL (15%):** Existuje riziko korekce po silném růstu. Fundamentální situace se může změnit. Proto je malé procento přiděleno i SELL pozici.
+*   **HOLD (25%):** Vzhledem k nejistotě ohledně fundamentálních faktorů a nutnosti sledovat další vývoj, je doporučeno ponechat část prostředků v pozici HOLD, dokud se situace nevyjasní.
+
+**Důležité upozornění:** Toto hodnocení je *velmi* zjednodušené a založené na omezených datech.  Je *nezbytné* provést důkladnou fundamentální analýzu a sledovat aktuální zprávy a události ovlivňující měny USD a PLN předtím, než učiníte jakékoliv investiční rozhodnutí. Toto hodnocení *není* investiční poradenství.

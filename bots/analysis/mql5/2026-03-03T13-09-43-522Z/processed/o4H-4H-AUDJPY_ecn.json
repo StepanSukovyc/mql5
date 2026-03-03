@@ -1,0 +1,34 @@
+```json
+{
+  "AUDJPY_ecn": {
+    "BUY": 35,
+    "SELL": 25,
+    "HOLD": 40
+  }
+}
+```
+
+**Vysvětlení:**
+
+Toto hodnocení je hrubý odhad založený na datech svíček a obecných principech.  Bez detailní fundamentální analýzy a dalších technických indikátorů je to spíše informativní odhad.
+
+*   **BUY (35%):** Data vykazují uptrend v první polovině měsíce. Později dochází k silnému poklesu a následné konsolidaci. Pokud by fundamentální analýza indikovala posilování AUD vůči JPY, mohlo by se spekulovat na pokračování uptrendu po konsolidaci.
+*   **SELL (25%):** Ke konci měsíce vidíme pokles a určité medvědí svíčkové formace. Pokud by fundamentální analýza naznačovala oslabování AUD nebo posilování JPY, mohlo by se uvažovat o prodeji. Silný pokles na konci datového souboru.
+*   **HOLD (40%):** Vzhledem k nejasnému trendu a potřebě dalšího potvrzení je nejrozumnější pozici držet (HOLD) a vyčkat na další signály z trhu a fundamentální analýzy. Konsolidace kolem cenové hladiny na konci měsíce naznačuje vyčkávání trhu.
+
+**Důležité upozornění:**
+
+*   Toto hodnocení **není investiční doporučení.**
+*   Finanční trhy jsou vysoce rizikové.
+*   Vždy proveďte důkladnou analýzu před jakýmkoli investičním rozhodnutím.
+*   Zohledněte svůj rizikový profil.
+*   Použijte stop-loss příkazy k omezení potenciálních ztrát.
+*   Kalkulace neuvažuje poplatky brokera.
+*   Toto hodnocení slouží výhradně pro ilustrativní účely.
+
+Pro přesnější hodnocení bych potřeboval:
+
+*   **Fundamentální analýzu:** Aktuální ekonomické zprávy a makroekonomické ukazatele Austrálie a Japonska (úrokové sazby, inflace, HDP, nezaměstnanost atd.).
+*   **Širší kontext:**  Analýzu delšího časového rámce (např. denní graf, týdenní graf) pro určení celkového trendu.
+*   **Technické indikátory:** Použití klouzavých průměrů, RSI, MACD, Fibonacciho úrovní atd.
+*   **Sentiment trhu:** Zjištění nálady investorů.

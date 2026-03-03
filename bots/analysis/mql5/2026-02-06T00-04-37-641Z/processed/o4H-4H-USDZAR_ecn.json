@@ -1,0 +1,23 @@
+```json
+{
+  "USDZAR_ecn": {
+    "BUY": 30,
+    "SELL": 50,
+    "HOLD": 20
+  }
+}
+```
+
+**Vysvětlení:**
+
+*   **SELL (50%):** Data ukazují silný klesající trend. Většina svíček ke konci období je červená (zavírá níže než otevírala) a vidíme výrazný pokles ceny z cca 16.55 na 15.65.
+*   **BUY (30%):** I přes celkový klesající trend, ke konci sledovaného období cena začíná mírně růst. To by mohlo indikovat krátkodobou korekci nebo změnu trendu.
+*   **HOLD (20%):** Situace není jednoznačná a je nutné sledovat další vývoj. Fundamentální analýza by mohla napovědět, zda se jedná o trvalejší obrat nebo jen o dočasnou korekci.
+
+**Důležité upozornění:**
+
+Toto hodnocení je **velmi zjednodušené** a vychází pouze z omezeného souboru dat a absenci fundamentální analýzy. Je nutné provést důkladnou fundamentální analýzu, zvážit globální ekonomické ukazatele, politické události a další faktory, které ovlivňují měnový pár USD/ZAR.
+
+**Zřeknutí se odpovědnosti:**
+
+Jsem pouze AI a nemohu poskytovat finanční poradenství. Toto hodnocení je pouze ilustrativní a nemělo by být používáno jako základ pro investiční rozhodnutí. Vždy se poraďte s kvalifikovaným finančním poradcem.

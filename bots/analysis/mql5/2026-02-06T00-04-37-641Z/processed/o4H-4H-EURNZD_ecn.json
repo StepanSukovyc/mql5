@@ -1,0 +1,9 @@
+```json
+{
+  "EURNZD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```

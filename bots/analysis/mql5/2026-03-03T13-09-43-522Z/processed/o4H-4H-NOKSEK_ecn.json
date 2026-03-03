@@ -1,0 +1,27 @@
+```json
+{
+  "NOKSEK_ecn": {
+    "BUY": 55,
+    "SELL": 25,
+    "HOLD": 20
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+Toto hodnocení je založeno na omezeném souboru dat a *simulaci* fundamentální analýzy. Bez reálných fundamentálních dat a pokročilejší technické analýzy je obtížné určit přesnější procentuální rozdělení.  Nicméně, zohlednil jsem následující faktory:
+
+* **Obecný trend:** Cena se v průběhu měsíce spíše zvyšovala, což naznačuje potenciální býčí sentiment. Poslední prudký nárůst ceny podporuje možnost BUY.
+* **Svíčkové formace:** Identifikoval jsem několik potenciálních býčích svíčkových formací (např.  dlouhé bílé svíčky, hammer/inverted hammer v určitých kontextech), které posilují signál pro BUY. Zaznamenal jsem i bearish engulfing, což dává signál SELL.
+* **Volatilita:** Zvýšená volatilita v některých obdobích zvyšuje rizikovost a nejistotu, což vede ke zvýšení HOLD.
+* **Fundamentální analýza (simulace):**  Představme si, že fundamentální data ukazují na mírné posílení norské koruny oproti švédské, nebo obecně pozitivní ekonomické vyhlídky pro Norsko, proto je hodnocení pro BUY vyšší.
+
+**Důležité upozornění:**
+
+* **Toto je pouze simulace a rizikové hodnocení na základě omezených dat.**
+* **Není to investiční doporučení.**
+* **Vždy proveďte vlastní důkladnou analýzu před jakýmkoli obchodováním.**
+* **Skutečná fundamentální analýza vyžaduje hluboké porozumění makroekonomickým faktorům, politické situaci a dalším relevantním informacím.**
+* **Technická analýza by zahrnovala pokročilejší indikátory a patterny.**
+* **Risk management je klíčový a měl by být vždy zohledněn.**

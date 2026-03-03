@@ -1,0 +1,38 @@
+```json
+{
+  "CHFHUF_ecn": {
+    "BUY": 40,
+    "SELL": 25,
+    "HOLD": 35
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k omezenému rozsahu dat a nemožnosti provést reálnou fundamentální analýzu v reálném čase, toto hodnocení je nutně orientační a založené na kombinaci technické analýzy dat a simulace vlivu potenciálních (hypotetických) fundamentálních faktorů.
+
+*   **Technická analýza (Svíčkové formace a trendy):**
+    *   **Celkový trend:** Poslední data naznačují silný růst.
+    *   **Svíčkové formace:** Identifikace a interpretace svíčkových formací v tomto rozsahu dat je velmi obtížná a nespolehlivá.
+    *   **Objem:** Volume při růstech cen jsou obecně vyšší než při poklesech.
+
+*   **Simulace fundamentální analýzy (hypotetické vlivy):**
+    *   **Hypotéza 1: Silnější CHF (0-10 % SELL):** Pokud by fundamentální analýza naznačovala posilování švýcarského franku (např. díky rostoucím úrokovým sazbám SNB, bezpečnému přístavu v době nejistoty), pak by to zvýšilo pravděpodobnost SELL.
+    *   **Hypotéza 2: Slabší HUF (0-15 % BUY):** Pokud by fundamentální analýza naznačovala oslabování maďarského forintu (např. kvůli vysoké inflaci v Maďarsku, politické nejistotě), pak by to zvýšilo pravděpodobnost BUY.
+    *   **Hypotéza 3: Neutrální sentiment (10-20 % HOLD):** Pokud by fundamentální analýza nenaznačovala žádné výrazné změny v ekonomickém výhledu Švýcarska nebo Maďarska, doporučení by bylo HOLD.
+
+*   **Kombinace a rizikové hodnocení:**
+    *   **BUY (40 %):** Aktuální růstový trend, plus potenciální slabost HUF.
+    *   **SELL (25 %):** Možné posílení CHF.
+    *   **HOLD (35 %):** Nejistota trhu a nedostatek jasných signálů (fundamental i technika).
+
+**Důležité poznámky:**
+
+*   Toto je pouze modelový příklad. Skutečné hodnocení by vyžadovalo:
+    *   **Komplexní fundamentální analýzu:** Aktuální ekonomické a politické události v Švýcarsku a Maďarsku.
+    *   **Rozsáhlejší historická data:** Analýzu trendů a patternů na větším časovém rámci.
+    *   **Použití technických indikátorů:** RSI, MACD, klouzavé průměry.
+    *   **Money management a řízení rizik:** Nastavení stop-loss a take-profit úrovní.
+
+Je nutné provést *důkladnou analýzu* před jakýmkoli investičním rozhodnutím. Toto hodnocení je pouze informativní.

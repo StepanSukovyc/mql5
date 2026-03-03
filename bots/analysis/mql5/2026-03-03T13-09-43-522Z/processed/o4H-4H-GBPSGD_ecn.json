@@ -1,0 +1,28 @@
+```json
+{
+  "GBPSGD_ecn": {
+    "BUY": 30,
+    "SELL": 45,
+    "HOLD": 25
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k omezeným informacím a nemožnosti provádět fundamentální analýzu v reálném čase (nemám přístup k webu a aktuálním zprávám), hodnocení vychází primárně z technické analýzy dat, která jsi poskytl, a to v následujícím duchu:
+
+*   **Celkový trend:** Z dat vyplývá spíše klesající trend během daného měsíce. Cena se postupně snižovala.
+*   **Svíčkové formace:** Analyzovat jednotlivé svíčky a hledat formace by vyžadovalo hlubší pohled na jednotlivé úseky, ale celkově data neukazují na silné býčí signály.
+*   **Objemy:** Vyšší objemy často doprovázejí poklesy, což by mohlo potvrzovat klesající trend.
+*   **Fundamentální faktory:** Bez reálné fundamentální analýzy (zprávy, ekonomické ukazatele) je tento aspekt opomenut.
+
+**Vysvětlení procentuálního rozdělení:**
+
+*   **SELL (45%):** Převaha prodeje vzhledem ke klesajícímu trendu a absenci silných signálů pro obrat trendu.
+*   **BUY (30%):**  Existuje šance na korekci nebo krátkodobý odraz vzhledem k tomu že trh klesal.
+*   **HOLD (25%):** Relativní nejistota a chybějící silné signály vedou k doporučení držet stávající pozice a vyčkat na jasnější signály.
+
+**Důležité upozornění:**
+
+Toto hodnocení je pouze orientační a vychází z omezeného datasetu a nemožnosti provádět reálnou fundamentální analýzu.  Před jakýmkoli obchodováním je nezbytné provést vlastní důkladný průzkum a zvážit rizika. Nejedná se o investiční poradenství.

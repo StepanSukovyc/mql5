@@ -1,0 +1,37 @@
+```json
+{
+  "AUDCAD_ecn": {
+    "BUY": 40,
+    "SELL": 20,
+    "HOLD": 40
+  }
+}
+```
+
+**Zdůvodnění:**
+
+**Technická analýza (Svíčkové formace & Data):**
+
+*   **Celkový trend:** Pozorujeme celkový rostoucí trend v průběhu měsíce (od cca 0.944 do cca 0.974), s následnou korekcí.
+*   **Svíčkové formace:** Identifikace konkrétních svíčkových formací bez detailnějšího algoritmu a vizualizace je obtížná. Nicméně, je pravděpodobné, že se v datech vyskytují formace indikující pokračování trendu (např. býčí pohlcení) i obratu (např. medvědí pohlcení, hvězdy).
+*   **Objemy:** Objem je proměnlivý, ale občasné nárůsty objemu při růstu ceny potvrzují býčí momentum. Zvýšený objem při poklesu ceny může signalizovat obrat.
+
+**Fundamentální analýza (Předpoklad):**
+
+*   **AUD (Australský dolar):** Předpokládejme, že fundamentální analýza naznačuje mírně pozitivní výhled pro australskou ekonomiku, např. díky rostoucím cenám komodit, které Austrálie exportuje.
+*   **CAD (Kanadský dolar):** Předpokládejme, že fundamentální analýza naznačuje neutrální až mírně negativní výhled pro kanadskou ekonomiku, např. kvůli nejistotě v ropném sektoru.
+
+**Hodnocení a Rozdělení Procent:**
+
+*   **BUY (40%):** Vzhledem k rostoucímu trendu a potenciálně pozitivním fundamentům pro AUD, existuje slušná šance na pokračování růstu. Ovšem, aktuální korekce a nejistota na trzích snižuje jistotu.
+*   **SELL (20%):** Korekce v datech a potenciálně negativní fundamenty pro CAD (relativně k AUD) naznačují možnost dalšího poklesu. Technické formace obratu by posílily tento signál. Menší procento, protože trend byl primárně rostoucí.
+*   **HOLD (40%):** Vzhledem k volatilitě trhu a neúplné fundamentální analýze je nejrozumnější vyčkat na potvrzení trendu. Riziko je v tomto případě vyvážené. Hold pozice umožňuje flexibilitu reagovat na nové informace.
+
+**Důležité poznámky:**
+
+*   **Toto hodnocení je pouze ilustrativní a založené na zjednodušených předpokladech.** Reálné hodnocení vyžaduje hlubší fundamentální analýzu, detailnější technickou analýzu a zohlednění aktuální situace na trhu.
+*   **Procentuální rozdělení je subjektivní a závisí na rizikovém profilu investora.** Konzervativnější investor by upřednostnil vyšší procento pro HOLD.
+*   **Rizikové hodnocení NENÍ investiční doporučení.** Před jakýmkoli investičním rozhodnutím se poraďte s kvalifikovaným finančním poradcem.
+*  Použitím pouze historických dat a bez hlubší znalosti kontextu (aktuální ekonomické události, politické vlivy atd.) je přesnost hodnocení omezená.
+*  Chybí mi kontext aktuálního data pro data.
+

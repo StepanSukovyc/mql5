@@ -167,6 +167,77 @@ async function fileExists(p) {
     }
 }
 
+function normalizeTyp(value) {
+    if (typeof value !== 'string') return undefined;
+    const upper = value.trim().toUpperCase();
+    return ['BUY', 'SELL', 'HOLD'].includes(upper) ? upper : undefined;
+}
+
+function inferTypFromScores(obj) {
+    if (!obj || typeof obj !== 'object') return undefined;
+
+    const buy = Number(obj.BUY);
+    const sell = Number(obj.SELL);
+    const hold = Number(obj.HOLD);
+
+    const scored = [
+        { key: 'BUY', val: buy },
+        { key: 'SELL', val: sell },
+        { key: 'HOLD', val: hold }
+    ].filter(x => Number.isFinite(x.val));
+
+    if (scored.length === 0) return undefined;
+
+    scored.sort((a, b) => b.val - a.val);
+    return scored[0].key;
+}
+
+function normalizePredictChoice(rawPredict) {
+    if (!rawPredict || typeof rawPredict !== 'object' || Array.isArray(rawPredict))
+        return null;
+
+    // 1) Přímý tvar: { symbol: 'EURUSD_ecn', typ: 'BUY' }
+    const directTyp =
+        normalizeTyp(rawPredict.typ) ??
+        normalizeTyp(rawPredict.type) ??
+        normalizeTyp(rawPredict.action);
+    const directSymbol = typeof rawPredict.symbol === 'string' ? rawPredict.symbol.trim() : undefined;
+
+    if (directSymbol && directTyp) {
+        return { symbol: directSymbol, typ: directTyp };
+    }
+
+    // 2) Tvar s jedním klíčem: { EURUSD_ecn: {...} }
+    const firstKey = Object.keys(rawPredict)[0];
+    if (!firstKey) return null;
+
+    const firstValue = rawPredict[firstKey];
+    if (!firstValue || typeof firstValue !== 'object') return null;
+
+    const symbolFromValue = typeof firstValue.symbol === 'string' ? firstValue.symbol.trim() : undefined;
+    const symbolFromKeyIsAction = Boolean(normalizeTyp(firstKey));
+    const symbolFromValueIsAction = Boolean(normalizeTyp(symbolFromValue));
+
+    // Pokud je symbol ve value BUY/SELL/HOLD (prohozené pole), použij klíč objektu jako symbol.
+    const symbol =
+        symbolFromValue && !symbolFromValueIsAction
+            ? symbolFromValue
+            : (!symbolFromKeyIsAction ? firstKey : undefined);
+
+    const typ =
+        normalizeTyp(firstValue.typ) ??
+        normalizeTyp(firstValue.type) ??
+        normalizeTyp(firstValue.action) ??
+        normalizeTyp(firstValue.symbol) ??
+        inferTypFromScores(firstValue);
+
+    if (symbol && typ) {
+        return { symbol, typ };
+    }
+
+    return null;
+}
+
 async function ensurePredictJson(traderData, proceedFolder) {
     try {
         const mqlSourceFolder = process.env.MQL_SOURCE_FOLDER;
@@ -186,9 +257,8 @@ async function ensurePredictJson(traderData, proceedFolder) {
 
         // Pokud existuje aPredict.json, zkopíruj do cPredict.json (pokud cPredict.json neexistuje)
         if (await fileExists(aPredictPath)) {
-            if (!(await fileExists(cPredictPath))) {
+            if (!(await fileExists(cPredictPath)))
                 await fs.copyFile(aPredictPath, cPredictPath);
-            }
 
             if (await fileExists(cPredictPath)) {
                 const raw = await fs.readFile(cPredictPath, 'utf-8');
@@ -200,9 +270,9 @@ async function ensurePredictJson(traderData, proceedFolder) {
                     data = [];
                 }
 
-                if (!Array.isArray(data) || data.length === 0) {
+                if (!Array.isArray(data) || data.length === 0)
                     console.error('Soubor cPredict.json neobsahuje platné pole objektů.');
-                } else {
+                else {
                     if (data.length > 5) {
                         // vezmi prvních 5 a předdej Gemini
                         const firstFive = data.slice(0, 5);
@@ -223,17 +293,23 @@ async function ensurePredictJson(traderData, proceedFolder) {
                                     const firstSnippet = snippets.length > 0 ? snippets[0] : null;
                                     predictJson = JSON.parse(firstSnippet.raw);
 
-                                    // vezmeme první klíč a uvnítř objektu bude symbol
-                                    const firstKey = Object.keys(predictJson)[0];
-                                    // tento celý objekt můžeme poslat na SLACK ale někdy příště
-                                    if (firstKey) {
-                                        predictJson = {
-                                            "symbol": firstKey,
-                                            // vezmeme větší hodnotu mezi BUY a SELL
-                                            "typ": predictJson[firstKey].BUY > predictJson[firstKey].SELL ? 'BUY' : 'SELL'
-                                        }
-                                        // predictJson = predictJson[firstKey];
-                                    }
+                                    // // vezmeme první klíč a uvnítř objektu bude symbol
+                                    // const firstKey = Object.keys(predictJson)[0];
+                                    // // tento celý objekt můžeme poslat na SLACK ale někdy příště
+                                    // if (firstKey) {
+                                    //     predictJson = {
+                                    //         "symbol": firstKey,
+                                    //         // vezmeme větší hodnotu mezi BUY a SELL
+                                    //         "typ": predictJson[firstKey].BUY > predictJson[firstKey].SELL ? 'BUY' : 'SELL'
+                                    //     }
+                                    //     // predictJson = predictJson[firstKey];
+                                    // }
+
+                                    const normalizedChoice = normalizePredictChoice(predictJson);
+                                    if (normalizedChoice)
+                                        predictJson = normalizedChoice;
+                                    else
+                                        predictJson = {};
 
                                     console.log('Načtený objekt z traderInfo.json: ', predictJson);
                                 } catch (e) {
@@ -248,7 +324,7 @@ async function ensurePredictJson(traderData, proceedFolder) {
                             // v režimu >5 nebudu tvořit predictJson (předpokládám, že predikci dělá Gemini)
                             predictJson = {};
                     }
-                    if (predictJson.length === 0 || !predictJson.symbol || !predictJson.typ) {
+                    if (Object.keys(predictJson).length === 0 || !predictJson.symbol || !predictJson.typ) {
                         // jeden prvek → vytvoř predikci + posuň frontu
                         const first = data[0];
 

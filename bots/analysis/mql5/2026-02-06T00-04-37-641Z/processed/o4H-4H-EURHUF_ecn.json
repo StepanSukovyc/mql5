@@ -1,0 +1,26 @@
+```json
+{
+  "EURHUF_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení:**
+
+S ohledem na poskytnutá data, nemožnost provedení fundamentální analýzy (absence aktuálních dat z webu) a omezenou analýzu svíčkových formací, jsem provedl rizikové hodnocení s následujícími úvahami:
+
+*   **Trend:** V datech je zřejmý klesající trend v druhé polovině měsíce.
+*   **Volatilita:** Měnový pár vykazuje určitou volatilitu s výraznějšími pohyby v některých obdobích.
+*   **Svíčkové formace:** Bez hlubší analýzy lze konstatovat přítomnost různých svíčkových formací, které naznačují jak býčí, tak medvědí sentiment.  (Např. na konci dat jsou patrné delší stíny svící - možná indikace nejistoty)
+*   **Absence fundamentální analýzy:** Zásadní omezení. Bez znalosti fundamentálních faktorů (ekonomické ukazatele, politické události apod.) je hodnocení výrazně omezené.
+
+**Rizikové hodnocení:**
+
+*   **SELL: 50%** - Kvůli zřetelnému klesajícímu trendu v závěru dat a nemožnosti ověření fundamentálních faktorů.
+*   **HOLD: 30%** -  Vzhledem k volatilitě a nejistotě v datech je vhodné vyčkat na potvrzení trendu nebo na nové informace.
+*   **BUY: 20%** -  Jako protireakce na možnou překoupenost a možnost korekce. Nicméně s nízkou mírou jistoty bez fundamentální analýzy.
+
+**Důležité upozornění:** Toto hodnocení je vysoce spekulativní a má omezenou vypovídající hodnotu.  *Je nezbytné provést důkladnou fundamentální a technickou analýzu s využitím aktuálních dat a nástrojů pro obchodování.*  Toto hodnocení nepředstavuje investiční doporučení.

@@ -1,0 +1,9 @@
+```json
+{
+  "USDNOK_ecn": {
+    "BUY": 30,
+    "SELL": 50,
+    "HOLD": 20
+  }
+}
+```

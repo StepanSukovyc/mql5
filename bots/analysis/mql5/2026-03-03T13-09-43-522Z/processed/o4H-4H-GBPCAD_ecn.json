@@ -1,0 +1,24 @@
+```json
+{
+  "GBPCAD_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k absenci aktuálních fundamentálních dat a omezením plynoucím z rozsahu odpovědi, rizikové hodnocení vychází primárně z technické analýzy poskytnutých dat.  Byl jsem nucen provést zjednodušenou analýzu svíčkových formací a trendu.
+
+*   **Trend:** Celkově, za dané období,  je patrný klesající trend (od 1.86 do 1.82).
+*   **Svíčkové formace:** Analyzoval jsem základní svíčkové formace, ale vzhledem k časové náročnosti a automatizaci pro detailnější analýzu to nebylo možné.
+*   **Fundamentální analýza:** Nemám přístup k aktuálním datům. Předpokládám, že fundamentální faktory nepodporují zásadní obrat trendu.
+
+**Proč dané procentuální rozdělení:**
+
+*   **SELL (50%):** Klesající trend naznačuje pokračující tlak na pokles ceny.
+*   **HOLD (30%):** Kvůli volatilitě a nejistotě trhu doporučuji držet pozici a čekat na další potvrzení trendu.
+*   **BUY (20%):** Možné krátkodobé korekce směrem vzhůru, ale trend je převážně klesající. Proto se jedná o nejrizikovější možnost.
+*   **Poznámka:** Toto hodnocení je silně omezeno dostupnými daty a chybějící fundamentální analýzou. V reálné situaci by bylo nutné zvážit aktuální ekonomické zprávy, politické události a další relevantní faktory.

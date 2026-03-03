@@ -1,0 +1,48 @@
+```json
+{
+  "NZDSGD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+Toto hodnocení je *velmi* zjednodušené a opírá se o následující (omezené) úvahy.  Bez hlubší fundamentální analýzy a detailnějšího prozkoumání svíčkových formací nelze poskytnout přesnější odhad.
+
+*   **Data samotná:** Cena měnového páru vykazuje v daném měsíci spíše boční trend s mírnou volatilitou. Ke konci měsíce vidíme klesající trend.
+*   **Svíčkové formace:** Analýza svíčkových formací v reálném čase by vyžadovala pokročilejší algoritmy a kontext. Nicméně, obecně:
+    *   Dlouhé svíčky s malými těly (Doji, Spinning Tops) naznačují nerozhodnost trhu.
+    *   Sekvence býčích/medvědích svíček naznačují krátkodobé trendy.
+*   **Fundamentální analýza (chybí):**
+    *   **Ekonomická data:** HDP, inflace, nezaměstnanost (NZD a SGD)
+    *   **Úrokové sazby:** Rozdíly v úrokových sazbách mezi NZD a SGD
+    *   **Geopolitické události:** Vliv na ekonomiky Nového Zélandu a Singapuru
+    *   **Komoditní trhy:** (Nový Zéland je závislý na exportu komodit)
+    *   **Sentiment trhu:**  Celkový nálada investorů vůči rizikovým aktivům
+
+**Důvody pro BUY (30%):**
+
+*   V datech vidíme určité odrazy od nižších hodnot, což může naznačovat existenci supportu.
+*   Potenciální pozitivní zprávy z Nového Zélandu (které nemám k dispozici) by mohly vést k posílení NZD.
+
+**Důvody pro SELL (40%):**
+
+*   Ke konci sledovaného období je zřetelný klesající trend.
+*   Poslední svíčky naznačují možný pokračující tlak na pokles.
+*   Silná ekonomika Singapuru (hypoteticky – nemám aktuální data) by mohla vést k posílení SGD.
+
+**Důvody pro HOLD (30%):**
+
+*   Absence jasného trendu v celkovém pohledu.
+*   Čekání na nové ekonomické zprávy, které by mohly pohnout trhem jedním nebo druhým směrem.
+*   Nerozhodnost trhu, naznačená některými svíčkovými formacemi.
+
+**Důležité upozornění:**
+
+*   **Toto hodnocení je pouze ilustrativní a nezakládá se na kompletní analýze.** Je nezbytné provést důkladný průzkum, než učiníte jakékoliv investiční rozhodnutí.
+*   **Rizikové hodnocení je subjektivní a závisí na vaší toleranci k riziku.**
+*   **Nejsem kvalifikovaný finanční poradce.**
+*   **Minulé výsledky nejsou zárukou budoucích zisků.**

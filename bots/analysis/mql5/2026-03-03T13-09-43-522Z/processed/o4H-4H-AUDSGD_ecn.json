@@ -1,0 +1,35 @@
+```json
+{
+  "AUDSGD_ecn": {
+    "BUY": 40,
+    "SELL": 25,
+    "HOLD": 35
+  }
+}
+```
+
+**Zdůvodnění:**
+
+*   **BUY (40%):**
+    *   **Trend:**  Počáteční uptrend a následná konsolidace naznačují potenciál pro další růst. Poslední část dat ukazuje snahu o opětovné otestování vyšších hodnot (kolem 0.90).
+    *   **Svíčkové formace:** Identifikace býčích svíčkových formací (např. Hammer, Morning Star) v oblastech supportu.
+    *   **Fundamentální analýza (implicitní):**  Předpokládáme, že fundamentální analýza (kterou v tomto okamžiku nemám k dispozici) by naznačovala potenciální posílení AUD vůči SGD (např. rozdílný vývoj úrokových sazeb, makroekonomické ukazatele).
+
+*   **SELL (25%):**
+    *   **Rezistence:** Oblast kolem 0.9000 - 0.9050 funguje jako silná rezistence, kde se cena opakovaně odráží.
+    *   **Svíčkové formace:** Identifikace medvědích svíčkových formací (např. Evening Star, Shooting Star) v oblastech rezistence.
+    *   **Technické indikátory:** Implicitně předpokládáme, že některé technické indikátory (RSI, MACD) by mohly ukazovat překoupenost.
+
+*   **HOLD (35%):**
+    *   **Konsolidace:** Měnový pár se dlouhodobě pohybuje v určitém rozpětí, což indikuje nejistotu trhu.
+    *   **Fundamentální nejistota:**  Nedostatek aktuálních fundamentálních dat znamená, že není možné s jistotou předvídat budoucí směr.
+    *   **Čekání na potvrzení:** Je rozumné vyčkat na jasnější signál (proražení rezistence, prolomení supportu, významné fundamentální zprávy), než zaujmout agresivnější pozici.
+
+**Důležité upozornění:**
+
+Toto je *pouze* obecné rizikové hodnocení založené na omezených datech a *bez* reálné fundamentální analýzy. Je nutné:
+
+*   **Provést důkladnou fundamentální analýzu.**
+*   Použít technické indikátory pro potvrzení signálů.
+*   Zohlednit osobní rizikový profil a strategii.
+*   Použít Stop-Loss příkazy pro minimalizaci ztrát.

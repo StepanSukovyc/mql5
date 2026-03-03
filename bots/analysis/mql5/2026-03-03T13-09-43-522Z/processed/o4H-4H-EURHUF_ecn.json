@@ -1,0 +1,30 @@
+```json
+{
+  "EURHUF_ecn": {
+    "BUY": 60,
+    "SELL": 15,
+    "HOLD": 25
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k omezeným vstupním datům se rizikové hodnocení provádí následovně:
+
+*   **Technická analýza (70% váha):**
+
+    *   **Trend:**  Cena EURHUF v posledních timeframech výrazně roste. Je vidět silný uptrend, který naznačuje pokračování růstu. Poslední dvě 4H svíčky jsou velmi býčí.
+    *   **Svíčkové formace:** Uprostřed dat se objevují medvědí svíčkové formace, které naznačují tlak na pokles ceny.
+
+*   **Fundamentální analýza (30% váha):**
+
+    *   **Bez znalosti fundamentálních dat** – nelze provést. Předpokládejme, že fundamenty jsou neutrální s mírným náznakem pro silnější EUR vůči HUF.
+
+**Hodnocení:**
+
+*   **BUY (60%):** Vzhledem k silnému rostoucímu trendu se jeví jako nejlogičtější strategie nakupovat.
+*   **SELL (15%):** Přítomnost medvědích svíčkových formací uprostřed dat, naznačují menší šanci na pokles.
+*   **HOLD (25%):**  Vzhledem k celkové volatilitě a nedostatku silných fundamentálních signálů je vhodné část prostředků ponechat v pozici "HOLD" a vyčkat na další vývoj.
+
+**Důležité upozornění:** Toto hodnocení je pouze informativní a nezohledňuje individuální rizikový profil investora. Investování do měnových párů je vysoce rizikové a může vést ke ztrátě kapitálu. **Před jakýmkoli investičním rozhodnutím se poraďte s kvalifikovaným finančním poradcem a proveďte důkladnou analýzu.**

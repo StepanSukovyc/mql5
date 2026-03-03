@@ -1,0 +1,25 @@
+```json
+{
+  "NZDSEK_ecn": {
+    "BUY": 35,
+    "SELL": 25,
+    "HOLD": 40
+  }
+}
+```
+
+**Zdůvodnění:**
+
+*   **Technická analýza (Svíčkové formace a data):**
+    *   **Trend:** Poslední část dat ukazuje na rostoucí trend s vyššími maximy a minimy, avšak s prudkým propadem ke konci a následnou konsolidací, což značí potenciální oslabení trendu.
+    *   **Svíčkové formace:** Identifikace konkrétních svíčkových formací by vyžadovala detailnější analýzu každé svíčky. Obecně, býčí svíčky (close > open) převažují v závěru periody, což naznačuje potenciální pokračování růstu. Ale pozor na konec datasetu, kde dochází k poklesu ceny.
+    *   **Volume:** Relativně vysoké objemy na růstových svíčkách konce datasetu by mohly potvrzovat sílu trendu, ale velký objem u poklesu je varovný.
+*   **Fundamentální analýza (obecné):**
+    *   **NZD (Novozélandský dolar):** Stav novozélandské ekonomiky, úrokové sazby centrální banky (RBNZ), inflace, obchodní bilance. V globálním prostředí sledujte rizikovou averzi - NZD je často vnímán jako rizikovější měna.
+    *   **SEK (Švédská koruna):** Stav švédské ekonomiky, úrokové sazby centrální banky (Riksbank), inflace, politická stabilita. Sledujte i vývoj v okolních zemích a dopad na Švédsko.
+
+*   **Procentuální hodnocení:**
+
+    *   **BUY (35%):** Růstový trend naznačuje potenciál pro další růst, ale je třeba sledovat support a rezistence a celkový sentiment.
+    *   **SELL (25%):** Propady a konsolidace konce datasetu a nejistota ve fundamentálních datech varují před rizikem poklesu.
+    *   **HOLD (40%):** Vzhledem k smíšeným signálům je rozumné vyčkat na potvrzení trendu (buď prolomení rezistence, nebo naopak potvrzení poklesu a prolomení supportu).

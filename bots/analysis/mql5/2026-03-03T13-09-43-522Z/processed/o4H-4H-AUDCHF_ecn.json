@@ -1,0 +1,25 @@
+```json
+{
+  "AUDCHF_ecn": {
+    "BUY": 40,
+    "SELL": 25,
+    "HOLD": 35
+  }
+}
+```
+
+**Zdůvodnění (toto v JSON formátu neposílám, je to jen pro tebe):**
+
+Je mi líto, ale nemám přístup k webovým stránkám a nemám možnost provést analýzu fundamentů.
+
+Rizikové hodnocení jsem provedl na základě těchto pozorování z dat:
+
+*   **Celkový trend:** Cena AUDCHF v daném období vykazuje převážně rostoucí trend, s několika korekcemi.
+*   **Svíčkové formace:** Z dat nelze jednoznačně identifikovat opakující se patterny. Je tam velká nestabilita a nepravidelnost.
+*   **Objem:** Objem obchodů je proměnlivý. Občasné vyšší objemy naznačují zvýšený zájem trhu v daných cenových bodech.
+
+Na základě těchto pozorování jsem přiřadil procentuální hodnoty:
+
+*   **BUY (40%):** Vzhledem k celkovému rostoucímu trendu a absenci silných signálů pro obrat.
+*   **SELL (25%):** Kvůli občasným korekcím a potenciálnímu riziku obratu trendu. Riziko vstupu do pozice proti trendu.
+*   **HOLD (35%):** Vysoká volatilita, proto raději počkat, dokud se situace neuklidní a neobjeví se jasnější signál.

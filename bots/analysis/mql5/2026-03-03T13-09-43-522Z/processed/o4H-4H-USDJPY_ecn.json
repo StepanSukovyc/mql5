@@ -1,0 +1,30 @@
+```json
+{
+  "USDJPY": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+*   **Technická Analýza (Svíčkové formace a data):**
+    *   **Klesající trend:** Z dat je patrný celkový klesající trend v průběhu měsíce. Začíná se na vyšších hodnotách (kolem 155-157) a končí na nižších (kolem 152-154).
+    *   **Výraznější pokles:** V polovině měsíce došlo k prudkému poklesu z hodnot kolem 157 na hodnoty kolem 153.
+    *   **Konsolidace:** Ke konci měsíce je patrná mírná konsolidace kolem hodnoty 153.
+    *   **Svíčkové formace:** Bez detailní analýzy každé jednotlivé svíčky je těžké udělat přesnější závěry, ale celkově klesající trend indikuje spíše **SELL**.
+
+*   **Fundamentální Analýza (obecné zásady):**
+    *   **USD:** Silnější americká ekonomika a očekávání zvyšování úrokových sazeb v USA obecně posilují USD. Aktuální ekonomická data z USA a vyjádření Fedu jsou klíčové.
+    *   **JPY:** Japonsko má dlouhodobě velmi nízké úrokové sazby a někdy intervence k oslabení jenu. Změny v politice Bank of Japan (BOJ) mají velký vliv.
+    *   **Rozdíl v měnové politice:** Rozdíl mezi měnovou politikou USA a Japonska je hlavní faktor ovlivňující kurz USDJPY.
+
+*   **Hodnocení:**
+
+    *   **SELL (40%):** Klesající trend v datech, kombinovaný s obecným fundamentálním vlivem silnějšího USD (vzhledem k rozdílné monetární politice) naznačuje potenciál pro další pokles.
+    *   **BUY (30%):** Možnost korekce po větším propadu. Pokud by se objevily náznaky slabšího dolaru (např. horší ekonomická data z USA) nebo signály změny politiky BOJ (např. spekulace o zvyšování úrokových sazeb), mohlo by dojít k posílení JPY a růstu kurzu.
+    *   **HOLD (30%):** Trh je volatilní a nepredikovatelný. Doporučuje se vyčkat na další potvrzení trendu nebo jasnější signály z fundamentální analýzy.
+
+**Disclaimer:** Toto je pouze modelová odpověď založená na omezených datech a obecných zásadách. Nejedná se o finanční poradenství. Reálné obchodování by mělo být založeno na hlubší analýze a zohlednění individuálního rizikového profilu. Fundamentální analýza se musí provádět průběžně s ohledem na aktuální zprávy a data.

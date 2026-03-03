@@ -48,7 +48,7 @@ async function analyzeDaysData(targetFolder) {
 
     if (files.length === 0) {
         console.log(`Složka "${targetFolder}" je prázdná. Přeskakuji.`);
-        return;
+        return false;
     }
 
     const merged = {};
@@ -77,6 +77,11 @@ async function analyzeDaysData(targetFolder) {
         ...data
     }));
 
+    if (array.length === 0) {
+        console.log(`Ve složce "${targetFolder}" nejsou validní denní výstupy o*.json.`);
+        return false;
+    }
+
     // Seřadit podle největší hodnoty BUY nebo SELL
     array.sort((a, b) => {
         const maxA = Math.max(a.BUY ?? 0, a.SELL ?? 0);
@@ -97,6 +102,7 @@ async function analyzeDaysData(targetFolder) {
     const aPredict = path.join(predictFolder, 'aPredict.json');
     await fse.copy(outputPath, aPredict);
     console.log(`Sloučený výstup uložen do: ${outputPath}`);
+    return true;
 }
 
 async function analyze4HData(targetFolder) {
@@ -104,7 +110,7 @@ async function analyze4HData(targetFolder) {
 
     if (files.length === 0) {
         console.log(`4H Složka "${targetFolder}" je prázdná. Přeskakuji.`);
-        return;
+        return false;
     }
 
     const merged = {};
@@ -133,6 +139,11 @@ async function analyze4HData(targetFolder) {
         ...data
     }));
 
+    if (array.length === 0) {
+        console.log(`Ve složce "${targetFolder}" nejsou validní 4H výstupy o4H*.json.`);
+        return false;
+    }
+
     // Seřadit podle největší hodnoty BUY nebo SELL
     array.sort((a, b) => {
         const maxA = Math.max(a.BUY ?? 0, a.SELL ?? 0);
@@ -155,7 +166,8 @@ async function analyze4HData(targetFolder) {
 
     // const aPredict = path.join(predictFolder, 'aPredict.json');
     // await fse.copy(outputPath, aPredict);
-    // console.log(`Sloučený výstup uložen do: ${outputPath}`);    
+    // console.log(`Sloučený výstup uložen do: ${outputPath}`);
+    return true;
 }
 
 

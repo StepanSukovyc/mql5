@@ -55,6 +55,7 @@ async function processDaysWithGemini(folder, proceedFolder) {
         return false;
     }
 
+    let processedCount = 0;
     for (const file of files) {
         if (!file.isFile()) {
             continue;
@@ -81,6 +82,12 @@ data jsou\n\`${content}\`\nodpověď prosím pošli stručně v JSON formátu, k
 Ohodnoť všechny poslané páry`;
 
         await proceedResponse(proceedFolder, 'o', fileName, fullPrompt);
+        processedCount++;
+    }
+
+    if (processedCount === 0) {
+        console.log(`Ve složce \"${folder}\" nebyly nalezeny soubory tHistory*.json.`);
+        return false;
     }
 
     return true;
@@ -98,6 +105,7 @@ async function process4HWithGemini(folder, proceedFolder) {
         const pairs = JSON.parse(data);
 
         // Projdeme všechny páry a zpracujeme ty, které splňují podmínky BUY nebo SELL > 50
+        let processedCount = 0;
         for (const pair of pairs) {
             const { symbol, BUY, SELL } = pair;
             if ((BUY && BUY > 50) || (SELL && SELL > 50)) {
@@ -122,11 +130,17 @@ data jsou\n\`${content}\`\nodpověď prosím pošli stručně v JSON formátu, k
 
                     // Zavolej funkci proceedResponse (axios verze)
                     await proceedResponse(proceedFolder, 'o4H-', fileName, prompt);
+                    processedCount++;
 
                 } catch (err) {
                     console.warn(`⚠️ Soubor ${fileName} nelze načíst:`, err.message);
                 }
             }
+        }
+
+        if (processedCount === 0) {
+            console.log('Nebyl nalezen žádný pár pro 4H analýzu (BUY/SELL > 50).');
+            return false;
         }
     } catch (err) {
         console.error('❌ Soubor aDaysResult.json neexistuje nebo nelze načíst:', err.message);
@@ -184,10 +198,7 @@ Jedná se o několik titulů vybraných jako nejpravděpodobnější pro obchod.
 - Analyzuj predikce v kontextu aktuálního stavu účtu a otevřených pozic.
 - Vyber pouze jeden měnový pár, který je aktuálně nejvhodnější k realizaci.
 - Dbej na to, aby součet otevřených pozic nebyl příliš rizikový.
-- Odpověď pošli **pouze** ve validním JSON formátu, bez dalšího textu ani komentářů.
-- Struktura musí být přesně takto:
-  {"EURNZD_enc": {"symbol":"EURNZD","typ":"BUY"}}
-- Použij klíč měnového páru (např. "EURNZD_enc") a jako hodnotu objekt s vlastnostmi 'symbol' a 'typ' převzatými z predikce.`;
+- odpověď prosím pošli stručně v JSON formátu, kde klíčem je měnový pár a tělem je hodnocení přesně tak, jak je uvedeno v predikci, např. {"EURNZD_enc": {"symbol":..., "typ":...}}, prosím strukturu přesně tak, jak je příklad s vlastnosti 'symbol' a 'typ', je na to vázaná další logika`;
 
             // Zavolej funkci proceedResponse (axios verze)
             await proceedResponse(proceedFolder, 'trader', fileName, prompt);

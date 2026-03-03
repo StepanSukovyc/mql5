@@ -1,0 +1,30 @@
+```json
+{
+  "SGDJPY_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Odůvodnění:**
+
+Vzhledem k omezeným datům (pouze 4H data za jeden měsíc) a absenci aktuální fundamentální analýzy je hodnocení nutně zjednodušené a opatrné.
+
+*   **Technická Analýza (omezená na data):**
+    *   **Obecný trend:** Data vykazují velkou volatilitu a trend je těžké určit s jistotou pouze z těchto dat.
+    *   **Svíčkové formace:** Bez podrobnější analýzy svíčkových formací je obtížné určit konkrétní signály. Nicméně, pozoruji obrat klesajícího trendu ke konci analyzovaného období.
+
+*   **Fundamentální Analýza (nemám přístup k aktuálním datům):**
+
+    *   **Základní předpoklady:** Bez znalosti aktuální fundamentální situace Singapuru a Japonska (úrokové sazby, inflace, HDP, politická stabilita atd.) je nemožné provést solidní odhad.
+    *   **Obecně:**  JPY je často vnímán jako "safe haven" měna, takže v období nejistoty má tendenci posilovat. SGD je ovlivněn regionální ekonomikou a globálním obchodem.
+
+*   **Rizikové Hodnocení:**
+
+    *   **BUY (30%):** Na základě obratu klesajícího trendu. Není to jednoznačný signál a je potřeba potvrzení.
+    *   **SELL (40%):** Celková nestabilita a volatilitě v datech. Bez fundamentů těžko říct, ale s klesajícím trendem je tato varianta pravděpodobnější.
+    *   **HOLD (30%):** Z důvodu nejistoty a omezených informací je vhodné vyčkat na další signály a fundamentální data.
+
+**Důležité upozornění:** Toto hodnocení je vysoce spekulativní a vychází pouze z omezených dat. Je **nezbytné** provést důkladnou fundamentální analýzu a zvážit další technické indikátory před provedením jakékoli investice. Nejedná se o investiční radu.

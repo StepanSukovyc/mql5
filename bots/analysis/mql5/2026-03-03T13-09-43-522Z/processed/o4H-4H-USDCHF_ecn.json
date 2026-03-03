@@ -1,0 +1,37 @@
+```json
+{
+  "USDCHF_ecn": {
+    "BUY": 40,
+    "SELL": 30,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení hodnocení:**
+
+Toto hodnocení je *velmi* zjednodušené a vychází *pouze* z dodaných historických dat a obecných principů technické analýzy. Bez fundamentální analýzy a dalších faktorů je jeho přesnost omezená.
+
+*   **BUY (40%):**
+    *   **Obecný trend:**  Z dat je patrný spíše boční až mírně rostoucí trend v průběhu sledovaného období. Posledních 5 svíček naznačuje růst.
+    *   **Svíčkové formace:** Bez detailní analýzy je obtížné identifikovat spolehlivé formace. Některé úseky naznačují býčí tlak.
+    *   **Rizika:** Záleží na cílové ceně a strategii. Je třeba zvážit potenciální propady a nastavit Stop-Loss.
+
+*   **SELL (30%):**
+    *   **Překoupenost:** Po růstu existuje riziko korekce nebo konsolidace.
+    *   **Svíčkové formace:** Je třeba hledat medvědí signály, které by potvrdily obrat trendu.
+    *   **Silné zóny:** Pokud existují silné rezistence v blízkosti aktuální ceny, SELL se stává atraktivnější.
+
+*   **HOLD (30%):**
+    *   **Nejasný trend:**  Data ukazují kolísavost, takže vyčkávání na jasnější signál je rozumné.
+    *   **Fundamentální faktory:** Pokud fundamentální data naznačují protichůdné signály, nejlepší je vyčkat.
+
+**Důležité upozornění:**
+
+*   **Toto NENÍ investiční doporučení.**
+*   **Fundamentální analýza chybí:** Bez znalosti ekonomických dat USA a Švýcarska (úrokové sazby, inflace, nezaměstnanost, geopolitická rizika) je hodnocení neúplné.
+*   **Další technické indikátory:** Doporučuji použít další indikátory (klouzavé průměry, RSI, MACD, Fibonacciho úrovně) pro potvrzení trendů a identifikaci potenciálních vstupních/výstupních bodů.
+*   **Řízení rizik:** Vždy používejte Stop-Loss a Take-Profit příkazy, abyste minimalizovali ztráty a maximalizovali zisky.
+*   **Časový rámec:** Toto hodnocení je založeno na 4H datech, takže je vhodné pro krátkodobější až střednědobé obchody.
+
+Pro přesnější a spolehlivější hodnocení je nutné provést komplexní analýzu s ohledem na aktuální fundamentální data, technické indikátory a vaši osobní rizikovou toleranci.

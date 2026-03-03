@@ -19,8 +19,7 @@ async function copyFiles() {
         const src = path.join(sourceFolder, file);
         const dest = path.join(targetFolder, file);
         await fs.copyFile(src, dest);
-        await fs.unlink(src);
-        console.log(`Zkopírován a odstraněn: ${file}`);
+        console.log(`Zkopírován: ${file}`);
     }
 
     return targetFolder;
@@ -51,14 +50,16 @@ async function mainCycle() {
             const targetFolder = path.join(folder, "processed");
             await fs.mkdir(targetFolder, { recursive: true });
 
-            let isExists = await processDaysWithGemini(folder, targetFolder);
-            if (isExists) {
-                await analyzeDaysData(targetFolder);
-                let isExists = await process4HWithGemini(folder, targetFolder);
-                if (isExists)
-                    await analyze4HData(targetFolder);
+            const hasDayInputs = await processDaysWithGemini(folder, targetFolder);
+            if (hasDayInputs) {
+                const hasDayResult = await analyzeDaysData(targetFolder);
+                if (hasDayResult) {
+                    const has4HInputs = await process4HWithGemini(folder, targetFolder);
+                    if (has4HInputs)
+                        await analyze4HData(targetFolder);
+                }
             }
-            ensurePredictJson(traderData, targetFolder);
+            await ensurePredictJson(traderData, targetFolder);
             // odstranění analyze.json
             await fs.unlink(filePath);
             console.log(`Soubor "${filePath}" byl odstraněn po zpracování.`);

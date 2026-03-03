@@ -1,0 +1,30 @@
+```json
+{
+  "NZDUSD_ecn": {
+    "BUY": 30,
+    "SELL": 40,
+    "HOLD": 30
+  }
+}
+```
+
+**Vysvětlení (proč takto):**
+
+Je důležité si uvědomit, že **bez fundamentální analýzy a kompletní technické analýzy je takovéto hodnocení vysoce spekulativní.**  Sám o sobě měsíční 4H graf neposkytuje dostatek informací pro solidní predikci.
+
+**Základní úvahy:**
+
+*   **Klesající trend:** Celkově se cena v datech pohybuje v klesajícím trendu. To naznačuje převahu prodejců.
+
+*   **Svíčkové formace:** Pro přesnější posouzení by bylo nutné identifikovat konkrétní svíčkové formace (např. Doji, Hammer, Engulfing patterns) a jejich umístění v grafu. Absence této analýzy snižuje přesnost.
+
+*   **Fundamentální analýza (Hypotetická):** Představme si, že:
+
+    *   **NZD (Nový Zéland):** Data z Nového Zélandu ukazují na zpomalující ekonomický růst a potenciální snížení úrokových sazeb.
+    *   **USD (Spojené státy):** Data z USA ukazují na stabilní ekonomický růst a očekávání dalšího zvyšování úrokových sazeb.
+
+Vzhledem k těmto (hypotetickým) fundamentálním datům a mírně klesajícímu trendu:
+
+*   **SELL: 40%** - Z důvodu klesajícího trendu a potenciálně silnějšímu dolaru oproti novozélandskému dolaru.
+*   **HOLD: 30%** - Trh je volatilní a je potřeba vyčkat na další potvrzení.
+*   **BUY: 30%** - I přes klesající trend se trh může otočit. Proto je vhodné ponechat malou šanci na růst.

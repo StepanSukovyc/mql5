@@ -1,0 +1,19 @@
+```json
+{
+  "EURSGD_ecn": {
+    "BUY": 20,
+    "SELL": 50,
+    "HOLD": 30
+  }
+}
+```
+
+**Zdůvodnění:**
+
+Vzhledem k tomu, že mám k dispozici *pouze* historická data a *žádné* fundamentální informace z webu (jak bylo v zadání předpokládáno), analýza je nutně omezená a rizikové hodnocení je proto konzervativnější.  Data vykazují převážně klesající trend během daného měsíce, s mnoha svíčkami indikujícími medvědí sentiment (delší stíny směrem dolů, close nižší než open). Na základě samotné svíčkové analýzy a pohybu ceny, a bez znalosti dalších faktorů:
+
+*   **SELL (50%):** Převažující klesající trend a absence silných signálů obratu naznačují, že krátkodobě je pravděpodobnější pokračování poklesu.
+*   **HOLD (30%):** Trh je volatilní a existuje zde potenciál pro obrat. Doporučuji vyčkat na potvrzení trendu nebo silnější signály.  Chybějící fundamentální data a celkově kolísavý charakter měnového páru snižují jistotu.
+*   **BUY (20%):** I přes klesající trend, trh nikdy nejde jen jedním směrem. Může dojít ke korekci vzhůru. Nicméně v kontextu ostatních faktorů je tato možnost méně pravděpodobná bez fundamentálních dat pro podporu růstu.
+
+**Důležité upozornění:** Toto hodnocení je *vysoce spekulativní* a založené *pouze* na omezené technické analýze historických dat.  **Bez fundamentální analýzy a širšího kontextu je nutné brát toto hodnocení s velkou rezervou.**  V reálné situaci by takové hodnocení nebylo kompletní bez zohlednění ekonomických ukazatelů, politických událostí a dalších relevantních zpráv ovlivňujících měnový pár EUR/SGD.

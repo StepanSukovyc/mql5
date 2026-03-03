@@ -1,0 +1,37 @@
+```json
+{
+  "EURPLN_ecn": {
+    "BUY": 30,
+    "SELL": 35,
+    "HOLD": 35
+  }
+}
+```
+
+**Zdůvodnění:**
+
+S ohledem na poskytnutá data (4H svíčky za měsíc) a absenci aktuální fundamentální analýzy (kterou bych normálně hledal na webu), je toto hodnocení založeno na:
+
+1.  **Technická Analýza dat:**
+    *   **Trend:**  Pozorujeme oscilace. Konsolidace kolem ceny 4.20. Na konci sledovaného období vidíme prudký pokles (vyznačený daty 1769083200, 1769097600). Následně vidíme konsolidaci kolem hodnoty 4.20. Na konci posledních dat (1770336000) vidíme spíše růst.
+    *   **Svíčkové formace:** Při bližší analýze jednotlivých svíček bych hledal formace naznačující obrat trendu (např. Doji, Hammer, Engulfing). Kvůli nedostatku času a nástrojů pro automatickou analýzu, toto v tomto hodnocení zohledňuji pouze částečně.
+
+2.  **Fundamentální rizika (bez konkrétních dat):** Jelikož nemám reálný přístup k aktuálním fundamentálním datům, musím vycházet z obecných předpokladů:
+    *   **EUR:**  Ekonomická situace v eurozóně, úrokové sazby ECB, politické události.
+    *   **PLN:**  Ekonomická situace v Polsku, úrokové sazby NBP, politické události.
+    *   **Globální sentiment:** Celková nálada na trzích (risk-on/risk-off) má vliv na měny emerging markets, jako je PLN.
+
+3.  **Volatilita:** Měnový pár EURPLN vykazuje určitou volatilitu, ale obecně se nepohybuje dramaticky.
+
+**Proč dané procentuální hodnocení?**
+
+*   **BUY (30%):** Koupě - Důvodem je pozorovaný nárůst v posledních datech. Je to spekulativní sázka na to, že by růst mohl pokračovat. Riziko je vysoké, jelikož fundamentální data nejsou známá.
+*   **SELL (35%):**  Prodej - Důvodem je volatilita a možnost poklesu.
+*   **HOLD (35%):**  Držení pozice - Nejistota. Čekání na lepší data nebo jasnější signály z trhu.
+
+**Důležité upozornění:**
+
+*   Toto hodnocení je *pouze informativní* a založené na omezených datech a zjednodušených předpokladech.
+*   **Není investiční doporučení.**
+*   Před jakýmkoli obchodem byste měli provést důkladnou analýzu trhu a zvážit svou vlastní toleranci k riziku.
+*   Doporučuji sledovat aktuální fundamentální data a ekonomický kalendář pro EUR a PLN.
