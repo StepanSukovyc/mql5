@@ -46,7 +46,7 @@ def _to_bool(value: str, default: bool = False) -> bool:
 class Config:
 	service_dest_folder: Path
 	symbol_suffix: str
-	lookback_days: int
+	lookback_periods: int
 	run_interval_seconds: int
 	rsi_period: int
 	ma_period: int
@@ -72,7 +72,7 @@ class Config:
 		return cls(
 			service_dest_folder=Path(dest),
 			symbol_suffix=os.getenv("MT5_SYMBOL_SUFFIX", "_ecn"),
-			lookback_days=int(os.getenv("LOOKBACK_DAYS", "30")),
+			lookback_periods=int(os.getenv("LOOKBACK_PERIODS", "30")),
 			run_interval_seconds=int(os.getenv("RUN_INTERVAL_SECONDS", "3600")),
 			rsi_period=int(os.getenv("RSI_PERIOD", "14")),
 			ma_period=int(os.getenv("MA_PERIOD", "20")),
@@ -209,29 +209,54 @@ def copy_rates(symbol: str, timeframe: int, date_from: datetime, date_to: dateti
 
 
 def collect_symbol_payload(symbol: str, cfg: Config) -> Dict[str, object]:
+	"""Collect candles and oscillators for all timeframes (last N periods each)."""
+	# Fetch last N periods for each timeframe
+	timeframes = {
+		"1h": mt5.TIMEFRAME_H1,
+		"4h": mt5.TIMEFRAME_H4,
+		"day": mt5.TIMEFRAME_D1,
+		"week": mt5.TIMEFRAME_W1,
+		"month": mt5.TIMEFRAME_MN1,
+	}
+	
+	# Use a lookback window that's large enough to capture N periods for all timeframes
+	# For monthly data, 365 days = ~12 months; for weekly ~52 weeks; for hourly ~month of hours
 	date_to = datetime.now(tz=timezone.utc)
-	date_from = date_to - timedelta(days=cfg.lookback_days)
-
-	rates_h4 = copy_rates(symbol, mt5.TIMEFRAME_H4, date_from, date_to)
-	rates_d1 = copy_rates(symbol, mt5.TIMEFRAME_D1, date_from, date_to)
-
-	candles_h4 = candle_rows_to_json_rows(rates_h4)
-	candles_d1 = candle_rows_to_json_rows(rates_d1)
-
-	osc_h4 = indicator_rows(rates_h4, ma_period=cfg.ma_period, rsi_period=cfg.rsi_period)
-	osc_day = indicator_rows(rates_d1, ma_period=cfg.ma_period, rsi_period=cfg.rsi_period)
-
-	return {
+	date_from = date_to - timedelta(days=730)  # 2 years to be safe for all timeframes
+	
+	payload = {
 		"symbol": symbol,
 		"generated_at": datetime.now(tz=timezone.utc).isoformat(),
-		"lookback_days": cfg.lookback_days,
-		"oscilatory": {
-			"4h": osc_h4,
-			"day": osc_day,
-		},
-		"4h": candles_h4,
-		"day": candles_d1,
+		"lookback_periods": cfg.lookback_periods,
+		"current_price": None,
+		"candles": {},
+		"oscillators": {},
 	}
+	
+	# Get current price
+	tick = mt5.symbol_info_tick(symbol)
+	payload["current_price"] = float(tick.bid) if tick else None
+	
+	# Fetch data for each timeframe
+	for tf_name, tf_value in timeframes.items():
+		try:
+			rates = copy_rates(symbol, tf_value, date_from, date_to)
+			
+			# Take only last N periods
+			rates = rates[-cfg.lookback_periods:] if len(rates) > cfg.lookback_periods else rates
+			
+			candles = candle_rows_to_json_rows(rates)
+			oscillators = indicator_rows(rates, ma_period=cfg.ma_period, rsi_period=cfg.rsi_period)
+			
+			payload["candles"][tf_name] = candles
+			payload["oscillators"][tf_name] = oscillators
+			
+		except Exception as exc:
+			print(f"[{symbol}] Warning: Failed to fetch {tf_name} data: {exc}")
+			payload["candles"][tf_name] = []
+			payload["oscillators"][tf_name] = {"rsi": [], "ma": []}
+	
+	return payload
 
 
 def write_symbol_file(dest_folder: Path, symbol: str, payload: Dict[str, object], pretty: bool) -> None:
