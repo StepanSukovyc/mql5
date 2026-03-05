@@ -1,0 +1,6 @@
+{
+  "recommended_symbol": "EURUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "reasoning": "EURUSD_ecn is showing bearish signals across multiple timeframes. The reasoning for the prediction indicates a SELL probability of 60% based on oversold conditions and price below moving averages on various timeframes. Current account balance allows for a small lot size to manage risk. Closing existing EURNZD positions is not recommended as they are relatively small and the potential loss is within acceptable limits. No other trades are recommended as they are either showing mixed signals or contradict existing open positions."
+}
