@@ -49,18 +49,14 @@ def get_account_info() -> dict:
 
 
 def print_account_status(account_info: dict) -> None:
-	"""Print account status to console."""
+	"""Print account status to console (single line)."""
 	timestamp = account_info["timestamp"]
 	
 	# Calculate free margin percentage
 	free_margin_percent = (account_info['margin_free'] / account_info['balance'] * 100) if account_info['balance'] > 0 else 0
 	
-	print(f"\n[{timestamp}] Account Status:")
-	print(f"  Zůstatek (Balance):        {account_info['balance']:.2f}")
-	print(f"  Majetek (Equity):          {account_info['equity']:.2f}")
-	print(f"  Marže (Margin):            {account_info['margin']:.2f}")
-	print(f"  Dostupná marže (Free):     {account_info['margin_free']:.2f}")
-	print(f"  Volná marže (%):           {free_margin_percent:.2f}%")
+	# Single line output
+	print(f"[{timestamp}] Balance: {account_info['balance']:.2f} | Equity: {account_info['equity']:.2f} | Margin: {account_info['margin']:.2f} | Free: {account_info['margin_free']:.2f} ({free_margin_percent:.2f}%)")
 
 
 def _get_margin_threshold() -> float:

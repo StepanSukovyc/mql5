@@ -1,12 +1,14 @@
 # MT5 Hourly Collector (Python)
 
-Automatický obchodní systém s AI rozhodováním. Skript kontroluje marži, stahuje data, filtruje signály, vytváří finální obchodní doporučení pomocí Gemini AI a **automaticky provádí obchody**.
+Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekonečný automat**: kontroluje marži, stahuje data, filtruje signály, vytváří finální obchodní doporučení pomocí Gemini AI, **automaticky provádí obchody** a **opakuje celý cyklus**.
 
 ## Co skript dělá
 
+**Nekonečný cyklus:**
+
 1. Načte konfiguraci z `.env`.
 2. Připojí se k MetaTrader 5 (`MetaTrader5` Python package).
-3. Spustí monitoring volné marže (jednoho).
+3. Spustí monitoring volné marže.
 4. Jakmile marže > 20%:
    - Zkontroluje, zda existují předpovědi z **aktuální hodiny**
    - **Pokud ano**: používá je (bez stahování nových dat)
@@ -19,7 +21,9 @@ Automatický obchodní systém s AI rozhodováním. Skript kontroluje marži, st
    - Příklad: balance 1893 → lot_size 0.04
 8. **Provede obchod** na MT5 s vypočtenou velikostí lotu
 9. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
-10. Vykonáný proces skončí (bez pokračujícího scheduleru)
+10. **Vrátí se na krok 3** (restart monitoring)
+
+**Ukončení:** Ctrl+C
 
 ## Struktura vystupu
 
@@ -103,30 +107,54 @@ GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-fl
 python logika.py
 ```
 
-Skript níže:
-1. Spustí monitoring volné marže (jedenkrát)
-2. Pokud marže > 10%:
+Skript běží jako **nekonečný obchodní automat**:
+1. Spustí monitoring volné marže
+2. Když marže > 20%:
    - Zkontroluje existující predikce z aktuální hodiny
    - Používá je, nebo stáhne nová data a získá nové predikce
    - Filtruje slabé signály
-3. **Skončí** (bez pokračného monitoringu)
+   - Provede obchod
+3. **Restart cyklu** (vrací se na krok 1)
+4. **Ukončení:** Ctrl+C
 
-## Automatické spuštění v cron
+## Automatické spuštění
 
-Chcete-li spouštět skript opakovaně (např. každou hodinu), použijte cron:
+Protože skript běží jako nekonečný automat, stačí ho spustit **jednou** při startu systému:
 
-```bash
-0 * * * * cd /path/to/bots/analysis/ollama && python logika.py
+### Linux (systemd service)
+Vytvoř service file `/etc/systemd/system/mt5-trading.service`:
+
+```ini
+[Unit]
+Description=MT5 Trading Automat
+After=network.target
+
+[Service]
+Type=simple
+User=your_user
+WorkingDirectory=/path/to/bots/analysis/ollama
+ExecStart=/usr/bin/python3 logika.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
 ```
 
-Skript bude spuštěn na začátku každé hodiny.
+Spuštění:
+```bash
+sudo systemctl enable mt5-trading
+sudo systemctl start mt5-trading
+```
+
+### Windows (Task Scheduler)
+Vytvoř task, který spustí `python logika.py` při startu systému.
 
 ## Moduly Systému
 
-- **logika.py** - Hlavní orchestrace procesu (monitoring → predikce → finální rozhodnutí)
-- **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 10% prahu
+- **logika.py** - Hlavní orchestrace nekonečného cyklu (monitoring → predikce → finální rozhodnutí → obchod → restart)
+- **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
 - **trading_logic.py** - Stahuje data z MT5, dotazuje se Gemini na predikce, filtruje je
-- **final_decision.py** - Kombinuje predikce se stavem účtu a dělá finální obchodní rozhodnutí
+- **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
 
 ## Výstupní Soubory
 
@@ -135,10 +163,12 @@ Skript bude spuštěn na začátku každé hodiny.
 
 ## Poznamky
 
-- MetaTrader 5 terminal musi bezet lokalne ve stejnem uzivatelskem kontextu.
-- Pokud nektery symbol selze, skript pokracuje na dalsi symbol.
+- MetaTrader 5 terminal musí běžet lokálně ve stejném uživatelském kontextu
+- Pokud některý symbol selže, skript pokračuje na další symbol
 - Monitorování probíhá v **background threadu**, nezablokuje tedy ostatní procesy
 - Optimalizace: Pokud jsou k dispozici předpovědi z aktuální hodiny, jsou používány (bez nového stahování)
-- Finální rozhodnutí se dělá na **právě jednom měnovém páru** s doporučenou velikostí lotu
-- Ukonceni skriptu: `Ctrl+C` (normálně skript sám skončí po obchodování)
+- Finální rozhodnutí se dělá na **právě jednom měnovém páru** s vypočtenou velikostí lotu
+- Lot_size se počítá podle vzorce: `floor((balance + 500) / 500) / 100`
+- **Nekonečný loop:** Skript běží dokola, dokud není ručně zastaven
+- Ukončení skriptu: `Ctrl+C`
 

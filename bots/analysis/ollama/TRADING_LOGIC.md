@@ -4,8 +4,8 @@
 
 Komplexní event-driven trading systém монitoruje volnou marži a dělá inteligentní obchodní rozhodnutí.
 
-**Fáze procesu:**
-1. **Monitoruje volnou marži** - kontroluje stav účtu jednou
+**Fáze procesu (nekonečný cyklus):**
+1. **Monitoruje volnou marži** - kontroluje stav účtu
 2. **Rozhoduje se pružně**:
    - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
    - Pokud ne → stáhne data z MT5 + získá nové predikce od Gemini AI
@@ -14,7 +14,8 @@ Komplexní event-driven trading systém монitoruje volnou marži a dělá int
    - Gemini AI vybere **1 měnový pár** a rozhodne BUY/SELL
 5. **Vypočítá lot_size** - podle vzorce: `floor((balance + 500) / 500) / 100`
 6. **Provede obchod** - automaticky otevře pozici na MT5
-7. **Ukončuje proces** - po provedení obchodu skončí (bez scheduleru)
+7. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
+8. **Ukončení** - Ctrl+C
 
 ## Nový Workflow
 
@@ -74,15 +75,23 @@ Komplexní event-driven trading systém монitoruje volnou marži a dělá int
        │        └──────┬───────────────────┘
        │               │
        │        ┌──────▼──────┐
-       │        │ Exit        │
-       │        └─────────────┘
-       │
-       └──────────────────────┐
-                              │
-                       ┌──────▼──────┐
-                       │ Exit        │
-                       │ (no trading)│
-                       └─────────────┘
+       │        │ Restart     │
+       │        │ Cycle       │
+       │        └──────┬──────┘
+       │               │
+       │               └──────┐
+       │                      │
+       └──────────────────────┴───────┐
+                                      │
+                              ┌───────▼────────┐
+                              │ Loop back to   │
+                              │ Account Monitor│
+                              └────────────────┘
+                                      │
+                              ┌───────▼────────┐
+                              │ (Infinite loop,│
+                              │  exit: Ctrl+C) │
+                              └────────────────┘
 ```
 
 ## Struktura výstupu
@@ -175,18 +184,20 @@ lot_size = floor((balance + 500) / 500) / 100
 ## Module Description
 
 ### 1. logika.py - Main Orchestration
-Hlavní skript, který koordinuje celý proces:
+Hlavní skript, který koordinuje **nekonečný obchodní cyklus**:
 - Inicializuje MT5 připojení a konfiguraci
-- Spouští account_monitor v background threadu
+- Běží v nekonečné smyčce (while True)
+- Každý cyklus: spouští account_monitor v background threadu
 - Čeká na signál překročení 20% marže
 - Rozhoduje: reuse existujících predikcí nebo download nových dat
 - Volá final_decision modul pro obchodní rozhodnutí
-- Ukončuje se po finálním rozhodnutí
+- Po dokončení obchodu **restartuje cyklus** (vrací se na monitoring)
+- Ukončení: Ctrl+C
 
 **Klíčové funkce:**
 - `find_predictions_folder_for_current_hour()` - hledá existující predikce z aktuální hodiny
 - `process_existing_predictions()` - aplikuje filtrování na existující predikce
-- `main()` - hlavní orchestrační cyklus
+- `main()` - hlavní orchestrační nekonečný cyklus
 
 ### 2. account_monitor.py - Account Monitoring
 Monitoruje stav účtu v background threadu:

@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-03-05 (Infinite Trading Loop)
+
+- **Converted to Infinite Trading Automat**
+  - After trade execution, system now automatically restarts monitoring cycle
+  - Removed exit-after-trade logic, replaced with infinite while loop
+  - Added cycle counter for tracking iterations
+  - Simplified account status output to single line (reduces console clutter)
+  - Process runs until manually stopped (Ctrl+C)
+  - Brief 2-second pause between cycles
+  - Error handling: failed trades don't crash the automat, just restart cycle
+
 ## 2026-03-05 (Trade Execution)
 
 - **Added Automatic Trade Execution**

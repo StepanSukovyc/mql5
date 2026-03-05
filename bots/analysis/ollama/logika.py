@@ -430,84 +430,103 @@ def main() -> int:
 		print(f"Config error: {exc}")
 		return 2
 
-	# Thread-safe events for coordination
-	monitor_stop_event = threading.Event()
-	trading_trigger_event = threading.Event()
-	
-	def monitor_wrapper():
-		"""Wrapper to run account monitor."""
-		run_account_monitor(
-			check_interval_seconds=60, 
-			stop_event=monitor_stop_event,
-			trading_trigger_event=trading_trigger_event
-		)
-	
 	try:
 		mt5_initialize(cfg)
 		print("Connected to MetaTrader 5.")
 		
-		# Start account monitor in a background thread (single check, not continuous)
-		monitor_thread = threading.Thread(
-			target=monitor_wrapper,
-			daemon=False
-		)
-		monitor_thread.start()
-		print("Account monitor started in background thread.")
+		print("\n" + "="*60)
+		print("🤖 Obchodní Automat - Nekonečný cyklus")
+		print("="*60)
+		print("Monitoring → Predictions → Final Decision → Trade → Repeat")
+		print("Ukončení: Ctrl+C")
+		print("="*60 + "\n")
 		
-		# Wait for monitor to complete (will signal trading_trigger_event if margin > 10%)
-		monitor_thread.join(timeout=30)
+		cycle_count = 0
 		
-		# Check if trading trigger was set by monitor (margin > 10%)
-		if trading_trigger_event.is_set():
-			print("\n🚀 Stop condition met (margin > 10%) - proceeding with trading...")
+		# Infinite trading loop
+		while True:
+			cycle_count += 1
+			print(f"\n{'='*60}")
+			print(f"🔄 Cyklus #{cycle_count}")
+			print(f"{'='*60}")
 			
-			predictions_folder = None
+			# Thread-safe events for coordination
+			monitor_stop_event = threading.Event()
+			trading_trigger_event = threading.Event()
 			
-			# Check if predictions from current hour already exist
-			existing_predictions = find_predictions_folder_for_current_hour(cfg.service_dest_folder)
+			def monitor_wrapper():
+				"""Wrapper to run account monitor."""
+				run_account_monitor(
+					check_interval_seconds=60, 
+					stop_event=monitor_stop_event,
+					trading_trigger_event=trading_trigger_event
+				)
 			
-			if existing_predictions:
-				# Use existing predictions from current hour
-				print("💡 Using existing predictions from current hour")
-				process_existing_predictions(existing_predictions)
-				predictions_folder = existing_predictions
-			else:
-				# Need to download data and get new predictions
-				print("📥 Downloading market data for current hour...")
-				run_cycle(cfg)
+			# Start account monitor in a background thread
+			monitor_thread = threading.Thread(
+				target=monitor_wrapper,
+				daemon=False
+			)
+			monitor_thread.start()
+			print("📊 Account monitor started...")
+			
+			# Wait for monitor to complete (will signal trading_trigger_event if margin > threshold)
+			monitor_thread.join()
+			
+			# Check if trading trigger was set by monitor
+			if trading_trigger_event.is_set():
+				print("\n🚀 Stop condition met - proceeding with trading...")
 				
-				print("🤖 Getting predictions from Gemini AI...")
-				try:
-					success, pred_folder = run_trading_logic(cfg.service_dest_folder)
-					predictions_folder = pred_folder
-					if success:
-						print("✅ Trading logic completed successfully")
-					else:
-						print("⚠️  Trading logic completed with warnings")
-				except Exception as trading_exc:
-					print(f"❌ Trading logic failed: {trading_exc}")
+				predictions_folder = None
+				
+				# Check if predictions from current hour already exist
+				existing_predictions = find_predictions_folder_for_current_hour(cfg.service_dest_folder)
+				
+				if existing_predictions:
+					# Use existing predictions from current hour
+					print("💡 Using existing predictions from current hour")
+					process_existing_predictions(existing_predictions)
+					predictions_folder = existing_predictions
+				else:
+					# Need to download data and get new predictions
+					print("📥 Downloading market data for current hour...")
+					run_cycle(cfg)
+					
+					print("🤖 Getting predictions from Gemini AI...")
+					try:
+						success, pred_folder = run_trading_logic(cfg.service_dest_folder)
+						predictions_folder = pred_folder
+						if success:
+							print("✅ Trading logic completed successfully")
+						else:
+							print("⚠️  Trading logic completed with warnings")
+					except Exception as trading_exc:
+						print(f"❌ Trading logic failed: {trading_exc}")
+				
+				# Make final trading decision if we have predictions
+				if predictions_folder:
+					print("\n🎯 Making final trading decision...")
+					try:
+						make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
+						print("\n✅ Cycle completed. Restarting monitoring...")
+					except Exception as decision_exc:
+						print(f"❌ Final decision failed: {decision_exc}")
+				else:
+					print("\n⚠️  No predictions available, restarting cycle...")
+			else:
+				print("\n⏸️  Stop condition not met - restarting monitoring...")
 			
-			# Make final trading decision if we have predictions
-			if predictions_folder:
-				print("\n🎯 Making final trading decision...")
-				try:
-					make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
-				except Exception as decision_exc:
-					print(f"❌ Final decision failed: {decision_exc}")
-			
-			print("\n🛑 Trading process finished. Exiting...")
-			return 0
-		else:
-			print("\n⏸️  Stop condition not met (margin ≤ 10%) - nothing to do.")
-			print("   Next monitoring check will be in ~1 hour when scheduler runs.")
-			return 0
+			# Brief pause before next cycle
+			import time
+			time.sleep(2)
 	
+	except KeyboardInterrupt:
+		print("\n\n🛑 Stopping trading automat (Ctrl+C detected)...")
+		return 0
 	except Exception as exc:  # pylint: disable=broad-except
 		print(f"Fatal error: {exc}")
 		return 1
 	finally:
-		# Ensure monitor is stopped
-		monitor_stop_event.set()
 		mt5.shutdown()
 		print("MetaTrader 5 connection closed.")
 
