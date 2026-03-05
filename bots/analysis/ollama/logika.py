@@ -10,6 +10,7 @@ import json
 import os
 import signal
 import sys
+import threading
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -17,6 +18,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 import MetaTrader5 as mt5
+from account_monitor import run_account_monitor
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -351,15 +353,41 @@ def main() -> int:
 		print(f"Config error: {exc}")
 		return 2
 
+	# Thread-safe event for monitor shutdown
+	monitor_stop_event = threading.Event()
+	
 	try:
 		mt5_initialize(cfg)
 		print("Connected to MetaTrader 5.")
+		
+		# Start account monitor in a background thread
+		monitor_thread = threading.Thread(
+			target=run_account_monitor,
+			kwargs={"check_interval_seconds": 60, "stop_event": monitor_stop_event},
+			daemon=False
+		)
+		monitor_thread.start()
+		print("Account monitor started in background thread.")
+		
+		# Run main scheduler
 		run_scheduler(cfg)
+		
+		# Signal monitor to stop before closing MT5
+		monitor_stop_event.set()
+		print("Signaling monitor thread to stop...")
+		
+		# Wait for monitor thread to finish (with timeout)
+		monitor_thread.join(timeout=5)
+		
 		return 0
 	except Exception as exc:  # pylint: disable=broad-except
 		print(f"Fatal error: {exc}")
+		# Signal monitor to stop on error
+		monitor_stop_event.set()
 		return 1
 	finally:
+		# Ensure monitor is stopped
+		monitor_stop_event.set()
 		mt5.shutdown()
 		print("MetaTrader 5 connection closed.")
 
