@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-03-05 (Trade Execution)
+
+- **Added Automatic Trade Execution**
+  - After Gemini makes final decision, system now automatically executes the trade
+  - Added `calculate_lot_size()` function with custom formula: `floor((balance + 500) / 500) / 100`
+  - Ignores lot_size recommendation from Gemini, calculates independently based on balance
+  - Added `execute_trade()` function to send orders to MT5
+  - Uses MT5's ORDER_FILLING_IOC (Immediate-Or-Cancel) for execution
+  - Comprehensive logging of trade execution (symbol, action, lot_size, price, order ID)
+  - Error handling for failed trades (doesn't crash process)
+  - Example: balance 1893 → lot_size 0.04
+
 ## 2026-03-05 (MT5 API Fix)
 
 - **Fixed TradePosition Commission Error**

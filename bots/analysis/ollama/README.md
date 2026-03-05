@@ -1,22 +1,25 @@
 # MT5 Hourly Collector (Python)
 
-Automatický obchodní systém s AI rozhodováním. Skript kontroluje marži, stahuje data, filtruje signály a vytváří finální obchodní doporučení pomocí Gemini AI.
+Automatický obchodní systém s AI rozhodováním. Skript kontroluje marži, stahuje data, filtruje signály, vytváří finální obchodní doporučení pomocí Gemini AI a **automaticky provádí obchody**.
 
 ## Co skript dělá
 
 1. Načte konfiguraci z `.env`.
 2. Připojí se k MetaTrader 5 (`MetaTrader5` Python package).
 3. Spustí monitoring volné marže (jednoho).
-4. Jakmile marže > 10%:
+4. Jakmile marže > 20%:
    - Zkontroluje, zda existují předpovědi z **aktuální hodiny**
    - **Pokud ano**: používá je (bez stahování nových dat)
    - **Pokud ne**: stáhne data a získá nové předpovědi od Gemini AI
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
-   - Gemini AI vybere **1 měnový pár** a rozhodne **BUY/SELL** s doporučenou **velikostí lotu**
-7. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
-8. Vykonáný proces skončí (bez pokračujícího scheduleru)
+   - Gemini AI vybere **1 měnový pár** a rozhodne **BUY/SELL**
+7. **Vypočítá velikost lotu** podle vzorce: `floor((balance + 500) / 500) / 100`
+   - Příklad: balance 1893 → lot_size 0.04
+8. **Provede obchod** na MT5 s vypočtenou velikostí lotu
+9. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
+10. Vykonáný proces skončí (bez pokračujícího scheduleru)
 
 ## Struktura vystupu
 

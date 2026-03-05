@@ -5,15 +5,16 @@
 Komplexní event-driven trading systém монitoruje volnou marži a dělá inteligentní obchodní rozhodnutí.
 
 **Fáze procesu:**
-1. **Monitoruje volnou marži** - controls account status once
+1. **Monitoruje volnou marži** - kontroluje stav účtu jednou
 2. **Rozhoduje se pružně**:
    - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
    - Pokud ne → stáhne data z MT5 + získá nové predikce od Gemini AI
 3. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
 4. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
    - Gemini AI vybere **1 měnový pár** a rozhodne BUY/SELL
-   - Doporučí velikost lotu na základě volné marže a risk managementu
-5. **Ukončuje proces** - po finálním rozhodnutí skončí (bez scheduleru)
+5. **Vypočítá lot_size** - podle vzorce: `floor((balance + 500) / 500) / 100`
+6. **Provede obchod** - automaticky otevře pozici na MT5
+7. **Ukončuje proces** - po provedení obchodu skončí (bez scheduleru)
 
 ## Nový Workflow
 
@@ -28,7 +29,7 @@ Komplexní event-driven trading systém монitoruje volnou marži a dělá int
         │ (check once)         │
         └──────────┬───────────┘
                    │
-                   ▼ margin > 10%?
+                   ▼ margin > 20%?
                    │
        ┌───────────┴───────────┐
        │                       │
@@ -64,7 +65,10 @@ Komplexní event-driven trading systém монitoruje volnou marži a dělá int
        │        │ • Ask Gemini for final     │
        │        │   recommendation:          │
        │        │   - 1 symbol (BUY/SELL)    │
-       │        │   - Recommended lot size   │
+       │        │ • Calculate lot_size:      │
+       │        │   floor((balance+500)/500) │
+       │        │   /100                     │
+       │        │ • Execute trade on MT5     │
        │        │ • Save to PREDIKCE_        │
        │        │   <timestamp>.json         │
        │        └──────┬───────────────────┘
@@ -148,9 +152,25 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
    - Očekávané výstupy: 1 měnový pár + BUY/SELL + doporučená velikost lotu
    - Gemini bere v úvahu Risk Management (volná marže, otevřené pozice)
 
-4. **Uložení:**
-   - Výsledek se uloží do: `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json`
-   - Proces se poté ukončí (bez automulálního otevřování obchodu)
+4. **Uložení a provedení obchodu:**
+   - Parsuje JSON odpověď od Gemini (symbol, action)
+   - Vypočítá lot_size podle vzorce: `floor((balance + 500) / 500) / 100`
+   - Provede obchod na MT5 (BUY nebo SELL)
+   - Uloží rozhodnutí do: `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json`
+   - Proces se poté ukončí
+
+## Lot Size Calculation
+
+Systém **ignoruje** doporučení lot_size od Gemini a počítá vlastní podle vzorce:
+
+```
+lot_size = floor((balance + 500) / 500) / 100
+```
+
+**Příklady:**
+- Balance 1893 → (1893 + 500) / 500 = 4.786 → floor = 4 → 4/100 = **0.04**
+- Balance 2500 → (2500 + 500) / 500 = 6.0 → floor = 6 → 6/100 = **0.06**
+- Balance 500 → (500 + 500) / 500 = 2.0 → floor = 2 → 2/100 = **0.02**
 
 ## Module Description
 
@@ -158,7 +178,7 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
 Hlavní skript, který koordinuje celý proces:
 - Inicializuje MT5 připojení a konfiguraci
 - Spouští account_monitor v background threadu
-- Čeká na signál překročení 10% marže
+- Čeká na signál překročení 20% marže
 - Rozhoduje: reuse existujících predikcí nebo download nových dat
 - Volá final_decision modul pro obchodní rozhodnutí
 - Ukončuje se po finálním rozhodnutí
@@ -171,14 +191,14 @@ Hlavní skript, který koordinuje celý proces:
 ### 2. account_monitor.py - Account Monitoring
 Monitoruje stav účtu v background threadu:
 - Pravidelně kontroluje **volnou marži** v procenta
-- Signalizuje překročení **10% prahu** pomocí threading.Event
+- Signalizuje překročení **20% prahu** (konfigurovatelné v .env) pomocí threading.Event
 - Zobrazuje info o účtu (zůstatek, equity, marže)
 - Běží bez blokování hlavního vlákna
 
 **Klíčové funkce:**
 - `get_account_info()` - dotaz do MT5
 - `print_account_status()` - výpis na konzoli (včetně % volné marže)
-- `check_stop_condition()` - ověří margin > 10%, nastavuje event
+- `check_stop_condition()` - ověří margin > threshold%, nastavuje event
 - `run_account_monitor()` - monitoring loop v threadu
 
 ### 3. trading_logic.py - Trading Predictions
@@ -196,19 +216,23 @@ Stahuje data a generuje predikce:
 **Vrací:** `tuple[bool, Optional[Path]]` - úspěch a cesta ke složce predikcí
 
 ### 4. final_decision.py - Final Trading Decision
-Dělá finální inteligentní obchodní rozhodnutí:
+Dělá finální inteligentní obchodní rozhodnutí a **provádí obchod**:
 - Načítá **všechny otevřené pozice** z MT5 (bez filtrování)
 - Sbírá **stav účtu** (zůstatek, equity, margin %)
 - Načítá **filtrované predikce** (BUY/SELL >= 35%)
 - Dotazuje se Gemini na finální doporučení
+- **Vypočítá lot_size** podle vzorce (ignoruje doporučení od Gemini)
+- **Provede obchod** na MT5
 - Ukladdá výsledek do `geminipredictions/PREDIKCE_<timestamp>.json`
 
 **Klíčové funkce:**
-- `get_open_positions()` - vrací seznam pozic s PnL, swap, poplachy
+- `get_open_positions()` - vrací seznam pozic s PnL, swap
 - `get_account_state()` - vrací stav účtu (balance, equity, margin %)
 - `load_predictions()` - načítá filtrované predikce
 - `ask_gemini_final_decision()` - Gemini query pro finální doporučení
-- `make_final_trading_decision()` - orchestruje celý proces
+- `calculate_lot_size(balance)` - vypočítá lot: `floor((balance + 500) / 500) / 100`
+- `execute_trade(symbol, action, lot_size)` - provede obchod na MT5
+- `make_final_trading_decision()` - orchestruje celý proces včetně obchodování
 
 **Expected Gemini Response:**
 ```json

@@ -36,6 +36,106 @@ def _clean_gemini_response(text: str) -> str:
 	return text.strip()
 
 
+def calculate_lot_size(balance: float) -> float:
+	"""
+	Calculate lot size based on account balance.
+	
+	Formula: floor((balance + 500) / 500) / 100
+	
+	Example:
+		balance = 1893 → (1893 + 500) / 500 = 4.786 → floor = 4 → 4/100 = 0.04
+	
+	Args:
+		balance: Current account balance
+	
+	Returns:
+		Lot size (e.g., 0.04)
+	"""
+	import math
+	numerator = balance + 500
+	quotient = numerator / 500
+	whole_number = math.floor(quotient)
+	lot_size = whole_number / 100
+	
+	print(f"\n💰 Lot Size Calculation:")
+	print(f"   Balance: {balance:.2f}")
+	print(f"   ({balance:.2f} + 500) / 500 = {quotient:.3f}")
+	print(f"   Floor: {whole_number}")
+	print(f"   Lot size: {lot_size:.2f}")
+	
+	return lot_size
+
+
+def execute_trade(symbol: str, action: str, lot_size: float) -> bool:
+	"""
+	Execute a trade on MT5.
+	
+	Args:
+		symbol: Trading symbol (e.g., "EURUSD_ecn")
+		action: "BUY" or "SELL"
+		lot_size: Number of lots to trade
+	
+	Returns:
+		True if trade was successful
+	"""
+	print(f"\n🔄 Executing trade...")
+	print(f"   Symbol: {symbol}")
+	print(f"   Action: {action}")
+	print(f"   Lot Size: {lot_size}")
+	
+	# Get current price
+	tick = mt5.symbol_info_tick(symbol)
+	if tick is None:
+		print(f"❌ Failed to get tick for {symbol}: {mt5.last_error()}")
+		return False
+	
+	# Determine order type and price
+	if action == "BUY":
+		order_type = mt5.ORDER_TYPE_BUY
+		price = tick.ask
+	elif action == "SELL":
+		order_type = mt5.ORDER_TYPE_SELL
+		price = tick.bid
+	else:
+		print(f"❌ Invalid action: {action} (must be BUY or SELL)")
+		return False
+	
+	print(f"   Price: {price}")
+	
+	# Prepare trade request
+	request = {
+		"action": mt5.TRADE_ACTION_DEAL,
+		"symbol": symbol,
+		"volume": lot_size,
+		"type": order_type,
+		"price": price,
+		"deviation": 20,
+		"magic": 234000,
+		"comment": "Gemini AI decision",
+		"type_time": mt5.ORDER_TIME_GTC,
+		"type_filling": mt5.ORDER_FILLING_IOC,
+	}
+	
+	# Send order
+	result = mt5.order_send(request)
+	
+	if result is None:
+		print(f"❌ Order send failed: {mt5.last_error()}")
+		return False
+	
+	if result.retcode != mt5.TRADE_RETCODE_DONE:
+		print(f"❌ Order failed with retcode: {result.retcode}")
+		print(f"   Comment: {result.comment}")
+		return False
+	
+	print(f"✅ Trade executed successfully!")
+	print(f"   Order: {result.order}")
+	print(f"   Volume: {result.volume}")
+	print(f"   Price: {result.price}")
+	
+	return True
+
+
 def get_open_positions() -> List[Dict]:
 	"""
 	Get all currently open positions on the MT5 account.
@@ -297,6 +397,34 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		print(f"   File: {decision_file}")
 		print(f"\n📋 Decision Content:")
 		print(decision_text)
+		
+		# Parse decision and execute trade
+		try:
+			decision = json.loads(decision_text)
+			symbol = decision.get("recommended_symbol")
+			action = decision.get("action")
+			
+			if not symbol or not action:
+				print("⚠️  Missing symbol or action in decision, skipping trade execution")
+			else:
+				# Calculate lot size based on account balance
+				lot_size = calculate_lot_size(account_state['balance'])
+				
+				if lot_size <= 0:
+					print(f"⚠️  Calculated lot size is {lot_size}, skipping trade execution")
+				else:
+					# Execute trade
+					success = execute_trade(symbol, action, lot_size)
+					
+					if success:
+						print("\n🎉 Trade executed successfully!")
+					else:
+						print("\n⚠️  Trade execution failed")
+		
+		except json.JSONDecodeError as exc:
+			print(f"⚠️  Failed to parse decision JSON: {exc}")
+		except Exception as exc:
+			print(f"⚠️  Error during trade execution: {exc}")
 		
 		print("\n" + "="*60)
 		print("✅ Final Trading Decision Completed")
