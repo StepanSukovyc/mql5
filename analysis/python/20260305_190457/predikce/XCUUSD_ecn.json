@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena klesá, RSI na 1H a 4H je pod 40, což naznačuje možný oversold stav, ale celkově je patrný klesající trend. MA na kratších timeframech je nad cenou. RSI na týdenním grafu je sice vysoké, ale klesající trend na denním grafu a krátkých timeframech převažuje. Měsíční data jsou nedostatečná. Doporučuji SELL s opatrností."
+}
+```

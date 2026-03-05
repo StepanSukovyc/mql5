@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "VIX_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "Na 1H a weekly timeframe je RSI překoupené (nad 70). Na denním timeframe se RSI blíží překoupenosti (69). Monthly timeframe je pod 60. Poslední denní svíčka je býčí. Cena je nad MA na všech timeframes. Kombinace překoupenosti na kratších časových rámcích a uptrendu naznačuje potřebu opatrnosti, proto rozdělení mezi BUY, SELL a HOLD."
+}
+```

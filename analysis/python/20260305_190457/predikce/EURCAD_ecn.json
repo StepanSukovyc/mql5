@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "EURCAD is trending downwards. Daily and Weekly RSI are showing oversold conditions, suggesting a potential short-term bounce, but the downtrend is strong. Month timeframe RSI is near neutral showing longterm uptrend is weakening. The price is below the daily, weekly and 4h moving averages. Short term 1h RSI shows a potential for short-term upswing, therefore holding is justified but primarily a sell scenario."
+}
+```

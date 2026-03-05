@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "DXY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "DXY se nachází v rostoucím trendu na denním grafu, s RSI 65. Nicméně, na měsíčním grafu je RSI 43 a cena pod MA, což naznačuje potenciální korekci. 1H a 4H grafy ukazují rostoucí RSI a cenu nad MA, což naznačuje krátkodobý růst. Proto je BUY rizikovější, ale potenciálně ziskový, SELL je opatrnější s ohledem na možnou korekci a HOLD čeká na potvrzení trendu."
+}
+```

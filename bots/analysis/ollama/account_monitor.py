@@ -63,18 +63,33 @@ def print_account_status(account_info: dict) -> None:
 	print(f"  Volná marže (%):           {free_margin_percent:.2f}%")
 
 
+def _get_margin_threshold() -> float:
+	"""
+	Get the margin threshold percentage from .env (default 20%).
+	Value is expected as integer (20), will be converted to decimal (0.20).
+	"""
+	threshold_str = os.environ.get('TRADING_MARGIN_THRESHOLD', '20')
+	try:
+		threshold_percent = float(threshold_str)
+		return threshold_percent / 100  # Convert percentage to decimal
+	except ValueError:
+		return 0.20  # Default to 20%
+
+
 def check_stop_condition(account_info: dict) -> bool:
 	"""
 	Check if monitoring should stop.
 	
-	Stop condition: Stop if margin_free is more than 10% of balance.
-	Modify this function to change the stop condition.
+	Stop condition: Stop if margin_free exceeds threshold % of balance.
+	Threshold is loaded from TRADING_MARGIN_THRESHOLD env variable (default 20%).
 	"""
 	margin_ratio = account_info['margin_free'] / account_info['balance'] if account_info['balance'] > 0 else 0
+	threshold = _get_margin_threshold()
+	threshold_percent = threshold * 100
 	
-	# Stop if available margin is more than 10%
-	if margin_ratio > 0.10:
-		print(f"\n⚠️  Stop condition met: Available margin exceeded 10% of balance!")
+	# Stop if available margin exceeds threshold
+	if margin_ratio > threshold:
+		print(f"\n⚠️  Stop condition met: Available margin exceeded {threshold_percent:.0f}% of balance!")
 		return True
 	
 	return False

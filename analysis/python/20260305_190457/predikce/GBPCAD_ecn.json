@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Z technického hlediska vidíme smíšené signály. Na hodinové bázi je RSI nad 50, naznačuje mírný býčí trend, ale cena je nad MA. Na 4H RSI pod 50. Denní a týdenní RSI jsou v přeprodané zóně. Měsíční RSI je nad 50 a cena pod MA, potenciál růstu. Cena je pod denním, týdenním MA, což naznačuje, že můžeme očekávat pokles. Vzhledem k těmto protichůdným signálům a krátkodobé downtrendové struktuře trhu doporučujeme s malou převahou SELL pozici."
+}
+```

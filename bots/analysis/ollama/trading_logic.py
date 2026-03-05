@@ -182,7 +182,7 @@ def filter_predictions(predictions_folder: Path) -> int:
 	return deleted_count
 
 
-def run_trading_logic(source_folder: Path) -> bool:
+def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	"""
 	Main trading logic: process all market data files and get Gemini predictions.
 	
@@ -190,7 +190,7 @@ def run_trading_logic(source_folder: Path) -> bool:
 		source_folder: Folder with market data JSON files (SERVICE_DEST_FOLDER)
 	
 	Returns:
-		True if processing was successful
+		Tuple of (success: bool, predictions_folder: Optional[Path])
 	"""
 	print("\n" + "="*60)
 	print("🚀 Starting Trading Logic with Gemini AI")
@@ -208,7 +208,7 @@ def run_trading_logic(source_folder: Path) -> bool:
 		print(f"✅ Gemini config loaded")
 	except Exception as exc:
 		print(f"❌ Failed to load Gemini config: {exc}")
-		return False
+		return False, None
 	
 	# Create timestamp for this run
 	timestamp = datetime.now(tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
@@ -229,7 +229,7 @@ def run_trading_logic(source_folder: Path) -> bool:
 	
 	if not json_files:
 		print(f"⚠️  No JSON files found in {source_folder}")
-		return False
+		return False, None
 	
 	print(f"\n📊 Found {len(json_files)} market data files to process")
 	
@@ -305,7 +305,7 @@ def run_trading_logic(source_folder: Path) -> bool:
 	deleted_count = filter_predictions(predictions_folder)
 	print(f"📊 Deleted {deleted_count} weak prediction(s)")
 	
-	return success_count > 0
+	return success_count > 0, predictions_folder if success_count > 0 else None
 
 
 if __name__ == "__main__":

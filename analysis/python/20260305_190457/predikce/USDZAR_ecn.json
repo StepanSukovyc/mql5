@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDZAR_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "Na hodinovém a 4-hodinovém grafu je RSI v překoupené zóně, což naznačuje potenciální korekci (SELL). Denní RSI je také relativně vysoké. Nicméně, týdenní RSI je neutrální a cena prolomila nad MA na denním grafu, což naznačuje potenciál pro další růst (BUY). Měsíční RSI je pod 40, ale MA se nachází vysoko nad cenou a proto klesá. Vysoký tick volume a dlouhá svíčka na denním grafu z 5. března posilují býčí sentiment, ale s ohledem na překoupené podmínky je rozumnější vyčkat na potvrzení trendu (HOLD)."
+}
+```

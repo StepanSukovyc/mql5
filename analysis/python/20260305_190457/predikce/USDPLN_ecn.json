@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDPLN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Mixed signals. Daily RSI is overbought (70.13), suggesting a possible pullback. However, recent price action shows bullish momentum. The month MA (3.787) is far above the current price (3.694) also indicating potential upward move. Considering all, HOLD is reasonable, BUY has potential, but with risk. SELL option is considerable due to daily RSI and candle stick formations on 1H and 4H."
+}
+```

@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "Cena ropy prudce vzrostla v posledních týdnech, denní a týdenní RSI jsou v překoupené zóně (83.73 a 77.27), což naznačuje možnou korekci. Nicméně, měsíční RSI je na 56.59, což dává prostor pro další růst. Denní moving average (MA) se nachází výrazně pod aktuální cenou, což indikuje silný uptrend. Poslední denní svíčka je býčí. Na hodinové bázi je patrná konsolidace, s RSI blížícím se střední hodnotě. Zvážení nákupu (BUY) je sice možné, ale s opatrností. Prodej (SELL) je rizikový vzhledem k silnému uptrendu, ale potenciální korekce by mohla nabídnout příležitost. Držet (HOLD) pozici je rozumná strategie pro investory, kteří již v ropě jsou, ale jsou opatrní ohledně vstupu do nových dlouhých pozic při současných úrovních. Z fundamentálního hlediska, pokud nečekáme nějakou významnou zprávu ohledně snížení těžby, tak by měl růst nadále pokračovat."
+}
+```

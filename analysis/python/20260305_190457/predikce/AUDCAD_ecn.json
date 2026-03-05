@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDCAD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "AUDCAD is currently trading at 0.95624. On the 1H and 4H timeframes, the RSI is below 35, indicating oversold conditions, but the price is still below the MA. The daily RSI is approaching 50. The weekly and monthly RSI are still showing bullish momentum but recent price action indicates a significant downtrend. Considering all timeframes, selling pressure is dominant due to breakdown of support levels. Hold for more clarification."
+}
+```

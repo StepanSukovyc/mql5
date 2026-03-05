@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "EURAUD aktuálně vykazuje smíšené signály. Hodinový RSI je překoupený (70.9), naznačuje možnou korekci. 4H RSI je neutrální (58.6). Denní a týdenní RSI signalizují přeprodanost, co naznačuje možný odraz. Měsíční graf je neutrální.  Krátkodobá MA se blíží k ceně. Svíčková formace poslední hodiny naznačuje silný nárůst, ale dlouhodobý trend je klesající. Proto je BUY rizikovější než za ideálních podmínek, ale stále s potenciálem. SELL má opodstatnění kvůli překoupenému hodinovému RSI a klesajícímu trendu, ale přeprodanost na denním a týdenním grafu omezuje sílu SELL. HOLD je rozumná strategie, pokud se čeká na jasnější potvrzení trendu."
+}
+```

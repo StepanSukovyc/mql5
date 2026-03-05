@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "NZDSEK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technicals are mixed. Daily RSI is approaching overbought territory but weekly RSI is neutral. Monthly RSI is oversold but MA is way above the current price, indicating long-term downtrend. Recent hourly candles showing indecision. Hence, HOLD is reasonable with slight bias towards BUY given the recent daily uptrend. Spreads in the hourly candles are too high."
+}
+```

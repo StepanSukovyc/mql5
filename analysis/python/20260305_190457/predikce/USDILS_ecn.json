@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDILS_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě (1h) RSI naznačuje překoupenost (68), ale cena je nad MA. Střednědobě (4h, den) RSI je neutrální a cena osciluje kolem MA. Dlouhodobě (týden, měsíc) RSI naznačuje přeprodanost, ale cena je výrazně pod MA. Celkově trh vykazuje smíšené signály. Vzhledem k přeprodanosti v delším horizontu a nedávnému nárůstu (1h) je nákup mírně pravděpodobnější, ale riziko poklesu nelze vyloučit. Doporučuji opatrnost a sledování trhu."
+}
+```

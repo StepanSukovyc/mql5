@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "Cena AUDZAR je v krátkodobém horizontu překoupená (RSI na 1h, 4h a denním grafu). Nicméně, na týdenním grafu se RSI blíží k překoupené úrovni, ale není v ní. Měsíční RSI je neutrální, což naznačuje potenciál pro další růst. Cena je nad MA na všech timeframes, kromě měsíčního, což naznačuje rostoucí trend. Zvážit LONG pozici s opatrností a nastavením SL pod MA na 1H grafu. Alternativně, HOLD pozici a sledovat vývoj indikátorů, zvlášť RSI na týdenním grafu a MA na měsíčním grafu."
+}
+```

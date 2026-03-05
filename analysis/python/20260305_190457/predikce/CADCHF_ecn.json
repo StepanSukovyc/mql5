@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "CADCHF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI hluboko v přeprodané zóně (21.66), což naznačuje potenciál pro korekci směrem nahoru. Nicméně, cena je pod klouzavým průměrem (MA) na všech časových rámcích s výjimkou 1h, což ukazuje na převahu medvědího trendu. Na týdenním grafu je RSI blízko k neutrální úrovni (46.31), ale cena je stále pod MA. Denní graf ukazuje RSI mírně nad 50 (58.83), což naznačuje mírný býčí moment, ale cena je blízko MA. 4H graf má RSI nad 50 (55.48) a cena osciluje kolem MA, což značí nejistotu. Posledních 30 hodinových svíček vykazují kolísání a žádný jasný směr. Vzhledem k těmto rozporuplným signálům se zdá nejrozumnější vyčkat (HOLD) na jasnější potvrzení trendu. SELL je upřednostněn díky dlouhodobému klesajícímu trendu a pozici ceny pod MA na vyšších časových rámcích."
+}
+```

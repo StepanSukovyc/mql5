@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na základě technické analýzy indikátorů a cenového vývoje na různých časových rámcích, kombinace signálů indikuje mírný prodejní tlak. Denní RSI je neutrální, ale hodinové RSI klesá pod 50, což naznačuje krátkodobý pokles. Pohyb průměru je na hodinové bázi nad cenou, což opět naznačuje prodejní tlak. Data svíčkových formací nenaznačují jasný signál pro nákup. Proto je doporučen prodej. Vzhledem k faktu, že se jedná o velmi stabilní měnový pár je rizikové hodnocení vyvážené, jelikož se nejedná o extrémní výkyvy ani na jedné straně."
+}
+```

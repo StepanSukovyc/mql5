@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Krátkodobý (1h) RSI je neutrální (57.68) a cena je nad MA, což naznačuje potenciální nákupní tlak. 4H RSI je také neutrální (48.23). Na denní bázi je RSI pod 50 (41.25) a cena pod MA, což naznačuje možný prodejní tlak. Týdenní RSI je také pod 50 (38.09). Měsíční RSI je nad 50 (52.44) a cena nad MA, což ukazuje na dlouhodobější rostoucí potenciál.  Vzhledem k protichůdným signálům a krátkodobé volatilitě je doporučeno vyčkat na potvrzení trendu.  Recentní hodinové svíčky ukazují na potenciální růst, ale je třeba opatrnosti.  Vzhledem k většímu timeframe (denní, týdenní) bych doporučil být opatrný ohledně nákupů a případně počkat na potvrzení zlomového bodu."
+}
+```

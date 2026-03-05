@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Na 1h a 4h timeframe je RSI pod 40, značící překoupenost. MA na 1h a 4h je nad současnou cenou, což ukazuje na downtrend. Na denním grafu RSI je na 56, ale poslední svíčka je klesající. Týdenní RSI je v překoupené zóně (75.63). Současný propad na 1h a 4h naznačuje prodejní tlak. HOLD pozice je pro případ mírné korekce nebo vyčkávání na další data."
+}
+```

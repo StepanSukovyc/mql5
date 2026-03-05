@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod MA na všech timeframech kromě 4h. RSI na týdenním timeframe je v oversold zóně, ale obecný trend je stále klesající. Na denním timeframe se RSI pohybuje kolem 44, což indikuje neutrální momentum, ale MA ukazuje klesající trend. Nedávné hodinové svíčky naznačují downtrend, jelikož cena klesla pod 56 USD a RSI klesá. Doporučuje se vyčkat na potvrzení trendu.  Proto je SELL nastaveno výše, BUY pouze jako potencionální korekce. HOLD jako zvážení dalšího vývoje."
+}
+```

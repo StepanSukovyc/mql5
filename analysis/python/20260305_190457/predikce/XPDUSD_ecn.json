@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena XPDUSD_ecn je 1629.15. RSI na 1H, 4H a denních grafech naznačuje překoupenost (30.13, 34.25, 36.39), což značí potenciální korekci směrem dolů. Cena je pod MA na 1H, 4H a denních grafech, což posiluje medvědí sentiment. Na týdenním grafu je RSI neutrální (54.36) a cena se pohybuje kolem MA, naznačuje to potenciální stabilitu. Dlouhodobý měsíční graf ukazuje silný rostoucí trend s RSI 66.83 a cena nad MA, což značí potenciální budoucí růst. Vzhledem k krátkodobé překoupenosti, ceně pod klouzavými průměry a aktuálnímu klesajícímu trendu s SELL 60% je SHORT/SELL pozice rizikově výhodnější."
+}
+```

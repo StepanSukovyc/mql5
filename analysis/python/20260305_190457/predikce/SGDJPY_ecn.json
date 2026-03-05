@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "The price is currently at 122.94. Hourly and 4-hourly RSI are below 50, suggesting potential downward momentum. The price is also below the hourly and 4-hourly moving averages, further indicating bearish pressure. Daily RSI is around 53 which is neutral, but weekly and monthly RSIs are above 60, suggesting longer term bullish sentiment. The recent price action shows consolidation after a pullback from higher levels. Therefore, a SELL position has a slightly higher probability in the short term, given the recent bearish indicators, while HOLD may be preferred to give the longer term bullish trend to prove itself."
+}
+```

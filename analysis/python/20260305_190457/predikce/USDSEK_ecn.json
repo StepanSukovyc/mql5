@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "USDSEK is showing mixed signals. Short-term (1H, 4H, Day) RSI indicates slightly overbought conditions, suggesting a potential pullback. However, the weekly RSI is around 50, and the daily MA is trending upwards. Monthly RSI is low, which might signal an long-term up-trend. Therefore HOLD is a safe option."
+}
+```

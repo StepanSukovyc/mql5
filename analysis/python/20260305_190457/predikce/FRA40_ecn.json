@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "Cena FRA40_ecn je aktuálně 7998.93. RSI indikují překoupenost na 1h a 4h timeframe (30.93 a 22.26), což naznačuje potenciální pokles. Cena se pohybuje pod MA na většině timeframe, což posiluje prodejní signál. Na denním grafu RSI na úrovni 33.96 stále ukazuje na prostor pro pokles. Poslední svíčky na 1h timeframe jsou výrazně klesající, což ukazuje na silný prodejní tlak. Proto upřednostňuji SELL s vyšší pravděpodobností. BUY je riskantní, ale potenciální odraz od supportu ho nevylučuje. HOLD dává smysl pro ty, kteří čekají na další potvrzení trendu."
+}
+```

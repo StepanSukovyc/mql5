@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "XAUUSD_ecn is currently showing bearish signals. The hourly RSI is extremely oversold at 20.88, suggesting a potential for a short-term bounce, but the price is below the hourly MA, which confirms a downtrend. On the 4h timeframe, the RSI is at 38.82 which confirms the short term bearish momentum, and the price also below the 4h MA, strengthening the argument. However, the daily RSI is at 49.95 suggesting that is a neutral trend. The weekly and monthly RSI are in overbought territory at 73.09 and 88.81 respectively and confirming that the long term up trend may be ending. Therefore, SELL is the most probable action, but a potential oversold bounce is possible, thus HOLD and BUY have some chances."
+}
+```

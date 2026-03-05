@@ -1,6 +1,38 @@
 # Changelog
 
+## 2026-03-05 (Configuration Update)
+
+- **Made Margin Threshold Configurable**
+  - Added `TRADING_MARGIN_THRESHOLD` parameter to .env (default: 20%)
+  - account_monitor.py now loads threshold from environment instead of hardcoded value
+  - Changed default threshold from 10% back to 20%
+  - New helper function `_get_margin_threshold()` handles env loading with fallback
+
+## 2026-03-05 (Documentation Update)
+
+- **Enhanced Documentation**
+  - Updated README.md with module overview and output file descriptions
+  - Expanded TRADING_LOGIC.md with detailed module descriptions:
+    - logika.py (orchestration)
+    - account_monitor.py (margin monitoring) 
+    - trading_logic.py (MT5 data + Gemini predictions)
+    - final_decision.py (intelligent final decision-making)
+  - Clarified prediction filtering logic and output structure
+
 ## 2026-03-05
+
+- **Added Final Trading Decision Module**
+  - Created `final_decision.py` with intelligent decision-making based on predictions and account state
+  - Queries open positions from MT5 account (time, volume, price, PnL, swap, commission)
+  - Combines remaining predictions (BUY/SELL >= 35%) with open positions and account state
+  - Sends comprehensive context to Gemini AI for final trading recommendation
+  - Output: Single symbol + BUY/SELL action + recommended lot size
+  - Results saved to `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json`
+  - Process exits after final decision is made
+
+- **Updated trading_logic.py**
+  - Changed return type to tuple (success: bool, predictions_folder: Optional[Path])
+  - Allows main flow to pass predictions folder to final decision module
 
 - **Major Refactor: New Trading Logic Workflow**
   - Removed hourly scheduler for MT5 data downloads

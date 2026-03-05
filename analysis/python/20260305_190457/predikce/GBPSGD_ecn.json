@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "GBPSGD_ecn",
+  "BUY": 35,
+  "SELL": 40,
+  "HOLD": 25,
+  "reasoning": "Technické indikátory naznačují smíšený signál. Na kratších timeframech (1h, 4h) RSI blízko překoupenosti, na denním a týdenním timeframe RSI pod 50, což naznačuje potenciál pro pokles. Cena se pohybuje pod denním a týdenním MA, ale nad hodinovým a 4h MA. Dlouhodobý trend (měsíční MA) je také nad aktuální cenou, naznačuje potenciál pro korekci dolů. Proto je Sell strategie o něco pravděpodobnější než Buy. Hold strategie se hodí z důvodu blížící se změny trendu."
+}
+```

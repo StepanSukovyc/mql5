@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Z krátkodobého hlediska (1h) je RSI překoupené (72.79), což naznačuje možnost korekce a SELL. Na denní bázi je RSI 40, což značí, že trh není ani překoupený ani přeprodaný. Na týdenní bázi je RSI velmi nízko (23.19), což signalizuje možný odraz a BUY, ale vzhledem k tomu, že týdenní MA (1.9860) je výrazně nad aktuální cenou (1.9078) a měsíční MA (2.0057) ještě více, je pravděpodobný pokračující downtrend. Celkově převládá SELL sentiment, BUY je rizikové. HOLD je vhodný pro ty, kteří nechtějí riskovat ani v jednom směru."
+}
+```

@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XPBUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "XPBUSD_ecn is currently trading at 1937.7. The daily, 4-hour and 1-hour RSI values are all below 50, indicating bearish momentum. The current price is below the moving averages for all timeframes (except monthly where data is missing), further suggesting a downtrend. Limited data on candle formations prevent thorough analysis. Overall, the indicators suggest a higher probability of a continued downtrend, hence the higher SELL percentage, but the lack of complete data leads to higher HOLD percentage. A strong bullish reversal candle on the hourly chart could invalidate the sell recommendation."
+}
+```

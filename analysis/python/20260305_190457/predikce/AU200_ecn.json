@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AU200_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "AU200_ecn is currently showing bearish signals across multiple timeframes. The 1H and 4H RSI are deeply oversold, suggesting a potential for short-term bounce. However, the daily RSI is also below 40, indicating continuing downward momentum. The price is below the moving average on the 1H, 4H and Day charts, further confirming the downward trend. Considering the limited lookback periods, a SELL position is the most probable outcome in the short to medium term. Potential for oversold bounce warrants a small BUY probability. HOLD reflects uncertainty given limited data."
+}
+```

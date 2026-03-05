@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Cena se nachází nad MA na 1h, 4h a denním grafu, což naznačuje uptrend. RSI na 1h a denním grafu je v neutrální zóně. Nicméně RSI na 4H grafu je blízko překoupené zóny (téměř 70). Na týdenním grafu se RSI nachází v neutrální zóně. Na měsíčním grafu MA ukazuje na downtrend, ale současná cena je pod MA, což poukazuje na potenciální změnu trendu. Celkově se jeví jako pravděpodobný uptrend, ale s ohledem na překoupenost na 4h a dlouhodobý downtrend doporučuji opatrnost a zvážení držení stávající pozice. Svícnové formace je třeba analyzovat detailněji pro přesnější odhad."
+}
+```

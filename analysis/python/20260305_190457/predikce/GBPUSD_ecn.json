@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "GBPUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "GBPUSD is showing bearish signals across multiple timeframes. Daily RSI is low at 33.93 indicating oversold conditions but also continued downward momentum. The price is currently below the 1h, 4h, and daily MAs, suggesting a downtrend. Although the monthly RSI is at 55.87, the most recent price action has been bearish.  Recent 1H candles confirm the downward price movement. Given this scenario, a SELL position carries the highest probability, with some potential for HOLD if the oversold condition leads to a short-term correction. Buying is risky at this time."
+}
+```

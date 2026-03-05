@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena je pod denním a týdenním MA, RSI na denní a 4H bázi naznačuje přeprodanost, ale klesající trend je silný. Na hodinové bázi RSI naznačuje mírný růst, nicméně celkový sentiment trhu je spíše medvědí. Měsíční timeframe ukazuje RSI nad 60 a MA pod cenou, což je býčí signál, nicméně krátkodobě převažují negativní indikátory. Proto doporučuji SELL s ohledem na možný krátkodobý odraz."
+}
+```

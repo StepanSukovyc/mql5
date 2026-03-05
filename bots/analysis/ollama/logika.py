@@ -20,6 +20,7 @@ from typing import Dict, Iterable, List, Optional
 import MetaTrader5 as mt5
 from account_monitor import run_account_monitor
 from trading_logic import run_trading_logic
+from final_decision import make_final_trading_decision
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -460,6 +461,8 @@ def main() -> int:
 		if trading_trigger_event.is_set():
 			print("\n🚀 Stop condition met (margin > 10%) - proceeding with trading...")
 			
+			predictions_folder = None
+			
 			# Check if predictions from current hour already exist
 			existing_predictions = find_predictions_folder_for_current_hour(cfg.service_dest_folder)
 			
@@ -467,6 +470,7 @@ def main() -> int:
 				# Use existing predictions from current hour
 				print("💡 Using existing predictions from current hour")
 				process_existing_predictions(existing_predictions)
+				predictions_folder = existing_predictions
 			else:
 				# Need to download data and get new predictions
 				print("📥 Downloading market data for current hour...")
@@ -474,13 +478,22 @@ def main() -> int:
 				
 				print("🤖 Getting predictions from Gemini AI...")
 				try:
-					success = run_trading_logic(cfg.service_dest_folder)
+					success, pred_folder = run_trading_logic(cfg.service_dest_folder)
+					predictions_folder = pred_folder
 					if success:
 						print("✅ Trading logic completed successfully")
 					else:
 						print("⚠️  Trading logic completed with warnings")
 				except Exception as trading_exc:
 					print(f"❌ Trading logic failed: {trading_exc}")
+			
+			# Make final trading decision if we have predictions
+			if predictions_folder:
+				print("\n🎯 Making final trading decision...")
+				try:
+					make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
+				except Exception as decision_exc:
+					print(f"❌ Final decision failed: {decision_exc}")
 			
 			print("\n🛑 Trading process finished. Exiting...")
 			return 0

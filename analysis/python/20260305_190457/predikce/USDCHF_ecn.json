@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the hourly and 4-hour charts, the RSI is above 50, suggesting bullish momentum, however, it is not yet overbought. The price is above the hourly and 4-hourly MA, further supporting a potential upward move. However, on the daily chart, the RSI is neutral, and the price has been consolidating recently. The weekly RSI is below 50 and the price is below the weekly MA, indicating a potential longer-term downtrend. The monthly RSI is low, suggesting the price is oversold, but is still below the monthly MA. Given these conflicting signals, a HOLD position is also valid. The buy rating is assigned since the latest hourly candle is bullish."
+}
+```

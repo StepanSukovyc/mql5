@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURGBP_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technické indikátory naznačují smíšený signál. Krátkodobé RSI (1h, 4h) je pod 50, což naznačuje potenciální prodejní tlak, zatímco RSI na denním a týdenním grafu jsou blízko 50, což značí neutralitu. MA na všech timeframech kromě měsíčního jsou nad aktuální cenou, což naznačuje rezistenci.  Měsíční RSI je nad 50 a MA pod cenou, což naznačuje dlouhodobější potenciál růstu, ale současný tlak směřuje spíše k prodeji. Poslední svíčky na 1h a 4h timeframech vykazují převážně bearish momentum. HOLD je rozumná strategie pro ty, co mají otevřené pozice a čekají na jasnější signál. Celkově vidím mírnou převahu pro SELL."
+}
+```

@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě indikátory naznačují rostoucí momentum (RSI na 1h, 4h a denním grafu nad 50). Střednědobě (týdenní graf) je RSI neutrální. Dlouhodobě (měsíční graf) se cena nachází pod MA, což naznačuje potenciál pro pokles. Celkově je situace nejednoznačná, proto rozdělení BUY/SELL/HOLD. Pozor na zvýšený spread v některých hodinách."
+}
+```

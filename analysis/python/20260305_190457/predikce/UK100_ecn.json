@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "UK100_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Technická analýza indikuje silný prodejní tlak. RSI na 1H i 4H timeframe je hluboko v přeprodané zóně (pod 30), což naznačuje potenciální obrat, ale denní RSI se blíží k 50 a cena je pod MA na 1H, 4H a denním timeframe. Na týdenním a měsíčním timeframe je trh v býčím trendu. Nicméně aktuální krátkodobý výprodej a pozice pod MA naznačují, že sell je aktuálně rizikově méně náročný než buy, ale zároveň je vhodné i držet pozici vzhledem k býčímu trendu na vyšších TF"
+}
+```

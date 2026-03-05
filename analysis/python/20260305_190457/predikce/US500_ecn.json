@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "US500_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena klesla pod MA na 1H, 4H a denním grafu, RSI na 1H a 4H je pod 40, což naznačuje možný další pokles. Měsíční RSI je ale vysoko (74.84), naznačující překoupenost a potenciální korekci. Riziko SELL je vyšší kvůli krátkodobému klesajícímu trendu, ale silný uptrend z dlouhodobého hlediska drží instrument v oblasti držení, BUY má menší podporu kvůli negativnímu krátkodobému sentimentu."
+}
+```

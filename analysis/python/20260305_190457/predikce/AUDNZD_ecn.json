@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "AUDNZD vykazuje smíšené signály. Na vyšších timeframech (týdenní, měsíční) je RSI v překoupené zóně, což naznačuje potenciální korekci. Na denním grafu je RSI také relativně vysoko. Hodinový a 4-hodinový graf ukazují RSI blízko spodní hranice, ale pohybují se pod MA. Kombinace překoupených podmínek na vyšších timeframech a krátkodobého downtrendu zvyšuje riziko SELL. Proto je hodnocení SELL upřednostněno, zatímco BUY má nízké hodnocení."
+}
+```

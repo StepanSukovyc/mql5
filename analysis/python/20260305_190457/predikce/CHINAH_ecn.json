@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "CHINAH_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena je v downtrendu. RSI na denním, 4H a týdenním grafu naznačuje překoupenost (oversold), ale MA na všech timeframech kromě měsíčního jsou nad aktuální cenou, což naznačuje silný medvědí trend. Měsíční RSI je neutrální, ale cena je nad MA, co by mohlo naznačovat lokální konsolidaci, ale i snahu o obrat trendu. Zvažuji prodej s nižší vahou než nákup.  Celkově převládá prodejní tlak."
+}
+```

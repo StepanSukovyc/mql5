@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Krátkodobé indikátory (1h, 4h) naznačují možný nárůst (RSI blízko překoupené zóny, MA pod cenou), ale dlouhodobé indikátory (týden, měsíc) naznačují klesající trend (RSI pod 50, MA nad cenou). Denní RSI je neutrální. Proto rozdělení mezi BUY, SELL a HOLD odráží tuto nejistotu."
+}
+```

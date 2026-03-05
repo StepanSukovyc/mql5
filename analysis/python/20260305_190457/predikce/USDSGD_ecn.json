@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na základě technické analýzy existuje potenciál pro další růst (BUY) vzhledem k rostoucím RSI na nižších timeframech a nedávnému proražení. Nicméně, RSI na 1H je v překoupené zóně a na týdenním a měsíčním grafu je RSI relativně nízké a cena je pod MA (SELL), což naznačuje možnou korekci. Proto je doporučeno i držet (HOLD) a sledovat další vývoj."
+}
+```

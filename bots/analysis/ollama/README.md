@@ -1,6 +1,6 @@
 # MT5 Hourly Collector (Python)
 
-Automatický obchodní systém s AI predikcemi. Skript kontroluje marži, stahuje data a dotazuje se Gemini AI na obchodní signály.
+Automatický obchodní systém s AI rozhodováním. Skript kontroluje marži, stahuje data, filtruje signály a vytváří finální obchodní doporučení pomocí Gemini AI.
 
 ## Co skript dělá
 
@@ -12,7 +12,11 @@ Automatický obchodní systém s AI predikcemi. Skript kontroluje marži, stahuj
    - **Pokud ano**: používá je (bez stahování nových dat)
    - **Pokud ne**: stáhne data a získá nové předpovědi od Gemini AI
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
-6. Vykonáný proces skončí (bez pokračujícího scheduleru)
+6. Dělá **finální rozhodnutí**:
+   - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
+   - Gemini AI vybere **1 měnový pár** a rozhodne **BUY/SELL** s doporučenou **velikostí lotu**
+7. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
+8. Vykonáný proces skončí (bez pokračujícího scheduleru)
 
 ## Struktura vystupu
 
@@ -114,11 +118,24 @@ Chcete-li spouštět skript opakovaně (např. každou hodinu), použijte cron:
 
 Skript bude spuštěn na začátku každé hodiny.
 
+## Moduly Systému
+
+- **logika.py** - Hlavní orchestrace procesu (monitoring → predikce → finální rozhodnutí)
+- **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 10% prahu
+- **trading_logic.py** - Stahuje data z MT5, dotazuje se Gemini na predikce, filtruje je
+- **final_decision.py** - Kombinuje predikce se stavem účtu a dělá finální obchodní rozhodnutí
+
+## Výstupní Soubory
+
+- `<SERVICE_DEST_FOLDER>/<timestamp>/predikce/*.json` - Filtrované predikce
+- `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json` - Finální rozhodnutí
+
 ## Poznamky
 
 - MetaTrader 5 terminal musi bezet lokalne ve stejnem uzivatelskem kontextu.
 - Pokud nektery symbol selze, skript pokracuje na dalsi symbol.
 - Monitorování probíhá v **background threadu**, nezablokuje tedy ostatní procesy
 - Optimalizace: Pokud jsou k dispozici předpovědi z aktuální hodiny, jsou používány (bez nového stahování)
+- Finální rozhodnutí se dělá na **právě jednom měnovém páru** s doporučenou velikostí lotu
 - Ukonceni skriptu: `Ctrl+C` (normálně skript sám skončí po obchodování)
 

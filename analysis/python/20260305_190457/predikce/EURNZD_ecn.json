@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURNZD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "EURNZD is showing mixed signals. 1H RSI is relatively high (64.84), suggesting potential for a pullback. 4H, Daily and Weekly RSI values are around 50 or less, hinting at a neutral to slightly bearish trend. Monthly RSI is still relatively high at 59.15. Current price above Daily MA suggesting upward momentum, but below Weekly MA suggesting overall downtrend. HOLD is recommended until a clearer signal emerges."
+}
+```

@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním MA, hodinové a 4H RSI naznačují, že by cena mohla jít dolů. Týdenní RSI je relativně vysoko, ale klesá, což naznačuje možnou změnu trendu. Nedostatek dat na měsíční bázi komplikuje dlouhodobější analýzu. Poslední denní svíčka je bearish.  Doporučuje se SELL s opatrností kvůli možnosti korekce (HOLD) a potencionálnímu BUY, pokud cena prokáže resistanci nad MA."
+}
+```

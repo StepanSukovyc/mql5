@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "Smíšené signály. Denní RSI je překoupené (70.76), což naznačuje možnost korekce. Na druhou stranu, týdenní RSI je neutrální (58.89) a cena se drží nad MA na kratších timeframech, což naznačuje potenciální pokračování uptrendu. Měsíční RSI je pod 50 (40.26), avšak cena je pod MA (22.04), což značí dlouhodobější downtrend, ale s potenciálem obratu. Vzhledem k tomu, že se cena nachází na klíčové úrovni (21.07), je nutná opatrnost. Proto je hodnota HOLD relativně vysoká, než se situace vyjasní."
+}
+```
