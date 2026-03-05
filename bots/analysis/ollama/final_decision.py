@@ -12,6 +12,30 @@ import httpx
 import MetaTrader5 as mt5
 
 
+def _clean_gemini_response(text: str) -> str:
+	"""
+	Clean Gemini response by removing markdown code blocks.
+	
+	Args:
+		text: Raw response from Gemini (may contain ```json ... ```)
+	
+	Returns:
+		Clean JSON string
+	"""
+	text = text.strip()
+	
+	# Remove markdown code blocks
+	if text.startswith("```json"):
+		text = text[7:]  # Remove ```json
+	elif text.startswith("```"):
+		text = text[3:]  # Remove ```
+	
+	if text.endswith("```"):
+		text = text[:-3]  # Remove trailing ```
+	
+	return text.strip()
+
+
 def get_open_positions() -> List[Dict]:
 	"""
 	Get all currently open positions on the MT5 account.
@@ -26,7 +50,6 @@ def get_open_positions() -> List[Dict]:
 		- current_price
 		- pnl (profit/loss)
 		- swap
-		- commission
 	"""
 	positions = mt5.positions_get()
 	if positions is None:
@@ -39,11 +62,8 @@ def get_open_positions() -> List[Dict]:
 		tick = mt5.symbol_info_tick(pos.symbol)
 		current_price = tick.bid if tick else pos.price_open
 		
-		# Calculate current PnL
-		if pos.type == 0:  # BUY
-			pnl = (current_price - pos.price_open) * pos.volume * 100000  # Approximate for 100k base
-		else:  # SELL
-			pnl = (pos.price_open - current_price) * pos.volume * 100000
+		# Calculate current PnL (using actual profit from MT5)
+		pnl = float(pos.profit)
 		
 		position_info = {
 			"symbol": pos.symbol,
@@ -52,9 +72,8 @@ def get_open_positions() -> List[Dict]:
 			"volume": float(pos.volume),
 			"open_price": float(pos.price_open),
 			"current_price": float(current_price),
-			"pnl": float(pnl),
-			"swap": float(pos.swap),
-			"commission": float(pos.commission)
+			"pnl": pnl,
+			"swap": float(pos.swap)
 		}
 		open_positions.append(position_info)
 	
@@ -88,7 +107,11 @@ def load_predictions(predictions_folder: Path) -> List[Dict]:
 	for pred_file in predictions_folder.glob("*.json"):
 		try:
 			with open(pred_file, "r", encoding="utf-8") as f:
-				prediction = json.load(f)
+				content = f.read()
+			
+			# Clean markdown formatting if present
+			cleaned_content = _clean_gemini_response(content)
+			prediction = json.loads(cleaned_content)
 			
 			buy_pct = prediction.get("BUY", 0)
 			sell_pct = prediction.get("SELL", 0)
@@ -190,8 +213,10 @@ Kde lot_size je hodnota pro reálný obchod a reasoning obsahuje stručné vysv�
 		text_response = response_data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
 		
 		if text_response:
+			# Clean markdown formatting from response
+			cleaned_response = _clean_gemini_response(text_response)
 			print(f"  ✅ Finální rozhodnutí získáno")
-			return text_response
+			return cleaned_response
 		else:
 			print(f"  ⚠️  Prázdná odpověď od Gemini")
 			return None

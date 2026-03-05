@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-03-05 (MT5 API Fix)
+
+- **Fixed TradePosition Commission Error**
+  - Issue: Attempted to access non-existent `commission` attribute on MT5 TradePosition objects
+  - Removed commission field from `get_open_positions()` (commission not stored in open positions)
+  - Simplified PnL calculation to use MT5's built-in `pos.profit` (more accurate)
+  - get_open_positions() now returns: symbol, type, open_time, volume, open_price, current_price, pnl, swap
+
+## 2026-03-05 (JSON Parsing Fix)
+
+- **Fixed JSON Parsing Error in Predictions**
+  - Issue: Gemini responses contained markdown code blocks (```json ... ```), causing JSON parsing errors
+  - Added `_clean_gemini_response()` function to both trading_logic.py and final_decision.py
+  - Strips markdown formatting before saving/loading predictions
+  - Updated `filter_predictions()` and `load_predictions()` to handle both old and new format files
+  - Backwards compatible with existing prediction files
+
 ## 2026-03-05 (Configuration Update)
 
 - **Made Margin Threshold Configurable**

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 30,
-  "SELL": 25,
-  "HOLD": 45,
-  "reasoning": "CHFJPY is showing mixed signals.  Longer timeframes (week, month) indicate an overbought condition (RSI > 68) and a strong upward trend, but daily and shorter timeframes (1h, 4h) RSI are neutral to slightly bearish. The price is currently near the daily MA but above weekly/monthly MA. Recent hourly candles show indecision, indicating a possible consolidation.  Therefore, a Hold position is recommended with moderate buy/sell risk based on short-term fluctuations."
-}
-```

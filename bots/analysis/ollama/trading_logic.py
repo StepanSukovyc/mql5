@@ -17,6 +17,30 @@ from typing import Dict, List, Optional, Set
 import httpx
 
 
+def _clean_gemini_response(text: str) -> str:
+	"""
+	Clean Gemini response by removing markdown code blocks.
+	
+	Args:
+		text: Raw response from Gemini (may contain ```json ... ```)
+	
+	Returns:
+		Clean JSON string
+	"""
+	text = text.strip()
+	
+	# Remove markdown code blocks
+	if text.startswith("```json"):
+		text = text[7:]  # Remove ```json
+	elif text.startswith("```"):
+		text = text[3:]  # Remove ```
+	
+	if text.endswith("```"):
+		text = text[:-3]  # Remove trailing ```
+	
+	return text.strip()
+
+
 def _load_gemini_config() -> Dict[str, str]:
 	"""Load Gemini configuration from environment variables."""
 	api_key = os.getenv("GEMINI_API_KEY")
@@ -137,10 +161,12 @@ Odpověď pošli POUZE v JSON formátu:
 		text_response = response_data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
 		
 		if text_response:
+			# Clean markdown formatting from response
+			cleaned_response = _clean_gemini_response(text_response)
 			print(f"  ✅ Predikce získána pro {symbol}")
 			# Delay to respect API limits
 			time.sleep(5)
-			return text_response
+			return cleaned_response
 		else:
 			print(f"  ⚠️  Prázdná odpověď pro {symbol}")
 			return None
@@ -165,7 +191,11 @@ def filter_predictions(predictions_folder: Path) -> int:
 	for pred_file in predictions_folder.glob("*.json"):
 		try:
 			with open(pred_file, "r", encoding="utf-8") as f:
-				prediction = json.load(f)
+				content = f.read()
+			
+			# Clean markdown formatting if present
+			cleaned_content = _clean_gemini_response(content)
+			prediction = json.loads(cleaned_content)
 			
 			buy_pct = prediction.get("BUY", 0)
 			sell_pct = prediction.get("SELL", 0)
