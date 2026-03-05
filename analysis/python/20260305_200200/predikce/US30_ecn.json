@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Na základě technické analýzy se doporučuje spíše prodej. RSI na kratších časových rámcích (1h, 4h, day) je v oblasti přeprodanosti, avšak na delších timeframech (week, month) ukazuje potenciál pro pokles. Cena je pod MA na 1h, 4h a denním grafu, což naznačuje klesající trend. Měsíční RSI je sice vysoké (67.87), ale aktuální propad ceny naznačuje možnou korekci. Kombinace těchto faktorů naznačuje vyšší pravděpodobnost SELL pozice. HOLD pozice je vhodná pro ty, kteří chtějí vyčkat na potvrzení trendu."
+}

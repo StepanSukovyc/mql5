@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Na denním a týdenním grafu je RSI v překoupené zóně, což naznačuje potenciální korekci. Měsíční RSI je neutrální. Cena je nad MA na všech timeframech, což indikuje uptrend. S ohledem na překoupené podmínky a nedávný prudký růst (gap na denním grafu), je rozumné ponechat část portfolia v BUY pozici, část prodat a část ponechat bez zásahu. Celkově indikátory ukazují na pokračování růstu, ale s potenciálem pro krátkodobou korekci."
+}

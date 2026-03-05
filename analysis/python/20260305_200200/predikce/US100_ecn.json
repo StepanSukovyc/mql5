@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Currently at 24824.09, US100_ecn shows mixed signals. Hourly RSI (41.84) suggests potential for upward correction, but price is below the hourly MA (25030.02). Daily RSI (45.99) also indicates room to fall. Weekly RSI (51.03) is neutral, but price is below weekly MA (25248.87). Monthly RSI is high (71.99) but monthly MA is much lower (22485.59), suggesting long term uptrend, with possibility of retracement. Recent hourly candles show volatile trading but current trend leaning towards downward movement. Therefore, SELL has a slightly higher probability. Waiting for more confirmation before entering a position is best."
+}

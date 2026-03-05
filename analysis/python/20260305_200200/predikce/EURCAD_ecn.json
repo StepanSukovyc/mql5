@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "EURCAD is showing bearish signals across multiple timeframes. Daily and weekly RSI are in oversold territory (22.33 and 34.35 respectively) suggesting potential for continued downward momentum. The price is below the moving average on hourly, 4-hourly, daily and weekly charts. Monthly chart RSI is at 59.89 indicating slightly bullish but weakening momentum. The recent price action is trending downward from 1.61 in the past month. 1H chart shows RSI is near 50 and MA close to the current price of 1.58415. However, the RSI of 4H and Day are still very low, there is high sell strength."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDILS_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě indikuje 1H RSI překoupenost a 4H RSI neutrální, denní RSI mírně pod 50. Týdenní a měsíční RSI silně pod 30, což naznačuje možný obrat. Cena je pod denním MA, týdenním MA, ale poblíž denního MA. Měsíční MA je výrazně výše. Celkově, s ohledem na klesající trend z dlouhodobého hlediska a krátkodobé indikátory, Sell je více pravděpodobné. Hold je rozumná alternativa, vzhledem k potenciálnímu obratu. Buy je riskantní."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "GER40_ecn",
+  "BUY": 30,
+  "SELL": 55,
+  "HOLD": 15,
+  "reasoning": "Cena je pod MA na 1h, 4h i denním grafu, RSI je silně pod 50 na krátkodobých timeframech, což naznačuje potenciál pro další pokles. Na měsíčním grafu je RSI sice vysoké, ale aktuální cena je relativně daleko od MA, a proto je SELL pravděpodobnější, HOLD je pro opatrné obchodníky."
+}

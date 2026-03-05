@@ -1,0 +1,7 @@
+{
+  "symbol": "XPTUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "XPTUSD currently shows bearish signals. Hourly and 4-hourly RSI values are below 40, indicating oversold conditions but also sustained downward momentum. The price is below the hourly and 4-hourly moving averages, suggesting a downtrend. Daily RSI is also below 40, confirming short-term bearish trend. Month timeframe is overbought (rsi = 73.142611) and Week timeframe is neutral, suggesting that price may continue to drop, but long term is overall bullish, with a high MA on monthly timeframe of 1359.4025. Recent hourly candles show a downtrend. Considering the short timeframe data, a SELL position seems more probable, but longer trend is up so HOLD also plausible."
+}

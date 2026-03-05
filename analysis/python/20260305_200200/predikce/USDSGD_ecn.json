@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 60,
+  "SELL": 15,
+  "HOLD": 25,
+  "reasoning": "Short-term bullish momentum. 1H and 4H RSI are overbought suggesting a possible pullback (Sell 15%). Daily RSI is also high. MA indicators suggest a continuation of the uptrend (Buy 60%). Longer-term, monthly RSI is still relatively low, but MA suggests it still has a way to go down. Given this divergence and recent up trend, HOLD is 25%."
+}

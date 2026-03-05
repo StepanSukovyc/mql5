@@ -1,0 +1,7 @@
+{
+  "symbol": "DXY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "DXY is showing mixed signals. RSI is elevated on shorter timeframes (1H, 4H, Day), suggesting potential overbought conditions, but the Monthly RSI is still relatively low. Price is above the daily and weekly MA, indicating a possible uptrend, but below monthly MA. Recent hourly candles are showing slight consolidation near 99.30. A breakout above 99.50 could signal further bullish momentum, while a break below 99.20 could lead to a pullback. Given these factors, the risk is split between buy, sell and hold."
+}

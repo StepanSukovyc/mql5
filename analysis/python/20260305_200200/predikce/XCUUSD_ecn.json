@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod 1h, 4h, i denním MA, RSI na 1h i 4h naznačuje, že je trh spíše překoupen. RSI na týdenním grafu je sice vysoké, ale ne extrémní. Měsíční graf nemáme kompletní, tudíž se nemůžeme rozhodnout podle něj. Denní a hodinové grafy tlačí na SELL. Proto největší pravděpodobnost dávám prodejnímu tlaku (SELL). BUY beru v potaz vzhledem k tomu, že cena by se mohla odrazit od nějaké úrovně podpory. HOLD dává prostor k vyčkání, zda se tlak prodávajících ještě zvýší, nebo zda nastane odraz (BUY)."
+}

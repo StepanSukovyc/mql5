@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFHUF_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "Cena je nad MA na všech timeframech, RSI na denním grafu je v překoupené zóně (71.98), což naznačuje možnost korekce. 1h a 4h RSI jsou také relativně vysoké. Dlouhodobější timeframe naznačují rostoucí trend (BUY), ale krátkodobé překoupení může vést ke korekci (SELL). Proto navrhuji část pozice držet (HOLD) a sledovat další vývoj."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 55,
+  "SELL": 15,
+  "HOLD": 30,
+  "reasoning": "Cena ropy je v uptrendu na denním, týdenním i měsíčním grafu, což naznačuje pokračující růstový potenciál. RSI na denním grafu je v překoupené zóně (83.11), což naznačuje možnost korekce. Nicméně, MA na denním grafu (67.05) je výrazně pod aktuální cenou (81.703), což potvrzuje silný uptrend. Na týdenním grafu je RSI také v překoupené zóně (76.49), avšak trend je silný. Na měsíčním grafu je RSI na neutrální hodnotě (56.36) a MA je pod cenou, což naznačuje dlouhodobější býčí trend. Vzhledem k silnému uptrendu s možnou korekcí dáváme větší váhu BUY, ale s opatrností. SELL dáváme menší váhu, kvůli existujícímu uptrendu a držení (HOLD) jako kompromis při současných překoupených úrovních a silnému uptrendu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na denním a týdenním grafu je RSI hluboko v přeprodané zóně, což naznačuje potenciál pro korekci směrem nahoru. Nicméně, MA na všech timeframech kromě 1H a měsíčního je nad aktuální cenou, což signalizuje downtrend. Dlouhodobý pohled (měsíční graf) ukazuje RSI mírně nad 50 a MA pod cenou, což je neutrální až mírně býčí signál. Vzhledem k převaze downtrendu na kratších timeframech a potenciální korekci, je SELL nejrizikovější variantou, avšak s největší pravděpodobností. BUY je méně pravděpodobné, ale existuje šance na krátkodobou korekci. HOLD je neutrální postoj vzhledem k rozporuplným signálům."
+}

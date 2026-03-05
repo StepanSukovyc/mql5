@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza vykazuje smíšené signály. RSI na denním i 4h timeframe naznačuje, že se trh blíží k přeprodané zóně, ale ještě tam není. MA na denním a 4h timeframe jsou nad aktuální cenou, což naznačuje možný odpor. Na týdenním timeframe je RSI blízko překoupené oblasti. Měsíční RSI je také relativně vysoké. Svíčkové formace na 1h a 4h timeframe nevykazují jasný trend. Celkově převládá opatrnost, proto je doporučeno držení pozice (HOLD) nebo short pozice (SELL) s nižší vahou než dlouhé (BUY) pozice. Důvodem je i klesající MA na vyšších timeframe. Pro BUY mluví RSI na 1H, kde se blíží k 50 bodům."
+}

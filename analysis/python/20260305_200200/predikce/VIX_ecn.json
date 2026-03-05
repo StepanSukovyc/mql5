@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "VIX_ecn ukazuje smíšené signály. Krátkodobé indikátory (1h, 4h) jsou v překoupené zóně (RSI blízko 70), což naznačuje možný pullback (SELL). Dlouhodobější trend (denní, týdenní) je rostoucí (RSI nad 60, MA roste), podpořený silným růstem ceny v poslední době (BUY). Měsíční RSI je neutrální, naznačující prostor pro další růst, ale i možnou konsolidaci (HOLD)."
+}

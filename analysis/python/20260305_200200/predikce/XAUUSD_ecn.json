@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "XAUUSD is showing signs of overbought conditions on longer timeframes (week, month) with high RSI values (72.59, 88.37). The hourly RSI is deeply oversold (25.59) suggesting a short term bounce is possible. However, the price is below its daily and 4h moving average, and the recent hourly candles indicate bearish momentum. Therefore, a SELL position is the most probable outcome with a short term relief BUY possible."
+}

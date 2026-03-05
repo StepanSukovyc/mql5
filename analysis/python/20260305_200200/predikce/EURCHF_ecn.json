@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "EURCHF je v downtrendu na denních, týdenních i měsíčních grafech. RSI je na všech těchto timeframech pod 40, což naznačuje, že je trh překoupený. Cena je pod klouzavými průměry na všech timeframech. I když hodinový graf ukazuje RSI blízko 50 a potenciální krátkodobé odrazy, silný downtrend na vyšších timeframech naznačuje větší pravděpodobnost poklesu. Proto je doporučení SELL s 60% rizikovým hodnocením. BUY má rizikové hodnocení 20% vzhledem k potenciálnímu odrazu. HOLD má rizikové hodnocení 20% kvůli nejistotě trhu."
+}

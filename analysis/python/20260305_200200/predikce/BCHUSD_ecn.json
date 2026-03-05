@@ -1,0 +1,7 @@
+{
+  "symbol": "BCHUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Technická analýza naznačuje převahu prodejců. RSI na denní bázi (37.14) se blíží překoupené oblasti, což naznačuje možný odraz nahoru. MA na denní bázi (510.2) je výrazně nad aktuální cenou (457.0), což signalizuje downtrend. Na hodinové bázi je RSI (43.87) a MA (461.13) relativně blízko aktuální ceny, ale MA je stále nad ní. Celkově, krátkodobý downtrend je dominantní, ale možnost korekce vzhůru existuje, proto držet je rozumná alternativa. Zvýšené spready naznačují nestabilitu."
+}

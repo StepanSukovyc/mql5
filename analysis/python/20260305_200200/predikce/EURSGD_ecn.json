@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 35,
+  "SELL": 45,
+  "HOLD": 20,
+  "reasoning": "EURSGD je v klesajícím trendu, což indikuje denní, týdenní RSI a MA. Měsíční RSI je neutrální, ale cena je nad MA. Na 1H timeframe RSI ukazuje překoupenost. Kombinace těchto faktorů naznačuje, že SELL má větší pravděpodobnost úspěchu, ale BUY je stale možné z důvodu krátkodobé dynamiky. HOLD doporučuji pokud nechcete podstupovat zvýšené riziko."
+}

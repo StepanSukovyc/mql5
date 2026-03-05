@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDJPY_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "On the hourly and 4-hourly charts, the RSI is below 50 and the price is below the moving average, indicating bearish momentum. The daily chart's RSI is slightly above 50, suggesting neutral sentiment, while the weekly RSI is high, indicating overbought conditions. The recent hourly price action suggests a downward trend. Therefore, SELL is the most likely scenario, with HOLD and BUY as lower probability outcomes."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena klesá, RSI na 1H je pod 40 a na měsíčním grafu silně pod 30, indikuje možný přeprodaný stav a potenciální odraz, ale MA napříč timeframech jsou převážně nad aktuální cenou. Na denním grafu i 4H se cena pohybuje pod MA. Na měsíčním grafu klesající trend s RSI hluboko v přeprodané oblasti naznačuje silný medvědí sentiment. Proto SELL má vyšší procentuální hodnocení. HOLD pro případ krátkodobé korekce."
+}

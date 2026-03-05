@@ -1,0 +1,7 @@
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Na denním a týdenním grafu je RSI v překoupené zóně (72.96 a 69.99), což naznačuje možnost korekce. Nicméně na hodinovém a 4h grafu se RSI pohybuje kolem neutrálních hodnot (58.48 a 55.77). Měsíční RSI je na hodnotě 47.36. Cena je blízko MA na všech timeframech. Celkově je trh v konsolidaci, proto doporučuji vyčkat s jasným rozhodnutím."
+}

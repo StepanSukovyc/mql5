@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "EURMXN aktuálně vykazuje smíšené signály. Na kratších časových rámcích (1H, 4H) RSI naznačuje překoupenost (RSI kolem 65-68), ale není extrémní. Na denním grafu je RSI neutrální (56). Týdenní RSI je pod 40 což značí že jsme poměrně hluboko v zóně přeprodanosti. Měsíční RSI je kolem 59. Cena se na 1h, 4h, a denním timeframe nachází nad MA, avšak na týdenním a měsíčním timeframe pod MA, což ukazuje na možný krátkodobý uptrend v rámci dlouhodobějšího downtrendu. Dnešní svíčka má poměrně dlouhý knot směrem nahoru, což naznačuje vyčerpání kupujících. Vzhledem k těmto rozporuplným signálům se doporučuje opatrnost a vyčkávání na potvrzení trendu. Důvodem k BUY je momentum na kratších timeframe. Důvodem k SELL je dlouhodobější downtrend. HOLD z důvodu nejasné situace."
+}

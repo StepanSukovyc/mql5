@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "On the hourly and 4-hour timeframes, the RSI is below 50, suggesting bearish momentum. The price is below the moving average on these timeframes as well, confirming a possible downtrend. The daily RSI is at 55.65, which doesn't indicate overbought conditions, but the recent daily candles show price decline. The weekly RSI is high (75.19), indicating an overbought situation and a potential for correction. Therefore, a SELL position has a higher probability, HOLD could be considered for risk-averse traders and BUY should be entered with caution."
+}

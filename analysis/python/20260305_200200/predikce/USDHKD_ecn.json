@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1h timeframe RSI naznačuje, že by měnový pár mohl být mírně přeprodaný (RSI = 41.81), ale MA na 1h timeframe je nad aktuální cenou. Denní RSI je na 57.96, což je neutrální. Cena je nad týdenním a měsíčním MA, což naznačuje potenciální dlouhodobý uptrend, ale krátkodobě se zdá, že se cena stabilizuje nebo mírně klesá. Vzhledem k těmto smíšeným signálům je doporučeno spíše SELL než BUY. HOLD je pak opatrná možnost vzhledem k nejednoznačnosti indikátorů."
+}

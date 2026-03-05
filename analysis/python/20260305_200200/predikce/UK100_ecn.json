@@ -1,0 +1,7 @@
+{
+  "symbol": "UK100_ecn",
+  "BUY": 20,
+  "SELL": 65,
+  "HOLD": 15,
+  "reasoning": "Na základě technické analýzy je patrný downtrend. RSI na 1H a 4H timeframech je hluboko v přeprodané zóně, což naznačuje možnou korekci, ale silný downtrend na denním grafu s klesajícím MA a RSI pod 50 naznačuje, že pokles bude pokračovat. Měsíční RSI je sice vysoko, ale vzhledem k silnému poklesu v posledních dnech se dá předpokládat jeho korekce. Proto je SELL varianta považována za nejrizikovější."
+}

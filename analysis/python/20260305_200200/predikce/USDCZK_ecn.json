@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě indikátory (RSI na 1h, 4h a denním grafu) naznačují překoupenost a potenciální korekci, ale střednědobý trend (týdenní graf) je neutrální s RSI pod 60. Měsíční graf naznačuje možnou konsolidaci. Proto BUY má nejvyšší, i když ne dominantní pravděpodobnost díky rostoucímu trendu, avšak riziko korekce a nejistota makroekonomických faktorů snižují jeho atraktivitu. SELL má střední pravděpodobnost, protože RSI na denní bázi je blízko překoupenosti a cena se vzdaluje od MA. HOLD je rozumná strategie pro ty, kteří chtějí sledovat další vývoj a nejsou si jisti směrem trhu."
+}

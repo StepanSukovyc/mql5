@@ -1,0 +1,7 @@
+{
+  "symbol": "CADCHF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CADCHF is showing mixed signals. Daily and 4H RSI are above 50, suggesting bullish momentum, but the weekly RSI is below 50. The monthly RSI is extremely oversold, suggesting potential for a bullish reversal, but the price is still below the monthly MA. Recent hourly candles show some indecision. A break above 0.5730 could confirm a short-term bullish trend, while a break below 0.5710 might signal further downside."
+}

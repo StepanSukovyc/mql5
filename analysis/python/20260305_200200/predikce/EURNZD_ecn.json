@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNZD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě indikuje 1H RSI překoupenost, ale 4H a denní grafy ukazují prostor pro pokles. Týdenní MA je nad cenou, což naznačuje potenciální rezistenci. Měsíční MA pod cenou, ale RSI je v neutrální zóně, což snižuje jistotu obou směrů. S ohledem na mix signálů a klesající trend na vyšších časových rámcích, má SELL mírnou převahu."
+}

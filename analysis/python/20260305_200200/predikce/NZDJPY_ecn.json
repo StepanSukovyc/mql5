@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "NZDJPY is currently at 92.746. Short-term (1H, 4H, Daily) MAs are above the current price suggesting downward pressure. RSI values on shorter timeframes (1H, 4H) are below 50 indicating bearish momentum. While Weekly and Monthly RSI are above 50, suggesting longer-term bullish sentiment, the current price action suggests a temporary pullback. Recent hourly candles show a bearish trend with a decrease in price. Therefore, a SELL position is considered to be more probable. A Hold position considers the longer term bull sentiment from the weekly/monthly charts."
+}

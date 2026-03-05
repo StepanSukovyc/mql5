@@ -1,0 +1,7 @@
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "FRA40_ecn is showing bearish signals across multiple timeframes. RSI is oversold on the 4H timeframe (22.25) and approaching oversold on the 1H and daily timeframes. Price is below the moving average on 1H, 4H and Daily timeframes. The recent price action shows a sharp decline (possible rejection of 8200 level) in 1H and 4H. Weekly timeframe RSI is neutral, and the monthly RSI is also near 50, so the longer term trend is less clear, but recent selling pressure is significant. Therefore SELL is the highest probability, with BUY being the least and HOLD being a lower probability option."
+}

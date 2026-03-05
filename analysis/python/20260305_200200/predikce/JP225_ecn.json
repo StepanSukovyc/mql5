@@ -1,0 +1,7 @@
+{
+  "symbol": "JP225_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "On the 1h and 4h timeframes, the RSI is below 35, indicating oversold conditions, which could lead to a slight bounce. However, the daily RSI is 43 and trending down, and the price has broken below the daily MA, suggesting further downside. Weekly RSI is at 59, but the price is well above the weekly MA, indicating some longer term upward momentum. Monthly RSI is at 68, suggesting upward momentum but approaching overbought territory, price significantly above MA. Recent price action is bearish, confirmed by 1h candles. Therefore, short position is more likely."
+}

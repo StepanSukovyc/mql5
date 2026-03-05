@@ -1,0 +1,7 @@
+{
+  "symbol": "EURGBP_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "EURGBP is currently trading at 0.86872. On the hourly and 4-hour charts, the RSI is below 40, suggesting the pair is approaching oversold conditions, potentially signalling a buy opportunity. However, the price is below the moving average (MA) on the 1H, 4H, Day and Week charts, indicating a downtrend. The monthly MA is significantly lower than the current price. The daily RSI is 46.63 which doesn't confirm any trend. Recent price action shows indecision, and considering the overall downtrend indicated by the moving averages on shorter timeframes, SELL is favored. HOLD is placed as a lower percentage given that no firm direction can be confirmed from this data."
+}

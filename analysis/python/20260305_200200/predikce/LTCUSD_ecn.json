@@ -1,0 +1,7 @@
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 20,
+  "SELL": 55,
+  "HOLD": 25,
+  "reasoning": "The current price of LTCUSD_ecn is 55.27. The RSI on the daily and hourly charts are below 50, suggesting bearish momentum. The Moving Averages across multiple timeframes are above the current price, reinforcing a downtrend. The weekly RSI is also in oversold territory, suggesting potential for a bounce, but not yet confirmed. Recent price action on the 1h and 4h charts shows a downtrend with lower highs and lower lows. Therefore, SELL has the highest probability, followed by HOLD, and then BUY as a potential contrarian play if oversold conditions lead to a reversal."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Krátkodobě indikuje RSI přeprodanost na 1h i 4h timeframe, což naznačuje možný odraz nahoru (BUY). Nicméně, denní RSI je stále pod 50 a cena je pod denním MA, což signalizuje medvědí trend (SELL). Týdenní RSI je na 54, a cena je kolem MA, což dává neutrální pohled a čekání na další vývoj (HOLD). Celkový sentiment je spíše medvědí vzhledem k poklesu ceny a MA, ačkoli existuje možnost krátkodobé korekce nahoru."
+}

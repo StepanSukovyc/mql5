@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním, týdenním a měsíčním grafu se RSI nachází v pásmu 50-70, což naznačuje spíše býčí momentum, ale ne překoupené podmínky. Cena je nad MA na denním, týdenním i měsíčním grafu, což také podporuje býčí výhled. Na druhou stranu hodinový graf ukazuje RSI blízko 50, a cena se pohybuje okolo MA, naznačující nejistotu. Proto je zde rozložení mezi BUY, SELL a HOLD, odrážející smíšené signály napříč časovými rámcich a potřebu opatrnosti."
+}

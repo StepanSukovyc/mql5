@@ -1,0 +1,7 @@
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 35,
+  "SELL": 40,
+  "HOLD": 25,
+  "reasoning": "NGAS_ecn currently shows mixed signals. Hourly RSI is slightly bullish (58.87), suggesting upward momentum. However, daily RSI is relatively neutral (45.37), and weekly/monthly MAs are significantly higher than the current price, indicating potential long-term resistance. Recent daily candles show a downward trend with a close below the MA, suggesting a potential further decline. The last hourly candle is bullish, but the 4H candles show indecision. Overall risk is high, favoring short to medium term Sell, until price clears weekly/monthly moving averages."
+}

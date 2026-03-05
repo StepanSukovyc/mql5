@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "EURUSD je v klesajícím trendu. RSI na 4H, denním a hodinovém grafu je v oblasti přeprodanosti, což naznačuje možnost korekce, ale celkový sentiment je spíše prodejní. MA na všech časových rámcích kromě měsíčního je nad aktuální cenou, což také indikuje prodejní tlak. Z historického hlediska, týdenní graf ukazuje, že cena klesla od 1. března. Měsíční RSI je sice nad 50, ale cena se od MA vzdaluje. Proto se přikláním k prodeji s rizikem možné korekce vzhledem k nízkým hodnotám RSI na nižších timeframech."
+}

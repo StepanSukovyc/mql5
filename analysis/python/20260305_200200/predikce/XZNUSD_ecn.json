@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "XZNUSD is currently in a short-term downtrend. Hourly and 4-hour RSI are low but not yet oversold. Daily RSI is approaching oversold conditions. Price is well below the daily, 4h and 1h moving averages, indicating bearish momentum. Weekly RSI is around 60. The recent strong downward move suggests further potential for selling. Risk of buy is low. Holding position is also a small risk if trend reverts. "
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena je pod 1h, 4h, denní a týdenní MA, což naznačuje downtrend. RSI na 1h, 4h a denní timeframe naznačuje překoupenost, což může signalizovat další pokles ceny. Měsíční RSI je relativně neutrální. Vzhledem k převládajícímu downtrendu a překoupenosti na nižších timeframe je pravděpodobnější pokles ceny. Svíčkové formace z 5.3.2026 na 1h timeframe ukazují na možné otestování supportu a jeho následné prolomení."
+}

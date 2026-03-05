@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 35,
+  "SELL": 40,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě (1h, 4h) RSI naznačuje potenciální překoupenost. Denní RSI je neutrální. Týdenní a měsíční RSI indikují potenciál pro růst, ale MA na týdenní a měsíční bázi jsou výrazně nad aktuální cenou, což naznačuje silný odpor. Cena se pohybuje pod týdenním MA. Zvažujeme SELL kvůli odporu a indikaci klesajícího trendu, BUY je omezeno překoupeností na nižších timeframech a silným odporem. HOLD je zváženo kvůli potenciálu pro odraz od supportu."
+}

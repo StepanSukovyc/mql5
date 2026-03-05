@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Cena je nad MA na 1h, 4h i denním grafu. RSI na 1h a 4h naznačuje překoupenost, ale denní RSI je stále pod 70. Týdenní MA je nad aktuální cenou, což může působit jako rezistence. Poslední denní svíčka je býčí. Celkově převládá krátkodobý býčí sentiment, ale s ohledem na dlouhodobější rezistence a možnou korekci je nutná opatrnost. Zvážil bych BUY se stop-loss pod poslední lokální minimum. Spread se v posledních hodinách zvýšil, což by mohlo indikovat vyšší volatilitu."
+}
