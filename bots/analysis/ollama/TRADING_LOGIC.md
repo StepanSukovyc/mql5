@@ -160,6 +160,7 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
 3. **Dotaz na Gemini AI:**
    - Očekávané výstupy: 1 měnový pár + BUY/SELL + doporučená velikost lotu
    - Gemini bere v úvahu Risk Management (volná marže, otevřené pozice)
+   - **DIVERZIFIKACE:** Gemini preferuje symboly bez otevřených pozic. Pokud už pozice na doporučovaném symbolu existuje a aktuální tržní cena je blízko vstupní ceny (< 0.5% rozdíl), Gemini **povinně vybírá jiný kandidát** z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
 
 4. **Uložení a provedení obchodu:**
    - Parsuje JSON odpověď od Gemini (symbol, action)
@@ -309,12 +310,55 @@ Instalace:
 pip install -r requirements.txt
 ```
 
-## Bezpečnost
+## Bezpečnost a Validace
 
+### Ochrana proti chybám
 - Soubory nejsou zpracovány dvakrát v jednom cyklu
 - Kontrola existence souborů před přesunem
 - Graceful error handling při selhání Gemini API
 - Ochrana proti duplicitním dotazům
+
+### Validace před obchodem
+1. **Symbol Validation** (`validate_symbol()`)
+   - Kontrola existence symbolu přes `mt5.symbol_info()`
+   - Automatické přidání symbolu do MarketWatch pokud není viditelný
+   - Ověření, že trading je povolen pro daný symbol
+   - V případě selhání: symbol se přidá do exclusion listu a systém požádá Gemini o jiný symbol (max 3 pokusy)
+
+2. **Lot Size Validation** (`validate_lot_size()`)
+   - Načtení min/max/step limitů od brokera
+   - Automatická úprava lotu na broker-kompatibilní hodnotu
+   - Zaokrouhlení na správný lot_step
+   - Ochrana proti příliš malým nebo velkým pozicím
+
+3. **Margin Requirements Check** (`check_margin_requirements()`)
+   - Přesný výpočet potřebné marže přes `mt5.order_calc_margin()`
+   - Porovnání s dostupnou volnou marží
+   - Prevence obchodů s nedostatečnou marží
+
+4. **Diverzifikace Portfolia**
+   - Gemini AI preferuje symboly bez otevřených pozic
+   - Pokud pozice na symbolu existuje, zkontroluje vstupní cenu
+   - Při rozdílu < 0.5% mezi aktuální a vstupní cenou **povinně vybírá jiný symbol**
+   - Ochrana proti duplicitním pozicím za podobnou cenu na stejném páru
+
+### Gemini API Quota Management
+- **Automatická suspenze** při dosažení limitu (HTTP 429)
+- Systém přestane dotazovat Gemini až do půlnoci následujícího dne (UTC)
+- Trading automat pokračuje v běhu (pouze přeskakuje dotazy)
+- Automatické obnovení po půlnoci
+
+### Trade Logging
+- **CSV záznam všech obchodů** do `SERVICE_DEST_FOLDER/trade_logs/trades.csv`
+- Loguje úspěchy i selhání včetně error zpráv
+- Formát: timestamp, symbol, action, lot_size, price, success, error_msg
+- Automatické vytvoření hlaviček při prvním použití
+
+### Error Recovery
+- Oddělené zachycení network errors (`httpx.HTTPError`) vs obecné výjimky
+- Detailní error zprávy v logu i CSV
+- Retry mechanismus pro failed symbol validation (max 3 pokusy)
+- Graceful handling při selhání kterékoliv validační fáze
 
 ## Poznámky
 
