@@ -67,20 +67,20 @@ def check_stop_condition(account_info: dict) -> bool:
 	"""
 	Check if monitoring should stop.
 	
-	Stop condition: Stop if margin_free is more than 20% of balance.
+	Stop condition: Stop if margin_free is more than 10% of balance.
 	Modify this function to change the stop condition.
 	"""
 	margin_ratio = account_info['margin_free'] / account_info['balance'] if account_info['balance'] > 0 else 0
 	
-	# Stop if available margin is more than 20%
-	if margin_ratio > 0.20:
-		print(f"\n⚠️  Stop condition met: Available margin exceeded 20% of balance!")
+	# Stop if available margin is more than 10%
+	if margin_ratio > 0.10:
+		print(f"\n⚠️  Stop condition met: Available margin exceeded 10% of balance!")
 		return True
 	
 	return False
 
 
-def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: Optional[int] = None, stop_event: Optional[threading.Event] = None) -> None:
+def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: Optional[int] = None, stop_event: Optional[threading.Event] = None, trading_trigger_event: Optional[threading.Event] = None) -> None:
 	"""
 	Monitor account status every N seconds until stop condition is met.
 	
@@ -88,6 +88,7 @@ def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: 
 		check_interval_seconds: How often to check account (default 60 = 1 minute)
 		max_duration_seconds: Maximum duration in seconds (None = no limit)
 		stop_event: Threading event to signal shutdown (None = no external stop signal)
+		trading_trigger_event: Threading event to signal when to start trading logic (None = this feature disabled)
 	"""
 	print(f"\n🔍 Account Monitor started. Checking every {check_interval_seconds} seconds...")
 	
@@ -107,9 +108,12 @@ def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: 
 				account_info = get_account_info()
 				print_account_status(account_info)
 				
-				# Check if we should stop
+				# Check if we should trigger trading logic
 				if check_stop_condition(account_info):
 					print(f"✅ Monitoring stopped after {check_count} checks.")
+					if trading_trigger_event:
+						trading_trigger_event.set()
+						print(f"🚀 Trading trigger event SET")
 					break
 				
 			except Exception as exc:

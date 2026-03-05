@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "Na denní bázi je RSI překoupené (83.7), což naznačuje možnost korekce. Nicméně, celkový trend je rostoucí a cena je nad MA na všech timeframech (1h, 4h, den, týden, měsíc), což naznačuje sílu.  Poslední denní svíčka je silná býčí svíčka.  RSI na měsíční bázi (56.57) má stále prostor pro růst. Proto doporučuji spíše BUY pozici, ale s ohledem na překoupenost na denním grafu je opatrnost na místě."
+}
+```

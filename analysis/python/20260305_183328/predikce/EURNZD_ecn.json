@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURNZD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Na 1h a 4h timeframe RSI osciluje kolem 50, což značí neutralitu. MA na 1h je pod aktuální cenou, na 4h jen mírně. Denní RSI je pod 50, což je mírně bearish, ale cena je nad MA. Týdenní RSI je taktéž pod 50 a cena pod MA, což značí sestupný trend. Měsíční RSI je nad 50 a cena nad MA, což je bullish. Celkově nejistota, buy má mírně navrch díky měsíčnímu timeframe, ale týdenní down trend a oscilace denního RSI s cenou blízko MA indikuje potenciální obrat, proto je hold významný.  Poslední 1h svíčky naznačují mírný růstový moment, ale je třeba opatrnosti."
+}
+```

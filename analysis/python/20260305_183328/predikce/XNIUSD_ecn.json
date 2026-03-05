@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 20,
+  "SELL": 50,
+  "HOLD": 30,
+  "reasoning": "Cena je pod MA na 1h, 4h a denním grafu, což naznačuje sestupný trend. RSI na 1h a 4h je pod 50, což signalizuje potenciální tlak na prodej. Na týdenním grafu je RSI nad 50, ale cena je pod denní MA a zdá se, že krátkodobé momentum je spíše směrem dolů. Měsíční data jsou nedostatečné, takže nelze je brát v potaz. Proto převládá SELL signál, ale vzhledem k omezenému počtu dat a možným falešným signálům je vhodné ponechat si pozici (HOLD) nebo nakoupit (BUY) jen v malém rozsahu."
+}
+```

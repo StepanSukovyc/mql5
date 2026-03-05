@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "Na denním a týdenním grafu je RSI překoupené (73, 70), což naznačuje možné stažení ceny. Na druhou stranu, měsíční RSI je neutrální a cena je nad MA na denním i týdenním grafu, což naznačuje uptrend. Proto doporučuji HOLD s mírným nákupním potenciálem (BUY 35%), pokud cena klesne k MA na denním grafu. Riziko poklesu je zvýšené kvůli překoupení na kratších časových rámcích (SELL 25%)."
+}
+```

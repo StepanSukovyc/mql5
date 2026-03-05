@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "NGAS_ecn currently trades at 2.999. The 1-hour RSI is at 40.4, suggesting potential for a slight upward move, but the price is below the 4-hour and monthly MA, indicating bearish momentum. The daily and weekly RSI are below 50. Recent daily candles also show downward movement. Therefore, a SELL position has a higher probability in short-term, but long term HOLD is suggested."
+}
+```

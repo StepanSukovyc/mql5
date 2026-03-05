@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Měnový pár USDCHF se nachází v konsolidační fázi. Krátkodobé indikátory (1h, 4h, denní RSI) naznačují potenciál pro mírný růst, přičemž cena se pohybuje nad MA na 1h a 4h timeframe. Nicméně, dlouhodobější indikátory (týdenní a měsíční MA) jsou stále nad aktuální cenou, což naznačuje pokračující medvědí trend. Proto doporučuji vyčkat na potvrzení trendu a zvýšenou opatrnost. BUY má 40% vzhledem k možnému krátkodobému růstu. SELL má 30%, protože dlouhodobý trend je stále klesající. HOLD má 30% kvůli konsolidaci a nejistotě."
+}
+```

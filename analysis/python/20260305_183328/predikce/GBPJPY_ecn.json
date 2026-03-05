@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "GBPJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "GBPJPY currently trades at 210.322. Hourly RSI is 46.36, near neutral. 4H RSI is 50.75, also neutral. Daily RSI is 48.55, showing no clear direction. Weekly and Monthly RSIs are above 60, suggesting upward momentum in the longer term but a possible overbought condition. The price has been consolidating around the daily MA (209.98) recently. Recent hourly candles show mixed signals, with some bullish and some bearish candles. Overall, the price action appears indecisive. Given these factors, the short-term trend appears neutral to slightly bearish, supporting 'SELL', longer term is slightly bullish. Risk is elevated so holding is also a valid strategy."
+}
+```

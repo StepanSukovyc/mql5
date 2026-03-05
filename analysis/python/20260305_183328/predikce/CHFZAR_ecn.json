@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "CHFZAR_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "Cena je nad MA na všech timeframech, RSI ukazuje překoupenost na 1h a 4h grafu, což naznačuje možné pullbacky. Denní graf ukazuje silný růst, ale týdenní a měsíční grafy jsou neutrální. Proto doporučuji opatrný BUY s ohledem na možné korekce."
+}
+```

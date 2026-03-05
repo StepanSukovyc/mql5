@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Na H1 a H4 je RSI pod 40, což indikuje potenciál pro přeprodanost. Nicméně, na denním grafu je RSI lehce nad 50 a týdenní RSI je v rostoucím trendu, což signalizuje smíšené signály. Aktuální cena je pod MA na H1 a H4, ale nad MA na denním, týdenním a měsíčním grafu. Poslední 4H svíčka je silně medvědí, což signalizuje silný tlak na pokles. Celkově převládá mírný medvědí sentiment, proto je vyšší šance na SELL."
+}
+```

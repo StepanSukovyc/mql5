@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "Na kratších timeframech (1h, 4h) je RSI pod 40, což naznačuje přeprodanost, ale cena klesá a MA se nachází nad cenou. Na denním grafu je RSI neutrální, ale cena je blízko MA. Týdenní RSI je překoupené (75), což naznačuje možnou korekci dolů. Měsíční RSI je neutrální. Vzhledem k překoupenosti na týdenním grafu a nedávnému poklesu ceny na 1h/4h, je SELL rizikovější, BUY je vysoce rizikové a HOLD je opatrný přístup. Trend se zdá být klesající v krátkodobém horizontu."
+}
+```

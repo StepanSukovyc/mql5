@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "CHFHUF_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "CHFHUF_ecn is showing mixed signals. Daily and weekly RSI are approaching overbought territory, suggesting a potential pullback. However, the price is above the moving averages on most timeframes, indicating bullish momentum. The most recent candles on the 1H timeframe suggest some bullish push. Therefore, a HOLD position might be reasonable, but a small BUY could be considered given the overall uptrend, but with caution. The risk of a sell-off is non-negligible given the RSI levels."
+}
+```

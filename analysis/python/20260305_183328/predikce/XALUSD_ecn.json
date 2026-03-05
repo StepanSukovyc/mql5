@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XALUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním grafu je RSI překoupené (78.79), což naznačuje potenciální obrat trendu. 1H a 4H RSI jsou neutrální. Cena je nad MA na 4H i denním grafu, pod MA na 1H. Dlouhodobý trend je rostoucí (MA na týdenním a denním grafu rostou), ale krátkodobě vidíme známky oslabení. Proto rozložení rizik SELL/HOLD/BUY."
+}
+```

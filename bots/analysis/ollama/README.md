@@ -1,21 +1,18 @@
 # MT5 Hourly Collector (Python)
 
-Tento modul kazdou hodinu (od okamziku spusteni) nacita data z lokalne beziciho MetaTrader 5 a uklada je do JSON souboru pro kazdy symbol.
+Automatický obchodní systém s AI predikcemi. Skript kontroluje marži, stahuje data a dotazuje se Gemini AI na obchodní signály.
 
-## Co skript dela
+## Co skript dělá
 
-1. Nacte konfiguraci z `.env`.
-2. Pripoji se k MetaTrader 5 (`MetaTrader5` Python package).
-3. Ziska vsechny symboly s koncovkou `_ecn` (nebo jinou dle konfigurace).
-4. Pro kazdy symbol stahne posledních N period pro vsechny timeframy:
-   - `1h` (1 hodina) - posledních 30 period
-   - `4h` (4 hodiny) - posledních 30 period
-   - `day` (1 den) - posledních 30 period
-   - `week` (1 tyden) - posledních 30 period
-   - `month` (1 mesic) - posledních 30 period
-   - Oscilatory (RSI + MA) pro kazdy timeframe
-5. Zapise vystup do `SERVICE_DEST_FOLDER/<SYMBOL>.json`.
-6. Po dokonceni ceka do dalsiho hodinoveho intervalu.
+1. Načte konfiguraci z `.env`.
+2. Připojí se k MetaTrader 5 (`MetaTrader5` Python package).
+3. Spustí monitoring volné marže (jednoho).
+4. Jakmile marže > 10%:
+   - Zkontroluje, zda existují předpovědi z **aktuální hodiny**
+   - **Pokud ano**: používá je (bez stahování nových dat)
+   - **Pokud ne**: stáhne data a získá nové předpovědi od Gemini AI
+5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
+6. Vykonáný proces skončí (bez pokračujícího scheduleru)
 
 ## Struktura vystupu
 
@@ -85,6 +82,10 @@ PRETTY_JSON=true
 # MT5_LOGIN=12345678
 # MT5_PASSWORD=your_password
 # MT5_SERVER=YourBroker-Server
+
+# Gemini AI konfigurace pro trading logic
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent
 ```
 
 **LOOKBACK_PERIODS** - Počet posledních period, které se mají stahovat pro každý timeframe. Výchozí 30.
@@ -95,11 +96,29 @@ PRETTY_JSON=true
 python logika.py
 ```
 
-Skript provede prvni cyklus okamzite po startu a pak kazdych `RUN_INTERVAL_SECONDS` sekund.
+Skript níže:
+1. Spustí monitoring volné marže (jedenkrát)
+2. Pokud marže > 10%:
+   - Zkontroluje existující predikce z aktuální hodiny
+   - Používá je, nebo stáhne nová data a získá nové predikce
+   - Filtruje slabé signály
+3. **Skončí** (bez pokračného monitoringu)
+
+## Automatické spuštění v cron
+
+Chcete-li spouštět skript opakovaně (např. každou hodinu), použijte cron:
+
+```bash
+0 * * * * cd /path/to/bots/analysis/ollama && python logika.py
+```
+
+Skript bude spuštěn na začátku každé hodiny.
 
 ## Poznamky
 
 - MetaTrader 5 terminal musi bezet lokalne ve stejnem uzivatelskem kontextu.
 - Pokud nektery symbol selze, skript pokracuje na dalsi symbol.
-- Ukonceni skriptu: `Ctrl+C`.
+- Monitorování probíhá v **background threadu**, nezablokuje tedy ostatní procesy
+- Optimalizace: Pokud jsou k dispozici předpovědi z aktuální hodiny, jsou používány (bez nového stahování)
+- Ukonceni skriptu: `Ctrl+C` (normálně skript sám skončí po obchodování)
 

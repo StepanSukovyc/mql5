@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena XPDUSD_ecn je v downtrendu na krátkodobých timeframech (1h, 4h, day). RSI na těchto timeframech naznačuje, že trh je poblíž přeprodané oblasti, což by mohlo vést k menší korekci nahoru. Nicméně, MA na těchto timeframech je stále nad aktuální cenou, což naznačuje pokračující tlak na pokles. Na týdenním timeframe je RSI neutrální a MA pod cenou, což naznačuje mírný pozitivní sentiment. Měsíční RSI je relativně vysoké, což naznačuje potenciální překoupenost v dlouhodobém horizontu.  Celkově převládá krátkodobý medvědí sentiment, takže SELL je doporučen s nejvyšší vahou, ale s ohledem na přeprodané podmínky a potenciální korekci směrem nahoru."
+}
+```

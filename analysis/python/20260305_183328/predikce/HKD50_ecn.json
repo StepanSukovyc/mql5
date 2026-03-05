@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena je pod MA na denních a 4H grafech. Denní a 4H RSI jsou pod 35, indikující potenciální přeprodanost, ale i nadále prostor pro pokles. Měsíční RSI je relativně vysoko, což naznačuje potenciál pro korekci. Poslední denní svíčka je silně medvědí. 1H timeframe: Cena osciluje kolem MA, RSI je neutrální, celkový trend down."
+}
+```

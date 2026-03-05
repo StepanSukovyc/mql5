@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena je pod MA na většině časových rámců. RSI je pod 50 na 1H, 4H, denním i týdenním grafu, na měsíčním grafu je dokonce hluboko v přeprodané zóně, což naznačuje silný prodejní tlak. Na grafu 1H se blíží překřížení MA a ceny, což je další signál pro SELL pozici."
+}
+```

@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "The pair shows bearish signs across multiple timeframes. While the weekly and monthly RSI are above 50, indicating potential upward momentum on a larger scale, the shorter-term indicators (1h, 4h, daily) are trending downwards with RSI values below 50 and the price below the moving average on 1H and 4H. The recent hourly candles show a clear downward trend. Therefore, SELL carries the highest probability. A HOLD strategy accounts for the long-term positive momentum. BUY has a low probability due to short term downtrend."
+}
+```

@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě medvědí trend. RSI na denní, týdenní a měsíční bázi naznačuje, že trh je spíše přeprodaný a MA na 1h timeframe je nad aktuální cenou. RSI na týdenní bázi je velmi nízko (28.73), což naznačuje možný odraz. Nicméně MA na delších časových rámcích je vysoko nad aktuální cenou, což potvrzuje silný downtrend. Poslední svíčky na 1h timeframe jsou převážně klesající, což také naznačuje prodejní tlak."
+}
+```

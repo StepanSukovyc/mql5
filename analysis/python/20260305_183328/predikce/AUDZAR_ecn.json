@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Cena je v uptrendu na kratších timeframech (1h, 4h, day) s RSI indikující překoupenost na denním grafu (73.02), ale ne extrémní. MA na všech timeframech pod aktuální cenou. Na týdenním grafu je RSI 66.38 což naznačuje, že prostor pro růst ještě je. Měsíční RSI je 48.57. Poslední denní svíčka je silná bullish. Potenciální ziskovost BUY převažuje, ale RSI naznačuje nutnost opatrnosti. Sell je rizikové vzhledem k momentum. Hold je opatrná strategie vzhledem k nejasnostem trhu."
+}
+```

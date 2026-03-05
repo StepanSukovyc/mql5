@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI (69.95) se blíží překoupené zóně, což naznačuje možnost korekce. Na týdenním grafu je RSI (55.09) neutrální. Měsíční RSI (41.62) je stále relativně nízko, ale cena je pod MA. Krátkodobé indikátory (1h, 4h) oscilují kolem MA, což indikuje nerozhodnost. Denní close candles indikují rostoucí trend, takže s opatrností lze spekulovat na BUY. Sell proto, že na 4h se RSI dostává do překoupené zóny, ale na větších timeframech je prostor pro růst. HOLD: vysoká volatilita a rozporuplné signály."
+}
+```

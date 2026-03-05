@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI naznačuje neutrální pozici (45.73), ale cena je pod denním MA (13029.0275). Na 4H grafu je RSI (39) rovněž neutrální, ale pod MA (13012.6775). Na týdenním grafu je RSI (69) blízko překoupené zóny, ale MA (12105.4655) je daleko pod aktuální cenou, což signalizuje uptrend, ale s potenciálem korekce. Poslední denní svíčka je bearish. Celkově indikátory naznačují spíše SELL kvůli klesajícímu trendu v krátkodobém horizontu, vysokému RSI na týdenním grafu a možnosti korekce."
+}
+```

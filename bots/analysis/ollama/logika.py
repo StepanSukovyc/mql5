@@ -19,6 +19,7 @@ from typing import Dict, Iterable, List, Optional
 
 import MetaTrader5 as mt5
 from account_monitor import run_account_monitor
+from trading_logic import run_trading_logic
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -307,7 +308,7 @@ def run_cycle(cfg: Config) -> None:
 	print(f"Cycle done. Success={ok_count}, Errors={err_count}, Total={len(symbols)}")
 
 
-def run_scheduler(cfg: Config) -> None:
+def run_scheduler(cfg: Config, trading_trigger_event: threading.Event) -> None:
 	should_stop = {"value": False}
 
 	def _handle_stop(signum, _frame):
@@ -322,6 +323,11 @@ def run_scheduler(cfg: Config) -> None:
 	cycle_idx = 0
 
 	while not should_stop["value"]:
+		# Check if trading logic was triggered by monitor
+		if trading_trigger_event.is_set():
+			print(f"\n🚀 Trading trigger signal received from monitor!")
+			break
+		
 		cycle_idx += 1
 		cycle_started = datetime.now(tz=timezone.utc).isoformat()
 		print(f"\n=== Cycle #{cycle_idx} started at {cycle_started} ===")
@@ -339,11 +345,81 @@ def run_scheduler(cfg: Config) -> None:
 
 		print(f"Waiting {int(sleep_seconds)} seconds for next cycle...")
 		
-		# Interruptible sleep - check should_stop every second
+		# Interruptible sleep - check should_stop and trading_trigger every second
 		sleep_remaining = sleep_seconds
 		while sleep_remaining > 0 and not should_stop["value"]:
+			if trading_trigger_event.is_set():
+				print(f"🚀 Trading trigger signal received during sleep!")
+				should_stop["value"] = True
+				break
 			time.sleep(min(1.0, sleep_remaining))
 			sleep_remaining -= 1.0
+
+
+def find_predictions_folder_for_current_hour(service_folder: Path) -> Optional[Path]:
+	"""
+	Find a predictions folder from the current hour (same hour in UTC).
+	
+	Current time example: 2026-03-05 19:45 UTC → look for folder 20260305_19*
+	Folder example: 20260305_190000, 20260305_191500, etc.
+	
+	Args:
+		service_folder: SERVICE_DEST_FOLDER path
+	
+	Returns:
+		Path to predictions folder if found, None otherwise
+	"""
+	now = datetime.now(tz=timezone.utc)
+	current_hour = now.hour
+	current_date_str = now.strftime("%Y%m%d")
+	
+	# Look for folders matching pattern: YYYYMMDD_HH****
+	hour_pattern = f"{current_date_str}_{current_hour:02d}"
+	
+	print(f"🔍 Looking for predictions from current hour ({hour_pattern})...")
+	
+	for folder in service_folder.iterdir():
+		if not folder.is_dir():
+			continue
+		
+		folder_name = folder.name
+		# Check if folder matches pattern: YYYYMMDD_HHMMSS
+		if folder_name.startswith(hour_pattern) and len(folder_name) == 15 and folder_name[8] == "_":
+			predikce_folder = folder / "predikce"
+			if predikce_folder.exists() and any(predikce_folder.glob("*.json")):
+				print(f"✅ Found existing predictions in: {folder_name}/predikce/")
+				return predikce_folder
+	
+	print(f"⚠️  No predictions found for current hour {hour_pattern}")
+	return None
+
+
+def process_existing_predictions(predictions_folder: Path) -> bool:
+	"""
+	Process existing predictions from current hour (filter them).
+	
+	Args:
+		predictions_folder: Path to predikce folder
+	
+	Returns:
+		True if predictions exist after filtering
+	"""
+	from trading_logic import filter_predictions
+	
+	print(f"\n📊 Processing existing predictions from {predictions_folder}...")
+	
+	# Count before filtering
+	before_count = len(list(predictions_folder.glob("*.json")))
+	print(f"   Before: {before_count} predictions")
+	
+	# Filter
+	deleted_count = filter_predictions(predictions_folder)
+	
+	# Count after filtering
+	after_count = len(list(predictions_folder.glob("*.json")))
+	print(f"   After: {after_count} predictions (deleted {deleted_count})")
+	
+	return after_count > 0
 
 
 def main() -> int:
@@ -353,37 +429,68 @@ def main() -> int:
 		print(f"Config error: {exc}")
 		return 2
 
-	# Thread-safe event for monitor shutdown
+	# Thread-safe events for coordination
 	monitor_stop_event = threading.Event()
+	trading_trigger_event = threading.Event()
+	
+	def monitor_wrapper():
+		"""Wrapper to run account monitor."""
+		run_account_monitor(
+			check_interval_seconds=60, 
+			stop_event=monitor_stop_event,
+			trading_trigger_event=trading_trigger_event
+		)
 	
 	try:
 		mt5_initialize(cfg)
 		print("Connected to MetaTrader 5.")
 		
-		# Start account monitor in a background thread
+		# Start account monitor in a background thread (single check, not continuous)
 		monitor_thread = threading.Thread(
-			target=run_account_monitor,
-			kwargs={"check_interval_seconds": 60, "stop_event": monitor_stop_event},
+			target=monitor_wrapper,
 			daemon=False
 		)
 		monitor_thread.start()
 		print("Account monitor started in background thread.")
 		
-		# Run main scheduler
-		run_scheduler(cfg)
+		# Wait for monitor to complete (will signal trading_trigger_event if margin > 10%)
+		monitor_thread.join(timeout=30)
 		
-		# Signal monitor to stop before closing MT5
-		monitor_stop_event.set()
-		print("Signaling monitor thread to stop...")
-		
-		# Wait for monitor thread to finish (with timeout)
-		monitor_thread.join(timeout=5)
-		
-		return 0
+		# Check if trading trigger was set by monitor (margin > 10%)
+		if trading_trigger_event.is_set():
+			print("\n🚀 Stop condition met (margin > 10%) - proceeding with trading...")
+			
+			# Check if predictions from current hour already exist
+			existing_predictions = find_predictions_folder_for_current_hour(cfg.service_dest_folder)
+			
+			if existing_predictions:
+				# Use existing predictions from current hour
+				print("💡 Using existing predictions from current hour")
+				process_existing_predictions(existing_predictions)
+			else:
+				# Need to download data and get new predictions
+				print("📥 Downloading market data for current hour...")
+				run_cycle(cfg)
+				
+				print("🤖 Getting predictions from Gemini AI...")
+				try:
+					success = run_trading_logic(cfg.service_dest_folder)
+					if success:
+						print("✅ Trading logic completed successfully")
+					else:
+						print("⚠️  Trading logic completed with warnings")
+				except Exception as trading_exc:
+					print(f"❌ Trading logic failed: {trading_exc}")
+			
+			print("\n🛑 Trading process finished. Exiting...")
+			return 0
+		else:
+			print("\n⏸️  Stop condition not met (margin ≤ 10%) - nothing to do.")
+			print("   Next monitoring check will be in ~1 hour when scheduler runs.")
+			return 0
+	
 	except Exception as exc:  # pylint: disable=broad-except
 		print(f"Fatal error: {exc}")
-		# Signal monitor to stop on error
-		monitor_stop_event.set()
 		return 1
 	finally:
 		# Ensure monitor is stopped

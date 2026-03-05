@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "GER40_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "GER40_ecn is showing bearish signals across multiple timeframes.  Daily and 4-hour RSI are in oversold territory, but still trending downward. The price is significantly below the daily and weekly moving averages, indicating a strong downtrend. Recent hourly candles show continued selling pressure, and the monthly RSI, while still high, has dropped significantly.  Limited data (30 candles) necessitates cautious interpretation, and monthly MA is still bullish. Therefore SELL is dominant."
+}
+```

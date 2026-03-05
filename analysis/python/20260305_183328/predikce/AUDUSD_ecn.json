@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Short-term: RSI values on 1H and 4H are below 35, suggesting oversold conditions and potential for a bounce. However, price is below the moving average on all timeframes, indicating a strong downtrend. Weekly RSI is high (65), suggesting potential for further downside. Daily timeframe shows RSI nearing 50 with current price breaking to the downside. Overall, the momentum is bearish, favoring SELL. Holding may be considered if expecting sideways consolidation."
+}
+```

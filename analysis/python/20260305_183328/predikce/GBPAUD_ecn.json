@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 35,
+  "SELL": 45,
+  "HOLD": 20,
+  "reasoning": "Na denním a týdenním grafu RSI naznačuje potenciál pro další pokles, i když je již blízko překoupenosti. MA na vyšších časových rámcích je stále nad aktuální cenou, což naznačuje pokračující downtrend. 1h a 4h RSI jsou v překoupené zóně, což signalizuje možnou korekci. Celkově převládá medvědí sentiment, ale vzhledem k nárůstu ceny v posledních hodinách je vhodné zvážit i hold."
+}
+```

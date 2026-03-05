@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na denním a týdenním grafu klesající RSI indikuje klesající trend. Cena je pod denním a týdenním MA. Naopak měsíční RSI je neutrální a cena je nad MA. Krátkodobě převládá prodejní tlak, ale dlouhodobý trend je nejistý. Doporučuje se vyčkat na další potvrzení trendu."
+}
+```

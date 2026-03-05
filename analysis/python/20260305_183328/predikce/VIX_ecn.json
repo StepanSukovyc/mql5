@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "VIX_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "VIX_ecn currently shows mixed signals. While the daily RSI is approaching overbought territory (68.9), the weekly RSI is already in overbought territory (72.4) suggesting potential for a pullback. The price is above the moving average on most timeframes, indicating bullish momentum. However, the recent price action on the 1h and 4h charts shows some consolidation, and with the weekly RSI being overbought, a potential correction is possible. Therefore, HOLD provides a balance, while BUY is considered due to overall bullish momentum, and SELL is considered due to overbought conditions on longer timeframes and recent price action. The recent large increase in tick volume on the daily and weekly charts should also be considered."
+}
+```

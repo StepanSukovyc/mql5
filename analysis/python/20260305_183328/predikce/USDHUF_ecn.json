@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technicals show mixed signals. Short-term (1h, 4h, day) RSI indicates overbought conditions potentially leading to a pullback. The price is currently above the daily and weekly moving averages, suggesting bullish momentum. However, the monthly MA is significantly higher than the current price, hinting at potential long-term resistance. Recent hourly candle data shows volatile price action. Therefore, HOLDing current positions or cautiously initiating BUY positions with tight stop-losses might be preferable. SELL positions are viable if the price breaks below short-term support levels."
+}
+```

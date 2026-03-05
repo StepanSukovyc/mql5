@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 20,
+  "SELL": 50,
+  "HOLD": 30,
+  "reasoning": "XZNUSD is showing bearish signals. 1H and 4H RSI are below 35, indicating oversold conditions but also potential for further downside. Price is below 1H, 4H and Daily MA, reinforcing the selling pressure. Daily RSI is also approaching the 40 mark. Weekly RSI is at 59 indicating a potential for downward movement. Recent price action (last hourly candles) show a sharp drop, and the overall trend is downwards. Until these downward signals are reversed, SELL offers the highest probability outcome and BUY is risky. Holding is a valid intermediate path."
+}
+```

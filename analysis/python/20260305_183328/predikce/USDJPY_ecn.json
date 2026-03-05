@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "USDJPY is trending upwards, as evidenced by the price being above the moving averages on the daily, weekly, and monthly timeframes. RSI is in the neutral to slightly overbought territory on shorter timeframes (1h, 4h, Day and week), suggesting potential for a pullback or consolidation before further upside. The most recent hourly candles suggest a potential short-term stall or consolidation with both highs and lows showing volatility, but no clear direction at the very end. The overall long-term trend suggests buying opportunities on dips, but given the RSI levels on shorter timeframes, it's not a high-confidence buy. Hold reflects the uncertainty given the RSI. The potential for a short-term sell is supported by overbought short time frames and possible consolidation."
+}
+```

@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CADJPY is showing mixed signals. Short-term (1H) RSI is neutral (45.88), while 4H RSI is slightly bullish (55.84). Daily and Weekly RSI suggest overbought conditions (62.21 and 66.63 respectively), but Monthly RSI is still neutral.  Price is above 1H and 4H moving averages, suggesting short-term upward momentum, however is below the daily moving average. Recent hourly candles show volatility but overall slightly bearish direction. Considering these factors, a hold position is recommended with potential for both buying and selling opportunities depending on short-term price action. Limited historical data is a concern."
+}
+```

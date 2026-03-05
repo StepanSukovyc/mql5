@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním grafu je RSI hluboko v přeprodané oblasti (21.30), což naznačuje potenciální býčí obrat. Nicméně, denní RSI (39.22) stále směřuje dolů a cena je pod 200denním klouzavým průměrem (1.666311), což naznačuje pokračující medvědí trend. Proto dává smysl SELL pozice. Na hodinovem grafu je RSI 63.156544 a cena je nad klouzavým průměrem (1.647396), což sice nabizi prostor pro nakup, ale celkovy trend je spise klesajici, proto davam vyssi procento pozici SELL."
+}
+```

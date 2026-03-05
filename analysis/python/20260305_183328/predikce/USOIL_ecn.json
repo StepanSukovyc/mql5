@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 60,
+  "SELL": 15,
+  "HOLD": 25,
+  "reasoning": "Denní a týdenní RSI jsou ve stavu překoupenosti, naznačují potenciální korekci. Nicméně, měsíční RSI má stále prostor pro růst, což naznačuje pokračující uptrend. MA na většině timeframech je pod aktuální cenou, což podporuje nákupní signál. Vzhledem k celkovému uptrendu a silnému momentum je preferován BUY, ale vzhledem k vysokému RSI na denním a týdenním timeframe je nutné zvážit i možnost korekce (HOLD a SELL)."
+}
+```

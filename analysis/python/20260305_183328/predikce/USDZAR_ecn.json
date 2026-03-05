@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDZAR_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "Na hodinových a 4hodinových grafech je RSI překoupené (nad 70), což naznačuje možnost korekce. Nicméně denní RSI je 65.76, což naznačuje uptrend. Týdenní RSI je neutrální, ale měsíční RSI je nízko, což dává v delším horizontu prostor pro růst. Cena je nad denním MA, ale pod měsíčním MA. Proto upřednostňuji BUY se sníženým rizikem SELL."
+}
+```

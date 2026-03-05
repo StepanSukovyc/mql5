@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním a týdenním timeframe je RSI překoupené, což naznačuje možnou korekci. Denní RSI je také vysoké. Krátkodobé (1h a 4h) RSI se pohybují kolem neutrálních hodnot. Cena je pod 1h a 4h MA, ale nad denním, týdenním a měsíčním MA. Celkově vidím vyšší pravděpodobnost korekce/sell než nákupu. HOLD indikuje nerozhodnost a čekání na další potvrzení trendu."
+}
+```

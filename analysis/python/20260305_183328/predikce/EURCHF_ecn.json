@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "EURCHF is showing bearish signals across multiple timeframes. Monthly and weekly RSI are oversold, but the strong downward trend suggests further potential for decline. The price is below the MA on the 1h, 4h, daily, weekly and monthly charts. Although 1h RSI shows oversold conditions, this is a short-term view. Given the dominant trend I give it a moderate short bias with lower likelihood of an upward retracement based on 1h oversold conditions."
+}
+```

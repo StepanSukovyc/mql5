@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "EURZAR is showing bullish momentum on shorter timeframes (1h, 4h) with RSI near overbought levels. The daily RSI is also trending upwards. However, the weekly and monthly RSIs are neutral. The price is above the daily MA, but below the weekly and monthly. Recent daily candle indicates bullish strength, but needs confirmation. Therefore, there is a bias toward buying, but caution is warranted, leading to a significant HOLD percentage as well."
+}
+```

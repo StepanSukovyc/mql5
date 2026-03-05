@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "ZARJPY is showing strong bearish signals. The hourly and 4-hourly RSI are deeply oversold, indicating potential for a short-term bounce, however, the daily RSI is also approaching oversold territory, and the price is below the daily Moving Average. Longer-term, the weekly RSI is above 50, while the monthly RSI is even higher, suggesting a downtrend. Given this divergence and the current price action, a SELL is the most probable scenario, although short-term volatility warrants caution. The overall long term trend on monthly charts are still bullish which might lead to retest higher values."
+}
+```

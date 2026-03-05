@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena BTCUSD se pohybuje pod 1h MA a denní MA, RSI na týdenní bázi je pod 33, což naznačuje potenciální překoupenost. Z denního grafu je patrný klesající trend a poslední hodinové svíčky naznačují klesající momentum. Měsíční MA je nad aktuální cenou. Celkově převládá medvědí sentiment, HOLD by mohl být vhodný v případě nejistoty."
+}
+```

@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "EURHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. RSI na denním a 4H grafu je relativně vysoké (okolo 67), což naznačuje, že pár by mohl být překoupený a mohla by přijít korekce. MA na denním grafu je výrazně níže než aktuální cena, což naznačuje rostoucí trend, avšak MA na měsíčním grafu je výše než aktuální cena. Svíčkové formace na 1H grafu nenaznačují jasný směr. Celkově je situace nejasná, proto doporučuji HOLD nebo opatrný BUY s malým rizikem."
+}
+```

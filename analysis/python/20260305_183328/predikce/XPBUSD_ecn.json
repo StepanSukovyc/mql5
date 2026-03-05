@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "XPBUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena XPBUSD_ecn je 1936.55, což je pod všemi MA v časových rámcích 1h, 4h, den a týden. RSI indikuje downtrend, zejména na denním a 4hodinovém grafu. Z denního grafu je patrný pokračující klesající trend, RSI je pod 40 a cena se pohybuje pod MA. Zvažuje se SELL pozice, protože indikátory naznačují downtrend. BUY má nízkou váhu. HOLD je zde jako vyčkávací možnost."
+}
+```

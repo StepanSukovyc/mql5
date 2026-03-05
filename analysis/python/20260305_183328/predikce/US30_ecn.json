@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "US30_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena US30 prudce klesá, RSI na 1H a 4H timeframech indikuje překoupenost a na denním timeframe je blízko překoupení. Cena je pod MA na 1H, 4H a denním timeframe. Na týdenním timeframe je RSI kolem 50, ale na měsíčním timeframe je RSI vysoké, což naznačuje možnou korekci.  Poslední hodinové svíčky ukazují silný pokles. Proto preferuji SELL."
+}
+```

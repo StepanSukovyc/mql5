@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě neutrální až mírně medvědí výhled. Cena se pohybuje kolem MA na denním grafu, RSI je lehce nad 50. Na 1h a 4h grafu je RSI neutrální. Denní svíčky naznačují konsolidaci. Vzhledem k omezenému množství dat a absence fundamentálních informací je vhodné vyčkat na jasnější signál. Měsíční MA roste, ale současná cena je nad ní, což naznačuje potenciál k poklesu.  Důležitý bude průraz supportu/rezistence."
+}
+```

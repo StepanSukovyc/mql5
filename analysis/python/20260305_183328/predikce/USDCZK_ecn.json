@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "Technické indikátory na denním grafu ukazují překoupenost (RSI 70.36), což naznačuje potenciální korekci (SELL). Na druhou stranu, týdenní RSI je neutrální (58.57) a cena se drží nad 20-týdenním MA, což naznačuje pokračující uptrend (BUY). Měsíční RSI je pod 50, ale cena je pod MA, to signalizuje, že trend na měsíčním timeframe je spíše do strany, ale mohlo by dojít k odrazu. Na H1 timeframe cena roste a RSI je blízko překoupenosti a H4 ukazuje na potenciální uptrend. Proto doporučuji HOLD s vyčkáváním na potvrzení trendu."
+}
+```

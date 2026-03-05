@@ -1,0 +1,9 @@
+```json
+{
+  "symbol": "AUDJPY_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Dominance SELL signalů na základě RSI (1H, 4H pod 40) a MA (cena pod MA na 1H, 4H), oslabení v posledních hodinách naznačuje medvědí momentum. Dlouhodobější timeframe (denní) je neutrální, týdenní a měsíční ukazují na překoupenost, ale aktuální price action a krátkodobé indikátory převažují směr k prodeji. Možnost BUY je limitována potenciálním odrazem od supportu."
+}
+```
