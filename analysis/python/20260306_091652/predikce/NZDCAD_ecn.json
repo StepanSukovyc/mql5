@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena je pod MA na všech timeframes kromě week, RSI je pod 50 na všech timeframes a klesá, což indikuje downtrend. Na 1h a 4h je RSI v oversold oblasti. SELL má vyšší pravděpodobnost. BUY je limitován krátkodobým potenciálem oversold, HOLD je z důvodu čekání na potvrzení trendu."
+}

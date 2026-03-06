@@ -1,0 +1,7 @@
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "XPDUSD_ecn is showing bearish signals. Hourly and 4-hourly RSI are oversold (36.64, 31.31), suggesting potential for a bounce, but the price is below the Moving Average on 1h, 4h, and daily timeframes. Weekly RSI is neutral (54.44). Recent daily and 4H price action indicates downward momentum, making a SELL position higher probability at this time. The HOLD option is there due to the longer term uptrend observed on monthly chart, potentially making the sell short term. "
+}

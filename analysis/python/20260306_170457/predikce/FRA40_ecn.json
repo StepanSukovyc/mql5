@@ -1,0 +1,7 @@
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Price is below MA on 1h, 4h and Day. RSI is low on all timeframes, indicating oversold conditions which could lead to a short-term bounce. However, downtrend seems strong and Monthly MA is below the price. Recent price action (candles) shows a move to the upside. Overall, the trend indicates a selling opportunity, but we advise holding due to the uncertain market conditions, as the price may recover slightly."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "JP225_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Technická analýza naznačuje medvědí sentiment. RSI na 1h a 4h timeframe je pod 40, což signalizuje, že trh je poblíž překoupené zóny. Denní RSI je také pod 50, což naznačuje pokračující pokles. Cena je pod denním MA. Týdenní RSI je sice v býčí zóně, ale klesá. Měsíční RSI je vysoké, ale cena se od MA vzdaluje. Vzhledem k těmto faktorům je pravděpodobnější pokles ceny.  Nicméně, je nutné brát v potaz, že data jsou omezená a analýza vychází pouze z technických indikátorů. Zvýšená volatilita (vysoký spread) také zvyšuje riziko."
+}

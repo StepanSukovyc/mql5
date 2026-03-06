@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Globally, the trend on the Monthly timeframe is bearish, as indicated by the RSI at 35.20 and the price being significantly below the MA. Shorter timeframes (Day and 4H) show RSI in slightly overbought territory (63.99 and 61.61, respectively), suggesting potential for a pullback. Recent hourly data shows price decreasing. Therefore, SELL has a slight edge, while BUY is riskier."
+}

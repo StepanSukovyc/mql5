@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na kratších časových rámcích (1h, 4h) RSI naznačuje, že se blížíme k přeprodané oblasti, ale MA je stále nad současnou cenou. Denní RSI je neutrální, týdenní je překoupený a měsíční ukazuje na pokračující uptrend. Vzhledem k rozporuplným signálům a blízkosti silné rezistence je doporučena opatrnost. SELL má mírnou převahu, jelikož cena klesla pod MA na 1h a 4h timeframe a RSI jsou relativně nízko, což naznačuje další potencionální pokles. BUY má menší podíl, zvažující potenciál pro odraz. HOLD je vhodný, pokud se čeká na jasnější signály."
+}

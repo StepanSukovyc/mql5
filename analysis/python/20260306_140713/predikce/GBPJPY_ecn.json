@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPJPY_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "Smíšené signály. RSI na denní a 4H bázi je neutrální, ale na týdenní a měsíční se blíží překoupené zóně. Cena je nad MA na všech timeframech, což naznačuje uptrend, ale krátkodobě (1h) se cena pohybuje kolem MA, což implikuje konsolidaci. Nedostatek výrazných svíčkových formací dává prostor pro HOLD, dokud se situace nevyjasní. Dlouhodobý uptrend je však stále v platnosti, proto vyšší váha pro BUY než SELL."
+}

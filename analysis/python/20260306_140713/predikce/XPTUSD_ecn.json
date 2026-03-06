@@ -1,0 +1,7 @@
+{
+  "symbol": "XPTUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI překoupené, ale na týdenním grafu se pohybuje kolem 55, což naznačuje potenciál pro další růst. Denní RSI je v neutrální zóně, ale cena je pod denním MA. Krátkodobé indikátory (1h a 4h) ukazují na přeprodanost a potenciální odraz, ale celkový trend se jeví spíše klesající. Kombinace těchto faktorů naznačuje spíše SELL pozici v krátkodobém horizontu s možným odrazem v budoucnu. Proto snížené % pro BUY."
+}

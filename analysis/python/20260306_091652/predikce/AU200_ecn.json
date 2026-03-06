@@ -1,0 +1,7 @@
+{
+  "symbol": "AU200_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "AU200_ecn shows a bearish trend. Short term (1H and 4H) RSI is oversold, suggesting a possible short term bounce. However, the price is below the moving averages across all timeframes except the monthly timeframe, with the daily timeframe showing significant downtrend, indicating continued selling pressure. The monthly timeframe RSI is above 60, indicating a bullish trend on the long-term perspective. Given the stronger downtrend indicators in the short- to mid-term, a 'SELL' recommendation carries the highest probability, while 'BUY' should be considered cautiously due to potential short-term oversold bounces. 'HOLD' is a neutral stance, acknowledging the mixed signals."
+}

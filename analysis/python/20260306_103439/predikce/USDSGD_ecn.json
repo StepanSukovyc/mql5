@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1h timeframe RSI je neutrální, ale cena je nad MA, což naznačuje krátkodobý potenciál růstu. Na 4h a denním timeframe je RSI v oblasti překoupenosti, což naznačuje potenciální korekci. Týdenní RSI je neutrální, ale cena je pod MA, což naznačuje dlouhodobější klesající trend. Měsíční RSI je pod 40, což naznačuje potenciál k obratu, nicméně cena je daleko od MA. Celkově převažují signály k prodeji (RSI na vyšších TF), ale kvůli rozporuplným signálům na různých timeframe a neutrálním hodnotám na denním a týdenním timeframe se doporučuje část pozice držet (HOLD) a malou část investovat do nákupu (BUY)."
+}

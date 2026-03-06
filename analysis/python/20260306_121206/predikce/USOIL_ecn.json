@@ -1,0 +1,7 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 50,
+  "SELL": 20,
+  "HOLD": 30,
+  "reasoning": "USOIL_ecn is currently showing strong bullish momentum, with price above the moving average (MA) on most timeframes and RSI levels indicating overbought conditions on shorter timeframes (1h, 4h, day, week). The strong upward move in the last day suggests continued buying pressure, but the overbought RSI values suggest potential for a pullback or consolidation. Monthly RSI is moderate, suggesting room for further upside in the longer term. Given these factors, the highest probability is for continued upward movement (BUY), but the overbought condition and potential for profit-taking warrant caution (HOLD) and a possibility of reversal (SELL)."
+}

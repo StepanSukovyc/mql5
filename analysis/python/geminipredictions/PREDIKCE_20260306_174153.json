@@ -1,0 +1,6 @@
+{
+  "recommended_symbol": "NZDSEK_ecn",
+  "action": "SELL",
+  "lot_size": 0.04,
+  "reasoning": "Analýza NZDSEK_ecn ukazuje na převahu prodejního tlaku. Měsíční RSI je hluboko v přeprodané zóně, ale MA na měsíčním grafu stále klesá, což ukazuje na silný downtrend. Denní graf ukazuje cenu nad MA, ale poslední svíčka je klesající. Krátkodobé timeframe ukazují RSI blízko k 50 a cenu pod MA, což signalizuje pokračující tlak na pokles. Mám otevřené pozice na EURNZD_ecn, GBPNZD_ecn, CHFZAR_ecn, CADCHF_ecn, USDSGD_ecn, UK100_ecn, AU200_ecn, GBPCAD_ecn, VIX_ecn, EURNOK_ecn a EURUSD. NZDSEK_ecn diverzifikuje portfolio. S margin_free 437.43 a opatrným risk managementem, doporučuji lot size 0.04."
+}

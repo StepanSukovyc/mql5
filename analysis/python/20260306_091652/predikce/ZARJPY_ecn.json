@@ -1,0 +1,7 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na základě technické analýzy vidíme, že cena ZARJPY je v klesajícím trendu, potvrzeném RSI pod 30 na 1h a 4h timeframe, což naznačuje překoupenost a potenciál pro další pokles. Denní RSI je pod 50, což naznačuje přítomnost prodejců. MA na většině timeframe kromě týdenního a měsíčního je nad aktuální cenou a tím vytváří rezistenci. Měsíční a týdenní RSI jsou nad 50, což ukazuje na dlouhodobější uptrend, ale aktuální situace naznačuje spíše SELL. HOLD je pro ty, co již mají pozice, dokud se trend neustálí."
+}

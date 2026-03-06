@@ -1,0 +1,7 @@
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the 1H and 4H charts, the RSI is approaching overbought levels, while the price has recently increased. The daily RSI is above 60, indicating upward momentum. The weekly and monthly RSI values are below 50, indicating that the trend has been bearish until now. Based on the price being above the MA on shorter timeframes and below the MA on longer timeframes and RSI values, I believe a retracement is possible, and therefore advise a HOLD or a conservative BUY."
+}

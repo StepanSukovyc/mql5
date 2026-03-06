@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu se RSI blíží překoupené zóně, ale je stále v pozitivním teritoriu. Cena se nachází nad denním MA. Na hodinovem grafu RSI je neutralni, cena se pohybuje okolo MA. Na tydennim a mesicnim grafu se zdá, že trend se pohybuje do strany. Proto navrhuji vetsi pravdepodobnost pro SELL nez BUY, a HOLD je take moznost."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "UK100_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena UK100_ecn je v krátkodobém horizontu v downtrendu, což indikuje RSI na 1h i 4h timeframe v silně přeprodané zóně (<30). Nicméně,  MA na 1h, 4h a denním timeframe je nad aktuální cenou, což naznačuje pokračující medvědí trend. Naopak, týdenní a měsíční MA je pod aktuální cenou. Denní RSI je 40, takže ještě neni přeprodané. Poslední denní svíčka je silně medvědí, což podporuje prodejní pozici. Proto upřednostňuji SELL. Hold doporučuji z důvodu velkého spreadu. Buy zvažuji jen v případě odrazu od supportu."
+}

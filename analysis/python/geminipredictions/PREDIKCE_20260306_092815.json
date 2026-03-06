@@ -1,0 +1,6 @@
+{
+  "recommended_symbol": "AU200_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "reasoning": "AU200_ecn má silný klesající trend, i když krátkodobé RSI naznačuje potenciální odraz. Cena je pod klouzavými průměry na většině časových rámců. Vzhledem k tomu, že nemám otevřené pozice na AU200_ecn, doporučuji SELL s lot size 0.01, s ohledem na aktuální margin free a celkovou strategii diverzifikace portfolia."
+}

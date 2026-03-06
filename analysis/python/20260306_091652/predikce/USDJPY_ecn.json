@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "USDJPY is showing mixed signals. The RSI on shorter timeframes (1h, 4h) is nearing overbought territory, but the daily RSI is still moderate. While the price is above the daily and weekly MA, suggesting an upward trend, recent 1h and 4h price action shows some consolidation. The lack of significant bullish candlestick patterns and potential for profit-taking at these levels contribute to uncertainty. Therefore, HOLD has significant weight."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "EURSGD is showing bearish signals. RSI on 1H, 4H, Day, and Week timeframes are below 50, indicating a downward trend. The price is below the moving average on 1H, 4H, Day, and Week timeframes, reinforcing the sell signal. Monthly RSI is above 50 but MA is below the current price which can signal possible long term resistance point. Recent hourly candles show downward movement. Given these indicators, SELL has the highest probability. BUY is risky, HOLD is neutral."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "EURCHF is showing bearish signals across multiple timeframes. RSI is consistently below 40 on 1H, 4H and Daily charts, indicating oversold conditions and continued downward momentum. Weekly and Monthly RSI values are also very low. The price is consistently below the Moving Average on all timeframes.  While a short-term bounce is possible (hence the 20% buy), the overall trend suggests further downside. Holding reflects the possibility of consolidation or unexpected news."
+}

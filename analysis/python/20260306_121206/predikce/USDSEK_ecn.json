@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "The price has been trending upwards in the shorter term (1h, 4h, daily) indicated by RSI and price movement. However, the longer term (weekly, monthly) trend still indicates a downtrend with RSI levels below 50. A HOLD position would wait for more confirmation, but a BUY position may be possible if upward momentum can be maintained. A SELL position is riskier, as it goes against current price action and momentum, but remains an option given the longer term picture."
+}

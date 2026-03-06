@@ -1,0 +1,7 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 65,
+  "SELL": 15,
+  "HOLD": 20,
+  "reasoning": "USOIL_ecn is currently overbought across multiple timeframes (1H, 4H, Day, Week) based on RSI. However, the recent surge in price suggests strong bullish momentum. The daily RSI is extremely high at 87.31, indicating a potential pullback is likely. Monthly RSI is at 60.57 and rising. Considering the bullish trend and MA values across all timeframes, a BUY position is favored, but caution is advised due to overbought conditions. HOLD is recommended to await a potential pullback for a better entry point. SELL is least favored but the high RSI across timeframes signals some short to mid term downturns will be very possible. "
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Na hourly timeframe je RSI silně přeprodané (22.77), což naznačuje možný krátkodobý odraz. Nicméně, cena je pod MA na všech timeframech a RSI na denním, týdenním i měsíčním timeframe naznačuje medvědí trend. Poslední denní svíčka je silně bearish. Proto převládá SELL. HOLD je možnost v případě očekávání konsolidace po výrazném poklesu."
+}

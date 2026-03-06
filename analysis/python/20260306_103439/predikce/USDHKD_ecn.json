@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technické indikátory ukazují smíšený signál. RSI na 1h je relativně vysoké (66.16), což naznačuje možnost překoupenosti, zatímco RSI na 4h a denním grafu jsou neutrální (51.85 a 60.69). MA na většině timeframech je pod současnou cenou (7.82202), což naznačuje býčí trend, ale blížící se hladina rezistence kolem 7.82458 na 1h timeframe může bránit dalšímu růstu. Poslední denní svíčka má poměrně malé tělo, což může signalizovat nerozhodnost trhu. Celkově mírně preferuji BUY, ale riziko poklesu je stále významné."
+}

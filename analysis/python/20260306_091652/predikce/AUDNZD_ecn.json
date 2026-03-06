@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "On the hourly timeframe, the RSI is trending down (38.58535), and the price is below the Moving Average (1.189283), indicating bearish momentum in the short term. On the daily timeframe, the RSI indicates that the asset is overbought (64.850897), which may be a sign of a potential reversal. On the weekly and monthly timeframes, the RSI indicates the asset is overbought (81.350134, 73.129596). Given these factors, the bearish signal on the hourly timeframe, the potential reversal signs on the daily timeframe and the indication of overbought on longer timeframes make a sell strategy more appropriate. The price has risen significantly and may be due for a correction. However, the absence of distinct candle patterns and the upward trend visible on longer timeframes leads to a cautious approach. Therefore the HOLD % is smaller."
+}

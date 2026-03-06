@@ -1,0 +1,6 @@
+{
+  "recommended_symbol": "EURCAD_ecn",
+  "action": "SELL",
+  "lot_size": 0.03,
+  "reasoning": "EURCAD shows a strong downtrend with high sell probability (65%). RSI is oversold on multiple timeframes, but the overall trend favors selling. There are currently no open positions on EURCAD, making it a good diversification choice. Lot size is calculated to keep the margin level safe, given the current equity."
+}

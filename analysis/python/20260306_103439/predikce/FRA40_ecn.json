@@ -1,0 +1,7 @@
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "FRA40_ecn is showing bearish signals across multiple timeframes. The price is below the daily and 4-hour moving averages. The daily RSI is at 34.5, suggesting further downside potential before reaching oversold territory. The 4-hour RSI is even lower at 27, indicating strong bearish momentum. Recent hourly candles show continued downward movement. Although the monthly MA suggests a long term uptrend, recent price action suggests a strong short to medium term bearish movement. BUY is risky, due to the prevailing bearish sentiment. HOLD is an option to see if the support level can be sustained in the near future, though a stronger shorting opportunity is arising."
+}

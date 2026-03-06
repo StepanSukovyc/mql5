@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technicals are mixed. RSI on daily timeframe is approaching overbought (70.72), suggesting potential for pullback. However, the price is above the daily MA, indicating an uptrend.  The 1H timeframe shows RSI at 58.37 and price above MA suggesting continued upward momentum but losing strength, while longer term signals (week, month) are still bullish but weakening and could be a possible short term correction. Therefore, HOLD or a cautious BUY with a tight stop-loss is reasonable. SELL is viable but riskier due to uptrend strength. Short-term pullback possible, longer-term trend is still up but weakening momentum indicates possible reversal."
+}

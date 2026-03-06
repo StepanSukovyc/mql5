@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Short-term bearish signals are emerging. Hourly RSI is oversold, suggesting potential for a bounce, but the price is below the hourly MA. Daily RSI is neutral. Weekly RSI is overbought, suggesting a potential pullback. Recent hourly candles show strong selling pressure. Therefore, SELL has higher probability."
+}

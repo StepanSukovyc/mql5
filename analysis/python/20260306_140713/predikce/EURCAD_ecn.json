@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCAD_ecn",
+  "BUY": 20,
+  "SELL": 65,
+  "HOLD": 15,
+  "reasoning": "EURCAD is showing oversold conditions on 1H, 4H, and Daily timeframes (RSI < 30), suggesting potential for a short-term bounce. However, the overall trend based on longer-term moving averages (daily, weekly) points downwards, indicating more likely continuation of the bearish momentum. Sell has higher probability due to the strong downtrend, buy might work for a short-term scalp."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Smíšené signály. Krátkodobě (1h) RSI naznačuje přeprodanost, ale cena je pod MA. Denní RSI je neutrální, ale týdenní a měsíční RSI indikují potenciální další pokles. Měsíční MA je vysoko nad cenou, což naznačuje dlouhodobý downtrend. Poslední denní svíčka je také negativní. Proto SELL má nejvyšší procento, následovaný HOLD a BUY."
+}

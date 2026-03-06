@@ -1,0 +1,7 @@
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "USDNOK is showing mixed signals. While the daily RSI is around 50 (neutral), the weekly and monthly RSI suggest oversold conditions (potential for a bounce). However, the moving averages on the longer timeframes (week, month) are still above the current price, indicating a downtrend. The recent hourly candles are indecisive. Given the overall downtrend and mixed signals, a 'SELL' position has a slight edge. Until the longer term MAs are broken, the short term bullish move can be seen as a retracement."
+}

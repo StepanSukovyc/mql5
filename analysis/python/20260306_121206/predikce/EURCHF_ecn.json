@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "EURCHF is showing strong bearish signals across multiple timeframes. The RSI values on daily, weekly, and monthly charts are all below 35, indicating oversold conditions, but momentum is still down. Price is below all MAs. Limited data available for detailed candlestick analysis, but recent price action suggests continued downward pressure. Therefore, SELL is the dominant strategy. BUY presents a risk as trend is downwards. HOLD could also be a strategy while waiting for a more clear market signal."
+}

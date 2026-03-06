@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the daily timeframe, the RSI is in overbought territory (70.08), suggesting a potential pullback. However, the current price (336.223) is above the daily MA (322.42), indicating an upward trend. The 4H RSI is also relatively high (68.89). The monthly MA (353.40) is above the current price, indicating potential resistance.  Recent hourly price action shows volatility and a slight downtrend. Given these mixed signals, a HOLD strategy is reasonable. A BUY position is supported by the overall upward trend, but the overbought RSI suggests caution. A SELL position is possible if the short-term downtrend continues."
+}

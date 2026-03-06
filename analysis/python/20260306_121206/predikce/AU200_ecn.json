@@ -1,0 +1,7 @@
+{
+  "symbol": "AU200_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena AU200_ecn se nachází v downtrendu, což potvrzují klesající RSI na 1h, 4h, a denních grafech (v pásmu pod 40, 1h a 4h dokonce pod 30, což naznačuje překoupenost a možnou korekci směrem nahoru, ale trend je stále dolů). MA na 1h, 4h a denních timeframech je nad aktuální cenou, což naznačuje rezistenci. Týdenní MA je mírně nad současnou cenou a RSI pod 50. Měsíční MA je pod současnou cenou, ale RSI se blíží k překoupené zóně, což ukazuje na oslabování býčího trendu. Svíčkové formace v posledních hodinách ukazují na převahu prodejců. Proto je pravděpodobnější pokračování downtrendu (SELL). Vzhledem k překoupenosti na nižších timeframech a silnému downtrendu je nákup rizikový (BUY). Zůstat na stávajících pozicích (HOLD) má střední riziko."
+}

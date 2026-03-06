@@ -1,0 +1,7 @@
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "EURAUD is showing bearish signals across multiple timeframes. Weekly and daily RSI are oversold/approaching oversold territory. The price is below the daily, weekly and monthly MA, indicating a downtrend. While the hourly RSI is above 50, suggesting short-term upward momentum, the 4-hour RSI is below 50. The overall picture points to a higher probability of further downside. HOLD balances the potential for short-term retracements."
+}

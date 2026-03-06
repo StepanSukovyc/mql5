@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "CHFJPY is in an uptrend on longer timeframes (week, month) with RSI approaching overbought levels. However, shorter timeframes (1h, 4h) show consolidation near the MA with RSI around 50. This indicates potential for continued upward movement, but also a risk of a pullback. Considering the recent price action and indecision, holding is a reasonable strategy until a clear direction emerges. The higher timeframe RSI suggests limited upside and potentially overbought conditions soon, reducing the buy probability."
+}

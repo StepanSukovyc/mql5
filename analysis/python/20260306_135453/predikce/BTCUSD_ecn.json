@@ -1,0 +1,7 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "BTCUSD is currently trading at 69941.0.  Hourly RSI is oversold (34.65), but the price is below the 1h MA (70899.75) suggesting continued downward pressure. 4h RSI is neutral (51.68), but the price is also below the 4h MA (70515.25). Daily RSI (42.97) is also below 50, but the price is above the Daily MA (68061.65). The weekly RSI is quite low (31.66), which suggests underlying weakness. Monthly MA is very high (90281) which is far from the current price. Given that there is no information about recent candlestick patterns or trendlines, I prefer to favor SELL rating, because of the lack of a stronger long-term bullish signal."
+}

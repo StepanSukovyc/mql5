@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCAD_ecn",
+  "BUY": 20,
+  "SELL": 55,
+  "HOLD": 25,
+  "reasoning": "AUDCAD is showing bearish signals. Short term (1H, 4H) RSI is low, indicating oversold conditions, but the price is still trending downwards. Daily RSI is below 50, MA on shorter timeframes are above current price, suggesting continued selling pressure. Weekly and Monthly RSI are above 60, but price action suggests the longer trend may be weakening. Recent daily candles indicate a clear downtrend. Therefore, SELL is the most likely scenario, followed by HOLD to monitor for a potential reversal."
+}

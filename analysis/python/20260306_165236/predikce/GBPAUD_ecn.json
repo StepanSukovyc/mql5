@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 35,
+  "SELL": 45,
+  "HOLD": 20,
+  "reasoning": "Na 1H a 4H timeframe je RSI v překoupené zóně nebo blízko ní, což naznačuje potenciální korekci dolů. MA na denním timeframe je nad aktuální cenou. Týdenní a měsíční timeframe ukazují dlouhodobý klesající trend a RSI hluboko v přeprodané oblasti, což naznačuje potenciál pro odraz, ale s ohledem na silný downtrend je pravděpodobnější pokračování poklesu. Doporučuje se SELL s ohledem na krátkodobé překoupení a střednědobý downtrend. BUY má omezený potenciál. Doporučuji zvážit STOP-LOSS a risk managment strategie."
+}

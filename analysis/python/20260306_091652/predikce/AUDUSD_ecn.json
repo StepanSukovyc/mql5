@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "AUDUSD is currently at 0.70232. Short-term indicators (1h, 4h) suggest oversold conditions (RSI < 40), but price remains below moving averages on all timeframes except weekly and monthly. Daily RSI is approaching 50, indicating weakening momentum. Recent hourly candles show a downtrend. The monthly RSI is still relatively high at 61.84. Overall, the price is more likely to continue downward in the short term, hence SELL is favored. HOLD is a moderate option due to the possibility of a short term correction due to oversold conditions on lower timeframes. BUY is less likely given current trends, and would only be valid for very short term trading."
+}

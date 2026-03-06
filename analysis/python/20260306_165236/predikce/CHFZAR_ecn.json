@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technické indikátory ukazují smíšené signály. Na hodinovém grafu je RSI v překoupené zóně (69.35), což naznačuje potenciální korekci (SELL). Čtyřhodinový graf je neutrální (RSI 60.22). Denní graf (RSI 63.96) a týdenní graf (RSI 53.85) naznačují mírný býčí sentiment (BUY). Měsíční graf je neutrální (RSI 53.93). Aktuální cena je nad denním MA, ale pod hodinovým MA (21.30 vs 21.28), což naznačuje možný krátkodobý pokles. Nicméně, dlouhodobější trend se zdá být mírně rostoucí. Vzhledem k protichůdným signálům a omezenému rozsahu dat, doporučuji opatrný přístup a sledování dalšího vývoje. Zvýšený spread může naznačovat vyšší volatilitu."
+}

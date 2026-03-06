@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na denním a 4H grafu je RSI hluboko v přeprodané zóně, což naznačuje potenciál pro korekci. Nicméně, cena je pod klouzavými průměry na většině timeframe (kromě měsíčního), a celkový trend se zdá být klesající. Proto je vyšší pravděpodobnost dalšího poklesu (SELL). BUY je rizikovější vzhledem k downtrendu. HOLD je opatrná strategie vzhledem k protichůdným signálům."
+}

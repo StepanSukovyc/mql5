@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "On the hourly and four-hour timeframes, the RSI is approaching oversold conditions, suggesting a potential bounce. However, the daily RSI is still below 50, and the price is below the daily moving average, indicating continued bearish momentum. The monthly RSI is high, suggesting it's overbought and will likely need to correct. Because of the overall negative sentiment, the analysis leans towards a sell, but RSI readings suggest a retrace and HOLD is viable to observe."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "XALUSD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Na týdenním grafu je RSI překoupené (79), což naznačuje potenciální korekci. Nicméně denní graf RSI (61) má stále prostor pro růst. 1H RSI (44) pod 50 značí krátkodobý pokles, 4H RSI (55) je neutrální. Cena je nad denním a týdenním MA, ale pod hodinovým. Proto je HOLD nejbezpečnější varianta. Riziko SELL je dáno překoupeností na vyšších timeframech a krátkodobým poklesem. Potenciál BUY existuje vzhledem k býčímu trendu a ceně nad MA na denním a týdenním grafu, ale je omezen překoupeností a krátkodobou korekcí."
+}

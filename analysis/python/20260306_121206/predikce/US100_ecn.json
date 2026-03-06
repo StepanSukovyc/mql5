@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Měsíční RSI je překoupené (71.99), ale týdenní RSI je neutrální (51.02). Krátkodobě (1h, 4h, den) se cena pohybuje pod klouzavým průměrem (MA), což naznačuje potenciální krátkodobý sestupný trend. Vzhledem k nejistotě a absenci jasných signálů je doporučeno držet (HOLD) a sledovat vývoj situace."
+}

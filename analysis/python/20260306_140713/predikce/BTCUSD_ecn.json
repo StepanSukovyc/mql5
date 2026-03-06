@@ -1,0 +1,7 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "The price is currently below the MA on 1h, 4h, week and month timeframes, suggesting a bearish trend. RSI is below 50 on all timeframes and below 30 on 1h and week suggesting oversold conditions, but further downside momentum is possible. Recent hourly candles show continued selling pressure."
+}

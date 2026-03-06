@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Krátkodobé indikátory (1h, 4h) RSI jsou mírně nad 50 a rostou, což naznačuje mírný býčí tlak. Dlouhodobější (týdenní RSI 38.27) indikuje potenciál pro růst. Cena se pohybuje nad MA na 1h, 4h a denních grafech, ale pod MA na týdenním a měsíčním grafu. Vzhledem k protichůdným signálům a blížícímu se týdennímu a měsíčnímu odporu, je vhodná opatrnost a držení pozice, zatímco se čeká na jasnější potvrzení trendu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "EURCHF is currently at 0.90494. RSI is oversold on Daily, Weekly and Monthly charts suggesting a potential bounce. However, the overall trend is bearish, indicated by the price being below the Moving Averages on all timeframes. The recent hourly candles show further downside. The market appears to be in a short-term downtrend. The recent candles on the hourly and 4H charts show strong bearish momentum. Therefore, a cautious approach is recommended with a higher probability of SELL."
+}

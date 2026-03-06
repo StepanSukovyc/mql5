@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI blízko překoupené zóny (59), což naznačuje potenciální zpomalení růstu. Na 1h grafu RSI je 46, tedy v neutrální zóně, a cena se pohybuje kolem klouzavého průměru, což naznačuje nejistotu. Na 4h grafu je RSI 49, což také svědčí o neutrálním sentimentu. Svíčkové formace nejsou zřetelně identifikovatelné jako signály pro nákup nebo prodej, což zvyšuje nejistotu. Data za poslední měsíc ukazují spíše konsolidaci než jasný trend. Celkově převládá mírný prodejní tlak kvůli potenciálnímu vyčerpání růstového momentum na denním grafu a nejasnému sentimentu na kratších timeframe."
+}

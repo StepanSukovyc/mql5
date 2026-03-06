@@ -1,0 +1,7 @@
+{
+  "symbol": "JP225_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI překoupené (71.42), což naznačuje potenciální korekci. Denní RSI je na 48.38 a klesá pod MA, což naznačuje možnost dalšího poklesu. Na 4H grafu je RSI 41.29, naznačuje klesající momentum. MA na všech timeframech s vyjímkou týdenního a měsíčního jsou nad cenou, to naznačuje downtrend. Z těchto důvodů přikládám vyšší pravděpodobnost pro SELL."
+}

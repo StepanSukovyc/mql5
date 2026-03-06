@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Na kratších časových rámcích (1h, 4h) je RSI v neutrální zóně okolo 50, což naznačuje absenci silného trendu. Denní RSI je mírně nad 50, což by mohlo signalizovat potenciál k růstu, ale týdenní a měsíční RSI jsou v přeprodané zóně (pod 40 a 30), což naznačuje možný downtrend. Cena je pod MA na 1h a 4h, ale nad MA na denním grafu. Dlouhodobé MA na týdenním a měsíčním grafu jsou výrazně nad aktuální cenou, což naznačuje medvědí sentiment. Vzhledem k protichůdným signálům a nejistotě upřednostňuji SELL pozici s ohledem na dlouhodobý downtrend. HOLD je rozumná alternativa pro konzervativní obchodníky."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "AUDJPY currently shows mixed signals. The weekly and monthly RSI are high (76.69, 64.78), indicating overbought conditions and potential for a pullback. 1H a 4H RSI is neutral. The price is currently below the 1h and 4h moving average (110.59, 110.70), suggesting short-term bearish momentum. Daily RSI is above 60, showing bullish momentum. Recent hourly candle patterns are showing decline. Therefore, a SELL position carries a slightly higher probability due to the short-term bearish signals, while BUY and HOLD remain viable options given the conflicting longer-term trends."
+}

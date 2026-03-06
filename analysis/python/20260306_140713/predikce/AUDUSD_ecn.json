@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena je pod 1h, 4h a denním MA. RSI na 1h a 4h indikují oversold, ale klesající trend. Týdenní a měsíční RSI ukazují býčí momentum, avšak současný pokles naznačuje krátkodobý prodejní tlak. Denní graf se blíží k MA a může fungovat jako rezistence, pokud se neodrazí. Zvláštní pozornost si zaslouží dnešní svíčka, která uzavírá pod 0.7. Kombinace indikátorů naznačuje větší pravděpodobnost prodeje než nákupu v krátkodobém horizontu, ale dlouhodobější trend je vzhledem k týdennímu grafu potenciálně rostoucí. HOLD pozice zde funguje jako waiting game, aby se zjistilo, zda se cena udrží v downtrendu, nebo se odrazí výše."
+}

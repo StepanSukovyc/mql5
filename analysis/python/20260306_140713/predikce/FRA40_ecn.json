@@ -1,0 +1,7 @@
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "FRA40_ecn is currently showing bearish signals across multiple timeframes. The price is below the daily and 4-hour moving averages, and the RSI is indicating oversold conditions on shorter timeframes (1H and 4H), suggesting potential for a short-term bounce but overall downtrend continuation. Monthly MA supports higher prices long term. The recent large red candlestick on the daily timeframe indicates strong selling pressure. Therefore, SELL carries the highest probability, followed by HOLD and then BUY."
+}

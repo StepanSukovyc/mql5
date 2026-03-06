@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Z technického hlediska vidíme smíšené signály. Krátkodobě (1h, 4h) RSI naznačuje mírné překoupení, ale denní RSI je neutrální. Týdenní RSI je na 36, což naznačuje potenciál pro růst. Měsíční RSI je také neutrální. Cena je nad MA na 1h, 4h a denním grafu, ale pod MA na týdenním a měsíčním grafu.  Poslední hodinové svíčky naznačují nárůst ceny. Proto: Buy mírně preferováno, ale s ohledem na celkovou nejistotu a divergenci signálů Hold je rozumná alternativa. Sell je menší pravděpodobnost s ohledem na poslední růst ceny."
+}

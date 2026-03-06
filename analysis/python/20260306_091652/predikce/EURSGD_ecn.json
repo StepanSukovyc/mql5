@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "The pair is currently at 1.48262. On the hourly timeframe, RSI is 60.115199, suggesting slightly overbought conditions, but the price is below the MA of 1.483103. The 4-hour RSI is 51.457273, and the price is below the MA of 1.483945. The daily RSI is 41.117042, and the price is significantly below the MA of 1.4929, signaling a potential downtrend. Weekly RSI is 38.03032 and below MA 1.502359. The monthly RSI is 52.404784 and the price is above MA 1.466239. Overall, the short to mid-term trend seems bearish, with longer term showing possibilities of upward movement. The higher timeframe MA acts as resistance. Sell position is slightly favored due to downward trend in shorter time frames, with hold as a possible safe position."
+}

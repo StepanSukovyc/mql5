@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním timeframe RSI na hodnotě 36, naznačuje potenciál k růstu, ale zároveň MA na měsíčním timeframe je stále vysoko nad aktuální cenou a denní timeframe ukazuje RSI kolem 55, indikující spíše sideways trend. 4H a 1H RSI se pohybují v neutrální zóně. Vzhledem k těmto faktorům doporučuji větší opatrnost a zvážit SELL pozici kvůli potenciálu klesání k MA na denním grafu."
+}

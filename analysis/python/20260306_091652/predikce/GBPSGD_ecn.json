@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPSGD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "GBPSGD is showing mixed signals. Hourly and 4-hour RSI indicate potential overbought conditions, while daily RSI is neutral. The price is currently above the hourly and 4-hour moving averages but below the daily, weekly, and monthly moving averages, suggesting short-term bullish momentum against a longer-term bearish trend. Recent hourly candles show some bullish movement but with signs of consolidation. Therefore, the risk is balanced between buying, selling, and holding."
+}

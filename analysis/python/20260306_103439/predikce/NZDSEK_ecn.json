@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "The monthly RSI of 25.3 suggests oversold conditions, potentially indicating future upside. However, the price is below the moving average on the hourly and 4-hourly charts, suggesting short-term bearish momentum. The daily RSI is neutral. Considering these mixed signals, a 'SELL' position carries a slightly higher probability than a 'BUY' or 'HOLD'."
+}

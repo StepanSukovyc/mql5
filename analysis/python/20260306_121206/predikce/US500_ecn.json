@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "The monthly RSI indicates overbought conditions (75.58), suggesting a potential correction.  The daily RSI is neutral (42.84), but the price is below the daily MA (6874.13), pointing to short-term weakness. Hourly RSI at 40.33 further reinforces a bearish sentiment. Recent hourly candles show a downtrend. SELL position advised."
+}

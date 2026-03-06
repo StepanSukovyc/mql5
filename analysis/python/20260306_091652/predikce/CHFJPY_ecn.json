@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI v překoupené zóně (70.57), což naznačuje potenciální korekci. Týdenní RSI je také vysoké (68.78). Denní RSI je neutrální (56.12), ale cena se nachází nad 200denním MA (200.77), což naznačuje uptrend. Nicméně, poslední denní svíčka je medvědí. Na 4H grafu je RSI neutrální (52.16) a cena se pohybuje kolem MA. Celkově převládá nejistota, ale spíše klesající trend."
+}

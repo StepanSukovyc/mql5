@@ -1,0 +1,7 @@
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě neutrální, střednědobě medvědí. RSI na denní bázi neutrální, ale na týdenní bázi pod 40. MA na měsíční a týdenní bázi klesá. Cena je pod MA na 1h a 4h timeframe, což naznačuje prodejní tlak. Na denním timeframe je cena nad MA, což indikuje potenciál pro buy, ale v kontextu celkového downtrendu, je spíše pravděpodobnější pokles. Nutno sledovat další vývoj."
+}

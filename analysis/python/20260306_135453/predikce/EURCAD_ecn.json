@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "The price is currently 1.57716. RSI values are oversold on shorter timeframes (1H, 4H, Daily), suggesting potential for a bounce, but the weekly RSI is 32, and monthly is 58 indicating more room for downward movement. Daily RSI is very low at 15.79 indicating extreme oversold conditions, but the price is trending below moving averages on all timeframes except monthly, indicating a strong downtrend and potential for further selling pressure. Given the downtrend and oversold conditions, SELL is favored. The monthly MA at 1.561916 is still below the current price suggesting that the overall monthly trend can change soon. HOLD is a neutral option considering the high volatility in the market."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "USDJPY je v uptrendu na denním a týdenním grafu (MA roste), RSI naznačuje, že nejsme překoupení. 1h a 4h RSI jsou v horní části spektra, což naznačuje potenciální překoupenost krátkodobě. Na měsíčním grafu je RSI neutrální. Proto upřednostňuji LONG, ale s ohledem na krátkodobé překoupené podmínky i možnost korekce, je doporučení HOLD."
+}

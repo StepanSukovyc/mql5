@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI pod 50, cena pod MA, indikuje potenciál pro pokles. Na týdenním grafu je RSI nad 60, což by mohlo naznačovat překoupenost, ale zároveň MA ukazuje rostoucí trend. 1h a 4h timeframe jsou neutrální. Celkově vnímám mírnou převahu pro SELL, ale s ohledem na rostoucí týdenní trend ponechávám významné procento pro HOLD a malé procento pro BUY (možná korekce směrem nahoru)."
+}

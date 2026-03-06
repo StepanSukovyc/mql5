@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje smíšené signály. 4H a denní RSI jsou poměrně vysoké, což může naznačovat překoupenost, ale hodinové RSI je blízko neutrální oblasti. Cena je nad MA na 1H, 4H, denním a týdenním grafu, ale pod MA na měsíčním grafu. Poslední svíčky na 1H grafu ukazují na určité momentum růstu. Dlouhodobý trend (měsíční graf) je stále klesající (MA je nad cenou), zatímco krátkodobý trend (1H a 4H) se zdá být rostoucí. Týdenní RSI je těsně pod 50, což naznačuje potenciální obrat. Proto se jeví rozumné částečně držet (HOLD) stávající pozice a rozdělit mezi BUY a SELL, s mírnou preferencí BUY kvůli rostoucímu momentu na kratších časových rámcích."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "FANG_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Cena je nad MA na 1H, 4H i denním grafu, což naznačuje potenciální uptrend. RSI na 1H a 4H je v mírně překoupené zóně, což signalizuje možnou korekci. Na týdenním grafu je cena pod MA a RSI je neutrální, což snižuje jistotu nákupu. Měsíční RSI naznačuje silný dlouhodobý uptrend, ale s ohledem na nedávné kolísání ceny a potenciální krátkodobou korekci se doporučuje opatrnost. HOLD je vhodný, pokud investor již pozici drží, a SELL by mohl být zvážen v případě překoupení na nižších časových rámcích."
+}

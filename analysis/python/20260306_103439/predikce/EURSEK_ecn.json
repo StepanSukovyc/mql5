@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Z krátkodobého hlediska (1h, 4h) vidíme RSI blízko neutrální oblasti a MA mírně nad aktuální cenou, což naznačuje možný mírný pokles. Denní RSI je neutrální, ale týdenní a měsíční RSI signalizují přeprodanost a potenciál pro korekci. Měsíční MA je výrazně nad aktuální cenou, což naznačuje dlouhodobý klesající trend. Důležité je si všímat svíčkových formací na denní a týdenní bázi pro potvrzení trendu. Celkově převládá opatrnost, proto je SELL mírně preferováno před BUY, HOLD je rozumnou variantou."
+}

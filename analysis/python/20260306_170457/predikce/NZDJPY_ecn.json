@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "The price is currently at 93.037. On the 1H chart, the RSI is 43.98 indicating slight bearish pressure, and the price is above MA. The 4H chart shows an RSI of 48.12 and price is above MA, hinting at potential consolidation. Daily RSI is 53.27, and weekly is 61.94, showing bullish sentiment in the long term, but recent downward momentum suggests sell. Overall, bearish sentiments dominate, so SELL has the highest percentage, BUY and HOLD are similar.  "
+}

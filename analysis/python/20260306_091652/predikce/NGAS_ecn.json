@@ -1,0 +1,7 @@
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "NGAS_ecn is currently trading at 2.989. The daily RSI is 45.19, indicating a neutral to slightly bearish sentiment. The 1h RSI is 56.22 and 4h RSI is 55.15 indicating neutral sentiment. The daily price is below the daily moving average (2.96315), suggesting potential downward pressure. However, the 1h and 4h MA are close to the current price. The weekly and monthly MAs are significantly higher than the current price. Recent 1h candles show some recovery. Overall, the analysis points towards a slightly bearish trend, but there is some short term buying pressure, making a hold position reasonable as well. SELL is prioritized due to the longer-term downtrend and negative RSI divergence."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena je pod 1h, 4h i denním MA, RSI na 1h a 4h je v oblasti přeprodanosti, což naznačuje možný krátkodobý odraz. Na denním grafu je RSI neutrální. Týdenní RSI je 59, takže se blíží překoupené oblasti. S ohledem na downtrend a MA, preferuji short pozice. Zdržení se nákupu (HOLD) je doporučeno do potvrzení změny trendu. Nedostupnost MA pro měsíční graf ztěžuje long-term analýzu."
+}

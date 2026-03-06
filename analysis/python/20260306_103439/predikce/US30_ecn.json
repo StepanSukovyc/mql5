@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena US30_ecn je pod klouzavými průměry na 1h, 4h a denním grafu, což naznačuje klesající trend. RSI na těchto timeframech je také v zóně pod 50, což podporuje prodejní tlak. Na týdenním grafu je RSI okolo 50, což signalizuje neutrální pozici. Nicméně, měsíční RSI je relativně vysoké, což naznačuje potenciál pro korekci. Proto se zdá být nejvhodnější prodejní pozice, s opatrností na možnou korekci, proto rozdělení pravděpodobností."
+}

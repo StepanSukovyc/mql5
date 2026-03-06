@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "NZDUSD is showing bearish signals. The price is below the daily and 4H moving averages, indicating a downtrend. The 4H RSI is at 36, suggesting the pair may be oversold but still has room to decline. The daily RSI is at 40, suggesting the pair is not oversold.  The last monthly candle is red and closes near the low. Recent hourly candles show volatility with downward pressure. Considering these factors, a sell position carries more probability. However, given the possibility of a short-term correction, HOLD is also relevant. BUY is less probable due to the overall downward trend."
+}

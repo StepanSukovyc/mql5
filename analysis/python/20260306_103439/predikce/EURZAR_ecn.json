@@ -1,0 +1,7 @@
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na hodinové bázi se RSI pohybuje kolem neutrálních hodnot a cena osciluje kolem MA. Na 4H a denní bázi RSI roste, což naznačuje býčí trend, ale týdenní a měsíční RSI jsou nižší, což naznačuje možný dlouhodobý medvědí trend. Cena je pod týdenním a měsíčním MA, což také naznačuje možný medvědí trend. Vzhledem k rozporuplným signálům a menšímu počtu svíček je doporučeno rozdělit riziko mezi BUY, SELL a HOLD."
+}

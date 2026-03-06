@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "The price is below the daily and 4h moving averages, and RSI on the daily and 4h charts is in oversold territory, suggesting potential for further downward movement. However, the 1h RSI is near neutral, suggesting a possible short-term consolidation or bounce. Monthly timeframe still showing an uptrend. Overall, short term bearish, mid term neutral, long term bullish. Therefore, SELL is preferred, but with caution."
+}

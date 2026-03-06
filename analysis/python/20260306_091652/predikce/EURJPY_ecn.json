@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena je aktuálně 182.873. Krátkodobé indikátory (1h, 4h, den) naznačují spíše medvědí trend (RSI pod 50, cena pod MA na 4h a denním grafu). Dlouhodobé indikátory (týden, měsíc) jsou býčí, ale momentálně je patrný pokles. Proto SELL má nejvyšší procento. BUY je rizikovější, dokud se krátkodobý trend neotočí. HOLD dává smysl pro ty, kteří mají dlouhodobější investiční horizont a věří v návrat k růstu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI na úrovni 33.90, což naznačuje, že by pár mohl být překoupený. Na týdenním grafu je RSI 46.37. Na denním grafu je RSI na úrovni 59.37 a cena je pod MA. Na 4H grafu je RSI 52.42 a cena je pod MA. Na hodinovém grafu RSI 47.20 a cena je pod MA. Celkově indikátory naznačují spíše SELL."
+}

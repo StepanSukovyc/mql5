@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Krátkodobě SELL: Cena je pod 1H a 4H MA, RSI na denním grafu je 33 (blízko přeprodané oblasti, ale stále klesá). Na týdenním grafu RSI naznačuje klesající momentum. Dlouhodobě HOLD: Měsíční graf RSI je nad 50 a MA roste, ale s ohledem na slabost v nižších časových rámcích doporučuji vyčkat s BUY."
+}

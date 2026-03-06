@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě indikuje SELL dle 1H a 4H timeframe RSI a MA. Denní RSI je neutrální, týdenní mírně pozitivní. Měsíční RSI je vysoko, což naznačuje potenciální korekci. HOLD vzhledem k nejistotě trhu. Posledni 4H svicka indikuje silny pokles."
+}

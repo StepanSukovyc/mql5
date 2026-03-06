@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CADJPY osciluje. Na denním grafu RSI 62 a MA 113.77 naznačují potenciální další růst, ale ne silný. Na týdenním grafu RSI 66 a MA 112.71 potvrzují rostoucí trend. 1h a 4h timeframe ukazují konsolidaci kolem MA hodnot. Nejsou patrné silné svíčkové formace, které by indikovaly jasný směr. Doporučuji opatrnost a čekat na potvrzení trendu."
+}

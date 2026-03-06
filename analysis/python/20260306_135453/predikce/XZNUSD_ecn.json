@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním MA, RSI je na všech nižších timeframech pod 50, což značí medvědí momentum. Nicméně, týdenní RSI je stále nad 60 a cena se nachází nad týdenním MA, což naznačuje potenciální support. Nejistota ohledně dalšího směru převládá, proto je doporučeno opatrné sledování a vyčkávání. Sell je mírně preferován kvůli krátkodobému medvědímu sentimentu, ale silný support na týdenní úrovni snižuje riziko výrazného poklesu."
+}

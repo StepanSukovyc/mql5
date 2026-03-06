@@ -1,0 +1,7 @@
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "FRA40_ecn is showing bearish signals. The price is below the hourly, daily, and weekly moving averages. The RSI is also low on the hourly and 4-hour charts, indicating oversold conditions, but overall downward momentum. While a short-term bounce is possible (giving some justification for a small 'Buy' rating), the overall trend suggests further downside. The monthly RSI is around 50, which suggests neutral longer-term conditions, indicating HOLD, but recent price action shows stronger selling, justifying a high SELL confidence."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "ETHUSD is currently at 2064.55. Hourly RSI is low (41.23) suggesting oversold conditions, but the price is below the 1h MA (2111.52), indicating continued downward pressure. Daily RSI is also low at 42.41, with the price above the daily MA (1999.77) which hints at a possible rebound, but also represents overbought on the short-term. The weekly RSI at 31.77 suggests an oversold condition on a longer timeframe, but the price remains significantly below the weekly MA (2872.41), signaling strong bearish momentum. Taking into account all timeframes, sell is slightly favored as the downward trend seems dominant. The hold recommendation provides a middle ground, awaiting a more decisive signal and confirmation of any potential trend reversal. The 4H RSI suggests Neutral Signal with a value of 54, further solidifying HOLD as an option to let the price move to an oversold or overbought range for a defined entry."
+}

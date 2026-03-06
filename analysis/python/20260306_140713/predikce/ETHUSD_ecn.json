@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "ETHUSD is showing bearish signals across multiple timeframes. The 1h RSI is oversold (36.66), suggesting a potential short-term bounce. However, the price is below the moving average on 1h, 4h and day charts, indicating downward pressure. The weekly RSI is at 30.22, also oversold, but the price is significantly below the weekly MA. Considering the mixed signals, a 'HOLD' strategy is suggested combined with short position."
+}

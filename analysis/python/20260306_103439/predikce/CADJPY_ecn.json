@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CADJPY je v rostoucím trendu na denních a týdenních grafech, RSI naznačuje překoupenost v denním grafu (68.09), ale ne na týdenním (67.34). Cena je nad MA na všech timeframech, což je býčí signál.  Nicméně, na 1H a 4H grafech se RSI pohybuje v pásmu kolem 60, a cena se pohybuje do strany.  Nejnovější denní svíčka má menší tělo, což naznačuje nejistotu.  Proto opatrný přístup s možností HOLD. BUY je mírně preferován vzhledem k dlouhodobějšímu rostoucímu trendu, ale překoupenost na denním grafu a současný pohyb do strany limitují potenciál. SELL je opodstatněný z důvodu možného pullbacku vzhledem k překoupenosti na denním grafu a pohybu do strany na 1H a 4H timeframe."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na 1H a 4H timeframe je RSI v překoupené zóně (nad 65), což naznačuje potenciální krátkodobý pullback. Denní RSI je na úrovni 56, což je neutrální. Týdenní RSI je nízké (36), což naznačuje potenciál pro růst. MA na 1H, 4H a denních timeframech jsou pod aktuální cenou, což signalizuje uptrend, zatímco týdenní a měsíční MA jsou nad aktuální cenou, což naznačuje dlouhodobý downtrend. Vzhledem k rozporuplným signálům z různých timeframech doporučuji opatrnost. Nákup s cílem krátkodobého zisku je možný (40% pravděpodobnost), ale prodej by mohl být vhodný vzhledem k potenciálnímu pullbacku (30% pravděpodobnost). Zbylých 30% bych ponechal na HOLD pozici, dokud se nevyjasní trend."
+}

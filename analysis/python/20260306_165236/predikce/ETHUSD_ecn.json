@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 20,
+  "SELL": 55,
+  "HOLD": 25,
+  "reasoning": "ETHUSD currently shows bearish signals. The price (1977.45) is below the daily MA (1996.1725), weekly MA (2867.41) and monthly MA (2877.4085), indicating a downtrend. The hourly RSI (21.89) suggests oversold conditions, which could lead to a short-term bounce, but the overall trend is still down. Selling pressure is likely to continue. Weekly RSI is low at 29.47, signalling potential for accumulation however current daily close is below 2000 psychological level."
+}

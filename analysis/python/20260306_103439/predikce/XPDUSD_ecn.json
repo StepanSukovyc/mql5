@@ -1,0 +1,7 @@
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena je pod denním i 4H klouzavým průměrem (MA). RSI na 4H i denním grafu naznačuje, že se trh nachází v zóně přeprodanosti, ale ne extrémní. Hodinový graf se nachází v neutrální zóně, je potřeba více potvrdit.  Tlak je aktuálně spíše prodejní, s ohledem na klesající MA na vyšších časových rámcích. Long-term je MA rostoucí, short term klesá. Aktuální stav je spíše SELL."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Z technického hlediska, týdenní a denní RSI naznačují, že trh je blízko překoupené úrovni, denní RSI je pod 40. Měsíční MA je výrazně nad aktuální cenou.  1h RSI naznačuje překoupenost, ale 4h RSI je neutrální. Vzhledem k silnému downtrendu na vyšších timeframech a potenciálnímu pullbacku na nižších, je pravděpodobnější SELL než BUY. Doporučuji vyčkat na potvrzení trendu a snížení rizika při vstupu do pozice."
+}

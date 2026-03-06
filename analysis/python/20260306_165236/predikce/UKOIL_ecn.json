@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Cena je silně přeprodaná na denním, 4H i hodinovém grafu (RSI nad 70-80). Na denním grafu se cena nachází vysoko nad MA. Na měsíčním grafu je RSI na 60, stále se jedná o nákupní sílu. Nicméně, rychlý růst ceny v posledních dnech naznačuje korekci. Riziko pro SELL je tedy vyšší. HOLD doporučuji pro ty, kteří chtějí vyčkat na další potvrzení trendu."
+}

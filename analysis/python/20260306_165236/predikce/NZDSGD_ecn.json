@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSGD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Na kratších časových rámcích (1h, 4h) je RSI pod 35, což naznačuje překoupenost a možný odraz nahoru, ale MA na denní a měsíční bázi jsou nad aktuální cenou, což naznačuje medvědí trend. Proto upřednostňuji prodej. Týdenní MA je pod aktuální cenou, ale RSI se blíží k 50, indikuje nerozhodnost. Pokračující pokles v posledních hodinách posiluje SELL doporučení. "
+}

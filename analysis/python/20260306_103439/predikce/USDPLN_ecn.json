@@ -1,0 +1,7 @@
+{
+  "symbol": "USDPLN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "USDPLN currently trades at 3.69248. Daily RSI (71.3) suggests overbought conditions. 1h RSI at 52.2 indicates neutral momentum. Monthly RSI at 42.5 shows no clear trend. Price is above daily and weekly MAs but below monthly MA. Recent hourly price action shows a downward trend. Therefore, SELL has a slightly higher probability, HOLD represents the uncertainty and BUY is considered less probable.  Limited candle data restricts formation pattern analysis."
+}

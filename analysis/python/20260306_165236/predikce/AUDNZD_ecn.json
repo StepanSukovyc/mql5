@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním a měsíčním grafu je AUDNZD překoupený (RSI nad 70). Denní graf také naznačuje překoupenost. Na 1H a 4H grafu je cena pod MA, což indikuje potenciální pokles. Zvažuji SELL s ohledem na možnou korekci po dlouhém růstu. Nicméně, trend na vyšších timeframech je stále rostoucí, proto je třeba opatrnosti a sledování dalšího vývoje. HOLD je alternativa pro ty, kteří preferují čekání na jasnější signál."
+}

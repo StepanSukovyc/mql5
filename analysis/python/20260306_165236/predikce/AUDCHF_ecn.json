@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Na 1H timeframe je RSI hluboko v přeprodané zóně (32.79), což naznačuje potenciální korekci. Nicméně, na 4H, Day a Month timeframe se cena nachází pod moving average (MA), což naznačuje downtrend. Týdenní RSI je relativně vysoko (61.67), což naznačuje pokračující momentum. Poslední denní svíčka je bearish. Celkově převládá tlak na prodej, ale přeprodané podmínky na 1H mohou vést ke krátkodobé korekci. HOLD je doporučen pro konzervativní investory čekající na jasnější signály."
+}

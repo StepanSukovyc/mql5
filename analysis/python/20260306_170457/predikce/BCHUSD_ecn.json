@@ -1,0 +1,7 @@
+{
+  "symbol": "BCHUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena BCHUSD_ecn je pod klíčovými klouzavými průměry (MA) na denním, týdenním i měsíčním grafu, což naznačuje downtrend. Hodinový RSI je silně přeprodaný (18.8), což by mohlo indikovat krátkodobou korekci, ale celkově je tlak spíše prodejní. Denní a týdenní RSI jsou také pod 40, potvrzují převahu prodejců. Poslední denní svíčky signalizují pokračování downtrendu. BUY pozice jsou rizikové."
+}

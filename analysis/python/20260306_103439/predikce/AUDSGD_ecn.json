@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním grafu je RSI překoupené (76.4), což naznačuje možný pullback. Na hodinových a 4hodinových grafech se cena pohybuje pod MA a RSI se pohybuje kolem 50, což naznačuje neutrální až mírně medvědí sentiment. Denní RSI je 56.6 a cena se drží lehce nad MA, signalizuje spíše vyčkávání. Celkově převládá spíše opatrnost, proto SELL má vyšší pravděpodobnost než BUY."
+}

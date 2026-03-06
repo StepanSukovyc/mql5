@@ -1,0 +1,7 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě SELL signal: 1h RSI je silně přeprodaný (21.82), ale cena klesá pod MA na 1h i 4h timeframe. Denní RSI je také relativně nízké (41.33) a cena se nachází nad MA na denním timeframe. Týdenní a měsíční timeframe naznačují medvědí trend s RSI pod 50 a cena pod MA. Celkově převládá tlak na pokles, ale přeprodanost na 1h timeframe naznačuje možnou konsolidaci nebo krátkodobý odraz. Je nutné sledovat další vývoj."
+}

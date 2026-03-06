@@ -1,0 +1,7 @@
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Technická analýza naznačuje převahu prodejců. RSI na denním timeframe (44.82) se blíží k přeprodané oblasti, ale MA (54.35) je stále nad aktuální cenou. Týdenní RSI (29.42) je hluboko v přeprodané oblasti, ale MA (76.11) je výrazně nad aktuální cenou, což signalizuje silný klesající trend. Měsíční timeframe ukazuje RSI na hodnotě 40.09, což je neutrální, ale MA je vysoko nad současnou cenou. V krátkodobém horizontu (1h, 4h) se zdá, že cena konsoliduje, ale celkově se trh jeví jako slabý."
+}

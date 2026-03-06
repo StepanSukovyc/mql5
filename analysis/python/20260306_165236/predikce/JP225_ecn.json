@@ -1,0 +1,7 @@
+{
+  "symbol": "JP225_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "JP225_ecn is showing bearish signals. The price is below the hourly and 4-hour moving averages, with both hourly and 4-hour RSI indicators in oversold territory (though bouncing from very oversold levels), suggesting potential for further downside after a possible short-term bounce. The daily RSI is below 50, also signaling bearish momentum. A large bearish candle on the daily timeframe signals strong sell pressure. The weekly RSI is near neutral, but price is far from MA, so there is still significant downside potential. Monthly chart shows a strong uptrend, but current pullback can continue to some key levels like 50k. Considering recent price action and momentum indicators, SELL appears to be the most probable direction."
+}

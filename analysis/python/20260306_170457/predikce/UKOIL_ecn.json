@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 20,
+  "SELL": 65,
+  "HOLD": 15,
+  "reasoning": "UKOIL_ecn is currently trading at 92.629. The RSI across multiple timeframes (1h, 4h, day, week) indicates overbought conditions (RSI > 70), particularly strong on the daily and weekly charts. While the monthly RSI is still relatively neutral, the short-term momentum suggests a potential pullback. The price is significantly above its moving averages on all timeframes, suggesting it may be unsustainable. A recent surge in price indicates strong buying pressure in the very short term, however the overbought conditions prevail at higher timeframes and hint at a possible retracement. Therefore, SELL position could be more profitable in short term. BUY and HOLD rating are lower due to significant risk."
+}

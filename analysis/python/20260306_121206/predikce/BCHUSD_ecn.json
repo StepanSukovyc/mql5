@@ -1,0 +1,7 @@
+{
+  "symbol": "BCHUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena BCHUSD je aktuálně 451.5. RSI na denní bázi je 37.4, což naznačuje, že trh je blízko přeprodané oblasti, ale ne ještě v ní. MA na denní bázi je 507.95, což je nad aktuální cenou, což naznačuje downtrend. RSI na týdenní bázi je 38.6, což také naznačuje možný, ale slabý downtrend. MA na týdenní bázi je 550.5, což je výrazně nad aktuální cenou. Na hodinové bázi je RSI 42.8, což naznačuje neutrální momentum. MA na hodinové bázi je 458.97, což je mírně nad aktuální cenou. Vzhledem k downtrendu na denních a týdenních grafech s klesajícími MA, je riziko 'SELL' nejvyšší. Nízké RSI na denním grafu by mohlo naznačovat možné oživení, 'BUY' je riskantnější. 'HOLD' je rozumná strategie pro ty, kteří již drží BCHUSD a chtějí počkat na další vývoj."
+}

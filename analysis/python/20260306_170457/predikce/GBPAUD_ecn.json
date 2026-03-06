@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "GBPAUD je v downtrendu na týdenním i měsíčním grafu, což naznačuje dlouhodobý prodejní tlak. RSI na týdenním grafu je 23, indikuje přeprodanost, což by mohlo vést k dočasné korekci nahoru. Na denním grafu RSI je 40 a cena se pohybuje pod MA, což potvrzuje downtrend.  Na hodinové a 4-hodinové grafy, RSI se blíží překoupené oblasti, což naznačuje potenciální zpomalení krátkodobého růstu.  Zvažujeme SELL s ohledem na downtrend na vyšších timeframe a potenciální korekci z přeprodané oblasti. BUY má menší procento kvůli potenciální krátkodobé přeprodanosti. HOLD zvažuje potenciál pro konsolidaci."
+}

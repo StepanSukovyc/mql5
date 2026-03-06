@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "USDJPY is showing mixed signals. Longer timeframes (day, week) have RSI above 60, suggesting bullish momentum, while 1H RSI is neutral and price is near the 1H MA, indicating potential consolidation or pullback. Recent 1H candles show volatility and indecision.  Therefore, holding seems a viable option.  However the pair is in an up trend on the Daily so BUY is also a reasonable outcome.  SELL has the lowest probability currently."
+}

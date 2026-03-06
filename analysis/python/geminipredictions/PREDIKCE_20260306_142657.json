@@ -1,0 +1,6 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.01,
+  "reasoning": "USOIL_ecn shows strong bullish momentum across multiple timeframes. Although overbought on shorter timeframes, the overall trend favors further upside potential.  A small lot size is recommended to manage risk, given the potential for a short-term pullback.  This symbol isn't already in existing positions. Daily RSI is extremely high at 87.31, indicating a potential pullback is likely. Considering the bullish trend and MA values across all timeframes, BUY position is favored."
+}

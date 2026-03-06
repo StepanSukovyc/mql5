@@ -1,0 +1,7 @@
+{
+  "symbol": "CHINAH_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Short-term indicators (1H, 4H, Day) suggest a potential downward trend. RSI values are below 50 on lower timeframes, indicating weak momentum. The price is below the daily and weekly MA, signaling bearish sentiment. While the monthly RSI is above 60, indicating overall bullishness, the recent price action suggests a correction or consolidation phase. Selling pressure seems to be dominating in the short to medium term. Holding would be reasonable, to see whether it breaks resistance."
+}

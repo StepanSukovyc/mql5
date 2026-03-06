@@ -1,0 +1,7 @@
+{
+  "symbol": "DXY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "DXY_ecn se nachází v uptrendu, jak naznačuje rostoucí MA na denním grafu (97.83) a RSI blízko překoupené zóny (67.98). Nicméně, RSI na 4H grafu je v překoupené zóně (70.35) což naznačuje možnost korekce. Měsíční graf ukazuje klesající MA (101.253) a RSI (43.34), což indikuje potenciál pro dlouhodobější pokles, ale krátkodobě vidíme potenciál růstu. Proto doporučuji vyčkat a sledovat situaci (HOLD), nebo zaujmout pozici s menším kapitálem (BUY nebo SELL) s ohledem na zvýšené riziko v obou směrech."
+}

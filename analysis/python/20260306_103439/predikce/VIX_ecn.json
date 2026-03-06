@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním grafu je RSI překoupené (72.34), což naznačuje potenciální korekci. Dení RSI se blíží překoupené zóně (68.78), což podporuje opatrnost. Na 1h a 4h grafech se RSI nachází ve středních hodnotách a cena je nad MA, což naznačuje, že se jedná o krátkodobé momentum vzhůru. Celkově převažuje SELL kvůli překoupenosti na vyšších časových rámcích a možné korekci, ale krátkodobé BUY momentum je stále přítomné, avšak je nutná opatrnost."
+}

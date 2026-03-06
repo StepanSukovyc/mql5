@@ -1,0 +1,7 @@
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "USDNOK is showing bearish signals across multiple timeframes. The price is below the daily and weekly moving averages, and the RSI on the hourly and weekly charts indicates oversold conditions, with the monthly RSI also very low. Recent hourly candles show a sharp downward move. The monthly MA is significantly above the current price, suggesting a long-term downtrend.  Therefore, a SELL position carries the most weight, while BUY is risky. Holding might be considered to wait for further confirmation."
+}

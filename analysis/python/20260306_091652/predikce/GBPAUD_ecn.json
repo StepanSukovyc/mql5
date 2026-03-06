@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Z technického hlediska indikuje měsíční a týdenní timeframe klesající trend (MA klesá, RSI nízké). Denní RSI se blíží přeprodané oblasti. Na 1h RSI je překoupené, což naznačuje potenciální obrat. Proto se nakupování jeví jako riskantní. SELL má vyšší pravděpodobnost úspěchu. HOLD je opatrná varianta vzhledem k nejasnému výhledu."
+}

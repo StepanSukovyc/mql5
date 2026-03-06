@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Na 1h a 4h timeframe je RSI v překoupené zóně, což naznačuje možnost korekce, ale denní RSI je stále pod 70, s MA výrazně pod aktuální cenou. Týdenní timeframe je neutrální a měsíční ukazuje klesající trend.  Poslední denní svíčka je býčí, což by mohlo naznačovat pokračující růst v krátkodobém horizontu. Celkově vidím mírnou převahu pro BUY, ale je potřeba být opatrný kvůli překoupenosti na kratších časových rámcích a dlouhodobějšímu klesajícímu trendu."
+}

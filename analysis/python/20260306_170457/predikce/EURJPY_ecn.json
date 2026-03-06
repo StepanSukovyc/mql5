@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza vykazuje smíšené signály. Krátkodobě (1h, 4h) klesající RSI a cena pod MA naznačují prodejní tlak. Denní timeframe je neutrální. Dlouhodobě (týden, měsíc) je RSI nad 50, což značí potenciál pro další růst, ale aktuální cena je blízko MA na denním grafu, což signalizuje rezistenci. Kombinace faktorů vyžaduje opatrnost. Vzhledem k aktuálnímu poklesu a rezistenci kolem MA na denním grafu, je zde vyšší riziko poklesu než růstu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "AU200_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "AU200_ecn is currently showing strong bearish signals. RSI values on 1H, 4H, and Day timeframes are all in oversold territory (below 30), suggesting potential for a short-term bounce, but the overall trend is downward. The price is below the Moving Average on all timeframes except for the monthly, which is barely holding, which indicates selling pressure. The recent daily candles show a significant drop in price. The Monthly RSI is still above 50, indicating that the asset is not overbought, nor oversold. This means it can still fall further. Thus, 'Sell' is the more likely option, but with some care."
+}

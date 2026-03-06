@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "NZDCHF je v downtrendu, což potvrzuje klesající MA na denním, týdenním i měsíčním grafu. RSI na měsíční timeframe naznačuje přeprodanost, ale na nižších timeframe (1h, 4h, den) je stále prostor pro pokles. 1H RSI je na 34, což naznačuje možnou konsolidaci. SELL je doporučeno kvůli převládajícímu downtrendu a pozici ceny pod MA na většině timeframe. BUY je rizikové, protože uptrend není potvrzen. HOLD doporučeno pro ty, co již mají otevřené pozice a čekají na vývoj."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "GBPSGD is showing mixed signals. Hourly and 4H RSI are near neutral, suggesting a lack of strong momentum. Daily and Weekly RSI are below 40 indicating potential for a bounce, but the Daily MA is acting as resistance. Monthly MA is above the current price which indicates longer term bearish sentiment. Recent hourly price action shows volatility and uncertainty. Therefore, holding provides optionality given current indicators and price level."
+}

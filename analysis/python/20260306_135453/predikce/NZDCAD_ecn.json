@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "Cena je v downtrendu, RSI je v pásmu přeprodanosti na nižších timeframech (1h, 4h) ale směřuje dolů i na denním grafu, MA klesá. Indikace naznačují spíše prodejní tlak. Na měsíčním grafu dochází k poklesu RSI a MA což také značí pokračující downtrend. I přes přeprodanost na nižších timeframech a potenciální krátkodobou korekci nahoru, celkový sentiment je medvědí."
+}

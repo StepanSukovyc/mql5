@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena klesá pod 1h a 4h MA, RSI na 1h je pod 40, což naznačuje potenciální pokračování downtrendu. Denní RSI je také pod 50. Nicméně, měsíční RSI je vysoko, což ukazuje na možný dlouhodobý býčí trend, ale krátkodobá korekce je pravděpodobná. Proto SELL má nejvyšší pravděpodobnost, BUY má nejnižší a HOLD jako možnost vyčkávání."
+}

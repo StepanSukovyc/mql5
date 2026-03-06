@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě rostoucí trend (RSI a MA na 1h a 4h rostou), ale s ohledem na dlouhodobější klesající trend (MA na měsíčním grafu výrazně nad aktuální cenou a RSI blízko neutrální zóně) a konsolidaci posledních dnů je nutná opatrnost. Denní graf ukazuje RSI v překoupené oblasti, naznačuje potenciální korekci. Týdenní RSI naznačuje, že prostor pro pokles existuje. Proto rozložení mezi BUY, SELL a HOLD."
+}

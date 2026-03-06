@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "On the monthly timeframe, the RSI is 31.16, suggesting oversold conditions, but the price is still far below the monthly MA of 0.8307, indicating a strong downtrend. The weekly RSI is 44.26, below the MA (0.7906) confirming downtrend. Daily RSI at 56.17 is neutral and above the MA (0.7734). On the hourly timeframe, the price hovers around the MA suggesting short term neutrality. Considering the longer-term downtrend, a cautious approach is warranted. SELL has more confidence as downward trend is stronger. BUY has limited confidence. HOLD as neutral short term view."
+}

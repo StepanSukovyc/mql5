@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI překoupené (72.8), což naznačuje potenciální korekci. Týdenní a denní grafy ukazují oscilaci kolem MA, s denním RSI pod 50, což signalizuje možný pokles. I když 4H RSI je mírně nad 50, celkový sentiment naznačuje spíše SELL než BUY. HOLD je zvažován vzhledem k rostoucímu MA na měsíčním timeframe, avšak převaha krátkodobých indikátorů favorizuje SELL."
+}

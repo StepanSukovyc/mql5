@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the hourly and daily charts, the RSI is showing overbought conditions (69.30, 71.12 respectively), which may suggest a potential pullback. However, the price is currently above the moving average on most timeframes, indicating an upward trend. Considering these conflicting signals and limited candle data, a Hold strategy is recommended, with a slightly increased chance of a buy order."
+}

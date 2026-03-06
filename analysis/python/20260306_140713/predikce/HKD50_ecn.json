@@ -1,0 +1,7 @@
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod denním a týdenním MA, denní RSI je pod 32, což indikuje potenciální přeprodanost, ale zároveň převládá klesající trend. Měsíční RSI je sice v býčí zóně, ale krátkodobé indikátory naznačují spíše tlak na pokles. Proto převládá doporučení SELL, HOLD je opatrná pozice a BUY je spekulativní vzhledem k možného odrazu od přeprodané úrovně."
+}

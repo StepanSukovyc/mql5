@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "EURUSD is currently trading at 1.15504. The RSI values on the 1H, 4H, and Daily timeframes are all below 35, indicating oversold conditions, but the price is still trending down. The current price is below the MA on the 1H, 4H, Day, and Week charts. The Monthly RSI is at 57.36, suggesting neutral momentum. Given the short-term oversold conditions and the overall downtrend, a cautious sell position seems most probable. The weekly timeframe also indicates strong downward momentum based on close price relative to the MA. A buy is risky and HOLD is considered if there is a high level of certainty in one direction or another but this is not the case."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním a denním grafu je RSI v překoupené zóně (72.24 a 68.64). Na hodinovem grafu je RSI 65.7 co naznačuje že cena možná dosahne vrcholu a bude korigovat směrem dolů. Cena je nad MA na všech timeframech co naznačuje rostoucí trend. Navíc za posledních 5 dní cena rostla, takže krátkodobě se pravděpodobně vrátí k průměru. Proto doporučuji větší sell než buy a držet stávající pozice."
+}

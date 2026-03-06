@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CADJPY is currently showing mixed signals. Daily and weekly RSI are approaching overbought territory (above 70 and 68, respectively), suggesting a potential pullback. However, the price is above the daily, weekly and monthly moving averages, indicating an overall uptrend. The 1H RSI is also at 60, but the price is above the 1H MA showing continued strength. A bullish position is risky based on the short-term overbought conditions. A sell position would be equally risky as the overall trend is up. A hold strategy is sensible until clear divergence and market correction occurs."
+}

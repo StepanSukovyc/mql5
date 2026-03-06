@@ -1,0 +1,7 @@
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na týdenním grafu je RSI silně přeprodané (20.90), což naznačuje možnost korekce směrem nahoru, ale denní RSI (36.65) naznačuje stále klesající trend. Cena je pod klouzavými průměry na denním, týdenním i měsíčním grafu, což naznačuje medvědí sentiment. I když hodinové RSI (59.71) naznačuje mírný nárůst, celkový dlouhodobý trend směřuje dolů. Proto je pravděpodobnější SELL."
+}

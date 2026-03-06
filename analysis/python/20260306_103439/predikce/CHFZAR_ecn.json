@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technické indikátory ukazují smíšený signál. RSI na hodinových a čtyřhodinových grafech je blízko překoupené zóně, ale nejedná se o extrémní hodnoty, což značí potenciál pro další růst. MA na kratších timeframech jsou pod aktuální cenou, což naznačuje krátkodobý uptrend. Na denním grafu je RSI a MA také mírně nadprůměrné. Týdenní graf je v neutrální zóně. Nicméně, spread se v poslední době zvýšil, což zvyšuje riziko. Proto 'HOLD' je rozumná volba, dokud se nevyjasní další trend. BUY má výhodu z uptrendu na kratších timeframech, SELL vychází z možného obratu po dosažení překoupené zóny."
+}

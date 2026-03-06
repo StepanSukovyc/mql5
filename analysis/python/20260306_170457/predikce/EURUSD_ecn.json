@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "EURUSD is currently trading at 1.1608. The daily and 4-hour RSIs are in oversold territory (32.88 and 39.29, respectively), suggesting potential for a bounce. However, the price is below the daily MA (1.1779) indicating bearish momentum on the daily timeframe. The hourly RSI is at 43.95, showing no immediate overbought signals. The month RSI is at 58.66. Considering the overall downtrend evident across daily and weekly charts, and a break below recent support levels, a SELL position carries more weight. However, oversold signals provide some counter-trend potential, which is why some % are allocated to BUY and HOLD. Recent hourly candles show downtrending momentum. Risk assessment reflects the higher probability of downward continuation."
+}

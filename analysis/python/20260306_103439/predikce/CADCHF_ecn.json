@@ -1,0 +1,7 @@
+{
+  "symbol": "CADCHF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the hourly and 4-hour charts, the price is trading above the Moving Average, with RSI values in the neutral to overbought territory (50-63). The daily RSI is also above 50, suggesting bullish momentum, but the weekly RSI is below 50, indicating a potential for a bearish correction. The monthly RSI is in oversold territory, suggesting a potential for long-term bullish reversal. The MA on the monthly timeframe is significantly higher than the current price, signalling a downtrend in the long-term. Given these factors, the overall sentiment is neutral with slight bullish bias in the short-term, therefore favoring a hold/buy strategy. Recent price action (last hour of provided data) shows some retracement, however, longer timeframe shows upward trend."
+}

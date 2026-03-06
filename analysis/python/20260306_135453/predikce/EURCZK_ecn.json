@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "Denní RSI je překoupené (70.25), což naznačuje možnost korekce. Nicméně 1h a 4h RSI jsou neutrální až mírně překoupené, což signalizuje potenciál pro krátkodobý růst. Měsíční RSI je pod 50, což indikuje celkový downtrend, ale poslední svíčka naznačuje možný obrat. MA na většině timeframech roste, ale měsíční MA klesá, což odpovídá downtrendu. Vzhledem k rozporuplným signálům je HOLD opatrnou strategií s lehkým náklonem k BUY, pokud se potvrdí krátkodobý růst."
+}

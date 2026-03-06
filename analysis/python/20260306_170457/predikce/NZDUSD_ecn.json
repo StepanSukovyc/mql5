@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na kratších časových rámcích (1h, 4h, day) je RSI relativně nízké, naznačující potenciální přeprodanost, ale celkový trend (zejména na denním a týdenním grafu, s MA nad cenou) je spíše medvědí. Proto je pravděpodobnější pokles (SELL). Měsíční RSI je neutrální. Posledních několik hodin (1h timeframe) ukazuje na pokles, který by mohl pokračovat, ale vzhledem k možném přeprodání je část rizika směrem k BUY a HOLD."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL: Cena je pod 1h a 4h MA, RSI na 1h a 4h je pod 50. Denní RSI kolem 50, indikuje neutralitu. Týdenní a měsíční RSI jsou překoupené (nad 70), což naznačuje možnost korekce. Měsíční MA je výrazně pod současnou cenou, což značí dlouhodobý uptrend, ale aktuální volatilita a krátkodobé indikátory naznačují spíše SELL nebo HOLD pozici, dokud se situace nevyjasní. Zvažte SELL s ohledem na překoupené úrovně na vyšších časových rámcích."
+}

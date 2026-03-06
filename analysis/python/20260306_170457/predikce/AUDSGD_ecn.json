@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním grafu je RSI v překoupené zóně (76.96), což naznačuje možnou korekci. Denní RSI je na 57, což je neutrální, ale cena je nad MA. 1H a 4H grafy ukazují klesající momentum, RSI pod 50 a cena pod MA. Poslední svíčky na 1H grafu jsou bearish. Měsíční RSI je na 59.67 a cena nad MA, což značí dlouhodobý rostoucí trend, ale krátkodobé faktory naznačují spíše korekci dolů. Proto je největší pravděpodobnost SELL. HOLD je pro ty, kteří již pozici mají a čekají na další vývoj. BUY je riskantnější, ale z dlouhodobého hlediska se může vyplatit."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě SELL vzhledem k klesajícímu trendu na 1h, 4h a day timeframe s RSI pod 50. Týdenní a měsíční timeframe naznačují potenciál růstu (RSI nad 60), ale momentální cena je pod MA na denním timeframe. HOLD je opatrný přístup vzhledem k protichůdným signálům."
+}

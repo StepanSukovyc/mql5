@@ -1,0 +1,7 @@
+{
+  "symbol": "FANG_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Cena je nad denním a 4H MA, RSI na 1H a 4H je kolem 65, což naznačuje potenciál k dalšímu růstu. Měsíční RSI je také relativně vysoké. Nicméně týdenní MA je nad aktuální cenou, týdenní RSI je pod 50 a za poslední dny je patrná volatilita, což dává smysl držet i pozice SELL i HOLD, pro vyčkávání.  Nedostatek dat (pouze 30 svíček pro 1H, 4H a denní timeframe) snižuje jistotu predikce."
+}

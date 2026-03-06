@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI překoupené (71.86), což naznačuje potenciální pokles. Hodinový graf RSI je neutrální (49.08), ale cena je pod MA (11.63 < 11.67). Na měsíčním grafu je RSI neutrální (47.60). Týdenní RSI je na 65, takže se blíží překoupené oblasti. Kombinace faktorů naznačuje spíše prodejní tlak v krátkodobém horizontu, avšak vzhledem k delšímu časovému rámci a potenciální nejistotě je vhodné také zvážit držení."
+}

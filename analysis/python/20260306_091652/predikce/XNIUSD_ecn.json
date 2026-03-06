@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním MA a v klesajícím trendu na krátkodobých timeframech (1h, 4h). RSI na 1h a 4h je pod 50, což naznačuje, že je trh v medvědí náladě. Týdenní RSI je sice nad 50, ale cena je v poklesu. Proto dáváme vyšší pravděpodobnost pro SELL. BUY je riskantní, a HOLD je neutrální možnost. Historická data (candles) naznačují velkou volatilitu a spread, což zvyšuje riziko obchodování."
+}

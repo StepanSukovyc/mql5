@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena klesá, RSI na 1H a měsíčním grafu je nízké, naznačuje možný oversold. Nicméně MA na většině timeframech je výše než současná cena, což naznačuje downtrend. Tlak na prodej je silnější. RSI na denním a týdenním grafu ukazují na střední hodnoty a naznačují prostor pro další pokles. Poslední 2 svíčky na 1H timeframe naznačují silný bearish momentum."
+}

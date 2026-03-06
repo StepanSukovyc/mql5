@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI je na 68.42, což naznačuje, že se blíží překoupené zóně. Na 4H grafu je RSI na 65.96, také blízko překoupené zóny. Cena je nad denním a 4H MA, což naznačuje uptrend, ale krátkodobě (1H) se cena pohybuje kolem MA, a RSI je neutrální. Na měsíčním grafu je RSI na 41.30, což naznačuje, že má stále prostor pro růst. Vzhledem k kombinaci těchto faktorů doporučuji spíše HOLD s možností BUY."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena ZARJPY klesá na kratších časových rámcích (1h, 4h, den), RSI indikuje přeprodanost na 4H timeframe a MA naznačuje medvědí trend. Nicméně na týdenním a měsíčním grafu je patrný rostoucí trend, proto 'HOLD' snižuje celkové riziko. BUY strategie je limitována krátkodobou klesající dynamikou a proto její potenciál je nízký."
+}

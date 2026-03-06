@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena klesá pod denní MA, RSI na 4h je pod 40 indikující možný sestupný trend. Týdenní RSI je sice vysoké, ale denní a 4h indikují spíše SELL. Poslední měsíční svíčka je také klesající. Proto upřednostňuji SELL."
+}

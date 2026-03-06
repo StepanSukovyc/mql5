@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI (68.63) naznačuje překoupenost, ale momentum je stále silné. Cena se pohybuje nad denním MA (24.25578), což naznačuje uptrend. Na týdenním grafu je RSI (54.66) neutrální a cena je nad MA (24.242005), což podporuje uptrend. Měsíční RSI (41.46) je nízké, ale cena je pod MA (24.72496), což naznačuje možný downtrend. Krátkodobě (1h, 4h) vidíme fluktuaci ceny a RSI se pohybuje v neutrálních hodnotách. Vzhledem k rozporuplným signálům napříč časovými rámci, doporučuji opatrnost a raději počkat na potvrzení trendu, proto dávám HOLD 30%. SELL 30% kvuli mozne korekci vzhledem k vyssimu RSI na dennim grafu a BUY 40% kvuli uptrendu na dennim a tydnnim grafu."
+}

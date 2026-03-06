@@ -1,0 +1,7 @@
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "LTCUSD_ecn shows a bearish trend. RSI values on 1H and 4H are below 40 indicating downward momentum. Price is below MA on 1H, 4H, Day and Month charts, further confirming a downtrend. The weekly RSI is also very low at 27.75 suggesting oversold, but does not outweigh the other indicators. Recent hourly candles also show downward pressure. Therefore, SELL is more probable. HOLD is considered due to oversold on weekly chart and BUY is least probable at the current price point."
+}

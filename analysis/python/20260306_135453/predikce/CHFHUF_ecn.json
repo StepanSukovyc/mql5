@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFHUF_ecn",
+  "BUY": 60,
+  "SELL": 15,
+  "HOLD": 25,
+  "reasoning": "Cena CHFHUF_ecn je v rostoucím trendu. RSI na timeframe 1h, 4h, day, week je v překoupené zóně, což indikuje možnou korekci (sell risk). Avšak MA rostou napříč timeframe, což implikuje pokračující trend (buy). Poslední den prudký růst ceny. Proto převládá buy, ale je třeba opatrnosti kvůli překoupenosti."
+}

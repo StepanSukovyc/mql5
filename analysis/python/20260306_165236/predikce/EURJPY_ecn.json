@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "EURJPY is showing bearish momentum on shorter timeframes (1h, 4h) with RSI below 40 and price below MA, suggesting a potential sell-off. Daily RSI is below 50 indicating weakness. However, longer-term trends (weekly and monthly) show RSI above 50 and price well above monthly MA, indicating bullishness, albeit potentially overextended. Recent price action suggests a correction or consolidation, hence HOLD as the risk/reward is unclear at the current price.  Bearish signals are slightly stronger than bullish currently."
+}

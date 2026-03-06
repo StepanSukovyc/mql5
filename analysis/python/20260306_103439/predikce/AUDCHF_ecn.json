@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "AUDCHF is currently around 0.54754. On the daily timeframe, the RSI is at 54.20, and the price is slightly above the MA (0.5471). However, on the 4H timeframe, the RSI is at 47.72, and the price is below the MA (0.5497). The monthly RSI is at 40.84 indicating potential for downward movement. Given the conflicting signals between short and long-term timeframes, and the slightly bearish signals on the longer timeframes, a HOLD position might be considered, however with slightly more weight toward SELL due to monthly RSI and 4H timeframe bearish MA crossover. Hourly indicators show some consolidation around the MA. Therefore, risks are balanced, and the outlook is neutral to slightly bearish. Recent hourly candles also suggest weakening bullish momentum."
+}

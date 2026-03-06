@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "US30 is showing bearish signals across multiple timeframes. Hourly, 4-hour, and daily RSIs are all below 35, indicating oversold conditions, but the downtrend is strong. Price is below the moving averages on hourly, 4h and daily charts, reinforcing the sell signal. The weekly RSI is near 50 indicating more room to fall. The monthly RSI is quite high, but it's reacting to a significant downward move. A bounce is possible but the overall trend is down, so HOLD is less probable than SELL. Last hourly candle showing some bullish momentum."
+}

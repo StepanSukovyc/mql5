@@ -1,0 +1,7 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "Denní RSI je v překoupené zóně (70.28), což naznačuje potenciální korekci. Týdenní RSI je také relativně vysoké (65.15). Na druhou stranu, hodinové a 4hodinové RSI jsou neutrální, naznačující potenciální krátkodobý růst. Cena je nad 1h a 4h MA, ale blízko denní a týdenní MA. Měsíční RSI je pod 50, naznačující neutrální dlouhodobý trend. Proto doporučuji držet se zpátky (HOLD) nebo menší BUY pozici s opatrností a sledovat vývoj."
+}

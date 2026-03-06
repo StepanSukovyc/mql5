@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "CHFJPY se pohybuje v uptrendu na měsíčním a týdenním grafu (RSI nad 69, cena nad MA). Nicméně, na denním grafu se RSI blíží překoupené zóně a cena osciluje kolem MA. 1H RSI je na 60.93 a 4H RSI je 48.97. To naznačuje potenciální krátkodobou konsolidaci nebo mírnou korekci, proto `HOLD` je nejbezpečnější volba. Nákup je stále možný vzhledem k dlouhodobému trendu, ale s opatrností. Prodej je rizikovější, protože se nacházíme stále v rostoucím trendu, ale není vyloučen krátkodobý pokles, proto 25%."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "GER40_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena je pod 1h, 4h, denním a týdenním MA, což naznačuje klesající trend. Denní a 4h RSI jsou pod 35, což naznačuje, že trh je překoupený, i když se může ještě snížit. Měsíční RSI je vysoké, ale krátkodobé indikátory naznačují spíše SELL. Hold je zvažován kvůli možné konsolidaci nebo krátkodobým odrazům."
+}

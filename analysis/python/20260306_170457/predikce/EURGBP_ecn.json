@@ -1,0 +1,7 @@
+{
+  "symbol": "EURGBP_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena EURGBP je aktuálně 0.86578. Na 1H a 4H timeframe je RSI hluboko v přeprodané zóně (35.07 a 25.05). Denní RSI je 40.56, což naznačuje klesající trend. Cena je pod MA na 1H, 4H a denním grafu, což ukazuje na medvědí momentum. Na týdenním grafu je RSI 46.68 a cena pod MA. Pouze na měsíčním grafu je RSI nad 50 (52.02) a cena nad MA (0.852804). Nicméně, krátkodobé indikátory (1H, 4H, den) signalizují spíše SELL. Přeprodanost na nižších timeframech by mohla vést k dočasné korekci vzhůru, proto je BUY riziko vyšší. HOLD je opatrná strategie vzhledem k nejasnému dlouhodobému trendu. Dlouhodobý výhled (měsíční graf) je neutrální."
+}

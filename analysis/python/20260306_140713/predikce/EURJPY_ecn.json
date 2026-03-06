@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "EURJPY is showing bearish signals. Short-term RSI values on the 1H and 4H charts are below 40, indicating potential oversold conditions, but overall momentum is downwards. The price is currently below the MA on the 1H, 4H, and Daily charts, suggesting continued selling pressure. Weekly and monthly timeframes show higher RSI and price well above the MA, suggesting potential long term buying, but the price is currently showing pullback so SELL is suggested short term."
+}

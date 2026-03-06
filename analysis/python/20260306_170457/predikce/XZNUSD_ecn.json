@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "XZNUSD is showing mixed signals. Hourly and 4-hour RSI are around 50, indicating neutral momentum. Daily RSI is below 50, suggesting potential for further downside. Weekly RSI is high at 66, possibly indicating overbought conditions. The price is below the daily MA, suggesting a bearish trend, but above the 4H MA and approaching the 1H MA. Recent hourly candles show some upward movement, but overall, the short-term trend appears bearish. Given this conflicting data, a HOLD position seems reasonable, but with a slightly higher probability of a SELL due to the daily chart and recent downward pressure, and a reduced chance for BUY."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Smíšené signály. Krátkodobé indikátory (1H, 4H, Day) naznačují možný růst (RSI se blíží překoupenosti, cena nad MA), ale dlouhodobé (Week, Month) ukazují klesající trend (cena pod MA, RSI pod 50). Vzhledem k rozporuplným indikacím a absenci zjevných svíčkových formací je třeba opatrnosti. 'Hold' je vhodná pozice pro vyčkávání, dokud trh neposkytne jasnější signály. Nicméně, existuje potenciál pro krátkodobý růst (BUY), avšak s rizikem obratu (SELL)."
+}

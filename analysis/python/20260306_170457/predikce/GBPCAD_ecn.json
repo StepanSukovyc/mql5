@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "GBPCAD shows bearish signals across multiple timeframes. Daily and weekly RSI are oversold (below 30/35), indicating potential for a bounce. However, the longer-term trend is downward, as evidenced by the daily and weekly MA being significantly above the current price. Monthly RSI is neutral, but the monthly MA is still above the current price. Recent hourly and 4-hour price action confirms the short-term downward momentum. Therefore, the higher probability is on SELL. A buy entry is risky given the trend so HOLD remains the lowest probability. "
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "DXY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "DXY je v krátkodobém horizontu lehce překoupený (RSI 4h = 70.16), 1h MA je nad aktuální cenou, což naznačuje rezistenci. Denní RSI je také poměrně vysoko (67.70). Měsíční RSI je neutrální (43.24), ale cena je pod MA. Celkově krátkodobé indikátory signalizují potenciální korekci (SELL), avšak dlouhodobější trend je nejasný (HOLD), což omezuje potenciál pro BUY.  Data jsou limitovaná na 30 svíček, nelze posoudit dlouhodobý trend s jistotou."
+}

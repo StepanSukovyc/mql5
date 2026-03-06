@@ -1,0 +1,7 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "EURPLN is showing mixed signals. Daily RSI at 71.83 suggests overbought conditions and potential for a pullback, however the recent bullish price action and higher time frame RSI values suggest some upward momentum. Hourly MA below the current price suggests a buying opportunity in the short term. Weigthing of BUY/SELL/HOLD reflects uncertainty, but more likely to go up."
+}

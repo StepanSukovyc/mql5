@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSGD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Cena je pod MA na 1h, 4h i denním grafu. RSI je pod 50 na všech timeframech kromě týdenního grafu, což naznačuje sestupný trend. Měsíční MA je výrazně nad aktuální cenou, což naznačuje dlouhodobý klesající trend. Poslední svíčky na 1h a 4h timeframe potvrzují klesající momentum. Riziko SELL je tedy vyšší, BUY je opatrnější vzhledem k potenciálnímu odrazu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "VIX_ecn se nachází v rostoucím trendu na denním, týdenním i měsíčním grafu. RSI na denní (72.09), týdenní (74.68) i hodinové (66.88) bázi naznačuje překoupenost, což naznačuje možnou korekci. Dnešní svíčka je červená, což také indikuje spíše SELL. Zvýšený objem posledních svíček potvrzuje aktivitu na trhu, ale vzhledem k vysokému RSI a červené svíčce s ohledem na celkovou překoupenost trhu by se mohlo jednat o krátkodobé vyvrcholení. MA napříč timeframech roste, což naznačuje dlouhodobější býčí trend, proto je HOLD varianta opodstatněná. Nízké BUY procento je odůvodněné překoupeností na vyšších timeframech a možnou korekcí v krátkodobém horizontu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "Krátkodobé indikátory (RSI na 1h, 4h a day) jsou překoupené, což naznačuje možnou korekci. Nicméně, týdenní RSI je neutrální a cena se výrazně vzdálila od MA na denním i týdenním grafu, což naznačuje silný uptrend. Měsíční RSI je neutrální a cena je pod MA. Vzhledem k uptrendu a překoupenosti je BUY nejvíce pravděpodobná, ale HOLD a SELL jsou možné kvůli korekci. Celkově prevazuje nakupni tlak."
+}

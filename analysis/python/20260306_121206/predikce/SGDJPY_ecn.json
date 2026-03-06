@@ -1,0 +1,7 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na 1h a 4h timeframe se cena pohybuje kolem MA, RSI se pohybuje v neutrální zóně. Denní a týdenní RSI indikují mírný uptrend, ale s blížící se hodnotou k překoupené oblasti.  Měsíční RSI také signalizuje uptrend. Recentní svíčkové formace na 1h ukazují na konsolidaci. Celkově se trh jeví nerozhodně, proto je HOLD relevantní. BUY je možný, pokud cena prorazí rezistenci a potvrdí uptrend. SELL je relevantní, pokud cena klesne pod support a potvrdí downtrend. Proto jsem rozložil riziko 40-30-30."
+}

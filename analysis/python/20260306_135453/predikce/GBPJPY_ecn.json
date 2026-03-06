@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the monthly and weekly timeframes, RSI is above 60, suggesting upward momentum but approaching overbought conditions. However, the 1h and 4h RSI values are around 50, indicating neither strong buying nor selling pressure in the short term. The price is above the daily MA, but recent daily candles show indecision. Considering this mixed picture, a HOLD strategy provides a safer approach, while a BUY is possible given the overall uptrend, but requires close monitoring. The risk of a SELL is present because the price could reverse."
+}

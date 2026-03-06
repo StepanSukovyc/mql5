@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the daily chart, the RSI is at 64, nearing overbought territory, suggesting potential for a pullback. However, the price is above the moving average, indicating an ongoing uptrend. Shorter time frames (1h and 4h) also show RSI values in a similar range. The weekly chart shows a recent rise in RSI, but it's still relatively neutral. Considering the mixed signals, a conservative 'HOLD' strategy is recommended, with a moderate 'BUY' risk due to the prevailing uptrend and some potential for short-term 'SELL' opportunities due to RSI levels."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě SELL kvůli RSI pod 50 na 1h, 4h a denním grafech, a ceně pod MA na 1h a 4h grafech. Dlouhodobě je měsíční RSI překoupené (76.05) a cena se nachází poměrně vysoko nad MA (6245.993), indikuje to možný pokles. Proto je i HOLD opatrný."
+}

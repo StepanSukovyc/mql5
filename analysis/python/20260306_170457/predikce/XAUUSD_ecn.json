@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Měsíční RSI je extrémně překoupené (90.92), což naznačuje potenciální korekci. Týdenní RSI je také vysoké (75.52). Denní a 4H RSI jsou neutrální.  Cena je nad denním MA, ale pod 4H MA. Poslední hourly candles ukazují pokles. Proto převládá SELL signál s menší šancí na HOLD. BUY je možné až po korekci RSI."
+}

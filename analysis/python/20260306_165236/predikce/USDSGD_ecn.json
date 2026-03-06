@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Analýza vykazuje smíšené signály. Krátkodobé timeframe (1h, 4h) indikují potenciál pro růst, RSI se nachází v neutrální až mírně překoupené zóně, cena se pohybuje kolem MA, ale denní RSI je blízko překoupené zóny a MA roste. Týdenní graf ukazuje RSI pod 50 a cenu pod MA, což naznačuje potenciální pokles, ale měsíční RSI je relativně nízko a cena se blíží supportu, což zase ukazuje na potenciální odraz. Proto rozložení rizika mezi BUY, SELL a HOLD."
+}

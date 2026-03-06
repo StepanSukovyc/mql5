@@ -1,0 +1,7 @@
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "NGAS_ecn currently trades at 3.117. On the 1H timeframe, RSI is at 68.32, indicating overbought conditions, but the price is above the MA (2.98). The 4H RSI is at 63.46, still relatively high. The daily RSI at 45.95 is neutral. The weekly RSI at 47.42, and Monthly at 51.91 suggest a lack of strong momentum either way on longer timeframes.  Recent price action has been positive, with an upward trend visible in the hourly candles of the current day. However, resistance might be encountered soon given that the asset has been increasing in price the whole day.  The Moving averages on 1H and 4H both point to the fact, that asset is above both of these averages. This gives some weight to buy signal, since trend is upward. Given these mixed signals, a cautious approach is recommended. Higher timeframes RSI values and MA values on the monthly timeframe make the BUY procent higher. The most recent data on candles hints some bullish price, but not an extreme buy."
+}

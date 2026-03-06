@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Krátkodobě SELL signalizováno RSI na 1H a 4H timeframe (pod 50), a cena je pod MA na 1H a 4H timeframe. Na denním timeframe je RSI blízko 50 a cena blízko MA, což indikuje HOLD. Dlouhodobě (týdenní a měsíční timeframe) je RSI vysoko (overbought) a cena nad MA, což naznačuje potenciální korekci (SELL). BUY je riskantní dokud cena nezačne konzistentně překonávat MA na nižších timeframech. Celkově převládá SELL tlak s možností korekce."
+}

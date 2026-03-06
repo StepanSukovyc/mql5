@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod MA na 1h, 4h, denním i měsíčním grafu, RSI je pod 50 na všech timeframech, což naznačuje převahu prodejců. Týdenní RSI je těsně pod 50, což indikuje nerozhodnost. Poslední denní svíčka je medvědí. Doporučuje se spíše SELL, ale s ohledem na možnou korekci je vhodné zvážit i HOLD. BUY je rizikové."
+}

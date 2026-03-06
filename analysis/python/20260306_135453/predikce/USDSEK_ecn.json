@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI stále pod 40, což naznačuje, že pár je blízko překoupení, ale MA na měsíčním grafu roste. Na denním grafu je RSI kolem 64 a MA na denním grafu také roste, což ukazuje na možný býčí trend. Na 4H grafu je RSI blízko 70, potenciálně překoupené. Na 1H grafu se RSI pohybuje kolem 60, ale spread je velmi vysoký a volatilní, což zvyšuje riziko. Vzhledem k smíšeným signálům a vysoké volatilitě preferuji SELL, ale HOLD je opatrná alternativa. BUY má nejmenší šanci kvůli překoupenosti na nižších časových rámcích."
+}

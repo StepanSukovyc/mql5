@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL kvůli RSI pod 40 na H1 a H4, klesající MA na H1 a nedávnému prolomení směrem dolů. Denní RSI je neutrální (53), ale uzavření dnešní svíčky je zatím silně negativní. Týdenní a měsíční RSI naznačují překoupenost/potenciál dalšího růstu, ale aktuální momentum je dolů. HOLD zvažuje dlouhodobější bullish trend a nutnost sledovat další vývoj."
+}

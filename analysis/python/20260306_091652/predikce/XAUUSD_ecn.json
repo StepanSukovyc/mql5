@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje možný pokles. RSI na 1h a 4h timeframe je pod 50, což značí možný downtrend. Denní RSI je těsně pod 50 a cena se pohybuje nad MA na denním grafu, což naznačuje spíše konsolidaci. Avšak na týdenním a měsíčním grafu je RSI vysoko (72.9 a 88.6), což signalizuje potenciální překoupenost a možnost korekce. Poslední denní svíčka je silně klesající. Důvodem pro částečný BUY je fakt, že cena klesla relativně nízko a může dojít k reboundu, zároveň MA na denním grafu může fungovat jako support. Vzhledem k rozporuplným signálům a vysoké volatilitě zlata je HOLD konzervativní možností."
+}

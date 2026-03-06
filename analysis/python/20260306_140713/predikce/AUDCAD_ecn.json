@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCAD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Short-term momentum is strongly bearish, as indicated by the RSI on 1H (37.12) and 4H (31.48) timeframes. The price is below the moving averages on the hourly, 4-hour, and daily charts, suggesting a downtrend. While longer-term indicators (weekly and monthly RSI) are slightly bullish, the recent price action indicates a continuation of the downtrend. SELL is favored based on immediate bearish signals. The last 4h candle closed below 0.95313. Potential target around 0.9500. Limited data available might lead to failure."
+}

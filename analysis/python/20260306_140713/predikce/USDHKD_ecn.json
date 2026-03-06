@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na hodinovém grafu RSI (42.73) naznačuje, že trh není ani překoupený, ani přeprodaný. Cena je pod klouzavým průměrem (MA: 7.820129 vs. Current price: 7.8191), což signalizuje mírný prodejní tlak. Na 4-hodinovém grafu RSI (49.29) je neutrální. Na denním grafu je RSI (59.19) mírně býčí, avšak denní svíčky ze včerejška a dneška nevypadají dobře a signalizují další pokles ceny. Proto držení může být rozumné, ale SELL má větší pravděpodobnost. Týdenní a měsíční RSI se pohybují kolem 50, což naznačuje neutralitu v dlouhodobějším horizontu. Vzhledem k nejnovějšímu cenovému pohybu a mírnému prodejnímu tlaku na kratších časových rámcích je SELL pravděpodobnější než BUY."
+}

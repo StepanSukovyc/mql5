@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "NZDCHF_ecn is currently at 0.45888. Hourly RSI is oversold at 29.16 suggesting a potential short-term bounce. However, longer-term indicators are bearish: Month RSI is 27.86 and the price is below the moving average on all timeframes. Recent hourly candles show a downward trend. Given these factors, a short position is more probable, but holding might be considered as risk management."
+}

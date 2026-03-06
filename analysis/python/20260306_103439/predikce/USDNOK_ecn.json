@@ -1,0 +1,7 @@
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Z technického hlediska vidíme smíšené signály. Na hodinovém grafu je RSI 44.29, což naznačuje, že trh není ani překoupený, ani přeprodaný. Cena je pod MA na hodinovém grafu. Na 4H grafu je RSI 61.07 a cena je pod MA. Denní RSI je neutrální, ale cena je nad MA, což naznačuje potencionální long. Týdenní a měsíční grafy ukazují klesající trend (RSI pod 40 a cena pod MA). Celkově, s ohledem na krátkodobé oscilace a dlouhodobý klesající trend, je doporučeno opatrné nastavení portfolia s mírným zvýrazněním krátké pozice."
+}

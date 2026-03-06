@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "NZDJPY currently shows bearish signals. 1H and 4H RSI are below 40, suggesting oversold conditions but not yet strong buy signals. Daily RSI is below 50, indicating bearish momentum. The price is below the moving average on 1H, 4H and Daily charts, reinforcing the sell signal. The recent price action also confirms the down trend. Weekly and Monthly charts shows uptrend, but the recent price suggests the trend is going to change direction."
+}

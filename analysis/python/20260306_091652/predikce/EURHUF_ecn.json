@@ -1,0 +1,7 @@
+{
+  "symbol": "EURHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním a 4H grafu se RSI nachází v pásmu překoupenosti, což naznačuje potenciál pro korekci dolů. Na týdenním grafu je RSI neutrální. Nicméně, hodinový graf ukazuje rostoucí trend s RSI blízko 60. Kombinace těchto faktorů naznačuje nerozhodnost trhu, proto rozdělení mezi BUY, SELL a HOLD odráží tuto nejistotu. Na měsíčním grafu se MA nachází nad cenou, což je lehce bearish signál."
+}

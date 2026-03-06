@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza vykazuje smíšené signály. Denní RSI je v překoupené zóně (70.43), což naznačuje potenciální korekci. Na druhou stranu, 4H RSI je 65.58, což značí stále rostoucí momentum, ale ne již extrémní. 1H RSI je neutrální (49.44). Cena je nad denním MA (24.26), týdenním MA (24.24), ale pod měsíčním MA (24.73). Poslední denní svíčka je rostoucí, což podporuje BUY. Celkově, vzhledem k rozdílným signálům z různých časových rámců doporučuji vyčkat na potvrzení trendu (HOLD) nebo s BUY pozicí postupovat opatrně."
+}

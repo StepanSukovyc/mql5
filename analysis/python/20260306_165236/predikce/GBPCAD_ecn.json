@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "GBPCAD is showing bearish signals across multiple timeframes. Daily RSI is oversold (28.52), indicating potential for a bounce, but overall trend remains down. The daily, week and month MA is above the current price, confirming the downtrend. Hourly and 4H RSIs are below 50, and price is below hourly and 4H MA suggesting continuation of the short term downtrend. Limited historical data (short lookback periods) increases uncertainty."
+}

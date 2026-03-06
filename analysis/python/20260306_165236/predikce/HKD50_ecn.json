@@ -1,0 +1,7 @@
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Technická analýza naznačuje převahu prodejců. Na denním a hodinovém grafu je RSI v přeprodané oblasti, což sice může signalizovat potenciální obrat, ale MA (moving average) na všech grafech kromě měsíčního je nad aktuální cenou, což naznačuje pokračující klesající trend. Měsíční RSI je sice relativně vysoké, ale cena se od MA vzdaluje, takže pravděpodobně přijde korekce. Vzhledem k celkovému kontextu je prodej rizikovější, ale pravděpodobnější."
+}

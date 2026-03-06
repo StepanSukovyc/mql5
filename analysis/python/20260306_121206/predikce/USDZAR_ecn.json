@@ -1,0 +1,7 @@
+{
+  "symbol": "USDZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na 1h a 4h timeframe RSI naznačuje, že pár by mohl být překoupený, ale denní RSI je stále pod 70, což značí potenciál pro další růst. MA na nižších timeframech jsou pod aktuální cenou, což podporuje nákupní signál, ale na měsíčním timeframe je MA nad cenou. Týdenní RSI je neutrální. Poslední svíčky na 1h timeframe ukazují na konsolidaci, což ztěžuje jasné rozhodnutí. Proto rozděluji riziko mezi BUY, SELL a HOLD."
+}

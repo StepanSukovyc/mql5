@@ -1,0 +1,7 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "BTCUSD currently shows mixed signals. Hourly RSI is oversold (35.20), suggesting a potential bounce. However, the price is below the hourly MA (72187.8), and shorter timeframes candles show recent bearish momentum. The Daily RSI (44.68) is neutral, but the price is above the Daily MA (68083.4). Weekly and Monthly MAs are far above current price, hinting at a larger downtrend. Therefore, SELL is slightly favored due to recent bearish trend on shorter timeframes and longer term downtrend. BUY is considered only on short term."
+}

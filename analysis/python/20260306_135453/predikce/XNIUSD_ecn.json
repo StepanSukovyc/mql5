@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Z krátkodobého hlediska (1h, 4h, day) RSI indikuje mírné přeprodání/neutrální hodnoty, ale cena je pod MA, což naznačuje potenciální prodejní tlak. Týdenní RSI je neutrální, ale cena je nad MA, signalizující dlouhodobější býčí trend. Vzhledem k aktuální ceně a smíšeným signálům od indikátorů je doporučení HOLD, s mírnou preferencí pro SELL, dokud se situace nevyjasní. Absence MA a RSI na měsíční bázi z důvodu nedostatku dat znemožňuje delší fundamentální analýzu."
+}

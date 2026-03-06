@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPJPY_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "GBPJPY is showing mixed signals. The longer-term trends (Weekly and Monthly) are bullish with RSI values above 60 and price above MA. However, shorter-term indicators (1H and 4H) are neutral, with RSI around 50 and recent price action showing consolidation. Day timeframe indicates consolidation near the MA. There is no clear trend now. Considering the uptrend, BUY has an advantage, but short-term consolidations introduce risk of selling. Holding seems a safe choice."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na denním a hodinovém timeframe je RSI v přeprodané oblasti (pod 30), což naznačuje potenciální odraz. Nicméně, cena je pod MA na všech timeframech kromě měsíčního, což naznačuje sestupný trend. RSI na týdenním timeframe je neutrální, ale denní RSI klesá. Kombinace těchto faktorů naznačuje krátkodobý potenciál pro odraz (BUY), ale převládající sestupný trend naznačuje spíše SELL. Proto SELL má nejvyšší procento rizika. HOLD je z důvodu nejistoty a čekání na potvrzení trendu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCAD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na základě technické analýzy USDCAD se zdá, že cena vykazuje smíšené signály. RSI na denním a 4H timeframe se pohybuje kolem 50, což nenaznačuje silný trend. Cena je pod 1H a 4H MA, ale nad denní MA. Dlouhodobé MA (týdenní a měsíční) jsou výrazně nad aktuální cenou, což naznačuje možný dlouhodobý downtrend. Celkově je trh v konsolidaci s mírným biasem pro SELL z důvodu downtrendu na vyšších timeframe."
+}

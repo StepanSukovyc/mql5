@@ -1,0 +1,7 @@
+{
+  "symbol": "EU50_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena je pod všemi MA kromě měsíčního, RSI je v pásmu přeprodanosti na 1H, 4H a denním grafu. Na týdenním grafu se RSI blíží neutrální hodnotě. Měsíční RSI je nad 60, což naznačuje uptrend, ale cena je daleko od MA. Celkově převažují signály pro SELL, ale přeprodanost a vzdálenost od MA na měsíčním grafu by mohla indikovat potenciální korekci nahoru, proto držím část HOLD a mírně BUY."
+}

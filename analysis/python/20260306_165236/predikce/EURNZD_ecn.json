@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNZD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Na hodinovém grafu RSI (62.47) naznačuje překoupenost, ale MA (1.9677) je mírně nad aktuální cenou. Na 4h a denním grafu je RSI neutrální, MA se pohybují okolo aktuální ceny. Týdenní MA (2.008) je výrazně nad aktuální cenou, což signalizuje možný dlouhodobý klesající trend. Měsíční MA (1.9115) je pod aktuální cenou, naznačuje možný růstový trend. Celkově je trh v konsolidaci, takže nejlepší je vyčkat s HOLD pozicí. Růstový potenciál signalizuje RSI na měsíční bázi. Riziko je však poměrně vysoké."
+}

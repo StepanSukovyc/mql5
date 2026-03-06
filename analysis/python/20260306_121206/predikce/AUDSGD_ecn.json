@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním grafu je RSI překoupené (76.60), což naznačuje potenciální korekci. Hodinové a 4hodinové RSI jsou neutrální, ale cena je pod 1h a 4h MA, což naznačuje krátkodobý klesající trend. Denní RSI je sice neutrální (56.77), ale cena se blíží MA. Měsíční RSI je také neutrální, ale cena je nad MA, což značí dlouhodobý rostoucí trend, ovšem s potenciální korekcí v blízké budoucnosti. Nejlepší je vyčkat."
+}

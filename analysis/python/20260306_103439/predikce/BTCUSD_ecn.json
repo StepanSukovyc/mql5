@@ -1,0 +1,7 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "BTCUSD is showing mixed signals. While the 4h RSI is neutral (54.17), the 1h RSI is at 41.93, suggesting potential for a bounce. However, the price is below the 1h MA (71175.15) and the weekly RSI (32.27) is oversold, but the MA (87087.85) is significantly higher than the current price, indicating longer-term bearish momentum. Daily RSI (43.78) and MA (68094.25) suggest possible downward movement. Therefore, SELL has the higher probability due to the weekly and daily downward trend, while BUY possibility is weakened by 1h indicators. HOLD is reasonable due to uncertainties of market, including potential of a trend reversal."
+}

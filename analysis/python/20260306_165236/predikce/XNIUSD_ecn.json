@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Analýza je smíšená. Krátkodobě (1h, 4h, day) RSI naznačuje spíše neutrální až mírně klesající trend, MA na všech timeframes kromě week je pod aktuální cenou, což naznačuje potenciál pro korekci. Týdenní RSI je poměrně vysoké, ale MA je výrazně pod aktuální cenou, což může signalizovat potenciál pro další růst, ale také pro hlubší korekci. Měsíční data chybí pro RSI i MA. Vzhledem k rozporuplným signálům a omezenému množství dat (pouze 30 period na nižších TF) je nejrozumnější vyčkat (HOLD) a sledovat další vývoj. SELL je mírně preferovaný vzhledem ke krátkodobému klesajícímu trendu a možnosti korekce po předchozím růstu. BUY je nejméně pravděpodobný s ohledem na současné indikátory."
+}

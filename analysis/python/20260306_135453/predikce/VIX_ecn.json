@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "VIX_ecn aktuálně vykazuje rostoucí trend. RSI na denní a hodinovém grafu naznačuje překoupenost, ale na týdenním grafu je RSI ještě vyšší (73.65), což ukazuje na silný, dlouhodobý býčí moment. Pohyblivé průměry (MA) na všech časových rámcích rostou, což podporuje uptrend. Z posledních svíčkových formací vyplývá pokračující růstový trend. Nicméně je třeba brát v potaz možnost krátkodobé korekce vzhledem k překoupenosti na denním a hodinovém grafu, proto dávám část rizikovosti hold."
+}

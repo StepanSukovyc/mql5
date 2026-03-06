@@ -1,0 +1,6 @@
+{
+  "recommended_symbol": "USDCZK_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "reasoning": "Diverzifikace: Nemám otevřenou pozici v USDCZK_ecn. Denní RSI se blíží překoupené zóně, ale měsíční RSI ukazuje prostor pro růst. Cena je nad denním MA, což je býčí signál. Vzhledem k aktuální marži (margin_free: 453.94) a opatrnému přístupu doporučuji lot size 0.02 pro kontrolu rizika. Pravděpodobnost BUY je 35%, což je vyhovující pro otevření nové pozice. HOLD je zvážena konzervativní strategie."
+}

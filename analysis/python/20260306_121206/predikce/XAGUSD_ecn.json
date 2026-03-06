@@ -1,0 +1,7 @@
+{
+  "symbol": "XAGUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Short-term bearish signals outweigh bullish factors. Hourly and 4-hour RSI are below 50, suggesting downward momentum. The price is below the hourly and 4-hour moving averages. Monthly RSI is very high (overbought), indicating a potential pullback in the longer term. Daily timeframe shows consolidation, hence some 'hold' probability. Recent price action shows increased volatility and downside risk."
+}

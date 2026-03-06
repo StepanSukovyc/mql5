@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena aktuálně 0.77724. Na měsíčním grafu je RSI na 29.61, což značí překoupenost, indikující možný obrat směrem dolů. Týdenní RSI je 41.42 a denní RSI 51.44, což naznačuje potenciální pokračování klesajícího trendu. Cena je pod 1h a 4h MA, na týdenním a měsíčním je nad MA, ale MA hodnota je velmi vysoko, čímž indikuje potenciální budoucí pokles.  Poslední denní svíčka je bearish, potvrzuje tlak prodejců. Doporučuji spíše SELL pozici s menším důrazem na HOLD, dokud se nepotvrdí signály obratu na vyšších časových rámcích."
+}

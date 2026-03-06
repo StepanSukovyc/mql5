@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Denní RSI je překoupené (85.26), což naznačuje možnost korekce. Na druhou stranu, týdenní RSI je stále vysoké (78.38), ale neextrémní, a cena je nad MA na všech časových rámcích. Poslední denní svíčka je silně býčí. Celkově převládá býčí momentum, ale s ohledem na překoupené podmínky doporučuji opatrný nákup s možností realizace zisku v krátkodobém horizontu, případně vyčkávání na menší korekci a následný vstup. Nezanedbatelné riziko poklesu s ohledem na překoupené podmínky je důvodem k SELL alokaci. HOLD je zde doporučení pro ty, kteří již mají pozici otevřenou a chtějí sledovat další vývoj, nebo pro ty, kteří čekají na lepší nákupní příležitost."
+}

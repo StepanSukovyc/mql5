@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CHFJPY is currently trading at 201.978.  Monthly and weekly RSI are overbought (70.94 and 69.57 respectively) suggesting a potential pullback. Daily RSI is moderate (59.30) but nearing overbought levels. The price is above the daily and 4H moving averages, but the 1H RSI is 64.49 and the price is above the 1H MA, indicating short-term upward momentum. The recent hourly candles suggest continued bullish pressure, however, risk of reversal remains high on higher timeframes. Market could consolidate due to overbought conditions and indecision."
+}

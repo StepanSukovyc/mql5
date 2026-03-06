@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena GBPUSD je aktuálně 1.33354. Na denním grafu je RSI na hodnotě 33.28, což naznačuje potenciální překoupenost. MA na denním grafu je 1.350884, což je nad aktuální cenou, indikující klesající trend. Na 1H a 4H grafech se RSI pohybuje kolem 40-43, což nepředstavuje silný signál. Nicméně, s ohledem na klesající trend na denním grafu a nedávný pokles, preferuji SELL pozici. Měsíční RSI je 55.95, což naznačuje potenciál k růstu, ale krátkodobé indikátory ukazují spíše na pokles.  Proto umírněný SELL."
+}

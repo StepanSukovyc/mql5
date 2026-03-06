@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "USDJPY is showing mixed signals. Hourly RSI is at 62.8, suggesting potential for a slight pullback. Daily and weekly RSI are also around 60, indicating upward momentum but not yet overbought. The current price is above the 4h and daily MA, but below the 1h MA, creating indecision. Recent hourly candles show mixed signals, with no strong trend established. I see slight bullish trend, but with limited space for growth due to the close price to the resistance point (1h MA)."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Měsíční RSI je hluboko v přeprodané zóně (28.30), což naznačuje potenciální odraz. Nicméně, MA na všech časových rámcích (1h, 4h, den) jsou nad aktuální cenou, což naznačuje klesající trend. Týdenní RSI (40.85) je také pod 50, což potvrzuje klesající momentum.  Denní data ukazují postupné klesání ceny v posledních dnech. Preferuji SELL s opatrností kvůli přeprodanému měsíčnímu RSI."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURHUF_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "EURHUF is currently trading at 391.199. The RSI on hourly and 4-hourly charts are in overbought territory (above 70), suggesting a possible pullback. However, daily RSI is also high at 73, indicating strong upward momentum. Weekly RSI is at 58.9, which is neutral, but moving average suggests possible increase. Monthly RSI is showing 53.4 suggesting overall upward direction of the currency. Recent hourly candles show a strong upward trend, and price is above the moving averages on shorter timeframes. Considering these factors, a BUY position is favored, although SELL or HOLD might be considered due to overbought conditions in the short term, but long-term direction seems to favor uptrend."
+}

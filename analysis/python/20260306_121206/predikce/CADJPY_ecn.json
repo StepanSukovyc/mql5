@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CADJPY is showing mixed signals. Short-term indicators (1H, 4H) suggest upward momentum with RSI around 60-65. Daily and weekly RSI are also elevated, indicating potential overbought conditions. The price is above the moving averages on all timeframes. Recent hourly candles show some indecision. Overall, there's potential for a bullish continuation, but overbought conditions and recent indecision warrant caution. HOLD is reasonable for now. A breakdown of the 1h MA would indicate more bearish momentum."
+}

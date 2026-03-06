@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě naznačuje 4H RSI překoupenost, ale denní a měsíční RSI ukazují prostor pro růst. MA na denním grafu je pod aktuální cenou, což signalizuje potenciál pro BUY, ale MA na měsíčním grafu je vysoko nad aktuální cenou. Týdenní graf ukazuje RSI blízko neutrální úrovně a MA nad aktuální cenou, což dává větší váhu HOLD a SELL."
+}

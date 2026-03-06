@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI překoupené (75.27), což naznačuje potenciální korekci. Denní RSI je 42.32 a 4H RSI je 43.47, což ukazuje spíše k prodeji. Aktuální cena je pod denním MA, což potvrzuje klesající trend. Na hodinové bázi cena osciluje kolem MA.  Celkově převládá riziko poklesu, proto doporučuji spíše SELL, HOLD a s malou šancí na BUY."
+}

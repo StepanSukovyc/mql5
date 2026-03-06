@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 60,
+  "SELL": 15,
+  "HOLD": 25,
+  "reasoning": "VIX_ecn rapidly increased over the last day. RSI is high on most timeframes, indicating overbought conditions (especially 1h, 4h, day, week). However, the longer-term (month) RSI is still moderate, suggesting potential for further upward movement. The price is above the moving average on all timeframes, indicating an uptrend. Recent bullish candlestick patterns on hourly timeframe suggest continued buying pressure. The overall trend and current momentum favour a buy, but high RSI values warrants caution, suggesting hold is also reasonable. Sell is the least favored due to the upward trend."
+}

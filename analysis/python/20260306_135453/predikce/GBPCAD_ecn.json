@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Technická analýza ukazuje na klesající trend. RSI na denní bázi je hluboko v přeprodané oblasti (27.83), což naznačuje potenciální odraz, ale celkový trend je klesající, potvrzený klesajícími MA na denní, týdenní i měsíční bázi. Hodinové a čtyřhodinové RSI se také nachází pod 50, což naznačuje slabý momentum. Aktuální cena je pod MA na většině časových rámců kromě měsíčního. Upřednostňuji SELL, dokud se neobjeví silnější signály pro obrat trendu. BUY má nízkou pravděpodobnost kvůli klesajícímu trendu. HOLD představuje opatrný přístup s čekáním na další data."
+}

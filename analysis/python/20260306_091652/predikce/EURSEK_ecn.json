@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSEK_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Krátkodobé timeframe (1H, 4H, DAY) mají RSI v neutrální zóně (okolo 50-60), což naznačuje určitý potenciál pro BUY. Nicméně, týdenní a měsíční timeframe ukazují RSI pod 40 a klesající MA, což naznačuje dlouhodobý klesající trend.  Poslední denní svíčka je klesající, což rovněž podporuje SELL. Celkově, s ohledem na převládající dlouhodobý downtrend a mírně pozitivní krátkodobé indikátory je SELL nejrizikovější, BUY má střední riziko a HOLD je nejkonzervativnější volba.  Z tohoto důvodu dávám SELL vyšší procento rizika než BUY."
+}

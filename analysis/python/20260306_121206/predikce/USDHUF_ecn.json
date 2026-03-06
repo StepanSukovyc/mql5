@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "Technická analýza ukazuje překoupené podmínky na kratších časových rámcích (1h, 4h, day) dle RSI, ale týdenní RSI je neutrální a cena prolomila nad MA na denním a týdenním grafu, což naznačuje uptrend. Měsíční MA je nad aktuální cenou, což signalizuje potenciální rezistenci. Proto BUY s opatrností, SELL je možné při korekci, HOLD pro vyčkání na další potvrzení trendu."
+}

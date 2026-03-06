@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCAD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena je pod MA na všech timeframech kromě 1H, kde je těsně pod ním. RSI na 1H a 4H je v oblasti oversold, denní RSI je pod 50. Klesající trend z posledních dní naznačuje SELL. HOLD je opatrný přístup vzhledem k potenciálnímu odrazu od oversold úrovní. BUY je nejméně pravděpodobné vzhledem k převládajícímu klesajícímu trendu."
+}

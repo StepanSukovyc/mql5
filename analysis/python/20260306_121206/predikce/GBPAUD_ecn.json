@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním grafu je RSI velmi nízko (20.91), což naznačuje, že trh je přeprodaný a mohl by se odrazit (BUY). Na denním grafu je RSI také relativně nízké (37.13) a cena je pod MA, což naznačuje pokračující sestupný trend (SELL). Na 1h a 4h grafu se cena pohybuje kolem MA, RSI se pohybuje ve středních hodnotách. Celkově je trh v downtrendu s možností korekce (HOLD)."
+}

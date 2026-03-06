@@ -1,0 +1,7 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Smíšené signály. Vyšší timeframe (týden, měsíc) indikují potenciál růstu, ale hodinový a 4hodinový timeframe naznačují možnou konsolidaci nebo mírný pokles. Denní RSI je neutrální. Vzhledem k absenci jasné svíčkové formace převládá opatrnost. Proto kombinace BUY, SELL a HOLD."
+}

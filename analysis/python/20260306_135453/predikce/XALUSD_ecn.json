@@ -1,0 +1,7 @@
+{
+  "symbol": "XALUSD_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "Na týdenním grafu je RSI překoupené (81), naznačuje potenciální korekci. Denní graf je také v oblasti překoupenosti (65). 4h graf se jeví více neutrálně (65). Nicméně, cena je nad MA na všech timeframech, co naznačuje pokračující uptrend. Proto doporučuji větší obezřetnost, a zvážit možnost výběru zisku, ale nenavrhuji aktivní shortování, dokud se neobjeví silnější signály obratu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Dlouhodobější timeframe (week, day) ukazují na překoupenost (RSI > 70), což naznačuje potenciální korekci. Month timeframe je neutrální. Hodinové a 4H timeframe se pohybují v neutrálních hodnotách. MA na denní a týdenní bázi stále rostou, ale je potřeba sledovat. Aktuální cena je nad MA na 1h a 4h, ale pod MA na denní a týdenní bázi, což naznačuje rozpor. Svíčky za posledních pár hodin ukazují na pohyb do strany. Celkově se jedná o nejistou situaci s lehce vyšší pravděpodobností poklesu, proto SELL má mírnou převahu, ale HOLD je také relevantní."
+}

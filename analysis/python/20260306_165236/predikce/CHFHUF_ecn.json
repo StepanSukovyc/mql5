@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFHUF_ecn",
+  "BUY": 50,
+  "SELL": 20,
+  "HOLD": 30,
+  "reasoning": "RSI indikuje překoupenost na kratších timeframech (1h, 4h, day), což naznačuje potenciální korekci (SELL). Nicméně, střednědobý trend (week, month) je stále rostoucí a cena je nad MA na všech timeframech, což podporuje BUY. HOLD zvažuje možnost konsolidace před dalším pohybem."
+}

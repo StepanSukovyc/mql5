@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CADJPY is showing mixed signals. RSI is slightly overbought on shorter timeframes (1H, 4H, Day), suggesting potential for a pullback. However, the overall trend seems bullish as indicated by the moving averages and RSI on the weekly and monthly charts, though only 30 candles for the week and day timeframes mean this is not as clear as desired. Therefore, HOLD is the most appropriate course of action to avoid excessive risk."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "VIX is currently at 22.82. The weekly RSI is high at 71.06, suggesting overbought conditions. The daily RSI is also elevated at 67.04. While shorter timeframes show RSI in neutral territory, the longer-term indicators and recent price action suggest potential for a pullback. The monthly RSI is at 58.61, showing some upward momentum. The price is above the MA on most timeframes, suggesting an uptrend but potentially overextended. Given the elevated RSI on longer timeframes and recent price surge, a SELL position has higher probability, while HOLD reflects uncertainty and BUY reflects short term momentum possibilities."
+}

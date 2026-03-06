@@ -1,0 +1,7 @@
+{
+  "symbol": "XPTUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na kratších časových rámcích (1h, 4h, den) je RSI pod 40, což naznačuje překoupenost a potenciál pro pokles. Cena je pod MA na 1h, 4h a denním grafu. Měsíční RSI je vysoko (73.7), což indikuje, že trh může být překoupený i v delším časovém horizontu. Týdenní RSI je na 55.45, tedy neutrální. Celkově, kratší časové rámce naznačují spíše prodejní tlak, zatímco delší časový rámec naznačuje dlouhodobější růst, ale momentálně je trh v korekci. HOLD je varianta, pokud věříte v dlouhodobý růst, ale ne o mnoho. SELL je rizikové, protože jsme stále nad MA pro týdenní a měsíční graf."
+}

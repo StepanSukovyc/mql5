@@ -1,0 +1,7 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Analýza SGDJPY_ecn ukazuje smíšené signály. Dlouhodobé grafy (týdenní a měsíční) indikují uptrend (RSI nad 60, cena nad MA), ale krátkodobé (1h a 4h) jsou neutrální (RSI kolem 50, cena kolem MA). Denní RSI je těsně pod 60, naznačuje oslabení momentu. Poslední hodinové svíčky ukazují na určité vybírání zisků (korekce), což mírně snižuje šanci BUY. Vzhledem k protichůdným signálům a očekávání další volatility doporučuji HOLD nebo opatrný BUY s malou pozicí."
+}

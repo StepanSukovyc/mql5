@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "NZDUSD is currently trading at 0.58614. The RSI is oversold on 1H and 4H timeframes (31.08 and 32.82 respectively) suggesting potential for a short-term bounce, but daily RSI is still below 50 (39.79), MA is above the current price on 1H, 4H, and Day. Weekly MA is slightly below current price but RSI is only 48.54. The overall trend appears bearish. Therefore, SELL is the primary recommendation with a smaller chance of a short BUY due to the oversold 1H and 4H RSIs. Holding is also a plausible option if you're already in a position or prefer to avoid active trading."
+}

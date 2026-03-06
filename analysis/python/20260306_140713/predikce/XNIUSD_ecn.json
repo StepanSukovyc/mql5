@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena se nachází pod denním i 4H MA, RSI naznačuje spíše neutrální až mírně klesající trend. Na týdenním grafu je cena nad MA, ale RSI se blíží překoupené zóně. Měsíční data jsou příliš omezená. Kvůli nejasnosti signálů a celkové tržní nejistotě doporučuji spíše SELL, ale s opatrností. HOLD je relevantní, pokud již pozici držíte a čekáte na jasnější signál."
+}

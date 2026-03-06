@@ -1,0 +1,7 @@
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI pod 40, což naznačuje potenciální přeprodanost, ale MA na denním, týdenním grafu je stále nad aktuální cenou, což naznačuje klesající trend. Na 4h grafu RSI rovněž indikuje potenciál k růstu. Na měsíčním grafu RSI je nad 60, což signalizuje, že by cena mohla v následujícím období spíše klesat. Proto, SELL je preferovanou variantou, avšak s ohledem na možnou korekci je třeba počítat s možností BUY."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje smíšené signály. Na týdenním grafu je RSI na 61, což naznačuje možný býčí trend, ale na denním a 4H grafu je RSI kolem 50 a MA se nachází nad aktuální cenou, což indikuje medvědí sentiment. Poslední denní svíčka je medvědí. Vzhledem k těmto smíšeným signálům doporučuji opatrný přístup. SELL má mírně vyšší pravděpodobnost z důvodu negativního krátkodobého trendu."
+}

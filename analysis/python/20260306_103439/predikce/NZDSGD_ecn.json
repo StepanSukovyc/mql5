@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSGD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod MA na většině timeframech (1h, 4h, day, month), což naznačuje downtrend. RSI je v neutrální zóně, ale spíše se blíží k přeprodané oblasti na 4h timeframe, což by mohlo signalizovat potenciální odraz, ale je potřeba potvrzení. Na týdenním grafu je cena nad MA, ale celkový trend je spíše do strany, proto HOLD. Data za březen vykazují pokles. Upřednostňuji SELL, protože krátkodobý trend je downtrend, BUY strategie je rizikovější."
+}

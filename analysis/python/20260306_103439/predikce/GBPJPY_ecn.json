@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "GBPJPY shows mixed signals. Longer timeframes (week, month) have RSI above 60, suggesting bullish momentum. However, the daily RSI is around 50, and the price is hovering around the daily MA, indicating indecision. Recent hourly price action shows consolidation. I would wait for a clearer trend before entering a position. Hold is reasonable, but the bullish longer-term trend gives 'buy' a slight edge."
+}

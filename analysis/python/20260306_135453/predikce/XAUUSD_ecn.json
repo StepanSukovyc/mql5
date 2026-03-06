@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "XAUUSD is showing mixed signals. Monthly RSI is extremely overbought (89.38), suggesting a potential correction. Weekly RSI is also high (73.75). Daily RSI is neutral (50.17). The 1h RSI is oversold (35.74), possibly indicating a short-term bounce. However, recent price action has been bearish, and the price is below the 4h MA. Short term sell is risky due to oversold indicators, therefore, holding is preferable."
+}

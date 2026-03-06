@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Smíšené signály. Na denním grafu RSI pod 40 (oversold, potenciál pro odraz), ale cena je pod MA, což naznačuje downtrend. Na hodinových a 4H grafech RSI blízko neutrální úrovně 50. Měsíční RSI je nad 50, což poukazuje na long-term uptrend. Celkově, více indikátorů naznačuje pokračování konsolidace nebo mírný pokles. BUY má menší pravděpodobnost, jelikož vidíme spíše pokračování konsolidace nebo mírný pokles."
+}

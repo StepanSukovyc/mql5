@@ -1,0 +1,7 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na hodinovém grafu RSI neutrální (49.67), ale cena je pod MA (4.274269). Na denním a týdenním grafu je RSI v překoupené zóně (68.92, 64.40). Na měsíčním grafu RSI neutrální (48.14). Denní graf se blíží překoupené zóně, což naznačuje potenciální korekci. Poslední hodinové svíce indikují možné oslabení eura. Proto SELL má vyšší váhu, HOLD jako opatrný přístup a BUY jako potenciální korekce."
+}

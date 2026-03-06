@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod MA na všech timeframech kromě 1h a 4h, kde je RSI silně přeprodané na 1h timeframe. Denní a týdenní RSI naznačují další prostor pro pokles. Měsíční timeframe je neutrální. Krátkodobý odraz je možný, ale celkový trend naznačuje další pokles. Medvědí sentiment převládá."
+}

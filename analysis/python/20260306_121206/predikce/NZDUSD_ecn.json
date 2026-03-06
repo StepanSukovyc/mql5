@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním a 4H MA, RSI na 1H a 4H jsou pod 40, což indikuje potenciální downtrend.  Měsíční MA je mírně nad aktuální cenou, což by mohlo působit jako rezistence. Týdenní RSI je blízko 50, což indikuje neutrální moment, ale celkově převládají signály pro SELL. Navíc, poslední denní svíčka naznačuje pokračující downtrend. HOLD doporučuji pro ty, kteří již mají pozice a chtějí počkat na další vývoj."
+}

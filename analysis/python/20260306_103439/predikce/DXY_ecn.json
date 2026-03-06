@@ -1,0 +1,7 @@
+{
+  "symbol": "DXY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "DXY je v krátkodobém uptrendu (1h, 4h, den), RSI naznačuje překoupenost na 4h a denním grafu, ale ne na 1h. MA na 1h a 4h je pod cenou, což indikuje potenciální další růst. Nicméně, na měsíčním grafu je RSI pod 50 a cena pod MA, což naznačuje dlouhodobější downtrend. Vzhledem k protichůdným signálům, je nejrozumnější kombinace BUY/SELL/HOLD s tím, že mírně preferuji BUY z krátkodobého hlediska."
+}

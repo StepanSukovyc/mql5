@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Krátkodobě (1h) je RSI neutrální a cena se pohybuje pod MA, což naznačuje potenciální prodejní tlak. Na denní bázi RSI je stále pod 50, což značí prostor pro pokles. Nicméně, 4H RSI je kolem 50. Týdenní a měsíční RSI naznačují, že trh je potenciálně přeprodaný. Celkově převládá opatrnost, proto zvýšená váha pro SELL."
+}

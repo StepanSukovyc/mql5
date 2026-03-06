@@ -1,0 +1,7 @@
+{
+  "symbol": "CADCHF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu se RSI nachází nad 60, což naznačuje potenciální býčí momentum. Nicméně, týdenní RSI je pod 50 a měsíční RSI je hluboko v přeprodané zóně, ale MA na měsíčním grafu je daleko nad aktuální cenou. Krátkodobé indikátory (1h, 4h) jsou smíšené. Proto kombinace signálů naznačuje, že je třeba být opatrný a držet pozici (HOLD) nebo lehce nakupovat (BUY) s menším objemem, než prodávat (SELL). Celkově je situace nejasná a vyžaduje další potvrzení pro jasnější signál."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena je v klesajícím trendu. RSI na 1H, 4H a denním grafu jsou pod 35, což naznačuje překoupenost a možnost korekce nahoru. MA na 1H, 4H a denním grafu jsou nad aktuální cenou, což značí rezistenci. Tlak je více na stranu SELL. Týdenní RSI je 43.49 a měsíční RSI je 47.15, což nenaznačuje silný trend ani na jedné straně, ale celkový trend je spíše klesající."
+}

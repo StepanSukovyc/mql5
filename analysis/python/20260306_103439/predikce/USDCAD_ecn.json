@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCAD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod 1h a 4h MA, RSI na denní a týdenní bázi kolem 50, resp. pod 50, naznačují neutrální až mírně klesající trend. Měsíční MA je vysoko nad aktuální cenou, což signalizuje dlouhodobější downtrend. Poslední denní svíčka je klesající. Sell má mírně vyšší pravděpodobnost. Buy je limitován klesajícím trendem na vyšších timeframech a aktuálním umístěním ceny. Hold je z důvodu nerozhodnosti trhu a nízkého množství dat."
+}

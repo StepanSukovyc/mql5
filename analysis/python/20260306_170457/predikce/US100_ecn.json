@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje smíšené signály. Na měsíčním grafu je RSI překoupené (72.32), což naznačuje potenciální pokles. Na denním a hodinovém grafu je RSI neutrální až mírně podhodnocené, ale cena se pohybuje pod MA na denním grafu. Na týdenním grafu je RSI mírně nad 50, a cena pod MA. Poslední 4h svíce je býčí. HOLD pozice reflektuje nejistotu trhu a možnost dalšího pohybu oběma směry."
+}

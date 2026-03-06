@@ -1,0 +1,7 @@
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě RSI na 1h a 4h naznačuje překoupenost, což zvyšuje riziko SELL. Dlouhodobější timeframy (den, týden, měsíc) naznačují neutrální až mírně býčí sentiment (RSI okolo 50, cena nad MA na denním grafu). Nedávný růst ceny naznačuje potenciál pro další růst, ale je nutné zvážit riziko korekce po překoupení na nižších time frame. Proto HOLD má smysl."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě je patrný klesající trend (1h RSI 37.49, cena pod MA), denní MA mírně roste, týdenní RSI značí překoupenost (65.02), ale cena nad MA. Měsíční RSI neutrální. Celkově nejistota, proto zvýšená váha pro SELL a HOLD."
+}

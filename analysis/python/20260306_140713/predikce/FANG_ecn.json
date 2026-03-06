@@ -1,0 +1,7 @@
+{
+  "symbol": "FANG_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "Aktuální cena je nad MA na 1h, 4h a denním grafu, ale pod MA na týdenním grafu. RSI na 1h a 4h je blízko překoupení. Měsíční RSI je poměrně vysoko. Konsolidace ceny v posledních dnech, spolu s protichůdnými signály z různých timeframe, naznačuje nejistotu. Vzhledem k rostoucímu trendu na měsíčním grafu a RSI je BUY mírně preferováno, SELL je omezeno díky růstu MA na hodinových a denních grafech, a zbytek HOLD pro vyčkávání na potvrzení trendu."
+}

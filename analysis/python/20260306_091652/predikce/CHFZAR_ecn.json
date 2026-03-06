@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Short-term bullish momentum (RSI above 60 on 1h and 4h), but approaching overbought conditions. Daily RSI also relatively high. Longer-term indicators (weekly and monthly MAs) suggest a more neutral stance, therefore HOLD offers reasonable risk management."
+}

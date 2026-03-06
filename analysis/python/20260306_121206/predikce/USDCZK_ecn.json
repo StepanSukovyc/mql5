@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "USDCZK is showing mixed signals. Daily and 4H RSI are in overbought territory suggesting a possible pullback (SELL). However, weekly RSI is neutral and the price is above the weekly MA, indicating continued upward potential (BUY). Monthly RSI is still relatively low, further suggesting a potential for upward movement long term. Recent hourly candles show indecision. Therefore, HOLD is also a reasonable position."
+}

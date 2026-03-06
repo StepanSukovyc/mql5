@@ -1,0 +1,7 @@
+{
+  "symbol": "EURGBP_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Krátkodobé RSI je přeprodané (1h a 4h), což naznačuje možnost odrazu. Nicméně, denní a týdenní MA klesají, což naznačuje převahu medvědího trendu. Měsíční MA roste, ale aktuální cena je pod ní, takže dáváme prioritu pro SELL. Celkově je trh v krátkodobém přeprodání, ale v dlouhodobějším klesajícím trendu."
+}

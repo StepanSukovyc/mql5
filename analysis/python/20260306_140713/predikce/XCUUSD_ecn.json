@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena se nachází pod MA na 1h, 4h a denním grafu, což signalizuje medvědí trend. RSI na 1h a 4h je pod 40, blízko překoupené zóně, ale nepotvrzuje silný obrat. Týdenní RSI je nad 68, což naznačuje překoupenost, ale dlouhodobý trend je stále rostoucí. Celkově převládají signály k prodeji, ale s ohledem na překoupenost a předchozí růst je část alokována i na HOLD a potenciální odraz BUY."
+}

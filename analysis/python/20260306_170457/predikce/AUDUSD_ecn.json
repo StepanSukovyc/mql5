@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "AUDUSD is currently trading at 0.7024. On the hourly and 4-hourly charts, the RSI is below 50, indicating bearish momentum. The hourly MA is slightly below the current price, while the 4-hourly MA is slightly above, suggesting indecision in the short-term. The daily chart shows an RSI around 50, while the MA is well above the current price, indicating a possible downward trend. The weekly and monthly charts, show a bullish trend with RSI above 60, but price has recently retreated, indicating potential for short-term correction. Given the recent price action and the combination of short-term bearish and long-term bullish signals, SELL has a higher risk score, followed by HOLD, with a smaller chance of BUY at the current price level."
+}

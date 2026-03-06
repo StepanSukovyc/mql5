@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena klesá pod denní i 4H MA, RSI na 1H a 4H timeframes je v pásmu přeprodanosti, což naznačuje možný dočasný odraz, ale celkový trend je spíše klesající. Měsíční RSI je nad 50, což naznačuje dlouhodobější uptrend, ale aktuální momentum je negativní.  Na denním grafu je RSI těsně nad 30 a klesá. BUY je rizikový, dokud se cena nedostane nad denní MA. SELL dominuje."
+}

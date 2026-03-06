@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Na denním a 4H grafu je RSI v překoupené zóně, což naznačuje možnou korekci. Nicméně, týdenní RSI je stále pod 70 a cena je nad MA na všech časových rámcích, což naznačuje pokračující uptrend. Proto lehce preferuji BUY. Důvodem pro SELL hodnocení je potenciální pullback vzhledem k překoupenosti na kratších časových rámcích."
+}

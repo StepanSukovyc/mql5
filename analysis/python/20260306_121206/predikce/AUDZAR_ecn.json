@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "AUDZAR_ecn shows mixed signals. Higher timeframe RSI (Day, Week) indicates overbought conditions suggesting potential for pullback. However, shorter timeframe (1H, 4H) shows RSI trending upward. Current price is above MA on most timeframes, suggesting bullish momentum, but MA on monthly suggests a long-term correction. Recent hourly price action is choppy.  Therefore, a balanced approach is recommended."
+}

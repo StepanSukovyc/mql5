@@ -1,0 +1,7 @@
+{
+  "symbol": "XAGUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena XAGUSD_ecn je v klesajícím trendu. RSI na 1H, 4H a denních grafech naznačuje, že trh není překoupený ani přeprodaný, s RSI hodnotami pod 50. Měsíční RSI je sice vysoko, ale celkový obraz je spíše medvědí. MA na 1H a 4H je nad aktuální cenou. Poslední denní svíčka má menší tělo, ale celková struktura napovídá k dalšímu poklesu.  Proto se doporučuje spíše SELL pozice."
+}

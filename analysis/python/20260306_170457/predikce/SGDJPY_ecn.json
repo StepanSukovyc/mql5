@@ -1,0 +1,7 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na hodinové bázi se RSI nachází pod úrovní 50, což naznačuje medvědí momentum. Cena se pohybuje nad MA na vyšších časových rámcích (denní, týdenní, měsíční), což by teoreticky naznačovalo uptrend, ale poslední svíčky na 1h a 4h timeframe ukazují spíše konsolidaci a možný pokles. Denní RSI je nad 50, ale ne výrazně, což naznačuje potenciál dalšího růstu, ale momentálně převažují krátkodobé signály k prodeji."
+}

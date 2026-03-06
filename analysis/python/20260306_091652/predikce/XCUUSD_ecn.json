@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "The price is currently below the 1h, 4h, and daily moving averages, suggesting a downtrend. The 1h and 4h RSI are both below 40, indicating oversold conditions, but also potential for further downside. The weekly RSI is relatively high at 69 suggesting overbought conditions which may point to a potential correction. Given the downtrend and overbought weekly RSI, SELL is more likely than BUY. Holding offers some opportunity to assess potential trend reversal."
+}

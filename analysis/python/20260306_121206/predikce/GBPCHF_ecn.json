@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "GBPCHF is showing bearish signals across multiple timeframes. The monthly and weekly RSI are in oversold territory, but the price continues to trend downwards. The daily RSI is below 50, indicating bearish momentum. Furthermore, the price is below the moving average on all timeframes, suggesting a downtrend. While a short-term bounce is possible (hence the 25% buy probability), the overall outlook favours a sell position. The MA on the daily chart is acting as dynamic resistance. Until we see a clear break above the daily MA and a shift in RSI, selling remains the higher probability trade. There is risk involved with trading against the short term trend, thus HOLD percentage is also considered. "
+}

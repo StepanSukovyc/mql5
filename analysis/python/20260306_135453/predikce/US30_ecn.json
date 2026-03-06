@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena je pod MA na 1h, 4h, denním grafu. RSI je nízko na 1h, 4h a denním grafu, což indikuje, že trh je v přeprodané zóně. Na týdenním grafu RSI kolem 50, na měsíčním grafu kolem 68, značící slábnoucí momentum. Prevládá krátkodobý klesající trend, ale dlouhodobější trend je stále rostoucí. Doporučuje se SELL. HOLD pro ty, co již mají pozice, dokud se situace nevyjasní. Nízké procento BUY kvůli možné korekci po přeprodané zóně."
+}

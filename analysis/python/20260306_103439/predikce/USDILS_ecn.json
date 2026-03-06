@@ -1,0 +1,7 @@
+{
+  "symbol": "USDILS_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje na převahu prodejců. Dlouhodobé RSI je hluboko v přeprodané zóně (týdenní RSI 26.65, měsíční RSI 25.96), což naznačuje potenciální obrat, ale krátkodobé ukazatele (1h, 4h, denní RSI pod 50) a klesající MA na denním grafu naznačují pokračující tlak na pokles. Poslední denní svíčky také ukazují spíše na medvědí momentum. Proto SELL má větší pravděpodobnost. HOLD je opatrný přístup, protože trh může v krátkodobém horizontu konsolidovat. BUY je rizikovější s ohledem na současný downtrend."
+}

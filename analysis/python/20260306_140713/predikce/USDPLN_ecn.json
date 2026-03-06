@@ -1,0 +1,7 @@
+{
+  "symbol": "USDPLN_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Denní a 4H RSI jsou v překoupené zóně (72.77 a 70.90), ale hodinové RSI je na 65.50, co naznačuje potenciál pro další růst. Cena je nad denním MA (3.59) a týdenním MA (3.61), což naznačuje uptrend. Měsíční RSI je 43.45, co dává prostor pro růst. Poslední denní svíčka je býčí. Buy má mírnou převahu, ale vysoká volatilita a překoupenost na vyšších TF naznačují riziko, proto HOLD má 20% a SELL 25%."
+}
