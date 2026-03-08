@@ -23,6 +23,7 @@ import MetaTrader5 as mt5
 from account_monitor import run_account_monitor
 from trading_logic import run_trading_logic
 from final_decision import make_final_trading_decision
+from ollama_service import ollama_service_loop
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -490,6 +491,10 @@ def main() -> int:
 		print(f"Config error: {exc}")
 		return 2
 
+	# Event to signal Ollama service shutdown
+	ollama_stop_event = threading.Event()
+	ollama_thread = None
+
 	try:
 		mt5_initialize(cfg)
 		print("Connected to MetaTrader 5.")
@@ -500,6 +505,19 @@ def main() -> int:
 		print("Monitoring → Predictions → Final Decision → Trade → Repeat")
 		print("Ukončení: Ctrl+C")
 		print("="*60 + "\n")
+		
+		# Start Ollama service in a separate thread
+		def ollama_wrapper():
+			"""Wrapper to run Ollama service."""
+			ollama_service_loop(cfg.service_dest_folder, ollama_stop_event)
+		
+		ollama_thread = threading.Thread(
+			target=ollama_wrapper,
+			name="OllamaService",
+			daemon=False
+		)
+		ollama_thread.start()
+		print("🔮 Ollama Service thread spuštěn...\n")
 		
 		cycle_count = 0
 		
@@ -591,11 +609,21 @@ def main() -> int:
 	
 	except KeyboardInterrupt:
 		print("\n\n🛑 Stopping trading automat (Ctrl+C detected)...")
+		print("🛑 Zastavuji Ollama Service...")
+		ollama_stop_event.set()
+		if ollama_thread and ollama_thread.is_alive():
+			ollama_thread.join(timeout=5)
 		return 0
 	except Exception as exc:  # pylint: disable=broad-except
 		print(f"Fatal error: {exc}")
 		return 1
 	finally:
+		# Ensure Ollama service is stopped
+		ollama_stop_event.set()
+		if ollama_thread and ollama_thread.is_alive():
+			print("🛑 Čekám na ukončení Ollama Service...")
+			ollama_thread.join(timeout=10)
+		
 		mt5.shutdown()
 		print("MetaTrader 5 connection closed.")
 

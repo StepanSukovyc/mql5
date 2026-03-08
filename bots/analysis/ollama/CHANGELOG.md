@@ -1,5 +1,33 @@
 # Changelog
 
+## 2026-03-08 (Ollama Service Integration)
+
+- **Added Independent Ollama Prediction Service**
+  - New parallel service running alongside main Gemini logic
+  - Generates predictions using local Ollama AI (deepseek-coder-v2 model)
+  - Runs in separate thread - fully independent from main trading loop
+  - Can be enabled/disabled via `OLLAMA_ENABLED` in .env (changeable during runtime)
+  - Predictions saved to `SERVICE_DEST_FOLDER/ollama/predikce/`
+
+- **Ollama Service Features**
+  - Auto-detects if predictions already exist for current hour (skips re-processing)
+  - Copies market data to `ollama/source/` folder for analysis
+  - Uses same prediction format as Gemini: `symbol`, `BUY`, `SELL`, `HOLD`, `reasoning`
+  - Additional metadata: `timestamp`, `model` for tracking
+  - 10-minute cycle interval between prediction runs
+  - Graceful shutdown on Ctrl+C
+
+- **Configuration**
+  - Added `OLLAMA_ENABLED=true` to .env and .env.example
+  - Added `OLLAMA_URL=http://localhost:11434/api/generate`
+  - Added `OLLAMA_MODEL=deepseek-coder-v2`
+  - Service checks .env dynamically - can be toggled without restart
+
+- **File Structure**
+  - Source files: `{symbol}.json` (e.g., `EURUSD_ecn.json`)
+  - Prediction files: `{symbol}.json` (compatible with downstream automats)
+  - Timestamp stored inside JSON, not in filename
+
 ## 2026-03-08 (Final Decision Strategy Update)
 
 - **Enhanced Gemini Final Decision Context (Swing + Fees + TP)**

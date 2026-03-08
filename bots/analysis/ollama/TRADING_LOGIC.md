@@ -1,10 +1,10 @@
-# Trading Logic - Gemini AI Integration
+# Trading Logic - Gemini AI Integration + Ollama Service
 
 ## Přehled Systému
 
-Komplexní event-driven trading systém моnitoruje volnou marži a dělá inteligentní obchodní rozhodnutí.
+Komplexní event-driven trading systém monitoruje volnou marži a dělá inteligentní obchodní rozhodnutí. **Nově** běží paralelně nezávislý **Ollama Service** pro kontinuální generování predikcí pomocí lokálního AI modelu.
 
-**Fáze procesu (nekonečný cyklus):**
+**Hlavní proces (Gemini AI - nekonečný cyklus):**
 1. **Kontroluje kritické hodiny** - pokud je 23:00-23:30 CET/CEST, počká do 23:30 (bez analýz)
 2. **Monitoruje volnou marži** - kontroluje stav účtu
 3. **Rozhoduje se pružně**:
@@ -33,6 +33,43 @@ Forex trh se v tomto období chová nepředvídatelně. systém tedy:
 Dvojitá kontrola zajišťuje bezpečnost:
 1. Na začátku cyklu: Pokud je restricted time → sleep na 30 minut
 2. Před obchodováním: Pokud je trading trigger v restricted time → zahodí signál a čeká
+
+## Ollama Service (Paralelní Proces)
+
+**Nezávislá smyčka běžící v samostatném threadu:**
+
+1. **Kontrola aktivace** - čte `OLLAMA_ENABLED` z .env (dynamicky, lze měnit za běhu)
+2. **Pokud disabled** → spí 5 minut a opakuje krok 1
+3. **Pokud enabled**:
+   - Zkopíruje aktuální tržní data z `SERVICE_DEST_FOLDER` do `ollama/source/`
+   - Pro každý symbol:
+     - Zkontroluje, zda predikce z aktuální hodiny už existuje (podle `mtime` souboru)
+     - Pokud ano → přeskočí (data jsou platná celou hodinu)
+     - Pokud ne → pošle data na Ollama API (model: deepseek-coder-v2)
+     - Parsuje JSON odpověď a extrahuje `BUY`, `SELL`, `HOLD`, `reasoning`
+     - Uloží do `ollama/predikce/{symbol}.json` s metadaty (`timestamp`, `model`)
+   - Čeká 10 minut a opakuje krok 1
+4. **Graceful shutdown** - zastaví se při Ctrl+C společně s hlavním procesem
+
+**Výhody:**
+- Běží nezávisle - negeneruje blokování hlavního procesu
+- Lokální AI - žádné API limity, žádné cloudy
+- Hodinové cykly - respektuje validitu dat (nepřepočítává stejnou hodinu)
+- Kompatibilní výstup - stejný formát jako Gemini (`symbol`, `BUY`, `SELL`, `HOLD`, `reasoning`)
+- Lze vypnout/zapnout za běhu změnou `OLLAMA_ENABLED` v .env
+
+**Příklad výstupu:**
+```json
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 45,
+  "SELL": 30,
+  "HOLD": 25,
+  "reasoning": "Na základě RSI a MA analýzy doporučuji...",
+  "timestamp": "2026-03-08T15:30:45+00:00",
+  "model": "deepseek-coder-v2"
+}
+```
 
 ## Nový Workflow
 
@@ -118,6 +155,10 @@ Dvojitá kontrola zajišťuje bezpečnost:
   ├── <timestamp>/
   │   ├── source/          # Původní JSON soubory s tržními daty
   │   └── predikce/        # Gemini AI predikce (BUY/SELL >= 35%)
+  │
+  ├── ollama/              # 🆕 Ollama Service výstupy
+  │   ├── source/          # Kopie tržních dat pro Ollama
+  │   └── predikce/        # Ollama AI predikce ({symbol}.json)
   │
   └── geminipredictions/
       └── PREDIKCE_<timestamp>.json   # Finální rozhodnutí (1 pár + akce + lot)

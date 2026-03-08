@@ -8,8 +8,8 @@
 
 This signal generator is an intelligent, fully automated trading system that monitors 
 market conditions, analyzes price action across multiple timeframes, and generates 
-actionable trading signals in real-time. Currently powered by **Google Gemini AI**, 
-with plans to transition to **local LLM (Ollama-based)** for privacy and independence.
+actionable trading signals in real-time. Currently combines **Google Gemini AI** for 
+primary trading decisions with **local Ollama AI** for parallel independent predictions.
 
 ## HOW IT WORKS
 
@@ -31,10 +31,10 @@ full logging.
 
 ## TECHNOLOGY STACK
 
-- **Current**: Google Gemini AI for market analysis
-- **Planned**: Local LLM via Ollama for enhanced privacy
+- **Primary**: Google Gemini AI for market analysis and trade execution
+- **Secondary**: Local Ollama AI (deepseek-coder-v2) for independent prediction service
 - **Data Source**: MetaTrader 5 (MT5)
-- **Automation**: Python-based continuous monitoring and execution
+- **Automation**: Python-based continuous monitoring and dual-AI execution
 
 ═════════════════════════════════════════════════════════════════════════════════
 
@@ -48,8 +48,8 @@ full logging.
 
 Tento generátor signálů je inteligentní, plně automatizovaný obchodní systém, který 
 monitoruje tržní podmínky, analyzuje pohyby cen na více timeframech a generuje v reálném 
-čase použitelné obchodní signály. V současnosti poháněn **Google Gemini AI**, s plány 
-na přechod na **lokální LLM (Ollama)** pro lepší soukromí a nezávislost.
+čase použitelné obchodní signály. Aktuálně kombinuje **Google Gemini AI** pro hlavní 
+obchodní rozhodování s **lokálním Ollama AI** pro paralelní nezávislou predikční službu.
 
 ## ZPŮSOB FUNGOVÁNÍ
 
@@ -70,9 +70,9 @@ podmínky splněny, obchody se provádějí na vaší platformě s plným zázna
 
 ## TECHNOLOGICKÝ STACK
 
-- **Aktuálně**: Google Gemini AI pro analýzu trhů
-- **Plánováno**: Lokální LLM přes Ollama pro lepší soukromí
+- **Primární**: Google Gemini AI pro analýzu trhů a provádění obchodů
+- **Sekundární**: Lokální Ollama AI (deepseek-coder-v2) pro nezávislou predikční službu
 - **Zdroj dat**: MetaTrader 5 (MT5)
-- **Automatizace**: Python s nepřetržitým monitoringem a prováděním
+- **Automatizace**: Python s nepřetržitým monitoringem a duální AI exekucí
 
 ═════════════════════════════════════════════════════════════════════════════════
