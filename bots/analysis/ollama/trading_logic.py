@@ -235,6 +235,10 @@ def load_recent_ollama_prediction_with_reason(
 	if not all(key in prediction for key in ("BUY", "SELL", "HOLD", "reasoning")):
 		return None, "chybi BUY/SELL/HOLD/reasoning"
 
+	payload_symbol = prediction.get("symbol")
+	if isinstance(payload_symbol, str) and payload_symbol != symbol:
+		return None, f"symbol mismatch ({payload_symbol} != {symbol})"
+
 	# Ensure symbol in payload matches currently processed symbol.
 	prediction["symbol"] = symbol
 	return prediction, "validni Ollama predikce"
@@ -330,7 +334,6 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	
 	# Track processed files to avoid duplicates (in case files are created during processing)
 	processed_symbols: Set[str] = set()
-	failed_symbols: Dict[str, int] = {}  # Track retry attempts
 	
 	success_count = 0
 	error_count = 0
@@ -352,10 +355,6 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 		
 		try:
 			print(f"\n📈 Processing {symbol}...")
-			
-			# Load market data
-			with open(json_file, "r", encoding="utf-8") as f:
-				market_data = json.load(f)
 
 			# Prefer prepared Ollama prediction when not older than one hour.
 			recent_ollama, ollama_reason = load_recent_ollama_prediction_with_reason(
@@ -381,6 +380,10 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 				continue
 
 			print(f"  🤖 Fallback na Gemini pro {symbol}: {ollama_reason}")
+
+			# Load market data only when Ollama prediction is not usable.
+			with open(json_file, "r", encoding="utf-8") as f:
+				market_data = json.load(f)
 			
 			# Get prediction from Gemini (with retry logic)
 			max_retries = 2

@@ -379,7 +379,8 @@ def find_predictions_folder_for_current_hour(service_folder: Path) -> Optional[P
 	hour_pattern = f"{current_date_str}_{current_hour:02d}"
 	
 	print(f"🔍 Looking for predictions from current hour ({hour_pattern})...")
-	
+
+	candidates: List[Path] = []
 	for folder in service_folder.iterdir():
 		if not folder.is_dir():
 			continue
@@ -389,8 +390,13 @@ def find_predictions_folder_for_current_hour(service_folder: Path) -> Optional[P
 		if folder_name.startswith(hour_pattern) and len(folder_name) == 15 and folder_name[8] == "_":
 			predikce_folder = folder / "predikce"
 			if predikce_folder.exists() and any(predikce_folder.glob("*.json")):
-				print(f"✅ Found existing predictions in: {folder_name}/predikce/")
-				return predikce_folder
+				candidates.append(predikce_folder)
+
+	if candidates:
+		# Timestamp format YYYYMMDD_HHMMSS is lexicographically sortable.
+		latest = max(candidates, key=lambda p: p.parent.name)
+		print(f"✅ Found existing predictions in: {latest.parent.name}/predikce/")
+		return latest
 	
 	print(f"⚠️  No predictions found for current hour {hour_pattern}")
 	return None
@@ -573,8 +579,11 @@ def main() -> int:
 					if existing_predictions:
 						# Use existing predictions from current hour
 						print("💡 Using existing predictions from current hour")
-						process_existing_predictions(existing_predictions)
-						predictions_folder = existing_predictions
+						has_predictions = process_existing_predictions(existing_predictions)
+						if has_predictions:
+							predictions_folder = existing_predictions
+						else:
+							print("⚠️  Existing predictions were filtered out, restarting cycle...")
 					else:
 						# Need to download data and get new predictions
 						print("📥 Downloading market data for current hour...")

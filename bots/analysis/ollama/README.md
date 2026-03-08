@@ -188,7 +188,6 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 
 - **logika.py** - Hlavní orchestrace nekonečného cyklu (monitoring → predikce → finální rozhodnutí → obchod → restart)
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
-- **trading_logic.py** - Stahuje data z MT5, dotazuje se Gemini na predikce, filtruje je
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
 
@@ -204,6 +203,10 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - Pokud některý symbol selže, skript pokračuje na další symbol
 - Monitorování probíhá v **background threadu**, nezablokuje tedy ostatní procesy
 - Optimalizace: Pokud je k dispozici čerstvá Ollama predikce symbolu (max 1h), použije se místo volání Gemini
+- Hardening: Kontrola "už zpracováno v této hodině" porovnává UTC datum+hodinu (YYYYMMDDHH), ne pouze hodinu
+- Hardening: Pokud existuje více predikčních složek v aktuální hodině, systém vybere nejnovější timestamp
+- Hardening: Pokud filtr smaže všechny existující predikce, obchodní krok se bezpečně přeskočí
+- Hardening: Reuse Ollama predikce ověřuje konzistenci symbolu, aby nedošlo ke křížení párů
 - Finální rozhodnutí se dělá na **právě jednom měnovém páru** s vypočtenou velikostí lotu
 - Každý `N`-tý obchod (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá `lot_size + take_profit` od Gemini
 - Ostatní obchody používají vlastní lot výpočet: `floor((balance + 500) / 500) / 100` a bez take profit

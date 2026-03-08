@@ -60,6 +60,11 @@ def get_current_hour() -> int:
     return datetime.now(tz=timezone.utc).hour
 
 
+def get_current_hour_key() -> str:
+    """Get current UTC year-month-day-hour key for robust hourly comparison."""
+    return datetime.now(tz=timezone.utc).strftime("%Y%m%d%H")
+
+
 def was_processed_this_hour(symbol: str, predictions_folder: Path) -> bool:
     """
     Check if prediction for symbol was already created this hour.
@@ -83,10 +88,10 @@ def was_processed_this_hour(symbol: str, predictions_folder: Path) -> bool:
     try:
         file_mtime = prediction_file.stat().st_mtime
         file_datetime = datetime.fromtimestamp(file_mtime, tz=timezone.utc)
-        file_hour = file_datetime.hour
-        current_hour = get_current_hour()
-        
-        return file_hour == current_hour
+        file_hour_key = file_datetime.strftime("%Y%m%d%H")
+        current_hour_key = get_current_hour_key()
+
+        return file_hour_key == current_hour_key
     except Exception:
         return False
 
