@@ -10,6 +10,9 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
 3. **Rozhoduje se pružně**:
    - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
    - Pokud ne → stáhne data z MT5 + získá nové predikce od Gemini AI
+   - Pro každý symbol se před dotazem na Gemini kontroluje `SERVICE_DEST_FOLDER/ollama/predikce/{symbol}.json`
+   - Pokud je `timestamp` validní a soubor není starší než 1 hodina, použije se Ollama predikce
+   - Pokud Ollama predikce chybí / je nevalidní / je starší než 1h, provede se fallback na `ask_gemini_prediction`
 4. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
 5. **Kontroluje kritických hodin (znovu)** - pokud je trading signal v 23:00-23:30, zahodí ho a čeká
 6. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
@@ -48,6 +51,7 @@ Dvojitá kontrola zajišťuje bezpečnost:
      - Pokud ne → pošle data na Ollama API (model: deepseek-coder-v2)
      - Parsuje JSON odpověď a extrahuje `BUY`, `SELL`, `HOLD`, `reasoning`
      - Uloží do `ollama/predikce/{symbol}.json` s metadaty (`timestamp`, `model`)
+   - Tyto soubory pak hlavní trading flow reuse-ne, pokud jsou čerstvé (<= 1h)
    - Čeká 10 minut a opakuje krok 1
 4. **Graceful shutdown** - zastaví se při Ctrl+C společně s hlavním procesem
 
@@ -57,6 +61,7 @@ Dvojitá kontrola zajišťuje bezpečnost:
 - Hodinové cykly - respektuje validitu dat (nepřepočítává stejnou hodinu)
 - Kompatibilní výstup - stejný formát jako Gemini (`symbol`, `BUY`, `SELL`, `HOLD`, `reasoning`)
 - Lze vypnout/zapnout za běhu změnou `OLLAMA_ENABLED` v .env
+- Hlavní logika umí predikce přímo převzít do `SERVICE_DEST_FOLDER/<timestamp>/predikce/` bez nového AI dotazu
 
 **Příklad výstupu:**
 ```json
@@ -286,7 +291,9 @@ Monitoruje stav účtu v background threadu:
 ### 3. trading_logic.py - Trading Predictions
 Stahuje data a generuje predikce:
 - Stahuje OHLC data z MT5 pro všechny symboly
-- Dotazuje se Gemini AI na predikce (BUY%, SELL%)
+- Pro každý symbol nejdřív kontroluje čerstvou Ollama predikci (`SERVICE_DEST_FOLDER/ollama/predikce/{symbol}.json`)
+- Pokud je Ollama predikce validní a max 1h stará, zkopíruje ji do běžné predikční složky cyklu
+- Pokud není dostupná, dotazuje se Gemini AI na predikci (BUY%, SELL%)
 - **Filtruje slabé signály:** Odstraňuje soubory kde BUY < 35% AND SELL < 35%
 - Vrací cestu ke složce s filtrovanými předpověďmi
 

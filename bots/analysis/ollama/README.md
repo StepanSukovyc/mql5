@@ -15,6 +15,9 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
    - Zkontroluje, zda existují předpovědi z **aktuální hodiny**
    - **Pokud ano**: používá je (bez stahování nových dat)
    - **Pokud ne**: stáhne data a získá nové předpovědi od Gemini AI
+  - Při tvorbě predikce pro každý symbol nejdřív zkontroluje `SERVICE_DEST_FOLDER/ollama/predikce/{symbol}.json`
+  - Pokud je `timestamp` v souboru čerstvý (max 1 hodina), reuse-ne Ollama predikci místo volání Gemini
+  - Pokud Ollama predikce neexistuje / je nevalidní / je starší než 1h, použije fallback `ask_gemini_prediction`
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
@@ -140,7 +143,8 @@ Skript běží jako **nekonečný obchodní automat**:
 2. Spustí monitoring volné marže (hlavní logika)
 3. Když marže > 20%:
    - Zkontroluje existující predikce z aktuální hodiny
-   - Používá je, nebo stáhne nová data a získá nové predikce (Gemini)
+  - Používá je, nebo stáhne nová data a získá nové predikce
+  - Pro každý symbol preferuje čerstvou Ollama predikci (<= 1h), jinak volá Gemini
    - Filtruje slabé signály
    - Provede obchod
 4. **Restart cyklu** (vrací se na krok 2)
@@ -185,19 +189,21 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - **logika.py** - Hlavní orchestrace nekonečného cyklu (monitoring → predikce → finální rozhodnutí → obchod → restart)
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
 - **trading_logic.py** - Stahuje data z MT5, dotazuje se Gemini na predikce, filtruje je
+- **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
 
 ## Výstupní Soubory
 
 - `<SERVICE_DEST_FOLDER>/<timestamp>/predikce/*.json` - Filtrované predikce
 - `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json` - Finální rozhodnutí
+- `<SERVICE_DEST_FOLDER>/ollama/predikce/{symbol}.json` - Předchystané Ollama predikce (použitelné v hlavní logice při stáří <= 1h)
 
 ## Poznamky
 
 - MetaTrader 5 terminal musí běžet lokálně ve stejném uživatelském kontextu
 - Pokud některý symbol selže, skript pokračuje na další symbol
 - Monitorování probíhá v **background threadu**, nezablokuje tedy ostatní procesy
-- Optimalizace: Pokud jsou k dispozici předpovědi z aktuální hodiny, jsou používány (bez nového stahování)
+- Optimalizace: Pokud je k dispozici čerstvá Ollama predikce symbolu (max 1h), použije se místo volání Gemini
 - Finální rozhodnutí se dělá na **právě jednom měnovém páru** s vypočtenou velikostí lotu
 - Každý `N`-tý obchod (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá `lot_size + take_profit` od Gemini
 - Ostatní obchody používají vlastní lot výpočet: `floor((balance + 500) / 500) / 100` a bez take profit
