@@ -18,6 +18,42 @@ import MetaTrader5 as mt5
 _gemini_suspended_until: Optional[datetime] = None
 
 
+def _get_gemini_full_control_every_n_trades() -> int:
+	"""Return how often Gemini should fully control lot size and take profit."""
+	raw = os.getenv("GEMINI_FULL_CONTROL_EVERY_N_TRADES", "3")
+	try:
+		value = int(raw)
+		if value <= 0:
+			return 3
+		return value
+	except (TypeError, ValueError):
+		return 3
+
+
+def _count_successful_trades(service_folder: Path) -> int:
+	"""Count successful trades from trade log CSV."""
+	if service_folder is None:
+		return 0
+
+	log_file = service_folder / "trade_logs" / "trades.csv"
+	if not log_file.exists():
+		return 0
+
+	success_count = 0
+	try:
+		with open(log_file, "r", encoding="utf-8", newline="") as f:
+			reader = csv.DictReader(f)
+			for row in reader:
+				raw_success = str(row.get("success", "")).strip().lower()
+				if raw_success in {"true", "1", "yes"}:
+					success_count += 1
+	except Exception as exc:
+		print(f"⚠️  Could not read trade history for mode selection: {exc}")
+		return 0
+
+	return success_count
+
+
 def _clean_gemini_response(text: str) -> str:
 	"""
 	Clean Gemini response by removing markdown code blocks.
@@ -230,7 +266,13 @@ def calculate_lot_size(balance: float) -> float:
 	return lot_size
 
 
-def execute_trade(symbol: str, action: str, lot_size: float, service_folder: Path = None) -> bool:
+def execute_trade(
+	symbol: str,
+	action: str,
+	lot_size: float,
+	service_folder: Path = None,
+	take_profit: Optional[float] = None,
+) -> bool:
 	"""
 	Execute a trade on MT5 with comprehensive validation.
 	
@@ -247,6 +289,7 @@ def execute_trade(symbol: str, action: str, lot_size: float, service_folder: Pat
 	print(f"   Symbol: {symbol}")
 	print(f"   Action: {action}")
 	print(f"   Requested Lot Size: {lot_size}")
+	print(f"   Take Profit: {take_profit if take_profit is not None else 'None'}")
 	
 	# Validate symbol
 	is_valid, error_msg = validate_symbol(symbol)
@@ -297,6 +340,36 @@ def execute_trade(symbol: str, action: str, lot_size: float, service_folder: Pat
 		return False
 	
 	print(f"   Price: {price}")
+
+	validated_tp: Optional[float] = None
+	if take_profit is not None:
+		try:
+			validated_tp = float(take_profit)
+		except (TypeError, ValueError):
+			error_msg = f"Invalid take_profit value: {take_profit}"
+			print(f"❌ {error_msg}")
+			log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+			return False
+
+		if validated_tp <= 0:
+			error_msg = f"Invalid take_profit <= 0: {validated_tp}"
+			print(f"❌ {error_msg}")
+			log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+			return False
+
+		if action == "BUY" and validated_tp <= price:
+			error_msg = f"Invalid take_profit for BUY: TP ({validated_tp}) must be > market price ({price})"
+			print(f"❌ {error_msg}")
+			log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+			return False
+
+		if action == "SELL" and validated_tp >= price:
+			error_msg = f"Invalid take_profit for SELL: TP ({validated_tp}) must be < market price ({price})"
+			print(f"❌ {error_msg}")
+			log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+			return False
+
+		print(f"   Validated TP: {validated_tp}")
 	
 	# Prepare trade request
 	request = {
@@ -311,6 +384,9 @@ def execute_trade(symbol: str, action: str, lot_size: float, service_folder: Pat
 		"type_time": mt5.ORDER_TIME_GTC,
 		"type_filling": mt5.ORDER_FILLING_IOC,
 	}
+
+	if validated_tp is not None:
+		request["tp"] = validated_tp
 	
 	# Send order
 	result = mt5.order_send(request)
@@ -432,7 +508,10 @@ def ask_gemini_final_decision(
 	account_state: Dict,
 	api_key: str,
 	api_url: str,
-	excluded_symbols: List[str] = None
+	excluded_symbols: List[str] = None,
+	trade_number: Optional[int] = None,
+	full_control_every_n: Optional[int] = None,
+	gemini_full_control_mode: bool = False,
 ) -> Optional[str]:
 	"""
 	Ask Gemini AI for final trading decision based on predictions and current account state.
@@ -477,6 +556,16 @@ def ask_gemini_final_decision(
 	excluded_note = ""
 	if excluded_symbols:
 		excluded_note = f"\n\nVYLOUČENÉ SYMBOLY (nevybírej): {', '.join(excluded_symbols)}"
+
+	mode_text = ""
+	if trade_number is not None and full_control_every_n is not None:
+		mode_label = "ANO" if gemini_full_control_mode else "NE"
+		mode_text = (
+			f"\n\nREŽIM AKTUÁLNÍHO OBCHODU:\n"
+			f"- Pořadí obchodu: #{trade_number}\n"
+			f"- Každý {full_control_every_n}. obchod je plně řízen Gemini (lot + take_profit): {mode_label}\n"
+			f"- U ne-plně řízených obchodů se lot_size a take_profit ve finální exekuci ignoruje."
+		)
 	
 	prompt = f"""Jsi expert obchodní poradce. Musíš na základě analýzy učinit finální obchodní rozhodnutí.
 
@@ -489,7 +578,7 @@ DOSTUPNÉ INFORMACE:
 {json.dumps(open_positions, indent=2)}
 
 3. Dostupné obchodní predikce (filtrované - pouze ty s BUY/SELL >= 35%):
-{json.dumps(predictions, indent=2)}{excluded_note}
+{json.dumps(predictions, indent=2)}{excluded_note}{mode_text}
 
 ÚKOL:
 Na základě všech dostupných informací (predikce, otevřené pozice, stav účtu):
@@ -497,8 +586,15 @@ Na základě všech dostupných informací (predikce, otevřené pozice, stav ú
 1. Vyber PRÁVĚ JEDEN měnový pár z dostupných predikcí
 2. Rozhodni se pro BUY nebo SELL
 3. Doporuč velikost lotu (berouc v úvahu aktuální marži a risk management)
-4. Zdůvodni rozhodnutí
+4. Navrhni take_profit cenu pro swing obchod (pozice může být otevřená několik dní)
+5. Zdůvodni rozhodnutí
 5. DIVERZIFIKACE: Preferuj symboly, které ještě nemáš v otevřených pozicích. Pokud už máš otevřenou pozici na doporučovaném symbolu, zkontroluj její vstupní cenu (open_price) - pokud je aktuální tržní cena blízko vstupní ceny (rozdíl < 0.5%), POVINNĚ vyber raději jiný kandidát z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
+
+DŮLEŽITÉ OBCHODNÍ NASTAVENÍ:
+- Nejsem intradenní obchodník. Pozice držím často více dní (swing styl).
+- Chci ale průběžně generovat zisky na denní bázi.
+- Zohledni transakční náklad: za každých 0.01 lot je poplatek 0.10 USD.
+- take_profit nastav realisticky tak, aby po odečtení poplatků dával obchod ekonomický smysl.
 
 Odpověď prosím formátuj POUZE jako JSON bez dalšího textu, v tomto formátu:
 
@@ -506,10 +602,11 @@ Odpověď prosím formátuj POUZE jako JSON bez dalšího textu, v tomto formát
   "recommended_symbol": "EURUSD_ecn",
   "action": "BUY",
   "lot_size": 0.5,
+	"take_profit": 1.105,
   "reasoning": "..."
 }}
 
-Kde lot_size je hodnota pro reálný obchod a reasoning obsahuje stručné vysvětlení"""
+Kde lot_size je doporučená velikost pozice, take_profit je cílová cena TP a reasoning obsahuje stručné vysvětlení"""
 	
 	request_data = {
 		"contents": [
@@ -618,6 +715,23 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		# Retry mechanism for symbol validation failures
 		max_retries = 3
 		excluded_symbols = []
+		full_control_every_n = _get_gemini_full_control_every_n_trades()
+		successful_trades = _count_successful_trades(service_folder)
+		next_trade_number = successful_trades + 1
+		gemini_full_control_mode = (next_trade_number % full_control_every_n) == 0
+
+		print("\n🧭 Trade Execution Mode")
+		print(f"   Successful trades so far: {successful_trades}")
+		print(f"   Current trade number: #{next_trade_number}")
+		print(f"   Full Gemini control every N trades: N={full_control_every_n}")
+		print(
+			"   Mode: "
+			+ (
+				"FULL GEMINI (lot_size + take_profit from Gemini)"
+				if gemini_full_control_mode
+				else "STANDARD (calculated lot_size, no take_profit)"
+			)
+		)
 		
 		for attempt in range(max_retries):
 			print(f"\n🔄 Decision attempt {attempt + 1}/{max_retries}")
@@ -629,7 +743,10 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				account_state,
 				api_key,
 				api_url,
-				excluded_symbols if excluded_symbols else None
+				excluded_symbols if excluded_symbols else None,
+				trade_number=next_trade_number,
+				full_control_every_n=full_control_every_n,
+				gemini_full_control_mode=gemini_full_control_mode,
 			)
 			
 			if not decision_text:
@@ -654,6 +771,8 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				decision = json.loads(decision_text)
 				symbol = decision.get("recommended_symbol")
 				action = decision.get("action")
+				gemini_lot_size = decision.get("lot_size")
+				gemini_take_profit = decision.get("take_profit")
 				
 				if not symbol or not action:
 					print("⚠️  Missing symbol or action in decision, skipping trade execution")
@@ -674,15 +793,33 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 					
 					continue  # Retry with exclusion
 				
-				# Calculate lot size based on account balance
-				lot_size = calculate_lot_size(account_state['balance'])
+				if gemini_full_control_mode:
+					try:
+						lot_size = float(gemini_lot_size)
+					except (TypeError, ValueError):
+						print("⚠️  Gemini lot_size missing/invalid in FULL GEMINI mode")
+						return False
+
+					try:
+						take_profit = float(gemini_take_profit)
+					except (TypeError, ValueError):
+						print("⚠️  Gemini take_profit missing/invalid in FULL GEMINI mode")
+						return False
+
+					print(f"   Using Gemini lot_size: {lot_size}")
+					print(f"   Using Gemini take_profit: {take_profit}")
+				else:
+					# Standard mode: lot size is computed and TP is intentionally disabled
+					lot_size = calculate_lot_size(account_state['balance'])
+					take_profit = None
+					print("   Standard mode active: take_profit disabled for this trade")
 				
 				if lot_size <= 0:
 					print(f"⚠️  Calculated lot size is {lot_size}, skipping trade execution")
 					return False
 				
 				# Execute trade
-				success = execute_trade(symbol, action, lot_size, service_folder)
+				success = execute_trade(symbol, action, lot_size, service_folder, take_profit)
 				
 				if success:
 					print("\n🎉 Trade executed successfully!")

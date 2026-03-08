@@ -16,10 +16,12 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
-   - Gemini AI vybere **1 měnový pár** a rozhodne **BUY/SELL**
-7. **Vypočítá velikost lotu** podle vzorce: `floor((balance + 500) / 500) / 100`
-   - Příklad: balance 1893 → lot_size 0.04
-8. **Provede obchod** na MT5 s vypočtenou velikostí lotu
+  - Gemini AI vybere **1 měnový pár**, rozhodne **BUY/SELL**, navrhne `lot_size` a `take_profit`
+  - V promptu zohledňuje swing styl (nejde o intraday), denní cíl ziskovosti a poplatek `0.10 USD` za každých `0.01` lotu
+7. **Režim exekuce dle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3):
+  - Každý N-tý obchod: použije se `lot_size` i `take_profit` od Gemini
+  - Ostatní obchody: `lot_size` se počítá vzorcem `floor((balance + 500) / 500) / 100` a `take_profit` se nepoužije
+8. **Provede obchod** na MT5 podle aktivního režimu
 9. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
 10. **Vrátí se na krok 3** (restart monitoring)
 
@@ -103,6 +105,9 @@ PRETTY_JSON=true
 # Gemini AI konfigurace pro trading logic
 GEMINI_API_KEY=your_gemini_api_key_here
 GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent
+
+# Každý N-tý obchod je plně řízen Gemini (lot_size + take_profit)
+GEMINI_FULL_CONTROL_EVERY_N_TRADES=3
 ```
 
 **LOOKBACK_PERIODS** - Počet posledních period, které se mají stahovat pro každý timeframe. Výchozí 30.
@@ -174,7 +179,8 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - Monitorování probíhá v **background threadu**, nezablokuje tedy ostatní procesy
 - Optimalizace: Pokud jsou k dispozici předpovědi z aktuální hodiny, jsou používány (bez nového stahování)
 - Finální rozhodnutí se dělá na **právě jednom měnovém páru** s vypočtenou velikostí lotu
-- Lot_size se počítá podle vzorce: `floor((balance + 500) / 500) / 100`
+- Každý `N`-tý obchod (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá `lot_size + take_profit` od Gemini
+- Ostatní obchody používají vlastní lot výpočet: `floor((balance + 500) / 500) / 100` a bez take profit
 - **Nekonečný loop:** Skript běží dokola, dokud není ručně zastaven
 - Ukončení skriptu: `Ctrl+C`
 

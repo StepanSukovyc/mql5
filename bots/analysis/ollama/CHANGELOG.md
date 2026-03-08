@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-03-08 (Final Decision Strategy Update)
+
+- **Enhanced Gemini Final Decision Context (Swing + Fees + TP)**
+  - Updated final-decision Gemini prompt to reflect swing trading style (positions can stay open for multiple days)
+  - Added explicit requirement for daily profit orientation in decision context
+  - Added transaction cost context: 0.10 USD fee per 0.01 lot
+  - Gemini now returns `take_profit` in final decision JSON (in addition to symbol/action/lot_size/reasoning)
+
+- **Added Hybrid Execution Mode (Every N-th Trade Fully Gemini-Controlled)**
+  - New env setting: `GEMINI_FULL_CONTROL_EVERY_N_TRADES` (default/recommended: `3`)
+  - Every N-th successful trade uses Gemini `lot_size` and `take_profit`
+  - Other trades keep local lot formula and execute without take profit
+  - Trade mode is selected by counting successful historical trades from `trade_logs/trades.csv`
+
+- **Trade Execution Enhancements**
+  - `execute_trade()` now supports optional take profit
+  - Added TP validation for BUY/SELL direction and positive numeric value before order send
+
+- **Config and Stability**
+  - Added `GEMINI_FULL_CONTROL_EVERY_N_TRADES=3` to `.env.example`
+  - Fixed main loop indentation regression in `logika.py`
+  - Added `pytz` to `requirements.txt`
+
 ## 2026-03-08 (Restricted Trading Hours)
 
 - **Added Restricted Trading Hours Protection (23:00-23:30 CET/CEST)**

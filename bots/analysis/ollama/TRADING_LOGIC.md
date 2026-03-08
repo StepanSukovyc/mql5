@@ -2,7 +2,7 @@
 
 ## Přehled Systému
 
-Komplexní event-driven trading systém монitoruje volnou marži a dělá inteligentní obchodní rozhodnutí.
+Komplexní event-driven trading systém моnitoruje volnou marži a dělá inteligentní obchodní rozhodnutí.
 
 **Fáze procesu (nekonečný cyklus):**
 1. **Kontroluje kritické hodiny** - pokud je 23:00-23:30 CET/CEST, počká do 23:30 (bez analýz)
@@ -13,8 +13,11 @@ Komplexní event-driven trading systém монitoruje volnou marži a dělá int
 4. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
 5. **Kontroluje kritických hodin (znovu)** - pokud je trading signal v 23:00-23:30, zahodí ho a čeká
 6. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
-   - Gemini AI vybere **1 měnový pár** a rozhodne BUY/SELL
-7. **Vypočítá lot_size** - podle vzorce: `floor((balance + 500) / 500) / 100`
+   - Gemini AI vybere **1 měnový pár**, rozhodne BUY/SELL, navrhne lot_size a take_profit
+   - V promptu je explicitně swing styl (ne intraday), denní cíl zisků a poplatek 0.10 USD za 0.01 lotu
+7. **Aplikuje režim exekuce podle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3)
+   - Každý N-tý obchod: použije se lot_size + take_profit z Gemini
+   - Ostatní obchody: lot_size se vypočítá lokálně, take_profit se nepoužije
 8. **Provede obchod** - automaticky otevře pozici na MT5
 9. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
 10. **Ukončení** - Ctrl+C
@@ -127,6 +130,7 @@ Dvojitá kontrola zajišťuje bezpečnost:
   "recommended_symbol": "EURUSD_ecn",
   "action": "BUY",
   "lot_size": 0.5,
+   "take_profit": 1.105,
   "reasoning": "Technická analýza a stav účtu doporučují vstup do long pozice..."
 }
 ```
@@ -172,20 +176,23 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
    - Vytváří komplexní kontext pro finální rozhodnutí
 
 3. **Dotaz na Gemini AI:**
-   - Očekávané výstupy: 1 měnový pár + BUY/SELL + doporučená velikost lotu
+   - Očekávané výstupy: 1 měnový pár + BUY/SELL + doporučená velikost lotu + take_profit
    - Gemini bere v úvahu Risk Management (volná marže, otevřené pozice)
+   - Gemini bere v úvahu styl obchodování: swing (pozice i několik dní), snaha o denní ziskovost a trading fee (0.10 USD za 0.01 lot)
    - **DIVERZIFIKACE:** Gemini preferuje symboly bez otevřených pozic. Pokud už pozice na doporučovaném symbolu existuje a aktuální tržní cena je blízko vstupní ceny (< 0.5% rozdíl), Gemini **povinně vybírá jiný kandidát** z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
 
 4. **Uložení a provedení obchodu:**
-   - Parsuje JSON odpověď od Gemini (symbol, action)
-   - Vypočítá lot_size podle vzorce: `floor((balance + 500) / 500) / 100`
+   - Parsuje JSON odpověď od Gemini (symbol, action, lot_size, take_profit)
+   - Aplikuje režim `GEMINI_FULL_CONTROL_EVERY_N_TRADES`:
+     - Každý N-tý obchod: použije Gemini lot_size i take_profit
+     - Ostatní obchody: použije lokální lot vzorec a obchoduje bez take_profit
    - Provede obchod na MT5 (BUY nebo SELL)
    - Uloží rozhodnutí do: `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json`
    - Proces se poté ukončí
 
 ## Lot Size Calculation
 
-Systém **ignoruje** doporučení lot_size od Gemini a počítá vlastní podle vzorce:
+Standardní režim (většina obchodů) počítá lot lokálně:
 
 ```
 lot_size = floor((balance + 500) / 500) / 100
@@ -195,6 +202,8 @@ lot_size = floor((balance + 500) / 500) / 100
 - Balance 1893 → (1893 + 500) / 500 = 4.786 → floor = 4 → 4/100 = **0.04**
 - Balance 2500 → (2500 + 500) / 500 = 6.0 → floor = 6 → 6/100 = **0.06**
 - Balance 500 → (500 + 500) / 500 = 2.0 → floor = 2 → 2/100 = **0.02**
+
+Každý N-tý obchod (N = `GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá lot_size a take_profit přímo z Gemini odpovědi.
 
 ## Module Description
 
@@ -253,7 +262,7 @@ Dělá finální inteligentní obchodní rozhodnutí a **provádí obchod**:
 - Sbírá **stav účtu** (zůstatek, equity, margin %)
 - Načítá **filtrované predikce** (BUY/SELL >= 35%)
 - Dotazuje se Gemini na finální doporučení
-- **Vypočítá lot_size** podle vzorce (ignoruje doporučení od Gemini)
+- Aplikuje obchodní režim podle pořadí obchodu (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`)
 - **Provede obchod** na MT5
 - Ukladdá výsledek do `geminipredictions/PREDIKCE_<timestamp>.json`
 
@@ -263,7 +272,7 @@ Dělá finální inteligentní obchodní rozhodnutí a **provádí obchod**:
 - `load_predictions()` - načítá filtrované predikce
 - `ask_gemini_final_decision()` - Gemini query pro finální doporučení
 - `calculate_lot_size(balance)` - vypočítá lot: `floor((balance + 500) / 500) / 100`
-- `execute_trade(symbol, action, lot_size)` - provede obchod na MT5
+- `execute_trade(symbol, action, lot_size, take_profit)` - provede obchod na MT5 (TP je volitelný)
 - `make_final_trading_decision()` - orchestruje celý proces včetně obchodování
 
 **Expected Gemini Response:**
@@ -272,6 +281,7 @@ Dělá finální inteligentní obchodní rozhodnutí a **provádí obchod**:
   "recommended_symbol": "EURUSD_ecn",
   "action": "BUY",
   "lot_size": 0.5,
+   "take_profit": 1.105,
   "reasoning": "Kombinovaná analýza prediktivního modelu..."
 }
 ```
@@ -304,6 +314,11 @@ Každá predikce obsahuje:
   - `GEMINI_URL` - Gemini API endpoint
 - **Delay**: 5 sekund mezi dotazy (respektování API limitů)
 - **Retry**: 60 sekund při quota exceeded (429)
+
+### final_decision.py
+- `GEMINI_FULL_CONTROL_EVERY_N_TRADES` - každý N-tý obchod je plně svěřen Gemini (lot_size + take_profit)
+- Fee kontext v promptu: `0.10 USD` za `0.01` lotu
+- Swing kontext v promptu: pozice mohou být otevřené i několik dní, ale cílem je denní ziskovost
 
 ## Použití
 

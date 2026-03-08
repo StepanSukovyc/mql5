@@ -583,11 +583,10 @@ def main() -> int:
 							print(f"❌ Final decision failed: {decision_exc}")
 					else:
 						print("\n⚠️  No predictions available, restarting cycle...")
-		else:
-			print("\n⏸️  Stop condition not met - restarting monitoring...")
+			else:
+				print("\n⏸️  Stop condition not met - restarting monitoring...")
 			
 			# Brief pause before next cycle
-			import time
 			time.sleep(2)
 	
 	except KeyboardInterrupt:
