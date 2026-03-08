@@ -23,6 +23,12 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
 9. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
 10. **Vrátí se na krok 3** (restart monitoring)
 
+**Automatické pozastavení v kritických hodinách:**
+- **23:00-23:30 CET/CEST**: Trh se chová nepředvídatelně, žádné obchody a analýzy
+  - Cyklus se zastaví (lock) na 30 minut
+  - Jakákoli připravená rozhodnutí se zahodí
+  - Obchody se automaticky obnoví v 23:30
+
 **Ukončení:** Ctrl+C
 
 ## Struktura vystupu

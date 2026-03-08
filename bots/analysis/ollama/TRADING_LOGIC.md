@@ -5,17 +5,31 @@
 Komplexní event-driven trading systém монitoruje volnou marži a dělá inteligentní obchodní rozhodnutí.
 
 **Fáze procesu (nekonečný cyklus):**
-1. **Monitoruje volnou marži** - kontroluje stav účtu
-2. **Rozhoduje se pružně**:
+1. **Kontroluje kritické hodiny** - pokud je 23:00-23:30 CET/CEST, počká do 23:30 (bez analýz)
+2. **Monitoruje volnou marži** - kontroluje stav účtu
+3. **Rozhoduje se pružně**:
    - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
    - Pokud ne → stáhne data z MT5 + získá nové predikce od Gemini AI
-3. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
-4. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
+4. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
+5. **Kontroluje kritických hodin (znovu)** - pokud je trading signal v 23:00-23:30, zahodí ho a čeká
+6. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
    - Gemini AI vybere **1 měnový pár** a rozhodne BUY/SELL
-5. **Vypočítá lot_size** - podle vzorce: `floor((balance + 500) / 500) / 100`
-6. **Provede obchod** - automaticky otevře pozici na MT5
-7. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
-8. **Ukončení** - Ctrl+C
+7. **Vypočítá lot_size** - podle vzorce: `floor((balance + 500) / 500) / 100`
+8. **Provede obchod** - automaticky otevře pozici na MT5
+9. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
+10. **Ukončení** - Ctrl+C
+
+### Restricted Trading Hours (23:00-23:30 CET/CEST)
+
+Forex trh se v tomto období chová nepředvídatelně. systém tedy:
+- **Zastavuje se** (lock) každodenně od 23:00 do 23:30
+- **Vypíná analýzu** - žádné stahování dat, žádné Gemini AI dotazy
+- **Blokuje obchody** - jakékoli signály jsou zahozeny
+- **Automaticky obnovuje** v 23:30 bez zásahu
+
+Dvojitá kontrola zajišťuje bezpečnost:
+1. Na začátku cyklu: Pokud je restricted time → sleep na 30 minut
+2. Před obchodováním: Pokud je trading trigger v restricted time → zahodí signál a čeká
 
 ## Nový Workflow
 
@@ -185,8 +199,12 @@ lot_size = floor((balance + 500) / 500) / 100
 ## Module Description
 
 ### 1. logika.py - Main Orchestration
-Hlavní skript, který koordinuje **nekonečný obchodní cyklus**:
+Hlavní skript, který koordinuje **nekonečný obchodní cyklus** se zásadou Forex market safety:
 - Inicializuje MT5 připojení a konfiguraci
+- Běží v nekonečné smyčce (while True)
+- **Kontroluje restricted trading hours** (23:00-23:30 CET/CEST)
+   - Pokud je v restricted hours → `wait_until_trading_allowed()` (sleep 30 minut, bez analýz)
+   - Pokud je trading trigger v restricted hours → zahodí signál a čeká do 23:30
 - Běží v nekonečné smyčce (while True)
 - Každý cyklus: spouští account_monitor v background threadu
 - Čeká na signál překročení 20% marže
@@ -196,6 +214,8 @@ Hlavní skript, který koordinuje **nekonečný obchodní cyklus**:
 - Ukončení: Ctrl+C
 
 **Klíčové funkce:**
+- `is_in_restricted_trading_hours()` - kontroluje, zda je čas v 23:00-23:30 CET/CEST
+- `wait_until_trading_allowed()` - počká do 23:30 bez jakýchkoli akcí (spí v 10-sec intervalech)
 - `find_predictions_folder_for_current_hour()` - hledá existující predikce z aktuální hodiny
 - `process_existing_predictions()` - aplikuje filtrování na existující predikce
 - `main()` - hlavní orchestrační nekonečný cyklus
