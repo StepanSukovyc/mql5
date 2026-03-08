@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-03-08 (Restricted Trading Hours)
+
+- **Added Restricted Trading Hours Protection (23:00-23:30 CET/CEST)**
+  - Forex market behaves unpredictably during 23:00-23:30 CET/CEST - no trades allowed
+  - Added `is_in_restricted_trading_hours()` function to check if current time is within restricted period
+  - Added `wait_until_trading_allowed()` function to pause system until 23:30 (sleeps in 10-second intervals)
+  - Integrated check at beginning of each cycle: if restricted hours → sleep 30 minutes (no analysis, no downloads)
+  - Integrated check before trading: if trading signal triggered in restricted hours → discard signal and wait until 23:30
+  - Double-check mechanism ensures no trades occur during unpredictable market conditions
+  - Added `pytz` dependency for accurate CET/CEST timezone handling
+  - Console output shows countdown timer and reason for pause
+  - System automatically resumes at 23:30 without manual intervention
+
 ## 2026-03-05 (Infinite Trading Loop)
 
 - **Converted to Infinite Trading Automat**

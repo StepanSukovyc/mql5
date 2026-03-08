@@ -17,6 +17,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
+import pytz
+
 import MetaTrader5 as mt5
 from account_monitor import run_account_monitor
 from trading_logic import run_trading_logic
@@ -147,10 +149,8 @@ def rsi_wilder(values: List[float], period: int) -> List[Optional[float]]:
 
 	return out
 
-
 def to_iso_utc(unix_timestamp: int) -> str:
 	return datetime.fromtimestamp(int(unix_timestamp), tz=timezone.utc).isoformat()
-
 
 def candle_rows_to_json_rows(rows: Iterable[object]) -> List[Dict[str, object]]:
 	output: List[Dict[str, object]] = []
@@ -423,6 +423,66 @@ def process_existing_predictions(predictions_folder: Path) -> bool:
 	return after_count > 0
 
 
+def is_in_restricted_trading_hours() -> bool:
+	"""
+	Check if current time is in restricted trading hours (23:00-23:30 CET/CEST).
+	
+	Forex market behaves unpredictably during this period. No trading should occur.
+	
+	Returns:
+		True if current time is between 23:00:00 and 23:29:59 Czech time
+	"""
+	tz_czech = pytz.timezone('Europe/Prague')
+	now_czech = datetime.now(tz=tz_czech)
+	current_hour = now_czech.hour
+	current_minute = now_czech.minute
+	
+	# Restricted: 23:00 - 23:29:59
+	if current_hour == 23 and 0 <= current_minute < 30:
+		return True
+	return False
+
+
+def wait_until_trading_allowed() -> None:
+	"""
+	Wait until restricted trading hours have passed (until 23:30).
+	
+	No analysis or trading during 23:00-23:30 CET/CEST.
+	"""
+	tz_czech = pytz.timezone('Europe/Prague')
+	
+	while True:
+		now_czech = datetime.now(tz=tz_czech)
+		current_hour = now_czech.hour
+		current_minute = now_czech.minute
+		current_second = now_czech.second
+		
+		if current_hour != 23 or current_minute >= 30:
+			# We're out of restricted hours
+			break
+		
+		# Calculate sleep time until 23:30
+		target_time = now_czech.replace(hour=23, minute=30, second=0, microsecond=0)
+		sleep_seconds = (target_time - now_czech).total_seconds()
+		
+		if sleep_seconds > 0:
+			loc_time = now_czech.strftime("%H:%M:%S")
+			print(f"\n⏸️  TRADING PAUSE - Restricted hours: 23:00-23:30 CET")
+			print(f"   Current time:     {loc_time}")
+			print(f"   Resuming trades:  23:30")
+			print(f"   Sleeping for:     {int(sleep_seconds)} seconds (~{int(sleep_seconds/60)} minutes)")
+			print(f"   Reason:           Market behavior unpredictable during this period\n")
+			
+			# Sleep in 10-second intervals to allow graceful shutdown
+			remaining = sleep_seconds
+			while remaining > 0:
+				time.sleep(min(10, remaining))
+				remaining -= 10
+			break
+		else:
+			time.sleep(1)
+
+
 def main() -> int:
 	try:
 		cfg = Config.from_env()
@@ -445,6 +505,10 @@ def main() -> int:
 		
 		# Infinite trading loop
 		while True:
+			# Check if we're in restricted trading hours (23:00-23:30)
+			if is_in_restricted_trading_hours():
+				wait_until_trading_allowed()
+			
 			cycle_count += 1
 			print(f"\n{'='*60}")
 			print(f"🔄 Cyklus #{cycle_count}")
@@ -475,46 +539,52 @@ def main() -> int:
 			
 			# Check if trading trigger was set by monitor
 			if trading_trigger_event.is_set():
-				print("\n🚀 Stop condition met - proceeding with trading...")
-				
-				predictions_folder = None
-				
-				# Check if predictions from current hour already exist
-				existing_predictions = find_predictions_folder_for_current_hour(cfg.service_dest_folder)
-				
-				if existing_predictions:
-					# Use existing predictions from current hour
-					print("💡 Using existing predictions from current hour")
-					process_existing_predictions(existing_predictions)
-					predictions_folder = existing_predictions
+				# Double-check we're not in restricted trading hours before proceeding
+				if is_in_restricted_trading_hours():
+					print("\n🛑 TRADING BLOCKED - Restricted hours (23:00-23:30)")
+					print("   Discarding prepared signals and waiting until 23:30...")
+					wait_until_trading_allowed()
 				else:
-					# Need to download data and get new predictions
-					print("📥 Downloading market data for current hour...")
-					run_cycle(cfg)
+					print("\n🚀 Stop condition met - proceeding with trading...")
 					
-					print("🤖 Getting predictions from Gemini AI...")
-					try:
-						success, pred_folder = run_trading_logic(cfg.service_dest_folder)
-						predictions_folder = pred_folder
-						if success:
-							print("✅ Trading logic completed successfully")
-						else:
-							print("⚠️  Trading logic completed with warnings")
-					except Exception as trading_exc:
-						print(f"❌ Trading logic failed: {trading_exc}")
-				
-				# Make final trading decision if we have predictions
-				if predictions_folder:
-					print("\n🎯 Making final trading decision...")
-					try:
-						make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
-						print("\n✅ Cycle completed. Restarting monitoring...")
-					except Exception as decision_exc:
-						print(f"❌ Final decision failed: {decision_exc}")
-				else:
-					print("\n⚠️  No predictions available, restarting cycle...")
-			else:
-				print("\n⏸️  Stop condition not met - restarting monitoring...")
+					predictions_folder = None
+					
+					# Check if predictions from current hour already exist
+					existing_predictions = find_predictions_folder_for_current_hour(cfg.service_dest_folder)
+					
+					if existing_predictions:
+						# Use existing predictions from current hour
+						print("💡 Using existing predictions from current hour")
+						process_existing_predictions(existing_predictions)
+						predictions_folder = existing_predictions
+					else:
+						# Need to download data and get new predictions
+						print("📥 Downloading market data for current hour...")
+						run_cycle(cfg)
+						
+						print("🤖 Getting predictions from Gemini AI...")
+						try:
+							success, pred_folder = run_trading_logic(cfg.service_dest_folder)
+							predictions_folder = pred_folder
+							if success:
+								print("✅ Trading logic completed successfully")
+							else:
+								print("⚠️  Trading logic completed with warnings")
+						except Exception as trading_exc:
+							print(f"❌ Trading logic failed: {trading_exc}")
+					
+					# Make final trading decision if we have predictions
+					if predictions_folder:
+						print("\n🎯 Making final trading decision...")
+						try:
+							make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
+							print("\n✅ Cycle completed. Restarting monitoring...")
+						except Exception as decision_exc:
+							print(f"❌ Final decision failed: {decision_exc}")
+					else:
+						print("\n⚠️  No predictions available, restarting cycle...")
+		else:
+			print("\n⏸️  Stop condition not met - restarting monitoring...")
 			
 			# Brief pause before next cycle
 			import time

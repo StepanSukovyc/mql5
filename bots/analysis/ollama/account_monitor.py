@@ -25,14 +25,6 @@ def _load_dotenv(dotenv_path: Path) -> None:
 		if key and key not in os.environ:
 			os.environ[key] = value
 
-
-def _to_bool(value: str, default: bool = False) -> bool:
-	if value is None:
-		return default
-	normalized = value.strip().lower()
-	return normalized in {"1", "true", "yes", "y", "on"}
-
-
 def get_account_info() -> dict:
 	"""Get current account status: balance, equity, margin, available margin."""
 	account = mt5.account_info()
