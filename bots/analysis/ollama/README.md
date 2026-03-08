@@ -2,9 +2,11 @@
 
 Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekonečný automat**: kontroluje marži, stahuje data, filtruje signály, vytváří finální obchodní doporučení pomocí Gemini AI, **automaticky provádí obchody** a **opakuje celý cyklus**.
 
+**Nově přidáno**: Paralelní **Ollama Service** - nezávislá smyčka generující predikce pomocí lokálního AI modelu.
+
 ## Co skript dělá
 
-**Nekonečný cyklus:**
+**Hlavní cyklus (Gemini AI):**
 
 1. Načte konfiguraci z `.env`.
 2. Připojí se k MetaTrader 5 (`MetaTrader5` Python package).
@@ -108,25 +110,43 @@ GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-fl
 
 # Každý N-tý obchod je plně řízen Gemini (lot_size + take_profit)
 GEMINI_FULL_CONTROL_EVERY_N_TRADES=3
+
+# Ollama service konfigurace (nezávislé predikce)
+OLLAMA_ENABLED=true
+OLLAMA_URL=http://localhost:11434/api/generate
+OLLAMA_MODEL=deepseek-coder-v2
 ```
 
 **LOOKBACK_PERIODS** - Počet posledních period, které se mají stahovat pro každý timeframe. Výchozí 30.
 
 ## Spusteni
 
+**Příprava (pokud chcete používat Ollama):**
+```bash
+# Ujistěte se, že Ollama server běží
+ollama serve
+
+# Stáhněte model deepseek-coder-v2
+ollama pull deepseek-coder-v2
+```
+
+**Spuštění aplikace:**
 ```bash
 python logika.py
 ```
 
 Skript běží jako **nekonečný obchodní automat**:
-1. Spustí monitoring volné marže
-2. Když marže > 20%:
+1. Spustí **Ollama Service** v samostatném threadu
+2. Spustí monitoring volné marže (hlavní logika)
+3. Když marže > 20%:
    - Zkontroluje existující predikce z aktuální hodiny
-   - Používá je, nebo stáhne nová data a získá nové predikce
+   - Používá je, nebo stáhne nová data a získá nové predikce (Gemini)
    - Filtruje slabé signály
    - Provede obchod
-3. **Restart cyklu** (vrací se na krok 1)
-4. **Ukončení:** Ctrl+C
+4. **Restart cyklu** (vrací se na krok 2)
+5. **Ukončení:** Ctrl+C (zastaví obě smyčky korektně)
+
+**Poznámka:** Ollama Service běží paralelně celou dobu a generuje vlastní predikce nezávisle.
 
 ## Automatické spuštění
 
