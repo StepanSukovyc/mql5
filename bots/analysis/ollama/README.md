@@ -150,7 +150,7 @@ Skript běží jako **nekonečný obchodní automat**:
 4. **Restart cyklu** (vrací se na krok 2)
 5. **Ukončení:** Ctrl+C (zastaví obě smyčky korektně)
 
-**Poznámka:** Ollama Service běží paralelně celou dobu a generuje vlastní predikce nezávisle.
+**Poznámka:** Ollama Service běží paralelně celou dobu a generuje vlastní predikce nezávisle. **Stahuje data přímo z MT5** (vlastní připojení) - není závislý na hlavní logice.
 
 ## Automatické spuštění
 
@@ -190,6 +190,8 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
+- **ollama_service.py** - Paralelní služba generující predikce pomocí lokálního Ollama AI (běží v samostatném threadu)
+- **market_data.py** - Sdílené utility pro sběr dat z MT5 (RSI, MA, svíčky) - používají logika.py i ollama_service.py
 
 ## Výstupní Soubory
 
@@ -202,6 +204,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - MetaTrader 5 terminal musí běžet lokálně ve stejném uživatelském kontextu
 - Pokud některý symbol selže, skript pokračuje na další symbol
 - Monitorování probíhá v **background threadu**, nezablokuje tedy ostatní procesy
+- **Ollama Service**: Stahuje data **přímo z MT5** (vlastní připojení), není závislý na hlavní logice
 - Optimalizace: Pokud je k dispozici čerstvá Ollama predikce symbolu (max 1h), použije se místo volání Gemini
 - Hardening: Kontrola "už zpracováno v této hodině" porovnává UTC datum+hodinu (YYYYMMDDHH), ne pouze hodinu
 - Hardening: Pokud existuje více predikčních složek v aktuální hodině, systém vybere nejnovější timestamp

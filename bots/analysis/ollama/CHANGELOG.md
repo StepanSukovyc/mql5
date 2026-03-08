@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-03-08 (Code Refactoring - DRY Principle)
+
+- **Extracted Shared Market Data Functions to `market_data.py`**
+  - Created new module `market_data.py` with common MT5 data collection utilities
+  - Removed duplicate code from `logika.py` and `ollama_service.py`
+  - Shared functions: `simple_moving_average()`, `rsi_wilder()`, `to_iso_utc()`, `candle_rows_to_json_rows()`, `indicator_rows()`, `get_symbols()`, `copy_rates()`, `collect_symbol_payload()`
+  - Both main logic and Ollama service now import from single source
+  - Benefits: Easier maintenance, consistent behavior, reduced code duplication
+
+## 2026-03-08 (Ollama Service - Direct MT5 Data Collection)
+
+- **Ollama Service Now Fetches Data Directly from MT5**
+  - Replaced `copy_market_data_to_ollama_source()` with `collect_market_data_from_mt5()`
+  - Service no longer depends on main logic's data collection cycle
+  - Now fully independent - establishes own MT5 connection and fetches market data
+  - Added MT5 helper functions: `simple_moving_average()`, `rsi_wilder()`, `candle_rows_to_json_rows()`, `indicator_rows()`, `get_symbols()`, `copy_rates()`, `collect_symbol_payload()`
+  - MT5 connection initialized on service startup, shutdown on service stop
+  - Same data collection logic as main trading system (all timeframes, RSI, MA indicators)
+
+- **Benefits**
+  - Ollama service can start immediately without waiting for main logic's margin trigger
+  - True parallel execution - both services operate independently
+  - No dependency on shared JSON files in SERVICE_DEST_FOLDER root
+
 ## 2026-03-08 (Main Logic Hardening)
 
 - **Fixed Hourly Comparison Across Day Boundary (Ollama Service)**
