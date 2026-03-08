@@ -10,7 +10,7 @@ import json
 import os
 import shutil
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 
@@ -176,6 +176,70 @@ Odpověď pošli POUZE v JSON formátu:
 		return None
 
 
+def _parse_iso_datetime(value: str) -> Optional[datetime]:
+	"""Parse ISO timestamp safely and normalize to timezone-aware UTC datetime."""
+	try:
+		parsed = datetime.fromisoformat(value)
+		if parsed.tzinfo is None:
+			return parsed.replace(tzinfo=timezone.utc)
+		return parsed.astimezone(timezone.utc)
+	except (TypeError, ValueError):
+		return None
+
+
+def load_recent_ollama_prediction(
+	ollama_predictions_folder: Path,
+	symbol: str,
+	max_age: timedelta = timedelta(hours=1),
+) -> Optional[Dict[str, object]]:
+	"""Load Ollama prediction for symbol when timestamp is not older than max_age."""
+	prediction, _ = load_recent_ollama_prediction_with_reason(
+		ollama_predictions_folder=ollama_predictions_folder,
+		symbol=symbol,
+		max_age=max_age,
+	)
+	return prediction
+
+
+def load_recent_ollama_prediction_with_reason(
+	ollama_predictions_folder: Path,
+	symbol: str,
+	max_age: timedelta = timedelta(hours=1),
+) -> tuple[Optional[Dict[str, object]], str]:
+	"""Load recent Ollama prediction and return decision reason for diagnostics."""
+	prediction_file = ollama_predictions_folder / f"{symbol}.json"
+	if not prediction_file.exists():
+		return None, "soubor neexistuje"
+
+	try:
+		prediction = json.loads(prediction_file.read_text(encoding="utf-8"))
+	except (json.JSONDecodeError, OSError):
+		return None, "nevalidni JSON"
+
+	timestamp_raw = prediction.get("timestamp")
+	if not isinstance(timestamp_raw, str):
+		return None, "chybi timestamp"
+
+	parsed_ts = _parse_iso_datetime(timestamp_raw)
+	if parsed_ts is None:
+		return None, "timestamp neni validni ISO"
+
+	now_utc = datetime.now(tz=timezone.utc)
+	age = now_utc - parsed_ts
+	if age < timedelta(0) or age > max_age:
+		age_minutes = int(age.total_seconds() // 60)
+		if age < timedelta(0):
+			return None, f"timestamp je v budoucnosti ({age_minutes} min)"
+		return None, f"timestamp je starsi nez 1h ({age_minutes} min)"
+
+	if not all(key in prediction for key in ("BUY", "SELL", "HOLD", "reasoning")):
+		return None, "chybi BUY/SELL/HOLD/reasoning"
+
+	# Ensure symbol in payload matches currently processed symbol.
+	prediction["symbol"] = symbol
+	return prediction, "validni Ollama predikce"
+
+
 def filter_predictions(predictions_folder: Path) -> int:
 	"""
 	Filter out prediction files where both BUY and SELL are less than 35%.
@@ -256,6 +320,7 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	
 	# Get all JSON files in source folder
 	json_files = list(source_folder.glob("*.json"))
+	ollama_predictions_folder = source_folder / "ollama" / "predikce"
 	
 	if not json_files:
 		print(f"⚠️  No JSON files found in {source_folder}")
@@ -269,6 +334,13 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	
 	success_count = 0
 	error_count = 0
+	ollama_reuse_count = 0
+	gemini_count = 0
+
+	if ollama_predictions_folder.exists():
+		print(f"🤝 Ollama fallback aktivní: {ollama_predictions_folder}")
+	else:
+		print(f"ℹ️  Ollama predikce složka neexistuje, používám jen Gemini")
 	
 	for json_file in json_files:
 		symbol = json_file.stem  # filename without .json
@@ -284,6 +356,31 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 			# Load market data
 			with open(json_file, "r", encoding="utf-8") as f:
 				market_data = json.load(f)
+
+			# Prefer prepared Ollama prediction when not older than one hour.
+			recent_ollama, ollama_reason = load_recent_ollama_prediction_with_reason(
+				ollama_predictions_folder,
+				symbol,
+			)
+			if recent_ollama is not None:
+				prediction_file = predictions_folder / f"{symbol}.json"
+				prediction_file.write_text(
+					json.dumps(recent_ollama, ensure_ascii=False, indent=2),
+					encoding="utf-8",
+				)
+				print(f"  ♻️  Použita Ollama predikce (<= 1h): {prediction_file.name}")
+				print(f"  ℹ️  Duvod: {ollama_reason}")
+
+				archive_file = source_archive_folder / json_file.name
+				shutil.move(str(json_file), str(archive_file))
+				print(f"  📦 Source moved to archive: {archive_file.name}")
+
+				processed_symbols.add(symbol)
+				success_count += 1
+				ollama_reuse_count += 1
+				continue
+
+			print(f"  🤖 Fallback na Gemini pro {symbol}: {ollama_reason}")
 			
 			# Get prediction from Gemini (with retry logic)
 			max_retries = 2
@@ -305,6 +402,7 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 				prediction_file = predictions_folder / f"{symbol}.json"
 				prediction_file.write_text(prediction_text, encoding="utf-8")
 				print(f"  💾 Prediction saved: {prediction_file.name}")
+				print(f"  🤖 Zdroj predikce: Gemini")
 				
 				# Move source file to archive
 				archive_file = source_archive_folder / json_file.name
@@ -314,6 +412,7 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 				# Mark as processed
 				processed_symbols.add(symbol)
 				success_count += 1
+				gemini_count += 1
 			else:
 				print(f"  ⚠️  No prediction received for {symbol} after retries, skipping")
 				error_count += 1
@@ -325,6 +424,8 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	print("\n" + "="*60)
 	print(f"✅ Trading Logic Completed")
 	print(f"   Success: {success_count}")
+	print(f"   Reused from Ollama (<=1h): {ollama_reuse_count}")
+	print(f"   Generated by Gemini: {gemini_count}")
 	print(f"   Errors: {error_count}")
 	print(f"   Total processed: {len(processed_symbols)}")
 	print(f"📁 Results saved in: {source_folder / timestamp}")
