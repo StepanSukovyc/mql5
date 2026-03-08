@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza vykazuje smíšené signály. RSI na 1H a 4H naznačuje neutrální až mírně býčí momentum, zatímco na týdenním grafu je blízko překoupené zóny. Cena je pod denním MA, ale nad 1H a 4H MA. Poslední denní svíčka je rostoucí, ale celkový trend za posledních 30 dní na denním grafu je spíše do strany. Riziko SELL je zvýšené prudkým poklesem na denní svíčce 5.3.2026. BUY má potenciál díky odrazu ceny z posledního dne. HOLD je z důvodu absence silného trendu."
+}

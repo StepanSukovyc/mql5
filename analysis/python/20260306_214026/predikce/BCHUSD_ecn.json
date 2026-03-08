@@ -1,0 +1,7 @@
+{
+  "symbol": "BCHUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod MA na všech časových rámcích kromě měsíčního, což naznačuje downtrend. RSI na 1h je sice v překoupené oblasti, ale celkový trend je spíše k prodeji. Na denním a týdenním grafu je RSI také pod 50, což potvrzuje převahu prodejců. Poslední hourly candles potvrzují pokračující pokles. I když existuje potenciál pro krátkodobé korekce, celkový tlak je dolů."
+}

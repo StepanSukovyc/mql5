@@ -1,0 +1,7 @@
+{
+  "symbol": "UK100_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na 1h a 4h timeframe je RSI v oblasti přeprodanosti, což naznačuje potenciální korekci nahoru. Nicméně, na denním grafu je RSI stále pod 50, a cena je pod klouzavým průměrem (MA) na všech timeframech kromě týdenního a měsíčního, což signalizuje převládající medvědí trend. Týdenní RSI je na 60 a měsíční na 70, což naznačuje, že v dlouhodobém horizontu je trh relativně silný, ale aktuální krátkodobý trend je klesající. Kombinace přeprodanosti na nižších timeframech a medvědího trendu na denním grafu vede k doporučení SELL, s potenciálem HOLD pro konzervativnější investory a malou šancí na BUY v případě silné korekce."
+}

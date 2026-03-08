@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na 1H a 4H timeframe je RSI pod 50, což značí potenciální prodejní tlak. Denní RSI je okolo 50, takže nejsme ani v překoupené ani v přeprodané zóně. Týdenní RSI je nejvýše (62.61), indikuje silnější uptrend v dlouhodobém horizontu. Cena je pod MA na 1H, 4H a Day timeframe. Měsíční RSI je okolo 40 a cena je blízko MA. Celkově, krátkodobý výhled je spíše k prodeji.  Dlouhodobý výhled je mírně rostoucí, ale momentální cena klesá."
+}

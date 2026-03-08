@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Měnový pár AUDSGD_ecn vykazuje smíšené signály. Na týdenním timeframe je RSI překoupené (77.80), což naznačuje možnou korekci. Denní RSI je na hodnotě 57, což je neutrální. 1H a 4H timeframe RSI jsou pod 50, indikují oslabení momentum. Aktuální cena je nad denním MA, ale pod 4H MA. Svíčkové formace na 1H a 4H timeframes naznačují spíše medvědí sentiment (poslední svíčky klesající). Celkově převládá nejistota, indikující možnost krátkodobého poklesu, avšak dlouhodobý trend (měsíční MA) je stále rostoucí."
+}

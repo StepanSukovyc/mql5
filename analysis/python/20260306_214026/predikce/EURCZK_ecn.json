@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "EURCZK aktuálně osciluje okolo hodnoty 24.37. Denní RSI je na 68, což naznačuje blížící se překoupenost. Měsíční RSI je na 41, což dává prostor pro růst, ale MA na měsíční bázi je vysoko (24.72), což naznačuje možný odpor. Krátkodobě, hodinové RSI je pod 50, což naznačuje potenciální pokles nebo konsolidaci. Proto doporučuji opatrný přístup s rozložením rizika mezi BUY, SELL a HOLD."
+}

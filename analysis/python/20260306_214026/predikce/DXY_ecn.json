@@ -1,0 +1,7 @@
+{
+  "symbol": "DXY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "DXY_ecn vykazuje smíšené signály. Na denním grafu je RSI na 64.49, což naznačuje mírně překoupené podmínky, ale stále s prostorem pro růst. Týdenní RSI je na 55.17, neutrální. Měsíční RSI je na 42.15, což naznačuje, že může být prostor pro býčí pohyb. Nicméně, cena se pohybuje pod měsíčním MA (101.23), což je medvědí signál.  Cena je nad denním MA (97.81), což je býčí signál.  1H a 4H RSI jsou blízko neutrálních hodnot, takže krátkodobá dynamika se jeví jako konsolidace. Poslední 4H svíčka klesla k 99.046. Potenciální support leží na úrovni 98.75 - 98.80. Očekávám pokles zónu a poté další pohyb nahoru. Celkově převládá mírný medvědí sentiment s potenciálem pro další pokles, proto větší váha SELL, ale vzhledem k tomu, že se nacházíme v konsolidační zóně doporučuji také HOLD."
+}

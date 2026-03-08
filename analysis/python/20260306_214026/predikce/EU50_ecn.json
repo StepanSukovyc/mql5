@@ -1,0 +1,7 @@
+{
+  "symbol": "EU50_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "Short-term indicators (1H, 4H, Day RSI below 37) signal oversold conditions, while Weekly RSI is around 48, and Monthly RSI is at 61. Short-term MAs (1H, 4H, Day) are above the current price, confirming a downtrend. The recent daily candles show a strong bearish momentum. Although a short-term bounce is possible, overall trend suggests further downside. Thus favoring SELL, while assigning smaller probabilities to BUY and HOLD."
+}

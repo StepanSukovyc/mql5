@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCAD_ecn",
+  "BUY": 20,
+  "SELL": 55,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě je AUDCAD v klesajícím trendu. RSI na H1 a H4 naznačuje přeprodanost, ale celkový trend je spíše medvědí. Denní RSI je pod 50. Cena je pod MA na H1, H4 a denním grafu, což indikuje další pokles. Týdenní a měsíční grafy naznačují potenciál pro růst, ale krátkodobé ukazatele upřednostňují prodej. Proto převládá doporučení SELL."
+}

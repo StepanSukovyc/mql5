@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "EURJPY at 183.25 shows mixed signals. Hourly RSI (55.77) is neutral, while the 4-hour RSI (46.66) is slightly bearish. Daily RSI (49.32) is also neutral.  The price is above the hourly and 4-hour MAs, but below the daily MA, indicating some short-term bullishness countered by medium-term potential resistance.  Weekly and monthly RSI values are relatively high, suggesting a possible overbought condition, but the monthly MA is far below the current price.  Recent 1H candles are showing a downtrend. Overall, the lack of a clear directional trend and potential for pullback from higher timeframes necessitates a cautious approach. SELL is prioritized based on recent price action and potential overbought conditions, while BUY is tempered by resistance at higher timeframes, HOLD is suggested due to mixed timeframe indicators."
+}

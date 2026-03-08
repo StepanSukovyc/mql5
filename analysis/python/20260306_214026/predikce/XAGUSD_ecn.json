@@ -1,0 +1,7 @@
+{
+  "symbol": "XAGUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na měsíčním grafu je RSI v překoupené zóně (80.49), což naznačuje potenciální korekci. Denní a 4H grafy ukazují RSI pod 50, což naznačuje klesající momentum. Cena je nad denním MA, ale pod měsíčním.  1H RSI kolem 50 naznačuje neutrální krátkodobý výhled. Kombinace těchto faktorů naznačuje, že SELL má vyšší pravděpodobnost než BUY. HOLD je pro ty, kteří preferují vyčkávání na jasnější signály."
+}

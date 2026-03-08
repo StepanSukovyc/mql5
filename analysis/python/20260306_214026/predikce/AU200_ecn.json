@@ -1,0 +1,7 @@
+{
+  "symbol": "AU200_ecn",
+  "BUY": 20,
+  "SELL": 50,
+  "HOLD": 30,
+  "reasoning": "AU200_ecn shows bearish signals across multiple timeframes. The 4H and Day RSI are both below 35, indicating oversold conditions, but the downtrend is persistent. The current price is below the Moving Averages on 1H, 4H, and Day charts, suggesting continued downward pressure. While a short-term bounce is possible (BUY 20%), the overall trend favors selling (SELL 50%). A hold position (HOLD 30%) is recommended for those already in a position, pending further confirmation of trend reversal or continuation."
+}

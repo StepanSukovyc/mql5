@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNZD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním a týdenním grafu je RSI pod 50, což naznačuje potenciální sestupný trend. 1H a 4H grafy jsou neutrální. Cena se pohybuje kolem denního MA. Na týdenním grafu je cena pod MA, což posiluje SELL signál. Měsíční graf naznačuje potenciální růst, ale krátkodobě převládá spíše klesající trend."
+}

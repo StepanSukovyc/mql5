@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI je pod 40, což naznačuje potenciální přeprodanost, ale MA je nad současnou cenou, což naznačuje downtrend. Na týdenním grafu se cena pohybuje kolem MA, což naznačuje konsolidaci. Měsíční graf ukazuje uptrend s RSI blízko 60. 1H RSI je nad 50. Celkově je trh nejasný, ale downtrend na denním grafu mírně převažuje."
+}

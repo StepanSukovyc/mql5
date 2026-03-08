@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na měsíčním timeframe je RSI hluboko pod 30, což značí překoupenost a potenciální obrat. Nicméně, cena je pod všemi MA na kratších timeframech. 1H RSI je také pod 40, 4h RSI se pohybuje kolem 50 a denní RSI se pohybuje také okolo 50. Krátkodobý trend je down. Závěr: převládá SELL, ale BUY pozice by mohla být zvažována pro dlouhodobé držení."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "The pair is currently trading at 1.48478. The daily and weekly RSI are below 40, indicating oversold conditions, but the price is still below the daily and weekly MA. Recent 1h and 4h candles suggest a possible consolidation around the current price, though 1h MA is close. The monthly RSI is neutral. Given the mixed signals and the downtrend on higher timeframes, a SELL position appears slightly more probable than a BUY, while HOLD provides a safe waiting period."
+}

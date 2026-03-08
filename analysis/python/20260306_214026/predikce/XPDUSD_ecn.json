@@ -1,0 +1,7 @@
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "XPDUSD_ecn currently shows bearish signals across multiple timeframes. The 1h, 4h, and daily RSI values are below 50, indicating downward momentum. The current price is below the Moving Average on 1h, 4h and daily charts, further supporting a sell signal. The weekly RSI is above 50, suggesting potential for some upside, and Monthly RSI is even higher, but recent downward trend outweighs longer term bullish tendencies. Recent price action has been volatile with significant downward spikes and limited recovery. Considering all these factors, a SELL position carries the highest probability, followed by HOLD as the price might consolidate before further downward movement, and a small probability of BUY if a reversal pattern forms."
+}

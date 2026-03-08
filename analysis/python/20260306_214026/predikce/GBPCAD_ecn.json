@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "GBPCAD_ecn se nachází v klesajícím trendu. RSI na denním a 4h grafu je silně pod 30, což naznačuje překoupenost a potenciální další pokles. MA na většině timeframech je nad současnou cenou, což posiluje medvědí výhled. Měsíční RSI je sice nad 50, ale MA na měsíčním grafu je také nad cenou. Nicméně extrémní hodnoty RSI mohou značit možnost korekce, proto je BUY riziko 25%. Nedávná cenová akce také naznačuje konsolidaci v krátkodobém horizontu, proto ponechávám HOLD riziko 20%."
+}

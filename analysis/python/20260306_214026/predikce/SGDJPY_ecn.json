@@ -1,0 +1,7 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Dlouhodobější timeframe (week, month) naznačují uptrend (RSI a MA rostou), zatímco kratší timeframe (1h, 4h) jsou neutrální. Denní RSI se blíží překoupené zóně. Aktuální cena je nad MA na všech timeframe kromě 1h, což naznačuje býčí sentiment. Nicméně, vzhledem k relativně krátkým lookback periodám a chybějícím datům pro identifikaci svíčkových formací, doporučuji opatrnost. Proto je rozložení rizikové hodnocení rozloženo mezi BUY, SELL a HOLD."
+}

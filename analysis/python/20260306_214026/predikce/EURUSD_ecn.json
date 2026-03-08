@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Denní a 4H RSI signalizují překoupenost, MA na denním grafu je vysoko nad aktuální cenou, což naznačuje medvědí trend. Naopak měsíční RSI je v neutrální zóně a cena je nad MA, což podporuje dlouhodobý býčí trend.  Krátkodobý tlak na prodej je silnější, ale dlouhodobý trend je smíšený."
+}

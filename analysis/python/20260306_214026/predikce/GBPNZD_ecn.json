@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPNZD_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "Na hodinových a 4hodinových grafech je RSI v rostoucím trendu, ale ne v překoupené zóně, což naznačuje potenciál pro další růst. Denní RSI je neutrální. Týdenní RSI je pod 50, což naznačuje možný pokles. Měsíční RSI je neutrální. Cena je nad MA na 1h, 4h, a denních grafech ale pod MA na týdenních grafech, což signalizuje protichůdné trendy.  Data jsou limitovaná na 30 svíček, takže signály nejsou silné. HOLD je rozumná volba s ohledem na smíšené signály."
+}

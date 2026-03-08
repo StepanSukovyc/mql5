@@ -1,0 +1,7 @@
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "EURAUD is currently showing bearish signals. The daily and weekly RSI values are in oversold territory (34.97, 20.38) suggesting a potential bounce, but the longer-term Moving Averages (daily, weekly, monthly) are all significantly above the current price, indicating a downtrend. The recent daily candles also confirm the downward momentum. Therefore, SELL has the highest probability. BUY is riskier but still possible, that's why it has 25%, and HOLD has 30% since the price is now bouncing."
+}

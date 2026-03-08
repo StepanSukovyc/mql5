@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Mixed signals. Short-term (1h, 4h) shows slight bullish momentum, but Daily RSI is high, potentially indicating overbought conditions. Weekly RSI is neutral. Monthly RSI and MA point to a longer-term downward trend. Recent hourly candles show downward pressure. Thus, SELL slightly favored, HOLD to observe, and BUY has limited evidence."
+}

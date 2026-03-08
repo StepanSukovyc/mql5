@@ -1,0 +1,7 @@
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL (RSI denní pod 35, cena pod denním MA, hodinový RSI kolem 46). Dlouhodobě HOLD (měsíční RSI naznačuje prostor pro růst, ale týdenní RSI a MA naznačují možný pokles, proto je třeba vyčkat). BUY je rizikové z důvodu klesajícího trendu na denním a týdenním grafu."
+}

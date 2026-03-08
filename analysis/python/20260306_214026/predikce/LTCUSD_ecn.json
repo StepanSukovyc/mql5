@@ -1,0 +1,7 @@
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena LTCUSD je v downtrendu. RSI na 1H a Weekly timeframes je hluboko v přeprodané zóně, což indikuje možnost krátkodobé korekce (BUY). Nicméně, Moving Averages na všech timeframes jsou nad aktuální cenou a směřují dolů, což signalizuje silnější medvědí sentiment (SELL). Denní timeframe vykazuje pokles a RSI se drží pod 50. Celkově převládá tlak na pokles, proto je prodej rizikově méně náročný než nákup. Hold pozice vyčkává na potvrzení trendu."
+}

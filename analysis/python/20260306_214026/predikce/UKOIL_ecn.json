@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 20,
+  "SELL": 70,
+  "HOLD": 10,
+  "reasoning": "UKOIL_ecn je silně překoupený na všech timeframech (RSI > 80 na 1h, 4h, denní a týdenní bázi). I když měsíční RSI naznačuje prostor pro růst, krátkodobé indikátory silně naznačují korekci. Cena je výrazně nad MA na všech timeframech, což indikuje potenciální návrat k průměru. Rychlý růst v posledních dnech také naznačuje možné vyčerpání býčího trendu. SELL má nejvyšší pravděpodobnost, HOLD je nejrozumnější varianta pro ty, co již mají pozici a BUY je vysoce rizikové."
+}

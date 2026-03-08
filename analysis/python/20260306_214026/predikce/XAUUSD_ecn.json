@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Měsíční RSI je extrémně překoupené (91.55), což naznačuje potenciální korekci. Týdenní RSI je také vysoké (76.25). Cena je nad denním MA, ale pod 4H MA, což ukazuje na smíšený krátkodobý sentiment. Poslední 4H svíčka naznačuje konsolidaci. Na základě těchto signálů je pozice SELL o něco rizikovější než BUY a HOLD."
+}

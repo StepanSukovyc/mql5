@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "NZDCHF is showing bearish signals across multiple timeframes. The monthly RSI is oversold at 27.99, but the price is still below the monthly MA of 0.488183. The daily, 4H and 1H RSI values are increasing, but still below 50, suggesting weakening bearish momentum.  Recent daily candles show downward movement. Therefore, a SELL position is more probable. A HOLD position is considered, as the price may consolidate before moving further. The 1H chart suggests a possible short-term bounce based on recent upward candles, warranting a small BUY possibility."
+}

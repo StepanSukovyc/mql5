@@ -1,0 +1,7 @@
+{
+  "symbol": "EURHUF_ecn",
+  "BUY": 45,
+  "SELL": 25,
+  "HOLD": 30,
+  "reasoning": "EURHUF is showing mixed signals. The daily RSI is at 71.59 indicating overbought conditions suggesting a potential pullback. However, the recent price action shows a strong bullish trend with the price above the daily MA. The monthly MA is above the current price suggesting possible resistance in the longer term. Given the conflicting signals, a HOLD position is warranted with a slightly higher probability for a BUY in the short-term due to current bullish momentum. A SELL position is less probable due to the overall upward trend in the last week but remains a possibility given the overbought daily RSI and monthly MA resistance."
+}

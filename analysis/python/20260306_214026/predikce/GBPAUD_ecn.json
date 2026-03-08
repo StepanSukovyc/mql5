@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Mixed signals. Shorter timeframes show bullish momentum (RSI 1H/4H above 50, price above MA), but longer timeframes (Day/Week/Month) suggest bearish trend continuation (RSI Day below 50, price below MA). Weak bullish pressure on 1H timeframe, as the MA hasn't been broken significantly upwards, with RSI around 60. Considering the long-term downtrend and the current price around 1.90619, a SELL position carries slightly higher probability. Holding is considered a neutral stance, waiting for more confirmations."
+}

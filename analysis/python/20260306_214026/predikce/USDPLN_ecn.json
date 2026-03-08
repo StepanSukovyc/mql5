@@ -1,0 +1,7 @@
+{
+  "symbol": "USDPLN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI na úrovni 69.89, což naznačuje blížící se překoupenost. Cena je pod 1h a 4h MA, ale nad denní, týdenní. Měsíční RSI je 42, což značí prostor pro růst, ale MA klesá. Poslední svíčky na 1h grafu ukazují na klesající trend. Celkově, více indikátorů ukazuje na SELL, ale s opatrností vzhledem k potenciálnímu odrazu. HOLD je alternativa, dokud se situace nevyjasní."
+}

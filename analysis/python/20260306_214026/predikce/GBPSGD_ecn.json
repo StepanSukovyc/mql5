@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPSGD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Smíšené signály. Krátkodobé RSI (1h, 4h) naznačují překoupenost, zatímco denní a týdenní RSI jsou neutrální až podhodnocené. Cena je nad MA na denním a nižších timeframech, ale pod MA na týdenním a měsíčním. Nedostatek jasného trendu z historických dat. Proto rozložení pravděpodobnosti mezi BUY, SELL a HOLD."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL (RSI 1h/4h pod 50, cena pod MA 1h/4h). Denní RSI nad 60 naznačuje možný uptrend, ale týdenní RSI je silně překoupené (78). Měsíční graf naznačuje potenciální další růst. Proto HOLD a sledování dalšího vývoje."
+}

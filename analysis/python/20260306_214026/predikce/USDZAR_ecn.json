@@ -1,0 +1,7 @@
+{
+  "symbol": "USDZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu se RSI nachází v překoupené oblasti (63.51), ale zároveň se cena pohybuje nad MA (16.07 vs. 16.55). Na 4H grafu RSI naznačuje korigování. Měsíční RSI je stále v přeprodané oblasti a celkově je MA vysoko nad cenou což indikuje klesající trend (17.60 vs 16.55). Proto kombinace kup, prodej a podrž (HOLD) vzhledem k protichůdným indikacím."
+}

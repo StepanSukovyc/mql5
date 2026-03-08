@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Denní RSI je v překoupené zóně (70.74), což naznačuje možnost korekce (SELL). Naopak, 4H RSI je na 61.55, s cenou nad MA na 4H i denním grafu což naznačuje pokračující růstový trend (BUY). Měsíční RSI je pod 40, což naznačuje potenciál pro růst. Vzhledem k protichůdným signálům a aktuální ceně (20.9923) doporučuji vyčkat na potvrzení trendu (HOLD), dokud se situace nevyjasní. Důležité je sledovat support a rezistence úrovně."
+}

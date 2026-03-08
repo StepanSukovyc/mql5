@@ -1,0 +1,7 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "USOIL_ecn is showing strong overbought conditions across multiple timeframes (1H, 4H, Day, Week) based on RSI values exceeding 80. While the monthly RSI is more moderate, the recent rapid price increase to 90.869 suggests a potential for a correction or pullback. Furthermore, the current price is significantly above the moving averages on all timeframes, indicating a possible overextension. Therefore, a SELL position carries the highest probability, while holding might be considered awaiting confirmation. BUY has a very limited probability due to extremely overbought conditions and potential for reversal."
+}

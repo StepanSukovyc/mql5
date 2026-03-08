@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Smíšené signály. Krátkodobě (1h, 4h) RSI naznačuje neutralitu, denní RSI je pod 50, což naznačuje mírný downtrend, ale týdenní RSI je nad 60, což ukazuje na uptrend. Cena je nad denním MA, ale pod týdenním MA.  Dostupná data jsou relativně krátká. Velký spread může ovlivnit krátkodobé obchodování. Doporučuje se vyčkat na jasnější potvrzení trendu."
+}

@@ -1,0 +1,6 @@
+{
+  "recommended_symbol": "NGAS_ecn",
+  "action": "BUY",
+  "lot_size": 0.04,
+  "reasoning": "NGAS_ecn shows a strong upward trend with the price above daily and 4H MAs. While hourly RSI is overbought, suggesting a potential pullback, the overall momentum favours buying. The daily RSI is neutral, indicating further potential upside. This symbol also allows for diversification as there are no existing open positions on NGAS_ecn. Given the margin free of 420.68 and a desire to limit risk, a lot size of 0.04 is recommended."
+}

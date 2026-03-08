@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCAD_ecn",
+  "BUY": 20,
+  "SELL": 65,
+  "HOLD": 15,
+  "reasoning": "Technická analýza ukazuje na silný prodejní signál. RSI je v pásmu přeprodanosti na 1H, 4H a denním grafu (1H:33.73, 4H:23.47, Day:15.31). Cena je pod MA na všech timeframech kromě měsíčního, což potvrzuje downtrend. Měsíční RSI (57.73) naznačuje prostor pro další pokles, i když je neutrální. Poslední denní svíčka je silně klesající. Proto preferuji SELL. BUY je rizikový, HOLD menší riziko. "
+}

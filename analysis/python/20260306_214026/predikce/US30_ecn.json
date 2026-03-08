@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na nižších timeframech (1h, 4h, day) je RSI hluboko v přeprodané zóně, což naznačuje potenciální krátkodobé odrazy. Nicméně, cena je pod klouzavými průměry (MA) na všech timeframech kromě měsíčního, kde je MA hluboko pod aktuální cenou. Denní a týdenní RSI klesá, což signalizuje pokračující klesající momentum. Poslední denní svíčka je výrazně medvědí, s dlouhým tělem a nízkým zavřením. Měsíční RSI je sice vysoké, ale s ohledem na probíhající propad a nedávné překřížení MA na nižších timeframech převažuje medvědí výhled."
+}
