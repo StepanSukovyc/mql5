@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-03-08 (Main Logic Hardening)
+
+- **Fixed Hourly Comparison Across Day Boundary (Ollama Service)**
+  - Replaced hour-only check with UTC `YYYYMMDDHH` key comparison
+  - Prevents false "already processed" matches between different days with the same hour
+
+- **Made Current-Hour Prediction Folder Selection Deterministic**
+  - When multiple folders exist within the same hour, system now selects the latest timestamped folder
+  - Avoids random/iteration-order dependent folder reuse
+
+- **Respected Filter Result for Existing Predictions**
+  - Main flow now checks whether predictions remain after filtering
+  - If all predictions are filtered out, trading step is skipped safely
+
+- **Added Symbol Consistency Validation for Ollama Reuse**
+  - Reused Ollama prediction is rejected on `symbol` mismatch against the processed file symbol
+  - Prevents accidental cross-symbol reuse due to malformed file content
+
+- **Reduced Unnecessary IO in Trading Logic**
+  - Market data JSON is loaded only when Gemini fallback is actually needed
+  - Removed unused retry-tracking variable
+
 ## 2026-03-08 (Gemini Flow + Ollama Reuse)
 
 - **Main Trading Logic Updated to Reuse Prepared Ollama Predictions**
