@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Na základě fundamentální analýzy a svíčkových formací může dojít k poklesu cen. RSI i MA indikují nejistotu.",
+  "timestamp": "2026-03-08T21:57:48.901112+00:00",
+  "model": "deepseek-coder-v2"
+}

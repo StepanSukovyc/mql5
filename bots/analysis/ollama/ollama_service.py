@@ -275,7 +275,8 @@ Odpověď ve formátu JSON:
 Odpověz pouze JSON, bez dalšího textu."""
 
     try:
-        print(f"🤖 Volám Ollama API ({ollama_model}) pro {symbol}...")
+        call_time = datetime.now(tz=timezone.utc).strftime("%H:%M:%S")
+        print(f"🤖 [{call_time}] Volám Ollama API ({ollama_model}) pro {symbol}...")
         
         request_data = {
             "model": ollama_model,
@@ -403,7 +404,8 @@ def process_symbol_with_ollama(
             output_path = ollama_predictions_folder / output_filename
             
             output_path.write_text(json.dumps(output_data, ensure_ascii=False, indent=2), encoding="utf-8")
-            print(f"💾 Predikce uložena: {output_filename}")
+            save_time = datetime.now(tz=timezone.utc).strftime("%H:%M:%S")
+            print(f"💾 [{save_time}] Predikce uložena: {output_filename}")
             return True
         
         return False
@@ -515,7 +517,11 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
                 continue
             
             print(f"\n✅ Staženo {symbols_collected} symbolů z MT5")
-            print("\n🔮 Začínám generovat predikce pomocí Ollama...")
+            
+            # Start timestamp for predictions
+            start_time = datetime.now(tz=timezone.utc)
+            start_time_str = start_time.strftime("%H:%M:%S")
+            print(f"\n🔮 Začínám generovat predikce pomocí Ollama... [{start_time_str}]")
             
             # Process each symbol
             processed_count = 0
@@ -541,10 +547,19 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
                 # Small delay between requests
                 time.sleep(2)
             
+            # End timestamp for predictions
+            end_time = datetime.now(tz=timezone.utc)
+            end_time_str = end_time.strftime("%H:%M:%S")
+            duration = (end_time - start_time).total_seconds()
+            duration_mins = int(duration // 60)
+            duration_secs = int(duration % 60)
+            
+            print(f"\n🏁 Predikce dokončeny [{end_time_str}] - trvání: {duration_mins}m {duration_secs}s")
             print(f"\n{'='*60}")
             print(f"✅ Ollama cyklus #{cycle_count} dokončen")
             print(f"   Zpracováno: {processed_count} symbolů")
             print(f"   Přeskočeno: {skipped_count} symbolů")
+            print(f"   Celková doba: {duration_mins} minut {duration_secs} sekund")
             print(f"{'='*60}")
             print("\n⏳ Čekám 10 minut před dalším cyklem...")
             
