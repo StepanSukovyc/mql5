@@ -16,6 +16,12 @@ from typing import Dict, Optional, Set
 
 import httpx
 import re
+import MetaTrader5 as mt5
+
+from market_data import (
+    collect_symbol_payload,
+    get_symbols,
+)
 
 
 def _load_dotenv_value(key: str) -> Optional[str]:
@@ -96,16 +102,20 @@ def was_processed_this_hour(symbol: str, predictions_folder: Path) -> bool:
         return False
 
 
-def copy_market_data_to_ollama_source(service_dest_folder: Path, ollama_source_folder: Path) -> int:
+def collect_market_data_from_mt5(ollama_source_folder: Path, suffix: str, lookback_periods: int, rsi_period: int, ma_period: int, pretty_json: bool) -> int:
     """
-    Copy latest market data files to ollama/source folder.
+    Collect market data directly from MT5 and save to ollama/source folder.
     
     Args:
-        service_dest_folder: Main SERVICE_DEST_FOLDER
         ollama_source_folder: Target ollama/source folder
+        suffix: Symbol suffix (e.g., "_ecn")
+        lookback_periods: Number of periods to fetch
+        rsi_period: RSI calculation period
+        ma_period: MA calculation period
+        pretty_json: Whether to format JSON with indentation
     
     Returns:
-        Number of files copied
+        Number of symbols processed
     """
     # Create target folder
     ollama_source_folder.mkdir(parents=True, exist_ok=True)
@@ -114,19 +124,43 @@ def copy_market_data_to_ollama_source(service_dest_folder: Path, ollama_source_f
     for old_file in ollama_source_folder.glob("*.json"):
         old_file.unlink()
     
-    # Find all symbol JSON files directly in SERVICE_DEST_FOLDER
-    # These are created by the main data collection cycle
-    copied_count = 0
+    # Get symbols from MT5
+    try:
+        symbols = get_symbols(suffix)
+    except Exception as e:
+        print(f"❌ Chyba při získávání symbolů z MT5: {e}")
+        return 0
     
-    for json_file in service_dest_folder.glob("*.json"):
-        # Copy symbol data files (e.g., EURUSD_ecn.json)
-        if json_file.is_file():
-            target = ollama_source_folder / json_file.name
-            shutil.copy2(json_file, target)
-            copied_count += 1
-            print(f"📋 Zkopírován do Ollama source: {json_file.name}")
+    if not symbols:
+        print(f"⚠️  Žádné symboly s příponou '{suffix}' nenalezeny")
+        return 0
     
-    return copied_count
+    print(f"📊 Nalezeno {len(symbols)} symbolů s příponou '{suffix}'")
+    
+    # Process each symbol
+    ok_count = 0
+    err_count = 0
+    
+    for symbol in symbols:
+        try:
+            payload = collect_symbol_payload(symbol, lookback_periods, rsi_period, ma_period)
+            
+            # Write to ollama/source folder
+            out_path = ollama_source_folder / f"{symbol}.json"
+            if pretty_json:
+                out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+            else:
+                out_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            
+            ok_count += 1
+            print(f"✅ {symbol}: Data stažena z MT5")
+            
+        except Exception as exc:
+            err_count += 1
+            print(f"❌ {symbol}: Chyba - {exc}")
+    
+    print(f"\n📈 Celkem: {ok_count} úspěšných, {err_count} chyb z {len(symbols)} symbolů")
+    return ok_count
 
 
 def _extract_json_from_text(text: str) -> Optional[Dict]:
@@ -399,6 +433,32 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
     ollama_url = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
     ollama_model = os.getenv("OLLAMA_MODEL", "deepseek-coder-v2")
     
+    # Load MT5 configuration
+    mt5_login_raw = os.getenv("MT5_LOGIN")
+    mt5_login = int(mt5_login_raw) if mt5_login_raw else None
+    mt5_password = os.getenv("MT5_PASSWORD")
+    mt5_server = os.getenv("MT5_SERVER")
+    symbol_suffix = os.getenv("MT5_SYMBOL_SUFFIX", "_ecn")
+    lookback_periods = int(os.getenv("LOOKBACK_PERIODS", "30"))
+    rsi_period = int(os.getenv("RSI_PERIOD", "14"))
+    ma_period = int(os.getenv("MA_PERIOD", "20"))
+    pretty_json = os.getenv("PRETTY_JSON", "true").lower() in {"true", "1", "yes", "y", "on"}
+    
+    # Initialize MT5 connection
+    print("🔌 Připojuji se k MetaTrader 5...")
+    mt5_ok = False
+    if mt5_login and mt5_password and mt5_server:
+        mt5_ok = mt5.initialize(login=mt5_login, password=mt5_password, server=mt5_server)
+    else:
+        mt5_ok = mt5.initialize()
+    
+    if not mt5_ok:
+        print(f"❌ MT5 inicializace selhala: {mt5.last_error()}")
+        print("⚠️  Ollama Service nemůže pokračovat bez MT5 připojení")
+        return
+    
+    print(f"✅ MT5 připojen - účet: {mt5.account_info().login if mt5.account_info() else 'N/A'}")
+    
     cycle_count = 0
     
     while not stop_event.is_set():
@@ -415,6 +475,7 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
                 # Sleep in small intervals to allow graceful shutdown
                 for _ in range(300):  # 5 minutes = 300 seconds
                     if stop_event.is_set():
+                        mt5.shutdown()
                         return
                     time.sleep(1)
                 continue
@@ -431,21 +492,29 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             ollama_source.mkdir(parents=True, exist_ok=True)
             ollama_predictions.mkdir(parents=True, exist_ok=True)
             
-            # Copy market data to ollama/source
-            print("\n📥 Stahuji aktuální tržní data...")
-            files_copied = copy_market_data_to_ollama_source(service_dest_folder, ollama_source)
+            # Collect market data from MT5
+            print("\n📥 Stahuji aktuální tržní data z MT5...")
+            symbols_collected = collect_market_data_from_mt5(
+                ollama_source,
+                symbol_suffix,
+                lookback_periods,
+                rsi_period,
+                ma_period,
+                pretty_json
+            )
             
-            if files_copied == 0:
+            if symbols_collected == 0:
                 print("⚠️  Žádná tržní data k dispozici")
                 print("   Čekám 5 minut na další pokus...")
                 
                 for _ in range(300):
                     if stop_event.is_set():
+                        mt5.shutdown()
                         return
                     time.sleep(1)
                 continue
             
-            print(f"\n✅ Zkopírováno {files_copied} symbolů")
+            print(f"\n✅ Staženo {symbols_collected} symbolů z MT5")
             print("\n🔮 Začínám generovat predikce pomocí Ollama...")
             
             # Process each symbol
@@ -491,7 +560,9 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             
             for _ in range(300):
                 if stop_event.is_set():
+                    mt5.shutdown()
                     return
                 time.sleep(1)
     
+    mt5.shutdown()
     print("\n🛑 Ollama Service Loop ukončen")
