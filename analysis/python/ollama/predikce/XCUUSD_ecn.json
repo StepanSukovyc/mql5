@@ -1,9 +1,9 @@
 {
   "symbol": "XCUUSD_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstový impulz je pozitivní, ale RSI indikuje přeprodanost a MA ukazuje silnou odolnost. Kombinace těchto faktorů doporučuje mírnou pozornost k nákupu.",
-  "timestamp": "2026-03-09T03:25:04.401512+00:00",
+  "SELL": 60.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstový potenciál omezen z důvodu vysokého RSI a nižších hodnot MA. Negativní svědectví ze svíčkových grafů a silný trend poklesu.",
+  "timestamp": "2026-03-09T06:03:05.814526+00:00",
   "model": "deepseek-coder-v2"
 }

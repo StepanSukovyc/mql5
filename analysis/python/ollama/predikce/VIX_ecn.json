@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Na základě analýzy fundamentálních faktorů a technické analýzy (svíčkové formace, RSI a MA) je rizikové hodnocení směřující k nejistotě s doporučením držet pozici.",
-  "timestamp": "2026-03-09T03:18:23.508121+00:00",
+  "reasoning": "Základní analýza ukazuje stabilitu s tržním indexem, RSI a MA indikují potenciál pro rozvoj na vyšší úrovni.",
+  "timestamp": "2026-03-09T05:53:47.953854+00:00",
   "model": "deepseek-coder-v2"
 }

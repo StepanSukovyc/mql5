@@ -1,9 +1,9 @@
 {
   "symbol": "XPBUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Nízké hodnoty RSI a MA sugerují pokračování klesajícího trendu. Nicméně, svíčkový graf může ukazovat na zlepšení v předběžných fázích obnovy.",
-  "timestamp": "2026-03-09T03:28:23.766444+00:00",
+  "BUY": 0.0,
+  "SELL": 100.0,
+  "HOLD": 0.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují pokles cen.",
+  "timestamp": "2026-03-09T06:07:41.416296+00:00",
   "model": "deepseek-coder-v2"
 }

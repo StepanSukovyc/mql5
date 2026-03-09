@@ -1,9 +1,9 @@
 {
   "symbol": "USDSEK_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoké hodnoty RSI a pokles MA indikují silnou tendenci k poklesu.",
-  "timestamp": "2026-03-09T03:11:43.238882+00:00",
+  "BUY": 50.0,
+  "SELL": 30.0,
+  "HOLD": 20.0,
+  "reasoning": "Zohledňuji svíčkové formace a stabilitu RSI nad hlavní MA, s určitou volatilitou představující potenciál pro růst.",
+  "timestamp": "2026-03-09T05:46:37.880635+00:00",
   "model": "deepseek-coder-v2"
 }

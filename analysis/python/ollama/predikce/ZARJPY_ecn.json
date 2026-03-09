@@ -1,9 +1,9 @@
 {
   "symbol": "ZARJPY_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Riziko spíše klesajícího trendu s náznaky otočení v předpovědi RSI a MA.",
-  "timestamp": "2026-03-09T03:35:01.119937+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle svíčkových formací a RSI může dojít k otočení trendu směrem nahoru, ale zároveň je tlak odporu v oblasti MA 50, což naznačuje nejistotu.",
+  "timestamp": "2026-03-09T06:17:11.294367+00:00",
   "model": "deepseek-coder-v2"
 }

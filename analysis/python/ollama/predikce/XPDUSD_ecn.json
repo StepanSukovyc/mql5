@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 65.0,
   "HOLD": 15.0,
-  "reasoning": "Růstové tendence jsou omezené zápornými výkyvy RSI a cenovým pohybem pod MA. Vysoká volatilita s nízkými objemy ukazuje na nejistotu.",
-  "timestamp": "2026-03-09T03:30:03.160771+00:00",
+  "reasoning": "Růstový impulz s ohledem na silnou podporu RSI a MA. Nedostatek jasných svíčkových formací.",
+  "timestamp": "2026-03-09T06:09:58.818877+00:00",
   "model": "deepseek-coder-v2"
 }

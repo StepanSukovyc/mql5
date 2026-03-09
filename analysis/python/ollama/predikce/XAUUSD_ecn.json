@@ -1,9 +1,9 @@
 {
   "symbol": "XAUUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech jsou slabší a RSI ukazuje přeprodanost. Nicméně, dlouhodobá trend line MA podporuje růst.",
-  "timestamp": "2026-03-09T03:23:24.630968+00:00",
+  "BUY": 30.0,
+  "SELL": 65.0,
+  "HOLD": 5.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu, ale zároveň indikace přehřátí trhu jsou silné.",
+  "timestamp": "2026-03-09T06:00:45.778126+00:00",
   "model": "deepseek-coder-v2"
 }
