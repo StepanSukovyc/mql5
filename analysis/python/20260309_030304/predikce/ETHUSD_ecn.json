@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "ETHUSD is showing bearish signals. Hourly RSI is oversold (27.17) but doesn't guarantee a reversal. All RSI values are below 50.  Price is below MA on the hourly and 4h charts (1967.35 vs 2003.91 & 2055.82 respectively). Weekly MA is significantly higher than the current price (2768.65 vs 1967.35) indicating a strong downtrend. Recent hourly candles are showing continued downward pressure. Limited lookback periods increases uncertainty."
+}

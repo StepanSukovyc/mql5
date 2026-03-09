@@ -1,0 +1,7 @@
+{
+  "symbol": "BCHUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena BCHUSD_ecn je aktuálně 447.7. RSI na 1H, 4H a denních grafech je pod 40, což naznačuje, že je trh překoupený a mohlo by dojít k odrazu.  MA na všech timeframech je nad aktuální cenou, což naznačuje medvědí trend. Kombinace těchto faktorů naznačuje, že prodej má větší pravděpodobnost úspěchu než nákup nebo držení. Poslední svíčky na 1H timeframe potvrzují klesající trend."
+}

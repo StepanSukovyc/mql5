@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena je v downtrendu, RSI na 1h, 4h i denním grafu je pod 35 (oversold, ale spíše potvrzuje downtrend). Cena je pod moving average na všech timeframech. Měsíční MA také klesá. Tlak na prodej je silný."
+}

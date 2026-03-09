@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena USDCAD se nachází v downtrendu. RSI na 1H timeframe je silně přeprodané (16.54), což naznačuje potenciální krátkodobou korekci směrem vzhůru. Nicméně, RSI na 4H, denním, týdenním a měsíčním timeframe jsou pod 50, což naznačuje převahu prodejců. Cena je pod MA na všech timeframech, což také signalizuje downtrend. Na denním timeframe došlo k silnému propadu ceny, uzavření na denním minimu. Proto je pravděpodobnější pokračování downtrendu."
+}

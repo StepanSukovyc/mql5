@@ -1,0 +1,9 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové momentum je slabší než klesající, ale MA ukazuje stabilitu. RSI blízko překoupenosti.",
+  "timestamp": "2026-03-09T05:11:14.557185+00:00",
+  "model": "deepseek-coder-v2"
+}

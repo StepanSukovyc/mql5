@@ -1,0 +1,7 @@
+{
+  "symbol": "JP225_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Dominantní je SELL signál: Cena je pod MA na všech timeframech kromě weekly, kde je těsně nad ní (52343.63 vs 52716.1335). RSI je pod 50 na 1H, 4H, a Day timeframech, indikující downtrend.  Monthly RSI je sice 64.80, ale po prudkém nárůstu ceny v únoru přichází výrazná korekce v březnu. BUY je limitován krátkým timeframe 1H, kde dochází k mírné stabilizaci RSI a potenciálu menší korekce zpět nahoru. HOLD je volba pro opatrné, kteří čekají na jasnější signál."
+}

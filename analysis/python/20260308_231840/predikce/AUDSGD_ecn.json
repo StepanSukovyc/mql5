@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s potvrzením v RSI a MA signalizují pohyb nahoru. Nicméně, zhoršené makroekonomické podmínky a volatilita mohou přinést nejistotu.",
+  "timestamp": "2026-03-08T22:52:17.749004+00:00",
+  "model": "deepseek-coder-v2"
+}

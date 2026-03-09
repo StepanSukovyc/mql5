@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "AUDNZD is showing mixed signals. Longer timeframes (week, month) indicate overbought conditions (high RSI) and bullish trend (price above MA). Shorter timeframes (1h, 4h) suggest potential pullback, with RSI around neutral and price near MA. Daily RSI is high, but not excessively overbought. Recent hourly candles show choppiness. Overall, risk is high due to conflicting signals. Selling is slightly favored, but holding is also viable."
+}

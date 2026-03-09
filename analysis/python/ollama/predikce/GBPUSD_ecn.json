@@ -1,0 +1,9 @@
+{
+  "symbol": "GBPUSD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje slabou finanční situaci Spojeného království a zhoršující se ekonomické podmínky. Svíčkové formace a RSI indikují pokles cen, i když MA sugeruje vzestupnou tendenci.",
+  "timestamp": "2026-03-09T04:56:18.861944+00:00",
+  "model": "deepseek-coder-v2"
+}

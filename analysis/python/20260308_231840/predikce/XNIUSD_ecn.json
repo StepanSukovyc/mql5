@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena se nachází nad denním MA, ale pod týdenním MA. RSI na denním grafu je 45, což naznačuje, že není přeprodaná ani překoupená. Na týdenním grafu je RSI na hodnotě 60, což naznačuje mírný býčí trend, ale s potenciálem korekce. 1H a 4H grafy ukazují RSI kolem 50, což naznačuje neutralitu. Vzhledem k nižšímu časovému rámci a nedávnému poklesu ceny a většímu spreadu, vidím větší pravděpodobnost SELL než BUY. HOLD doporučuji pro ty, kteří již mají pozici otevřenou a čekají na další vývoj."
+}

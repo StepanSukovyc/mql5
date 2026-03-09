@@ -1,0 +1,7 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "EURPLN is showing mixed signals. Recent hourly and 4-hour RSI values are trending towards overbought, suggesting potential for pullback. However, daily and weekly RSIs are also elevated, indicating continued upward momentum. Price is above the daily MA. Recent hourly candles show a strong bullish surge, but also increased spread and high volume, suggesting a potential fight between buyers and sellers. The market is in a near term uptrend. Given limited data, HOLD is advised to monitor the reaction to the recent surge. BUY is justified given trend, and SELL with caution as pullback might be short lived. Limited historical data makes risk assessment difficult."
+}

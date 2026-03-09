@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Denní RSI je překoupené (70.41), 1H RSI je neutrální (48.00). Měsíční MA je nad aktuální cenou, což naznačuje možný down trend. V posledních dnech se cena konsoliduje a je pod tlakem.  Z tohoto důvodu je SELL o něco pravděpodobnější než BUY."
+}

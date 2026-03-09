@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "USDJPY is showing overbought conditions on shorter timeframes (1h, 4h, Day RSI > 70). While the weekly RSI is still below 70, suggesting potential for further upside, the daily timeframe is reaching overbought territory. The current price is significantly above the daily and weekly MAs, indicating a potential pullback or consolidation. Recent hourly candles show upward movement, but are near to the overbought conditions, giving some confidence to sell. Hold may be good, because of overall uptrend."
+}

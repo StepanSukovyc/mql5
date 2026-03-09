@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFHUF_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "The price is above the MA on all timeframes, indicating an upward trend. Daily and weekly RSI are nearing overbought territory (79.44 and 70.42 respectively), suggesting potential for a pullback, but the bullish momentum is strong. The recent hourly candles show continued upward movement with some consolidation, supporting a buy in the short-term. However, large spreads on 1h candles on 03-09 suggest high volatility and uncertainty, warranting caution. SELL receives some consideration given the overbought RSI on daily timeframe. HOLD reflects some uncertainty given short timeframe of available data."
+}

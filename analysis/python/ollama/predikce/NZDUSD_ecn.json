@@ -1,0 +1,9 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažující trend je poklesový s několika svíčkovými formacemi potvrzujícími tento pohyb. RSI a MA ukazují slabost cen a riziko poklesu.",
+  "timestamp": "2026-03-09T05:17:52.737157+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CHFJPY is showing mixed signals. Longer term (Weekly/Monthly), RSI is high indicating overbought conditions, suggesting potential pullback (SELL). However, price is above moving averages on all timeframes, showing positive momentum. The most recent hourly candles show indecision after a strong move up. HOLD/BUY is reasonable if short term (1H/4H) moving averages and support levels hold. Overall risk is moderate."
+}

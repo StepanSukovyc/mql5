@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Smíšené signály. Krátkodobé RSI (1h, 4h, den) naznačují překoupenost a potenciální korekci (SELL), zatímco týdenní RSI je neutrální. Měsíční MA je nad aktuální cenou, což by mohlo bránit dalšímu růstu (HOLD). Nicméně, prolomení nad denní MA a rostoucí cena z posledních hodin naznačují potenciál dalšího růstu (BUY), avšak s ohledem na rizika je vhodné být opatrný."
+}

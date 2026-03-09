@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Cena je pod MA na 1h, 4h, denním a týdenním grafu, což naznačuje downtrend. RSI na denním a týdenním grafu je pod 40, což naznačuje, že by mohl být v překoupené oblasti. Na měsíčním grafu je cena nad MA. Celkově se zdá, že je větší šance na další pokles (SELL). RSI na hodinovém grafu je nad 60, což naznačuje možnost krátkodobé korekce vzhůru (BUY). HOLD je neutrální pozice s ohledem na potenciální nejistotu."
+}

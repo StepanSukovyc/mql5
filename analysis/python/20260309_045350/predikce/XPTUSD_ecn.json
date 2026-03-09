@@ -1,0 +1,7 @@
+{
+  "symbol": "XPTUSD_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "Technická analýza naznačuje možný prodejní tlak. Cena je pod MA na 1h, 4h i denním grafu. RSI je pod 40 na 1h, 4h i denním grafu, což značí, že trh je téměř přeprodaný. Na týdenním grafu je RSI 55, což je neutrální. Na měsíčním grafu je RSI 73, což naznačuje překoupený trh. Poslední 1H a 4H svíčky naznačují silný pokles. Převládá tedy prodejní tlak.  HOLD doporučuji pro vyčkání na potvrzení trendu."
+}

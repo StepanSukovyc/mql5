@@ -1,0 +1,9 @@
+{
+  "symbol": "GBPCHF_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují zlepšení. Riziko se snižuje.",
+  "timestamp": "2026-03-09T04:49:40.586205+00:00",
+  "model": "deepseek-coder-v2"
+}

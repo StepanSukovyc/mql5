@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním a týdenním grafu je RSI v překoupené zóně (73.5 a 81.4), což naznačuje možnou korekci. Na denním grafu je RSI také relativně vysoké (66.7). Cena se sice pohybuje nad denním MA, ale na 1H a 4H timeframe se cena pohybuje pod MA, což naznačuje krátkodobý klesající trend. Poslední 4H svíčka je bearis a 1H svíčka také. Proto SELL má vyšší pravděpodobnost než BUY. HOLD by mohl být vhodný pro ty, kteří čekají na jasnější signál."
+}

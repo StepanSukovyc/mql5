@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "AUDUSD is currently trading at 0.69966.  Hourly and 4-hour RSI are both below 40, suggesting oversold conditions, but not extreme.  The daily RSI is below 50. However, the weekly and monthly RSI are above 60, indicating potential overbought conditions in the longer term. The current price is below the moving averages on the hourly, 4-hourly, and daily charts, suggesting a downward trend. The price is also below this week's open. Svíčkové formace za poslední hodiny naznačují pokračující pokles (poslední svíčky jsou medvědí). Considering the confluence of factors, a SELL position is more favorable, while a cautious HOLD is recommended to see if oversold levels will push back to test resistance."
+}

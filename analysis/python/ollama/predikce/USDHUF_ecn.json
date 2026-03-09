@@ -1,0 +1,9 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje slabou finanční situaci maďarského forintu, ale svíčkové formace a RSI indikují pokles v příštích týdnech.",
+  "timestamp": "2026-03-09T05:36:22.768811+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "SGDJPY is currently showing mixed signals. The longer-term trends (week, month) indicate upward momentum (RSI above 60, price above MA), but the recent short-term price action (1h, 4h) suggests potential consolidation or pullback. RSI on 1h and 4h are neutral. We are in a neutral zone between the RSI indicators. Recent candlesticks show volatility. A hold position is warranted to see if support is formed, or a breakdown occurs."
+}

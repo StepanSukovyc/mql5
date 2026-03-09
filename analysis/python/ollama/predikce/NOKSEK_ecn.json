@@ -1,0 +1,9 @@
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Rozpětí mezi BUY a HOLD je způsobeno nejistotou ohledně dalšího vývoje na trhu. RSI ukazuje slabost síly, což může být indikací poklesu, ale MA ukazuje stabilitu nebo dokonce růst.",
+  "timestamp": "2026-03-09T05:07:55.616086+00:00",
+  "model": "deepseek-coder-v2"
+}

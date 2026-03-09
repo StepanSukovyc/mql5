@@ -1,0 +1,9 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení technických indikátorů a pokles v rsi. Nicméně, zlepšení fundamentální analýzy naznačuje stabilitu.",
+  "timestamp": "2026-03-08T23:09:04.990701+00:00",
+  "model": "deepseek-coder-v2"
+}

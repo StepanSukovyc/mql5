@@ -1,0 +1,9 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a slabé svíčkové formace signalizují pokles měnového kurzu.",
+  "timestamp": "2026-03-09T03:06:48.242709+00:00",
+  "model": "deepseek-coder-v2"
+}

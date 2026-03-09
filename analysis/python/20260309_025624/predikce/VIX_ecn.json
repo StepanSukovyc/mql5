@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "VIX_ecn is currently at 28.8. RSI values across multiple timeframes (1H, 4H, Daily, Weekly) are in overbought territory, indicating potential for a pullback. The MA values are significantly lower than the current price, suggesting a possible mean reversion. The Monthly RSI is at 65.25, which is high, but not yet in the overbought range, indicating there may still be upward momentum, but not enough to offset the other signals. Therefore, SELL has the highest probability, followed by HOLD, with a lower probability for BUY due to the overbought conditions."
+}

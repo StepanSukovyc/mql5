@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na měsíčním grafu je RSI stále hluboko v přeprodané zóně, což naznačuje potenciál pro korekci směrem nahoru, nicméně MA na měsíčním grafu je vysoko nad aktuální cenou. Na týdenním grafu je RSI na úrovni 45 a cena je pod MA, což naznačuje spíše medvědí trend. Denní RSI je 60, což naznačuje, že se trh blíží překoupené zóně.  Krátkodobě (1h, 4h) je RSI neutrální. Poslední svíčky na 1h timeframe naznačují mírný růst, ale celkový trend je spíše klesající. Důvodem pro SELL je silnější medvědí trend na vyšších timeframech a potenciál pro pokračování poklesu. BUY je limitován dlouhodobou přeprodaností a mírnou korekcí z posledních hodin. HOLD je zde z důvodu nejasností a čekání na potvrzení trendu."
+}

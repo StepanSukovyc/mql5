@@ -1,0 +1,7 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL díky RSI na 1h (31.74) a poklesu ceny v posledních hodinách. Denní RSI (59.61) naznačuje potenciál pro další růst v budoucnu, avšak současný pokles je zřetelný. Měsíční RSI (48.57) je neutrální. Vzhledem k rozporuplným signálům je vhodné HOLD."
+}

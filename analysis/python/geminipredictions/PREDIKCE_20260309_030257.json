@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "CHINAH_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 8700.00,
+  "reasoning": "Pořadí obchodu je #30, což znamená, že je plně řízen Gemini. CHINAH_ecn je doporučen k prodeji na základě technické analýzy, která naznačuje potenciální přeprodanost a možnost korekce. Cena je pod denním a týdenním MA, což indikuje klesající trend. I když má pár z dlouhodobého hlediska potenciál růstu, krátkodobý klesající trend převažuje. Doporučuji malý lot size s ohledem na aktuální marži a risk management. Take profit je nastaven realisticky s ohledem na poplatky a potenciální zisk."
+}

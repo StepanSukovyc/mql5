@@ -1,0 +1,7 @@
+{
+  "symbol": "USDILS_ecn",
+  "BUY": 35,
+  "SELL": 45,
+  "HOLD": 20,
+  "reasoning": "Na měsíčním a týdenním grafu je RSI hluboko v přeprodané zóně, což naznačuje možný odraz (BUY). Nicméně, MA na těchto timeframech jsou stále nad aktuální cenou, signalizující pokračující downtrend (SELL). Denní graf je neutrálnější, s RSI kolem 50, a cena se pohybuje kolem MA, což naznačuje HOLD. Poslední hodinové svíčky ukazují na růst, ale spread je vysoký, což zvyšuje riziko. Celkově vidím větší pravděpodobnost SELL, protože downtrend z vyšších timeframe stále přetrvává, ale s ohledem na přeprodanost se může objevit korekce směrem vzhůru. Zvýšený spread u posledních hodinových svíček signalizuje opatrnost."
+}

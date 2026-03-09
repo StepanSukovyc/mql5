@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSEK_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "EURSEK is showing bearish signals across multiple timeframes. Hourly RSI is below 40 suggesting further downside potential. The price is below both the hourly and 4-hourly moving averages. The monthly RSI is also low, indicating the potential for a longer-term downtrend. Although the daily RSI is around 50, the price action over the last few days has been bearish, closing lower. The weekly RSI is below 40 showing continued bearish momentum. Given the short lookback period, the data is not conclusive, thus reducing the conviction of the SELL. Holding can be considered in case of reversal patterns."
+}

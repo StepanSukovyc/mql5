@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI na úrovni 64.57, což naznačuje rostoucí trend, ale ne už překoupenost. 4H graf RSI na 67.17 také ukazuje rostoucí trend. Cena je nad denním MA, což je býčí signál. Nicméně na měsíčním grafu je cena pod MA, což ukazuje na dlouhodobější medvědí trend. Proto rozložení: Buy - mírný krátkodobý růstový potenciál, Sell - s ohledem na dlouhodobější trend, Hold - pro nejistotu způsobenou protichůdnými signály z různých časových rámců."
+}

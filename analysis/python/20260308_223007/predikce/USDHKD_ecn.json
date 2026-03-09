@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena se drží v úzkém rozmezí. Na denním grafu RSI 61 naznačuje mírný býčí trend, ale na 1h a 4h grafu je RSI blízko neutrální úrovně. Z historického pohledu (měsíční graf) vidíme, že se pár pohybuje kolem dlouhodobého průměru, ale v posledních dnech vidíme pokles. Proto držení pozice, nebo opatrný prodej, dokud se nevyjasní směr."
+}

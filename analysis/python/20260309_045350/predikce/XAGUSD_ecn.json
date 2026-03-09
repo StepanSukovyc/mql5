@@ -1,0 +1,7 @@
+{
+  "symbol": "XAGUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Short-term bearish momentum due to price below hourly and 4-hour MA, RSI below 40 on these timeframes. Daily RSI is also below 50. Recent hourly candles show significant downward movement.  Monthly RSI is very high suggesting a potential correction. Weekly RSI is above 60 indicating a possible weakness, while it is still above 50."
+}

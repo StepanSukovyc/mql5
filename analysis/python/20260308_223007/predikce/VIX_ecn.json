@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "VIX_ecn is showing overbought conditions on daily, 4h and weekly timeframes (RSI > 70). The monthly RSI is relatively high but not in overbought territory. While the price is above all MAs, the overbought conditions and recent strong upward movement suggest a possible pullback. Therefore, a SELL position carries the highest probability. A BUY position is risky due to the potential for reversal, and a HOLD position would be appropriate for existing short-term positions awaiting confirmation of a reversal. Last week's candle indicates strong buying momentum, but a correction is likely. "
+}

@@ -1,0 +1,9 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Na základě fundamentálních ukazatelů a růstových trendů v minulosti je vidět potenciál pro růst. Svíčkové formace indikují stabilitu s lehkým tendencem k růstu.",
+  "timestamp": "2026-03-09T02:51:45.048178+00:00",
+  "model": "deepseek-coder-v2"
+}

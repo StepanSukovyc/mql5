@@ -1,0 +1,7 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "ZARJPY se nachází v krátkodobém downtrendu. RSI na 1H, 4H a denním grafu jsou pod 50, což naznačuje medvědí momentum. Cena je pod MA na 1H, 4H a denním grafu. Na týdenním a měsíčním grafu je RSI nad 50 a cena nad MA, což ukazuje na dlouhodobý uptrend, ale aktuální pullback naznačuje pokračování medvědího trendu v krátkodobém horizontu. Proto je doporučeno spíše SELL s opatrností, BUY je rizikovější a HOLD je neutrální."
+}

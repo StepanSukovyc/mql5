@@ -1,0 +1,9 @@
+{
+  "symbol": "GBPZAR_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "RSI je nad úrovní předávání síly (overbought), ale cenový trend ukazuje na potenciál růstu. Kompromis mezi rizikem a očekávaným ziskem.",
+  "timestamp": "2026-03-09T04:57:58.149318+00:00",
+  "model": "deepseek-coder-v2"
+}

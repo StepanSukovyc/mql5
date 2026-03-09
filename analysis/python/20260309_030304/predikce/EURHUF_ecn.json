@@ -1,0 +1,7 @@
+{
+  "symbol": "EURHUF_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "EURHUF is showing mixed signals. Daily and 4H RSI are overbought, suggesting a potential pullback (SELL), while weekly RSI is moderate. Current price is above daily and weekly MA but below monthly MA. Recent hourly candles show volatility. Limited data for long-term analysis suggests caution (HOLD). Recent upward momentum supports a potential for further gains in the short-term (BUY)."
+}

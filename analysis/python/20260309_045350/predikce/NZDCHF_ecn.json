@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 20,
+  "SELL": 55,
+  "HOLD": 25,
+  "reasoning": "NZDCHF_ecn ukazuje sestupný trend. Měsíční RSI je v oblasti přeprodanosti, ale MA na vyšších timeframech jsou stále nad aktuální cenou. Denní i hodinové grafy naznačují pokles. Proto převládá SELL signál, ale kvůli potenciální korekci je zde i BUY, a HOLD je konzervativní přístup."
+}

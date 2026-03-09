@@ -1,0 +1,7 @@
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod 1h MA a 4h MA, denní RSI je pod 40, týdenní RSI je také pod 50. Měsíční RSI naznačuje, že stále existuje potenciál pro růst, ale v krátkodobém horizontu převládá medvědí trend. Proto je větší šance na SELL než BUY. HOLD je vhodný pro ty, kteří již pozici mají a chtějí vyčkat další vývoj."
+}

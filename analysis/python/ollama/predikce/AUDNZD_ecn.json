@@ -1,9 +1,9 @@
 {
   "symbol": "AUDNZD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením klimatu a negativními faktory pro australskou ekonomiku. Nedostatek jasných signálů stability způsobuje nejistotu.",
-  "timestamp": "2026-03-08T21:55:16.276582+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Růst cenových trendů je podporován silnou MA a pozitivním RSI. Nicméně, některé indikátory ukazují na možnost korekce nebo konfliktní situace.",
+  "timestamp": "2026-03-09T03:53:21.070162+00:00",
   "model": "deepseek-coder-v2"
 }

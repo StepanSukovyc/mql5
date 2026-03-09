@@ -1,0 +1,9 @@
+{
+  "symbol": "USDCAD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "The RSI shows a slight bullish momentum but the overall trend is mixed due to high volatility. The MA suggests some support which might lead to a short-term increase.",
+  "timestamp": "2026-03-09T05:29:34.604231+00:00",
+  "model": "deepseek-coder-v2"
+}

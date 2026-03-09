@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "NZDUSD je v downtrendu. Denní a hodinové RSI jsou pod 40, což naznačuje, že může být překoupený, ale MA na denní bázi je nad aktuální cenou. Tlak je stále dolů s ohledem na klesající trend na denním grafu a MA nad cenou. Proto větší šance na SELL. Týdenní graf je neutrální."
+}

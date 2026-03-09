@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURCAD_ecn",
+  "action": "SELL",
+  "lot_size": 0.02,
+  "take_profit": 1.455,
+  "reasoning": "EURCAD vykazuje silné medvědí signály napříč mnoha časovými rámci. RSI je hluboce přeprodané na denních a 4H grafech, což naznačuje potenciál pro krátkodobý odraz, ale celkový trend je dolů. Klouzavé průměry na 1H, 4H, denních a týdenních časových rámcích jsou vysoko nad současnou cenou, což potvrzuje medvědí momentum. Na účtu nemáme otevřenou pozici na EURCAD, což splňuje podmínku diverzifikace. Doporučená velikost lotu je 0.02, aby se minimalizovalo riziko a maximalizoval volný margin. TP 1.455 je nastaven realisticky tak, aby po odečtení poplatků dával obchod ekonomický smysl. Poplatek 0.20 USD za 0.02 lot, TP = 1.455."
+}

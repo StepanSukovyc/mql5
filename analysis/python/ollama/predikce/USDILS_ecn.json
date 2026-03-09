@@ -1,0 +1,9 @@
+{
+  "symbol": "USDILS_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Podle svíčkových formací a RSI je trend směrem dolů, ale MA ukazuje stabilitu. Doporučuji držet pozici.",
+  "timestamp": "2026-03-09T05:38:02.707521+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNOK_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "EURNOK is oversold on multiple timeframes (RSI below 35 across 1H, 4H, Daily and approaching oversold on Weekly). However, the price is consistently below its Moving Averages on all timeframes, suggesting a strong downtrend. Recent daily candles are bearish.  Therefore, SELL is the most likely outcome, with a small chance of a short-term correction (BUY) before the downtrend continues."
+}

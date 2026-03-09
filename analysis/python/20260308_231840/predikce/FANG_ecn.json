@@ -1,0 +1,7 @@
+{
+  "symbol": "FANG_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Current price is above the daily MA but below the weekly MA, suggesting mixed signals. RSI on the daily chart is around 53, indicating neither overbought nor oversold conditions. Recent hourly candles show consolidation. The monthly RSI is relatively high at 62. Overall market momentum is neutral to slightly bullish, with considerable volatility reflected in the wide spread of recent candles. Hence a balanced approach is suggested with a slight bias toward BUY. Short lookback period."
+}

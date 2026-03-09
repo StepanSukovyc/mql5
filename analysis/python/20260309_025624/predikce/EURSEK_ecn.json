@@ -1,0 +1,9 @@
+{
+  "symbol": "EURSEK_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Zohlednil jsem svíčkové formace, RSI ukazuje slabost a MA trend je mírně klesající. Riziko poklesu je vyšší.",
+  "timestamp": "2026-03-09T02:01:49.541015+00:00",
+  "model": "deepseek-coder-v2"
+}

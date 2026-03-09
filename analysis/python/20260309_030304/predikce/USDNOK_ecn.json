@@ -1,0 +1,7 @@
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním a týdenním grafu je RSI pod 40, což značí potenciál pro oživení, ale MA na těchto timeframech indikuje silný downtrend. Na denním grafu je RSI neutrální a cena je nad MA, což naznačuje potenciál pro nákup, ale 1H a 4H grafy ukazují blížící se konsolidaci po posledních nákupech. Proto je nejlepší vyčkat na potvrzení trendu, než zaujmout pozici. SELL má mírně vyšší váhu kvůli klesajícímu trendu na vyšších časových rámcích."
+}

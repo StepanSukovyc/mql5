@@ -1,0 +1,9 @@
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Vzhledem k růstu cen v posledních měsících a stabilitě RSI a MA je pravděpodobnost růstu akcií.",
+  "timestamp": "2026-03-09T02:33:30.776080+00:00",
+  "model": "deepseek-coder-v2"
+}

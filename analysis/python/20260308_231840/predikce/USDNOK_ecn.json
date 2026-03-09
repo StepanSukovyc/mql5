@@ -1,0 +1,7 @@
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1h timeframe je RSI v oversold teritoriu (31.05), což naznačuje potenciální odraz. Nicméně, 1h MA je nad aktuální cenou, což působí jako rezistence. 4h a denní timeframe RSI jsou neutrální, ale MA na 4h timeframe je také nad cenou. Týdenní a měsíční timeframe ukazují klesající trend, s cenou pod MA a RSI pod 50. Celkově převládá spíše prodejní tlak, i když krátkodobý odraz nahoru je možný. Proto rozdělení BUY/SELL/HOLD s vyšší vahou na SELL."
+}

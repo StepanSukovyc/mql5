@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "UKOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.05,
+  "take_profit": 85.00,
+  "reasoning": "Na základě dostupných predikcí je u UKOIL_ecn silný signál k nákupu (BUY 60%, SELL 15%). Analýza uvádí, že ačkoliv je RSI na denní a týdenní bázi překoupené, na měsíční bázi je stále prostor pro růst. MA na všech časových rámcích jsou pod cenou, což potvrzuje uptrend. Vzhledem k stylu obchodování (swing) a snaze o generování denních zisků, je tento pár vhodný. V portfoliu nemáme aktuálně otevřenou pozici s UKOIL_ecn, takže diverzifikace je zajištěna.  Take profit je nastaven na rozumnou úroveň s ohledem na denní volatilitu instrumentu a transakční náklady."
+}

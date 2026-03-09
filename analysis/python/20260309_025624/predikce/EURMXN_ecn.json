@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě indikátory naznačují překoupenost (RSI 4H = 70.9), ale denní RSI je neutrální (59.02). Cena je nad denním MA, což naznačuje mírný uptrend. Týdenní MA je nad aktuální cenou, což dává smíšený signál. Měsíční RSI je neutrální a cena je pod měsíčním MA. Aktuální cena (20.71) je vyšší než denní MA (20.38), ale pod týdenním MA (20.86). Nedostatek silného potvrzení v jednom směru indikuje rovnoměrné rozložení rizik."
+}

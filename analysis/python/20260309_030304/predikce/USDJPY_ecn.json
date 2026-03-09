@@ -1,0 +1,9 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace ukazují silnou odolnost u cenových úrovní. Rozhodnutí zohledňuje historické výkony a předpokládá se, že ceny budou mít pokles jen omezeně.",
+  "timestamp": "2026-03-09T03:05:09.315310+00:00",
+  "model": "deepseek-coder-v2"
+}

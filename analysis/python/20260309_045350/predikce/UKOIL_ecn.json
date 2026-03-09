@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 15,
+  "SELL": 75,
+  "HOLD": 10,
+  "reasoning": "UKOIL_ecn is heavily overbought on almost all timeframes (1h, 4h, Day, Week RSI significantly above 70). A potential correction is expected. However, a strong bullish momentum is confirmed on smaller timeframes, with the price above moving averages. A hold position is possible but very risky. The RSI on the Monthly timeframe suggest a slight correction but is not as significant as the smaller timeframes."
+}

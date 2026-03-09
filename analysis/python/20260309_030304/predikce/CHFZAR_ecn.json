@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Cena je nad MA na 1h, 4h, Day, Week, ale pod MA na Month. RSI je v překoupené zóně na 1h a Day, blízko na 4h. Na týdenní a měsíční bázi indikuje střed. Trend na denním a týdenním grafu je nahoru. Recent hodinové svíčky naznačují momentum uptrendu. Zvýšený spread na některých hodinových svíčkách naznačuje zvýšenou volatilitu, takže HOLD se může vyplatit, pokud si trader není jistý."
+}

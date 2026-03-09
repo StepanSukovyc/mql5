@@ -25,3 +25,17 @@ timestamp,symbol,action,lot_size,price,success,error_msg
 2026-03-06T21:52:36.984854+00:00,NGAS_ecn,BUY,0.05,0.0,True,
 2026-03-06T21:52:41.672020+00:00,NGAS_ecn,BUY,0.05,0.0,True,
 2026-03-06T21:52:46.410452+00:00,CADJPY_ecn,BUY,0.05,0.0,True,
+2026-03-08T22:38:50.727814+00:00,EURAUD_ecn,SELL,0.05,0.0,True,
+2026-03-08T22:38:56.244697+00:00,EURCAD_ecn,SELL,0.02,0.0,True,
+2026-03-08T22:41:30.047354+00:00,AUDCAD_ecn,SELL,0.05,0.0,True,
+2026-03-08T23:26:34.477582+00:00,UKOIL_ecn,BUY,0.05,0.0,False,"Insufficient margin: required 534.52, available 481.14"
+2026-03-08T23:26:45.012605+00:00,UKOIL_ecn,BUY,0.05,0.0,False,"Insufficient margin: required 534.77, available 481.12"
+2026-03-08T23:26:49.375741+00:00,UKOIL_ecn,BUY,0.05,0.0,False,"Insufficient margin: required 534.57, available 480.87"
+2026-03-08T23:26:53.801363+00:00,UKOIL_ecn,BUY,0.05,0.0,False,"Insufficient margin: required 534.47, available 480.81"
+2026-03-08T23:26:58.357618+00:00,UKOIL_ecn,BUY,0.05,0.0,False,"Insufficient margin: required 534.62, available 481.81"
+2026-03-08T23:27:02.958981+00:00,UKOIL_ecn,BUY,0.05,0.0,False,"Insufficient margin: required 534.52, available 481.82"
+2026-03-08T23:27:08.877890+00:00,CHFHUF_ecn,BUY,0.05,0.0,True,
+2026-03-09T03:02:57.383081+00:00,CHINAH_ecn,SELL,0.01,8472.9,False,Invalid take_profit for SELL: TP (8700.0) must be < market price (8472.9)
+2026-03-09T03:09:32.708803+00:00,CADJPY_ecn,BUY,0.02,116.97,False,Invalid take_profit for BUY: TP (108.35) must be > market price (116.97)
+2026-03-09T03:09:37.786550+00:00,GBPSGD_ecn,SELL,0.05,0.0,True,
+2026-03-09T05:00:21.715935+00:00,NGAS_ecn,BUY,0.05,0.0,True,

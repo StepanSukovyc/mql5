@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Na měsíčním grafu je RSI stále relativně vysoko (69.14), ale klesá, což naznačuje zpomalení růstu. Denní, 4H a 1H grafy ukazují RSI pod 40, což naznačuje potenciální překoupenost, ale klesající MA potvrzují klesající trend. Dále cena je pod denním MA, což rovněž naznačuje downtrend. Na týdenní bázi se MA blíží k ceně.  Klesající trend z posledního týdne převažuje a upřednostňuje se SELL pozice."
+}

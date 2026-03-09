@@ -1,0 +1,7 @@
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "RSI na 1h, 4h a denní timeframe se blíží překoupené zóně (nad 60), což naznačuje potenciální korekci. MA na denním timeframe je pod současnou cenou, což indikuje rostoucí trend. Týdenní a měsíční RSI jsou neutrální. Celkově vidím potenciál pro další růst, ale i riziko korekce, proto rozložení BUY/SELL/HOLD."
+}

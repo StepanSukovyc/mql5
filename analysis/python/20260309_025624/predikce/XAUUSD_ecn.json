@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním MA, hourly a 4h RSI jsou pod 50 a klesají.  Monthly RSI je extrémně překoupené, což naznačuje možnou korekci.  Poslední svíčky na H1 a 4H naznačují prodejní tlak. I přes dlouhodobý rostoucí trend je pravděpodobná krátkodobá korekce. Týdenní RSI je stále vysoké (72.39), ale klesá, naznačujíc slábnoucí momentum. Proto SELL má největší pravděpodobnost. BUY a HOLD jsou rozděleny rovnoměrně, jelikož potenciál pro další růst stále existuje, ale s větší opatrností."
+}

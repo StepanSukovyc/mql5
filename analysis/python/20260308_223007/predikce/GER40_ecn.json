@@ -1,0 +1,7 @@
+{
+  "symbol": "GER40_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na denní a 4H timeframe je patrný klesající trend. RSI na těchto timeframech je v oblasti přeprodanosti (31,44 a 36,64). MA na všech timeframech kromě měsíčního je nad aktuální cenou, což naznačuje downtrend. Měsíční RSI je sice v oblasti překoupenosti (68,42), ale cena se nachází nad MA, což značí rostoucí tendenci v dlouhodobém horizontu, ale v krátkodobém horizontu existuje potenciál pro další pokles. Proto převládá signál k prodeji (SELL). S ohledem na přeprodanost a možnou korekci downtrendu je část alokována pro BUY (25%), zatímco HOLD signalizuje opatrnost s ohledem na nejednoznačnost signálů."
+}

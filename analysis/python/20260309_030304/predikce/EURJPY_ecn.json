@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje mírný sestupný trend. RSI na 1H, 4H a denním grafu se nachází pod 50, což značí medvědí momentum. Cena se pohybuje blízko MA na kratších timeframech, ale je nad MA na týdenním a měsíčním grafu, což ukazuje na potenciální dlouhodobější support. Vzhledem k nedávnému pullbacku a indikátorům směřujícím dolů, je SELL pozice mírně pravděpodobnější než BUY, ale volatilita a nejednoznačnost vyžadují opatrnost, a proto HOLD má taky významnou váhu."
+}

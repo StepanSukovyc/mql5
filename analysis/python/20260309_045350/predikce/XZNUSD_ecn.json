@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Na týdenním grafu je RSI na 66.99, což naznačuje potenciální překoupenost, ale zároveň je cena nad MA. Denní RSI je 48.17, což je neutrální. Na 1h a 4h jsou RSI také neutrální. Poslední denní svíčka je spíše doji, takže naznačuje nerozhodnost. Zatímco týdenní trend je stále vzhůru, krátkodobé signály jsou nejasné. Proto doporučuji držet, dokud se situace nevyjasní."
+}

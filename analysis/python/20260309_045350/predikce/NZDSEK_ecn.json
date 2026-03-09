@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Month RSI is oversold (26.49), suggesting potential for upward correction in the long term. However, 1H RSI is at 65.56, indicating short-term overbought conditions. The price is above the daily MA but below the monthly MA, showing conflicting signals. Recent hourly candles show price has risen, so HOLD position is logical in this scenario until further analysis."
+}

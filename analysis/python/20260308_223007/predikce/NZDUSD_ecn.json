@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod MA na denním, 4H i hodinovém grafu, RSI je na denním a 4H v neutrální zóně, ale směřuje spíše dolů. Týdenní RSI je těsně pod 50, naznačuje neutrální trend. Měsíční RSI je neutrální. Z krátkodobého hlediska (1H) je RSI mírně nad 50, což naznačuje mírný býčí tlak, ale MA je nad cenou. Celkově převládá medvědí sentiment s ohledem na trend na vyšších časových rámcích a pozici ceny pod MA. Riziko SELL je vyšší, ale BUY může být vhodný pro krátkodobé korekce. HOLD doporučuji, pokud již máte pozici, vyčkejte dalšího vývoje."
+}

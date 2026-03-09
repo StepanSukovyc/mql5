@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 60,
+  "SELL": 15,
+  "HOLD": 25,
+  "reasoning": "CADJPY is showing strong bullish momentum. Hourly and 4-hour RSI are in overbought territory, suggesting a potential pullback. Daily RSI is high but still has room to grow. Weekly RSI is also bullish. The price is above the moving averages on all timeframes. Monthly RSI is neutral. The last daily candle is bullish, confirming the upward trend. Despite the overbought short-term conditions, the overall trend and momentum favor further upside, but a cautious approach is advised. A pullback is possible before the next leg up, hence the significant HOLD percentage."
+}

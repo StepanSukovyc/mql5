@@ -1,0 +1,7 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na denním grafu RSI (44.84) a 4h grafu (43.33) naznačují, že trh není ani překoupený, ani přeprodaný, ale blíže k přeprodané oblasti. Cena je pod denním MA (9.64) a 4h MA (9.52), což značí krátkodobý downtrend. Na týdenní bázi je RSI (58.87) neutrální, ale MA (9.39) je pod aktuální cenou, což by mohlo signalizovat možný odraz nahoru, ale krátkodobé indikátory spíše indikují sell. Měsíční RSI (61.59) je relativně vysoké a naznačuje, že trh by mohl být blízko překoupené oblasti, což naznačuje potenciální korekci. Celkově krátkodobý downtrend a potenciál pro korekci převažují nad dlouhodobějším býčím sentimentem, proto SELL má nejvyšší váhu. BUY se zvažuje díky potenciálu odrazu od týdenního MA. HOLD je zvažován z důvodu protichůdných signálů z různých časových rámců."
+}

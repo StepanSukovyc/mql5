@@ -1,0 +1,7 @@
+{
+  "symbol": "BCHUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "The price is below the hourly, 4-hourly, daily and weekly moving averages, indicating a potential downtrend. Daily RSI is at 36, suggesting it is approaching oversold conditions, but not there yet. A 'SELL' position has a higher probability, although a short-term bounce ('BUY') could occur. 'HOLD' suggests caution."
+}

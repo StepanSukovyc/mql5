@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "USDJPY is currently trading at 158.688. RSI is above 60 on all timeframes indicating overbought conditions and potential pullback. The pair is above the MA across all timeframes which signals strong bullish momentum. However the RSI at 1H and 4H are at 67.565493 and 73.371224 levels respectively. Overall, bullish trend persists but with caution due to overbought conditions and possible consolidation."
+}

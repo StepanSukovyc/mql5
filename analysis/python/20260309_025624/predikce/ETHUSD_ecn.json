@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "ETHUSD je v krátkodobém i střednědobém downtrendu. RSI na 1H a týdenním timeframe je hluboko v přeprodané zóně, což naznačuje možný odraz, ale celkový trend je klesající. MA na všech timeframech, kromě denního, jsou nad aktuální cenou, což potvrzuje medvědí sentiment. Dlouhodobé MA naznačují možnou hodnotu klesání. Proto převládá doporučení pro prodej, ale je třeba sledovat indikátory pro možné přeprodané stavy. Denní rsi se pohybuje kolem 36ti bodů, což značí že by se cena mohla vyhoupnout nahoru, proto doporučujeme držet malou část portfolia a zbytek prodat."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "UK100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobý prodejní tlak přetrvává (RSI na 1h a 4h je pod 35), cena je pod MA na 1h, 4h a denním grafu. Nicméně, týdenní a měsíční RSI naznačují dlouhodobější uptrend, tudíž HOLD je také relevantní. Vzhledem k potenciálu pro další pokles a nedávnému poklesu, upřednostňuji SELL. BUY je riskantní kvůli současnému momentu."
+}

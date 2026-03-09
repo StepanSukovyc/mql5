@@ -1,0 +1,9 @@
+{
+  "symbol": "GBPZAR_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace naznačují možnost otočení. Riziko ztráty je vysoké.",
+  "timestamp": "2026-03-09T02:23:32.952840+00:00",
+  "model": "deepseek-coder-v2"
+}

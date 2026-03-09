@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Cena se pohybuje nad denním MA, RSI na denním grafu je 69, naznačuje býčí momentum. Na druhou stranu, měsíční RSI je 42, což naznačuje, že celkový trend nemusí být silně býčí. Poslední svíčky na hodinovém grafu jsou býčí, ale předtím se cena výrazně propadla. Kvůli rozporuplným signálům z různých časových rámců navrhuji alokovat i HOLD pozici."
+}

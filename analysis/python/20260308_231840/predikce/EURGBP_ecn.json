@@ -1,0 +1,9 @@
+{
+  "symbol": "EURGBP_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle RSI a klouzavých průměrů ukazuje cenový graf slabost, ale zároveň dochází k nárustu v posledních třech měsících. Tento trend je potenciálně silný a může být příznakem budoucího růstu.",
+  "timestamp": "2026-03-08T23:03:33.472102+00:00",
+  "model": "deepseek-coder-v2"
+}

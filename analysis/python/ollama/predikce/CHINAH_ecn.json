@@ -1,0 +1,9 @@
+{
+  "symbol": "CHINAH_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Na základě fundamentální analýzy a svíčkových formací ukazuje potenciál růstu, ale také signály pro nejistotu vzhledem k volatilitě trhu.",
+  "timestamp": "2026-03-09T04:11:28.383877+00:00",
+  "model": "deepseek-coder-v2"
+}

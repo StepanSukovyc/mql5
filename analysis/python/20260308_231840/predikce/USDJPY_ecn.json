@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "USDJPY is trading near recent highs (158.315). The RSI on the daily and weekly charts (63.19 and 63.09 respectively) suggest that it is approaching overbought territory, while the MA values are well below the current price, indicating an uptrend. However, the 1-hour RSI is at 53.73, suggesting room for further upward movement, while the current price sits well above the hourly MA. Month RSI is only at 53.31. Limited lookback period makes identifying trend reversals difficult. Given the proximity to recent highs, potential for pullback exists, however the overall trend appears bullish."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "XAGUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na měsíčním grafu je RSI překoupené (78.83), což naznačuje potenciální korekci. Denní a 4H grafy ukazují RSI pod 41, což naznačuje potenciální přeprodanost, ale MA je nad současnou cenou na krátkodobých timeframe, což naznačuje downtrend. Poslední svíčky na 1H a 4H timeframes jsou bearish. Týdenní RSI je kolem 60, indikuje neutrální sentiment. Proto je doporučeno SELL."
+}

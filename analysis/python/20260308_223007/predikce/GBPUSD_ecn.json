@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "On the 1H timeframe, RSI is nearing overbought territory (68.78), suggesting potential for a pullback. The 4H RSI is neutral (53.68), while the daily RSI indicates oversold conditions (40.03). Price is below 1H & 4H MA, but above month MA. Recent daily candles show some upward movement. Overall, conflicting signals across timeframes with a slight bias towards selling given the recent price action and 1H overbought RSI. A hold position is suggested until confirmation of either the downward or upward trend, as risk is high."
+}

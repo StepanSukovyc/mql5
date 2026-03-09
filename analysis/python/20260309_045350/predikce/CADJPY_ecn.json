@@ -1,0 +1,9 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 60.0,
+  "SELL": 20.0,
+  "HOLD": 20.0,
+  "reasoning": "Vysoká hodnota RSI a MA ukazují na silnou pozitivní tendenci. Nicméně, pokles v posledních týdnech může být signalizací potenciálního oslabení.",
+  "timestamp": "2026-03-09T04:04:53.856641+00:00",
+  "model": "deepseek-coder-v2"
+}

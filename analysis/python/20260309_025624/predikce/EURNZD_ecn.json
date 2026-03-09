@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNZD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Krátkodobě (1h, 4h) RSI naznačuje neutrální až mírně přeprodané podmínky, ale cena je pod MA na denním i týdenním grafu. Denní a týdenní RSI pod 40 naznačuje downtrend. Měsíční graf s RSI 57 a cenou nad MA naznačuje uptrend, ale je potřeba větší potvrzení. Vzhledem k downtrendu na denním grafu a ceně pod MA je SELL mírně pravděpodobnější než BUY.  HOLD je opatrná strategie vzhledem ke smíšeným signálům."
+}

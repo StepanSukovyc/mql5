@@ -1,0 +1,9 @@
+{
+  "symbol": "UK100_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s růstovými trendem v RSI a MA. Svíčkové formace podporují pozitivní pohyb.",
+  "timestamp": "2026-03-09T05:21:14.283524+00:00",
+  "model": "deepseek-coder-v2"
+}

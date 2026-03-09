@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Krátkodobé indikátory (1h, 4h, denní RSI pod 32) signalizují překoupenost a možný obrat. MA na kratších timeframech jsou nad cenou. Měsíční RSI je stále vysoké (68.52), ale cena se pohybuje pod MA na všech timeframech kromě měsíčního, což naznačuje oslabování dlouhodobého trendu. Pokles v posledních dnech je výrazný."
+}

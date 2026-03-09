@@ -1,0 +1,7 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Dominance SELL signálů. RSI na 1h i week timeframe je hluboko v přeprodané zóně, což naznačuje potenciální odraz, ale zároveň silný downtrend. MA na všech timeframech kromě 1h je nad aktuální cenou, což naznačuje klesající trend. Vzhledem k silnému downtrendu a přeprodanosti je lepší SELL pozice, ale s opatrností. HOLD pozice je vhodná pro ty, kteří již BTC drží a čekají na lepší časy. BUY je riziková pozice a doporučená pouze pro zkušené tradery s vysokou tolerancí rizika."
+}

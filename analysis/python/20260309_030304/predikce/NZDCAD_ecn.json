@@ -1,0 +1,9 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence směrem nahoru, ale objem je slabý. Doporučuji držet pozici.",
+  "timestamp": "2026-03-09T02:35:09.804214+00:00",
+  "model": "deepseek-coder-v2"
+}

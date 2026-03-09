@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI v překoupené zóně (71.93), což naznačuje potenciální korekci. Nicméně, aktuální cena je nad MA na 1h, 4h i denním grafu, což signalizuje býčí trend. Týdenní RSI je neutrální (53.11), ale cena je pod MA, naznačující mírný medvědí tlak. Měsíční RSI je nízko (40.29), cena je pod MA, což ukazuje na dlouhodobější downtrend. Vzhledem k rozporuplným signálům napříč timeframe, doporučuji opatrnost, přičemž mírně preferuji nákup z důvodu krátkodobého momentum."
+}

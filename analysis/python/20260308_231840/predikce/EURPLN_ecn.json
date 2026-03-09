@@ -1,0 +1,9 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Riziko je závislé na volatilitě a aktuálním pohybu trhu. RSI ukazuje neutralitu s nedostatečným tlakem nahoru, MA trend může být slabý, což vede k rozhodnutí držet pozici.",
+  "timestamp": "2026-03-08T23:14:20.923311+00:00",
+  "model": "deepseek-coder-v2"
+}

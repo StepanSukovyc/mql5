@@ -1,0 +1,7 @@
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod MA na týdenním a měsíčním grafu, což naznačuje potenciální downtrend. RSI na 1H je pod 50, indikuje medvědí momentum. Denní svíčka naznačuje pokles. 4H RSI je sice nad 50, ale klesá. Celkově převládá mírný tlak na prodej."
+}

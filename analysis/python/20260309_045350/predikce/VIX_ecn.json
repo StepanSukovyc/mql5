@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "VIX_ecn je překoupený na kratších timeframe (1h, 4h, den, týden) dle RSI. Měsíční RSI je sice nižší, ale stále relativně vysoko. Cena se pohybuje nad MA na všech timeframe, ale rychlý nárůst naznačuje potenciální korekci. SELL pozice je preferovaná kvůli překoupenosti a potenciálnímu návratu k průměru. BUY pozice je riskantní, HOLD dává smysl pro investory, kteří drží dlouhodobé pozice a jsou ochotni tolerovat volatilitu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "AUDZAR_ecn vykazuje na denním a týdenním grafu RSI hodnoty blízko překoupené úrovně (73 a 70), což naznačuje potenciální korekci. Nicméně, aktuální cena je nad 1h, 4h a měsíční MA, což by mohlo signalizovat pokračující býčí trend, avšak v kratším časovém horizontu. Poslední denní svíčka je býčí a indikuje snahu o další růst. Vzhledem k těmto protichůdným signálům od různých timeframe, je BUY scénář nejpravděpodobnější s lehkou převahou, avšak SELL je stále významnou možností s ohledem na potenciální korekci. HOLD je pak rozumný pro ty, kteří již pozici mají a čekají na potvrzení trendu."
+}

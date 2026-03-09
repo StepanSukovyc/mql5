@@ -1,0 +1,9 @@
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Především na základě fundamentální analýzy s ohledem na poslední ekonomické ukazatele a očekávání je vidět pokles trendu. RSI i MA hodnoty podporují tento pohyb, což svědčí pro nákupovou příležitost.",
+  "timestamp": "2026-03-09T05:12:55.564270+00:00",
+  "model": "deepseek-coder-v2"
+}

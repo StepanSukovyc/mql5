@@ -1,0 +1,7 @@
+{
+  "symbol": "EU50_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Aktuální cena 5721.9. Na denním grafu je RSI 33.16, což naznačuje, že je trh přeprodaný, ale MA 6019.3675 je stále vysoko nad aktuální cenou. 1h a 4h grafy ukazují RSI pod 40.64 a 36.52 respektive, což také naznačuje, že trh je přeprodaný v krátkodobém horizontu. Týdenní RSI je 47.96 a měsíční je 61.49, což ukazuje na klesající trend z vyšších hodnot RSI. Svíčkové formace na 1h a 4h grafu ukazují na pokračující medvědí trend. Doporučuji SELL, jelikož krátkodobé přeprodané podmínky nemusí nutně znamenat obrat a dlouhodobý trend je stále klesající."
+}

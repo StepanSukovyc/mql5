@@ -1,0 +1,7 @@
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena XPDUSD_ecn je pod MA na 1h, 4h a denním timeframe. RSI je pod 40 na 1h a denním grafu, extrémně přeprodané na 4h. Vzhledem k dlouhodobějšímu uptrendu (měsíční MA roste a RSI je 66) je HOLD zvažován. Pokles ceny v posledních dnech a přeprodané RSI na kratších timeframech indikuje SELL pozici s potenciální korekcí výše v budoucnu (proto nižší hodnota BUY)."
+}

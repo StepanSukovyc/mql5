@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPNZD_ecn",
+  "BUY": 35,
+  "SELL": 45,
+  "HOLD": 20,
+  "reasoning": "GBPNZD shows mixed signals. Hourly and 4-hour RSI are nearing overbought territory, suggesting potential for a pullback. The daily RSI is neutral. However, the weekly MA is significantly above the current price, indicating a longer-term downtrend. Recent daily price action shows a potential for reversal after a bounce. Considering the conflicting signals and limited recent data, SELL is favored due to the weekly downtrend and potential overbought conditions on shorter timeframes, but a significant portion is held in BUY to not miss upward price action."
+}

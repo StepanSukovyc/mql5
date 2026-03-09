@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Short-term indicators (1h, 4h, Day RSI) are heavily oversold suggesting a potential bounce. However, the longer-term trend (Weekly MA above current price, Monthly RSI at 63.12) indicates a continuing downtrend. A recent sharp drop in price combined with the short-term oversold conditions suggests a potential for a weak bullish correction. Therefore, selling is the most probable outcome."
+}

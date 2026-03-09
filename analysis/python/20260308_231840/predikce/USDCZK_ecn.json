@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL: 1H RSI je pod 40, poslední 1H svíčka naznačuje další pokles. Denní RSI se blíží překoupené oblasti, což naznačuje možnou korekci. Měsíční MA je nad aktuální cenou. Střednědobě HOLD: 4H RSI kolem 50, trh se stabilizuje. Dlouhodobě BUY: Týdenní RSI je nad 50 a měsíční je stále relativně nízko."
+}

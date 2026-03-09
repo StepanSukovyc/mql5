@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Smíšené signály. Krátkodobě (1h, 4h, day) RSI indikuje potenciální překoupenost a konsolidaci po růstu. MA na týdenní bázi naznačuje support. Naopak měsíční RSI naznačuje potenciál k růstu. Celkově, po prudkém poklesu v posledních měsících se pár stabilizoval. Proto doporučuji spíše vyčkat, ale i malá BUY a SELL pozice s rozumným risk managementem by mohly být ziskové.  Riziko spočívá v potenciálním silnějším trendu, který by mohl vychýlit bilanci jedním směrem. HOLD je doporučen pro zajištění klidu a lepšího posouzení situace v následujících dnech."
+}

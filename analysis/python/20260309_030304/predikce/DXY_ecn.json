@@ -1,0 +1,7 @@
+{
+  "symbol": "DXY_ecn",
+  "BUY": 50,
+  "SELL": 25,
+  "HOLD": 25,
+  "reasoning": "DXY is currently at 99.599. The daily RSI is at 73.87, indicating overbought conditions, which might suggest a potential pullback (SELL). However, 1h and 4h RSI are not so high and the price is above the 1h and 4h MAs. Also, on the weekly timeframe, RSI is at 59.07, indicating a potential for further upside (BUY). On the monthly timeframe, RSI is at 43.74, suggesting more room to grow (BUY). Given these mixed signals and the limited historical data, HOLD is the most conservative choice. The recent hourly price action shows a slight upward trend which is why BUY has 50%."
+}

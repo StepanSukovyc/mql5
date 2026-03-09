@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "The price is trending downwards, indicated by RSI values below 40 on 1h, 4h and daily timeframes, suggesting an oversold condition but continuing bearish momentum. MA values are also declining across all timeframes. Price is below MA. There are some reversal candlesticks on lower timeframes, but overall trend is down, thus SELL is prioritized. However, RSI showing an oversold in shorter terms so HOLD is recommended as well to prevent fake breakouts for short period."
+}

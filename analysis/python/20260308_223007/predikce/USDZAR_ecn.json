@@ -1,0 +1,7 @@
+{
+  "symbol": "USDZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Smíšené signály. Denní RSI na 61 naznačuje překoupenost, ale 4H RSI je na 56, což je neutrální. Cena je nad denním MA, ale pod měsíčním MA. Poslední denní svíčka je bearish. Z krátkodobého hlediska (1H) je RSI pod 40, což naznačuje možnost růstu, ale celkový trend je nejistý. Proto rozdělení pozic mezi BUY, SELL a HOLD."
+}

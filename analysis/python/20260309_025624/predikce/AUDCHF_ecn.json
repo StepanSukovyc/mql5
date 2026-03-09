@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na měsíčním grafu je RSI blízko přeprodané oblasti (39.52), ale trend je stále klesající. Na týdenním grafu je RSI 63.51, což naznačuje potenciální překoupenost, ale MA roste. Denní graf ukazuje RSI 52.77 a MA se pohybuje do strany. Na 4H a 1H grafech je RSI pod 50, což naznačuje klesající momentum. Kombinace těchto faktorů naznačuje spíše SELL pozici s opatrností. Recentní cenový pohyb naznačuje další oslabování, avšak nutno brát v potaz support úrovně a potenciální reverzi."
+}

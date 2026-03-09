@@ -1,0 +1,7 @@
+{
+  "symbol": "CHINAH_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Denní RSI na 30.7 naznačuje potenciální překoupenost a možnou korekci. Cena je pod denním MA (8904.3105) a týdenním MA (9045.943), což indikuje klesající trend. 1h a 4h RSI jsou neutrální, ale MA se blíží ceně. Měsíční RSI 58,88 naznačuje, že z dlouhodobého hlediska má pár potenciál růstu, ale krátkodobý klesající trend převažuje. Z těchto důvodů je doporučení SELL rizikovější, ale potencionálně výnosnější, a HOLD je rozumná strategie."
+}

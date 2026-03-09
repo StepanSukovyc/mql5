@@ -1,0 +1,9 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle svíčkových formací a trendu RSI může dojít k poklesu ceny. Nicméně, MA ukazuje silnou podporu, což naznačuje nejistotu v budoucím pohybu.",
+  "timestamp": "2026-03-08T22:17:05.864398+00:00",
+  "model": "deepseek-coder-v2"
+}

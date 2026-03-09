@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "EURMXN vykazuje smíšené signály. Krátkodobé indikátory (1h, 4h) naznačují mírný býčí sentiment (RSI blízko překoupenosti, cena nad MA), zatímco denní RSI je neutrální a týdenní RSI je spíše medvědí. Měsíční RSI je také neutrální. Cena se pohybuje pod týdenním MA a nad denním MA. Z historického hlediska (měsíční graf) je patrný klesající trend, ale poslední měsíc vykazuje růst. Proto doporučuji držet pozici nebo nakupovat s opatrností. Možnost short pozice na základě týdenního grafu."
+}

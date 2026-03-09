@@ -1,0 +1,9 @@
+{
+  "symbol": "BCHUSD_ecn",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Vysoká volatilita s omezeným pohybem. RSI ukazuje přeprodanost, MA indikace slabého trendu.",
+  "timestamp": "2026-03-08T22:05:08.862609+00:00",
+  "model": "deepseek-coder-v2"
+}

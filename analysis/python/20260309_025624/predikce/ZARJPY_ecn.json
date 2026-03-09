@@ -1,0 +1,7 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je v krátkodobém klesajícím trendu (1h, 4h, den). RSI na 1h, 4h a denním grafu je pod 50, což naznačuje klesající momentum. Cena je pod MA na 1h, 4h a denním grafu. Dlouhodobější indikátory (týdenní a měsíční) naznačují rostoucí trend, ale v krátkodobém horizontu převažují prodejní signály. Z toho důvodu: SELL má největší váhu, BUY nejmenší a HOLD balancuje mezi nimi, protože dlouhodobější trend je býčí, ale krátkodobě převažuje medvědí nálada."
+}

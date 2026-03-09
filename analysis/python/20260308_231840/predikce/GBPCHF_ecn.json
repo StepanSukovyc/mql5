@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "GBPCHF is currently at 1.03943. The monthly RSI is oversold at 28.01, suggesting potential for a bounce. However, the daily RSI is at 39.88, and weekly RSI is at 29.77, indicating continued bearish momentum. The price is below the MA on all timeframes, reinforcing the sell signal. Recent hourly candles show some consolidation, but overall trend is down. Therefore, SELL is the dominant recommendation."
+}

@@ -1,0 +1,9 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 40.0,
+  "SELL": 50.0,
+  "HOLD": 10.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět silný trend směrem dolů. Nicméně, svíčková formační analýza ukazuje na možnost otočení cenového pohybu v příštích týdnech.",
+  "timestamp": "2026-03-09T03:00:08.681990+00:00",
+  "model": "deepseek-coder-v2"
+}

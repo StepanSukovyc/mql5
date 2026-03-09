@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI 62.37 naznačuje překoupenost, ale MA roste. Týdenní RSI 58.16 a měsíční 55.77 jsou neutrální. Krátkodobě (1h) je RSI 42.33 pod 50, což naznačuje potenciál pro růst. Celkově smíšené signály, proto rozložení Buy/Sell/Hold. Buy je podpořen rostoucím MA na denním grafu a potenciálem růstu po poklesu na 1h grafu. Sell je podpořen překoupeností na denním grafu a potenciálním odporem v blízkosti posledního high. Hold dává smysl kvůli rozporuplným signálům a potřebě dalšího potvrzení trendu."
+}

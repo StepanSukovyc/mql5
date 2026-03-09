@@ -1,0 +1,7 @@
+{
+  "symbol": "XALUSD_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "XALUSD_ecn is currently trading at 3504.6. The daily, 4-hour and hourly RSI indicate overbought conditions (71.65, 72.09 and 67.47 respectively), suggesting a potential pullback. The weekly RSI is very high at 84.09 further reinforcing this potential. While the price is above the moving averages on all timeframes, the high RSI values suggest caution. Given the strong upward move over the past few days the BUY strength is significantly reduced. Limited candle data available to assess recent patterns accurately. SELL is favored because of overbought levels across multiple timeframes. HOLD is assigned a small percentage due to the possibility of continued upward momentum, requiring further confirmation before making strong commitment to a sell position."
+}

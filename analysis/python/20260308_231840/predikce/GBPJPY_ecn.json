@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "GBPJPY je v krátkodobém uptrendu (1h, 4h RSI nad 50, cena nad MA), ale dlouhodobé ukazatele (denní RSI 55.87, týdenní RSI 61.30) naznačují možnost korekce. 1h RSI je překoupené (72.51), což naznačuje blížící se pullback. Měsíční MA je hluboko pod cenou, což naznačuje silný dlouhodobý růstový trend, ale potenciální pro nákupní příležitost po korekci. Důvodem pro HOLD je, že trh potřebuje vytvořit základnu před tím, než bude pokračovat v růstu nebo se objeví nová klesající hybnost."
+}

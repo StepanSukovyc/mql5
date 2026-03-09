@@ -1,0 +1,9 @@
+{
+  "symbol": "GBPSGD_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstový tlak na GBP a pokles trendu RSI pod hranicí neutrality svědčí za BUY. Nedostatek jasných signálů z MA je částečně kompenzováno pozitivním sentimentem RSI.",
+  "timestamp": "2026-03-09T04:54:38.455184+00:00",
+  "model": "deepseek-coder-v2"
+}

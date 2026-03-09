@@ -1,0 +1,9 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s následnou podporou RSI a MA sugerují potenciál pro růst. Nicméně, pokles v minulosti může být dalším signálem.",
+  "timestamp": "2026-03-09T03:16:43.388008+00:00",
+  "model": "deepseek-coder-v2"
+}

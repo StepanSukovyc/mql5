@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena XAUUSD klesá. Hodinové a 4-hodinové RSI ukazují přeprodanost, což naznačuje možnou korekci nahoru. Denní RSI je neutrální. Týdenní a měsíční RSI jsou v překoupené zóně, ale MA na vyšších timeframech jsou daleko pod aktuální cenou, což indikuje dlouhodobý uptrend, ale s potenciálem korigovat. Aktuální cena je pod denním MA, což naznačuje krátkodobý SELL signál. Poslední 1h a 4h svíčky naznačují silný pokles. Celkově převažuje krátkodobý SELL signál, s potenciálem HOLD pozice, dokud se situace nevyjasní."
+}

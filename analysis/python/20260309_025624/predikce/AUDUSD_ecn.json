@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "AUDUSD is currently trading at 0.69942. RSI values on shorter timeframes (1h, 4h, day) are below 45, indicating potential oversold conditions, however, there is continued selling pressure in the recent hourly candles. The weekly and monthly RSI are still relatively high, suggesting that the overall trend might still be bearish. The price is also below the moving averages on the 1h, 4h and day timeframes, further supporting a bearish outlook. Therefore, SELL has the highest probability, followed by HOLD, and then BUY. The most recent daily candle shows a continuation of the downtrend, closing near its low. This selling pressure needs to abate before considering a buy.  A hold position is reasonable to wait for more price confirmation. "
+}

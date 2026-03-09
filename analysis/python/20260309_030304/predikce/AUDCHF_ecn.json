@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Short-term indicators (1h, 4h RSI) suggest oversold conditions and potential for a bounce, but the overall trend, especially on the daily and weekly charts, appears bearish. The price is currently below the daily and 4h moving averages. Monthly RSI is low, but not yet in oversold territory, MA decreasing. Given the mixed signals, a HOLD position is reasonable, but a SELL position carries a slightly higher probability. Recent hourly candles confirm downtrend. BUY signal is the least probable."
+}

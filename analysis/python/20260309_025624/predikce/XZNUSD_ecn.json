@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technicky, price action naznačuje krátkodobý down trend. RSI na denním grafu je pod 50 a MA na denním grafu (3337.11) je nad aktuální cenou (3313.49) - SELL. Nicméně, RSI na týdenním grafu je relativně vysoko (66.9677) a MA na týdenním grafu (3184.8) je výrazně pod aktuální cenou. Dlouhodobý trend je tedy UP. Zvážil bych HOLD s částečným prodejem a čekal na potvrzení trendu."
+}

@@ -1,0 +1,9 @@
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové zabarvení svíček s omezeným rozpětím a nárůstem RSI indikuje silnou pozitivní tendenci. Nicméně, pokles MA signalizuje potenciální oslabení trendu.",
+  "timestamp": "2026-03-08T22:56:12.823951+00:00",
+  "model": "deepseek-coder-v2"
+}

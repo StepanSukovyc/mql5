@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "NZDCAD je v downtrendu. RSI na všech timeframes je pod 50, naznačuje přeprodanost, ale ne dostatečnou pro nákup. Cena je pod MA na všech timeframes, což potvrzuje downtrend. Zvážení prodeje, ale s ohledem na přeprodanost je vhodné nastavit stop-loss pro případný obrat. Obchodovat proti trendu je rizikove."
+}

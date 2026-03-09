@@ -1,0 +1,9 @@
+{
+  "symbol": "FANG_ecn",
+  "BUY": 60.0,
+  "SELL": 20.0,
+  "HOLD": 20.0,
+  "reasoning": "Zvýšení RSI a MA v posledních měsících indikuje silnou pozici. Nicméně nárůst cen z roku na rok je oslaben, což naznačuje nejistotu.",
+  "timestamp": "2026-03-09T04:43:07.849923+00:00",
+  "model": "deepseek-coder-v2"
+}

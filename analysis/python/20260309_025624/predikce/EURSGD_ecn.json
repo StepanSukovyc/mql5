@@ -1,0 +1,9 @@
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové signály z fundamentální analýzy a svíčkových formací naznačují stabilitu. RSI indikuje překoupenost, ale MA ukazuje silnou podporu. Kompromis mezi potenciálem růstu a rizikem.",
+  "timestamp": "2026-03-09T02:03:30.615269+00:00",
+  "model": "deepseek-coder-v2"
+}

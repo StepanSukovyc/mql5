@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 65.0,
   "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět, že cena může pokračovat v růstu, ale také existuje riziko nesouladu mezi cenou a trendem. Z tohoto důvodu doporučuji částečně držet pozici s nízkým rizikem pro ztrátu.",
-  "timestamp": "2026-03-08T21:50:29.111526+00:00",
+  "reasoning": "Riziko je spíše na straně poklesu s ohledem na nedávný pohyb směrem dolů a negativním RSI. MA ukazuje slabší trend.",
+  "timestamp": "2026-03-09T03:50:06.394613+00:00",
   "model": "deepseek-coder-v2"
 }

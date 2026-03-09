@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod MA na 1h, 4h a denním grafu, což naznačuje sestupný trend. RSI na 1h, 4h a denním grafu se nachází v neutrální zóně, avšak blíže k přeprodanému území. Na týdenním grafu je RSI překoupené, což naznačuje možnou korekci. Proto je SELL mírně preferován. HOLD je z důvodu absence měsíčních dat, které by doplnily celkový obraz. BUY se opírá o potenciální odraz od supportu vzhledem k blízkosti přeprodané zóny u RSI."
+}

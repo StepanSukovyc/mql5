@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI blízko překoupené úrovně (79.709), což naznačuje možnou korekci. Na 1h a 4h timeframech je RSI také relativně vysoko, ale ne v extrémní překoupené zóně. Cena je nad MA na kratších timeframech (1h, 4h, day, week), ale pod MA na měsíčním grafu, což naznačuje smíšený trend. Poslední denní svíčka je býčí, ale potřebujeme více potvrzení. Celkově je situace nejednoznačná. Existuje potenciál pro další růst (BUY), ale i pro korekci (SELL). HOLD doporučuji pro opatrnost do doby, než se situace vyjasní. Zohlednil jsem i aktuální cenu 21.185 a data svíček."
+}

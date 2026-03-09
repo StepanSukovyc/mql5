@@ -1,0 +1,9 @@
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme stabilitu s tendencí k růstu. Nicméně, svíčkové formace naznačují nejistotu.",
+  "timestamp": "2026-03-09T05:31:15.000062+00:00",
+  "model": "deepseek-coder-v2"
+}

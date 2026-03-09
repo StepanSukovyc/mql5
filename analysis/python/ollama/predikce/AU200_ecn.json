@@ -1,9 +1,9 @@
 {
   "symbol": "AU200_ecn",
   "BUY": 30.0,
-  "SELL": 45.0,
-  "HOLD": 25.0,
-  "reasoning": "Riziko je vyvážené mezi nákupem a držením, s mírnějším trendem k prodeji.",
-  "timestamp": "2026-03-08T21:45:16.287049+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezené v důsledku globálních ekonomických nepředvídatelností a nestabilitou trhu. Některé technické indikátory, jako je RSI, ukazuje na přečerpání nadhodnoty a potenciál pro korekci. Nicméně, podporující fondamentální analýza a stabilitu růstu v oblasti technologií, nedoporučuji silnou pozici ve prospěch poklesu.",
+  "timestamp": "2026-03-09T03:46:52.982417+00:00",
   "model": "deepseek-coder-v2"
 }

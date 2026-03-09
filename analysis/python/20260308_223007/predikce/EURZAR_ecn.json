@@ -1,0 +1,7 @@
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 35,
+  "SELL": 45,
+  "HOLD": 20,
+  "reasoning": "EURZAR_ecn currently trades at 19.33356. Shorter timeframes (1h, 4h) show RSI trending upwards but still indicating neither overbought nor oversold conditions. However, recent hourly candles show a downtrend. The weekly RSI is relatively low at 42.7, suggesting potential for upward movement, but the price is below the weekly MA (19.408775). The monthly timeframe shows RSI at 43.79 and the price below the MA (19.766725), indicating bearish momentum in the longer term. The daily timeframe shows RSI around 56.22, suggesting potential for further upward movement, and the price is above the daily MA (18.925101). Recent daily candles, however, indicate some indecision. Given the mixed signals across timeframes, a cautious approach is warranted. I lean towards selling due to downtrend in short term and price being above the daily Moving Average, while the longer term is more bearish. Risk allocation: Sell>Buy>Hold."
+}

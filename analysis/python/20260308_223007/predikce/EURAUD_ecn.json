@@ -1,0 +1,7 @@
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Based on the provided data, a bearish sentiment is indicated. The weekly RSI is significantly oversold at 19.70, but the price is still trending below the weekly MA of 1.7272. The daily RSI is also in oversold territory at 34.98 and the price is below the daily MA of 1.6646. The shorter term (1h, 4h) indicators are neutral, suggesting a potential consolidation or minor pullback, but the overall trend suggests further downside. Monthly MA is at 1.711248. Limited upward movement can be expected."
+}

@@ -1,0 +1,9 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět nárůst tlaku mezi cenami, ale zatímco BUY může být odmítnut kvůli nižším hodnotám v porovnání s předchozími vrcholy, SELL je založen na potenciálním poklesu po těchto úrovních.",
+  "timestamp": "2026-03-09T05:34:41.901863+00:00",
+  "model": "deepseek-coder-v2"
+}

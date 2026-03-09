@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Technická analýza ukazuje na klesající trend. Denní a 4H RSI indikují přeprodanost, ale MA na všech timeframech kromě měsíčního naznačují pokles. Měsíční RSI je neutrální. SELL má vyšší pravděpodobnost, BUY je rizikovější vzhledem k trendu. HOLD je opatrný přístup."
+}

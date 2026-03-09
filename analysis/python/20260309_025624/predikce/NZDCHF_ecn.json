@@ -1,0 +1,9 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA trendu je stále tendence k poklesu, ale fundamentální analýza svědčí o stabilitě. Předpokládám, že dojde k pozvolnému růstu.",
+  "timestamp": "2026-03-09T02:36:49.924577+00:00",
+  "model": "deepseek-coder-v2"
+}

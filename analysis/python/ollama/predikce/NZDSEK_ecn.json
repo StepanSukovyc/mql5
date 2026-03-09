@@ -1,0 +1,9 @@
+{
+  "symbol": "NZDSEK_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Předběžné hodnocení na základě růstových trendů v měnovém páru a nárůstu RSI indikátoru.",
+  "timestamp": "2026-03-09T05:14:34.571486+00:00",
+  "model": "deepseek-coder-v2"
+}

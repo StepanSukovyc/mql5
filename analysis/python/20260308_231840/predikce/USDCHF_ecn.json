@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "Short-term bearish signals prevail. 1H RSI is oversold (26.81), suggesting a potential bounce, but the overall trend on 1H, 4H and daily charts shows a recent downtrend. The price is below the daily MA, and significantly below the weekly and monthly MA, indicating a broader bearish context. Recent 1H candles are bearish. Monthly RSI is low at 30.84, which suggests that the price has potential to go up at long-term (hold), so a small percentage of buy is still possible. However, since 4H and daily charts are close to the same level, HOLD and BUY is at the same percentage."
+}

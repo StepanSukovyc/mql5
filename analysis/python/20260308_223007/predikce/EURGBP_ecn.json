@@ -1,0 +1,7 @@
+{
+  "symbol": "EURGBP_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Krátkodobě SELL (RSI pod 30 na 1h a 4h time framech naznačuje překoupenost a potenciál pro korekci dolů, cena pod MA na 1h, 4h i denním grafu). Dlouhodobější trend je nejistý (HOLD) s možností BUY (RSI na měsíčním grafu je 52 a cena je nad MA, ale potřebujeme další potvrzení). Riziko BUY je zvýšené kvůli silnému klesajícímu momentu v posledních dnech. Doporučuji sledovat, zda se cena udrží nad 0.86500."
+}

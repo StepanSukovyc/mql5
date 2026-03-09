@@ -1,0 +1,9 @@
+{
+  "symbol": "USDZAR_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Riziko je vyvážené mezi nákupem a držením vzhledem k pozitivnímu trendu RSI a MA. Nedostatečný pokles pro SELL.",
+  "timestamp": "2026-03-09T03:15:03.036009+00:00",
+  "model": "deepseek-coder-v2"
+}

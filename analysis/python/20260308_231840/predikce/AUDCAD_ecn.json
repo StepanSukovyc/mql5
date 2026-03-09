@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDCAD_ecn",
+  "BUY": 0.0,
+  "SELL": 100.0,
+  "HOLD": 0.0,
+  "reasoning": "Vysoké hodnoty RSI a pokles MA indikují silnou tendenci poklesu ceny.",
+  "timestamp": "2026-03-08T22:45:10.218161+00:00",
+  "model": "deepseek-coder-v2"
+}

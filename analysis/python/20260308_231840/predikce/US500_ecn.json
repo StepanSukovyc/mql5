@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "Na měsíčním grafu je RSI stále vysoko (69.09), ale klesá, což naznačuje potenciální oslabování býčího trendu. RSI na denním, 4H a 1H timeframech jsou poměrně nízko, blízko k přeprodané zóně, což by mohlo naznačovat potenciální odraz, ale celkový trend je spíše klesající. Cena je pod MA na všech timeframech kromě měsíčního, což ukazuje na downtrend. Důraz je kladen na SELL."
+}

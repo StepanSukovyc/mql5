@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na hodinovém grafu je RSI blízko překoupené zóně (69.49), ale cena je pod klouzavým průměrem (MA). Na 4H grafu je RSI také relativně vysoké (66.08) a cena je nad MA. Denní RSI je neutrální (47.56), ale cena je pod MA. Týdenní RSI je pod 40 (39.71), což naznačuje potenciál pro růst, ale cena je stále nad MA. Měsíční RSI je také neutrální (48.31). Celkově data naznačují mírný medvědí sentiment, proto vyšší riziko pro SELL než BUY, ale HOLD je rozumná strategie vzhledem k rozporuplnosti signálů."
+}

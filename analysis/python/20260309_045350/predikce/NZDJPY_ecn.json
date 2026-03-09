@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "NZDJPY se pohybuje v konsolidační fázi. RSI na denním grafu je neutrální, ale cena je nad MA, naznačující mírný býčí sentiment. Nicméně, poslední svíčky na 1H a 4H timeframech ukazují na pokles a RSI osciluje kolem 50, což naznačuje nerozhodnost. RSI na týdenním grafu je na 64.5, což naznačuje blížící se překoupenost. Celkově, vzhledem k nejistotě na nižších timeframech a blížící se překoupenosti na týdenním grafu, SELL má mírně vyšší pravděpodobnost než BUY. HOLD je rozumná strategie pro vyčkání na potvrzení trendu."
+}

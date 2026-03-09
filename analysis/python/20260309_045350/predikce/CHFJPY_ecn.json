@@ -1,0 +1,9 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a pokles RSI oproti minulosti indikují riziko poklesu kurzu. Nicméně, MA ukazuje stabilitu, což vede k doporučení držet pozici.",
+  "timestamp": "2026-03-09T04:08:11.468720+00:00",
+  "model": "deepseek-coder-v2"
+}

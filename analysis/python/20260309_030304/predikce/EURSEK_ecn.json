@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSEK_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena EURSEK je 10.69065. Na měsíčním a týdenním grafu je RSI pod 40, což naznačuje překoupenost. MA na delších časových rámcích (týdenní a měsíční) jsou výrazně nad současnou cenou, což ukazuje na klesající trend. Denní RSI je sice na 56.76, ale cena se pohybuje pod denním MA (10.64). Na 4h grafu RSI lehce nad 50, na hodinovém také. Poslední 4h svíčka je ale medvědí. Vzhledem k převládajícímu klesajícímu trendu na vyšších časových rámcích a relativně neutrálním indikátorům na kratších časových rámcích, má 'SELL' větší šanci než 'BUY'. Proto navrhuji: SELL: 45%, BUY: 30%, HOLD: 25%."
+}

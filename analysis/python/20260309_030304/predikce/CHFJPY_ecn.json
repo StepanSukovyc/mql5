@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "CHFJPY is showing mixed signals. Higher timeframe (weekly/monthly) RSI and MA suggest bullish momentum, but recent hourly data shows volatility and potential short-term pullback. Daily RSI is around 62, indicating a potential for further upside but also risk of overbought conditions. Therefore, HOLD is recommended with slight leaning towards BUY."
+}

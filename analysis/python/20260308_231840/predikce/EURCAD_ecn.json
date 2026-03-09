@@ -1,0 +1,9 @@
+{
+  "symbol": "EURCAD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a očekávání klesajícího trendu může vést k poklesu ceny. Nicméně technická analýza s RSI a MA indikátory naznačuje opravu, což doporučuje částečnou expozici na růst.",
+  "timestamp": "2026-03-08T22:58:00.434255+00:00",
+  "model": "deepseek-coder-v2"
+}

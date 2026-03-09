@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Smíšené signály. Krátkodobě (1h, 4h) je RSI překoupené, signalizuje možnou korekci. Denní RSI je neutrální. Týdenní RSI je pod 50, signalizuje potenciál růstu. Cena je nad denním MA, ale pod týdenním MA.  Poslední den vykazuje bullish momentum.  Celkově vidím vyšší pravděpodobnost růstu než poklesu, ale překoupenost na menších časových rámcích indikuje riziko korekce. Proto alokace: Buy(40%), Sell(30%) a Hold(30%)."
+}

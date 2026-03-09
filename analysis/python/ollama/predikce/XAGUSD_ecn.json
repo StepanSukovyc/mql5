@@ -1,0 +1,9 @@
+{
+  "symbol": "XAGUSD_ecn",
+  "BUY": 20.0,
+  "SELL": 60.0,
+  "HOLD": 20.0,
+  "reasoning": "Rozdělení rizikového hodnocení je založeno na analýze svíčkových formací a indikátorů RSI a MA. Formace svíček naznačuje pokračující silný pohyb ceny, ale některé signály ze strategie RSI a MA jsou v konfliktu s tímto trendem. Toto rizikové hodnocení reflektuje nejistotu trhu a doporučuje diverzifikaci investice.",
+  "timestamp": "2026-03-09T03:20:06.423816+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI překoupené (70.41), což naznačuje možný obrat. Měsíční graf RSI je sice neutrální, ale cena je pod MA, což vytváří mírný tlak na SELL. Krátkodobě (1h, 4h) je patrný rostoucí trend, ale s ohledem na dlouhodobější překoupenost a polohu ceny pod MA na měsíčním grafu převažuje SELL. Držení pozice (HOLD) je rozumné pro ty, kteří již pozici mají a čekají na potvrzení trendu."
+}

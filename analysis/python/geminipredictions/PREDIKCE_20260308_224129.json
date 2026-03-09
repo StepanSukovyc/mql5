@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "AUDCAD_ecn",
+  "action": "SELL",
+  "lot_size": 0.02,
+  "take_profit": 0.89,
+  "reasoning": "AUDCAD má silný signál k prodeji (65%). Nemám otevřenou pozici v AUDCAD. Vzhledem k celkovému stavu účtu a marži, lot 0.02 je rozumná velikost. Dle predikce, RSI a MA indikují potenciální změnu trendu k poklesu ceny. Take profit je nastaven realisticky s ohledem na potenciální pohyb a transakční náklady (0.2 USD)."
+}

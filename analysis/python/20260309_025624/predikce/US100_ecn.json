@@ -1,0 +1,9 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 25.0,
+  "SELL": 50.0,
+  "HOLD": 25.0,
+  "reasoning": "Riziko je rozložené mezi nákup a držení v důsledku volatilního trhu, s malou předpokládanou změnou směrem nahoru.",
+  "timestamp": "2026-03-09T02:50:05.308967+00:00",
+  "model": "deepseek-coder-v2"
+}

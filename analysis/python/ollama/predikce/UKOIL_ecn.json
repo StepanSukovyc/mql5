@@ -1,0 +1,9 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové trendy ukazují na další růst cen, ale překonání klouzavých průměrů signalizuje oslabení trendu.",
+  "timestamp": "2026-03-09T05:22:54.321806+00:00",
+  "model": "deepseek-coder-v2"
+}

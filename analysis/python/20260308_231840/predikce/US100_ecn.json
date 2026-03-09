@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Krátkodobý výhled je spíše medvědí. RSI na 1h a 4h timeframe indikuje, že trh je blízko překoupení (oversold), avšak denní a týdenní timeframe ukazují klesající trend. Cena je pod MA na 1h, 4h, denním i týdenním timeframe. Měsíční timeframe je stále býčí. Doporučuje se vyčkat na potvrzení trendu."
+}

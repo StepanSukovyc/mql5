@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "EURCHF is showing strong bearish signals. RSI is oversold on multiple timeframes (1H, 4H, Day, Week, Month), suggesting a potential bounce. However, the price is consistently below its moving averages across all timeframes, indicating a strong downtrend. The recent price action in the 1H timeframe shows a continued downward movement. The spread increase on 2026-03-09T00:00:00+00:00 suggests low liquidity and potential volatility. Therefore, a SELL position carries a higher probability. HOLD is advised to a small extend due to oversold conditions which often lead to corrections."
+}

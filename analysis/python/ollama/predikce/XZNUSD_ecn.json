@@ -1,0 +1,9 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s mírně rostoucím trendem. Svíčkové formace a RSI indikují nejistotu s určitými signály k nákupu, ale hlavní tendence je střednědobý pokles.",
+  "timestamp": "2026-03-09T03:33:22.892074+00:00",
+  "model": "deepseek-coder-v2"
+}

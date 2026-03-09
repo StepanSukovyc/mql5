@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Na denním grafu je RSI hluboko v přeprodané zóně (26.77), ale cena stále klesá, což naznačuje silný downtrend. MA na všech časových rámcích kromě měsíčního jsou nad aktuální cenou. Historická data ukazují klesající trend z minulých měsíců. Proto doporučuji spíše SELL. RSI na měsíčním grafu je neutrální, což může znamenat klidnější období, pokud se současný trend neudrží a tak opatrně s HOLD a BUY."
+}

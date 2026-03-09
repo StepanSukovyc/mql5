@@ -1,0 +1,9 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růst cen měny je podporován silnou pozitivní divergencí RSI a vzestupem klouzavých průměrů (MA), ale také narušením trendu na grafu s vysokým objemem, což naznačuje odraz. Předběžná analýza ukazuje nejistotu v rámci střednědobého trendu.",
+  "timestamp": "2026-03-09T05:19:34.609301+00:00",
+  "model": "deepseek-coder-v2"
+}

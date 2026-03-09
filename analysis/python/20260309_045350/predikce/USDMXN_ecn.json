@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 50,
+  "SELL": 30,
+  "HOLD": 20,
+  "reasoning": "Krátkodobě překoupené (RSI na 1h, 4h a denním grafu blízko 70 nebo nad). MA na týdenním a měsíčním grafu naznačují možný odpor. Poslední den rostoucí, ale data jsou fragmentovaná a neúplná (absence víkendových dat). Fundamentálně nutné sledovat vývoj úrokových sazeb a inflaci v obou zemích. Proto rozložení mezi BUY, SELL a HOLD."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "The FRA40_ecn is currently showing bearish signals. The price is below the moving averages on the 1h, 4h, and daily timeframes, indicating a downtrend. The RSI on the 4h and daily charts is also below 35, suggesting oversold conditions, but not sufficiently low to ignore the overall bearish momentum. While the monthly timeframe shows the price above its MA, the recent price action outweighs this. The recent daily candles confirm strong selling pressure. Given this confluence of bearish signals, a SELL position appears to be the most appropriate course of action, however, oversold conditions and monthly uptrend indicate caution, therefore SELL has only a moderate advantage."
+}

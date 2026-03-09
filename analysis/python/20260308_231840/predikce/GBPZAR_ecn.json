@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI 58, což je neutrální, ale blíží se překoupené zóně. Týdenní RSI je 46, také neutrální. Měsíční RSI je 43, což naznačuje mírný pokles. Cena je pod měsíčním MA, ale nad denním a 4H MA. Poslední denní svíčka je medvědí. Vzhledem k těmto smíšeným signálům a klesajícímu RSI na vyšších timeframe, odhaduji, že prodej má o něco vyšší pravděpodobnost než nákup, proto SELL 40%. BUY a HOLD jsou si rovné - 30%."
+}

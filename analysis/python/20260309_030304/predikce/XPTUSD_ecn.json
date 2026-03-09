@@ -1,0 +1,7 @@
+{
+  "symbol": "XPTUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Krátkodobě indikátory RSI (1h, 4h, day) ukazují na přeprodanost, což by mohlo vést k menší korekci nahoru (BUY). Nicméně trend je klesající (klesající MA na 1h, 4h, day) a měsíční RSI je stále poměrně vysoko, což indikuje potenciál pro další pokles (SELL). Protože existuje možnost korekce a týdenní RSI není tak extrémní, část pozice ponechávám jako HOLD."
+}

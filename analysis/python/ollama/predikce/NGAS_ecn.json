@@ -1,0 +1,9 @@
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažují signály pro prodej založené na technických indikátorech RSI a MA. Nicméně, fondamentální analýza naznačuje stabilitu s růstovými perspektivami.",
+  "timestamp": "2026-03-09T05:06:15.291488+00:00",
+  "model": "deepseek-coder-v2"
+}

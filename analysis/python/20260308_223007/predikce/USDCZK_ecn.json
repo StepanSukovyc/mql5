@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1h timeframe je RSI pod 40, což značí, že by mohl přijít menší odraz nahoru, nicméně 4h i denní RSI se blíží překoupené zóně. Měsíční MA je výrazně nad cenou a denní svíčky naznačují klesající trend. Celkově převládá spíše prodejní tlak. Hold pozice je vzhledem k aktuální volatilitě měnového páru."
+}

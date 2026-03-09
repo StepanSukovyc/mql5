@@ -1,0 +1,9 @@
+{
+  "symbol": "EURSEK_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Převažují silné signály pro pokles z důvodu vysokých úrovní RSI a negativní divergence. Nízká pohyblivost MA indikuje slabší tlak cen.",
+  "timestamp": "2026-03-08T23:16:06.426632+00:00",
+  "model": "deepseek-coder-v2"
+}

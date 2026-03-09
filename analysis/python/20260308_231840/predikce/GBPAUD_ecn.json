@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje na smíšené signály. Krátkodobé indikátory (1H, 4H) naznačují rostoucí moment, ale denní a týdenní RSI jsou nízko, MA na vyšších timeframech ukazují na klesající trend.  Nejlepší je vyčkat na silnější potvrzení směru. Zvláště silné je přeprodání na týdenním grafu (RSI 23.36), které by mohlo vést ke korekci směrem nahoru, ale zatím je krátké."
+}

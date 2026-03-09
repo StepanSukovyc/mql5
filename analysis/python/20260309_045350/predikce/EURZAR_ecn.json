@@ -1,0 +1,9 @@
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 25.0,
+  "SELL": 50.0,
+  "HOLD": 25.0,
+  "reasoning": "Kombinace nižších hodnot RSI a MA s rostoucím tlakem směrem nahoru indikuje nejistotu a přijetí.",
+  "timestamp": "2026-03-09T04:41:28.723557+00:00",
+  "model": "deepseek-coder-v2"
+}

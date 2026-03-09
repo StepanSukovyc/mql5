@@ -1,0 +1,7 @@
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Dlouhodobý downtrend (týdenní RSI 18.99), denní RSI 32.94 naznačuje možný odraz, ale MA na všech timeframes kromě 1H a 4H jsou výše, indikující spíše pokračování downtrendu. Aktuální cena pod MA na denním, týdenním a měsíčním grafu. Vyčkávám na potvrzení obratu."
+}

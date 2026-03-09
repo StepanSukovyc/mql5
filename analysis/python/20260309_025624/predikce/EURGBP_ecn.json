@@ -1,0 +1,7 @@
+{
+  "symbol": "EURGBP_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Na 4H timeframe je RSI v silně přeprodané zóně (23.48), což naznačuje možnost odrazu. Nicméně, MA na všech timeframech (1H, 4H, Day, Week) kromě měsíčního je nad aktuální cenou, což naznačuje downtrend. RSI na denním a týdenním timeframe je pod 50, což potvrzuje potenciální bear trend. Celkově převládá SELL signál, ale přeprodanost na 4H může vést k dočasné korekci (HOLD)."
+}

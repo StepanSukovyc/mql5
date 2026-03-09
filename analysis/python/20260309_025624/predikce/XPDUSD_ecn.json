@@ -1,0 +1,7 @@
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena XPDUSD_ecn je aktuálně 1615.05. RSI na 1h, 4h a denním timeframe naznačují přeprodané podmínky (pod 30), což by mohlo vést k krátkodobé korekci nahoru. Nicméně, cena je pod MA na 1h, 4h a denním timeframe, což naznačuje pokračující klesající trend. Týdenní RSI je 52.72, což je neutrální. Měsíční RSI je 64.85, což signalizuje že trh má sílu, ale je blízko překoupené zóně. S ohledem na to, že cena prolomila klíčovou úroveň podpory a stále klesá, dáváme přednost prodeji s opatrným držením a možností nákupu při silnějším obratu trendu."
+}

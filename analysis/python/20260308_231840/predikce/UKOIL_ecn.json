@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 60,
+  "SELL": 15,
+  "HOLD": 25,
+  "reasoning": "UKOIL_ecn vykazuje silný uptrend. RSI na denní a týdenní bázi signalizuje překoupenost, ale na měsíční bázi je stále prostor pro růst. MA na všech timeframech jsou pod cenou. Riziko korekce existuje, ale momentálně trh táhne silný býčí sentiment."
+}

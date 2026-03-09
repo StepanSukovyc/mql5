@@ -1,0 +1,9 @@
+{
+  "symbol": "GBPSGD_ecn",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Zhoršení makroekonomických prognóz pro Velkou Británii a zlepšení v předpovědích pro Singapur může oslabovat libru. Technické indikátory, jako je RSI pod 50 a MA směřující dolů, signalizují pokles.",
+  "timestamp": "2026-03-09T02:20:14.097646+00:00",
+  "model": "deepseek-coder-v2"
+}

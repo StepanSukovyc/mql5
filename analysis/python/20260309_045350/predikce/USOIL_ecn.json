@@ -1,0 +1,7 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 15,
+  "SELL": 75,
+  "HOLD": 10,
+  "reasoning": "USOIL_ecn je silně překoupený na všech časových rámcích (RSI nad 80, často i nad 90). I přes rostoucí MA na nižších TF, extrémní hodnoty RSI naznačují blížící se korekci. Na denním, týdenním a měsíčním grafu se již cena značně vzdálila od MA. Dnešní prudký nárůst ceny (vysoký gap) naznačuje možnou vyčerpanost trendu. Navíc svíčková formace na 1H a 4H TF, po takovém růstu, naznačuje blížící se obrat. Ačkoliv dlouhodobý trend je zřejmě stále rostoucí, krátkodobá korekce je velmi pravděpodobná."
+}

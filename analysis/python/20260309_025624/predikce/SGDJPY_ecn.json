@@ -1,0 +1,9 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 40.0,
+  "SELL": 50.0,
+  "HOLD": 10.0,
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu na trhu. Nicméně, základní trend pozitivně diverguje s RSI, což podporuje BUY.",
+  "timestamp": "2026-03-09T02:45:06.491893+00:00",
+  "model": "deepseek-coder-v2"
+}

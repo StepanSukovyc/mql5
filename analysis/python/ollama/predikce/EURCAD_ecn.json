@@ -1,0 +1,9 @@
+{
+  "symbol": "EURCAD_ecn",
+  "BUY": 30.0,
+  "SELL": 40.0,
+  "HOLD": 30.0,
+  "reasoning": "Zohledňuji svíčkovou formací na vyšších časových úrovních a stabilitu RSI nad hladinou překoupenosti. Historické ceny ukazují potenciál růstu, ale také riziko v současné době silným pohybem.",
+  "timestamp": "2026-03-09T04:19:46.801159+00:00",
+  "model": "deepseek-coder-v2"
+}

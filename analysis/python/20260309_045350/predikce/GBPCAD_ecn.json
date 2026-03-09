@@ -1,0 +1,9 @@
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zohlednil jsem fondamentální analýzu s tendencí klesajícího trhu GBP a růstu trhu CAD. Svíčkové formace a indikátory jako RSI a MA podporují slabší pohyb cen, což doporučuje nejistou pozici.",
+  "timestamp": "2026-03-09T04:48:02.703515+00:00",
+  "model": "deepseek-coder-v2"
+}

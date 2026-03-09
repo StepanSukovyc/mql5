@@ -1,0 +1,7 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 20,
+  "SELL": 65,
+  "HOLD": 15,
+  "reasoning": "USOIL_ecn je překoupený na většině timeframe (RSI). Na denní a týdenní bázi se RSI nachází v extrémních hodnotách (88.78 a 86.08), což naznačuje blížící se korekci. Cena je také výrazně nad MA na všech timeframe, což dále podporuje argument pro korekci. Recentní silný uptrend, viditelný z denních a týdenních svíček, by se mohl dočasně zastavit a zkonsolidovat. Proto doporučuji spíše SELL než BUY, ale z důvodu potencionálního prorůstu ceny a nutnosti otestování supportů podávají data HOLD."
+}

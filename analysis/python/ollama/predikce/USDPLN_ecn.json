@@ -1,0 +1,9 @@
+{
+  "symbol": "USDPLN_ecn",
+  "BUY": 60.0,
+  "SELL": 20.0,
+  "HOLD": 20.0,
+  "reasoning": "Vysoká hodnota RSI a MA signalizují silnou pozici. Nedostatek signálu pro SELL z důvodu stability na vyšších hladinách.",
+  "timestamp": "2026-03-09T03:10:05.401026+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním a týdenním grafu RSI pod 40 signalizuje potenciální přeprodanost, ale MA na těchto timeframech jsou stále vysoko nad aktuální cenou, což naznačuje dlouhodobý downtrend. Denní RSI je neutrální, ale cena je nad MA, což dává malý signál k nákupu. 1H a 4H RSI také nejsou ani v přeprodané, ani překoupené zóně. Poslední denní svíčka je bearish. Proto upřednostňuji SELL."
+}

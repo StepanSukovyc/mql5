@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "The weekly RSI is in overbought territory (77.36), suggesting a potential pullback. The 1h and 4h RSI are below 50, indicating bearish momentum in the short-term. The current price is below the 4h MA, further supporting a sell. However, the daily RSI is above 50 and the price is above the daily MA, so HOLD is also viable. A significant gap down on March 9th creates uncertainty and a need for caution."
+}

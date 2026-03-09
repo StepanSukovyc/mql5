@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu se RSI pohybuje kolem 45, což nenaznačuje silný trend. Cena je pod denním MA. Na týdenním grafu je RSI vysoko (69), což naznačuje potenciální překoupenost. Zvažujeme prodejní pozici s ohledem na potenciální korekci po předchozím růstu. Na hodinovém a 4h grafu se RSI pohybuje pod 40, což poukazuje na možný prodejní tlak. Nedostatek dat pro měsíční graf omezuje dlouhodobější hodnocení."
+}

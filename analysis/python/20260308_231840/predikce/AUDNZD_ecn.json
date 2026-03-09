@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růst cenových trendů a podporované MA ukazují na pokračující růst. Nedostatek jasných signálů pro nákup ale zvyšuje riziko v případě poklesu.",
+  "timestamp": "2026-03-08T22:50:30.789048+00:00",
+  "model": "deepseek-coder-v2"
+}

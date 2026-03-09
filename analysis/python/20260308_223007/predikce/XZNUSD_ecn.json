@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI 48.59, což je neutrální. Cena je pod denním MA (3315.84 vs. 3340.45). Na týdenním grafu je RSI 67.47 a cena nad MA (3315.84 vs. 3170.30). 1H a 4H graf ukazují RSI kolem 50-57 a cena se pohybuje kolem MA.  Vzhledem k této nejednoznačnosti indikátorů na různých timeframech převládá názor, že by mohlo dojít k dalšímu poklesu. HOLD je relevantní kvůli rostoucímu trendu na week grafu."
+}

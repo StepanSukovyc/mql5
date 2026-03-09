@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFHUF_ecn",
+  "BUY": 60,
+  "SELL": 20,
+  "HOLD": 20,
+  "reasoning": "Cena roste, RSI na denní bázi je překoupené (76.9), ale trend je silný. MA na všech timeframes roste. Poslední denní svíčka ukazuje na pokračování růstu. Nicméně je třeba vzít v úvahu potenciální korekci kvůli překoupenému RSI na denním grafu, proto HOLD má 20%. Objem se zdá relativně vysoký, což potvrzuje sílu trendu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 25,
+  "SELL": 60,
+  "HOLD": 15,
+  "reasoning": "Na denním, 4H i hodinovém grafu je RSI v pásmu přeprodanosti. Nicméně cena se pohybuje pod MA na všech timeframech kromě měsíčního, což naznačuje silný klesající trend. Měsíční MA by mohl fungovat jako support. Kombinace přeprodanosti a převládajícího klesajícího trendu naznačuje možnost pokračování poklesu, ale s potenciální korekcí nahoru. Vzhledem k propadu o víkendu bych preferoval SELL. Proto SELL (60%), BUY (25%) pro potenciální korekci, a HOLD (15%) pokud by se situace stabilizovala."
+}

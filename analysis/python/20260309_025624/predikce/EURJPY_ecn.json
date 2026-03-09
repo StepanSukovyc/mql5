@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. Měsíční a týdenní RSI jsou nad 50, což naznačuje býčí trend v dlouhodobém horizontu, ale denní, 4H a 1H RSI jsou pod 50, signalizují potenciální krátkodobý pokles. Cena se aktuálně pohybuje kolem denní MA, indikuje nejistotu. Vzhledem k nejnovějším hodinovému svíčkám, které vykazují klesající trend, SELL má mírnou převahu, ale HOLD je rozumnou strategií vzhledem ke smíšeným signálům a nedostatečnému jasnému trendu. BUY je považován za rizikovější v krátkodobém horizontu."
+}

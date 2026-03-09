@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "CADJPY je překoupený na většině časových rámců (RSI nad 70 na 1h, 4h a denním grafu).  Navíc, cena je nad klouzavým průměrem (MA) na všech časových rámcích, což naznačuje uptrend, ale překoupenost naznačuje potenciální korekci.  Na měsíčním grafu je RSI neutrální (57), ale MA je výrazně pod cenou, což naznačuje dlouhodobější potenciál pro růst, ale krátkodobě je pravděpodobná korekce. Riziko buy je vyšší kvůli překoupenosti, sell je podpořen překoupeností a možnou korekcí a hold je opodstatněný kvůli dlouhodobému růstovému potenciálu."
+}

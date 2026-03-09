@@ -1,0 +1,7 @@
+{
+  "symbol": "AU200_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Na základě technické analýzy, RSI je silně přeprodaný na 1h, 4h i denním grafu. Cena je pod MA na všech timeframech kromě měsíčního (kde je jen mírně nad). Nedávný pokles ceny je silný a naznačuje downtrend. Doporučuji SELL s ohledem na možnost krátkodobého odrazu, proto malé procento BUY a HOLD."
+}

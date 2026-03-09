@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "On the hourly timeframe, the RSI is below 50, suggesting a slight downward momentum. The price is above the hourly MA, however. On the daily timeframe, RSI is above 60, suggesting bullish momentum, but the weekly MA is above the current price. The monthly timeframe shows an RSI below 50 and the price below the MA indicating bearish momentum. Taking everything into account, it would be best to sell or hold off due to strong downward pressure."
+}

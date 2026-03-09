@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod MA na všech timeframech kromě týdenního, RSI denního a 4H timeframe jsou v klesajícím trendu a pod 50. Měsíční RSI je kolem 50, indikuje to, že momentálně je pár v neutrální pozici. Z krátkodobého hlediska, dokud se cena nedostane nad MA, preferuji SELL pozice, proto vyšší procento."
+}

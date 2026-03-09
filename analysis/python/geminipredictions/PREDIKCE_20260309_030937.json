@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "GBPSGD_ecn",
+  "action": "SELL",
+  "lot_size": 0.05,
+  "take_profit": 1.6700,
+  "reasoning": "GBPSGD_ecn má silné SELL doporučení (75%). Zhoršené makroekonomické prognózy pro Velkou Británii a zlepšení v předpovědích pro Singapur můžou oslabovat libru. Technické indikátory, jako je RSI pod 50 a MA směřující dolů, signalizují pokles. Vzhledem k diverzifikaci portfolia (nemám GBPSGD v otevřených pozicích) a aktuálnímu stavu účtu (margin_free 522.04 USD) doporučuji SELL pozici s lot_size 0.05. Poplatek za transakci bude 0.5 USD. Take profit je nastaven na 1.6700, aby byla zajištěna dostatečná potenciální ziskovost s ohledem na swingový styl obchodování a transakční náklady."
+}

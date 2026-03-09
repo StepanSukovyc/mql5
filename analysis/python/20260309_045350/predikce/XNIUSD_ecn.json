@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Cena XNIUSD_ecn je pod klesajícími MA na 1h, 4h a denním grafu, což naznačuje downtrend. RSI na 1h je v přeprodané zóně, což může vést k dočasné korekci nahoru, ale celkový sentiment je spíše SELL.  Nicméně, na týdenním grafu je RSI neutrální a MA roste, což ukazuje na potenciál pro růst v dlouhodobém horizontu. Velký pokles ceny během poslední 4h svíčky a denní svíčky naznačuje silný prodejní tlak. Z dostupných dat je taktický SELL nejvíce pravděpodobný."
+}
