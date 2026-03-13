@@ -1,9 +1,9 @@
 {
   "symbol": "USDZAR_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezené v důsledku negativních fundamentálních faktorů a slabým supportem svíčkovými formacemi. Technická analýza ukazuje signály pro pokles.",
-  "timestamp": "2026-03-09T05:50:06.452683+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Předběžné hodnocení na základě fundamentálních faktorů a technických indikátorů ukazuje na nejistotu s rozhodnutím BUY, přičemž vyšší pravděpodobnost poklesu je v současné fázi silnější.",
+  "timestamp": "2026-03-13T15:42:20.210243+00:00",
   "model": "deepseek-coder-v2"
 }

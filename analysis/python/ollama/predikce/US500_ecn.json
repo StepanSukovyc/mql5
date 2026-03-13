@@ -1,9 +1,9 @@
 {
   "symbol": "US500_ecn",
-  "BUY": 30.0,
-  "SELL": 40.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové trendy jsou slabší, ale nárust RSI a MA signalizují opravu. Současný stav je nejistý.",
-  "timestamp": "2026-03-09T05:27:55.090001+00:00",
+  "BUY": 20.0,
+  "SELL": 60.0,
+  "HOLD": 20.0,
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nárůst volatility s rostoucím indexem ukazuje na potenciální nesrovnalosti v ekonomice.",
+  "timestamp": "2026-03-13T15:11:24.435443+00:00",
   "model": "deepseek-coder-v2"
 }

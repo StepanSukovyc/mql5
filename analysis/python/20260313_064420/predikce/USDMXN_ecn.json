@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "USDMXN is currently showing mixed signals. Shorter timeframes (1H, 4H) indicate upward momentum with RSI above 60 and price above MA, suggesting potential for further gains. However, daily RSI is also above 60, approaching overbought territory. Weekly RSI is neutral and Monthly MA is significantly higher than current price indicating long term downtrend. Considering this conflicting signals and limited data, it is suggested HOLDing with a slight bias to BUY as there is potential for continuation of short term upward trend, which might be short lived. SELL rating is based on the possibility of rejection at overbought zones or reversal due to prevailing long term downward trend."
+}

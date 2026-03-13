@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 50,
+  "SELL": 20,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI v překoupené zóně (72.4), což naznačuje potenciální korekci. Na druhou stranu, MA na denním a týdenním grafu naznačují rostoucí trend. Na měsíčním grafu je MA výše než současná cena, což naznačuje potenciální odpor. Hodinový graf ukazuje RSI na 65.23, což naznačuje, že se blíží překoupené zóně a může se pohybovat do strany, dokud se nenastaví korekce. BUY a HOLD jsou pravděpodobnější scénáře s ohledem na rostoucí trend, ale nelze vyloučit korekci, proto je SELL stále relevantní možnost."
+}

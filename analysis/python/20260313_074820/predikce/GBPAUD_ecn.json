@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Na týdenním a denním grafu je RSI v přeprodané oblasti (21.05, 37.33). Cena je pod klouzavým průměrem (MA) na denním, týdenním i měsíčním grafu, což naznačuje downtrend. Na 1h grafu je RSI 65.93 a cena nad MA, což může naznačovat krátkodobý býčí pohyb, ale celkový trend je spíše medvědí. Preferuji SELL, protože indikátory na vyšších časových rámcích naznačují downtrend."
+}

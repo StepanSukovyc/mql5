@@ -1,0 +1,7 @@
+{
+  "symbol": "XPBUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena XPBUSD_ecn je pod MA na všech časových rámcích (1h, 4h, day, week), RSI indikuje, že aktivum není překoupené ani přeprodané, nicméně denní a týdenní RSI se blíží přeprodané zóně. Nedostatek dat pro měsíční timeframe znemožňuje kompletní fundamentální analýzu. Vzhledem k downtrendu a tlaku MA doporučuji SELL, ale s ohledem na potenciální korekci (RSI) ponechávám část na HOLD a malou část na BUY pro případ silného odrazu."
+}

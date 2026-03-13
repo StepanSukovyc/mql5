@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Denní a týdenní RSI jsou v překoupené zóně (84.4, 84.0), což naznačuje potenciální korekci. 1h a 4h RSI jsou neutrální (61.3, 58.8). Cena je nad denním MA (80.4), týdenním MA (68.4) a měsíčním MA (71.7), ale pod 1H MA (99.4). Silný nárůst ceny v posledním měsíci, ale krátkodobě se zdá, že momentum slábne. Celkově opatrně spíše SELL, ale je potřeba sledovat další vývoj."
+}

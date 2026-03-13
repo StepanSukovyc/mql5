@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "AUDNZD is overbought on higher timeframes (Day, Week, Month - RSI > 70). While the 4H RSI is nearing overbought territory, the 1H RSI is neutral. Recent 1H candle data shows fluctuating price action and failing to maintain upwards momentum (closing prices relatively flat). There is a higher probability for a short-term correction/reversal to the downside. Holding might be an option but momentum and overbought conditions favour selling."
+}

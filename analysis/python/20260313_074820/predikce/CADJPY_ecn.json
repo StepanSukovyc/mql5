@@ -1,0 +1,9 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 30.0,
+  "SELL": 45.0,
+  "HOLD": 25.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují silnou pozici, ale zároveň je třeba vzít v úvahu volatilitu trhu.",
+  "timestamp": "2026-03-13T07:16:35.971584+00:00",
+  "model": "deepseek-coder-v2"
+}

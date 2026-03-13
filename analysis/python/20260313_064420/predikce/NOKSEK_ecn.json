@@ -1,0 +1,7 @@
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na základě dat: RSI je překoupené na denních a týdenních grafech, což naznačuje potenciální pullback (SELL). Nicméně, měsíční RSI je neutrální (HOLD) a cena je nad MA na všech timeframech, což naznačuje uptrend (BUY). Důvodem proč nedávám vyšší procento BUY je malý počet svíček v datech, takže nemám dostatečné množství dat na určení formace."
+}

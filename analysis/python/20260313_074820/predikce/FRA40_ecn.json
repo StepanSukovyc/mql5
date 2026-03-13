@@ -1,0 +1,7 @@
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "FRA40_ecn je v klesajícím trendu. Denní RSI na 32.62 naznačuje, že index je blízko přeprodané zóně, ale ještě ne v ní. MA na všech časových rámcích s výjimkou měsíčního je nad aktuální cenou, což poukazuje na odpor. Na 1H a 4H je RSI mírně pod 50, což nepodporuje silný nákupní signál. S ohledem na tyto faktory, SELL má vyšší pravděpodobnost úspěchu."
+}

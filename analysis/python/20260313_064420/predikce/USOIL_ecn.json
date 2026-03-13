@@ -1,0 +1,7 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "USOIL_ecn is currently trading at 95.707. The weekly and daily RSI indicate overbought conditions (83.13 and 78.82 respectively), suggesting a potential pullback. However, the monthly RSI at 64.93 indicates further upside potential. The hourly RSI also signals overbought conditions (71.11). The Moving Averages show a steady upward trend, but the recent price action suggests consolidation. Given the mixed signals, I recommend a cautious approach with a slight bias towards selling due to short-term overbought conditions. Holding is also a viable option to observe further price action."
+}

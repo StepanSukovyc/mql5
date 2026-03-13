@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením finanční situace v Evropské unii a Mexiku. RSI indikuje přeprodanost s možností odrazu.",
-  "timestamp": "2026-03-09T04:30:00.401197+00:00",
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale fundamentální analýza ukazuje silnou podporu na úrovni 1.8600, což by mohlo vést k obnovení růstu.",
+  "timestamp": "2026-03-13T17:12:18.184502+00:00",
   "model": "deepseek-coder-v2"
 }

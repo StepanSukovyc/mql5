@@ -1,9 +1,9 @@
 {
   "symbol": "EURCZK_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět slabost v růstových trendech. Nedávné svíčkové formace naznačují pokles cen, což podporuje SELL.",
-  "timestamp": "2026-03-09T04:23:22.997788+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme nárůst indikátorů, což naznačuje potenciální zlepšení. Nicméně, cenový graf ukazuje složitou situaci s mnoho svíček, které nejsou jasně orientovány.",
+  "timestamp": "2026-03-13T17:05:23.825432+00:00",
   "model": "deepseek-coder-v2"
 }

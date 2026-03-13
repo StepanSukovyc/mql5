@@ -1,0 +1,7 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu se RSI nachází na úrovni 60, což naznačuje mírný nákupní tlak, ale není v překoupené zóně. Cena je nad denním MA, což podporuje potenciální růst. Na týdenním grafu je RSI na hodnotě 64, což se blíží překoupené zóně, ale trend je stále býčí. Měsíční RSI je na 48, což naznačuje neutrální postoj. Poslední hodinové svíčky nevykazují jasný směr. Celkově se trh zdá být v konsolidaci s mírným býčím sentimentem, ale s omezeným prostorem pro další růst. Proto je doporučení HOLD s možností nákupu při prolomení rezistence a prodeje při proražení supportu. Zvýšený spread v některých hodinách naznačuje nižší likviditu a potenciální volatilitu, což zvyšuje riziko. Data jsou omezená, proto opatrný přístup."
+}

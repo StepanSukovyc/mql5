@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCHF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě se GBPCHF jeví býčí (RSI na 1h a 4h rostou, cena nad MA na 1h i 4h). Denní RSI je neutrální. Z dlouhodobějšího hlediska (týdenní a měsíční RSI pod 50, cena pod MA na týdenním a měsíčním grafu) je trend spíše klesající. Kombinace signálů indikuje nejistotu, tudíž držení pozice (HOLD) má smysl, dokud se trend nevyjasní. Důvod pro BUY je krátkodobý uptrend, pro SELL dlouhodobý downtrend a pro HOLD neurčitost."
+}

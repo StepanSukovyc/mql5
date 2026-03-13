@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCAD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1H grafu je RSI překoupené, indikuje možnost korekce. Dlouhodobější timeframe (week, month) mají RSI blízko 50 a cena je pod MA, což značí mírný downtrend. Dnešní den zatím rosteme, ale čekám korekci. Proto SELL má největší pravděpodobnost, BUY je rizikovější a HOLD je neutrální."
+}

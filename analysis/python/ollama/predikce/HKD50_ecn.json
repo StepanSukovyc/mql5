@@ -1,9 +1,9 @@
 {
   "symbol": "HKD50_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě fundamentální analýzy a svíčkových formací indikujeme mírnou poptávku. RSI i MA hodnoty ukazují na stabilitu s potenciálem růstu.",
-  "timestamp": "2026-03-09T05:01:18.651307+00:00",
+  "BUY": 20.0,
+  "SELL": 70.0,
+  "HOLD": 10.0,
+  "reasoning": "Růstové trendy indikátory (RSi a MA) ukazují slabost s trendem směrem dolů. Zhoršení fundamentálních faktorů navrhuje pokračující silnou tendenci k poklesu.",
+  "timestamp": "2026-03-13T14:40:12.992884+00:00",
   "model": "deepseek-coder-v2"
 }

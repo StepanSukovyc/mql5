@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDCAD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažují pohledy na pokles měnového páru vzhledem k divergenci RSI a cenovým svíčkám.",
+  "timestamp": "2026-03-13T06:54:14.837899+00:00",
+  "model": "deepseek-coder-v2"
+}

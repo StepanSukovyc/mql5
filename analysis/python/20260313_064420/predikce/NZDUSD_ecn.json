@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "NZDUSD je v downtrendu. RSI na 1H, 4H, a Day timeframe signalizuje, že je trh 'oversold', ale i přesto cena klesá. MA na všech timeframech je nad aktuální cenou, což naznačuje rezistenci. SELL má vyšší pravděpodobnost úspěchu než BUY. HOLD je rozumný přístup pokud trader nechce podstupovat riziko."
+}

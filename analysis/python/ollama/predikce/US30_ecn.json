@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
-  "BUY": 50.0,
+  "BUY": 45.0,
   "SELL": 20.0,
-  "HOLD": 30.0,
-  "reasoning": "Zohledňuji faktory jakožto růstové potenciály akcií založených na fundamentech a technickém analyzou s využitím RSI a MA indikátorů, což svědčí o stabilitě trhu.",
-  "timestamp": "2026-03-09T05:26:15.583044+00:00",
+  "HOLD": 35.0,
+  "reasoning": "Vysoká úroveň RSI a klíčových měsíčních MA podporuje nákup, ale volatilita způsobená ekonomickými faktory vyvolává nejistotu.",
+  "timestamp": "2026-03-13T15:09:02.256324+00:00",
   "model": "deepseek-coder-v2"
 }

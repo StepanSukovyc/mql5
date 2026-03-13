@@ -1,0 +1,9 @@
+{
+  "symbol": "EURCAD_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstový impulz na svíčkovém grafu s potvrzením RSI a MA signalizuje přijetí pozitivního návrhu. Nedostatek trendu v longer timeframe zvyšuje nejistotu.",
+  "timestamp": "2026-03-13T07:37:14.719504+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,9 +1,9 @@
 {
   "symbol": "US100_ecn",
-  "BUY": 25.0,
-  "SELL": 70.0,
-  "HOLD": 5.0,
-  "reasoning": "Riziko spadku je vysoké kvůli nižším hodnotám RSI a MA, ale také potenciál růstu podle svíčkových formací.",
-  "timestamp": "2026-03-09T05:24:34.605909+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zohlednil jsem svíčkové formace a RSI, které indikují návalovitost trhu. MA ukazuje stabilitu, ale zároveň nedostatek silných trendů.",
+  "timestamp": "2026-03-13T15:06:40.644520+00:00",
   "model": "deepseek-coder-v2"
 }

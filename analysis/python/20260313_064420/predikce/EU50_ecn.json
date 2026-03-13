@@ -1,0 +1,7 @@
+{
+  "symbol": "EU50_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI pod 40, což naznačuje potenciální překoupenost, ale denní MA je stále výrazně nad aktuální cenou, což naznačuje medvědí trend. 1H a 4H time framy RSI jsou neutrální, 1H MA je také nad cenou, což naznačuje další pokles. Měsíční graf ukazuje RSI nad 60, což by mohlo znamenat blížící se překoupenost a potenciální korekci. Týdenní timeframe naznačuje že se cena pohybuje kolem MA, takže je nutné vyčkat a je doporučeno HOLD."
+}

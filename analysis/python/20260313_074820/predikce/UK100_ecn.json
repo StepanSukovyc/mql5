@@ -1,0 +1,7 @@
+{
+  "symbol": "UK100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje na oslabení. Denní RSI je na 40.59, což naznačuje, že index není přeprodaný, ale klesající trend pokračuje. 1H a 4H grafy klesají, týdenní a měsíční RSI naznačuje pohyb do strany (klesající momentum). Cena je pod klouzavým průměrem (MA) na 1H, 4H a denním timeframe, což ukazuje na medvědí trend. BUY má 30% vzhledem k tomu že se cena nachází v blízkosti support levelu a v minulosti došlo k výrazným odrazům, HOLD má 30% kvůli možné konsolidaci."
+}

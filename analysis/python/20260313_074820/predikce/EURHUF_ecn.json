@@ -1,0 +1,9 @@
+{
+  "symbol": "EURHUF_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických prognóz pro Eurozone a omezení monetární politiky způsobuje pokles hodnoty EUR vůči HUF. RSI ukazuje slabost s opakovanými body návratu pod hladinou 50, což naznačuje silnou oblast podpory. Avšak trend MA signalizuje střednědobý pokles, což omezuje příležitosti pro BUY.",
+  "timestamp": "2026-03-13T07:46:39.135564+00:00",
+  "model": "deepseek-coder-v2"
+}

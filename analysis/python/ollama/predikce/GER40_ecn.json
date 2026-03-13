@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tlak prodlužování svíček, což naznačuje pokračující sílu. Nicméně, ztráta významných supportů indikuje určitou nejistotu a riziko.",
-  "timestamp": "2026-03-09T04:59:39.027856+00:00",
+  "reasoning": "Převažují indikátory poklesu s nízkými hodnotami RSI a MA, ale svíčkové formace naznačují potenciál pro oživení.",
+  "timestamp": "2026-03-13T14:38:20.814072+00:00",
   "model": "deepseek-coder-v2"
 }

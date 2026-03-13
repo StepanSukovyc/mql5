@@ -1,9 +1,9 @@
 {
   "symbol": "USDPLN_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převažují indikátory RSI a MA ukazující spouštění nákupu, ale cenové svíčky sugerují nejistotu.",
-  "timestamp": "2026-03-09T05:44:54.333699+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na grafy RSI a MA je vidět tendence k poklesu, ale zároveň je tady silný support u úrovně 3.78, což by mohlo vést k nárustu.",
+  "timestamp": "2026-03-13T15:35:10.094377+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "USDCZK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
+  "BUY": 20.0,
+  "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Na základě fundamentálních faktorů jako inflace a mzdový růst je ekonomika silná, což by mohlo podpořit hodnotu měny. Svíčkové formace i RSI indikují stabilitu s tendencí k růstu, ale MA ukazuje slabší trend.",
-  "timestamp": "2026-03-09T05:32:58.465645+00:00",
+  "reasoning": "Na základě fundamentální analýzy a svíčkových formací může dojít k oživení trhu, což podporuje BUY. Nicméně RSI ukazuje nadprůměrnou sílu prodeje a MA trendu je nejistý, co vedlo k HOLD.",
+  "timestamp": "2026-03-13T15:18:34.199146+00:00",
   "model": "deepseek-coder-v2"
 }

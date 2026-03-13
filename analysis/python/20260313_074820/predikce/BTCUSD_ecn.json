@@ -1,0 +1,9 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Riziko je spíše směrem nahoru s trendem růstu hodnot. RSI a MA ukazují stabilitu, ale přítomnost korekce může být signálem pro nejistotu.",
+  "timestamp": "2026-03-13T07:12:09.786496+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Riziko je spíše na straně poklesu s ohledem na nedávný pohyb směrem dolů a negativním RSI. MA ukazuje slabší trend.",
-  "timestamp": "2026-03-09T03:50:06.394613+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje silnou měnu AUD s růstovým tlakem. RSI a MA hodnoty podporují tento trend.",
+  "timestamp": "2026-03-13T16:28:00.441241+00:00",
   "model": "deepseek-coder-v2"
 }

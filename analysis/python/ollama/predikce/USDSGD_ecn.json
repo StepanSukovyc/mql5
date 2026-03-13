@@ -1,9 +1,9 @@
 {
   "symbol": "USDSGD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle fundamentální analýzy je měna zdravě hodnocena s růstovými perspektivami. Technické indikátory (RSI a MA) podporují stabilitu cen.",
-  "timestamp": "2026-03-09T05:48:22.852888+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem makroekonomických faktorů a nedávnými poklesy. Nízké hodnoty RSI indikují pře prodej, ale MA ukazuje stabilitu.",
+  "timestamp": "2026-03-13T15:39:56.244489+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,9 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují silnou podporu, což naznačuje nejistotu.",
+  "timestamp": "2026-03-13T07:39:33.244907+00:00",
+  "model": "deepseek-coder-v2"
+}

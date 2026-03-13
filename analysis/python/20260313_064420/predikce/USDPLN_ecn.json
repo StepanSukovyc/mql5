@@ -1,0 +1,7 @@
+{
+  "symbol": "USDPLN_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na hodinovém a denním grafu je RSI překoupené, což naznačuje potenciální korekci. 4H a týdenní grafy ukazují silný uptrend (RSI nad 50 a rostoucí). Měsíční graf naznačuje dlouhodobý downtrend (RSI pod 50 a MA klesá). Celkově je situace smíšená: krátkodobé riziko poklesu, střednědobé býčí, dlouhodobě smíšené. Tudíž doporučuji opatrnost."
+}

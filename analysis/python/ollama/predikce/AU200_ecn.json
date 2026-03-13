@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené v důsledku globálních ekonomických nepředvídatelností a nestabilitou trhu. Některé technické indikátory, jako je RSI, ukazuje na přečerpání nadhodnoty a potenciál pro korekci. Nicméně, podporující fondamentální analýza a stabilitu růstu v oblasti technologií, nedoporučuji silnou pozici ve prospěch poklesu.",
-  "timestamp": "2026-03-09T03:46:52.982417+00:00",
+  "reasoning": "Růstové momentum je slabší, ale signály z RSI a MA podporují stabilitu. Trh může být nejistý.",
+  "timestamp": "2026-03-13T16:23:23.256778+00:00",
   "model": "deepseek-coder-v2"
 }

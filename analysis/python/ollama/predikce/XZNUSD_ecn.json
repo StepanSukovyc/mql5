@@ -1,9 +1,9 @@
 {
   "symbol": "XZNUSD_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstový impulz s nárustem RSI a MA signalizuje potenciál růstu. Nicméně, pokles v posledních třech měsících ukazuje na určitou nejistotu.",
-  "timestamp": "2026-03-09T06:14:45.490742+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Převažující pohled je do budoucna negativní s ohledem na volatilitu a nedostatek jasných trendů. RSI ukazuje slabost, MA sugeruje pokračování mezitím.",
+  "timestamp": "2026-03-13T16:08:28.342019+00:00",
   "model": "deepseek-coder-v2"
 }

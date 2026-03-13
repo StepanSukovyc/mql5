@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Technické indikátory naznačují překoupenost na kratších časových rámcích (1h RSI 75.58, day RSI 70.48). Nicméně, na týdenním grafu je RSI na 56.65 a měsíční RSI je 38.44, což naznačuje prostor pro další růst. Denní graf ukazuje rostoucí trend, který se potvrzuje aktuální cenou (9.42) nad denním MA (9.12). I přes překoupené krátkodobé indikátory a možnou krátkodobou korekci, střednědobý trend naznačuje potenciál pro další růst, avšak je nutné zohlednit rizika spojená s překoupeností."
+}

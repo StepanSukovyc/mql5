@@ -1,0 +1,7 @@
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod MA na 1h, 4h a denním grafu, RSI je neutrální na všech časových rámcích kromě měsíčního, kde je překoupený. Poslední denní svíčka naznačuje prodejní tlak. Celkově trh vykazuje krátkodobý medvědí sentiment."
+}

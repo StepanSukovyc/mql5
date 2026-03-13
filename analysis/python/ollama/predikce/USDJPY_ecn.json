@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 50.0,
   "HOLD": 10.0,
-  "reasoning": "Zvýšení RSI a MA indikátorů naznačuje silnou tendenci růstu. Změny svíčkových formací podporují tento trend.",
-  "timestamp": "2026-03-09T05:39:42.939254+00:00",
+  "reasoning": "Zhoršení krajiny makroekonomických signálů a slabé svíčkové formace vedou k ospravedlnění SELL pozice.",
+  "timestamp": "2026-03-13T15:28:01.202514+00:00",
   "model": "deepseek-coder-v2"
 }

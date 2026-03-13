@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technicky se zdá, že pár USDSGD je v krátkodobém uptrendu (RSI na 1H, 4H a Daily timeframe je nad 50, cena je nad MA na 1H a 4H timeframe). Nicméně na týdenním grafu je cena pod MA a na měsíčním grafu je RSI pod 40 a cena je vysoko nad MA. To signalizuje dlouhodobější downtrend. Proto se doporučuje opatrnost a zvážení HOLD pozice. BUY má větší šanci díky krátkodobému uptrendu, SELL má menší šanci díky dlouhodobějšímu downtrendu."
+}

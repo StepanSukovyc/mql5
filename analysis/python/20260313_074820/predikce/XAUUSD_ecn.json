@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "XAUUSD is currently trading at 5086.53. Monthly RSI is extremely overbought at 88.75, weekly RSI is also high at 72.62 suggesting a potential correction. Daily RSI is at 53.74. 1H and 4H RSI are at 44.16 and 45.89 respectively, suggesting that short-term downward movement is likely to continue. The price is below the 1H and 4H moving averages, but above the daily MA suggesting a possible test of the daily MA before further downtrend. Recent daily candles show strong downward momentum, suggesting further selling pressure. The high spread suggests the price could be volatile, however, recent daily candles and oscillator metrics suggest bearish momentum."
+}

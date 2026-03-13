@@ -1,0 +1,7 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL kvůli klesajícímu trendu na denním a týdenním grafu (RSI pod 50, MA nad cenou). Dlouhodobější HOLD/BUY je nejistý. RSI na týdenním grafu je 33 (blízko přeprodané zóně) ale MA je stále vysoko. MA na měsíčním grafu je také vysoko.  Cena se pohybuje pod MA na většině timeframes, s výjimkou 1h, což naznačuje, že krátkodobé oživení by mohlo být brzy vyčerpáno."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHUF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě indikátory naznačují možný další růst (RSI na 1h a 4h nad 50, cena nad MA na 1h), ale denní RSI je již překoupené a měsíční MA je nad současnou cenou, což naznačuje dlouhodobý potenciál pro pokles. Proto rozložení do všech tří možností."
+}

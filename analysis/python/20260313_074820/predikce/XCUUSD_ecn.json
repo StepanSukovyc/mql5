@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL (RSI 1h a 4h pod 50, cena pod MA 1h, 4h i day, recent downward price action), dlouhodobě HOLD (RSI week nad 60, uptrend MA week), BUY mírné riziko (možná korekce před dalším růstem)."
+}

@@ -1,9 +1,9 @@
 {
   "symbol": "EU50_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Růstové potenciály jsou omezené z důvodu negativních fundamentálních indikátorů a silným odporovým tlakem založeným na svíčkových formacích.",
-  "timestamp": "2026-03-09T04:16:28.463108+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Riziko je v současné době vyvážené mezi nákupem a držením. S ohledem na volatilitu trhu a historické trendy RSI a MA indikátorů podporuje mírný nárust.",
+  "timestamp": "2026-03-13T16:58:23.554746+00:00",
   "model": "deepseek-coder-v2"
 }

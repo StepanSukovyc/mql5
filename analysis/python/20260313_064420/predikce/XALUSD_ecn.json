@@ -1,0 +1,7 @@
+{
+  "symbol": "XALUSD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Cena je nad denním a týdenním MA, RSI na denním a týdenním timeframe indikuje překoupenost. Na 1h a 4h timeframe je RSI neutrální. Poslední denní svíčka je negativní. Rozhodnutí je rozdělené: potenciál růstu je omezený (RSI), ale uptrend je patrný. HOLD se jeví jako rozumná strategie s ohledem na nejednoznačné signály."
+}

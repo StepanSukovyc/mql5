@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNZD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na 1h timeframe je RSI v překoupené zóně (70.36), což naznačuje možnost korekce. Nicméně, 4h a denní RSI jsou pod 70, což naznačuje pokračující uptrend. MA na 1h, 4h a denním grafu jsou pod aktuální cenou, což také podporuje uptrend. Týdenní MA je nad aktuální cenou, což může působit jako rezistence. Celkově je krátkodobý uptrend silný, ale existuje riziko korekce, proto BUY (40%), SELL (30%) a HOLD (30%)."
+}

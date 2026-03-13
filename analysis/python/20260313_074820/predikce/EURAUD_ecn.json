@@ -1,0 +1,9 @@
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na svíčkové formace a RSI indikátor je vidět nápadný vzestup, což naznačuje potenciální růst. Nicméně, SMA ukazuje slabost, což může být důsledek nejistoty na trhu.",
+  "timestamp": "2026-03-13T07:34:55.092109+00:00",
+  "model": "deepseek-coder-v2"
+}

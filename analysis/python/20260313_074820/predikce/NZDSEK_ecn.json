@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSEK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza vykazuje smíšené signály. Na denním grafu je RSI na 63.66, což naznačuje blížící se překoupenost, ale ne zatím. Na 4H grafu je RSI neutrální. Hodinový RSI je pod 50, což naznačuje možný pokles. Měsíční RSI je silně přeprodané, ale MA na měsíčním grafu je výrazně nad současnou cenou, což naznačuje dlouhodobý klesající trend. Na týdenním grafu indikátory neříkají nic speciálního. Z historických dat je vidět, že pár má tendenci k velkým výkyvům. Vzhledem k těmto rozporům, a s omezeným množstvím dat, doporučuji HOLD s opatrným sledováním vývoje."
+}

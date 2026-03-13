@@ -1,9 +1,9 @@
 {
   "symbol": "XNIUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy jsou potenciálně ohromné s novým ropným šokem a cenami akcií, ale RSI je překoupený a MA ukazuje pokles. Vysoké riziko následujícího poklesu.",
-  "timestamp": "2026-03-09T06:05:24.894479+00:00",
+  "BUY": 40.0,
+  "SELL": 20.0,
+  "HOLD": 40.0,
+  "reasoning": "Podle svíčkových formací a trendu RSI může dojít k otočení trhu. Historické hodnoty MA podporují stabilitu.",
+  "timestamp": "2026-03-13T15:59:01.127588+00:00",
   "model": "deepseek-coder-v2"
 }

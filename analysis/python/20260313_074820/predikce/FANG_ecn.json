@@ -1,0 +1,7 @@
+{
+  "symbol": "FANG_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na hodinové timeframe je RSI na úrovni 42.42, což naznačuje potenciální prostor pro růst, ale cena je pod MA (14967.657), což poukazuje na krátkodobý downtrend. Na denní bázi je RSI 48.97, což je neutrální. Týdenní RSI je 45.77 a cena je pod MA (15582.7235), což naznačuje pokračující tlak prodejců. Měsíční RSI je 62.51, což je poměrně vysoko, ale ne v překoupené zóně, cena je nad MA (13941.024), což signalizuje dlouhodobý uptrend. Vzhledem k rozporuplným signálům z různých timeframe a převaze negativních signálů v krátkodobém a střednědobém horizontu, přikláním se k SELL pozici, ale s ohledem na dlouhodobý uptrend ponechávám prostor pro BUY a HOLD."
+}

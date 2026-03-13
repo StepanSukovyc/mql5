@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 40.0,
+  "SELL": 20.0,
+  "HOLD": 40.0,
+  "reasoning": "Vysoké hodnoty RSI a MA ukazují na silnou pozitivní tendenci. Historická data s konzistentním růstem v posledních měsících podporuje BUY.",
+  "timestamp": "2026-03-13T07:00:57.663341+00:00",
+  "model": "deepseek-coder-v2"
+}

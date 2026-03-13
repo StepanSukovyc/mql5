@@ -1,0 +1,7 @@
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "The weekly and monthly RSI values are quite low (26.56 and 39.38 respectively), indicating oversold conditions which could suggest a potential bounce (BUY). However, the price is below the moving averages on all timeframes, and the daily and 4H RSI are still below 50. Furthermore, the monthly MA is much higher than the current price signaling bearish sentiment (SELL). Given the conflicting signals and short lookback, HOLD position with a slightly higher probability to sell for higher timeframe downtrend. "
+}

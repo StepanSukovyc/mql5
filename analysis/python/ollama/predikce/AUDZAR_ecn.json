@@ -1,9 +1,9 @@
 {
   "symbol": "AUDZAR_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažují signály pro pokles trhu v důsledku negativních fundamentálních ukazatelů a silných odporových úrovní.",
-  "timestamp": "2026-03-09T03:58:18.050707+00:00",
+  "BUY": 0.0,
+  "SELL": 100.0,
+  "HOLD": 0.0,
+  "reasoning": "Vysoké hodnoty RSI a pokles MA indikují silnou tendenci k poklesu.",
+  "timestamp": "2026-03-13T16:39:21.550014+00:00",
   "model": "deepseek-coder-v2"
 }

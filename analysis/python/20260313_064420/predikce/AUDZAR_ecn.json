@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 60,
+  "SELL": 25,
+  "HOLD": 15,
+  "reasoning": "AUDZAR_ecn shows bullish signals on shorter timeframes (1H and 4H), supported by rising RSI and price above MA. Daily and weekly RSI are in overbought territory, suggesting potential pullback, but strong bullish momentum prevails. Monthly RSI is neutral. Recent price action shows strong upward movement. Risk remains due to overbought conditions on longer timeframes."
+}

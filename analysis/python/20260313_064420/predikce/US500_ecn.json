@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Na kratších časových rámcích (1h, 4h, den) vidíme RSI blízko přeprodané zóně a klesající trend, cena je pod MA. Na měsíčním grafu je sice RSI v překoupené zóně a cena nad MA, ale to je dlouhodobý trend a současný pokles jej oslabuje. Týdenní graf taktéž ukazuje potenciál klesajícího trendu. Převažuje tedy signál k prodeji, ale vzhledem k možným korekcím ponechávám i malý prostor pro BUY a HOLD."
+}

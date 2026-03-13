@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstový impulz s korekcí, RSI ukazuje slabost, ale MA podporuje pohyb nahoru.",
-  "timestamp": "2026-03-09T05:04:35.558880+00:00",
+  "reasoning": "Růstový tlak je pozitivní, ale existují silné odporové úrovně a negativní divergence RSI indikuje překročení nadpisů.",
+  "timestamp": "2026-03-13T14:43:58.150299+00:00",
   "model": "deepseek-coder-v2"
 }

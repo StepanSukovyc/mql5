@@ -1,0 +1,7 @@
+{
+  "symbol": "XPBUSD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním i hodinovým MA. RSI na všech timeframes naznačuje, že trh není ani překoupený ani přeprodaný. Na týdenním grafu je RSI blízko přeprodané úrovni, což by naznačovalo možnou korekci nahoru. Ale vzhledem k převládajícímu medvědímu sentimentu a klesajícímu MA na denním grafu se zdá pravděpodobnější další pokles ceny. Proto je SELL rizikovější. HOLD je opatrná strategie vzhledem k neurčitému stavu trhu."
+}

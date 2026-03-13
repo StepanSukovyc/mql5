@@ -1,9 +1,9 @@
 {
   "symbol": "GBPNZD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle svíčkových formací a RSI indikátoru ukazuje graf potenciál růstu. Zároveň MA hodnoty podporují stabilitu.",
-  "timestamp": "2026-03-09T04:52:59.028363+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Malé svíčkové formace a pokles RSI signalizují další pokles. Nicméně, MA ukazuje stabilitu.",
+  "timestamp": "2026-03-13T14:30:49.313704+00:00",
   "model": "deepseek-coder-v2"
 }

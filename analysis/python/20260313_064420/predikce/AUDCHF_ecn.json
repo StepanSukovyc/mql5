@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na týdenním grafu je RSI překoupené (70.96), což naznačuje potenciální korekci. Na denním grafu je RSI také relativně vysoko (62.56), ale ještě ne v překoupené zóně. Cena je mírně pod 4H MA. Na 1H je RSI pod 40, což naznačuje potenciální dočasnou silu, ale celkový trend naznačuje spíše pokračování klesajícího trendu. Měsíční RSI je 46, což je neutrální."
+}

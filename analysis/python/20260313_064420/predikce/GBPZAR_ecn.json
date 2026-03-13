@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1h timeframe je RSI překoupené (77.38), naznačuje možný pokles. Na denním timeframe RSI 62.03 naznačuje potenciál k růstu ale i korekci. MA na měsíční bázi (23.17) je výrazně nad aktuální cenou, což naznačuje dlouhodobý downtrend. Svícové formace nenaznačují jasný směr. Proto preferuji SELL a HOLD nad BUY. "
+}

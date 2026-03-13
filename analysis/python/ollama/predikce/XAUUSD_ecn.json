@@ -1,9 +1,9 @@
 {
   "symbol": "XAUUSD_ecn",
   "BUY": 30.0,
-  "SELL": 65.0,
-  "HOLD": 5.0,
-  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu, ale zároveň indikace přehřátí trhu jsou silné.",
-  "timestamp": "2026-03-09T06:00:45.778126+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje silnou finanční situaci Spojených států a růst cen zlata způsobený inflací. Svíčkové formace a RSI indikují, že cena může dále růst.",
+  "timestamp": "2026-03-13T15:54:15.860555+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,7 @@
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 35,
+  "SELL": 40,
+  "HOLD": 25,
+  "reasoning": "Na týdenním a měsíčním timeframech je RSI hluboko v přeprodané zóně, což naznačuje potenciální odraz. Nicméně MA na těchto timeframech jsou vysoko nad současnou cenou, což ukazuje na silný dlouhodobý downtrend. Denní RSI je neutrální, ale cena je pod MA. Krátkodobé indikátory (1h, 4h) naznačují mírný uptrend, ale celkový trend je spíše medvědí, proto se přikláním k SELL pozici s mírnou převahou. HOLD zohledňuje možnost konsolidace ceny."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena je pod MA na 1h a 4h timeframech. RSI na 1h je extrémně nízko, což naznačuje možnou překoupenost, ale celkový trend naznačuje spíše prodej. RSI na vyšších timeframech (day, week, month) se nachází ve středních až vyšších hodnotách, což dále podporuje potenciální prodej. Denní svíčky indikují downtrend. Nedávný pokles ceny a slabý odraz (jak je vidět na 1h svíčkách) posiluje prodejní signál."
+}

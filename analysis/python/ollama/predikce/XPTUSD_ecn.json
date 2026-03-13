@@ -1,9 +1,9 @@
 {
   "symbol": "XPTUSD_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy založené na svíčkových formacích a stabilita RSI s MA indikátory naznačují potenciál pro pokračující růst. Nicméně, přítomnost významných odporových úrovní a volatilita trhu mohou být důvody pro nejistotu.",
-  "timestamp": "2026-03-09T06:12:20.091317+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Převaha klesajících trendů a nárůstu volatility s omezeným růstem indikovaný MA.",
+  "timestamp": "2026-03-13T16:06:05.282465+00:00",
   "model": "deepseek-coder-v2"
 }

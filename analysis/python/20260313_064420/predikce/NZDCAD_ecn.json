@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "The price is currently 0.79392.  The hourly RSI is extremely oversold at 24.35, suggesting a possible short-term bounce. However, the price is below the hourly MA of 0.800779. The 4h, day and weekly RSI also suggest bearish momentum. The monthly RSI is at 46.18, showing a relatively neutral outlook. The recent price action shows consistent selling pressure in the 1h and 4h candles. Given the overall downtrend, short-term oversold conditions, and the longer-term bearish momentum, SELL is favored. Holding is considered because of the oversold condition and possible retracement before further decline."
+}

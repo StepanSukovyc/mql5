@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Cena je blízko rezistence (7.828), RSI na denním a týdenním grafu ukazuje překoupenost, ale MA na všech timeframech ukazuje rostoucí trend. Poslední hourly svíčky naznačují vyčerpání kupní síly. Proto je zde rovnováha mezi BUY, SELL a HOLD."
+}

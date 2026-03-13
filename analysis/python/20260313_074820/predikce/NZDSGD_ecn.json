@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSGD_ecn",
+  "BUY": 20,
+  "SELL": 60,
+  "HOLD": 20,
+  "reasoning": "Cena NZDSGD_ecn je v downtrendu. RSI na 1h, 4h a denním grafu signalizuje překoupenost. MA na všech timeframech kromě týdenního je nad aktuální cenou, což naznačuje rezistenci.  Poslední denní svíčka je klesající. Celkově převažují signály pro SELL. Nízká pravděpodobnost pro BUY kvůli downtrendu. HOLD jako neutrální varianta."
+}

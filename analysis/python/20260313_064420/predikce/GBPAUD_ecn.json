@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "GBPAUD is showing mixed signals. Hourly RSI is overbought (70.42) suggesting potential pullback. Daily and weekly RSI are oversold (38.04 & 21.11) indicating potential for a bounce. The price is below the daily MA (1.90007) and significantly below the weekly MA (1.978384), hinting at further downside. The recent hourly candles show some consolidation, but the longer-term downtrend remains. Sell pressure seems more dominant than buy. Therefore, Sell has the highest probability, BUY has the lowest, and HOLD is a safe option."
+}

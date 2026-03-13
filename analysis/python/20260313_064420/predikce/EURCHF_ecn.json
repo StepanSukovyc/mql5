@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Dlouhodobý trend na denním, týdenním i měsíčním grafu je klesající (RSI a cena pod MA). RSI na týdenní a měsíční bázi naznačuje přeprodanost, ale trend má stále převahu. Krátkodobě (1h) je RSI v překoupené zóně, což naznačuje potenciální korekci dolů. Celkově převládá tlak na prodej."
+}

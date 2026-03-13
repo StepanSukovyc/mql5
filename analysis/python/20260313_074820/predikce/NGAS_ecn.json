@@ -1,0 +1,7 @@
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Technická analýza ukazuje smíšené signály. RSI na denní a 4H timeframech naznačují rostoucí momentum, avšak týdenní MA je nad současnou cenou. Svíčkové formace nejsou jasně býčí ani medvědí. Vzhledem k neurčitosti indikátorů, raději držím pozici, s možností nákupu pokud denní/4H RSI dosáhne 70, nebo prodeje, pokud cena klesne pod denní MA."
+}

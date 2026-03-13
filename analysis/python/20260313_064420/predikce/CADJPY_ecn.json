@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "CADJPY is showing mixed signals. Longer timeframes (Day, Week) indicate overbought conditions (RSI > 70) suggesting potential for a pullback, while 4H RSI is at 65, leaving room for more upside. 1H MA is slightly above the current price, potentially acting as resistance.  The recent candles show some consolidation, hence the higher HOLD percentage.  Given the conflicting signals, a cautious approach is recommended, favoring HOLD until clearer direction emerges, however bullish sentiment is still dominant over bearish. The moving averages on the daily timeframe are far lower than the current price showing a strong upward trend that might have some consolidation before breaking higher."
+}

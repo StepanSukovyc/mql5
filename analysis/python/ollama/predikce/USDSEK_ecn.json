@@ -1,9 +1,9 @@
 {
   "symbol": "USDSEK_ecn",
-  "BUY": 50.0,
-  "SELL": 30.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zohledňuji svíčkové formace a stabilitu RSI nad hlavní MA, s určitou volatilitou představující potenciál pro růst.",
-  "timestamp": "2026-03-09T05:46:37.880635+00:00",
+  "reasoning": "Převažující trend je poklesový, ale nárusty jsou stále možné díky divergencím RSI a svíčkovým formacím.",
+  "timestamp": "2026-03-13T15:37:32.423196+00:00",
   "model": "deepseek-coder-v2"
 }

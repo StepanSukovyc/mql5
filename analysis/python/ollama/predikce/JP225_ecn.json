@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 40.0,
   "HOLD": 30.0,
-  "reasoning": "Zohledňuji fundamentální analýzu s pozitivním vlivem politiky a ekonomiky. Technické indikátory RSI a MA ukazují stabilitu s potenciálem pro růst.",
-  "timestamp": "2026-03-09T05:02:57.562551+00:00",
+  "reasoning": "Podle svíčkových formací a RSI indikátoru ukazuje dlouhodobě tendenci poklesu. Nicméně MA hodnoty signalizují silnou podporu, což naznačuje stabilitu.",
+  "timestamp": "2026-03-13T14:42:05.607626+00:00",
   "model": "deepseek-coder-v2"
 }

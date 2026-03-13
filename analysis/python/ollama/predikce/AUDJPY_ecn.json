@@ -1,9 +1,9 @@
 {
   "symbol": "AUDJPY_ecn",
   "BUY": 30.0,
-  "SELL": 65.0,
-  "HOLD": 5.0,
-  "reasoning": "Vysoké hodnoty RSI a MA sugerují další růst, ale zároveň je třeba vzít v úvahu negativní fondamentální analýza.",
-  "timestamp": "2026-03-09T03:51:43.124915+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Rozhodujícím faktorem je pokles RSI a pohyb cen pod hlavní MA. Pravděpodobnost růstu je nízká kvůli silnému trendu k poklesu.",
+  "timestamp": "2026-03-13T16:30:18.867032+00:00",
   "model": "deepseek-coder-v2"
 }

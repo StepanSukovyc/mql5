@@ -1,0 +1,7 @@
+{
+  "symbol": "USDZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě překoupený (RSI 1h=78.79), ale střednědobě v rostoucím trendu (RSI 4h, Day nad 50). Cena nad MA na 1h, 4h a denním grafu, ale pod MA na měsíčním grafu. Nejistota ohledně dalšího vývoje, proto vyvážené riziko mezi BUY, SELL a HOLD. Nutné sledovat další vývoj."
+}

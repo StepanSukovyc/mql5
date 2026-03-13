@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI je lehce nad 60, což naznačuje rostoucí momentum, ale ne extrémně překoupené podmínky. Cena je nad MA, což je bullish signál. Nicméně, na týdenním grafu, cena je pod MA, což je bearish. Na měsíčním grafu je RSI pod 40, což značí, že cena by mohla být podhodnocena. Kombinace indikátorů naznačuje potenciál pro růst (BUY), ale protichůdné signály na týdenním a měsíčním timeframe naznačují riziko dalšího poklesu (SELL) a indikují potřebu opatrného přístupu (HOLD)."
+}

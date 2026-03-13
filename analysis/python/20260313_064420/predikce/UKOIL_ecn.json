@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Denní a týdenní RSI jsou v překoupené zóně, což naznačuje možnou korekci. Nicméně, měsíční RSI je stále pod 70, a cena je nad MA na všech časových rámcích, což signalizuje silný uptrend. Poslední denní svíčka je silná býčí, naznačující pokračující tlak na růst ceny, ale je třeba být opatrný kvůli vysokému RSI. Proto doporučuji nákup s opatrností, částečný prodej (realizovat zisk) nebo držení pozice."
+}

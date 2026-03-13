@@ -1,0 +1,7 @@
+{
+  "symbol": "XALUSD_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "XALUSD_ecn is showing overbought conditions on weekly (RSI 83.35) and daily (RSI 69.06) timeframes, suggesting a potential pullback. Hourly RSI is neutral at 54.37. While the 4H and Daily MAs are below the current price indicating bullish momentum, the overbought nature on larger timeframes outweighs this. The price is also above the 1H MA suggesting that the trend will correct to the down side as there is a high risk of short term correction. Therefore a SELL is recommended."
+}

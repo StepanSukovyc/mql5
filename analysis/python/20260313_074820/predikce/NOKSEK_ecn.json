@@ -1,0 +1,7 @@
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 55,
+  "SELL": 25,
+  "HOLD": 20,
+  "reasoning": "Na denním a týdenním grafu je RSI v překoupené zóně, což naznačuje potenciální korekci. Nicméně, celkový trend je rostoucí, MA na všech timeframech s výjimkou měsíčního se zvedá. 1H/4H naznačuje potenciální pokles, ale kupní síla je silnější. Vzhledem k těmto smíšeným signálům dáváme přednost BUY, ale s opatrností. HOLD je vhodný pro ty, kteří již pozici mají, než se trh vyjasní. SELL doporučujeme pouze při potvrzení silnějšího obratu trendu, vzhledem k celkové růstové tendenci je riziko pro short pozici vyšší."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNOK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním a denním grafu je RSI v zóně přeprodanosti, což naznačuje potenciální odraz, ale celkový trend (MA na všech timeframech) je spíše klesající. Na 1h a 4h grafu je RSI neutrální, cena se pohybuje kolem MA. Proto SELL má o něco vyšší pravděpodobnost."
+}

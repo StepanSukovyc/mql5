@@ -1,9 +1,9 @@
 {
   "symbol": "ZARJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle svíčkových formací a RSI může dojít k otočení trendu směrem nahoru, ale zároveň je tlak odporu v oblasti MA 50, což naznačuje nejistotu.",
-  "timestamp": "2026-03-09T06:17:11.294367+00:00",
+  "BUY": 50.0,
+  "SELL": 30.0,
+  "HOLD": 20.0,
+  "reasoning": "Kombinace růstových indikátorů s pozitivním svědectvím z fundamenta může podporovat růst, ale vysoké riziko volatilního trhu způsobuje nejistotu.",
+  "timestamp": "2026-03-13T16:10:52.827555+00:00",
   "model": "deepseek-coder-v2"
 }

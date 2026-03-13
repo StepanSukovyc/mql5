@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On daily and weekly timeframes RSI is above 60 indicating a buying pressure, but 1h RSI is around 50. The price is above the Moving Average on all timeframes, suggesting an upward trend. Overall neutral stance, waiting for more confirmations."
+}

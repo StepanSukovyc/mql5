@@ -1,0 +1,7 @@
+{
+  "symbol": "USOIL_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "USOIL_ecn shows mixed signals. Daily and weekly RSI indicate overbought conditions (81.24 and 83.32 respectively), suggesting potential for a pullback. While the 1h and 4h RSI are neutral, the current price (96.957) is above the 1h MA (94.72) and 4h MA (89.71), but below the 30-candle MA daily timeframe (75.03). A very large daily candle was created March 9, indicating some sell pressure. Considering these factors, a SELL position carries a higher probability, HOLD allows observation of trends and BUY has the lowest due to overbought indicators."
+}

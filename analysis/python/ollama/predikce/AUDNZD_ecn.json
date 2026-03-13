@@ -1,9 +1,9 @@
 {
   "symbol": "AUDNZD_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Růst cenových trendů je podporován silnou MA a pozitivním RSI. Nicméně, některé indikátory ukazují na možnost korekce nebo konfliktní situace.",
-  "timestamp": "2026-03-09T03:53:21.070162+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové potenciály jsou omezeny nízkými hladinami RSI a MA, zatímco riziko poklesu roste v důsledku divergence mezi cenou a technickými indikátory.",
+  "timestamp": "2026-03-13T16:32:35.258554+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCAD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje možný pokles. Denní a týdenní RSI jsou v překoupené zóně, což naznačuje potenciální obrat.  Cena je pod klouzavými průměry na denní, týdenní i měsíční bázi, což posiluje medvědí výhled. Na 1H a 4H je RSI neutrální, ale MA jsou nad cenou, což naznačuje rezistenci. Je potřeba sledovat, zda cena prorazí support, Buy je opatrný, kvůli nízkému RSI na denním a týdenním grafu."
+}

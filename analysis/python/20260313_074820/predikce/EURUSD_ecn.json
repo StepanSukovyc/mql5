@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 20,
+  "SELL": 65,
+  "HOLD": 15,
+  "reasoning": "Dominance SELL pozice je indikována překoupeností na měsíčním grafu (RSI 55.42), klesajícím trendem na denním a týdenním grafu (cena pod MA) a RSI pod 30 na denním grafu, což signalizuje, že trh je v sestupném trendu. BUY pozice má velmi nízkou pravděpodobnost pro nejasný krátkodobý signál pro nákup, avšak dlouhodobý trend je spíše prodejní. HOLD pozice je taktéž málo pravděpodobná, protože signály jsou víceméně jasné."
+}

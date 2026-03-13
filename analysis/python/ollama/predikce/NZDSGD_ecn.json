@@ -1,9 +1,9 @@
 {
   "symbol": "NZDSGD_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy podporované silnou podporou na MA a pozitivním RSI signalizuje potenciál pro růst.",
-  "timestamp": "2026-03-09T05:16:13.091041+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové potenciály jsou omezená zatímco riziko poklesu je vyšší díky volatilitě trhu.",
+  "timestamp": "2026-03-13T14:57:04.701174+00:00",
   "model": "deepseek-coder-v2"
 }

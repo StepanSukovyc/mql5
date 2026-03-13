@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "UKOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.01,
+  "take_profit": 98.0,
+  "reasoning": "Na základě dostupných obchodních predikcí se UKOIL_ecn jeví jako vhodná příležitost pro nákup. Predikce naznačuje silný uptrend, přestože existují signály překoupenosti na denních a týdenních grafech. Měsíční RSI je stále pod 70, a cena je nad MA na všech časových rámcích, což signalizuje pokračující tlak na růst ceny. Otevření pozice BUY na UKOIL_ecn diverzifikuje portfolio, protože v současné době nemám otevřené pozice na tomto symbolu. Protože se jedná o #33 obchod, který je plně řízen Gemini, navrhuji lot_size 0.01 a take_profit 98.0.  Cílová cena take_profit bere v úvahu transakční náklady (0.1 USD) a realistický zisk."
+}

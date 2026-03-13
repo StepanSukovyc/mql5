@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Krátkodobý downtrend potvrzený RSI na 1h, 4h, a day timeframe pod 50. Cena je pod MA na 1h, 4h, a day timeframe. Monthly RSI je sice vysoko (68.94), ale z krátkodobého hlediska převažuje prodejní tlak. Týdenní RSI je neutrální. Doporučuji opatrnost, protože trh může být volatilní. Hold pozice dává prostor pro vyhodnocení dalšího vývoje."
+}

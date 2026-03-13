@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové potenciály omezeno vysokými RSI a MA hodnotami. Tržní podmínky indikují pokles.",
+  "timestamp": "2026-03-13T06:56:26.328698+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 60,
+  "SELL": 15,
+  "HOLD": 25,
+  "reasoning": "Cena se aktuálně nachází nad 1h, 4h, denním i týdenním MA, což naznačuje uptrend. RSI na denním grafu je v překoupené zóně (76.59), což by mohlo signalizovat potenciální korekci, ale celkový trend je stále vzhůru. Měsíční RSI je neutrální. Poslední denní svíčka je býčí, což podporuje BUY pozici. Proto přiděluji 60% pravděpodobnost pro BUY, 15% pro SELL (kvůli překoupené zóně na denním grafu) a 25% pro HOLD, pokud by trh konsolidoval."
+}

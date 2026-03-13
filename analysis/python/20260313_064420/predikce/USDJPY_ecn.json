@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "USDJPY is showing bullish momentum. RSI on 1h, 4h and day is nearing overbought conditions, suggesting potential pullback. MA on all timeframes below current price indicates uptrend. Limited candle data makes pattern analysis challenging. Considering the overbought signals and limited data, holding existing positions or initiating small long positions cautiously might be appropriate. Short entry not recommended given the uptrend signal."
+}

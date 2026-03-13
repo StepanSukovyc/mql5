@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Indikátory na kratších timeframech (1h, 4h, den) naznačují oslabování, RSI je v blízkosti překoupené zóny a cena je pod MA. Dlouhodobější (měsíční) RSI je sice vysoké, ale trend se otáčí, klesající cena. SELL má tedy vyšší pravděpodobnost. Riziko BUY je vysoké vzhledem k klesajícímu trendu. HOLD je opatrná volba vzhledem k protichůdným signálům na různých časových rámcích. Zohledněna klesající cena v posledních dnech."
+}
