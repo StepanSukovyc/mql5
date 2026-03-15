@@ -1,9 +1,9 @@
 {
   "symbol": "EURPLN_ecn",
   "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem světových událostí a negativního tlaku na měnu. Naopak, pokles je podpořen silnou polisou a obavami z ekonomických faktorů.",
-  "timestamp": "2026-03-13T17:17:42.479221+00:00",
+  "SELL": 45.0,
+  "HOLD": 25.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu, ale zároveň nízké hodnoty v měsíčním časovém rámci indikují nejistotu.",
+  "timestamp": "2026-03-13T20:00:47.883936+00:00",
   "model": "deepseek-coder-v2"
 }

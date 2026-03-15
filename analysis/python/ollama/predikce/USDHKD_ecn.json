@@ -1,9 +1,9 @@
 {
   "symbol": "USDHKD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu USA. Svíčkové formace a RSI indikují stabilitu. MA ukazuje růstovou tendenci.",
-  "timestamp": "2026-03-13T15:20:57.237520+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulsy jsou potenciálně podpořeny svíčkovými formacemi a pozitivním RSI. Nicméně, poklesem v předchozích měsících indikuje určitou nejistotu na trhu.",
+  "timestamp": "2026-03-13T21:03:43.270375+00:00",
   "model": "deepseek-coder-v2"
 }

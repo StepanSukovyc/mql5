@@ -1,9 +1,9 @@
 {
   "symbol": "USOIL_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Převládajícím signálem je pokles ceny z důvodu silného RSI a klesajících MA hodnot. Nicméně, fundamentální analýza naznačuje stabilitu s trvalým růstem poptávky.",
-  "timestamp": "2026-03-13T15:44:43.496835+00:00",
+  "BUY": 50.0,
+  "SELL": 30.0,
+  "HOLD": 20.0,
+  "reasoning": "Analýza svíčkových grafů a indikátorů ukazuje směr trendu. RSI i MA poskytují signály podporující stabilitu ceny.",
+  "timestamp": "2026-03-13T21:20:54.751870+00:00",
   "model": "deepseek-coder-v2"
 }

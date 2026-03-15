@@ -1,9 +1,9 @@
 {
   "symbol": "AUDUSD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje slabou finanční situaci Austrálie, což může vést k poklesu hodnoty AUD. Technická analyza s pomalým tempem MA a RSI pod 50 signalizují další pokles.",
-  "timestamp": "2026-03-13T16:37:09.155658+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Převažují negativní signály z RSI a MA, ale je potenciál na obnovu růstových trendů.",
+  "timestamp": "2026-03-13T19:20:57.458946+00:00",
   "model": "deepseek-coder-v2"
 }

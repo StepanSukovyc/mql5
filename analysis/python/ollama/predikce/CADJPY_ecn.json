@@ -1,9 +1,9 @@
 {
   "symbol": "CADJPY_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Riziko růstu je zvýšeno z důvodu silného trendu a překonaných high v poslední době. Nicméně, RSI ukazuje nárust nad 50, což naznačuje slabou sílu kupujících.",
-  "timestamp": "2026-03-13T16:46:18.611101+00:00",
+  "BUY": 20.0,
+  "SELL": 60.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály je omezeno vlivem měnových a globálních faktorů. RSI i MA hodnoty ukazují na pokles cen, ale zároveň diverzifikace portfolia vyžaduje uchování pozice.",
+  "timestamp": "2026-03-13T19:29:40.554953+00:00",
   "model": "deepseek-coder-v2"
 }

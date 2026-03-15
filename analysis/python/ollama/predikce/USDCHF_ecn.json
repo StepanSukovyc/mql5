@@ -1,9 +1,9 @@
 {
   "symbol": "USDCHF_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
-  "HOLD": 20.0,
-  "reasoning": "Zvýšení RSI a MA hodnot indikuje potenciální vzestup trhu. Nicméně, pokles v posledních třech měsících ukazuje na určitou nejistotu.",
-  "timestamp": "2026-03-13T15:16:09.495595+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a silná poptávka po bezpečnosti vedou k lepšímu hodnocení CHF.",
+  "timestamp": "2026-03-13T21:00:16.387233+00:00",
   "model": "deepseek-coder-v2"
 }

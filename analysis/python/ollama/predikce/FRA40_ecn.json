@@ -1,9 +1,9 @@
 {
   "symbol": "FRA40_ecn",
   "BUY": 25.0,
-  "SELL": 50.0,
-  "HOLD": 25.0,
-  "reasoning": "Rozdíl mezi BUY a SELL je převážně v očekáváním poklesu na základě vysokých hodnot RSI a MA, které indikují opravu. HOLD reprezentuje nejistotu s omezenými pohyby.",
-  "timestamp": "2026-03-13T17:28:51.805512+00:00",
+  "SELL": 30.0,
+  "HOLD": 45.0,
+  "reasoning": "Předpokládám stabilitu s tržními indikátory ukazujícími mírný růst.",
+  "timestamp": "2026-03-13T20:11:11.211037+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "XAUUSD_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje silnou finanční situaci Spojených států a růst cen zlata způsobený inflací. Svíčkové formace a RSI indikují, že cena může dále růst.",
-  "timestamp": "2026-03-13T15:54:15.860555+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence k poklesu. Nicméně svíčková formační analýza ukazuje na možnost silného odrazu, což podporuje předpoklad růstu.",
+  "timestamp": "2026-03-13T21:27:49.072103+00:00",
   "model": "deepseek-coder-v2"
 }

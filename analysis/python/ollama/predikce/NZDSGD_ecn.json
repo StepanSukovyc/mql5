@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezená zatímco riziko poklesu je vyšší díky volatilitě trhu.",
-  "timestamp": "2026-03-13T14:57:04.701174+00:00",
+  "reasoning": "Riziko je vyšší kvůli volatilitě trhu a poklesu hodnoty MA. BUY méně než SELL.",
+  "timestamp": "2026-03-13T20:44:34.825272+00:00",
   "model": "deepseek-coder-v2"
 }

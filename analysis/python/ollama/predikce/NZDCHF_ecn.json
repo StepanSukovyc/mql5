@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové síly jsou slabší než poklesové, ale trend směřuje nahoru. RSI a MA podporují pozitivní pohyb.",
-  "timestamp": "2026-03-13T14:51:28.296339+00:00",
+  "reasoning": "Růstové impulzy s RSI nad 50 a korekce podle svíčkových grafů naznačují stabilitu. Nicméně, pokles MA signalizuje další pohyb dolů.",
+  "timestamp": "2026-03-13T20:39:20.119360+00:00",
   "model": "deepseek-coder-v2"
 }

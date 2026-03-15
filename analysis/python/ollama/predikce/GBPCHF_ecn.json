@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Růstové tendence jsou slabší, ale stále pozitivní. RSI a MA ukazují směr růstu.",
-  "timestamp": "2026-03-13T14:27:05.131192+00:00",
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace naznačují možnost otočení. Riziko ztráty je vyváženo pozitivním sentimentem ze snížení úrokových sazeb ve Velké Británii.",
+  "timestamp": "2026-03-13T20:16:22.486038+00:00",
   "model": "deepseek-coder-v2"
 }

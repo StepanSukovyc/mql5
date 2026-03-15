@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Předběžné hodnocení na základě fundamentálních faktorů a technických indikátorů ukazuje na nejistotu s rozhodnutím BUY, přičemž vyšší pravděpodobnost poklesu je v současné fázi silnější.",
-  "timestamp": "2026-03-13T15:42:20.210243+00:00",
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nárůst cen je podporován pouze slabými základnami.",
+  "timestamp": "2026-03-13T21:19:12.376055+00:00",
   "model": "deepseek-coder-v2"
 }

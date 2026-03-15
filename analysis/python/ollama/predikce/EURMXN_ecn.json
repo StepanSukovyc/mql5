@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend směrem dolů, ale fundamentální analýza ukazuje silnou podporu na úrovni 1.8600, což by mohlo vést k obnovení růstu.",
-  "timestamp": "2026-03-13T17:12:18.184502+00:00",
+  "reasoning": "Základní analýza ukazuje stabilitu s mírně růstajícím trendem. RSI indikátor signalizuje překoupenost s následujícím očekáváním korekce, zatímco MA ukazuje střednědobý trend. Doporučení je tedy kompromisem mezi potenciálem růstu a rizikem.",
+  "timestamp": "2026-03-13T19:55:35.054144+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem makroekonomických faktorů a nedávnými poklesy. Nízké hodnoty RSI indikují pře prodej, ale MA ukazuje stabilitu.",
-  "timestamp": "2026-03-13T15:39:56.244489+00:00",
+  "reasoning": "Při pohledu na svíčkové formace a RSI je vidět tendence k poklesu, ale MA ukazuje stabilitu. Kombinace těchto faktorů doporučuje částečný nákup s vyloučením silného pohybu.",
+  "timestamp": "2026-03-13T21:17:29.838994+00:00",
   "model": "deepseek-coder-v2"
 }

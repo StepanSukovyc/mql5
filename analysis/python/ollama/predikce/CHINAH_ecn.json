@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená z důvodu nižších hodnot RSI a vývojem svíčkových grafů. Přijatelnější riziko pro kupující je ale stále menší.",
-  "timestamp": "2026-03-13T16:53:07.092053+00:00",
+  "reasoning": "Riziko je vyšší kvůli volatilitě trhu a slabým svíčkovými formacemi. RSI ukazuje přebytek negativních signálů.",
+  "timestamp": "2026-03-13T19:36:37.939806+00:00",
   "model": "deepseek-coder-v2"
 }

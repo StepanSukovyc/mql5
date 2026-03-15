@@ -1,9 +1,9 @@
 {
   "symbol": "AUDZAR_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoké hodnoty RSI a pokles MA indikují silnou tendenci k poklesu.",
-  "timestamp": "2026-03-13T16:39:21.550014+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové potenciály jsou omezená vzhledem k aktuálním cenám a silným odporům. Historické hodnoty RSI ukazují nadprůměrnou sílu prodlužuje pozitivní trend.",
+  "timestamp": "2026-03-13T19:22:42.016395+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "AUDJPY_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozhodujícím faktorem je pokles RSI a pohyb cen pod hlavní MA. Pravděpodobnost růstu je nízká kvůli silnému trendu k poklesu.",
-  "timestamp": "2026-03-13T16:30:18.867032+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle svíčkových formací a RSI může dojít k otočení trendu směrem nahoru, ale zároveň je třeba vzít v úvahu volatilitu trhu.",
+  "timestamp": "2026-03-13T19:15:44.469851+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "XCUUSD_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Na základě fundamentální analýzy a svíčkových formací může dojít k poklesu ceny. RSI indikuje překoupenost, která může vést k oživení trendu směřujícího k poklesu.",
-  "timestamp": "2026-03-13T15:56:38.043871+00:00",
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Převažujícím signálem je pokles cen na základě silného bearish svíčkového vzoru a nízkých hodnot RSI. MA ukazuje slabou podporu, což potvrzuje negativní tendenci.",
+  "timestamp": "2026-03-13T21:29:33.338418+00:00",
   "model": "deepseek-coder-v2"
 }

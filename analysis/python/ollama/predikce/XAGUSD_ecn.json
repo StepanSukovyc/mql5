@@ -1,9 +1,9 @@
 {
   "symbol": "XAGUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zvýšení RSI v měsíčním timeframe a potvrzení svíčkovou formací podporují růst. Nicméně, pokles MA signalizuje tím zeslabování trendu.",
-  "timestamp": "2026-03-13T15:49:28.443917+00:00",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Růst cenových trendů s podporou RSI a MA indikátorů, ale nízké hodnoty v měsíčním časovém rámci indikují nejistotu.",
+  "timestamp": "2026-03-13T21:24:23.715785+00:00",
   "model": "deepseek-coder-v2"
 }

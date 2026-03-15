@@ -1,9 +1,9 @@
 {
   "symbol": "USDCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové potenciály jsou omezená vysokými úrovněmi odporu a poklesový tlak je silný díky nízkým hodnotám RSI.",
-  "timestamp": "2026-03-13T15:13:46.294921+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza měnového páru ukazuje slabost v kanadském dolaru, zatímco americký dolar je silný. RSI a klouzavé průměry indikují další pokles.",
+  "timestamp": "2026-03-13T20:58:33.703401+00:00",
   "model": "deepseek-coder-v2"
 }

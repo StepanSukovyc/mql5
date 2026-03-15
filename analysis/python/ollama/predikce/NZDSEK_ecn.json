@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu Novozélance a slabou švédskou korunu. RSI i MA hodnoty indikují stabilitu s tendencí růstu.",
-  "timestamp": "2026-03-13T14:55:13.441758+00:00",
+  "reasoning": "Podle RSI je trend opakovaně odrážen od podpory/odporu, což naznačuje nejistotu. MA ukazuje slabší růstový potenciál.",
+  "timestamp": "2026-03-13T20:42:49.735067+00:00",
   "model": "deepseek-coder-v2"
 }

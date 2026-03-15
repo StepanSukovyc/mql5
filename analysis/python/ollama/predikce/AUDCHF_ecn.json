@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu AUD s růstovým tlakem. RSI a MA hodnoty podporují tento trend.",
-  "timestamp": "2026-03-13T16:28:00.441241+00:00",
+  "reasoning": "Podle fundamentální analýzy měnového páru AUD/CHF je očekáván růst. Technická analýza ukazuje silnou podporu na hodinovém grafu a RSI indikátor signalizuje nadvládu síly kupujících. Hodnocení reflektuje nejistotu z důvodu volatilního trhu.",
+  "timestamp": "2026-03-13T19:13:59.623774+00:00",
   "model": "deepseek-coder-v2"
 }

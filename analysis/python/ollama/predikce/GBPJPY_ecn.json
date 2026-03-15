@@ -1,9 +1,9 @@
 {
   "symbol": "GBPJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
+  "BUY": 30.0,
+  "SELL": 65.0,
   "HOLD": 5.0,
-  "reasoning": "Růstové signály jsou omezené zhoršením situace na trhu a nedostatečným potvrzením svíčkovými formacemi.",
-  "timestamp": "2026-03-13T14:28:57.692511+00:00",
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují silnou pozici na BUY, ale zároveň je potřeba vzít v úvahu riziko způsobené geopoliticými návaly.",
+  "timestamp": "2026-03-13T20:18:05.614316+00:00",
   "model": "deepseek-coder-v2"
 }

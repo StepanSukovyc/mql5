@@ -1,9 +1,9 @@
 {
   "symbol": "SGDJPY_ecn",
-  "BUY": 60.0,
-  "SELL": 30.0,
-  "HOLD": 10.0,
-  "reasoning": "Růst RSI a MA ukazují na potenciální zesílení trendu. Malé svíčkové formace indikují nejistotu.",
-  "timestamp": "2026-03-13T15:00:46.938850+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a silné odporové síly na úrovni 100 MA indikují nejistotu.",
+  "timestamp": "2026-03-13T20:48:02.502439+00:00",
   "model": "deepseek-coder-v2"
 }

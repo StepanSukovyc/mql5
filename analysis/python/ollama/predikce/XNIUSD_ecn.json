@@ -1,9 +1,9 @@
 {
   "symbol": "XNIUSD_ecn",
   "BUY": 40.0,
-  "SELL": 20.0,
-  "HOLD": 40.0,
-  "reasoning": "Podle svíčkových formací a trendu RSI může dojít k otočení trhu. Historické hodnoty MA podporují stabilitu.",
-  "timestamp": "2026-03-13T15:59:01.127588+00:00",
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle svíčkových formací a RSI indikátoru ukazuje graf tendenci k oživení, ale stále je prezentován významný odpor. Kombinace s MA hodnotami podporují stabilitu, což doporučuje mírnou nákupní pozici.",
+  "timestamp": "2026-03-13T21:31:18.179162+00:00",
   "model": "deepseek-coder-v2"
 }

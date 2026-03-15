@@ -1,9 +1,9 @@
 {
   "symbol": "EURCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažující trend je směrem dolů s nárustem volatility. RSI a MA hodnoty indikují pokles ceny.",
-  "timestamp": "2026-03-13T17:03:37.979899+00:00",
+  "reasoning": "Podle RSI a klouzavých průměrů je trend směrem dolů, ale cenová akce naznačuje možnou změnu. Fundamentální analýza neposkytuje jasné rozhodující faktory.",
+  "timestamp": "2026-03-13T19:46:52.606167+00:00",
   "model": "deepseek-coder-v2"
 }

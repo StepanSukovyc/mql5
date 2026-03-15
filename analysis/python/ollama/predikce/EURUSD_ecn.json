@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět nápadný pokles v posledních měsících, což naznačuje silnou tendenci k poklesu. Nicméně svíčkové formace ukazují potenciální zotavení, což mi dává nejistotu.",
-  "timestamp": "2026-03-13T17:23:13.738092+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět, že cena se nachází v oblasti pod svým kratším MA, což naznačuje pokles. Nicméně, fundamentální analýza ukazuje stabilitu s růstem trhu a investicemi do zlateminingu.",
+  "timestamp": "2026-03-13T20:05:59.997414+00:00",
   "model": "deepseek-coder-v2"
 }

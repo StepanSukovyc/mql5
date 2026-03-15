@@ -1,9 +1,9 @@
 {
   "symbol": "USDCZK_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě fundamentální analýzy a svíčkových formací může dojít k oživení trhu, což podporuje BUY. Nicméně RSI ukazuje nadprůměrnou sílu prodeje a MA trendu je nejistý, co vedlo k HOLD.",
-  "timestamp": "2026-03-13T15:18:34.199146+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stochastický vzestup, který naznačuje potenciální zeslabení trendu poklesu. Nicméně, dlouhodobý trend ukazuje na pokles kurzu.",
+  "timestamp": "2026-03-13T21:01:59.660992+00:00",
   "model": "deepseek-coder-v2"
 }

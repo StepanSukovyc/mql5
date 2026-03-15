@@ -1,9 +1,9 @@
 {
   "symbol": "EURJPY_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu, RSI a MA indikují překoupenost s malou pohyblivostí. Svíčkové formace sugerují most mezi růstem a poklesem.",
-  "timestamp": "2026-03-13T17:10:31.686305+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové síly indikátoru RSI a korekce v MA sugerují potenciál pro pokračující růst. Nicméně, nízký objem obchodů a divergence mezi cenou a indikátory mohou signalizovat nejistotu.",
+  "timestamp": "2026-03-13T19:53:48.911516+00:00",
   "model": "deepseek-coder-v2"
 }

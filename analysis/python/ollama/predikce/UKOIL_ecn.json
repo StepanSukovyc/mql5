@@ -1,9 +1,9 @@
 {
   "symbol": "UKOIL_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Základní analýza ukazuje stabilitu ceny a silnou podporu na úrovni 70 USD. RSI indikátor nad 50 indikuje slabou sílu klesajících trendů, zatímco MA hodnoty svědčí o pokračujícím trendu.",
-  "timestamp": "2026-03-13T15:04:30.854128+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a slabá svíčková formační analýza naznačují potenciální pokles ceny. Nicméně, RSI ukazuje nadprůměrnou sílu a MA signalizuje pozitivní trend.",
+  "timestamp": "2026-03-13T20:51:31.928295+00:00",
   "model": "deepseek-coder-v2"
 }

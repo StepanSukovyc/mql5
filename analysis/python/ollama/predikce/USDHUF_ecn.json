@@ -1,9 +1,9 @@
 {
   "symbol": "USDHUF_ecn",
-  "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence poklesu. Nicméně cenový graf ukazuje signály pro růst v příštích týdnech.",
-  "timestamp": "2026-03-13T15:23:19.401550+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové potenciály jsou omezeny nízkými hodnotami RSI a MA, zatímco pokles je podpořen silnějším trendem.",
+  "timestamp": "2026-03-13T21:05:25.897789+00:00",
   "model": "deepseek-coder-v2"
 }

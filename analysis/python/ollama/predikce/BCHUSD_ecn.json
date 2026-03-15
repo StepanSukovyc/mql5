@@ -1,9 +1,9 @@
 {
   "symbol": "BCHUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Růstové potenciály jsou omezené vzhledem k historickým vrcholům a silným odporovým úrovním. Zatímco MA ukazuje tendenci směrem nahoru, RSI je nad přeučenou hodnotou 70, což naznačuje možnou změnu trendu.",
-  "timestamp": "2026-03-13T16:41:07.925159+00:00",
+  "BUY": 60.0,
+  "SELL": 35.0,
+  "HOLD": 5.0,
+  "reasoning": "Dle RSI a MA indikátorů je trend ceny nakloněn k růstu. Změny v MA ukazují silnou podporu. Současný stav marketu ale zdůrazňuje nejistotu.",
+  "timestamp": "2026-03-13T19:24:26.246508+00:00",
   "model": "deepseek-coder-v2"
 }

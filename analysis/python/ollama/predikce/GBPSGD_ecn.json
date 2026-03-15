@@ -1,9 +1,9 @@
 {
   "symbol": "GBPSGD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
+  "BUY": 20.0,
+  "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Podle fundamentální analýzy může dojít k růstu GBP v důsledku očekávaných změn ekonomického prostředí. Technická analyza ukazuje stochastické vyhlazování a RSI blízko překoupení, což naznačuje nejistotu.",
-  "timestamp": "2026-03-13T14:32:44.944427+00:00",
+  "reasoning": "Růstové potenciály jsou omezené vlivem globálních ekonomických faktorů a nedávnými ztrátami v bankovnictví. Náladum trhu ale stačí pro pozitivní pohled.",
+  "timestamp": "2026-03-13T20:21:32.013732+00:00",
   "model": "deepseek-coder-v2"
 }

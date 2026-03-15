@@ -588,7 +588,7 @@ Na základě všech dostupných informací (predikce, otevřené pozice, stav ú
 3. Doporuč velikost lotu (berouc v úvahu aktuální marži a risk management)
 4. Navrhni take_profit cenu pro swing obchod (pozice může být otevřená několik dní)
 5. Zdůvodni rozhodnutí
-5. DIVERZIFIKACE: Preferuj symboly, které ještě nemáš v otevřených pozicích. Pokud už máš otevřenou pozici na doporučovaném symbolu, zkontroluj její vstupní cenu (open_price) - pokud je aktuální tržní cena blízko vstupní ceny (rozdíl < 0.5%), POVINNĚ vyber raději jiný kandidát z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
+6. DIVERZIFIKACE: Preferuj symboly, které ještě nemáš v otevřených pozicích. Pokud již existují otevřené pozice, posuzuj tu s open_price nejblíže aktuální tržní ceně a novou pozici na stejném symbolu otevři POUZE tehdy, když tato nejbližší pozice prodělává více než 15 % aktuální hodnoty účtu; jinak POVINNĚ vyber raději jiný kandidát z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
 
 DŮLEŽITÉ OBCHODNÍ NASTAVENÍ:
 - Nejsem intradenní obchodník. Pozice držím často více dní (swing styl).

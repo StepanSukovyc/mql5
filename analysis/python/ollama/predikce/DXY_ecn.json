@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růst cenových impulsů s nárůstem RSI a MA signalizuje silnou tendenci. Nicméně, pokles v rámci předchozího měsíce ukazuje na určitou nejistotu.",
-  "timestamp": "2026-03-13T16:54:51.334381+00:00",
+  "reasoning": "Růst cenových trendů je potenciálně zastíren svíčkovými formacemi a nárůstem RSI, ale divergence mezi indikátory a cenou naznačuje nejistotu.",
+  "timestamp": "2026-03-13T19:38:22.197340+00:00",
   "model": "deepseek-coder-v2"
 }

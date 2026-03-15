@@ -1,9 +1,9 @@
 {
   "symbol": "NOKSEK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s tržním profilem, RSI a MA indikují silnou podporu, což naznačuje potenciál růstu.",
-  "timestamp": "2026-03-13T14:47:43.908574+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s cenným papírem, RSI a MA indikují potenciál růstu, ale vysoké riziko na základě historických dat.",
+  "timestamp": "2026-03-13T20:35:50.811931+00:00",
   "model": "deepseek-coder-v2"
 }

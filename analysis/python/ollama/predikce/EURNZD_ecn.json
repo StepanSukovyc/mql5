@@ -1,9 +1,9 @@
 {
   "symbol": "EURNZD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale svíčkové formace indikují případný pullback. Riziko ztráty je omezené.",
-  "timestamp": "2026-03-13T17:15:53.251568+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem obav z inflace a politiky centrálních bank. Klesající trend RSI s nárůstem volatility.",
+  "timestamp": "2026-03-13T19:59:03.679252+00:00",
   "model": "deepseek-coder-v2"
 }

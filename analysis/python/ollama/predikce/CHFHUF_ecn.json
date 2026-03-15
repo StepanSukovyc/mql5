@@ -1,9 +1,9 @@
 {
   "symbol": "CHFHUF_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zohledňuji faktory jako stabilita měny, technické signály bullish na krátkodobé a střednědobé horizonty, ale také přítomnost odporu v RSI a MA.",
-  "timestamp": "2026-03-13T16:48:01.475315+00:00",
+  "BUY": 40.0,
+  "SELL": 20.0,
+  "HOLD": 40.0,
+  "reasoning": "Na základě svíčkových formací a RSI indikátoru může dojít k obnovení růstu cen. Nicméně, MA hodnoty ukazují nejistotu.",
+  "timestamp": "2026-03-13T19:31:24.900289+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Předpokládám stabilitu trhu s přijetím rizika většího než očekávání.",
-  "timestamp": "2026-03-13T15:47:06.264739+00:00",
+  "reasoning": "Předpokládám, že RSI a MA hodnoty ukazují směr trendu, zatímco fundamentální analýza není jasná. VIX je volatilním indexem, který indikuje očekávání trhu ohledně budoucí volatility. Tento model předpokládá, že dojde k určitému opakování minulých trendů a doporučuje držet pozici.",
+  "timestamp": "2026-03-13T21:22:40.957706+00:00",
   "model": "deepseek-coder-v2"
 }
