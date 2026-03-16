@@ -1,7 +1,0 @@
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. 4H a denní RSI se blíží překoupené oblasti, ale nejsou tam. Cena je nad 4H a denní MA, což naznačuje býčí trend. Týdenní a měsíční RSI jsou pod 50, což naznačuje potenciální medvědí trend. Týdenní MA je nad aktuální cenou, což podporuje medvědí výhled. Vzhledem k těmto rozporům a chybějícím svíčkovým formacím se doporučuje obezřetnost. HOLD je rozumná pozice, dokud se nevyjasní další signály. BUY je potenciálně rizikový, SELL je také rizikový. Přikláním se k BUY, protože krátkodobý trend je stále býčí."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "XPDUSD_ecn se nachází v downtrendu. RSI na 1h, 4h a denním grafu naznačuje, že je trh blízko přeprodané zóně, ale ještě ji nedosáhl, což naznačuje potenciál pro další pokles. Cena je pod klouzavými průměry na 1h, 4h a denních grafech, což potvrzuje downtrend. Na týdenním grafu je RSI neutrální a cena je nad MA, ale poslední týdenní svíčka je silně klesající. Měsíční RSI je sice vysoké, ale cena se od MA značně odklonila a nyní klesá. Převažují signály pro SELL, BUY je rizikový, HOLD je opatrný přístup vzhledem k potenciálnímu krátkodobému odrazu."
-}

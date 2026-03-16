@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Mixed signals across timeframes. 1H RSI is neutral and price is below MA, suggesting potential for further short-term downside. 4H RSI is at 63, suggesting a potential for a pullback after an upward trend. Daily RSI is around 56, and price is above MA, leaning bullish but not strongly. Weekly and monthly RSIs are also in the bullish territory but not overbought, while price is far from its MA. Overall, SELL has slightly higher probability due to short-term momentum and possible pullback from 4h timeframe, but holding also prudent due to medium/long timeframe bullish indicators. Given mixed signals, Buy is least likely."
-}

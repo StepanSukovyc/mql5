@@ -1,7 +1,0 @@
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "Na denním grafu je RSI na úrovni 69.7, což naznačuje překoupenost, ale není extrémní. Týdenní RSI je na 64.9, což je relativně neutrální. Měsíční RSI je na 48.4, což naznačuje potenciál pro růst. Cena je pod MA na 1h a 4h grafech, ale nad MA na denním, týdenním a měsíčním grafu. Vzhledem k rozporuplným signálům a absenci jasné svíčkové formace, doporučuji HOLD s mírným náklonem k BUY. Rychlý růst v posledních dnech může být korigován, proto je riziko SELL. Potenciál BUY je dán dlouhodobějším trendem a možným odrazem od MA na vyšších timeframech."
-}

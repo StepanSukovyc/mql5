@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "The monthly and weekly RSI values are very low, indicating oversold conditions. However, the price is still below the daily and hourly moving averages, and the recent candles show no clear bullish reversal pattern. The daily RSI is below 50, suggesting continued bearish momentum, and the 4h timeframe shows indecision. Therefore, a HOLD position is warranted with slightly higher conviction for SELL, given the short-term bearish momentum."
-}

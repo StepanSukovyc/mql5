@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod denním a týdenním MA, RSI na denním a týdenním grafu naznačuje, že nejsme v překoupené ani přeprodané zóně. Na 1h a 4h grafu se cena pohybuje kolem MA. Celkově mírný tlak na SELL s ohledem na pozici ceny vůči MA a RSI na vyšších timeframech. S ohledem na to, že se cena pohybuje kolem MA na 1h a 4h timeframe, je HOLD rozumná volba. BUY pozice je riziková."
-}

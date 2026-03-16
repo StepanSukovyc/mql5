@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "AUDCHF is currently at 0.54736. On the daily timeframe, RSI is at 54.32, and price is slightly above MA (0.5471). Weekly RSI is high at 65.08, suggesting potential overbought conditions. Monthly RSI is 40.91 and current price is above monthly MA, suggesting overall bullish long term momentum. 1h and 4h RSI are neutral. Recent price action shows a slight downtrend, leading to a higher probability of sell. HOLD is a safe choice given conflicting timeframes."
-}

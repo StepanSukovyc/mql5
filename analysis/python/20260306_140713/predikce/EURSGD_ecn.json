@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "EURSGD is currently exhibiting a downward trend across multiple timeframes. RSI values on 1H, 4H, and Daily charts are all below 40, indicating oversold conditions, but not extremely so, suggesting further downside potential. The price is also below the Moving Averages on all timeframes except for the monthly, which lags significantly. The recent hourly candles show a consistent decline. A 'SELL' position seems to have the highest probability due to the persistent downtrend, while HOLD is appropriate for those waiting for a clearer signal or mean reversion. A BUY is risky, due to trend but is present as a possible short term trade due to the oversold conditions. "
-}

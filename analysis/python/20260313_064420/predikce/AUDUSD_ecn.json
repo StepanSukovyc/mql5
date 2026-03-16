@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 25,
-  "SELL": 60,
-  "HOLD": 15,
-  "reasoning": "Na hodinovém grafu je RSI hluboko v přeprodané oblasti (21.88), což by mohlo naznačovat potenciální korekci směrem nahoru. Nicméně, cena se nachází pod MA na všech časových rámcích s výjimkou denního, což ukazuje na převahu medvědího sentimentu. Denní RSI je neutrální (53.22), ale klesající trend v posledních dnech je zřetelný, což indikuje pokračující tlak na pokles ceny. Týdenní a měsíční RSI jsou relativně vysoké (70.66 a 64.46), což signalizuje, že pár je stále v uptrendu, ale mohl by být překoupený a náchylný k korekci. Vzhledem k aktuální ceně (0.70418) a tomu, že se cena pohybuje pod denním MA (0.707598), upřednostňuji SELL pozici. Je potřeba sledovat případné support úrovně a přeprodané podmínky na nižších timeframech, které by mohly vést k dočasným korekcím. Celkově je riziko poklesu ceny vyšší než růstu."
-}

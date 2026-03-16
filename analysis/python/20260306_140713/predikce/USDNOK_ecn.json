@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě neutrální až mírně medvědí výhled. 1h RSI blízko 50, 4h RSI nad 60, naznačuje možný býčí moment. Denní RSI okolo 52, potvrzuje spíše neutrální sentiment. Nicméně týdenní a měsíční RSI pod 40 indikuje silný downtrend. Měsíční MA je vysoko nad současnou cenou, což naznačuje silný dlouhodobý klesající trend. Cena se pohybuje pod MA na 1h a 4h timeframe, ale nad MA na denním timeframe. Svícny z posledních hodin nenaznačují silný trend, proto je vhodné vyčkat."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "NOKSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza na denním a týdenním timeframe naznačuje překoupenost (RSI > 70), což signalizuje potenciální obrat trendu. I když měsíční RSI je neutrální, cena se pohybuje nad měsíčním MA. Nicméně, poslední hourly svíčky ukazují pokles, s RSI pod 50 a cenou pod MA, což naznačuje spíše SELL. 4h RSI je také okolo 50, což nenaznačuje jasný směr. Proto doporučuji zvážit SELL s opatrností a sledovat další vývoj. HOLD je relevantní vzhledem k neurčitosti v kratších časových rámcích."
-}

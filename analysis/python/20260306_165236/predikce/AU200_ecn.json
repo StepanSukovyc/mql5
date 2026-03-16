@@ -1,7 +1,0 @@
-{
-  "symbol": "AU200_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Short-term: RSI is oversold on 1h and 4h charts, suggesting a possible bounce. However, the price is below the MA on all timeframes except monthly, indicating a downtrend. Daily RSI is falling. Therefore, SELL has the highest probability. Long-term monthly MA is still in a bullish position so HOLD is viable. There may be a BUY opportunity in the short term but the overall trend is too strong to be confident in a buy."
-}

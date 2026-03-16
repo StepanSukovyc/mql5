@@ -1,9 +1,9 @@
 {
   "symbol": "US100_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Riziko je ohodnoceno založeně na analýze RSI a MA. RSI ukazuje slabost s poklesem pod hladinu 50, což naznačuje nárůst rizika pro pokles. Hlavní trend je pozitivní, ale SMA signalizuje nejistotu s křivkou pod cenovým pohybem.",
-  "timestamp": "2026-03-13T20:53:18.228518+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažují negativní signály z RSI a MA, s několika potenciálními výkyvy směrem nahoru.",
+  "timestamp": "2026-03-16T01:55:29.133242+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,0 @@
-{
-  "symbol": "EURAUD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převládající trend směrem dolů s několika signály pro obrat v rámci svíčkových grafů a RSI ukazuje přeprodanost.",
-  "timestamp": "2026-03-09T04:18:06.839253+00:00",
-  "model": "deepseek-coder-v2"
-}

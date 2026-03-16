@@ -1,7 +1,0 @@
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na denním a týdenním grafu je RSI pod 40, což značí potenciální překoupenost, ale zároveň klesající trend. Denní MA je výrazně nad aktuální cenou, což indikuje další pokles. Na hodinovém grafu je RSI kolem 50 a cena kolem MA, takže krátkodobý signál je neutrální. Měsíční RSI je blízko překoupenosti, ale cena je nad MA. Celkově převažuje SELL, protože denní a týdenní graf naznačují klesající trend."
-}

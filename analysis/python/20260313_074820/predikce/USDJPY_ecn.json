@@ -1,7 +1,0 @@
-{
-  "symbol": "USDJPY_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "USDJPY je v uptrendu, RSI na denní a 4H bázi ukazuje hodnoty blízko překoupenosti, ale neextrémní. MA na všech timeframech kromě 1H jsou pod aktuální cenou, což naznačuje pokračující tlak na růst. Nicméně, riziko korekce existuje vzhledem k vysokým hodnotám RSI a omezenému množství dat (pouze 30 svíček pro 1H, 4H a denní graf). Doporučuji opatrný BUY s možností HOLD, pokud se situace vyvine nepříznivě."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "AUDNZD je v překoupené zóně na týdenním i měsíčním grafu (RSI > 70). Denní RSI se také blíží překoupené zóně. I když cena je nad MA na většině časových rámců, riziko korekce je vysoké kvůli překoupeným podmínkám. Z posledních 30 svíček na denním grafu vidíme převážně býčí svíčky, ale poslední den se formuje medvědí svíčka (06/03), což naznačuje oslabení tlaku. Proto SELL má větší procentuální zastoupení než BUY. HOLD je doporučen pro ty, kteří již mají otevřené pozice a chtějí počkat na další vývoj situace."
-}

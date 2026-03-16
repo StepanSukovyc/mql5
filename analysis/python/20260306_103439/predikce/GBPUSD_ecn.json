@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Technická analýza naznačuje spíše SELL pozici. Denní a 4H RSI jsou pod 50, což indikuje sestupný trend. Denní MA je nad současnou cenou a působí jako rezistence. Naopak měsíční MA je pod aktuální cenou, což naznačuje potenciální budoucí support. 1H RSI je v neutrální zóně. Vzhledem k rozporuplným signálům na různých časových rámcích a převaze medvědích indikátorů preferuji SELL s menší podporou HOLD."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 25,
-  "SELL": 60,
-  "HOLD": 15,
-  "reasoning": "Cena USOIL prudce vzrostla, RSI je silně překoupené na všech kratších časových rámcích (1h, 4h, den), což naznačuje potenciální korekci. MA na delších časových rámcích je sice stále pod současnou cenou, ale překoupenost indikuje vysoké riziko pro nákup. Posledních 30 svíček na 4h grafu ukazují silný uptrend, ale RSI signalizuje, že je čas na korekci. Proto SELL má vyšší pravděpodobnost, HOLD je opatrnější přístup a BUY je rizikové."
-}

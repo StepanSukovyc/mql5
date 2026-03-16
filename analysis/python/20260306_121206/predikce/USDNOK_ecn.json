@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Dlouhodobý trend na měsíčním a týdenním grafu je klesající (RSI pod 40, MA klesá). Denní graf vykazuje mírnou konsolidaci (RSI kolem 50, MA mírně klesá). Krátkodobě (1h, 4h) vidíme menší růstový potenciál, ale celkový sentiment trhu naznačuje spíše SELL pozici. HOLD je opatrná strategie vzhledem k nejistotě."
-}

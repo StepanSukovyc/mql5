@@ -1,9 +1,9 @@
 {
   "symbol": "USDSEK_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Riziko je v současné době vyšší kvůli silným pohybům směřujícím nahoru na svíčkovém grafu a poklesu RSI. Nicméně, MA ukazuje tendenci k růstu, což dává jistotu pro BUY.",
-  "timestamp": "2026-03-13T21:15:45.906393+00:00",
+  "reasoning": "Rozdíl mezi BUY a HOLD je způsoben volatilitou trhu, zatímco SELL odráží silnou tendenci poklesu.",
+  "timestamp": "2026-03-16T02:17:54.765197+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "Na kratších timeframech (1h, 4h, den) je RSI překoupené, což naznačuje možnost korekce (SELL). Měsíční RSI je neutrální a cena nad MA naznačuje pokračující uptrend (BUY). Týdenní timeframe s RSI 67.5 a cenou nad MA naznačuje možnou pokračující sílu uptrendu (BUY). Vzhledem k rozporuplným signálům je rozumné část držet (HOLD) pro případ konsolidace nebo korekce."
-}

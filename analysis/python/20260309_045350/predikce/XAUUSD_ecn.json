@@ -1,7 +1,0 @@
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Zlato je v prekoupene zone na mesicnim a tydennim grafu (RSI 89, 73), coz naznacuje potencialni korekci. Na nizsich timeframech (1h, 4h, den) je RSI neutrální až pod hranicí prekoupaneho stavu, ale cena klesla pod MA na 1h a 4h grafu.  Posledni denni svicka je bearish. Proto je SELL sance vyšší. Hold kvuli moznemu odrazu od supportu. BUY sance je nejmenší kvůli překoupenosti na vyšších časových rámcích a klesajícímu trendu na nižších."
-}

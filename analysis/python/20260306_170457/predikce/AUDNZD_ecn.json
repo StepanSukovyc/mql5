@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "On the monthly and weekly timeframes, the RSI is overbought, signaling a possible correction. The daily RSI suggests potential consolidation or slight pullback.  Hourly RSI is neutral, and recent price action shows a downward trend, supporting a SELL bias.  However, the price is still above the daily and higher timeframe moving averages, providing some support for a HOLD strategy.  Given the mixed signals, a HOLD strategy is advisable until a clearer trend emerges.  The recent hourly price action shows a significant drop, increasing the short-term SELL probability."
-}

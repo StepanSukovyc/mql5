@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCAD_ecn",
-  "BUY": 25,
-  "SELL": 60,
-  "HOLD": 15,
-  "reasoning": "NZDCAD is showing oversold conditions across multiple timeframes (RSI 1H, 4H, Day all below 36), suggesting potential for a short-term bounce. However, the longer-term Moving Averages (Day and Month) are significantly above the current price, and the recent price action shows a clear downtrend, favoring a SELL strategy. The weekly RSI is at 44, so it is not overbought or oversold, meaning it needs more indicators for that time frame to tell. A HOLD strategy is not suitable as the recent price action and moving averages tell a strong story for selling."
-}

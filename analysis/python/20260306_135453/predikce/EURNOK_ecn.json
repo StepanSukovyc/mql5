@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena EURNOK se nachází v klesajícím trendu. RSI na denním a týdenním grafu je silně pod 30, což signalizuje překoupenost, ale stále indikuje sílu downtrendu. Měsíční RSI je také relativně nízké. MA na všech timeframech je nad současnou cenou, což potvrzuje medvědí sentiment.  Poslední hourly svíčky naznačují mírný support kolem 11.16, ale celkově převládá tlak na prodej. Doporučuji SELL s opatrností vzhledem k potenciálnímu odrazu z překoupených úrovní."
-}

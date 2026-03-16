@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCAD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena je pod klouzavými průměry na většině timeframech (1h, 4h, day, month) což signalizuje downtrend. RSI je nízko na 1h a 4h timeframech, což naznačuje potenciální přeprodanost, ale downtrend je silnější a pravděpodobnější. Na týdenním grafu je RSI blízko 50. Na denním grafu cena prorazila dolů, což posiluje SELL signál. Pokračující pokles ceny se zdá být pravděpodobnější než obrat, proto doporučuji SELL."
-}

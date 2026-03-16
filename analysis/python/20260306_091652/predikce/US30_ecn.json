@@ -1,7 +1,0 @@
-{
-  "symbol": "US30_ecn",
-  "BUY": 25,
-  "SELL": 60,
-  "HOLD": 15,
-  "reasoning": "US30 is currently in a downtrend. RSI on 1h, 4h and daily charts are showing oversold conditions, suggesting potential for a short-term bounce. However, the price is below the moving average on all timeframes except the monthly. The monthly RSI is relatively high at 69.03. Last daily candle indicates significant selling pressure. Given the prevailing downtrend and recent price action, a selling position presents a higher probability trade in the short term. It´s recommended to hold with low portion and wait the situation to be more clear."
-}

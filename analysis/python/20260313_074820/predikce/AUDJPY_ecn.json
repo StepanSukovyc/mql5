@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoké hodnoty RSI a MA ukazují na pokles cen, zatímco údaje o fundamentu nepodporují růst.",
-  "timestamp": "2026-03-13T06:58:42.818721+00:00",
-  "model": "deepseek-coder-v2"
-}

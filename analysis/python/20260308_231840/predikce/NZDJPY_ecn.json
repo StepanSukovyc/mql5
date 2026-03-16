@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1H timeframe je RSI blízko překoupené zóně, ale na vyšších timeframe je neutrální. Cena je pod MA na 1H, 4H a denním grafu, což naznačuje klesající trend. Historická data ukazují pokles na týdenním grafu. Doporučuje se SELL strategie, dokud cena neklesne, nebo se dokud se indikátory nepřeklopí."
-}

@@ -1,9 +1,9 @@
 {
   "symbol": "GBPAUD_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažují silné signály pro pokles na základě vysokých úrovní RSI a MA, ale také pozitivní svíčkové formace naznačuje oslabení trendu.",
-  "timestamp": "2026-03-13T20:12:54.475745+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Podle RSI a MA hodnot je trend směrem dolů, ale svíčkové formace ukazují silnou podporu blízko aktuální ceně.",
+  "timestamp": "2026-03-16T01:15:33.114934+00:00",
   "model": "deepseek-coder-v2"
 }

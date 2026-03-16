@@ -1,9 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 60.0,
-  "SELL": 25.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle RSI a MA je trend směrem nahoru, ale svíčkové formace indikují nejistotu.",
-  "timestamp": "2026-03-08T23:17:50.349035+00:00",
-  "model": "deepseek-coder-v2"
-}

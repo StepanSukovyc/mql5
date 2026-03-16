@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "AUDCAD is currently at 0.94905. Short-term indicators (1H, 4H, Daily RSI) are showing oversold conditions, but the price is still below its Moving Averages, suggesting continued downward momentum. Weekly and Monthly RSI are above 60, suggesting uptrend in long term but recent crash is a strong signal to SELL. Therefore, a SELL is favoured. The spread is also increasing."
-}

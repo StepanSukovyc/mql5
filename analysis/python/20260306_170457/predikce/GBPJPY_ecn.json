@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "GBPJPY is showing mixed signals. RSI is trending upwards on shorter timeframes but is also hitting overbought levels, while MA is trending upwards and the price is above the MA on all time frames. The last hourly candle also broke a local resistance, potentially forming a bull flag. The Daily is above the moving average but RSI isn't in an overbought condition. We'll assign 40% confidence that it will continue in an upward direction. The RSI is hitting overbought levels, giving us a 30% probability that price will go down. 30% probability we HOLD with no action."
-}

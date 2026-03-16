@@ -1,7 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "EURUSD is showing oversold conditions on multiple timeframes (1H, 4H, Day RSI < 30). However, the short-term moving averages are still above the current price, and the longer-term daily MA is significantly higher. The monthly RSI is around 56, showing no indication of being oversold or overbought. Recent price action shows a bearish trend. Due to RSI oversold conditions we allow 20% for BUY. SELL is 60% as the price is below all the daily and weekly moving averages. HOLD is 20% to allow for consolidation."
-}

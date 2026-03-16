@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 20,
-  "SELL": 65,
-  "HOLD": 15,
-  "reasoning": "Měnový pár EURCHF je v silném downtrendu. RSI na všech časových rámcích (1h, 4h, den, týden, měsíc) je v pásmu přeprodanosti, což naznačuje možnost korekce, ale ne nutně obratu trendu. MA na všech časových rámcích jsou nad aktuální cenou, což potvrzuje downtrend. Na 1h grafu vidíme sérii klesajících svíček, což signalizuje prodejní tlak. Korekce je možná, ale trend je jednoznačně klesající."
-}

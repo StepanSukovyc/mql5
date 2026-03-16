@@ -1,7 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na 1h a 4h timeframe je RSI v překoupené zóně, což naznačuje potenciální korekci (SELL). Denní RSI je také relativně vysoko. Na druhou stranu, cena se pohybuje nad denním a týdenním MA, což naznačuje uptrend (BUY). Měsíční MA je nad současnou cenou a RSI pod 50, což naznačuje potenciál pro růst (BUY). S ohledem na rozporuplné signály doporučuji HOLD."
-}

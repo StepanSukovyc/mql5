@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "GBPJPY is currently in an uptrend, confirmed by price action above the daily, weekly, and monthly moving averages. However, the 1h RSI is overbought (72.509879), suggesting a possible short-term pullback. The daily RSI is at 55.87, indicating moderate upward momentum. Recent hourly candles show price consolidating, adding uncertainty. This warrants caution, thus 'Hold' with a significant weighting. A higher 'Buy' probability is assigned due to the overriding long-term uptrend. 'Sell' assigned due to overbought conditions on the hourly timeframe."
-}

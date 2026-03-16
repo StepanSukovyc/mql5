@@ -1,9 +1,9 @@
 {
   "symbol": "HKD50_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Zvýšení RSI a MA ukazují tendenci růstu. Nicméně, pokles v posledních měsících svíčkovými formacemi indikuje určitou nejistotu.",
-  "timestamp": "2026-03-13T20:28:47.711117+00:00",
+  "reasoning": "Riziko je převážně směřující k poklesu na základě technických indikátorů a negativních fundamentálních ukazatelů.",
+  "timestamp": "2026-03-16T01:31:04.154703+00:00",
   "model": "deepseek-coder-v2"
 }

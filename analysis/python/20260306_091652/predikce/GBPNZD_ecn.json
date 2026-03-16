@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "GBPNZD currently shows mixed signals. Short-term (1H, 4H) RSI is nearing overbought levels, while Daily RSI is neutral. The price is above the daily MA, but below the weekly MA. Monthly RSI is showing upward momentum, suggesting long-term bullish potential, but needs more confirmation. Recent 1H candles are showing indecision. Given the conflicting signals and proximity to resistance from the weekly MA, a HOLD position to observe further price action is prudent, with a cautious bias to BUY if the weekly MA is broken. SELL position is considered due to possible short term retrace because of overbought levels on smaller timeframes and general indecision."
-}

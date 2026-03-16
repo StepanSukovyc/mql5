@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 50,
-  "SELL": 25,
-  "HOLD": 25,
-  "reasoning": "Na hodinovém a 4hodinovém grafu RSI naznačuje překoupenost (hodnoty nad 60), ale na denním grafu je stále poměrně vysoko (65.18). Týdenní RSI je neutrální (50.22), zatímco měsíční RSI je hluboko v přeprodané oblasti (35.74), což naznačuje potenciální prostor pro růst. Cena je nad denním MA, ale pod měsíčním MA, což ukazuje na smíšený signál. Poslední denní svíčka je býčí. Celkově, vzhledem k smíšeným signálům z různých časových rámců, vidím 50% šanci na růst (BUY), 25% na pokles (SELL) a 25% na stagnaci (HOLD)."
-}

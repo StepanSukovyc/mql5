@@ -1,7 +1,0 @@
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 55,
-  "SELL": 25,
-  "HOLD": 20,
-  "reasoning": "Technická analýza naznačuje krátkodobý uptrend. Hodinový RSI je v překoupené zóně (81.29), což naznačuje potenciální korekci. Nicméně, denní RSI je na 61.30, což implikuje, že má ještě prostor pro růst. Týdenní a měsíční RSI jsou relativně neutrální. Cena se nachází nad denním a 4H MA, ale pod týdenním a měsíčním MA. Poslední hodinové svíčky ukazují na rostoucí trend. Celkově vidím mírnou převahu pro BUY, ale je třeba být opatrný kvůli překoupenosti na hodinovém grafu a potenciální rezistenci od týdenních a měsíčních MA."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Na základě technické analýzy vykazuje UK100_ecn medvědí signály. Krátkodobé RSI (1h, 4h) je hluboko v přeprodané zóně, což naznačuje možný odraz. Nicméně, cena je pod klesajícími MA na 1h, 4h a denních timeframech. Týdenní RSI je sice neutrální, ale cena se odrazila od týdenního MA. Měsíční timeframe zůstává býčí, ale krátkodobý pokles naznačuje pokračování korekce. Svíčkové formace v 1h a 4h timeframech nepotvrzují silné býčí signály. Celkově převládají spíše medvědí signály, takže SELL má nejvyšší prioritu, HOLD je neutrální a BUY má nejnižší prioritu kvůli rizikovosti."
-}

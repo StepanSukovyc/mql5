@@ -1,9 +1,9 @@
 {
   "symbol": "EU50_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Rozdíly v RSI a MA ukazují nejistotu s mírným trendem růstem. Konstantní hodnoty RSI naznačují fluktuaci mezi koupi a držením.",
-  "timestamp": "2026-03-13T19:41:46.565345+00:00",
+  "BUY": 60.0,
+  "SELL": 20.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle fundamentální analýzy dochází k pozitivním trendům v dané oblasti. RSI a MA ukazují stabilitu s tendencí růstu.",
+  "timestamp": "2026-03-16T00:43:49.580382+00:00",
   "model": "deepseek-coder-v2"
 }

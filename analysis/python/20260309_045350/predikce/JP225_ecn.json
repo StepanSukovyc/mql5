@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "JP225_ecn shows strong bearish signals. RSI is oversold on 1H and 4H charts, suggesting potential bounce, but Daily RSI is still below 50. Price is below all MAs. Recent price action indicates a sharp downward movement. The monthly RSI is high, suggesting overbought conditions in the past and a correction is underway. Given the strong downtrend, SELL is preferred. HOLD is viable for those already in a position. A weak BUY signal is based on the possible short-term oversold bounce."
-}

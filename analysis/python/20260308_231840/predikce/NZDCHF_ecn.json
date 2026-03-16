@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCHF_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "NZDCHF is showing bearish signals across multiple timeframes. The monthly RSI is deeply oversold (27.68), suggesting potential for a short-term bounce, but the price is significantly below the monthly MA (0.488125).  Daily and 4H RSI are also below 50, suggesting the downtrend has momentum. The 1H RSI is oversold, which could mean a short term bounce before further decline. Recent daily candles show consistent downward movement. I put a small buy % due to potential RSI bounce, but high sell risk given the price action."
-}

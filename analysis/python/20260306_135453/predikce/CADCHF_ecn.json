@@ -1,7 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "CADCHF is showing mixed signals. Hourly and 4-hour RSI are approaching overbought territory, suggesting a potential pullback. Daily RSI is also relatively high. However, weekly RSI is neutral, and monthly RSI is oversold, indicating long-term bullish potential. Current price is above the daily MA but below the weekly and monthly MA, showing no clear trend. Therefore, I allocate moderate percentages to BUY, SELL and HOLD."
-}

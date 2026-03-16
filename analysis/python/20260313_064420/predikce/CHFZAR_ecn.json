@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 35,
-  "SELL": 40,
-  "HOLD": 25,
-  "reasoning": "Na denním grafu je RSI na úrovni 63, což naznačuje blížící se překoupenost. Cena je nad MA na všech timeframech, ale hodinové RSI klesá. Nejnovější denní svíčka je menší než předchozí, což indikuje slábnutí momentu. Celkově data indikují potenciál pro korekci (SELL), ale v krátkodobém horizontu je možný růst (BUY) než dojde ke korekci. HOLD je nejistá pozice, protože se trh chystá buď na prolomení trendu nebo na pokračování. Vzhledem k nejistotě preferuji čekání na jasnější signál."
-}

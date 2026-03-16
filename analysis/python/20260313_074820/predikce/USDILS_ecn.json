@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "On shorter timeframes (1h, 4h, day), RSI is approaching overbought conditions, suggesting a potential pullback. However, the price is above the moving averages on these timeframes, indicating upward momentum. On the weekly and monthly charts, RSI is low and indicating an oversold situation, suggesting a potential long term upward correction.  Therefore, BUY is preferred slightly, but given limited historical data and conflicting signals across timeframes, HOLD and SELL are also reasonable options."
-}

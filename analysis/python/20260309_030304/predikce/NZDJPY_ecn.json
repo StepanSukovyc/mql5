@@ -1,9 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Vysoký RSI a MA ukazují nadějné momentum pro růst. Nicméně, negativní svíčková formace naznačuje silnou odolnost nebo pokles.",
-  "timestamp": "2026-03-09T02:38:29.420654+00:00",
-  "model": "deepseek-coder-v2"
-}

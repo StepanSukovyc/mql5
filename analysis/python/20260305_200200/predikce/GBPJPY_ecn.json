@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 35,
-  "SELL": 40,
-  "HOLD": 25,
-  "reasoning": "Na měsíčním a týdenním grafu je RSI poměrně vysoko, což naznačuje možný překoupený trh. Denní RSI je pod 50, naznačuje neutrální až mírně medvědí sentiment. 1H a 4H RSI jsou kolem 50, což potvrzuje neutrální sentiment. Cena se aktuálně pohybuje nad denním MA, ale pod 4H MA. Obecně se přikláním k SELL, vzhledem k vyšším časovým rámcům (měsíční, týdenní) RSI a nejistotě."
-}

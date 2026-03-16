@@ -1,7 +1,0 @@
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Krátkodobě downtrend. RSI na denní, 4h a 1h timeframe naznačuje přeprodanost, ale MA na všech timeframech (kromě měsíčního) jsou nad aktuální cenou, což potvrzuje medvědí trend. Proto SELL má největší pravděpodobnost. Měsíční MA je pod aktuální cenou, což by mohlo signalizovat dlouhodobý potenciál růstu. Celkově je trh volatilní a s krátkou historií. Proto dáváme HOLD malou pravděpodobnost a BUY sníženou pravděpodobnost. Pozor na vysoké spready, které mohou ovlivnit profitabilitu obchodů."
-}

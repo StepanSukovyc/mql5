@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém a 4H grafu je RSI blízko překoupené úrovně, což naznačuje potenciální korekci. Denní RSI je neutrální. Týdenní RSI je pod 50. Cena je nad denním a 4h MA, ale pod týdenním MA. Měsíční graf naznačuje uptrend. Zvažoval bych long pozici, ale s opatrností a s pevným stop-lossem."
-}

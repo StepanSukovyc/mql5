@@ -1,7 +1,0 @@
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "Technická analýza naznačuje převahu prodejců. RSI na denní bázi je v oblasti přeprodanosti (30.36), což by mohlo naznačovat blížící se korekci nahoru, ale MA na denní i týdenní bázi jsou výrazně nad aktuální cenou, signalizují sestupný trend. Na měsíční bázi je RSI neutrální (59.38) a cena se pohybuje nad MA, ale krátkodobé timeframes (1h, 4h) potvrzují, že cena je pod MA. Proto je SELL scénář pravděpodobnější, ale s ohledem na potenciální korekci a dlouhodobý výhled se doporučuje zvážit i HOLD nebo opatrný BUY."
-}

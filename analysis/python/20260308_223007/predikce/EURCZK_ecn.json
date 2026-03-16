@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCZK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "The recent hourly candles show a sharp decline, pushing the RSI (1h) to 37, indicating potential oversold conditions, but the daily RSI at 63 suggests the pair may be close to overbought. The price is currently below the 1h moving average, while it's near the 4h and daily moving averages. The monthly MA is significantly above the current price. The recent daily candles suggests a potential pullback, while the overall trend from the weekly and monthly charts is less clear, indicating consolidation. Given these mixed signals, selling presents a higher probability trade, while holding remains a consideration as well."
-}

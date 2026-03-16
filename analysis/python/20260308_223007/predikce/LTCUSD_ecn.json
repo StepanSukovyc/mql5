@@ -1,7 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 20,
-  "SELL": 55,
-  "HOLD": 25,
-  "reasoning": "LTCUSD_ecn is currently trading at 52.45.  The RSI indicates oversold conditions on the weekly timeframe (25.57), but hourly and daily are neutral. The price is consistently below its moving averages across all timeframes, suggesting a downtrend. Recent hourly candles show some consolidation, but the overall pressure appears to be downward, supporting a sell bias. The monthly RSI is also below 50, indicating bearish momentum."
-}

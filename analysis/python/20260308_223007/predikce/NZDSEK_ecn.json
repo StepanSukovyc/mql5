@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě je NZDSEK překoupený (RSI na 1h je 27.69), cena je pod MA na 1h a 4h timeframech. Měsíční RSI je silně přeprodané (24.58), ale MA je vysoko nad současnou cenou, což naznačuje dlouhodobý downtrend. Denní RSI je neutrální (53.06). Pravděpodobnost dalšího poklesu je vyšší než růstu, doporučuji SELL s opatrností a nastavením Stop Loss kvůli přeprodanému měsíčnímu RSI. HOLD je relevantní, pokud má investor delší časový horizont a věří v obrat trendu. BUY doporučuji spíše vyčkávat na lepší vstupní pozice."
-}

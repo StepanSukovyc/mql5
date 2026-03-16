@@ -1,7 +1,0 @@
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Denní RSI je překoupené (70.93), ale 4H RSI je 62.62 a 1H RSI je 53.30, což značí potenciál pro další růst v krátkodobém horizontu. Cena je nad MA na 1h, 4h, denním, týdenním grafu, ale pod MA na měsíčním grafu, což ukazuje smíšené signály v závislosti na timeframe. Proto je opatrná BUY pozice (40%), opatrná SELL pozice (30%) a HOLD pozice (30%)."
-}

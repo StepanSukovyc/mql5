@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje slabost v trendu s růstovými pohyby omezenými. RSI indikátor udává přečkávání a MA ukazují tendenci poklesu, což podporuje SELL.",
-  "timestamp": "2026-03-13T21:39:34.797074+00:00",
+  "reasoning": "Růstové potenciály jsou omezené v důsledku volatilního trhu a slabší MA signalizuje silnou tendenci poklesu. Hlavním faktorem je negativní svědectví z fundamentální analýzy.",
+  "timestamp": "2026-03-16T02:40:23.778501+00:00",
   "model": "deepseek-coder-v2"
 }

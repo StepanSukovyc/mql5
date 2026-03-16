@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "AUDUSD is currently at 0.70058. Hourly RSI is neutral, but the price is below the hourly MA, suggesting a short-term downward pressure. The 4-hour RSI is below 50, and the price is also below the 4-hour MA, reinforcing a bearish signal. Daily RSI is also below 50 and the price is below daily MA. However, weekly and monthly RSI are above 50 and price is above MA, suggesting a longer term uptrend. Recent daily candles show indecision. Overall, short-term bearish pressure outweighs longer-term bullish signals, leading to a higher SELL probability. HOLD reflects the conflicting signals."
-}

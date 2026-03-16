@@ -1,7 +1,0 @@
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "XALUSD_ecn is showing overbought conditions on multiple timeframes (1h, 4h, Day, Week), with RSI values significantly above 70. While the price is above its moving averages, indicating an uptrend, the high RSI suggests a potential pullback. Therefore, a sell position carries higher risk-adjusted probability. Limited monthly data makes a definitive longer-term assessment difficult, warranting caution."
-}

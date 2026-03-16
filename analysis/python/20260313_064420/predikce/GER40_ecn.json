@@ -1,7 +1,0 @@
-{
-  "symbol": "GER40_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě SELL kvůli RSI klesajícímu na denním a týdenním grafu a ceně pod MA na 4h a denním grafu. Měsíční graf naznačuje dlouhodobý BUY, ale krátkodobé momentum je dolů. HOLD je rozumné při velké volatilitě.  Nejistota kvůli blížícím se zprávám/událostem (implicitní, bez kontextu fundamentální analýzy)."
-}

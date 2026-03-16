@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Na hodinovém grafu je RSI překoupené (70.38), naznačuje možnou korekci. Denní RSI je neutrální (50.71). Týdenní RSI je pod 50 (45.23) což naznačuje mírný klesající trend. Cena je nad denním MA, ale pod týdenním MA, což ukazuje na smíšený signál. Svíčkové formace za poslední hodiny jsou nejasné. Proto je potřeba brát v úvahu držení pozice, pokud nemáme jasný signál k nákupu nebo prodeji."
-}

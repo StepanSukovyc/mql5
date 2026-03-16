@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Technická analýza ukazuje na medvědí trend. RSI na 1h, 4h a denním grafu je pod 50, což naznačuje prodejní tlak. Cena je pod MA na 1h, 4h a denním grafu. Na týdenním grafu je RSI nad 50 a cena nad MA, ale měsíční RSI je překoupené (75) a naznačuje možnou korekci. Proto doporučuji SELL, s opatrným HOLD a BUY."
-}

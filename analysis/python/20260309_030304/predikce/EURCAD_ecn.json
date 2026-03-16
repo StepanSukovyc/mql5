@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Silný klesající trend na denním a týdenním grafu. RSI je extrémně přeprodané na kratších timeframech, naznačuje krátkodobé možné korekce, ale celkový sentiment je stále spíše SELL. Měsíční RSI je nad 50, ale cena je nad MA, což naznačuje možný obrat. HOLD doporučuji pro ty, kteří již mají otevřenou pozici a čekají na vývoj situace. Aktuální cena pod měsíčním MA naznačuje pokračování v poklesu."
-}

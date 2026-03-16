@@ -1,9 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu CAD a slabší měnu CHF. Svíčkové formace a RSI indikují nejistotu s volatilitou trhu.",
-  "timestamp": "2026-03-09T04:03:14.877214+00:00",
-  "model": "deepseek-coder-v2"
-}

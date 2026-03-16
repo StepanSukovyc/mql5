@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Technická analýza ukazuje na downtrend. Měsíční a týdenní RSI jsou hluboko v přeprodané oblasti (25.99 a 26.77). Cena je pod MA na všech timeframe, což naznačuje medvědí sentiment. Na 1h timeframe RSI je 60.77, což naznačuje potenciální překoupenost v krátkodobém horizontu, ale denní a 4h RSI jsou neutrální (46.53 a 47.00), což nepotvrzuje silný nákupní tlak. Celkově je downtrend silný a krátkodobé oscilace naznačují prodejní příležitost. Svíčkové formace nenaznačují jasný obrat. Prodej je riskantní, ale zdá se jako pravděpodobnější scénář."
-}

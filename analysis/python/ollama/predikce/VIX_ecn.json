@@ -1,9 +1,9 @@
 {
   "symbol": "VIX_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Předpokládám, že RSI a MA hodnoty ukazují směr trendu, zatímco fundamentální analýza není jasná. VIX je volatilním indexem, který indikuje očekávání trhu ohledně budoucí volatility. Tento model předpokládá, že dojde k určitému opakování minulých trendů a doporučuje držet pozici.",
-  "timestamp": "2026-03-13T21:22:40.957706+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové potenciály je omezeno vlivem globální ekonomických faktorů a nedostatečný RSI signalizuje pokles.",
+  "timestamp": "2026-03-16T02:24:49.723271+00:00",
   "model": "deepseek-coder-v2"
 }

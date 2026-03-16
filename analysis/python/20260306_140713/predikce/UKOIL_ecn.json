@@ -1,7 +1,0 @@
-{
-  "symbol": "UKOIL_ecn",
-  "BUY": 60,
-  "SELL": 15,
-  "HOLD": 25,
-  "reasoning": "UKOIL_ecn is currently at 90.259. Daily RSI is extremely overbought at 86.97, suggesting a potential pullback. However, the price has broken above the daily MA (73.62) and weekly MA (66.43), demonstrating strong upward momentum. Recent hourly and 4-hour candles show continued bullish activity. Monthly RSI at 59.65 is moderate. Given the overbought condition on the daily timeframe, a short-term pullback is possible (increasing hold/sell risk), but the overall trend suggests further upside potential (positive weekly/monthly momentum). 1h RSI is showing overbought condition (72.11) which can indicate trend reversal soon."
-}

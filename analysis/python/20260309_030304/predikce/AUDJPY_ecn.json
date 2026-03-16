@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Na týdenním grafu je RSI v překoupené zóně (79.28), což naznačuje potenciální korekci. Na denním grafu je RSI 61.98, což je relativně neutrální, ale nad 50. Cena je nad denním MA, ale blízko 4H a 1H MA. Svíčkové formace za poslední hodiny nevykazují silný trend. Vzhledem k těmto faktorům je SELL nastavení mírně pravděpodobnější, ale nejistota vyžaduje alespoň HOLD přístup."
-}

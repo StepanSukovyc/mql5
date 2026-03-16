@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "AUDUSD is currently at 0.70273. Hourly (34.13) and 4-hour (35.00) RSIs are in oversold territory, suggesting potential for a bounce, but RSI day 46.22 is neutral. The 1h MA (0.70142) and 4h MA(0.702503) are below the current price, while the day MA (0.707177) is above, indicating potential resistance. The recent hourly price action shows a downtrend. Weekly (64.64) and monthly (60.94) RSIs are high, suggesting overbought conditions on larger timeframes and possibility of downward momentum. Given the short-term oversold conditions and longer-term overbought conditions, a 'Sell' position is favoured, expecting downward pressure. But a good risk managment is still necessary."
-}

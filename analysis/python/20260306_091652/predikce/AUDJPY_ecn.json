@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "AUDJPY is showing mixed signals. Short-term (1H, 4H) RSI is below 50, suggesting potential for further downside, and the price is below the 4H MA. The 1H MA is also below the current price, potentially acting as near resistance. Daily RSI is around 57 suggesting neutral momentum. Weekly and Monthly RSI are relatively high indicating overbought conditions on longer timeframes. Recent price action suggests downtrend on smaller timeframes. Sell is preferred. Until more clear pattern is confirmed HOLD is reasonable. Long term trend is bullish due to week/month MA."
-}

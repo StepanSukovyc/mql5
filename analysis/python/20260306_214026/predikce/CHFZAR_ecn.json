@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Cena se pohybuje nad MA na 4H, denním a týdenním grafu, což naznačuje potenciální růst. RSI na denním grafu je 64.24, což signalizuje sílu, ale blíží se překoupené zóně. Na hodinových grafech se zdá, že cena je v konsolidaci, což ztěžuje rozhodování. Navíc, poslední 4H svíce ukazuje na pokles. Proto 40% pro BUY, 30% pro SELL a 30% pro HOLD."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "LTCUSD is showing bearish signals across multiple timeframes.  The weekly and monthly RSI are below 30 and 40 respectively, suggesting oversold conditions, but also strong downward momentum.  The price is below the moving average on all timeframes, indicating a downtrend. Although there might be a short term relief (oversold conditions), the overall trend suggests more downside. The 1h and 4h RSI are hovering around 40-50, suggesting a lack of strong momentum in either direction, hence the hold percentage. The risk is weighted towards SELL, due to the prevailing downtrend and negative signals across longer timeframes."
-}

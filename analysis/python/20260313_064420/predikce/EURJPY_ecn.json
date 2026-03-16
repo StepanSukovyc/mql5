@@ -1,7 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje smíšený signál. Krátkodobě (1h, 4h) je RSI neutrální, cena se pohybuje kolem MA, denní RSI je také neutrální. Nicméně, týdenní a měsíční RSI jsou v překoupené zóně (nad 60), což naznačuje možnou korekci.  Proto je 'SELL' mírně preferovaný, ale s ohledem na neutrální krátkodobé indikátory a rostoucí MA na denní bázi je třeba brát v úvahu i 'HOLD' a 'BUY'. Z historického hlediska (měsíční timeframe) je cena výrazně nad MA, což podporuje korigující pohyb."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "GBPZAR is currently at 22.26744. Hourly and 4-hourly RSI are approaching overbought levels (62.72, 69.62), suggesting short-term bullish momentum, while daily RSI is also above 60. Weekly RSI is neutral at 41.55 and Monthly RSI is also neutral at 42.23, indicating no strong trend on longer timeframes. Price is above hourly, 4 hourly and daily MA but below weekly and monthly. Given the mixed signals, holding seems reasonable to wait for a more decisive move. A cautious buy may be entered with tight stop loss."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na měsíčním a týdenním grafu je zlato překoupené (RSI 91.35 a 76.02), což naznačuje možnost korekce. Denní RSI je neutrální (51.87). Hodinové a 4hodinové RSI jsou pod 50 (41.17 a 41.13), což naznačuje krátkodobý sestupný trend. Cena je nad denním MA, ale pod 4hodinovým MA. Na základě těchto indikátorů a pullbacku z vysokých hodnot, je větší pravděpodobnost SELL pozice, ale vzhledem k silnému uptrendu z dřívějšího období,  rozhodnutí HOLD by také mohlo být rozumné."
-}

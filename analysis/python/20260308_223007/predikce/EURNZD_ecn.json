@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Krátkodobé RSI (1h, 4h, day) se pohybují v neutrální zóně kolem 50. Týdenní RSI je pod 50, což naznačuje potenciální medvědí trend. Měsíční RSI je nad 50, což ukazuje na býčí momentum. Cena je pod týdenním MA, ale nad měsíčním MA. Poslední denní svíčky vykazují převahu medvědího sentimentu. Doporučuje se opatrnost. Vzhledem k neurčitému tržnímu kontextu je pravděpodobné, že bude pokračovat konsolidace. "
-}

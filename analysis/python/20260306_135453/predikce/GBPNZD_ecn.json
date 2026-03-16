@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 40,
-  "SELL": 25,
-  "HOLD": 35,
-  "reasoning": "Na hodinovém a 4-hodinovém grafu je RSI v překoupené zóně (75.78 a 70.05), což naznačuje potenciální korekci směrem dolů. Denní RSI je neutrální (54.11), týdenní RSI je rovněž neutrální (47.22). Cena je nad MA na denním a měsíčním grafu, pod MA na týdenním grafu. Vzhledem k překoupenosti na kratších časových rámcích a neutrálnímu sentimentu na delších, doporučuji opatrný přístup. HOLD je vhodný pro ty, kteří již pozici drží. BUY má potenciál růstu, ale s ohledem na riziko korekce. SELL zvažovat při potvrzení medvědí divergence na kratších časových rámcích."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "On the hourly and 4-hour timeframes, the RSI is showing overbought conditions. Additionally, the monthly timeframe indicates that the price is below the MA, suggesting bearish pressure. A long-term bearish sentiment could be forming, but the short-term RSI and recent upward price movement suggest a need for caution. The daily RSI and current price hover near MA, indicating no clear trend. Given the conflicting signals, HOLD is warranted until the trend is better established. A BUY position is risky due to RSI, and a SELL position is risky because of the short uptrend."
-}

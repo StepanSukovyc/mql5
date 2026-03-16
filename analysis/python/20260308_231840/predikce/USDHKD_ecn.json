@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHKD_ecn",
-  "BUY": 30,
-  "SELL": 35,
-  "HOLD": 35,
-  "reasoning": "Smíšené signály. Denní RSI (61.21) naznačuje překoupenost, zatímco týdenní RSI (60.05) je neutrální. Aktuální cena (7.82068) je nad denní a týdenní MA, ale pod hodinovou MA. Poslední svíčky na 1H grafu naznačují konsolidaci. Na základě těchto indikátorů je vhodné vyčkat na jasnější signál. SELL má mírně vyšší pravděpodobnost vzhledem k překoupenosti a konsolidaci, ale je nutné brát v potaz globální ekonomickou situaci, kterou nemám k dispozici."
-}

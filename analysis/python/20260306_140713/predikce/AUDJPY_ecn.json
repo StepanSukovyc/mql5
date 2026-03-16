@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "AUDJPY is currently at 110.284. Hourly and 4-hourly RSIs are below 50, suggesting possible downward momentum. The price is below the hourly and 4-hourly moving averages, indicating a bearish trend in the short term. Daily RSI is at 57.98, close to overbought conditions, and weekly RSI is at 74.87, indicating overbought conditions. Monthly RSI is at 64, suggesting further upside potential but with weakening momentum. The recent daily candles show a downward trend. Overall, SELL is slightly favored due to short-term bearish indicators and overbought conditions on longer timeframes, however bullish trend in monthly timeframe can reverse the price. HOLD is considered due to uncertainties."
-}

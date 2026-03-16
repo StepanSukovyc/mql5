@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCHF_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena NZDCHF je pod klouzavými průměry na všech timeframech kromě týdenního, což naznačuje klesající trend. RSI je pod 40 na denním, týdenním i hodinovém grafu. Na měsíčním grafu je dokonce v přeprodané zóně (RSI 27.61), což by mohlo znamenat potenciální korekci, ale celkový trend je silně klesající, proto převažuje SELL. HOLD je opodstatněný nízkým RSI na měsíčním grafu a BUY jen jako spekulace na korekci."
-}

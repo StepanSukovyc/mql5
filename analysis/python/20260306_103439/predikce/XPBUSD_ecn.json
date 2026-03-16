@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Technická analýza naznačuje spíše prodejní pozici. Denní a týdenní RSI jsou pod 50, což značí klesající trend. MA na denním a týdenním timeframe jsou nad aktuální cenou, což slouží jako rezistence. Naopak, 1h timeframe naznačuje mírný uptrend. Celkově převažuje riziko poklesu, proto SELL má nejvyšší procento."
-}

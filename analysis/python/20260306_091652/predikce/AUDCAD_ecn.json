@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Technická analýza ukazuje na krátkodobý downtrend. Hodinové a 4hodinové RSI jsou pod 40, což naznačuje potenciální přeprodanost, ale denní RSI je stále pod 50, což podporuje klesající trend. Cena je pod MA na hodinových, 4hodinových i denních grafech. Na týdenním a měsíčním grafu je RSI nad 65, což by mohlo naznačovat blížící se korekci. Vzhledem k downtrendu na nižších časových rámcích a blížící se korekci na vyšších, SELL má vyšší pravděpodobnost úspěchu než BUY. HOLD je zvážení pro případ, že by se situace změnila."
-}

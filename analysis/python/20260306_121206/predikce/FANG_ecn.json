@@ -1,7 +1,0 @@
-{
-  "symbol": "FANG_ecn",
-  "BUY": 40,
-  "SELL": 25,
-  "HOLD": 35,
-  "reasoning": "Cena je nad MA na 1h, 4h a denním grafu, RSI na 1h a 4h je blízko překoupené zóny, což naznačuje potenciální nákupní tlak. Na týdenním grafu je cena pod MA a RSI neutrální. Na měsíčním grafu je cena nad MA a RSI se blíží překoupené zóně. Celkově je situace smíšená s potenciálem pro krátkodobé zisky (BUY), ale s rizikem korekce (SELL). Proto je HOLD rozumná strategie."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Technicals suggest a bearish bias. RSI is below 50 on hourly, 4H, and daily charts. The current price is below the moving average on the hourly, 4H and daily charts, indicating a short-term downtrend. The weekly and monthly RSI are relatively high, suggesting potential for a pullback. The recent hourly candle action shows a struggle to maintain upward momentum after reaching intraday highs. Given the mix of signals, SELL is favored, but HOLD is a reasonable option to observe price action more closely."
-}

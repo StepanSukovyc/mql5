@@ -1,7 +1,0 @@
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "The price is below both the daily and 4h moving averages, suggesting a downtrend. The 1h RSI is extremely oversold (16.89), which could indicate a short-term bounce, but the overall momentum seems bearish. Weekly and monthly MAs are significantly higher, supporting the SELL signal. Daily RSI is at 38.68, far from being overbought. Limited data impacts accuracy."
-}

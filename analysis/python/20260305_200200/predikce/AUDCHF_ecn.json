@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCHF_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "AUDCHF is currently at 0.54693. Hourly RSI is oversold (29.3), but trending downwards, suggesting further potential for a bearish move. Price is below the daily MA (0.546918) and significantly below the hourly MA (0.549455) and 4h MA (0.550305), indicating short-term downward pressure. Daily RSI (52.8) is neutral, while weekly RSI (64.3) is approaching overbought territory, suggesting limited upward potential. Monthly RSI (40.4) is neutral. Recent hourly candles show continued bearish momentum. Considering these factors, a SELL position carries higher probability, while the oversold hourly RSI prevents this from being a strong indicator. Longer timeframes suggest possible stabilization. We also only have a limited dataset."
-}

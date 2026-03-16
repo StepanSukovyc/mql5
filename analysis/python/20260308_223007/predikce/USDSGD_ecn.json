@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSGD_ecn",
-  "BUY": 35,
-  "SELL": 40,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě neutrální až mírně medvědí výhled. 1H RSI je pod 50, naznačuje možný prodejní tlak. 4H RSI je blízko překoupené zóny, ale ještě ne. Denní RSI je na 63.48 a MA roste naznačuje rostoucí trend, ale aktuální cena je pod týdenním MA a měsíční RSI je pod 50, s klesající MA naznačuje dlouhodobý klesající trend. Proto opatrný SELL přístup. Celkový trend je těžko určitelný a proto je HOLD s menší pravděpodobností."
-}

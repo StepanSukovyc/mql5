@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena je pod MA na denním a týdenním grafu, RSI na denním a 4h grafu je pod 50, což indikuje medvědí trend. Nicméně, je potřeba opatrnost a zvážení držení, protože RSI se blíží překoupené zóně a aktuální cena je relativně blízko MA na hodinovém grafu, což by mohlo naznačovat potenciální krátkodobou konsolidaci nebo odraz. Absentující data pro měsíční timeframe omezují celkový pohled. Poslední denní svíčka naznačuje silný pokles, což podporuje prodej."
-}

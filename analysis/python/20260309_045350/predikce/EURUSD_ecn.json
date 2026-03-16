@@ -1,9 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažují indikátory pro pokles ceny s nízkým RSI a slabší MA.",
-  "timestamp": "2026-03-09T04:39:50.447100+00:00",
-  "model": "deepseek-coder-v2"
-}

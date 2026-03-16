@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním a týdenním grafu je RSI hluboko v přeprodané zóně, což naznačuje potenciální odraz. Nicméně MA na vyšších časových rámcích stále klesá. Denní RSI se pohybuje kolem 50, což naznačuje neutrální moment. Nejbližší hodinové a čtyřhodinové grafy také nevykazují jasný směr. Vzhledem k těmto protichůdným signálům a absenci jasného trendu je nejjistější pozice HOLD. Mírná převaha SELL je dána klesajícím MA na vyšších timeframech a nedávným propadem ceny."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "EURSGD is showing bearish signals across multiple timeframes. RSI values on 1H, 4H, and Day charts are all below 40, indicating oversold conditions but continued downward momentum. The current price is below the Moving Average on the 1H, 4H, Day, and Week charts, suggesting a downtrend. While the monthly RSI is around 50, the price is currently above the monthly MA, offering slight support. Overall, the short-term and medium-term trends point to a sell. A small buy percentage is assigned due to the oversold conditions on shorter timeframes, potentially leading to a short-term bounce. Holding is a neutral position given conflicting signals between long and short term views."
-}

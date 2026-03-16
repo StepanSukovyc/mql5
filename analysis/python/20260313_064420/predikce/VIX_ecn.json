@@ -1,7 +1,0 @@
-{
-  "symbol": "VIX_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na týdenním grafu je RSI na 73.07, což naznačuje překoupenost. Denní RSI je 64.16, což je relativně vysoké. Aktuální cena 24.98 je nad denním MA (21.24) a týdenním MA (18.38), ale pod cenou 26.02 ze dne 6. března. Po prudkém růstu VIXu začátkem března následuje konsolidace. Proto odhaduji vyšší pravděpodobnost pro SELL, než pro BUY. Je třeba sledovat, zda cena prorazí výše, nebo se udrží pod cenou ze dne 6.3.2026."
-}

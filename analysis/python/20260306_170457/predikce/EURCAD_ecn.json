@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "EURCAD is showing oversold conditions on multiple timeframes (1H, 4H, Day) based on RSI. However, the Daily RSI is extremely low at 16.24, suggesting continued downward momentum. Price is below all Moving Averages except monthly, signaling downtrend. Recent hourly candles continue to show downward pressure. Therefore, SELL is favored, with BUY as a low probability retrace, and HOLD as neutral."
-}

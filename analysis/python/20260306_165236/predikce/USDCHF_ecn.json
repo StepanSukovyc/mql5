@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI pod 31, což naznačuje přeprodanost. Nicméně, MA na měsíčním grafu i nadále klesá, což naznačuje silný sestupný trend. Týdenní RSI je pod 50. Denní RSI je kolem 55. Na 4H a 1H grafu je cena kolem MA. Kvůli rozporuplným signálům a klesajícímu trendu doporučuji spíše SELL, s opatrností. Situace vyžaduje další sledování."
-}

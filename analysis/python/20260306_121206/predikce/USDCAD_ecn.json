@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "USDCAD is currently trading around 1.36633. Hourly and Daily RSI are both near 50, suggesting neutral momentum. However, Weekly RSI is at 44.5 indicating possible downward pressure. The price is below the weekly and monthly MA (1.381681 and 1.389828 respectively), signaling a potential downtrend. Although the 4H RSI shows some bullish signals, the longer-term indicators lean towards SELL. Until decisive signals emerge (e.g., a break above the weekly MA), a HOLD position is reasonable but SELL signals are stronger, so the analysis is weighted to them. "
-}

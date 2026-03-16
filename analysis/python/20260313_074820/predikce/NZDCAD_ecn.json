@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Převládá medvědí sentiment. RSI je na 1H, 4H a denním grafu pod 33. MA na všech grafech je nad současnou cenou. Poslední denní svíčka je silně medvědí. Vyšší timeframes (týdenní, měsíční) RSI ukazují neutrální trend, ale cena klesá pod klíčové MA, což naznačuje pokračující pokles. Sell pozice jsou rizikovější než nákup, ale vzhledem ke krátkodobé hybnosti doporučuji omezit zisky nebo umístit stop loss."
-}

@@ -1,9 +1,9 @@
 {
   "symbol": "XPTUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle RSI a MA je trend cenového grafu oslabující s nápadem na pokles, avšak zároveň dochází k divergenci mezi cenou a indikátory což naznačuje slabost těchto pohybů. Kombinace svíčkových formací a fundamenta mírně upřednostňuje selhání.",
-  "timestamp": "2026-03-13T21:37:09.284143+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy podle svíčkových formací jsou slabší než poklesové. RSI a MA hodnoty ukazují směr trendu, ale volatilita způsobuje nejistotu.",
+  "timestamp": "2026-03-16T02:38:39.090006+00:00",
   "model": "deepseek-coder-v2"
 }

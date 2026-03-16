@@ -1,7 +1,0 @@
-{
-  "symbol": "VIX_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "VIX_ecn is currently trading at 28.65. The RSI across multiple timeframes (1H, 4H, Day, Week) is showing overbought conditions (RSI > 70), suggesting a potential pullback. The monthly RSI is at 64.65, indicating further upward momentum may be limited. Recent hourly candles show strong upward movement, but the higher timeframes indicate a potential for mean reversion. Therefore, SELL is favored, with HOLD considered due to the possibility of continued short-term upward movement."
-}

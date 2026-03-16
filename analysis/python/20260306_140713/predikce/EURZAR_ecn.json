@@ -1,7 +1,0 @@
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na kratších časových rámcích (1h, 4h) RSI indikuje překoupenost, naznačující potenciální korekci. Nicméně, denní a týdenní timeframe ukazují prostor pro další růst, i když týdenní MA je nad aktuální cenou, což může působit jako rezistence. Z toho důvodu doporučuji opatrný BUY postoj."
-}

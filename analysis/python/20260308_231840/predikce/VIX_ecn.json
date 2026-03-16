@@ -1,7 +1,0 @@
-{
-  "symbol": "VIX_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "VIX_ecn is currently at 28.15. RSI is overbought on daily (74.95), 4-hour (73.09) and weekly (81.13) timeframes, suggesting a potential pullback. Although monthly RSI (64.39) is not extremely overbought, the consistent overbought signals across multiple shorter timeframes coupled with the increasing moving averages suggest the upward trend may be losing steam. Additionally, weekly chart shows current candle near resistance with rsi indicating overbought. Therefore, a short position has the highest probability. Hold for conservative approach."
-}

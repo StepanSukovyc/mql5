@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě mírný býčí sentiment (RSI na 1h a 4h blízko 50, denní RSI blízko 60). Týdenní RSI neutrální. Měsíční RSI silně přeprodané, ale MA výrazně nad cenou. Kombinace indikátorů naznačuje potenciál pro mírný růst, ale silný dlouhodobý klesající trend z měsíčního grafu omezuje potenciál. Proto vyvážený přístup mezi BUY, SELL a HOLD."
-}

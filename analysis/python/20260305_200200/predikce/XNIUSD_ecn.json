@@ -1,7 +1,0 @@
-{
-  "symbol": "XNIUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena klesá pod MA na 1h, 4h a denním grafu. RSI na 1h a 4h naznačuje, že trh je blízko překoupení, avšak nejedná se o silný signál. Na týdenním grafu je RSI neutrální a nad MA, což naznačuje potenciální pokračování rostoucího trendu v dlouhodobém horizontu. Důležitá je i vysoká volatilita a velké spready. S ohledem na klesající krátkodobé indikátory a neutrální dlouhodobý výhled vidím větší pravděpodobnost SELL pozice, ale je třeba sledovat vývoj a potenciální odraz od support úrovní."
-}

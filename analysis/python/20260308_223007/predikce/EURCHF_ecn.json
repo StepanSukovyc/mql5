@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 20,
-  "SELL": 65,
-  "HOLD": 15,
-  "reasoning": "EURCHF is oversold across multiple timeframes (RSI very low). The price is currently below the moving average on all timeframes, indicating a strong downtrend. Short data history, not enough to hold position."
-}

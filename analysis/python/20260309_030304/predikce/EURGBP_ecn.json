@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Na 1H a 4H timeframe je RSI hluboko v přeprodané zóně, což naznačuje možnou korekci nahoru (BUY). Nicméně, denní, týdenní a měsíční MA jsou výrazně nad aktuální cenou, což naznačuje dlouhodobější klesající trend (SELL). Vzhledem k tomu, že cena se pohybuje pod denním MA a RSI není extrémně přeprodané na denním timeframe, dáváme SELL pozici větší váhu. HOLD pozice vyjadřuje opatrnost vzhledem k protichůdným signálům."
-}

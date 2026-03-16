@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena XPDUSD_ecn je v klesajícím trendu napříč různými časovými rámci (1h, 4h, den), což indikuje sílu prodejců. RSI na 1h, 4h a denní bázi naznačuje, že aktivum je blízko překoupené zóny, ale zatím v ní není, což dává prostor pro další pokles. MA na kratších časových rámcích (1h, 4h, den) jsou nad aktuální cenou, což funguje jako rezistence. Týdenní a měsíční timeframe naznačují stále rostoucí trend, ale denní data signalizují pokračující short-term oslabování ceny. Z tohoto důvodu je větší šance na SELL než BUY, i když HOLD je stále relevantní volba pro ty, kteří věří v dlouhodobý růst palladia."
-}

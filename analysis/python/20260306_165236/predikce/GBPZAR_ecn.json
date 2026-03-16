@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém a 4-hodinovém grafu je RSI v překoupené zóně, což naznačuje možnou korekci. Denní RSI je také poměrně vysoké. Na týdenním a měsíčním grafu jsou hodnoty RSI neutrálnější a cena je pod MA, což ukazuje na potenciál růstu. Celkově, vzhledem k krátkodobému překoupení a dlouhodobému potenciálu růstu, je BUY rizikovější než HOLD. Vysoký spread a volatilita (tick volume) v posledních hodinách zvyšují riziko. SELL je nejméně pravděpodobné, ale nemožné s ohledem na krátkodobé překoupení."
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "EURCZK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle fundamentální analýzy je cena EUR/CZK ospravedlňována silnou ekonomikou Evropské unie a mírným růstem. Svíčkové formace ukazují na stabilitu, RSI i MA hodnoty svědčí o konzolidaci ceny.",
-  "timestamp": "2026-03-13T07:41:54.654134+00:00",
-  "model": "deepseek-coder-v2"
-}

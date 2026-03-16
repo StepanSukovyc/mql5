@@ -1,9 +1,9 @@
 {
   "symbol": "EURSGD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem geopolitických událostí a očekává se pokles při dalším pohledu na graf.",
-  "timestamp": "2026-03-13T20:04:14.520727+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Vysoké hodnoty RSI a MA signalizují silnou pozitivní tendenci. Nedávný růst podporuje myšlenku o prodloužení tohoto trendu.",
+  "timestamp": "2026-03-16T01:06:54.281494+00:00",
   "model": "deepseek-coder-v2"
 }

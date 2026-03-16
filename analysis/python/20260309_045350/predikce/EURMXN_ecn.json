@@ -1,9 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením finanční situace v Evropské unii a Mexiku. RSI indikuje přeprodanost s možností odrazu.",
-  "timestamp": "2026-03-09T04:30:00.401197+00:00",
-  "model": "deepseek-coder-v2"
-}

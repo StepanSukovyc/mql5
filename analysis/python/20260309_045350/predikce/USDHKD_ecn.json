@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHKD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na 1h a 4h timeframe je RSI pod 40, což naznačuje, že by mohlo dojít k mírnému odrazu, avšak trend na denním grafu je spíše neutrální s RSI kolem 50. Týdenní a měsíční grafy indikují možný rostoucí trend, nicméně aktuální cena je blízko rezistence, což vede k preferenci SELL pozice. Zároveň zvažujeme nižší BUY pozici v očekávání krátkodobého odrazu. HOLD je konzervativní přístup vzhledem k nejistotě."
-}

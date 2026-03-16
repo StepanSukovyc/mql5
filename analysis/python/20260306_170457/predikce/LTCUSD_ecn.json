@@ -1,7 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "LTCUSD_ecn is currently in a downtrend. Hourly RSI is oversold (21.16) suggesting a possible short-term bounce. However, RSI on daily (39.66), weekly (27.40), and monthly (39.13) timeframes indicates continued downward pressure. The price is also below the moving average (MA) on all timeframes. The current price of 53.68 is significantly lower than the moving averages on longer timeframes (week: 76.00, month: 88.02), further supporting a bearish outlook. Therefore, SELL is the higher probability option. HOLD and BUY have smaller likelihoods as a short-term rebound is possible but unlikely to be sustainable given the broader bearish trends."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 55,
-  "SELL": 20,
-  "HOLD": 25,
-  "reasoning": "The price is currently above the daily and weekly moving averages, indicating an upward trend. RSI on the weekly chart is in overbought territory (82.5), suggesting potential for a pullback, but the daily and 4h RSI are not as extreme. The latest weekly candle is strongly bullish. Considering these factors, a cautious buy approach is reasonable, but risk management is crucial due to overbought conditions."
-}

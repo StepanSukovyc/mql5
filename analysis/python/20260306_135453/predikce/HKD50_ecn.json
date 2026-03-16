@@ -1,7 +1,0 @@
-{
-  "symbol": "HKD50_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod 1h, 4h, denním a týdenním MA, což naznačuje klesající trend. Denní RSI je na 32.31, což je blízko k překoupené oblasti, ale celkově převládá prodejní tlak. Měsíční RSI je 63.76, což je neutrální, ale MA roste. Proto SELL má největší pravděpodobnost, BUY je rizikovější a HOLD je rozumná strategie vyčkávání."
-}

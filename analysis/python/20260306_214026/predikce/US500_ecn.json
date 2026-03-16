@@ -1,7 +1,0 @@
-{
-  "symbol": "US500_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na měsíčním grafu je RSI překoupené (72.89), ale cena je stále nad MA. Na týdenním a denním grafu RSI klesá a cena se dostává pod MA, což naznačuje klesající trend. Hodinové a čtyřhodinové RSI jsou pod 40, indikují potenciál dalšího poklesu. Proto převládá SELL signál, HOLD je doporučen pro ty, co již pozice drží a BUY pouze v případě potvrzení obratu trendu."
-}

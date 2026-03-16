@@ -1,7 +1,0 @@
-{
-  "symbol": "USDZAR_ecn",
-  "BUY": 50,
-  "SELL": 25,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě indikátory naznačují možný nákup (RSI na 1h a 4h se blíží překoupené zóně, cena nad MA na 4h). Dlouhodobější pohled (měsíční RSI pod 40, cena pod MA) a volatilita trhu zvyšují riziko, proto i sell a hold mají významné zastoupení."
-}

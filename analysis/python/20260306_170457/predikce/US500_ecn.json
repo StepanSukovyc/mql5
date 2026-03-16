@@ -1,7 +1,0 @@
-{
-  "symbol": "US500_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na měsíčním grafu je RSI silně překoupené (74.12), což naznačuje potenciální korekci. Na denním grafu RSI (40.48) a 4H grafu (40.99) se nachází v neutrální zóně, ale cena je pod klouzavými průměry na 1H, 4H a denním grafu. Poslední hodinové svíčky ukazují pokračující pokles. Týdenní RSI je 51.36, což je neutrální. Celkově převládá spíše medvědí sentiment krátkodobě, a proto SELL má vyšší pravděpodobnost než BUY. HOLD je zde, protože týdenní graf je víceméně neutrální a trh se může uklidnit."
-}

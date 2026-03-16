@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Indikátory na denní a 4H bázi naznačují překoupenost (RSI nad 70), ale rostoucí MA naznačuje uptrend. Na týdenní bázi je RSI neutrální. Měsíční RSI se pohybuje kolem 50.  Rozhodnutí HOLD beru v potaz kvůli dlouhodobějšímu kontextu v grafu, z něhož není patrné, kam trh směřuje. Vzhledem k aktuální ceně a indikátorům je BUY potenciálně rizikovější, ale stále s uptrend tendencemi. SELL zvažuji, protože se trh může brzy otočit. Proto dělím riziko rovnoměrně mezi BUY/SELL. HOLD je opatrný přístup."
-}

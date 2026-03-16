@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "EURCHF is showing strong bearish signals across multiple timeframes. The current price of 0.90162 is below the moving averages on all timeframes (1h, 4h, day, week, month), indicating a downtrend. The RSI is oversold on shorter timeframes (1h, 4h, day), which could lead to a minor retracement, but the overall trend suggests further downside. Selling pressure is visible in recent hourly candles. Longer timeframes (week, month) also have low RSI values suggesting continued bearish momentum. The recent daily candles also confirm downtrend."
-}

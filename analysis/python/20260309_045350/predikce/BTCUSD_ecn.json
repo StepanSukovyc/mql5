@@ -1,9 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstový trend je pozitivní, ale přítomnost silného odporu a nedávné hluboké poklesy indikují určitou nejistotu.",
-  "timestamp": "2026-03-09T04:01:36.216233+00:00",
-  "model": "deepseek-coder-v2"
-}

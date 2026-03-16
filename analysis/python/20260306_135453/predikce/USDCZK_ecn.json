@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCZK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Smíšené signály. Krátkodobé indikátory (1h, 4h, day) naznačují překoupenost (vysoké RSI), ale střednědobý (week) RSI je neutrální a dlouhodobý (month) RSI je pod 50, což naznačuje potenciál pro růst. Cena se nachází nad MA na 1h, 4h, day a week timeframe, ale pod MA na měsíčním timeframe. Poslední hodinová svíčka je býčí, ale celkově vidíme v posledních hodinách spíše konsolidaci. Riziko SELL je podpořeno možnou korekcí z překoupených hodnot a rizikem BUY podkopává, že cena je pod dlouhodobým MA. HOLD je opodstatněný kvůli rozporuplným signálům."
-}

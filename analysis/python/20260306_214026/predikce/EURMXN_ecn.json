@@ -1,7 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Short-term bullish momentum (RSI above 50 on hourly and daily charts, price above MA on hourly and 4h charts). However, weekly RSI is low suggesting possible longer term bearish trend. Monthly MA is significantly higher than current price suggesting possible longer term downwards pressure. Therefore, HOLD is warranted due to mixed signals."
-}

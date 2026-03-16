@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě naznačuje spíše SELL pozici. RSI na 1H a 4H je pod 50 a cena je pod MA na 1H a 4H. Denní RSI je lehce nad 50, ale cena je pod MA. Týdenní RSI je nad 60, což značí rostoucí trend, ale měsíční RSI je pod 40, což naznačuje, že by se mohl trh brzy otočit. Celkově je trh nestabilní a proto doporučuji HOLD nebo krátkodobou SELL pozici."
-}

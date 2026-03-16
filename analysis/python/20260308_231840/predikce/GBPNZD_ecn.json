@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Smíšené signály. Krátkodobě (1h, 4h) RSI ukazuje na možný růst, cena je nad MA. Denní RSI je neutrální, cena je nad MA. Týdenní RSI je pod 50 a cena je pod MA, což naznačuje možný pokles. Měsíční RSI je neutrální, cena je nad MA. Vzhledem k rozporuplnosti signálů je HOLD rozumná strategie, dokud se trend nevyjasní. Riziko SELL je dané týdenním timeframe, možnost BUY vyplývá z krátkodobých signálů."
-}

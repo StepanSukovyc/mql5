@@ -1,9 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové momentum s náznaky zeslabení v posledních týdnech, ale stále silná podpora na hodinovém grafu.",
-  "timestamp": "2026-03-09T04:33:18.566994+00:00",
-  "model": "deepseek-coder-v2"
-}

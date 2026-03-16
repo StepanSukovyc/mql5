@@ -1,9 +1,9 @@
 {
   "symbol": "EURZAR_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály je omezeno silnou odporovou hladinou RSI a MA. Tržní podmínky naznačují pokles.",
-  "timestamp": "2026-03-13T20:07:44.020945+00:00",
+  "HOLD": 30.0,
+  "reasoning": "RSI ukazuje slabost na růstu, ale MA signalizuje stabilitu. Kombinace svíčkových formací a trendu indikuje nejistotu.",
+  "timestamp": "2026-03-16T01:10:21.628830+00:00",
   "model": "deepseek-coder-v2"
 }

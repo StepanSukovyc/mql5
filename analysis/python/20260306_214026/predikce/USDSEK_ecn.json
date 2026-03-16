@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje smíšený signál. Na denním grafu je RSI na 60.5, což naznačuje blížící se překoupenost, ale ne ještě extrémní. Na měsíčním grafu je RSI na 34.19, což signalizuje potenciální odraz, ale také naznačuje silný downtrend. Cena je pod MA na měsíčním grafu (9.16 vs 9.87), ale nad MA na denním grafu (9.16 vs 9.03). Poslední denní svíčka je medvědí. Proto 'SELL' má mírnou převahu, 'HOLD' jako opatrná strategie a 'BUY' s nejnižším procentem."
-}

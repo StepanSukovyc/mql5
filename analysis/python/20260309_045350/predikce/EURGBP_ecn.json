@@ -1,9 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Důvody pro BUY jsou zejména v růstových trendech a nárůstu RSI. Důvody pro SELL jsou především poklesy a snížení MA, které naznačují další pokles. HOLD je navrženo kvůli nejistotě trhu.",
-  "timestamp": "2026-03-09T04:25:03.711885+00:00",
-  "model": "deepseek-coder-v2"
-}

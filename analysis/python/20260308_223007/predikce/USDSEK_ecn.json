@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Technická analýza naznačuje spíše prodejní tlak. Na hodinovém grafu je RSI v oblasti přeprodanosti (33.11), ale cena se nedostala nad klouzavý průměr (MA 9.213607). Na denním grafu je RSI 58.36 a cena je nad MA (9.03), což naznačuje potenciál růstu, ale s ohledem na klesající trend na týdenním a měsíčním grafu, kde je cena pod MA, a na nejnovější cenový pohyb (pokles na 1H a 4H), je pravděpodobnější krátkodobý pokles. Nejnovější data 1H vykazují klesající svíčky. Měsíční RSI je také poměrně nízká (35.40), což naznačuje potenciál pro další pokles. Proto je sell pozice rizikovější a Buy má menší váhu. Celkově je trh nestabilní, proto je doporučeno počkat na další potvrzení směru, pokud se jedná o dlouhodobé investice. Proto HOLD má 25%."
-}

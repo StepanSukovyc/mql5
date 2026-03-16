@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "Short-term bullish signals (RSI on 1h & 4h above 60, price above MA on 1h & 4h) are countered by longer-term bearish signals (monthly RSI at 35.94, price below monthly MA). Daily RSI approaching overbought. Recent price action shows volatility. Therefore, HOLD is safest, with a slight edge to BUY in the short term. A strong bearish day or week could invalidate this."
-}

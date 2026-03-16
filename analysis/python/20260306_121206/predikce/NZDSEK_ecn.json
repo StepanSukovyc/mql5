@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě SELL: Cena je pod MA na 1h a 4h timeframe. RSI na 1h naznačuje prostor pro pokles. Denní RSI je blízko překoupenosti, ale MA roste. Měsíční RSI je extrémně nízko (přeprodané), ale cena klesá pod MA.  HOLD: kvuli celkovému trendu (dlouhodobé přeprodané) a nejistotě. BUY: je rizikový, ale nelze vyloučit korekci."
-}

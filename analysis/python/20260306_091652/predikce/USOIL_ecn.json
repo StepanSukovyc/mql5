@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Denní a týdenní RSI jsou v překoupené zóně, což naznačuje potenciální korekci. Hodinový a 4-hodinový timeframe také ukazují vysoké hodnoty RSI. Přestože je dlouhodobý trend stále rostoucí (měsíční RSI pod 60), krátkodobé indikátory signalizují možné oslabení. Doporučuji opatrnost a případné SELL pozice s ohledem na potenciální krátkodobou korekci."
-}

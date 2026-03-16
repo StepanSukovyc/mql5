@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu je RSI překoupené (79.14), což naznačuje možnou korekci. Na denním grafu je RSI 65.46, což je relativně vysoko. Cena je nad MA na denním grafu, což signalizuje býčí trend, ale RSI naznačuje potenciální zpomalení. Na týdenním a měsíčním grafu je RSI relativně neutrální (55.15 a 54.54), ale cena se nachází nad MA na měsíčním grafu. Celkově doporučuji opatrnost, a proto zvýšená váha pro SELL. Data jsou pouze za posledních 30 dní a 24 měsíců, což omezuje dlouhodobější analýzu a interpretaci trendů."
-}

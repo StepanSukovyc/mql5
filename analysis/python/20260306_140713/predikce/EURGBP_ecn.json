@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na 1H a 4H timeframe je RSI hluboko v přeprodané zóně (pod 30). MA na všech timeframe kromě měsíčního jsou nad aktuální cenou, což značí potenciální rezistenci. Data z minulého měsíce ukazuje na pohyb od 0.87719 na 0.86616. Převaha indikací naznačuje spíše SELL pozici, i když s ohledem na přeprodanost je možné otestování rezistence. HOLD je opatrný přístup vzhledem k protichůdným signálům."
-}

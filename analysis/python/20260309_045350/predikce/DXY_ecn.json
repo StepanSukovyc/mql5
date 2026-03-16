@@ -1,9 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Předběžné hodnocení na základě fundamentální analýzy a svíčkových formací ukazuje potenciál pro růst. RSI i MA indikátory udávají silnou pozici, ale vysoké riziko volatilního trhu způsobuje nejistotu.",
-  "timestamp": "2026-03-09T04:13:08.734719+00:00",
-  "model": "deepseek-coder-v2"
-}

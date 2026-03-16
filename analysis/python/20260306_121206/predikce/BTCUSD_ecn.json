@@ -1,7 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě SELL (RSI 1h=38.6, pod MA, klesající trend za poslední hodiny). Střednědobě HOLD (RSI 4h=55, MA mírně klesá). Dlouhodobě nejasný signál (RSI týdenní=32.2 pod hranicí přeprodanosti, ale MA je stále vysoko)."
-}

@@ -1,9 +1,9 @@
 {
   "symbol": "CADJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály je omezeno vlivem měnových a globálních faktorů. RSI i MA hodnoty ukazují na pokles cen, ale zároveň diverzifikace portfolia vyžaduje uchování pozice.",
-  "timestamp": "2026-03-13T19:29:40.554953+00:00",
+  "reasoning": "Růst cen v posledních měsících podporován by SELL pozici, ale zároveň SMA ukazuje stoupající trend, což by mohlo podpořit BUY.",
+  "timestamp": "2026-03-16T00:31:41.773530+00:00",
   "model": "deepseek-coder-v2"
 }

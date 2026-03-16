@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měsíční RSI naznačuje přeprodanost (31.04), ale MA na všech timeframech kromě denního jsou nad současnou cenou. Týdenní RSI je 44.05, což naznačuje potenciál pro další pokles. Denní RSI je 54.99 a cena je nad MA, což naznačuje krátkodobý býčí sentiment. 1H a 4H RSI jsou neutrální. Celkově převládá medvědí sentiment, ale krátkodobě je potenciál pro mírný růst. Proto je SELL oceněno jako nejrizikovější, BUY je riskantní a HOLD je neutrální."
-}

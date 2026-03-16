@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu AUD s růstovým tlakem. RSI a MA indikují stabilitu a potenciál pro pokračující růst.",
-  "timestamp": "2026-03-09T03:56:39.997435+00:00",
-  "model": "deepseek-coder-v2"
-}

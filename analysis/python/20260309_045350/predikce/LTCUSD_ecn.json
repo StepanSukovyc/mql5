@@ -1,7 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Technická analýza naznačuje spíše SELL pozici. RSI je na většině timeframe pod 40, což indikuje, že je LTCUSD překoupený. MA na všech timeframech, kromě 1h, je nad současnou cenou, což rovněž podporuje prodej. Dlouhodobější timeframe (týdenní, měsíční) ukazují klesající trend. Nicméně, silný propad v posledních hodinách by mohl naznačovat krátkodobé odražení ceny, takže HOLD má nějaký smysl. BUY je vysoce rizikové."
-}

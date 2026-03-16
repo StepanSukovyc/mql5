@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "Na měsíčním a týdenním grafu je RSI v překoupené zóně, což naznačuje potenciální korekci (SELL). Denní graf je neutrální. 1H a 4H grafy naznačují mírný růstový trend (BUY), ale celkově je nejlepší vyčkat na jasnější signál (HOLD). Současná cena je nad MA na denním grafu, ale pod MA na hodinových timeframech. "
-}

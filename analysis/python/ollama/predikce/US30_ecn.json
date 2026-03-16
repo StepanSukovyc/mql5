@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
-  "BUY": 40.0,
-  "SELL": 20.0,
-  "HOLD": 40.0,
-  "reasoning": "Podle svíčkových formací a RSI je trend směrem nahoru, ale MA ukazuje silnou odolnost proti poklesům. Hodnocení zohledňuje krátkodobou stabilitu a potenciál pro rozvoj.",
-  "timestamp": "2026-03-13T20:55:04.203352+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s tržním tlakem nahoru, ale technické indikátory (RSI a MA) signalizují nejistotu.",
+  "timestamp": "2026-03-16T01:57:12.722432+00:00",
   "model": "deepseek-coder-v2"
 }

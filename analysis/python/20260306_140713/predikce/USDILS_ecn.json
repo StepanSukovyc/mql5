@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním a týdenním grafu je RSI silně přeprodané, což naznačuje potenciální obrat. Nicméně MA na těchto timeframech je výrazně nad aktuální cenou, což naznačuje silný downtrend. Denní a 4H grafy ukazují RSI kolem 50, což indikuje neutralitu. 1H RSI se blíží překoupené zóně. Celkově je downtrend stále silný, ale přeprodané podmínky na vyšších timeframech by mohly vést ke korekci. Zvýšený spread v posledních hodinách zvyšuje nejistotu. Proto mírná preference pro SELL."
-}

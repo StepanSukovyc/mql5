@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPAUD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na týdenním timeframe je RSI hluboko v přeprodané zóně (23.93), což naznačuje možný obrat směrem nahoru (BUY). Nicméně, MA na týdenním a měsíčním grafu jsou výrazně nad aktuální cenou (1.90952), což naznačuje silný downtrend (SELL). Denní RSI je pod 50, což také podporuje SELL. 4H RSI je nad 50, indikuje sílu. 1H RSI se pohybuje okolo 50. Celkově downtrend na vyšších TF má větší váhu, proto SELL s vyšším rizikem. Doporucuji vyckat, nez se situace vyjasni (HOLD)."
-}

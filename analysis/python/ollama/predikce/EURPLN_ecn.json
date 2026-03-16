@@ -1,9 +1,9 @@
 {
   "symbol": "EURPLN_ecn",
   "BUY": 30.0,
-  "SELL": 45.0,
-  "HOLD": 25.0,
-  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu, ale zároveň nízké hodnoty v měsíčním časovém rámci indikují nejistotu.",
-  "timestamp": "2026-03-13T20:00:47.883936+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických ukazatelů a očekávání poklesu ECB může vést k poklesu eura. Nicméně, svíčkové formace naznačují potenciální zotavení.",
+  "timestamp": "2026-03-16T01:03:26.161721+00:00",
   "model": "deepseek-coder-v2"
 }

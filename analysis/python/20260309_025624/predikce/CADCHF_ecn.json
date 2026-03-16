@@ -1,7 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu je RSI překoupené (73.66), ale cena se drží nad MA (0.56719). Na 4H grafu je RSI také v překoupené zóně (71.07). Na týdenním grafu je RSI neutrální (52.14), ale cena je nad MA (0.572399). Měsíční RSI je nízké (25.21), což by mohlo naznačovat potenciální obrat, ale cena je stále pod MA (0.597484). Nedostatek historických dat a rozporuplné signály mezi různými časovými rámci zvyšují riziko. Poslední hodinové svíčky naznačují růstový momentum, ale po silném růstu je korekce pravděpodobná. Proto 'HOLD' snižuje riziko."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDMXN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "USDMXN is showing mixed signals. Medium-term (daily, 4h) RSI and price action suggest bullish momentum, but the monthly MA is significantly higher than the current price, signaling potential resistance. Short term (1h) RSI is neutral. Considering all factors, a HOLD position is reasonable, but BUY positions could be entered with caution and stop-loss orders. SELL positions are justified by longer-term downtrend and monthly MA resistance but short term could be risky."
-}

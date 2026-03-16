@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "AUDJPY is at 110.996.  On the hourly and 4-hour charts, RSI is neutral (around 46-48), and price is near the MA, suggesting indecision. Daily RSI is 58, implying slightly bullish momentum, but the price is above the MA. Weekly RSI is overbought at 76, potentially indicating a pullback. Monthly RSI is 65, showing an overall uptrend. The latest hourly candles indicate a recent drop. Given the conflicting signals and overbought weekly conditions, SELL is slightly favored, HOLD is a viable option to await further confirmation, and BUY is less favorable due to potential for correction."
-}

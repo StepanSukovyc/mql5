@@ -1,7 +1,0 @@
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje smíšený signál. Krátkodobé indikátory (1h, 4h) jsou neutrální až mírně prodejní (RSI se pohybuje kolem 40-54), zatímco denní a týdenní RSI naznačují, že trh je přeprodaný. Cena je pod 1h MA (2076.745) a 4h MA (2057.0), ale nad denní MA (1999.85). Měsíční MA je výrazně vyšší (2881.086) což ukazuje na dlouhodobý klesající trend. Vzhledem k klesajícímu trendu na vyšších časových rámcích a současné ceně pod krátkodobými MA dáváme vyšší váhu prodejnímu signálu, ale s ohledem na potenciální odraz od přeprodaných úrovní i HOLD a BUY mají jisté opodstatnění."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Na denním grafu RSI naznačuje mírný býčí trend (57.45), ale cena se pohybuje kolem MA (18.93), což signalizuje nejistotu. Týdenní RSI je nízké (37.92), což by mohlo znamenat potenciální obrat směrem nahoru. Na měsíčním grafu RSI je 42.48 a cena je pod MA (19.76), což naznačuje dlouhodobější medvědí sentiment. Na 4H grafu je RSI 57.35, což ukazuje na rostoucí tlak a cena je nad MA (19.18). Vzhledem k těmto rozporům se doporučuje opatrnost. Vzhledem k poslednímu hodinovému svícnu, který prudce klesal, a skutečnosti, že cena se nachází mírně pod MA, je pravděpodobné, že bude pokračovat v poklesu (riziko)."
-}

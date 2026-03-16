@@ -1,7 +1,0 @@
-{
-  "symbol": "ZARJPY_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "Cena je pod MA na 1h, 4h i denním grafu, RSI na 4h je pod 35 naznačuje přeprodanost, ale i tak je trend spíše klesající. Na týdenním a měsíčním grafu je RSI nad 60, naznačuje překoupenost. Zvažoval bych spíše SELL pozici s ohledem na denní a 4H graf, ale je nutné brát v potaz i vyšší timeframe pro celkový kontext. Proto ponechávám i HOLD a BUY, ale s menším rizikem."
-}

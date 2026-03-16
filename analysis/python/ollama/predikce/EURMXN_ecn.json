@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s mírně růstajícím trendem. RSI indikátor signalizuje překoupenost s následujícím očekáváním korekce, zatímco MA ukazuje střednědobý trend. Doporučení je tedy kompromisem mezi potenciálem růstu a rizikem.",
-  "timestamp": "2026-03-13T19:55:35.054144+00:00",
+  "reasoning": "Zhoršení makroekonomických podmínek a negativní svíčková forma v poslední fázi může vést k poklesu kurzu.",
+  "timestamp": "2026-03-16T00:58:08.549530+00:00",
   "model": "deepseek-coder-v2"
 }

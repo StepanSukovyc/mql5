@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "USDCAD_ecn is showing bearish signals. The price is below moving averages on multiple timeframes (1H, 4H, Day, Week, Month). RSI on 1H is in oversold territory (16.5), which could signal a temporary bounce, but overall trend is down. The last daily candle is bearish. Therefore SELL has the highest probability. Limited data provided limits confidence."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena klesá na 1H, 4H i denním grafu. RSI je na 1H a 4H pod 50, což naznačuje klesající momentum. MA na 1H a 4H jsou nad aktuální cenou, což také signalizuje downtrend. Měsíční RSI je sice v překoupené zóně (74), ale krátkodobé ukazatele naznačují spíše prodejní tlak. Týdenní RSI je na 55. Celkově převládá klesající trend. Fundamentální analýza není k dispozici, takže se opírám pouze o technickou analýzu."
-}

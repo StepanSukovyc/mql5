@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "NGAS_ecn currently sits at 3.3.  Looking at the data, particularly the daily and 4-hour charts, there's evidence of recent upward momentum. The 1h and 4h RSI values are around 60, indicating potential for further gains without being significantly overbought.  The daily RSI is at 48, indicating some room to run upwards. The price is currently above the hourly and 4-hourly moving averages, suggesting a short to medium term uptrend.  However, the weekly moving average is much higher at 3.703, which is also higher than MA of month at 3.4191. On the daily timeframe price is above the MA and RSI has some room to run. This suggest that recent uptick may be short lived before longer down trend continues. Given the conflicting signals and limited lookback periods, a hold position with a slight bias toward buying is suggested, monitoring price action to confirm further upward movement."
-}

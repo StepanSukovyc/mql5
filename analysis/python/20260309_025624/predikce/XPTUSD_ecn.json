@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na kratších timeframech (1h, 4h) je RSI hluboko v přeprodané zóně, což naznačuje potenciální korekci nahoru, ale denní RSI je také pod 40, což potvrzuje trend klesání. Týdenní RSI je kolem 50, ale Monthly RSI je velmi vysoko, naznačuje silný nákupní tlak v minulosti. Cena je pod MA na 1h, 4h a denním grafu, ale nad MA na týdenním. Data z posledního dne indikují velký pokles, proto upřednostňuji SELL."
-}

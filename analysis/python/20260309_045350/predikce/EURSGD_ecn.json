@@ -1,9 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažují indikátory prodeje a nejistota z pohledu technické analýzy.",
-  "timestamp": "2026-03-09T04:38:13.529100+00:00",
-  "model": "deepseek-coder-v2"
-}

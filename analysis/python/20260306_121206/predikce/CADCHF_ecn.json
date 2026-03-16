@@ -1,7 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na hodinové bázi je RSI neutrální (55), zatímco 4h a denní RSI se blíží překoupené zóně (65 a 62). Týdenní RSI je neutrální (47), ale měsíční RSI je silně přeprodané (22), což naznačuje potenciál pro obrat. Cena je blízko MA na 1h, 4h a týdenní bázi, ale pod MA na denní a měsíční bázi. Celkově se jeví jako nejistá situace s potenciálem pro mírný růst, ale s rizikem poklesu. HOLD pozice představuje vyčkávání na potvrzení trendu."
-}

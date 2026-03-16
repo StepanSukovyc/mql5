@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPSGD_ecn",
-  "BUY": 30,
-  "SELL": 35,
-  "HOLD": 35,
-  "reasoning": "Na 1H a 4H timeframe RSI naznačuje překoupenost, ale daily RSI je neutrální. MA na vyšších timeframech (den, týden, měsíc) jsou nad aktuální cenou, což naznačuje potenciální rezistenci. Zatímco poslední den byl rostoucí, celkový trend (týdenní, měsíční) je spíše do strany až mírně klesající. Volatilita je značná. Doporučuji držet pozici s opatrností a čekat na potvrzení trendu, případně zvážit SELL, pokud cena nedokáže prorazit rezistence."
-}

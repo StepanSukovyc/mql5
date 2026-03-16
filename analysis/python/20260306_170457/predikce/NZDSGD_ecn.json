@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měnový pár NZDSGD_ecn vykazuje smíšené signály. RSI na kratších timeframech (1h, 4h) je neutrální, ale RSI na měsíčním grafu je pod 50, což naznačuje potenciální downtrend. Cena je pod měsíčním MA, což je další bearish signál. Na denním grafu cena klesla pod MA. Poslední hodinové svíčky indikují snahu o odraz, ale celkově převládá prodejní tlak. Proto doporučuji mírnou převahu SELL pozice."
-}

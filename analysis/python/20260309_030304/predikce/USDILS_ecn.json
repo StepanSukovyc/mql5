@@ -1,9 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na grafu s omezeným pohybem a slabý RSI signalizují pokračující tendenci. Stabilita MA ukazuje na podporu.",
-  "timestamp": "2026-03-09T03:03:28.175738+00:00",
-  "model": "deepseek-coder-v2"
-}

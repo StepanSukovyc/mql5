@@ -1,7 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "UK100_ecn is currently at 10309.4. Short-term (1H & 4H) RSI is oversold (34.29 & 30.59) suggesting a potential bounce. However, the price is below the moving averages on 1H, 4H and Daily timeframes (10364.95, 10467.72, 10588.919), indicating a downtrend. Weekly RSI is neutral (60.78) while Monthly RSI is high (69.91) but descending, suggesting a possible long-term correction. Recent daily candles also show a significant downtrend with high tick volume on the last day suggesting strong bearish sentiment. Given these factors, SELL is the most appropriate action, with a small chance for BUY if a short term bounce happens. Holding could be an option if one had a very longer view for the market with potential for a bullish trend in the future, according to the mensual MA."
-}

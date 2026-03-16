@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "EURNOK je v downtrendu. RSI je pod 40 na všech časových rámcích (hodinový timeframe je dokonce oversold), což naznačuje, že by mohl nastat odraz. MA na všech TF je výše než aktuální cena. Svíčkové formace za poslední hodiny ukazují na převahu prodejců. Riziko je vysoké, SHORT pozice se zdají výhodnější."
-}

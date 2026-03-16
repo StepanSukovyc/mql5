@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHKD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu je RSI na hodnotě 60.6, což naznačuje potenciální překoupenost. 1H a 4H RSI jsou v neutrální zóně. Cena je blízko MA na většině timeframech. Celkový pohled je neutrálně mírně negativní. Vzhledem k tomu a v souladu s tím, že HKD je navázán na USD, nedoporučuje se spekulativně vstupovat do obchodu, proto HOLD s možností SELL."
-}

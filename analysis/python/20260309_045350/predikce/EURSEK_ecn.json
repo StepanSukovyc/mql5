@@ -1,9 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA indikátorů míří cena k poklesu, ale zároveň je vidět silný support v úrovni minulých vrcholů. Doporučuji tedy držet pozici.",
-  "timestamp": "2026-03-09T04:36:36.200150+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na všech timeframech kromě týdenního, RSI je na 1h velmi nízké (23.8), což naznačuje potenciální překoupenost. Na denním timeframe je patrný klesající trend. Měsíční MA je vysoko nad cenou. Celkově převažují signály pro SELL, ale extrémní překoupenost na 1h timeframe může způsobit dočasnou korekci směrem vzhůru, proto je nutné sledovat další vývoj. Týdenní MA je pod aktuální cenou, i když jen nepatrně."
-}

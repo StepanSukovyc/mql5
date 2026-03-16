@@ -1,7 +1,0 @@
-{
-  "symbol": "FANG_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Smíšené signály. Krátkodobé RSI (1h, 4h) naznačují mírné překoupení, ale denní RSI je neutrální. Cena se nachází nad MA na 1h, 4h a denním grafu, ale pod MA na týdenním grafu. Měsíční MA pod cenou. Nedostatek historických dat omezuje komplexnější analýzu svíčkových formací. Celkově pozorujeme potenciální konsolidaci v krátkodobém horizontu, s nejistým směrem v dlouhodobém horizontu."
-}

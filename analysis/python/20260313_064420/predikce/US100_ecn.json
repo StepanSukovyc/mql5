@@ -1,7 +1,0 @@
-{
-  "symbol": "US100_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod MA na 1h, 4h, denním i týdenním grafu, což naznačuje downtrend. RSI na 1h je v přeprodané zóně (25.59), což by mohlo vést k menší korekci nahoru, ale celkově převládá prodejní tlak. Měsíční RSI je vysoko (69.53), indikuje, že je trh v oblasti překoupenosti a lze očekávat brzkou korekci.  Svíčkové formace za posledních pár hodin naznačují konsolidaci po poklesu. Z těchto důvodů je SELL nejrizikovější variantou."
-}

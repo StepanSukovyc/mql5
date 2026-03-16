@@ -1,7 +1,0 @@
-{
-  "symbol": "XZNUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Short-term: 1H & 4H RSI are near 50, suggesting indecision. Recent 1H candles show a slight pullback. Day RSI is below 50 indicating a bearish trend. The daily MA is above the current price suggesting selling pressure. Week RSI is high at 66, but current price is below weekly MA, which suggests sell signal. Limited monthly data for a comprehensive analysis. Overall trend suggests a potential SELL, but the relatively high week RSI and recent upward price action warrant a HOLD option as well. BUY opportunity can be found with the day RSI and price rising above the daily MA."
-}

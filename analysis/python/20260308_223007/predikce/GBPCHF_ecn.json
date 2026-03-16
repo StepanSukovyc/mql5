@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "GBPCHF is showing a bearish trend. RSI is oversold on weekly and monthly charts (29.59 and 27.83 respectively) indicating further downside potential. Daily RSI is below 40, confirming downward momentum. The price is below the MA on all timeframes. The most recent daily candles show a failure to sustain upward movement, suggesting a continuation of the downtrend. Limited lookback period available makes precise trend identification harder."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Krátkodobě SELL: 1H RSI je v přeprodané zóně (33.11), což naznačuje možný odraz ceny nahoru, ale současný denní a 4H graf ukazují na poklesný trend. MA na měsíčním grafu roste, což indikuje dlouhodobý růst. Celkově je momentálně převaha medvědího sentimentu (SELL), ale je potřeba sledovat vývoj a potenciální odraz od přeprodanosti (BUY). HOLD doporučuji pro opatrné investory."
-}

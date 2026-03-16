@@ -1,9 +1,0 @@
-{
-  "symbol": "FANG_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s cenzurním potenciálem růstu. Technické indikátory RSI a MA svědčí o volatilitě s tendencí k poklesu, ale fondové pozice zvyšují riziko.",
-  "timestamp": "2026-03-09T02:08:32.974249+00:00",
-  "model": "deepseek-coder-v2"
-}

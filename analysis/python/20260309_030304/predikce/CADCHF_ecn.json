@@ -1,7 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobé RSI indikátory (1h, 4h, day) jsou v překoupené zóně, což naznačuje potenciální obrat. Dlouhodobější RSI (month) je sice nízké, ale MA na měsíčním grafu je výrazně nad aktuální cenou. Týdenní RSI je neutrální. Proto vidím spíše příležitost pro SELL, ovšem s ohledem na týdenní data a absenci jasných reverzních formací zvažuji také HOLD."
-}

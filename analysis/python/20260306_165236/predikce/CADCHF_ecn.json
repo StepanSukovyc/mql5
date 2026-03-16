@@ -1,7 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "CADCHF is showing mixed signals. Short-term (1H, 4H) RSI suggests slight overbought conditions or at least a lack of clear direction, while daily RSI is moderate. Weekly RSI is neutral. Monthly RSI is oversold, but MA is still far above the current price indicating a potential longer-term downtrend. The price is currently near weekly MA, which might act as resistance. The recent hourly candles show strong volatility, with a large bearish candle in the last hour, indicating bearish pressure. Considering the conflicting signals, selling pressure appears to be present. Holding is suggested while waiting for a clearer trend. The potential for a longer-term downtrend and recent bearish price action outweigh short-term bullish signals. Note: limited candle data is available."
-}

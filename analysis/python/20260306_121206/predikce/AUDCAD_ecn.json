@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena AUDCAD se nachází v klesajícím trendu na kratších časových rámcích (1h, 4h, day) a RSI indikátory jsou v oblasti pod 50, což naznačuje převahu prodejců. Moving Averages na kratších timeframech jsou nad aktuální cenou (0.95567), což také poukazuje na potenciální odpor a možnost dalšího poklesu. Dlouhodobé indikátory (týdenní, měsíční) jsou pozitivní, ale krátkodobé faktory aktuálně převažují. Proto doporučuji spíše SELL, HOLD je neutrální a BUY je riskantní."
-}

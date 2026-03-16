@@ -1,7 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "LTCUSD_ecn is currently trading at 54.59. The RSI on the 1h chart is 36.41, indicating it is approaching oversold conditions. However, the price is below the moving average (MA) on all timeframes from 1h to month, suggesting a downtrend. The weekly RSI is very low at 28.04, further indicating oversold conditions. Considering the persistent downtrend across multiple timeframes and the current price being below the MAs, a 'SELL' position holds the highest probability. The 'HOLD' is justified due to the oversold RSI on shorter and longer timeframes which could lead to a short term retracement. The potential 'BUY' is there as a risk factor for potential future upside."
-}

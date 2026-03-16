@@ -1,9 +1,0 @@
-{
-  "symbol": "USDCZK_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět pokles, ale zároveň fundamentální analýza ukazuje stabilitu. Rozhodnutí o BUY je ovlivněno potenciálem růstu na základě historických dat a aktuálního trendu.",
-  "timestamp": "2026-03-09T02:58:27.695878+00:00",
-  "model": "deepseek-coder-v2"
-}

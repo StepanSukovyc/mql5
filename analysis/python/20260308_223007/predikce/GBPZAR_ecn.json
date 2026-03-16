@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "Technická analýza GBPZAR_ecn ukazuje smíšené signály. Na denním grafu se RSI nachází na 58, což naznačuje mírný býčí sentiment, ale cena je nad MA, což značí potenciál pro korekci. Na týdenním grafu je RSI na 45 a cena se obchoduje kolem MA, což naznačuje nerozhodnost. Měsíční RSI je 43 a cena je pod MA, což naznačuje spíše medvědí trend. Svíčkové formace z posledních hodin ukazují na určité vybírání zisků po předchozím růstu. Vzhledem k této nejednoznačnosti je vhodné držet (HOLD) stávající pozice a sledovat trh, přičemž nákup (BUY) je mírně preferován vzhledem k odrazu na denním grafu a prodej (SELL) je s menší pravděpodobností, ale stále možný."
-}

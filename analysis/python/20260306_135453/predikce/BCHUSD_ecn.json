@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Aktuální cena 448.9 je pod klouzavými průměry na všech časových rámcích s výjimkou měsíčního. RSI je pod 50 na všech časových rámcích, což naznačuje medvědí momentum. Denní a hodinový RSI jsou v oblasti překoupenosti (pod 30), což by mohlo vést k menšímu odrazu (BUY 25%). Nicméně, převládající trend je klesající (SELL 45%). Doporučuje se opatrnost a vyčkávání na jasnější signály, proto HOLD 30%."
-}

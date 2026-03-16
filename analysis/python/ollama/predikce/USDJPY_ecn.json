@@ -1,9 +1,9 @@
 {
   "symbol": "USDJPY_ecn",
   "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Vysoká úroveň RSI a MA ukazují silnou pozici kupujících. Nicméně, pokles v minulých měsících indikuje potenciál pro další pokles.",
-  "timestamp": "2026-03-13T21:08:51.661182+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je zřetelné, že cena může začít konsolidovat nebo dokonce poklesnout, což naznačuje nejistotu.",
+  "timestamp": "2026-03-16T02:11:01.665770+00:00",
   "model": "deepseek-coder-v2"
 }

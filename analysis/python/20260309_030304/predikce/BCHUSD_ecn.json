@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na všech timeframech (1h, 4h, den, týden), což naznačuje klesající trend. RSI je nízko na 1h a denním timeframe (pod 30), což indikuje překoupenost a potenciální krátkodobý odraz, ale celkový trend je spíše k prodeji. Na měsíčním timeframe je RSI sice na 47,42, ale i zde cena pod MA. Proto doporučuji spíše SELL, a jen 25% pro BUY."
-}

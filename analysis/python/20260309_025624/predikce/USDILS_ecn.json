@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Z krátkodobého hlediska (1h, 4h) vidíme mírný býčí sentiment, RSI se pohybuje okolo 50-60, cena nad MA. Denní RSI také neutrální. Na druhou stranu týdenní a měsíční RSI jsou hluboko pod 30, což značí silné přeprodání.  Dlouhodobější MA ukazují klesající trend. Poslední dvě hodinové svíčky vykazují silný růst, ale je třeba zvážit, že mohou být pouze korekcí. Proto vyvážená strategie HOLD s potenciálem pro BUY (v případě potvrzení býčího trendu) a SELL (při návratu k downtrendu) se zdá nejrozumnější. Navíc, velké spready v posledních hodinových svíčkách naznačují volatilitu a potenciální nestabilitu."
-}

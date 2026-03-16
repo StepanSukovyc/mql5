@@ -1,7 +1,0 @@
-{
-  "symbol": "SGDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technické indikátory ukazují smíšený signál. RSI na denní a týdenní bázi naznačuje potenciální překoupenost, zatímco hodinové a 4-hodinové RSI jsou neutrální. Aktuální cena je nad MA na všech časových rámcích, ale denní a 4H MA se blíží ceně. Celkově je trh v konsolidaci, takže pozice HOLD má smysl. SELL je upřednostňován, vzhledem k potenciální korekci po předchozím růstu, což naznačuje týdenní RSI."
-}

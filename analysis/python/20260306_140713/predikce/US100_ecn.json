@@ -1,7 +1,0 @@
-{
-  "symbol": "US100_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje potenciální prodejní tlak. Na hodinovém grafu je RSI v oblasti přeprodanosti (35.06), ale cena se pohybuje pod MA (24969.76). Na denním grafu RSI je 41.99, což naznačuje, že k přeprodanosti je ještě prostor, a cena je pod MA (24919.674). Měsíční graf je sice býčí (RSI 70.23), ale aktuální cena je výrazně pod týdenním MA (25237.811), což naznačuje střednědobý medvědí trend. Poslední denní svíčka je medvědí. Proto je SELL rizikovější."
-}

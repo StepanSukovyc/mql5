@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technically, the pair is showing mixed signals. Hourly RSI is around 50 indicating neutral momentum, but 4H and daily RSI are below 50 suggesting bearish pressure. The price is below the 4H and daily moving averages, indicating a potential downtrend. Monthly RSI is above 50. Recent hourly candles also show indecision. Therefore, considering the bearish daily trend and indecision on smaller timeframes, SELL has a slightly higher probability, with a need for caution and HOLD as a safety approach until a clear direction emerges."
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozhodujícím faktorem je pokles RSI a SMA, což naznačuje další pokles. Nicméně, podle svíčkových formací může dojít k obratu.",
-  "timestamp": "2026-03-08T22:48:41.844098+00:00",
-  "model": "deepseek-coder-v2"
-}

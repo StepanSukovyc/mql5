@@ -1,7 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "EURJPY is currently trading at 182.405. The short-term indicators (1H, 4H, Daily) show RSI values below 50, suggesting potential downward momentum. The price is below the moving average on the 1H, 4H and daily timeframes which also point to the possibility of a downtrend. The weekly RSI is at 58 and the monthly RSI at 61, indicating an upward trend in the longer term. However, in the short term, selling appears to be the optimal approach due to the downward momentum. Due to the conflicting signals on different timeframes, holding a percentage of the position is reasonable."
-}

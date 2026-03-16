@@ -1,7 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na hodinovém grafu je RSI hluboko v přeprodané zóně (16.98), což naznačuje potenciální odraz ceny. Nicméně, cena je pod MA na 1h, 4h, denní, týdenní i měsíční bázi, což naznačuje silný sestupný trend. Denní a týdenní RSI jsou také poměrně nízko (38.31 a 29.09), což posiluje medvědí výhled.  Proto upřednostňuji SELL s možností krátkodobé korekce nahoru."
-}

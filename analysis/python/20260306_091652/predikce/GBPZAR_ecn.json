@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "GBPZAR je v krátkodobém horizontu překoupený (RSI 1h a 4h nad 70), což naznačuje potenciální korekci. Denní RSI je na 62, což značí rostoucí momentum, ale ne extrémně překoupené. MA na týdenní a měsíční bázi jsou nad současnou cenou, což může sloužit jako rezistence. Týdenní RSI je neutrální. Celkově je trend spíše rostoucí, ale s ohledem na překoupenost na kratších časových rámcích, je nutná opatrnost. Proto rozložení mezi BUY, SELL a HOLD."
-}

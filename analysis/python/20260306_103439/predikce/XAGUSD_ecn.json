@@ -1,7 +1,0 @@
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Globally, the price action suggests a downtrend, with the monthly RSI showing overbought conditions (78.73). The current price is below the 4h MA, indicating potential resistance. The daily RSI is neutral, while the weekly RSI is showing a positive upwards trend and a level approaching 60. The recent hourly candles display volatility, but there is resistance shown above 84.000. Overall, there are more indications for selling given the data at hand."
-}

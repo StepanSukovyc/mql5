@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCZK_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "Cena je v uptrendu na kratších timeframech (1h, 4h, day), RSI signalizuje překoupenost, ale MA potvrzuje trend. Na týdenním grafu je RSI neutrální. Měsíční graf naznačuje dlouhodobý downtrend, ale současný nárůst ceny se blíží k MA. Rizikové hodnocení odráží nejistotu z kombinace krátkodobého uptrendu a dlouhodobého downtrendu."
-}

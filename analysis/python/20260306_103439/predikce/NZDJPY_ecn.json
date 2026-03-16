@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod MA na 1h, 4h a denním grafu, což naznačuje potenciální downtrend. RSI na 4h je pod 50, což podporuje SELL. Týdenní RSI je sice nad 60, ale celkový krátkodobý sentiment je spíše bearish.  Proto mírná převaha pro SELL.  HOLD je rozumná volba vzhledem ke konsolidaci ceny v posledních dnech a nejasnému směru na vyšších timeframech."
-}

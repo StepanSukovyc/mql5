@@ -1,7 +1,0 @@
-{
-  "symbol": "ZARJPY_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "ZARJPY is currently at 9.428. The hourly and daily RSI indicate oversold conditions (38.43 and 40.76 respectively), suggesting potential for a bounce. However, the price is below the moving average on the hourly, 4-hour and daily charts, indicating a potential downtrend. The weekly and monthly RSI are still in bullish territory, suggesting a broader uptrend. The most recent daily candle is bearish. Considering all of these, a 'Sell' position carries the highest probability, closely followed by 'Hold'. A 'Buy' position is the riskiest at this stage."
-}

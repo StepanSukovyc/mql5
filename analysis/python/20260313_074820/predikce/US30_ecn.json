@@ -1,7 +1,0 @@
-{
-  "symbol": "US30_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Na denním grafu je RSI v oblasti přeprodanosti (28.80), což naznačuje potenciál pro korekci směrem nahoru. Nicméně, cena je pod klouzavým průměrem (MA) na všech časových rámcích kromě měsíčního, což indikuje klesající trend. Vzhledem k tomu, že denní RSI je tak nízko, a cena je pod všemi MA kromě měsíčního, SHORT pozice má vyšší pravděpodobnost úspěchu než Long pozice, nicméně riziko korekce je přítomno. HOLD je opatrná strategie, jelikož by se jednalo o vyčkávání a pozorování potvrzení trendu v následujících obdobích."
-}

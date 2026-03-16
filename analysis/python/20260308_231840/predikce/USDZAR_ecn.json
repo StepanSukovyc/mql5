@@ -1,7 +1,0 @@
-{
-  "symbol": "USDZAR_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1h timeframe je RSI na hodnotě 39, což naznačuje možnost překoupenosti. Denní RSI je na 61, což je relativně neutrální, ale blíží se překoupené oblasti. MA na měsíčním grafu je nad aktuální cenou, což naznačuje možný dlouhodobý klesající trend. Z posledních denních svíček je patrný spíše klesající trend, i když poslední den uzavřel výše. Na 4h timeframe je RSI na 56, což je neutrální. Vzhledem k těmto smíšeným signálům se doporučuje spíše opatrnost a SELL pozice s rozumným risk managementem."
-}

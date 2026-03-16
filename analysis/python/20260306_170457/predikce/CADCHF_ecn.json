@@ -1,7 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 35,
-  "SELL": 45,
-  "HOLD": 20,
-  "reasoning": "Měsíční RSI je velmi nízko (21.59), což značí potenciální překoupenost, ale MA na měsíčním timeframe je stále vysoko nad současnou cenou, což naznačuje dlouhodobější downtrend. Denní a 4H RSI se pohybují v neutrálních až mírně překoupených hodnotách. 1H timeframe ukazuje mírnou konsolidaci.  Důvod pro SELL je silnější, vzhledem k dlouhodobějšímu downtrendu a neutrálnímu sentimentu na nižších timeframe. Důvod pro BUY existuje kvůli překoupenosti na měsíčním grafu, ale trend je zatím slabý. HOLD je opatrný přístup kvůli smíšeným signálům."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "On the 1H and 4H timeframe we are seeing RSI values above 50, indicating bullish momentum. However, the weekly RSI is below 40 and MA is trending above current price, suggesting an underlying bearish trend. Given the conflicting signals, a cautious approach is warranted, hence the HOLD. A potential breakout above the monthly MA resistance could favor BUY in the long term."
-}

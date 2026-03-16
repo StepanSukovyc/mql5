@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na 1h, 4h, day a week timeframes. RSI je pod 50 na 1h, 4h, day a week timeframes, naznačuje klesající momentum. Chybí měsíční data pro kompletní pohled. Poslední týdenní svíčka je silně bearish. Proto SELL má největší pravděpodobnost, ale potenciál BUY je mírný vzhledem k možnosti odrazu od supportu."
-}

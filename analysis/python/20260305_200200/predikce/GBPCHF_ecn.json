@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Dlouhodobější trend je klesající (RSI a MA na vyšších timeframech klesají). RSI na denním a týdenním grafu je v oblasti přeprodanosti, což naznačuje možnost krátkodobé korekce vzhůru. Nicméně, MA na denním grafu je stále nad aktuální cenou a směřuje dolů. Na 1h timeframe je RSI mírně nad 50, což značí mírný bullish momentum, ale je nutno brát ohled na vyšší timeframe, kde převládá medvědí trend."
-}

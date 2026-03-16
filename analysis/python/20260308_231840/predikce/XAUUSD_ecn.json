@@ -1,7 +1,0 @@
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "XAUUSD is currently at 5099.05. Monthly RSI is extremely overbought (89.58), suggesting a potential pullback. Weekly RSI is also high (73.62). While the daily MA is below the current price indicating short term up-trend, 4H MA is above the current price. The recent price action on the 1H chart is choppy. The long-term trend (monthly) indicates a continued uptrend, but short-term indicators suggest a potential correction. Selling has higher probability due to overbought conditions on higher timeframes."
-}

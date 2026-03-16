@@ -1,7 +1,0 @@
-{
-  "symbol": "VIX_ecn",
-  "BUY": 60,
-  "SELL": 20,
-  "HOLD": 20,
-  "reasoning": "VIX_ecn prudce roste, denní a týdenní RSI signalizují překoupenost, ale silný uptrend by mohl pokračovat. Měsíční RSI je neutrální a nad MA.  Krátkodobý SELL (na 1h timeframe) je možný z důvodu korekce. HOLD je opatrná strategie vzhledem k volatilitě. Vzhledem k poslední svíčce na 4h a denním grafu - silný růst, preferuji BUY s opatrností."
-}

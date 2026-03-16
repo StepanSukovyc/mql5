@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na všech timeframes kromě měsíčního. RSI je pod 40 na denním, 4h a 1h timeframech, což naznačuje, že je BCHUSD překoupený. SELL má proto nejvyšší pravděpodobnost, následován HOLD. BUY má nejmenší pravděpodobnost, dokud se situace neobrátí."
-}

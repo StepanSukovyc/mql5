@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "EURNOK is currently at 11.10118. RSI values on hourly (28.66), daily (32.12) and weekly (24.27) timeframes indicate oversold conditions, suggesting potential for a bounce. However, Moving Averages on all timeframes are significantly higher than the current price, indicating strong downward momentum. Recent hourly candles show price consolidation, but with a slight downward trend. The overall trend seems bearish on longer timeframes. Therefore, a cautious SELL position is more probable than BUY, HOLD is considerable given oversold indications and a possible correction."
-}

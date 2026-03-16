@@ -1,7 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu se RSI blíží překoupené zóně (59), ale cena je stále pod MA. Týdenní RSI je nízké (37) a cena je pod MA. Denní RSI je neutrální (53) a cena je nad MA, což naznačuje potenciální býčí momentum. Nicméně, v posledních hodinách vidíme spíše konsolidaci. Celkově převládá mírný medvědí sentiment, proto vyšší pravděpodobnost SELL. HOLD je pro ty, kteří čekají na jasnější signál."
-}

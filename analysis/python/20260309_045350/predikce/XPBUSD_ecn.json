@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na všech timeframech kromě měsíčního, kde nejsou data. RSI je na denní bázi a 1h timeframe v oversold zóně a týdenní není daleko.  Na denní a týdenní bázi je downtrend. 1h a 4h RSI naznačuje potencionální mírný odraz, ale celkový sentiment je spíše medvědí."
-}

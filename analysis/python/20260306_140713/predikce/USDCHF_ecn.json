@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje medvědí sentiment. Měsíční RSI je na 31.4 (blízko přeprodané zóně, ale stále klesající), MA je nad aktuální cenou. Týdenní RSI je 44.7, MA je také nad cenou. Denní RSI je 56.8 a MA pod cenou. 4H a 1H RSI se nachází nad 50. Cena je aktuálně nad MA na 1H, 4H a denních grafech. Vzhledem k tomu, že existuje divergence mezi různými časovými rámci a silnější signály se nacházejí na vyšších TF, doporučuje se SELL s možností HOLD."
-}

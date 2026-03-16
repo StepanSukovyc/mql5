@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém a 4hodinovém grafu se RSI nachází v překoupené zóně, což naznačuje potenciální korekci. Denní RSI je také relativně vysoké. MA na všech timeframech kromě měsíčního je blízko aktuální ceně, což naznačuje konsolidaci. Na měsíčním grafu je RSI nízko, což by mohlo signalizovat dlouhodobou příležitost k nákupu, ale MA je vysoko nad aktuální cenou. Vzhledem k rozporuplným signálům a omezenému množství dat je držení stávající pozice opatrnější. BUY má mírnou převahu díky potenciálu růstu z dlouhodobého pohledu, SELL má druhou nejvyšší prioritu vzhledem k signálům překoupenosti na kratších timeframech."
-}

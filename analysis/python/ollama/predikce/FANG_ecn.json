@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezená vysokými úrovněmi RSI a MA, což naznačuje nejistotu a riziko poklesu.",
-  "timestamp": "2026-03-13T20:09:28.172944+00:00",
+  "reasoning": "Zvýšení RSI a MA v posledních měsících naznačuje silnou pozici s tendencí k růstu.",
+  "timestamp": "2026-03-16T01:12:04.405468+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují signály pro prodej na základě vysokých hodnot RSI a poklesu MA. Buysignál je omezen kvůli mírnému růstu v posledním období.",
-  "timestamp": "2026-03-13T20:34:06.011263+00:00",
+  "reasoning": "Převažující trend je poklesový, ale síla RSI a MACD svědčí o možném oslabení tlaku nabídky. Kombinace cenových modelů a indikátorů ukazuje na nejistotu trhu.",
+  "timestamp": "2026-03-16T01:36:15.257521+00:00",
   "model": "deepseek-coder-v2"
 }

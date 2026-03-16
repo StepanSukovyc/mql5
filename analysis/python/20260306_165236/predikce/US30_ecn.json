@@ -1,7 +1,0 @@
-{
-  "symbol": "US30_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "US30_ecn is showing a strong bearish signal. RSI is oversold on 1H and 4H, and approaching oversold on the daily timeframe. Price is well below the moving averages across all short to mid-term timeframes (1h, 4h, Daily). The monthly timeframe, while showing an RSI in overbought territory historically, is trending downward. Recent daily candles are showing strong downward movement. Therefore, SELL has a higher probability. However, given the oversold nature of RSI on shorter timeframes, a HOLD or slight bounce is possible, hence the 20% BUY and HOLD rating."
-}

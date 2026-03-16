@@ -1,7 +1,0 @@
-{
-  "symbol": "US500_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na měsíčním grafu je RSI vysoko (74.5), což naznačuje překoupenost. Na denním a hodinovém grafu je RSI relativně nízké (42.5 a 36.03), ale cena je pod denním a hodinovým MA. Posledních pár hodin cena klesá a svíčky naznačují pokračující tlak na pokles ceny. Tlak na prodej je větší než na nákup."
-}

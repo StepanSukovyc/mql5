@@ -1,7 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "The weekly RSI is extremely oversold at 28.64, suggesting potential for a bounce, but the daily and 4-hour RSIs are still below 50, indicating bearish momentum. The price is consistently below its moving averages across all timeframes, with the weekly and monthly MAs being significantly higher (76.07 and 88.09 respectively), suggesting a strong downtrend. Recent daily candles also show weakness. Therefore, a 'Sell' position holds the highest probability, followed by 'Hold'. 'Buy' carries the most risk, even with potential bounce due to weekly RSI oversold state. Limited candle data impacts the accuracy."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHKD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technické indikátory ukazují smíšený obraz. RSI na denní bázi je relativně vysoké (59.52), naznačující potenciální překoupenost. Na 1h a 4h timeframe je RSI neutrální. MA se na většině timeframe drží blízko aktuální ceny.  Poslední svíčky na 1h a 4h timeframe naznačují mírný tlak na SELL, avšak celkově je trh relativně konsolidovaný. Proto je doporučení rozděleno mezi SELL a HOLD, s menší vahou na BUY."
-}

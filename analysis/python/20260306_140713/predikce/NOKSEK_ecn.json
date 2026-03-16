@@ -1,7 +1,0 @@
-{
-  "symbol": "NOKSEK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na denním a týdenním grafu je RSI v překoupené zóně, což naznačuje potenciální korekci (SELL). Nicméně, současná cena je nad MA na většině časových rámců, což signalizuje možný uptrend (BUY). Na měsíčním grafu je RSI v neutrální zóně, naznačuje vyčkávání (HOLD)."
-}

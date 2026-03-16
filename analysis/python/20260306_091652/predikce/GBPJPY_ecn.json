@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "GBPJPY exhibits mixed signals.  On shorter timeframes (1h, 4h), RSI is neutral, and the price is hovering around the MA. The daily RSI is below 50, suggesting a slight bearish momentum.  Weekly and Monthly RSI are above 60, indicating a possible overbought condition. Recent daily candles show a pullback. SELL is slightly favored due to short term indicators and recent price action, BUY needs more confirmation, and HOLD is warranted to observe further price development."
-}

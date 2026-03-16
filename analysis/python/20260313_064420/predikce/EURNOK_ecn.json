@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "EURNOK is showing bearish signals across multiple timeframes. Weekly and daily RSI values are below 45, indicating potential for further downside. The price is currently below the daily, weekly and monthly MA, strengthening the sell signal.  The 1h and 4h RSIs are hovering around the 50 level, suggesting consolidation/hold. However, the longer-term trend is downwards. Short data history limits deeper analysis."
-}

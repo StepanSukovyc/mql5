@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstový impuls podporovaný svíčkovou formací a pozitivním RSI. Nicméně, pokles MA signalizuje silnou odolnost proti růstu.",
-  "timestamp": "2026-03-13T21:34:46.924093+00:00",
+  "reasoning": "Podle svíčkových formací a RSI ukazuje trend směrem nahoru, ale MA indikátor signalizuje nejistotu s klesajícím průměrem.",
+  "timestamp": "2026-03-16T02:36:54.862851+00:00",
   "model": "deepseek-coder-v2"
 }

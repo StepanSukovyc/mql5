@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1H timeframe je RSI překoupené (68.78) a MA je nad aktuální cenou, což značí rezistenci. Denní RSI (40.03) je neutrální, ale MA (1.3512) je výrazně nad současnou cenou, což naznačuje medvědí trend. Týdenní RSI (41.38) je také neutrální, ale MA (1.3393) je mírně nad cenou. Měsíční RSI (55.58) je neutrální a MA (1.3176) je pod současnou cenou, což signalizuje potenciální support. Celkově převládá medvědí sentiment s potenciálem klesání. Proto SELL má největší procento, HOLD je doporučen pro opatrnost, a BUY má nízkou pravděpodobnost úspěchu."
-}

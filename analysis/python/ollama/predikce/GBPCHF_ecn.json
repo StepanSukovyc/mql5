@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace naznačují možnost otočení. Riziko ztráty je vyváženo pozitivním sentimentem ze snížení úrokových sazeb ve Velké Británii.",
-  "timestamp": "2026-03-13T20:16:22.486038+00:00",
+  "reasoning": "Zvýšení RSI a MA signalizují potenciál růstu, ale zároveň se snižuje fondy pro HOLD kvůli nedostatečným indikacím trendu.",
+  "timestamp": "2026-03-16T01:18:59.755195+00:00",
   "model": "deepseek-coder-v2"
 }

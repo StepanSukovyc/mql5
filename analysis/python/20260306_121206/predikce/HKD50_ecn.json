@@ -1,7 +1,0 @@
-{
-  "symbol": "HKD50_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu je RSI na 37.39, což naznačuje, že trh je blízko k přeprodané zóně, ale ještě není přeprodaný. Týdenní RSI je na 45.11. Měsíční RSI je na 65.22. Cena je pod denním MA, ale nad měsíčním MA. Na hodinové a 4 hodinové timeframech se cena pohybuje pod MA. Protože intradenní indikátory (1H a 4H) indikují spíše pokles, denní RSI ještě není v přeprodané zóně a cena je pod denním MA, dáváme větší váhu pro SELL. Nicméně, měsíční RSI je poměrně vysoko a cena nad měsíčním MA, což značí dlouhodobější uptrend, proto ponecháváme i BUY a HOLD."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na 1h a 4h timeframe je RSI v překoupené zóně, což naznačuje možnou korekci (SELL). Na denním grafu je RSI na 60, což je neutrální. Týdenní a měsíční RSI naznačují potenciál pro růst (BUY). Cena je nad denním MA, ale pod týdenním a měsíčním MA. Doporučuje se vyčkat na potvrzení trendu (HOLD)."
-}

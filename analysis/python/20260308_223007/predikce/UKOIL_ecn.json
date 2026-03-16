@@ -1,7 +1,0 @@
-{
-  "symbol": "UKOIL_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "UKOIL_ecn je aktuálně překoupen na denním (RSI 88.41), týdenním (RSI 85.37) i 4H (RSI 76.63) timeframe. MA je pod cenou, což značí uptrend, ale síla uptrendu se zdá být vyčerpaná dle RSI. Na měsíčním timeframe je RSI 67.55 a MA pod cenou. Proto, převládá riziko korekce směrem dolů, což podporuje SELL pozici. BUY má omezenou podporu vzhledem k celkovému překoupení a SELL pozici podporují RSI hodnoty, HOLD pozice zohledňuje pokračující uptrend na měsíční bázi."
-}

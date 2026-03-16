@@ -1,7 +1,0 @@
-{
-  "symbol": "NOKSEK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na denním a týdenním grafu je RSI v překoupené zóně (77.81 a 72.18), což naznačuje možnost korekce. Na druhou stranu, cena se nachází nad MA na všech časových rámcích, což naznačuje pokračující býčí trend. Měsíční RSI je neutrální, ale MA klesá. Vzhledem k rozporuplným signálům doporučuji opatrnost. BUY s ohledem na krátkodobý uptrend, SELL jako zajištění pro možnou korekci a HOLD pro vyčkávání na jasnější signál. Nedostatek detailních dat svíčkových formací limituje hlubší analýzu."
-}

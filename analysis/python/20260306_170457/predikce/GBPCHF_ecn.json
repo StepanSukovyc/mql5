@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "GBPCHF is showing bearish signals across multiple timeframes. Monthly and Weekly RSI values are deeply oversold, suggesting potential for a short-term bounce, but Daily RSI is also relatively low. The price is below the moving average on all timeframes, further reinforcing the bearish sentiment. Recent hourly price action shows a drop towards the end of the period. Therefore, a 'SELL' position carries the highest probability, although the deeply oversold longer timeframes suggest that some caution is warranted and the position should be monitored carefully."
-}

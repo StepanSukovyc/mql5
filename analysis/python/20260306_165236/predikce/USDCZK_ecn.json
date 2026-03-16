@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCZK_ecn",
-  "BUY": 60,
-  "SELL": 20,
-  "HOLD": 20,
-  "reasoning": "Na denním grafu je RSI na úrovni 73.14, což naznačuje překoupenost. Nicméně, krátkodobý trend (1H a 4H) je stále býčí s RSI blížící se překoupené zóně, ale s aktivním pohybem ceny vzhůru (poslední svíčky). Týdenní RSI je na 59.65 a měsíční RSI je 40.64, což dává prostor pro další růst.  MA na denním grafu je 20.60 a cena je nad MA, což indikuje rostoucí trend. Celkově, na základě technické analýzy, je větší pravděpodobnost BUY, avšak s ohledem na překoupenost na denním grafu je nutné být opatrný. SELL je méně pravděpodobné vzhledem k rostoucímu trendu. HOLD se doporučuje pro ty, co mají otevřené pozice a čekají na potvrzení trendu."
-}

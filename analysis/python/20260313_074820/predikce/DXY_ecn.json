@@ -1,9 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály DXY jsou omezené z důvodu konjunkturálních problémů a vysokých úrokových sazeb. Na druhé straně, pokles je omezován silnou měnovou politikou a investičními nástroji.",
-  "timestamp": "2026-03-13T07:27:55.563949+00:00",
-  "model": "deepseek-coder-v2"
-}

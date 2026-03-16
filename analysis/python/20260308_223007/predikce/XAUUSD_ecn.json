@@ -1,7 +1,0 @@
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Zlato (XAUUSD) vykazuje smíšené signály. Měsíční RSI je extrémně překoupené (91.62), což naznačuje možnost korekce. Týdenní RSI je také vysoké (76.12). Denní RSI (52.75) je neutrální, ale cena se pohybuje nad 200denním MA (kalkulováno z dat), což signalizuje dlouhodobý uptrend. Krátkodobé indikátory (1h, 4h RSI) naznačují oslabení. S ohledem na překoupené dlouhodobé indikátory a nedávný pokles, SELL má mírnou převahu, HOLD je opatrná pozice, a BUY je rizikovější."
-}

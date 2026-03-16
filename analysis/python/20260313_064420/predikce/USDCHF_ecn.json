@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 55,
-  "SELL": 25,
-  "HOLD": 20,
-  "reasoning": "USDCHF is showing bullish momentum on shorter timeframes (1H RSI overbought, price above MA). Daily RSI is also climbing. However, weekly MA is still above current price suggesting possible resistance. Month timeframe suggest bearish divergence in longer term."
-}

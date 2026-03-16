@@ -1,7 +1,0 @@
-{
-  "symbol": "US100_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod denním MA, hodinový a 4H RSI jsou pod 50, což naznačuje medvědí momentum. Měsíční RSI je ale vysoko (70.43), což může naznačovat překoupenost a potenciální korekci. Týdenní MA je výše než aktuální cena. Poslední denní svíčka je také medvědí. Tudíž, SELL má o něco větší pravděpodobnost než BUY. HOLD je rozumný, pokud investor čeká na potvrzení trendu."
-}

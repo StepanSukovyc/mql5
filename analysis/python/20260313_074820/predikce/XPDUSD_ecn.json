@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod klouzavými průměry na denním a 4H grafu, RSI na denním grafu je pod 50. Krátkodobě (1H) je RSI neutrální, ale MA je nad aktuální cenou. Na měsíčním grafu je RSI poměrně vysoko, což naznačuje potenciální překoupenost. Vzhledem k volatilite a spreadům, doporučuji SELL s úzkým SL nebo HOLD. Nedoporučuji BUY."
-}

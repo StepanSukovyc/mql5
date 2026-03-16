@@ -1,9 +1,0 @@
-{
-  "symbol": "NZDUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických indikátorů s vlivem na NZD, ale pozitivní svíčkové formace a stabilita RSI indikuje potenciál pro pokles.",
-  "timestamp": "2026-03-09T02:43:26.973045+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena se nachází nad MA na týdenním a měsíčním grafu, ale pod MA na kratších časových rámcích (1h, 4h, day). RSI na 4H je pod 40, což naznačuje potenciální přeprodanost, ale na měsíčním je nad 70, značící překoupenost.  Vzhledem k poklesu ceny v posledních dnech a medvědímu sentimentu na kratších časových rámcích převažuje SELL, ale s ohledem na dlouhodobý trend a potenciál pro korekci se doporučuje i HOLD a menší BUY pozice."
-}

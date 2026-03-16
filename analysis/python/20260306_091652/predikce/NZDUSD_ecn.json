@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "NZDUSD je v klesajícím trendu na denním i týdenním grafu. RSI na 1H a 4H jsou pod 50, což naznačuje medvědí momentum. Cena je pod MA na většině timeframech. Poslední svíčky na 1H grafu jsou medvědí, což podporuje prodejní tlak. Na měsíčním grafu RSI osciluje kolem 50, což značí nejistotu, ale cena je poblíž MA, což může indikovat testování rezistence. HOLD je rozumný, pokud investor čeká na potvrzení trendu nebo na fundamentální zprávy, ale SELL má nejvyšší prioritu. BUY je nejméně pravděpodobné vzhledem k současnému klesajícímu trendu."
-}

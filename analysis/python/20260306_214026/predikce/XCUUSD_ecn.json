@@ -1,7 +1,0 @@
-{
-  "symbol": "XCUUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1h a 4h timeframe je RSI pod 40, což naznačuje potenciální přeprodanost, ale zároveň cena klesá pod MA na většině timeframech (1h, 4h, day). Týdenní RSI je sice vysoko, ale aktuální cena je pod denním MA, což dává větší váhu krátkodobému klesajícímu trendu. Vzhledem k rozporuplným signálům a klesajícímu trendu preferuji SELL pozici s větším rizikem, HOLD s opatrností a BUY s menším rizikem."
-}

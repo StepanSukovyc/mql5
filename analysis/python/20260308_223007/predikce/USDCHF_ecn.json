@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Technická analýza ukazuje na převahu prodejců. RSI na 1H timeframe je pod 30, což indikuje překoupenost a možnost korekce. Dlouhodobé MA (týdenní, měsíční) jsou nad současnou cenou, což naznačuje downtrend. Svícové formace na 1H ukazují na převahu medvědího sentimentu (pokles). Dlouhodobý pohled (měsíční RSI) je stále nízko, ale není tak extrémní jako na 1H, takže existuje potenciál pro konsolidaci (HOLD). Denní RSI je kolem 50, což naznačuje neutrální sentiment a možnost pohybu oběma směry. Vzhledem k převaze medvědího sentimentu a MA na vyšších časových rámcích převládá SELL. Potenciální krátkodobá korekce vzhůru a denní RSI dává 25% pro BUY."
-}

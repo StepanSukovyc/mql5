@@ -1,7 +1,0 @@
-{
-  "symbol": "ZARJPY_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Short-term bearish signal. Price below daily MA, RSI trending down on multiple timeframes. Weekly and monthly RSI suggest overbought conditions in the past, with a recent correction. Hourly chart showing downward momentum. However, recent hourly candles indicate a potential short-term bounce."
-}

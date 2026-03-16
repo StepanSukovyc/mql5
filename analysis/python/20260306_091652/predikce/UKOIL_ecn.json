@@ -1,7 +1,0 @@
-{
-  "symbol": "UKOIL_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na denním a týdenním grafu je RSI překoupené, což naznačuje potenciální korekci. 1h a 4h RSI jsou neutrální. Cena se pohybuje nad MA na všech timeframech kromě 1H, ale krátkodobé MA (1h) se blíží k překřížení pod cenu. Zvažte SELL pozici a HOLDujte, než dojde k další korekci."
-}

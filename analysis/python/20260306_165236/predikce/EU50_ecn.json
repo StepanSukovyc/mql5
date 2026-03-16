@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena prudce klesá a RSI je překoupené na 1H a 4H timeframech, což naznačuje možnost korekce. Nicméně denní RSI je také pod 30, MA na denním timeframe klesá, což indikuje silný klesající trend. Měsíční RSI je sice stále relativně vysoko, ale cena je pod MA. Celkově převládá sentiment pro SELL."
-}

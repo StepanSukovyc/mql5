@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Indikátory na denní a týdenní bázi ukazují potenciál klesajícího trendu, což naznačuje možnost SELL. RSI na měsíční bázi je pod 40, a MA dlouhodobě klesá. Naopak, hodinové a 4-hodinové grafy indikují spíše neutrální až mírně býčí momentum, proto nelze vyloučit BUY. HOLD je proto konzervativní volba. Celkově je trh poměrně volatilní a je nutná opatrnost."
-}

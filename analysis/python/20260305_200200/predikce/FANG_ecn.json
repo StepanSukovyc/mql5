@@ -1,7 +1,0 @@
-{
-  "symbol": "FANG_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Smíšené signály. Krátkodobě (1h, 4h) RSI naznačuje potenciální překoupenost, ale denní RSI je neutrální. Cena je nad MA na kratších timeframech (1h, 4h, day), ale pod MA na týdenním grafu, což ukazuje na nejistotu ohledně střednědobého trendu. Měsíční RSI je relativně vysoké, ale stále pod 70. Proto doporučuji částečný BUY s ohledem na potenciální korekci, SELL s opatrností a nechat si rezervu v HOLD."
-}

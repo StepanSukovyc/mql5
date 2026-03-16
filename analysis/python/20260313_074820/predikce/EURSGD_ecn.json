@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 25,
-  "SELL": 65,
-  "HOLD": 10,
-  "reasoning": "The daily and weekly RSI values indicate oversold conditions (24 and 29 respectively), suggesting potential for a bounce. However, the price is below the Moving Average on all timeframes except the monthly, signaling a strong downtrend. The hourly RSI is also below 50. Therefore, SELL is the most probable scenario, with BUY being possible but less likely due to the prevailing downtrend and SELL signal on shorter timeframes."
-}

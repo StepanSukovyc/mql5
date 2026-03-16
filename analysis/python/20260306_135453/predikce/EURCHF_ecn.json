@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "EURCHF is currently trading at 0.9034. RSI values across all timeframes (1h, 4h, day, week, month) are below 40, indicating oversold conditions, but the larger timeframes (week and month) are significantly oversold (RSI around 25). The price is below the moving average on all timeframes, suggesting a downtrend. Recent hourly candles confirm the downtrend. Although the price is oversold, the dominant trend is down. Selling pressure may continue due to overall market sentiment. Holding is an option if you expect a small retracement, but the reward/risk may not be worthwhile."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XCUUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena je pod MA na hodinové, 4hodinové a denní bázi, což naznačuje klesající trend. RSI na 1H, 4H a denní časovém rámci je pod 50, což podporuje klesající momentum. Týdenní RSI je sice vysoké (67), ale aktuální cena je výrazně pod denním MA a pohybuje se v klesajícím trendu. Z dostupných dat nelze identifikovat silné signály pro nákup. S ohledem na klesající trend a relativně nízké hodnoty RSI na kratších časových rámcích je SELL pozice rizikově méně zatížená než BUY. HOLD je neutrální postoj, zvažující možnost obratu trendu, ale vzhledem k převažujícím negativním signálům je jeho hodnocení nižší."
-}

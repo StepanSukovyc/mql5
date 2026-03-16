@@ -1,9 +1,9 @@
 {
   "symbol": "USOIL_ecn",
-  "BUY": 50.0,
-  "SELL": 30.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Analýza svíčkových grafů a indikátorů ukazuje směr trendu. RSI i MA poskytují signály podporující stabilitu ceny.",
-  "timestamp": "2026-03-13T21:20:54.751870+00:00",
+  "reasoning": "Zhoršení makroekonomických podmínek a nedostatečná zelená stopy vedou k očekávání poklesu ceny ropy.",
+  "timestamp": "2026-03-16T02:23:06.204556+00:00",
   "model": "deepseek-coder-v2"
 }

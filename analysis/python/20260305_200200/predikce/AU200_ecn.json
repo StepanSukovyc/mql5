@@ -1,7 +1,0 @@
-{
-  "symbol": "AU200_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "AU200_ecn is currently showing a strong downward trend. Hourly and 4-hour RSI are deeply oversold, suggesting a potential short-term bounce. However, the daily RSI is also trending down, and the price is significantly below the daily MA. The weekly timeframe also shows a drop below its MA. Monthly RSI is high but trending down. Given the confluence of factors, a SELL position seems more probable, but hold some reserves for a potential bounce before a longer fall. Therefore, 60% sell, 20% buy (short bounce risk), and 20% hold."
-}

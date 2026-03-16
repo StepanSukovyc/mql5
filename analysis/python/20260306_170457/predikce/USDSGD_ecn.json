@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI pod 40, což naznačuje potenciální přeprodanost, ale MA naznačuje klesající trend. Denní RSI se pohybuje kolem 60, což je neutrální. Krátkodobě (1h, 4h) RSI roste, ale cena je pod 1h MA. Týdenní graf je neutrální.  Vzhledem k rozporuplným signálům a sestupnému trendu na vyšších časových rámcích je mírná převaha pro SELL. BUY má omezený potenciál kvůli MA odporu, HOLD je opatrná strategie."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XNIUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod 1h a 4h MA, RSI na denní bázi klesá, což naznačuje potenciální SELL. Týdenní RSI je sice v rostoucím trendu, ale denní data jsou více aktuální.  HOLD je opatrná pozice vzhledem k nedostatku historických dat."
-}

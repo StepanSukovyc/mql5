@@ -1,7 +1,0 @@
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI extrémně překoupené (79.58), což naznačuje možnou korekci. Na denním a 4H grafu je RSI v neutrálních hodnotách. Aktuální cena je pod MA na 1H, 4H i denním grafu, což naznačuje spíše medvědí trend. Týdenní graf ukazuje RSI mírně nad 60 a cenu nad MA, naznačující možný býčí trend, ale celkový obraz je smíšený. Vzhledem k překoupenosti na měsíčním grafu a ceně pod MA na kratších timeframech je vyšší pravděpodobnost poklesu. Proto SELL má vyšší rizikové hodnocení. BUY je podpořeno týdenním trendem. Doporučuje se vyčkat na jasnější signál."
-}

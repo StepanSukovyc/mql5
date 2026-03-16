@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCHF_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena je pod 1h a 4h MA, RSI na 1h je v přeprodané zóně (31.79), což naznačuje možný odraz, ale trend na denním grafu a vyšších timeframech je neutrální až mírně klesající. Z denního pohledu se zdá, že cena testuje support. RSI na denním grafu je okolo 50, což nenaznačuje silný směr. Celkově převládá nejistota, ale krátkodobý pokles je pravděpodobnější."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu RSI na úrovni 62 naznačuje potenciál překoupenosti. Na týdenním a měsíčním grafu je RSI pod 50, což naznačuje medvědí sentiment. Cena je pod měsíčním MA (23.16), a blíží se týdennímu MA (22.26). Kombinace těchto faktorů signalizuje vyšší pravděpodobnost poklesu ceny. Nicméně, krátkodobé momentum (1h, 4h RSI) je lehce býčí. Proto SELL má největší pravděpodobnost, následován HOLD, a nejmenší BUY."
-}

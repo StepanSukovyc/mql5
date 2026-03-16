@@ -1,7 +1,0 @@
-{
-  "symbol": "EURAUD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "EURAUD is currently at 1.63202. On the weekly timeframe, RSI is at 17.19 indicating oversold conditions, however, the MA is at 1.7262 suggesting a strong downtrend. Daily RSI is at 35.69 and MA is 1.6532, hinting at a continuing downtrend but less extreme oversold conditions. Hourly RSI is at 63.82 above 50. Given the downtrend on larger timeframes, SELL has higher probability, BUY is risky. HOLD suggests maintaining current position."
-}

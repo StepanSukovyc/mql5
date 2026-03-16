@@ -1,7 +1,0 @@
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě SELL převládá kvůli RSI na 1H (35.3) a 4H (41.2) pod 50 a ceně pod MA na 1H a 4H. Střednědobě HOLD - RSI na denním grafu je neutrální (50.03). Dlouhodobě naznačuje růst indikátor RSI na týdenním (73.58) a měsíčním grafu (89.24), nicméně, cena je značně nad MA na týdenním a měsíčním grafu, což naznačuje potenciální korekci."
-}

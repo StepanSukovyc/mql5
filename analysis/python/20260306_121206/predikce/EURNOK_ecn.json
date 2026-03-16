@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 20,
-  "SELL": 50,
-  "HOLD": 30,
-  "reasoning": "EURNOK is in a downtrend. The RSI values on daily and weekly timeframes are below 35, indicating oversold conditions, but not yet at extreme levels. Monthly RSI is also below 40. The price is below the moving average on all timeframes, confirming the downtrend. Recent hourly candles show some bullish activity but were unable to sustain upward momentum. A 'sell' position is favored, with higher risk due to the short term oversold condition, which means price could stall. Holding is a reasonable option to await further price action, while a buy position carries substantial risk unless a clear trend reversal signal emerges."
-}

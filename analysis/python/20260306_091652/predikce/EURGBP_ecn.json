@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "The EURGBP pair shows a bearish tendency on shorter timeframes (1h, 4h) with RSI below 40 and price below MA. Daily RSI is below 50, further indicating potential for downward movement. However, longer timeframes (week, month) have RSI above 50.  The recent hourly candlesticks indicate a downward trend, with recent closing prices lower than opening prices.  Therefore, SELL is the most probable action, followed by HOLD due to mixed signals and BUY being least probable.  The market could consolidate before continuing its downward trajectory, supporting a HOLD position."
-}

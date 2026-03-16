@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě je NGAS překoupený (RSI 1h a 4h vysoko), což naznačuje potenciální korekci (SELL). Denní RSI je neutrální, ale MA klesá (HOLD). Dlouhodobě (měsíční graf) RSI i MA naznačují pokračující růstový trend, ale po korekci (BUY)."
-}

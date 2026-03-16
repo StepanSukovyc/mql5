@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Mixed signals. Short-term (1h, 4h) RSI hovers around neutral, suggesting consolidation. Daily RSI is bullish, but weekly RSI is neutral and monthly RSI is oversold, suggesting potential for a bounce. However, the price is below the 1h and 4h Moving Averages. Given the short timeframe data suggesting potential short term consolidation and longer term signals mixed, a 'SELL' position is slightly favored due to the recent price action below moving averages and the monthly RSI pointing towards longer term weakness. A slight chance of a 'BUY' position due to oversold Monthly conditions. 'HOLD' suggests a neutral approach pending further confirmation."
-}

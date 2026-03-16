@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Aktuální cena 1604.43. RSI je překoupené na 1h, 4h i denním grafu, což indikuje SELL. MA na denní a 4h je nad cenou. Naopak týdenní MA je pod aktuální cenou, což může vést k potencionálnímu BUY. Měsíční RSI naznačuje býčí trend. S ohledem na poslední pokles ceny preferuji SELL. "
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Technicky se EURGBP nachází v sestupném trendu. 1H a 4H RSI jsou pod 40, což naznačuje, že je překoupený. Denní RSI je 45.48 a týdenní RSI je blízko 50. Měsíční je sice nad 50, ale MA na všech timeframech kromě měsíčního se nachází nad současnou cenou, což naznačuje rezistenci. Kombinace těchto faktorů naznačuje potenciální prodejní tlak. Nicméně, je potřeba vzít v potaz i možné fundamentální vlivy, které technická analýza nezohledňuje, a proto doporučuji alespoň část portfolia držet."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na týdenním a měsíčním grafu je RSI překoupené (81.88 a 73.51), což naznačuje potenciální korekci. Na hodinovém grafu je RSI 41.92 a cena je pod MA (1.1907), což naznačuje možnost poklesu. Denní RSI je 67.20, což je relativně vysoko. Doporučuji spíše opatrnost a HOLD pozici s menší převahou SELL kvůli překoupenosti na vyšších timeframech a současnému trendu klesání na hodinovém grafu."
-}

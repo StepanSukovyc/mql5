@@ -1,9 +1,9 @@
 {
   "symbol": "ZARJPY_ecn",
-  "BUY": 50.0,
-  "SELL": 30.0,
-  "HOLD": 20.0,
-  "reasoning": "Analýza svíčkových formací a RSI indikátoru ukazuje střednědobou stabilitu s potenciálem růstu. Fondamentální analýza a MA hodnoty podporují tento pohyb.",
-  "timestamp": "2026-03-13T18:58:31.475811+00:00",
+  "BUY": 0.0,
+  "SELL": 100.0,
+  "HOLD": 0.0,
+  "reasoning": "Vysoká volatilita a nízké hodnoty RSI indikují silnou tendenci poklesu.",
+  "timestamp": "2026-03-16T02:42:06.161307+00:00",
   "model": "deepseek-coder-v2"
 }

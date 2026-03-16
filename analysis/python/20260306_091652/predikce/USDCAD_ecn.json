@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hourly grafu je RSI blízko 50, což nenaznačuje jasný směr. Cena se pohybuje kolem MA. Na 4H grafu je RSI také kolem 50, ale cena je pod MA, což naznačuje potenciální odpor. Denní RSI je těsně pod 50. Týdenní a měsíční RSI jsou pod 50 a cena je pod MA, což naznačuje downtrend na vyšších timeframe. Vzhledem k downtrendu na vyšších timeframe a ceně pod MA na 4H grafu je SELL mírně pravděpodobnější. BUY je rizikovější, HOLD je rozumná strategie."
-}

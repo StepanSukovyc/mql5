@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 25,
-  "SELL": 60,
-  "HOLD": 15,
-  "reasoning": "EU50_ecn is showing bearish signals across multiple timeframes. Daily and 4H RSI are heavily oversold, suggesting possible short-term bounce, but overall trend is down. The current price is significantly below the daily and 4H moving averages, indicating strong downward momentum. Monthly RSI is showing bearish divergence, and the price broke previous monthly candle support.  Recent weekly candle suggest bearish continuation. 1H RSI is currently around 40, potentially showing some consolidation, yet short MA suggests continued downward trend. A hold percentage is included for possible consolidation and indecision in the market at its present level."
-}

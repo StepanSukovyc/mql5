@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Short-term bearish signals dominate. Price is below the hourly and daily moving averages. RSI on the monthly timeframe is below 50, indicating weakening momentum. Although the weekly timeframe suggests possible support around the MA, the overall trend appears downward. Recent daily and 4h candles show a decline. Therefore SELL carries more risk and a higher percentage."
-}

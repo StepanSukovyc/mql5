@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě se cena pohybuje kolem MA na 1h a 4h grafech, RSI jsou neutrální, což naznačuje nerozhodnost. Na denním grafu je RSI pod 50, což naznačuje mírný klesající trend. Týdenní MA je výrazně nad aktuální cenou a RSI je pod 50, což posiluje SELL. Měsíční RSI je neutrální, ale cena je nad MA, což vytváří protichůdné signály. Vzhledem k převaze klesajících signálů a blížícímu se testování supportu dávám SELL vyšší váhu."
-}

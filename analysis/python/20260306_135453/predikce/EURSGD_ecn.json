@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "EURSGD is currently trending downwards. RSI values on 1H, 4H, Daily and Weekly timeframes are below 50, indicating bearish momentum. The price is below the Moving Average on 1H, 4H, Daily and Weekly timeframes, further confirming the downtrend. The Monthly RSI is just above 50 and price above MA, suggesting a weakening long term uptrend. Recent price action on the 1H chart shows a series of lower highs and lower lows, which also points to a bearish trend. The data indicates that a SELL position has a higher probability of success than a BUY position."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 55,
-  "SELL": 20,
-  "HOLD": 25,
-  "reasoning": "Na denním grafu RSI je na 74.27, což naznačuje potenciální překoupenost, ale trend je stále rostoucí. Na 1h a 4h timeframech je RSI také poměrně vysoké (63.20 a 66.68). Cena je nad MA na 1h, 4h, denním a týdenním timeframe. Měsíční MA je nad cenou, což naznačuje dlouhodobý klesající trend. Vzhledem k rostoucímu trendu na kratších timeframech a překoupenosti na denním grafu je BUY šance relativně vyšší, ale potenciální korekce dává SELL šanci."
-}

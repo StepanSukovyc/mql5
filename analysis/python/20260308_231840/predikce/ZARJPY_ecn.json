@@ -1,7 +1,0 @@
-{
-  "symbol": "ZARJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu RSI pod 50 a klesající MA naznačují potenciální prodejní tlak. 4H graf ukazuje RSI pod 50 a MA se blíží. 1H RSI je nad 50, ale MA je vyšší než aktuální cena, což by mohl být signál k SELL. Na týdenním a měsíčním grafu je RSI nad 50, ale potenciál růstu se zdá být omezený vzhledem k cenové akci za poslední měsíc. HOLD je vhodné vzhledem ke smíšeným signálům na různých časových rámcích. Krátkodobě spíše SELL, dlouhodobě HOLD."
-}

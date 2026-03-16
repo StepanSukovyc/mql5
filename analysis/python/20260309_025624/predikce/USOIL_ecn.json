@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 20,
-  "SELL": 65,
-  "HOLD": 15,
-  "reasoning": "USOIL_ecn is extremely overbought on all shorter timeframes (1H, 4H, Daily, Weekly RSI > 80). While the Monthly RSI is showing bullish continuation, a significant correction is highly likely. The recent price surge is significant, making a 'SELL' position more probable in the short-term."
-}

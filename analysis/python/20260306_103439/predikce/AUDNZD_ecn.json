@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na týdenním a měsíčním grafu je RSI v překoupené zóně (nad 70). Cena se pohybuje nad MA na všech timeframech, což naznačuje uptrend, ale překoupené podmínky zvyšují pravděpodobnost korekce. Na denním grafu se RSI pohybuje kolem 70. Poslední denní svíčka je bearish. Na 4H grafu se cena pohybuje lehce nad MA, RSI je neutralní. Na hodinovém grafu je RSI kolem 64, cena je nad MA. Z toho plyne, že signály jsou smíšené. Dlouhodobý trend je uptrend, ale krátkodobě hrozí korekce. Vzhledem k překoupenosti na vyšších časových rámcích dáváme vyšší váhu prodeji, ale uptrend naznačuje i nějakou šanci na další růst."
-}

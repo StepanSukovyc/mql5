@@ -1,7 +1,0 @@
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě SELL: Denní a týdenní RSI jsou pod 40 (oversold, ale stále naznačují klesající trend). MA na denní a týdenní bázi jsou nad aktuální cenou (rezistence). 1h a 4h RSI jsou neutrální. Měsíční RSI je kolem 60 (buy, ale bereme ohled na kratší timeframe). MA na měsíční bázi je pod cenou (support). Kombinace signalizuje potenciální pokračování klesajícího trendu. BUY: Měsíční RSI je 60 a MA je pod aktuální cenou. HOLD: Vzhledem k protichůdným signálům z různých timeframe a indikátorů, je doporučeno opatrně vyčkávat na potvrzení trendu."
-}

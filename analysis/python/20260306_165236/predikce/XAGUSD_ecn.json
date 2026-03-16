@@ -1,7 +1,0 @@
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "XAGUSD_ecn se nachází v downtrendu. RSI na denním a 4H grafu je pod 50, což naznačuje převahu prodejců. Měsíční RSI je sice vysoko (78.88), ale cena klesla pod MA na všech timeframech (1h, 4h, den). Dřívější prudký nárůst, který se ukazuje na weekly timeframe, nebyl udržen a aktuální cena klesla hluboko pod weekly MA. V posledních hodinách vidíme opakovaný pokus o odraz, který se ale nedaří, což nahrává spíše SELL pozici. HOLD je volba pro ty, kteří preferují vyčkat na potvrzení trendu."
-}

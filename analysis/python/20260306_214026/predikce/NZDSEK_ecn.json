@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě SELL vzhledem k RSI pod 40 na 1h a 4h grafu, klesajícímu trendu dle MA na 1h a 4h grafu. Měsíční RSI je silně přeprodané, což indikuje možnost budoucího obratu, ale momentálně převažuje klesající momentum. HOLD z důvodu denního RSI kolem 57, což značí potenciál k růstu, ale současná situace je nejasná. BUY je nejméně pravděpodobné vzhledem ke krátkodobému klesajícímu trendu, ale nelze jej vyloučit kvůli potenciálnímu odrazu od přeprodaných úrovní na vyšších timeframe."
-}

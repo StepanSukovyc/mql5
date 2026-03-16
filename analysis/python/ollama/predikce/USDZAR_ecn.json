@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nárůst cen je podporován pouze slabými základnami.",
-  "timestamp": "2026-03-13T21:19:12.376055+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět trend směřující k poklesu, ale zároveň dochází k divergenci mezi cenovým grafem a indikátory. To naznačuje možnost otočení trendu. Nicméně, úzký rozsah svíček může být důsledkem volatilitu trhu.",
+  "timestamp": "2026-03-16T02:21:23.637052+00:00",
   "model": "deepseek-coder-v2"
 }

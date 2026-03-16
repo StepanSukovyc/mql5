@@ -1,9 +1,9 @@
 {
   "symbol": "GBPZAR_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená z důvodu volatilního trhu a silných odporových hladin. Nedávný pokles pod MA signalizuje slabost, ale RSI je stále nad 50, což naznačuje sílu.",
-  "timestamp": "2026-03-13T20:25:01.358485+00:00",
+  "HOLD": 30.0,
+  "reasoning": "RSI indikuje přeuiverzii a MA ukazuje silnou odolnost, ale fundamentální analýza naznačuje stabilitu s omezeným růstem.",
+  "timestamp": "2026-03-16T01:27:36.965852+00:00",
   "model": "deepseek-coder-v2"
 }

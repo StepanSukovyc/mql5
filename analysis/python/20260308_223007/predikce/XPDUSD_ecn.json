@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Krátkodobý SELL signál. Cena je pod MA na 1h, 4h, day. RSI je pod 40 na 1h, 4h, day, což značí potenciální přeprodanost, ale momentum je stále spíše negativní. Na týdenním grafu je RSI neutrální a cena nad MA, měsíční graf naznačuje uptrend.  Vzhledem k silnému poklesu v posledních dnech a aktuální ceně pod krátkodobými MA dáváme přednost SELL, ale s ohledem na dlouhodobější uptrend a potenciální přeprodanost držíme malý podíl pro BUY a HOLD."
-}

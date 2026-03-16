@@ -1,9 +1,0 @@
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíly v RSI a MA hodnotaž indikují nejistotu s tržním pohybem.",
-  "timestamp": "2026-03-09T04:09:49.270056+00:00",
-  "model": "deepseek-coder-v2"
-}

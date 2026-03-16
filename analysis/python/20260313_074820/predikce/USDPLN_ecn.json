@@ -1,7 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "USDPLN currently shows mixed signals. Short-term (1H, 4H) RSI indicates potential for continued upward movement, but daily RSI is nearing overbought levels (70.86), suggesting a possible pullback. Weekly RSI is also relatively high (63.93). Monthly RSI is still low (44.23) but the price is below MA, indicating downtrend in the long term. Price is moving upwards but data suggests it can be overbought, so BUY carries significant risk. The price fluctuated recently. I recommend waiting for further price consolidation before making decision."
-}

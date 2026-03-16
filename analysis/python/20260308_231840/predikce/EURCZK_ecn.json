@@ -1,9 +1,0 @@
-{
-  "symbol": "EURCZK_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové momentum je slabší a indikátory ukazují na pokles v těsných pohybech. Historické údaje podporují tendenci k poklesu.",
-  "timestamp": "2026-03-08T23:01:29.397476+00:00",
-  "model": "deepseek-coder-v2"
-}

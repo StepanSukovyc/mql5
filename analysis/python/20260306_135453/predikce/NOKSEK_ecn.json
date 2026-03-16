@@ -1,7 +1,0 @@
-{
-  "symbol": "NOKSEK_ecn",
-  "BUY": 45,
-  "SELL": 25,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje na smíšené signály. Krátkodobé indikátory (1h, 4h, den) RSI naznačují překoupenost nebo blízko překoupenosti, což by mohlo vést ke korekci. Nicméně, cena je nad MA na většině časových rámců, což signalizuje pokračující uptrend. Dlouhodobější RSI (týdenní) je také v překoupené zóně a měsíční je neutrální. Svíčkové formace (není vyhodnoceno automatizovaně) a širší kontext vyžadují hlubší prozkoumání, proto HOLD má 30%. Celkově vidím mírnou převahu pro BUY s rizikem korekce."
-}

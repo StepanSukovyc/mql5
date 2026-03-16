@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena je pod denním MA a RSI je pod 50, což naznačuje medvědí momentum. 4H RSI je také pod 50. Měsíční MA je těsně pod aktuální cenou, ale blíží se k ní, což by mohlo působit jako rezistence. Nedávná cenová akce na 1H grafu ukazuje klesající trend. Celkově je větší pravděpodobnost poklesu ceny, ale není jisté, proto Hold má menší procento."
-}

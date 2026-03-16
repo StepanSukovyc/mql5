@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHKD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na základě technické analýzy existuje mírný tlak na prodej. Hodinový RSI je 42.65 (lehce pod 50 což naznačuje k sellu) a cena se pohybuje kolem MA. 4H RSI je 47.91 což je lehce pod 50 a price je nad MA. Denní RSI je 59.15, což naznačuje spíše buy (lehce nad 50), ale cena je nad MA. Týdenní a měsíční RSI a cena jsou podobné dennímu grafu. Trend je spíše do strany, s mírným náznakem k prodeji. Proto dáváme vyšší procento sellu, a nižší buy."
-}

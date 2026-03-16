@@ -1,7 +1,0 @@
-{
-  "symbol": "XZNUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena se pohybuje pod MA na 1H, 4H i denním grafu, RSI je neutrální až mírně pod hranicí 50 na těchto timeframech. Na týdenním grafu je RSI nad 60, což naznačuje možný překoupený stav. Celkově převažuje medvědí sentiment, ale potenciál k oživení existuje, proto kombinace SELL, HOLD a opatrný BUY."
-}

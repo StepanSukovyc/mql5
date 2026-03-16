@@ -1,7 +1,0 @@
-{
-  "symbol": "US30_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje převahu prodejců. RSI je pod 40 na 1H, 4H a denním grafu, což signalizuje potenciální přeprodanost, ale i pokračující klesající trend. Cena je pod MA na 1H, 4H, denním a týdenním grafu. Na měsíčním grafu je RSI 63.25 a cena nad MA, ale je nutné zohlednit i klesající trend v kratších časových rámcích. Vzhledem ke klesajícímu trendu s potenciálem pro další pokles preferuji SELL. HOLD je varianta pro vyčkání na další vývoj a potvrzení trendu. BUY je rizikovější s ohledem na převahu prodejců, ale nemůžeme zcela vyloučit korekci směrem vzhůru."
-}

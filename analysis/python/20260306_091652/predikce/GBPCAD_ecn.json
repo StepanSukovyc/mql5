@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCAD_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "Cena se nachází pod MA na 1h, 4h, denní a týdenní bázi. RSI na denní a týdenní bázi signalizuje překoupenost. Měsíční RSI je neutrální, cena je pod MA. Recent cenový vývoj indikuje downtrend. Je potřeba sledovat další vývoj pro potvrzení trendu."
-}

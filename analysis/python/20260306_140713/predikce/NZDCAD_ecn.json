@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "NZDCAD je v klesajícím trendu. RSI na 1h, 4h a denním grafu je v přeprodané zóně, což naznačuje potenciální korekci, nicméně MA na všech timeframech jsou nad aktuální cenou, což potvrzuje klesající trend. Poslední svíčky na 1h grafu jsou medvědí. Celkově převažují signály pro SELL."
-}

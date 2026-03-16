@@ -1,7 +1,0 @@
-{
-  "symbol": "XNIUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod 1h, 4h a denním MA, což naznačuje možný klesající trend. Denní RSI je 45, což je neutrální až mírně klesající. Nicméně týdenní RSI je 59, což naznačuje nákupní sílu v delším časovém rámci. Vzhledem k smíšeným signálům a omezenému množství dat, je doporučení rozděleno mezi SELL a HOLD. Pro BUY chybí silnější potvrzení rostoucího trendu, přesto možnost BUY existuje."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena je pod MA na všech timeframech (1h, 4h, day, week), což indikuje downtrend. RSI se pohybuje v neutrální/mírně přeprodané zóně (zejména na denním grafu), což naznačuje potenciál pro další pokles. Historická data z měsíčního grafu ukazují dlouhodobější downtrend. I přes možné krátkodobé korekce je pravděpodobnější pokračování poklesu."
-}

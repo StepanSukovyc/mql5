@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Long-term (weekly & monthly) RSI is oversold, suggesting potential for upward correction, but the MA values on these longer timeframes are significantly higher than the current price, indicating a strong downtrend. Hourly RSI is nearing overbought, suggesting short-term pullback. Recent 1H price action shows some bullish momentum, but overall market sentiment seems bearish. Given these factors, a cautious SELL approach is slightly favored. Limited data makes accurate analysis challenging. Recent hourly candles show some bullish momentum."
-}

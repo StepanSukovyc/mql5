@@ -1,9 +1,0 @@
-{
-  "symbol": "USDHUF_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převažují indikátory ukazující na pokles kurzu. RSI a MA trend jsou ve srovnání s měsíčním objemem nižší.",
-  "timestamp": "2026-03-09T03:01:48.632766+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "EURJPY se aktuálně obchoduje na úrovni 182.78. Na hodinové bázi se RSI nachází na 57.05, což naznačuje neutrální momentum. Cena se pohybuje pod 1h MA (182.87). Na 4hodinovém grafu je RSI 42.25, což naznačuje potenciální prostor pro pokles. Denní RSI je 47.12, což je také v neutrálním pásmu, ale s klesajícím MA (182.95). Týdenní RSI je 58.37, což naznačuje mírné býčí momentum, s MA na 182.08. Měsíční RSI je 61.48, což naznačuje silnější býčí momentum a MA na 169.64.  Na základě těchto indikátorů a skutečnosti, že cena je pod MA na kratších timeframech (1h, 4h, den), zatímco na delších timeframech (týden, měsíc) je cena nad MA, doporučuji držet (HOLD) s mírným sklonem k prodeji (SELL).  Existuje potenciál pro pokles v krátkodobém horizontu, ale dlouhodobější trend zůstává nejistý. BUY má nižší procento kvůli nedávné volatilitě a cenové akci."
-}

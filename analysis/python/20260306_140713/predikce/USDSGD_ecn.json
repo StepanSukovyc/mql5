@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSGD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě indikátory naznačují mírný uptrend (RSI na 1h a 4h v pásmu 60-70, cena nad MA na 1h a 4h). Dlouhodobější pohled (týdenní MA nad cenou, měsíční RSI pod 50 a MA nad cenou) ale naznačuje možnou korekci. Proto rozdělení mezi BUY, SELL a HOLD odráží smíšené signály z různých časových rámců. Riziko je vzhledem ke globální ekonomické situaci zvýšené, preferuji opatrnost."
-}

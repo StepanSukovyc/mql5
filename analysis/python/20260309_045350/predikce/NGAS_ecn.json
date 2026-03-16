@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 55,
-  "SELL": 25,
-  "HOLD": 20,
-  "reasoning": "NGAS_ecn is showing bullish momentum on shorter timeframes (1h, 4h) with RSI in overbought territory (1h RSI=78.61) suggesting potential for pullback. However, the daily RSI (55.82) is neutral and the price is above its daily MA (2.97), indicating a potential for continued upward movement. The weekly MA (3.71) is significantly higher than current price, potentially offering resistance. Increased spreads on the hourly timeframe can be a sign of volatility and uncertainty. Recent daily candle is bullish, supporting a buy. Overall, a cautious buy is recommended, but the high spreads and overbought 1h RSI suggest monitoring for potential reversals. Monthly MA is roughly the same as the current price."
-}

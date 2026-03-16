@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPSGD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "GBPSGD_ecn is showing bearish signals across multiple timeframes. Daily and weekly RSI are below 40, suggesting potential for oversold conditions, but the price is currently below the moving average on all timeframes, including monthly. Recent hourly candles also indicate some consolidation, further increasing chances of sell off if broken downwards."
-}

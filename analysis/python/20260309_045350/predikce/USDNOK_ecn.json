@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Z krátkodobého hlediska (1h, 4h) se RSI nachází v neutrální zóně a cena osciluje kolem MA. Denní RSI je také neutrální. Týdenní a měsíční RSI naznačují, že trh je spíše přeprodaný a mohl by se v dlouhodobějším horizontu odrazit, ale MA na těchto timeframech je daleko nad aktuální cenou. Celkově indikátory naznačují spíše mírný prodejní tlak. Proto je doporučena opatrnost a HOLD pozice, dokud se nevyjasní směr."
-}

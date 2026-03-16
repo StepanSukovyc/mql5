@@ -1,7 +1,0 @@
-{
-  "symbol": "US100_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Krátkodobě SELL. 1H RSI je v pásmu přeprodanosti, ale klesající trend pokračuje. Cena je pod MA na 1H, 4H i denním grafu. Měsíční RSI je vysoko, což naznačuje možnou korekci. Poslední denní svíčka je silně klesající. Týdenní MA je stále nad cenou. BUY pozice mají nízké procento vzhledem k možnému pokračování klesajícího trendu. HOLD je opatrná strategie v nejisté situaci."
-}

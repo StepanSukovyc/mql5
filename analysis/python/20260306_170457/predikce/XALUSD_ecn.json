@@ -1,7 +1,0 @@
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 55,
-  "SELL": 15,
-  "HOLD": 30,
-  "reasoning": "Cena XALUSD je v uptrendu, jak ukazuje růst RSI a překonání MA na denním a týdenním grafu. RSI na týdenním grafu je ale na hodnotě 82.3, což naznačuje překoupenost. I na nižších časových rámcích RSI roste. Proto kombinuji BUY s HOLD.  SELL se zdá být méně pravděpodobné vzhledem k celkovému momentum, ale je potřeba počítat s možnou korekcí, proto nižší procento. Měsíční data jsou nekompletní."
-}

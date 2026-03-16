@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním a týdenním grafu je RSI pod 40, což naznačuje potenciální překoupenost, ale celkový trend (MA) je stále klesající. Denní RSI je v neutrální zóně, ale cena se pohybuje kolem MA. Krátkodobé indikátory (1H, 4H) naznačují mírný nárůst, ale v dlouhodobém horizontu převládá klesající trend. Proto je SELL mírně preferovaný před BUY a HOLD."
-}

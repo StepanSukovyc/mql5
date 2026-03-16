@@ -1,7 +1,0 @@
-{
-  "symbol": "US500_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na měsíčním grafu je RSI stále vysoko (73.06), což naznačuje překoupenost. Na týdenním, denním, 4h i 1h grafu se cena pohybuje pod klouzavým průměrem (MA). Hodnota RSI na 1h grafu je nízká (36.02), což signalizuje potenciální krátkodobé oživení, ale celkový trend je spíše klesající, proto převažuje SELL nad BUY. HOLD je vhodné pro ty, kteří již pozici mají a čekají na další vývoj."
-}

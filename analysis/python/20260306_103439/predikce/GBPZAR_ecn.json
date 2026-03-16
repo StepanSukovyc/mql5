@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě je patrný uptrend (RSI na 1H, 4H i Day timeframes nad 50, cena kolem MA), avšak týdenní a měsíční RSI naznačují možnou konsolidaci nebo korekci. Zvažte HOLD pro potvrzení trendu, nebo BUY se stop-loss pod nejbližší support."
-}

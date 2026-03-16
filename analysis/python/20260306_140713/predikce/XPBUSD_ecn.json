@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena se pohybuje pod MA na většině časových rámců, RSI na denní bázi je pod 40, což naznačuje, že trh je spíše v prodejním tlaku. Historická data ukazují klesající trend. 1h a 4h timeframe sice vykazuji RSI blízko 50, ale celkově převažuje medvědí sentiment."
-}

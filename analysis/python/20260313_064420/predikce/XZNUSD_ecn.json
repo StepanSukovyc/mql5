@@ -1,7 +1,0 @@
-{
-  "symbol": "XZNUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena je pod denním i 4H MA, RSI se pohybuje v neutrální zóně s klesající tendencí. Na týdenním grafu je RSI relativně vysoko, což naznačuje potenciální překoupenost. Nedostatek dat na měsíčním grafu znemožňuje posoudit dlouhodobý trend. Krátkodobý tlak je spíše na SELL. HOLD je opatrná strategie vzhledem k nejistotě."
-}

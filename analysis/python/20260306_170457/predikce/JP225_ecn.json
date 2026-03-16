@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Krátkodobě SELL vzhledem k RSI na 1h a 4h timeframe (pod 40, oversold), a klesajícímu MA na 1h timeframe. Denní RSI je neutrální, ale pod MA. Týdenní RSI je nad 60, ale cena je nad MA, potenciál poklesu. Měsíční RSI je vysoko, což naznačuje možnou korekci. Celkově vidím tlak k prodeji v krátkodobém horizontu, s potenciálním BUY v delším časovém rámci. Nedávný pokles ceny v denním grafu, potvrzený dnešním poklesem, rovněž podporuje krátkodobé SELL."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 40,
-  "SELL": 25,
-  "HOLD": 35,
-  "reasoning": "EURPLN is showing mixed signals. The RSI on daily and weekly charts is approaching overbought territory, suggesting a potential pullback. However, the recent price action with an hourly RSI of 62.69 and current price above the hourly MA of 4.273366 suggests short term upward momentum. Monthly RSI at 50.26 suggests neutrality in the long term. Overall, the pair is range-bound, justifying a HOLD, with a slightly higher probability of a BUY due to the short-term positive momentum. Given the overbought signals on higher timeframes, a SELL position is less likely but not impossible."
-}

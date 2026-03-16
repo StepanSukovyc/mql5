@@ -1,7 +1,0 @@
-{
-  "symbol": "USDMXN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na hourly a 4h timeframe RSI blízko překoupenosti (63, 71), což naznačuje potenciální korekci, ale denní RSI (63) a týdenní RSI (44) naznačují prostor pro růst. Cena je nad MA na hourly, 4h a denním grafu, pod MA na týdenním a měsíčním grafu. Nedávný pohyb vzhůru (zvýšení ceny) naznačuje uptrend. Celkově, vzhledem k blížící se překoupenosti na nižších timeframe a pozici ceny nad MA na krátkodobých grafech, existuje potenciál pro další růst (BUY), ale také možnost korekce (SELL) a proto by HOLD měl mít významnou váhu."
-}

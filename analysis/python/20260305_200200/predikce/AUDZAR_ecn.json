@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "AUDZAR is showing mixed signals. RSI on shorter timeframes (1h, 4h, day) is overbought, suggesting a potential pullback. However, the weekly RSI is still below 70 and price is above weekly MA indicating bullish trend. Monthly RSI is neutral. Recent price action shows strong upward movement. Given these factors, a hold or cautious buy is reasonable but overbought conditions call for caution."
-}

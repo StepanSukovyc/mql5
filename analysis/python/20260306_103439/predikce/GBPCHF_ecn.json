@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Dlouhodobé indikátory (týdenní, měsíční RSI) jsou hluboko v přeprodané zóně, což naznačuje možný odraz. Nicméně, denní RSI je stále pod 50 a cena je pod denním MA, což naznačuje pokračující downtrend. Krátkodobé indikátory (1h, 4h) jsou neutrální. Proto převládá SELL signál. HOLD je opatrná strategie vzhledem k přeprodaným dlouhodobým indikátorům."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "AUDUSD is showing bearish signals. Hourly and 4-hourly RSI are in oversold territory, suggesting possible near-term bounce, but overall trend is down. The price is below MA on all timeframes except weekly and monthly indicating a potential downward pressure. Daily RSI is below 50 and decreasing further, confirming bearish pressure. Monthly RSI is at 60 and decreasing showing that the uptrend may be losing steam. Recent hourly candles closing near the low indicating continued selling pressure. High timeframe MAs are further away, so price might need to consolidate for a while before the next major movement."
-}

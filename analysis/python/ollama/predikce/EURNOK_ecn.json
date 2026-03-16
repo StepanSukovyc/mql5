@@ -1,9 +1,9 @@
 {
   "symbol": "EURNOK_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Rizikové hodnocení je založeno na analýze cenových svíček a indikátorů RSI a MA. Ceny ukazují signály pro pokles v předpokladu silnějšího pohybu směrem dolů, což podporuje strategii SELL.",
-  "timestamp": "2026-03-13T19:57:20.088070+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických indikátorů s růstem inflace a nedostatečné odpovědi centrální banky může vést k poklesu kurzu. RSI i MA hodnoty ukazují na střednědobou tendenci poklesu.",
+  "timestamp": "2026-03-16T00:59:55.115414+00:00",
   "model": "deepseek-coder-v2"
 }

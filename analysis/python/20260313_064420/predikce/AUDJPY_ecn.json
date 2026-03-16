@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na hodinovém grafu je RSI hluboko v přeprodané oblasti (26.79), což naznačuje možnou korekci nahoru. Nicméně, cena je pod MA na všech časových rámcích kromě hodinového, což naznačuje obecný klesající trend. Týdenní RSI je velmi vysoko (81.78), což naznačuje překoupenost a možný obrat dolů. Poslední denní svíčka je medvědí. Proto je SELL s vyšší pravděpodobností než BUY, HOLD je opatrný přístup."
-}

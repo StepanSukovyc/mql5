@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "EURNZD shows mixed signals. Hourly RSI is overbought, suggesting a potential pullback. However, the price is above the daily MA and monthly RSI is near 60, indicating bullish momentum. Recent price action shows upward movement, but the longer-term weekly MA is significantly higher than the current price, possibly acting as resistance. Risk assessment considers this conflicting data, leading to a more cautious approach, splitting the probability between buy, sell and hold scenarios."
-}

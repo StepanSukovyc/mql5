@@ -1,7 +1,0 @@
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na základě technické analýzy indikátorů RSI a MA na různých časových rámcích (1h, 4h, den), je patrný mírný rostoucí trend s aktuální cenou nad klouzavými průměry na kratších časových rámcích. RSI na denním grafu je blízko 50, což naznačuje neutrální momentum. Dlouhodobé indikátory (týdenní, měsíční) ukazují klesající trend, a proto doporučuji opatrnost. Rozhodnutí držet (HOLD) je vhodné pro sledování dalšího vývoje situace, BUY s ohledem na krátkodobý rostoucí trend a SELL s ohledem na dlouhodobý klesající trend."
-}

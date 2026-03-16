@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 35,
-  "SELL": 40,
-  "HOLD": 25,
-  "reasoning": "EURNZD is currently trading at 1.97059. Hourly RSI is 52.08, suggesting neutral momentum, while the 4-hour RSI is 54.06, also leaning towards neutral. Daily RSI is 47.77, and weekly RSI is 44.24, both indicating bearish momentum. The monthly RSI is 59.32, signaling bullish momentum. The price is currently above the hourly and 4-hour moving averages but below the weekly MA. Recent daily candles show some downward movement. Overall, the mixed signals across different timeframes suggest caution. A sell position is favored slightly due to the recent downward trend and lower time frame RSI values. The monthly MA is showing bullish momentum but the weekly suggests overbought conditions."
-}

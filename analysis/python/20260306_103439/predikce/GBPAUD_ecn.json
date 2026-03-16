@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPAUD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na týdenním grafu RSI hluboko v přeprodané zóně (20.61), což naznačuje možný odraz. Nicméně, denní RSI (36.87) a MA (1.909086) naznačují pokračující downtrend a cena je pod MA. Měsíční MA (2.005386) je také výrazně nad aktuální cenou, což ukazuje na dlouhodobý klesající trend. Krátkodobě (1h, 4h) vidíme stabilizaci a mírný růst RSI, ale celkový sentiment trhu zůstává medvědí. Zvažujeme SHORT pozici."
-}

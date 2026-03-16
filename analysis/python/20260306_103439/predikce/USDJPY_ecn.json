@@ -1,7 +1,0 @@
-{
-  "symbol": "USDJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "USDJPY is trending upwards, with RSI values on 1H, 4H, Day, and Week timeframes indicating positive momentum. However, RSI on the 4H timeframe is approaching overbought levels and 1H RSI is coming down. The price is also above the MA on all timeframes, suggesting bullish sentiment. Recent hourly candles show a slight decrease in price after reaching new high suggesting potential for short retracement. The monthly RSI is at 52.85 indicating a fairly neutral level that could break either way. Overall the likelihood is that a short-term pullback before continuing upwards. Therefore a hold is better than either sell or buy, but the potential to buy after the pullback is there"
-}

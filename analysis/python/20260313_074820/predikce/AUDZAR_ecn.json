@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem obecněho trhu a nedostatečným tlakem nákupu. Vysoká volatilita je důsledkem konfliktu mezi silnou podporou na 100MA a silným odporem na 200MA, což indikuje nejistotu.",
-  "timestamp": "2026-03-13T07:07:41.512532+00:00",
-  "model": "deepseek-coder-v2"
-}

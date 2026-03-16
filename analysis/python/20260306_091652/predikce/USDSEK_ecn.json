@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "USDSEK shows mixed signals. Daily RSI is approaching overbought (63.87), suggesting potential for a pullback. 1H and 4H RSI are neutral. The price is above the daily MA but below the weekly MA, indicating conflicting trends. Month RSI shows oversold conditions. Therefore, HOLD is the most appropriate action, with a slight bias toward BUY due to the monthly oversold conditions. Risk assesment is high due to short timeframe data."
-}

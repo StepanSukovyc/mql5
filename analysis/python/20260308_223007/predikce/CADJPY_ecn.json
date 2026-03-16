@@ -1,9 +1,0 @@
-{
-  "symbol": "CADJPY_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zvýšení RSI a MA signalizují potenciál růstu, ale svíčkové formace a volatilita indikují nejistotu.",
-  "timestamp": "2026-03-08T22:12:23.719321+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XCUUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Z technického hlediska se zdá, že XCUUSD_ecn je v krátkodobém klesajícím trendu. RSI na 1H a 4H timeframech jsou pod 50, což naznačuje medvědí momentum. Cena je pod klouzavým průměrem na 1H, 4H a denním timeframech. Na týdenním grafu je RSI poměrně vysoké, ale potenciálně se blížíme k overbought stavu, což by mohlo naznačovat blížící se korekci. Máme breakout a retest high, ideálně longovat po odrazu, jinak shortovat průraz a retest low. Nejdůležitější je sledovat high a low za posledních 30dní, týdnů, měsíců a ty si pohlídat."
-}

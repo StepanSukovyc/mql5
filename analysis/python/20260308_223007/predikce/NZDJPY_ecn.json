@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je aktuálně pod MA na 1h, 4h a denním grafu, což naznačuje možný downtrend. RSI na 1h je mírně nad 50, ale na 4h je kolem 50, což naznačuje nejistotu. Na denním grafu se RSI pohybuje kolem 50. Na týdenním grafu je RSI 61.97 a na měsíčním 53.17. Celkově, vzhledem k klesajícímu trendu a nejistým signálům z RSI na nižších timeframech je vhodné zvážit SELL pozici. Nicméně, na týdenním grafu se zdá být cena v uptrendu, takže je vhodné držet pozici (HOLD) a sledovat další vývoj. Nákupní pozice (BUY) je riziková vzhledem k výše zmíněnému, a je tak sázka s menší pravděpodobností výhry."
-}

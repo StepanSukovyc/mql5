@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena XPBUSD_ecn je pod klouzavými průměry (MA) na denní a týdenní bázi, což naznačuje sestupný trend. RSI na denní a týdenní bázi je pod 40, což naznačuje, že aktivum může být přeprodané, ale ne extrémně. Na 1H a 4H je RSI neutrální. Vzhledem k sestupnému trendu na vyšších timeframe a neutrálním hodnotám RSI se zdá SELL jako nejrizikovější volba. BUY je omezenější kvůli klesajícímu trendu. HOLD je rozumná strategie pro investory, kteří preferují vyčkávání a sledování dalšího vývoje, než se rozhodnou."
-}

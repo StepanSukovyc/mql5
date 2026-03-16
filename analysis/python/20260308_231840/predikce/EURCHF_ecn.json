@@ -1,9 +1,0 @@
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a negativní RSI signalizuje pokles.",
-  "timestamp": "2026-03-08T22:59:44.020609+00:00",
-  "model": "deepseek-coder-v2"
-}

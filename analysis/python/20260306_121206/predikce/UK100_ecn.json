@@ -1,7 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na měsíčním grafu je RSI stále překoupené (71.71) a cena je vysoko nad MA. Týdenní RSI je na hodnotě 63.49, což signalizuje možný obrat. Denní RSI je 45.97 a klesá, cena je pod denním MA (10593.27). 4H RSI je 31.49 a cena je pod MA (10493.74). 1H RSI je 37.38 a cena je pod MA (10441.25). Krátkodobé indikátory naznačují pokračující pokles. Preferuji SELL. Zisky z předchozího uptrendu jsou vybírány, proto SELL. Dlouhodobý trend je sice stále rostoucí (dle měsíčního MA), ale krátkodobé indikátory poukazují na korekci. BUY je rizikové, avšak nevylučuji, že po korekci dojde opět k nákupům. Proto ponechávám malou hodnotu pro BUY. HOLD je neutrální postoj s nízkou pravděpodobností."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měsíční RSI je velmi nízko (22.15), což naznačuje potenciální překoupenost, ale MA na měsíčním grafu je výrazně nad aktuální cenou, což poukazuje na silný dlouhodobý downtrend. Denní a 4H RSI jsou v neutrální/mírně překoupené zóně. Týdenní RSI je blízko hodnoty 50. Současná cena je nad MA v 1H, 4H a denním grafu, ale pod MA v týdenním a měsíčním grafu. Proto je vhodné opatrné nastavení pozic s možností SELL, dokud se trh neustálí. Vzhledem k tomu, že 1h graf vykazuje největší volatilitu posledních 24 hodin, je vhodné mít otevřené krátkodobé pozice na SELL s SL na lokálních maximech. Pro BUY doporučuji vyčkat na silnější signál z týdenního a měsíčního grafu."
-}

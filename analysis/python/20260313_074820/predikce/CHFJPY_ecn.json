@@ -1,9 +1,0 @@
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na grafu s vyrovnaným RSI a MA indikátory. Historické cenové akce naznačují potenciál pro pokračující růst.",
-  "timestamp": "2026-03-13T07:21:06.168805+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Krátkodobé indikátory (1h, 4h) RSI naznačují překoupenost a MA růst, zatímco dlouhodobé (týdenní, měsíční) RSI jsou neutrální až lehce podhodnocené a MA klesá. Denní timeframe je neutrální. Vzhledem k této nejednoznačnosti a absenci dat svíčkových formací doporučuji opatrný přístup. Spread u některých svíček je vysoký, což je další varovný signál. Proto rozložení portfolia mezi BUY, SELL a HOLD."
-}

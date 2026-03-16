@@ -1,9 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Zhoršení makroekonomických prognóz a silné svíčkové formace s růstem pravděpodobnosti poklesu.",
-  "timestamp": "2026-03-08T22:54:26.684429+00:00",
-  "model": "deepseek-coder-v2"
-}

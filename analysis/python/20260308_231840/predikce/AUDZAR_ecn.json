@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na základě technické analýzy se jeví situace smíšená. Krátkodobě (1H) RSI signalizuje překoupenost, což naznačuje možnost poklesu. Dlouhodobější timeframe (Day, Week) RSI je na vyšších hodnotách, signalizuje spíše potenciál pro další růst. Měsíční RSI je neutrální. Aktuální cena je nad MA na 1H a 4H, pod MA na denním, týdenním a měsíčním grafu. Vzhledem k divergenci signálů, doporučuji opatrnost a vyčkávání na potvrzení trendu. BUY má 40%, SELL 30% a HOLD 30%."
-}

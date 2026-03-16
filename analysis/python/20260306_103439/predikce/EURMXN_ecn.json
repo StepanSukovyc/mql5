@@ -1,7 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Analýza EURMXN ukazuje smíšený signál. Krátkodobě (1H, 4H) je trh v neutrální až mírně překoupené zóně (RSI okolo 50-65) s cenou poblíž MA, což naznačuje potenciální konsolidaci. Denní RSI je také neutrální. Dlouhodobější pohled (týdenní RSI pod 40) a cena pod týdenním MA naznačují možný pokračující klesající trend, a proto upřednostňuji SELL pozici. Měsíční RSI je mírně nad 50 a cena pod MA, což přidává na nejistotě a vyžaduje opatrnost (HOLD)."
-}

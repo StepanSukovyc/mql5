@@ -1,9 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zhoršení ekonomických indikátorů a ztráta momentum v rámci svíčkového grafu s RSI ukazující nízké hodnoty signalizuje pokles kurzu, ale stále existuje mírná podpora na hodinovém a čtyřhodinovém timeframe.",
-  "timestamp": "2026-03-08T22:24:27.837241+00:00",
-  "model": "deepseek-coder-v2"
-}

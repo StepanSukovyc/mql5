@@ -1,7 +1,0 @@
-{
-  "symbol": "AU200_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "AU200_ecn is currently trading at 8676.65. Across multiple timeframes (1h, 4h, Day), the RSI is significantly oversold (below 30), suggesting potential for a short-term bounce. However, the price is consistently below the moving averages across all timeframes, indicating a strong downtrend. The recent daily and weekly candles show significant selling pressure. Monthly RSI is at 58 indicating that there is still some space to move down. Taking into account the oversold conditions for short term, but stronger downtrend in longer periods with downtrend showing across all averages, the most probable scenario is continuing sell."
-}

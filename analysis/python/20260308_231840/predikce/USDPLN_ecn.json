@@ -1,7 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu je RSI pod 40, což naznačuje potenciální překoupenost. Denní RSI je relativně vysoké (66), což by mohlo naznačovat potenciální korekci. Na měsíčním grafu je cena pod klouzavým průměrem (MA), což naznačuje klesající trend. Týdenní graf ukazuje, že cena se v současnosti pohybuje nad MA, což indikuje krátkodobý uptrend. Celkově, vzhledem k mixu signálů a krátkému sledovanému období, je držení pozice (HOLD) a potenciální SELL na základě denního RSI a měsíčního MA opatrnější strategií. BUY je rizikové, ale možné s ohledem na hourly překoupenost. Důraz je kladen na krátkodobou korekci a dlouhodobější klesající trend. Různé časové rámce vykazují různé signály, vyžadující opatrný přístup."
-}

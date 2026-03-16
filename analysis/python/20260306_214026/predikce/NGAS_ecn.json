@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 55,
-  "SELL": 25,
-  "HOLD": 20,
-  "reasoning": "NGAS_ecn currently trades at 3.154. Hourly RSI is overbought (78.32), suggesting a possible pullback. However, the 4H RSI (71.54) is also elevated but not as extreme. Daily RSI is neutral (49.99), indicating a potential for further upside. Price is above the daily MA (2.9597) and 4H MA (3.0112) signaling positive momentum. Recent hourly candles show a strong upward trend. Considering these factors, a BUY position has a slightly higher probability, but SELL and HOLD should not be disregarded, indicating possibility of short-term retracements."
-}

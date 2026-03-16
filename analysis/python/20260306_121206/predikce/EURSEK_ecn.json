@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním a týdenním grafu je RSI hluboko v přeprodané zóně (32.78, 37.99), což naznačuje možný odraz. Nicméně, MA na těchto timeframech (11.07, 10.79) jsou stále nad současnou cenou (10.71), což signalizuje downtrend. Denní graf ukazuje RSI 55.80 a MA na 10.64, indikující potenciál pro růst, ale krátkodobý (1h, 4h) RSI se pohybuje okolo 50, což naznačuje nerozhodnost. Poslední hodinové svíčky ukazují klesající trend. Celkově se přikláním k SELL, ale s ohledem na přeprodané podmínky i možnost držení (HOLD) nebo malého BUY."
-}

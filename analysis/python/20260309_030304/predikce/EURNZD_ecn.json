@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na týdenním a denním grafu je RSI pod 40, což naznačuje potenciál pro oversold podmínky a možný odraz nahoru. Nicméně, MA na denním grafu je výše než současná cena, což naznačuje rezistenci. Na týdenním grafu je MA daleko od současné ceny, což naznačuje silnou rezistenci a potenciální dlouhodobější downtrend. Kombinace těchto faktorů naznačuje, že SELL pozice má větší pravděpodobnost úspěchu než BUY. HOLD je rozumná volba vzhledem k nejednoznačnosti trhu."
-}

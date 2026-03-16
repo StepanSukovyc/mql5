@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "RSI na 1h a 4h naznačuje překoupenost, ale denní a týdenní RSI jsou neutrální. Cena je nad MA na všech timeframech. Recent candle patterns on 1h show indecision (doji-like). The spread volatility on 1h is also concerning and riskier. Given overall uptrend and neutral to slightly overbought conditions, a hold position is suitable."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu se RSI blíží překoupenosti (63.78), ale MA stále roste. Na týdenním grafu je RSI neutrální (48.77), ale cena je nad MA. Měsíční RSI je kolem 44.73, což naznačuje potenciál růstu, ale cena je pod MA. Vzhledem k současné ceně 22.4483 se zdá, že krátkodobý růst je možný, ale dlouhodobě existuje nejistota. Spread je v posledních hodinách kolísavý. Proto doporučuji opatrný přístup s důrazem na sledování vývoje na denním grafu."
-}

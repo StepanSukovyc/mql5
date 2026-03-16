@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "AUDUSD is showing bearish signals on shorter timeframes (1h, 4h) with RSI below 50 and price below MA. Daily RSI is near 50 indicating neutrality. However, Weekly RSI is overbought and price is above MA suggesting possible correction. Recent hourly price action showing downward pressure with multiple red candles. Overall risk assessment favors SELL due to short to mid term bearish signals. HOLD is a possibility to see if the price bounces from current levels. The BUY option is riskier due to overall downward trend."
-}

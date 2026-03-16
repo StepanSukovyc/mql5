@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "GBPCHF is currently at 1.03985.  Longer timeframes (weekly and monthly) show oversold RSI values (below 30) indicating potential for a bounce, BUT the price is below all moving averages. Daily RSI is also below 50. Hourly RSI is neutral but trending down. While a bounce is possible, the overall trend suggests more downside risk in the short-term, hence higher percentage risk to SELL. The current price is also trending below 1h MA. The low RSI across weekly and monthly suggest a good entry point to HOLD if already invested."
-}

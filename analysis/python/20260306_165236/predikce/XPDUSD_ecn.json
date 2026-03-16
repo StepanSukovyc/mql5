@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Krátkodobě SELL: RSI na 1h, 4h a denním grafu naznačuje přeprodanost, ale trend je klesající. Cena je pod MA na 1h, 4h a denním grafu. Týdenní graf je neutrální. Dlouhodobě BUY: Měsíční RSI je 66.6, což je blízko překoupené oblasti, ale MA je hluboko pod cenou, signalizující dlouhodobý potenciál růstu. Poslední denní svíčka je klesající a potvrzuje klesající trend."
-}

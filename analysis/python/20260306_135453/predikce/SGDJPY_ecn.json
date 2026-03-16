@@ -1,7 +1,0 @@
-{
-  "symbol": "SGDJPY_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Smíšené signály. Dlouhodobější timeframe (týden, měsíc) naznačují rostoucí trend (RSI nad 50, cena nad MA), ale krátkodobé indikátory (1h, 4h) a poslední svíčky naznačují potenciální konsolidaci nebo mírnou korekci.  RSI na denním grafu je blízko překoupené zóně. Doporučuji vyčkat na potvrzení trendu."
-}

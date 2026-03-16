@@ -1,9 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažující trend je směrem dolů, ale nárust cen v posledních týdnech naznačuje silnou oporu. RSI a MA ukazují bod stability nebo mírného vzestupu.",
-  "timestamp": "2026-03-13T07:09:56.194288+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena AUDCAD klesá, RSI na 1h a 4h je v přeprodané zóně, což naznačuje možné vyčerpání prodejců a potenciální korekci vzhůru (proto 20% BUY). Denní RSI se blíží přeprodané zóně. Nicméně, cena je pod MA na všech timeframech kromě týdenního a měsíčního, což naznačuje downtrend. Proto 60% SELL. Týdenní a měsíční RSI naznačují potenciál pro další růst, ale krátkodobý tlak je směrem dolů, takže 20% HOLD."
-}

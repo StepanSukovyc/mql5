@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na 1h, 4h a denním grafu, což naznačuje sestupný trend. RSI na 1h a 4h je v oblasti překoupenosti, což posiluje SELL. Na týdenním grafu je RSI blízko 50 a cena nad MA, indikace protichůdné, tedy menší prostor pro BUY. Na měsíčním grafu se cena pohybuje kolem MA. Celkově převažuje prodejní tlak."
-}

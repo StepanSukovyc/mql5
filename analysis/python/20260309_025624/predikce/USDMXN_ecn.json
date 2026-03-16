@@ -1,7 +1,0 @@
-{
-  "symbol": "USDMXN_ecn",
-  "BUY": 35,
-  "SELL": 40,
-  "HOLD": 25,
-  "reasoning": "Na denním a hodinovém grafu je RSI v překoupené zóně, což naznačuje potenciální obrat. Měsíční MA je výrazně nad současnou cenou, naznačuje dlouhodobý down trend. I přes nedávný růst ceny (potvrzeno svíčkami na 1H), celkový trend naznačuje větší pravděpodobnost poklesu. Navíc, poslední 4H svíčka naznačuje stagnaci ceny."
-}

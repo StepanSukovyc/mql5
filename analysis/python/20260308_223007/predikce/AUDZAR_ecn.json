@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět trend směřující nahoru, což naznačuje potenciální růst. Nicméně, výsledky fundamentální analýzy indikují určitou nejistotu a volatility trhu.",
-  "timestamp": "2026-03-08T22:02:40.257930+00:00",
-  "model": "deepseek-coder-v2"
-}

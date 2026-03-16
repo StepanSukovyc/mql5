@@ -1,7 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "EURUSD is showing bearish signals across multiple timeframes. Daily RSI is deeply oversold (26.14), suggesting potential for a bounce, but overall trend is downward. Hourly and 4H RSI are also below 40. The price is below all moving averages (MA) across timeframes. While the monthly RSI is still relatively neutral (56.11), the price action in the current month suggests further downside.  Short-term bounce is possible but overall the momentum favors sellers."
-}

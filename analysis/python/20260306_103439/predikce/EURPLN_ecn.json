@@ -1,7 +1,0 @@
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Denní RSI na 70.88 signalizuje potenciální překoupenost. Na 1h timeframe cena klesá pod MA. 4h RSI je sice stále rostoucí, ale denní timeframe naznačuje možnou korekci. Zvažuji SELL pozici, ale kvůli rostoucímu trendu na týdenním grafu je třeba počítat s rizikem a proto HOLD je také opodstatněná strategie. Měsíční timeframe je neutrální."
-}

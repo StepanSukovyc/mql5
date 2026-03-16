@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCAD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Technická analýza naznačuje medvědí trend. Denní a týdenní RSI jsou silně přeprodané, což naznačuje možný odraz nahoru, ale celkový trend je klesající. Klouzavé průměry na vyšších časových rámcích (den, týden) jsou nad aktuální cenou, což potvrzuje klesající trend. Na měsíčním grafu se RSI pohybuje v neutrální zóně, ale cena je nad MA. Doporučuji SELL. HOLD se doporučuje z důvodu možného odrazu od supportu."
-}

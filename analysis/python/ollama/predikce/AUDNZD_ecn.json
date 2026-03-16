@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu sólo na základě fundamentálních faktorů. RSI a MA hodnoty podporují spouštěcí signály pro nákup, ale také indikují nejistotu v dlouhodobém horizontu.",
-  "timestamp": "2026-03-13T19:17:29.483816+00:00",
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu. Nedostatek jasných svíčkových formací.",
+  "timestamp": "2026-03-16T00:19:42.265159+00:00",
   "model": "deepseek-coder-v2"
 }

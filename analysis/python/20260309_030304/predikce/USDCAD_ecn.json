@@ -1,9 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růst cenových pohybů je potenciálně omezen v důsledku silného podpory MA a RSI. Nicméně, pokles volatility s ohledem na zhoršení ekonomických indikátorů signalizuje riziko.",
-  "timestamp": "2026-03-09T02:55:05.327439+00:00",
-  "model": "deepseek-coder-v2"
-}

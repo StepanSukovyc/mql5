@@ -1,7 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 20,
-  "SELL": 50,
-  "HOLD": 30,
-  "reasoning": "LTCUSD is currently trading at 52.76. The weekly RSI is oversold at 25.66, suggesting potential for a bounce. However, the daily RSI is at 40.12, showing downward momentum, and the price is below the daily MA of 54.29. The monthly RSI is 38.83 and the price is well below the monthly MA of 87.97. Recent daily candles show bearish activity.  Therefore, SELL is preferred. HOLD is an option because of the oversold weekly RSI, and a potential bounce is possible. A BUY is risky due to the current downtrend."
-}

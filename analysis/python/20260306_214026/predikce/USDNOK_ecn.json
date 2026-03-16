@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "USDNOK_ecn is showing bearish signals across multiple timeframes. The current price (9.57489) is below the moving average on the 1h and 4h charts. Furthermore, RSI on daily, weekly, and monthly charts are below 50, indicating downward momentum. The recent hourly candles confirm a downtrend. Therefore, a sell position seems to have a higher probability of success than buy. Considering the possibility of a short term correction, HOLD is a viable strategy. Overall, risk assessment favours SELL."
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je vystaveno zhoršení finanční situace v oblasti euro-jpy. RSI a MA ukazují slabost síly ceny.",
-  "timestamp": "2026-03-08T23:07:16.628337+00:00",
-  "model": "deepseek-coder-v2"
-}

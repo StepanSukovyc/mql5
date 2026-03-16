@@ -1,7 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "EURUSD is currently at 1.16108. The daily RSI is at 33.20, indicating oversold conditions, but the downtrend is strong, with prices below the daily MA of 1.17793. Hourly and 4-hour RSIs are also below 50, further supporting a selling bias. Recent hourly candles show a strong bearish momentum. Monthly RSI is 58.72, not indicating extremes. Overall, the short to medium term trend is bearish."
-}

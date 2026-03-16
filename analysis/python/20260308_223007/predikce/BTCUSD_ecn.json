@@ -1,9 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převaha negativních signálů z RSI a poklesu MA hodnoty indikuje riziko poklesu ceny. Nicméně, pozitivní svíčkové formace naznačují silnou podporu.",
-  "timestamp": "2026-03-08T22:07:34.889540+00:00",
-  "model": "deepseek-coder-v2"
-}

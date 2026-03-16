@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena se pohybuje pod 1h a 4h MA, denní RSI je pod 40 indikujíc downtrend. Týdenní a denní timeframes také ukazují, že cena je pod MA. Proto doporučuji SELL (45%). Nicméně, měsíční RSI ukazuje potenciál k růstu, i když je blízko 50%, proto HOLD (25%).  Vzhledem k nižším RSI hodnotám na 1h a 4h timeframes a potenciálnímu odrazu od bottomu z dlouhodobějšího pohledu (měsíční timeframe), dávám mírnou šanci na BUY (30%)."
-}

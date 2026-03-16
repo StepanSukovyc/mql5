@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "On the hourly and 4-hour timeframes, RSI is approaching overbought territory, suggesting potential for a pullback (Sell: 30%). However, the daily RSI is at 59.21, indicating room for upward movement. The price is above the daily and 4H moving averages, but below the weekly MA, presenting a mixed signal. Recent price action shows upward momentum, and the monthly MA suggests overall bullish trend (Buy: 40%). Given these mixed signals and limited historical data, a 'Hold' strategy is also reasonable as confirmation of trend is required (Hold: 30%)."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na 1H a 4H timeframe je RSI nad 50 a MA pod cenou, což indikuje rostoucí trend. Denní RSI je také relativně vysoké. Na druhou stranu, měsíční RSI je pod 50 a MA nad cenou, naznačující potenciální dlouhodobý klesající trend. Vzhledem k rozporuplným signálům a limitovanému počtu svíček, doporučuji opatrnost a zvážení držení pozice (HOLD), dokud se nevyjasní směr. BUY má největší procento, protože krátkodobé indikátory naznačují potenciální pokračování růstu, ale SELL si zaslouží významné procento kvuli dlouhodobým indikátorům a nutné opatrnosti."
-}

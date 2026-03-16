@@ -1,7 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 20,
-  "SELL": 65,
-  "HOLD": 15,
-  "reasoning": "Short-term: RSI is oversold on 1H and 4H, suggesting a possible bounce. However, price is below all MAs on 1H, 4H, and Day charts, indicating a downtrend. Daily RSI is below 50. Longer-term, weekly and monthly RSI are still relatively high, though dropping on weekly. Overall bearish sentiment based on MA crossovers and price action. SELL is favored. Limited confidence = lower values."
-}

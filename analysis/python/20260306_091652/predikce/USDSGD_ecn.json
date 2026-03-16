@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod 1h MA, RSI je neutrální. 4h RSI je téměř překoupené, denní RSI je 62, ale cena se drží pod týdenní MA a měsíční RSI je 39, naznačující klesající trend na dlouhodobém horizontu. Konsolidace na krátkodobém horizontu, s potenciálem klesání."
-}

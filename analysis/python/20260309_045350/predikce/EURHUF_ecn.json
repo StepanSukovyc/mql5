@@ -1,9 +1,0 @@
-{
-  "symbol": "EURHUF_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Na základě fundamentální analýzy a svíčkových formací ukazuje EUR/HUF silný trend růstu. RSI i MA hodnoty podporují tento pohyb.",
-  "timestamp": "2026-03-09T04:26:42.458186+00:00",
-  "model": "deepseek-coder-v2"
-}

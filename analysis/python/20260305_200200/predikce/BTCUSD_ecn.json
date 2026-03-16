@@ -1,7 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technicky se BTCUSD nachází v korekční fázi. RSI na 1H a denním grafu naznačuje prostor pro další pokles. Cena se pohybuje pod MA na 1H grafu. Na týdenním grafu je RSI poměrně nízko, ale MA je daleko nad cenou, což naznačuje silný downtrend. Doporučuje se vyčkat na stabilizaci a potvrzení směru. 4H ukazuje RSI v neutrální zóně."
-}

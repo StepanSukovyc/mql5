@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPAUD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem obav z globální ekonomiky. SMA ukazuje slabší trend.",
-  "timestamp": "2026-03-09T04:46:22.896257+00:00",
-  "model": "deepseek-coder-v2"
-}

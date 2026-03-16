@@ -1,9 +1,0 @@
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA hodnot je trend směrem dolů, ale svíčková formační analýza ukazuje silnou podporu blízko současné ceně.",
-  "timestamp": "2026-03-08T23:10:49.858623+00:00",
-  "model": "deepseek-coder-v2"
-}

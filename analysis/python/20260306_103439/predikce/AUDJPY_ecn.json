@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "AUDJPY is currently at 110.6. The 1h RSI is at 60.5, suggesting slightly overbought conditions, while the 4h RSI is at 47.5, closer to neutral. The daily RSI is 59.85, and the weekly RSI is high at 76.45. 1h MA (110.62) is above current price and 4H MA (110.75) is also above current price, while daily MA (109.87) is below current price. Recent hourly candles show some indecision after a previous downtrend. Overall, the mixed signals and recent price action suggest caution. SELL has the highest probability due to the current price being below the 1H and 4H MA with a high RSI for a longer timeframe (Week). HOLD is the next most likely while we see the price action. A BUY only has 30% confidence as the RSI on the Week timeframe indicates that it is overbought, suggesting it is due to come down."
-}

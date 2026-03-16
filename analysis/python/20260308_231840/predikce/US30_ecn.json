@@ -1,7 +1,0 @@
-{
-  "symbol": "US30_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Na denním a 4H timeframe se RSI nachází v přeprodané zóně (pod 35), což značí možnou korekci směrem nahoru (proto 20% BUY). Nicméně, cena je pod denním, 4H i 1H MA, což naznačuje pokračující klesající trend. Měsíční RSI je sice nad 60, ale klesá, a cena se aktuálně nachází nad MA. Týdenní RSI je na hodnotě 43.44 a klesá. Kombinace těchto faktorů silně upřednostňuje SELL (60%). HOLD (20%) zohledňuje potenciální krátkodobou konsolidaci před dalším poklesem."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "DXY is showing mixed signals. Daily and 4H RSI indicate overbought conditions suggesting a potential pullback (SELL 30%). However, the price is above the daily and weekly MA, and recent hourly candles show upward momentum (BUY 40%). Monthly RSI is still below 50, suggesting longer-term consolidation. With this, I suggest a partial HOLD approach until additional support for a trade is available (HOLD 30%)."
-}

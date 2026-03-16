@@ -1,7 +1,0 @@
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "FRA40_ecn is showing strong bearish signals. The current price is significantly below the Moving Averages on 1H, 4H and Daily timeframes. RSI values on 1H (27.88) and 4H (22.17) are in oversold territory, but the downward trend is strong. Daily RSI is also low at 31.19. While a short-term bounce is possible (hence the 20% buy), the overall trend suggests further downside. The Monthly MA is below the current price, indicating long term potential upside. But the short and medium term analysis paints a rather bleak picture. The large recent drop indicates a risk-off sentiment, favouring a 'SELL' position."
-}

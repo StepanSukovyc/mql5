@@ -1,9 +1,9 @@
 {
   "symbol": "GBPUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zvýšení RSI a MA signalizuje trendovou změnu směrem nahoru. Nicméně, cenový model svíček ukazuje na odpor v oblasti 1.4500, což indikuje nejistotu.",
-  "timestamp": "2026-03-13T20:23:14.768591+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Riziko je vyvážené mezi růstem a poklesem. RSI ukazuje neutralitu s mírným trendem k poklesu.",
+  "timestamp": "2026-03-16T01:25:54.278064+00:00",
   "model": "deepseek-coder-v2"
 }

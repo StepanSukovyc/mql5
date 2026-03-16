@@ -1,9 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezeny silnou odporovou hladinou na úrovni 1.13, zatímco poklesové pohyby mohou být podpořeny slabším impulzem směrem k 1.10.",
-  "timestamp": "2026-03-08T23:19:36.908684+00:00",
-  "model": "deepseek-coder-v2"
-}

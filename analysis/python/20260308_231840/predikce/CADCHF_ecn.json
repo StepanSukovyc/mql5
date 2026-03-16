@@ -1,7 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "CADCHF is showing mixed signals. Daily and 4H RSI are above 60, suggesting potential overbuying. However, Monthly RSI is deeply oversold at 23.86, indicating long-term potential for upward correction. Price is above daily and 4h MA, but below weekly and monthly MA.  Given the conflicting signals and short data history, a cautious approach is warranted, balancing buy/sell/hold options."
-}

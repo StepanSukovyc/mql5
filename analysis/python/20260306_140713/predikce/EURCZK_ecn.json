@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCZK_ecn",
-  "BUY": 60,
-  "SELL": 15,
-  "HOLD": 25,
-  "reasoning": "Na denním grafu je RSI v překoupené zóně (71.8), což naznačuje možnost korekce. Nicméně, na týdenním grafu je RSI neutrální (56.55). Měsíční RSI je pod 50 (42.45) což naznačuje potenciál pro další růst. Cena je nad MA na všech timeframech kromě měsíčního, což indikuje rostoucí trend. Na 4h grafu se RSI blíží překoupené zóně (68.37). Poslední 4h svíčka je silně bullish. Celkově, převládá býčí sentiment, ale je třeba brát v potaz potenciální korekci na denním grafu. Doporučuje se opatrný BUY. Zesílení koruny (SELL) je méně pravděpodobné s ohledem na rostoucí trend."
-}

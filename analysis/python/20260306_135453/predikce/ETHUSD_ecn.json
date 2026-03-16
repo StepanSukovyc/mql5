@@ -1,7 +1,0 @@
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Převažují signály k prodeji. RSI na 1h je v oblasti přeprodanosti (35.04), ale na 4h je na 50.93, a na denním timeframe 40.59, což naznačuje prostor pro další pokles.  MA na 1h (2074.92) je nad aktuální cenou (2044.2), podobně i na 4h (2056.03). Denní MA (1998.88) je pod cenou, ale týdenní a měsíční MA jsou výrazně nad cenou, což naznačuje dlouhodobější sestupný trend. Poslední hodinové svíčky nevykazují silnou formaci pro obrat. Dlouhodobé timeframe naznačují silný prodejní tlak. BUY má nízké skóre. HOLD je neutrální postoj vzhledem k potenciálnímu obratu."
-}

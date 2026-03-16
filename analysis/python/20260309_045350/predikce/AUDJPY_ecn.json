@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Analýza AUDJPY je smíšená. Dlouhodobější timeframe (týdenní a měsíční) indikují silný uptrend (RSI týdenní 79.14, měsíční 65.56, MA stoupající). Denní RSI je 62.00, což naznačuje, že trh má stále momentum pro růst. Nicméně, krátkodobější timeframe (1H a 4H) ukazují RSI kolem 50, což naznačuje, že momentum slábne. Aktuální cena je nad MA na denním, týdenním a měsíčním grafu, ale pod MA na 1h a 4h, což vytváří protichůdné signály. Vzhledem k protichůdným signálům a konsolidaci ceny v posledních dnech, je HOLD pozice rozumná. BUY se doporučuje opatrně vzhledem k překoupenému týdennímu RSI a SELL se doporučuje s ohledem na potenciální krátkodobé korekce."
-}

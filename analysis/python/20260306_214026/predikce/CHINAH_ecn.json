@@ -1,7 +1,0 @@
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Na denním a týdenním grafu je RSI pod 40, což značí potenciální přeprodanost, ale MA na těchto timeframech jsou výrazně nad aktuální cenou, což ukazuje na dlouhodobější downtrend. Hodinový graf ukazuje RSI blízko neutrální hodnoty a cena se pohybuje kolem MA, což naznačuje nejistotu. Měsíční graf je více bullish s RSI nad 60 a cena nad MA. Celkově převládá medvědí sentiment v krátkodobém až střednědobém horizontu, ale existuje potenciál pro odraz. Proto je doporučeno spíše SELL, ale s opatrností a s přihlédnutím k měsíčnímu grafu a potenciálnímu odrazu od přeprodaných úrovní."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena je pod MA na 1h, 4h a denním grafu, což naznačuje downtrend. RSI na 1h a 4h je v oblasti přeprodanosti, ale celkově se zdá, že převládá prodejní tlak. Na týdenním a měsíčním grafu je sice RSI výše, ale krátkodobé indikátory naznačují další pokles. Doporučuji spíše SELL, dokud se situace neuklidní. HOLD pro konzervativní přístup."
-}

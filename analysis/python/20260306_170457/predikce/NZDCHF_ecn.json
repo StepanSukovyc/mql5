@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCHF_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na všech timeframech kromě week. RSI na měsíčním grafu je hluboko v přeprodané zóně (28.17), což naznačuje potenciální obrat, ale krátkodobé RSI indikují klesající trend. Aktuální cena je 0.45883, což je pod týdenním MA, i když se mu blíží. Po zvážení indikátorů a cenové akce převládá SELL signál s menší pravděpodobností HOLD a malou šancí na BUY."
-}

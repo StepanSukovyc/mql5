@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "USDCAD je krátkodobě v downtrendu, RSI na 1H a 4H timeframe je pod 40, což indikuje potenciální přeprodanost, ale MA na všech timeframech je nad současnou cenou. Denní svíčky také naznačují pokračující prodeje. Proto převládá signál k SELL, ale vzhledem k potenciální přeprodanosti je zde i šance na BUY korekci. Proto se přikláním spíše k HOLD."
-}

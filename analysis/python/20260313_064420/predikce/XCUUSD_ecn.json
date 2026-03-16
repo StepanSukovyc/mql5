@@ -1,7 +1,0 @@
-{
-  "symbol": "XCUUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hourly a 4h timeframe je RSI v neutrální zóně, ale klesající, cena se pohybuje pod MA, což indikuje možný krátkodobý downtrend. Na denní timeframe je RSI také neutrální. Týdenní RSI je sice relativně vysoko (68.99), ale cena je nad MA, což naznačuje potenciální dlouhodobý uptrend. Nicméně poslední denní svíčka je bearish a aktuální cena je pod denním MA. Vzhledem k protichůdným signálům a absenci relevantních dat pro měsíční timeframe doporučuji spíše SELL nebo HOLD, dokud se situace nevyjasní. Vyšší váha je dána SELL z důvodu krátkodobého sestupného trendu a klesajícího RSI."
-}

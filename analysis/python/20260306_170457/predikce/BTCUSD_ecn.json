@@ -1,7 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena je pod 1h a 4h MA, 1h RSI je silně přeprodané, což značí potenciální krátkodobé oživení. Nicméně, denní a týdenní MA jsou výrazně vyšší než aktuální cena, což naznačuje medvědí trend. SELL má největší pravděpodobnost díky celkovému downtrendu, BUY menší šanci kvůli krátkodobému přeprodání, HOLD má menší šanci kvůli jasnému trendu."
-}

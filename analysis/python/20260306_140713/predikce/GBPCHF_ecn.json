@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "GBPCHF is showing bearish signals on higher timeframes (daily, weekly, monthly) with RSI below 45, 35 and 30 respectively, suggesting oversold conditions but still in a downtrend. Price is below daily, weekly and monthly moving averages. While short-term 1H and 4H RSIs are slightly above 50, not strong enough to suggest uptrend to consider BUY. HOLD is reasonable as 1h and 4H are slightly bullish but need to break above key resistance levels. Given the dominant downtrend on higher timeframes the greater bias leans towards SELL."
-}

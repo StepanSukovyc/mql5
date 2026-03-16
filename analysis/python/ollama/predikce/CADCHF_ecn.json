@@ -1,9 +1,9 @@
 {
   "symbol": "CADCHF_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové zájmy v Kanadě a pokles cen ropy mohou podporovat korunu, ale politická situace a geopolitické riziko mají tendenci převažovat.",
-  "timestamp": "2026-03-13T19:27:55.058405+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle fundamentální analýzy měnového páru je situace neutrální s tendencí k poklesu. Technická analýza ukazuje silnou hladinu odporu a střet vážených pohybových průměrů, což naznačuje neistotu.",
+  "timestamp": "2026-03-16T00:29:58.749005+00:00",
   "model": "deepseek-coder-v2"
 }

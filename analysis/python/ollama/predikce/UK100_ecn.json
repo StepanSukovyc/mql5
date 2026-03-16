@@ -1,9 +1,9 @@
 {
   "symbol": "UK100_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu na trhu. Bující tlak prodeje je známkou rizika, ale také potenciálu pro opravu.",
-  "timestamp": "2026-03-13T20:49:47.046370+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět mírný pokles. Nicméně, fundamentální analýza ukazuje stabilitu s pozitivními trendem v zásobách.",
+  "timestamp": "2026-03-16T01:52:00.793451+00:00",
   "model": "deepseek-coder-v2"
 }

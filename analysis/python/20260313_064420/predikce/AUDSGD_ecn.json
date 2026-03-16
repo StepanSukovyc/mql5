@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDSGD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Na hodinové bázi je RSI hluboko v přeprodané zóně (25.52), což naznačuje potenciální korekci směrem nahoru. Nicméně, cena je stále pod 1h MA (0.90851) a 4h MA (0.907086), což indikuje pokračující downtrend. Denní RSI je 59.48, což není ani přeprodané, ani překoupené. Týdenní RSI na hodnotě 80.65 naznačuje překoupenost a možnost korekce. Celkově se zdá, že short term je šance na korekci, nicméně downtrend převažuje."
-}

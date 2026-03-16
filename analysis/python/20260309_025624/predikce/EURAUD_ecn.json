@@ -1,7 +1,0 @@
-{
-  "symbol": "EURAUD_ecn",
-  "BUY": 20,
-  "SELL": 50,
-  "HOLD": 30,
-  "reasoning": "Z technického hlediska, na denním a týdenním grafu, RSI indikuje překoupenost, což naznačuje možnost poklesu. MA na vyšších časových rámcích jsou výrazně nad aktuální cenou, což signalizuje medvědí trend. Na nižších časových rámcích (1h, 4h) je RSI neutrální, cena se pohybuje kolem MA. Z důvodu výrazného poklesu ceny v posledních týdnech a překoupenosti na vyšších timeframech preferuji SELL pozici, HOLD je rozumná opatrná strategie a BUY je rizikovější."
-}

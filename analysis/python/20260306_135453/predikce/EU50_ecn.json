@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na základě technické analýzy převládá signál k prodeji. RSI je pod 35 na 1H, 4H a denním grafu, což naznačuje překoupenost. Aktuální cena je pod MA na všech timeframe kromě měsíčního, což naznačuje sestupný trend. Vzhledem k poklesu z vyšších hodnot v posledních dnech a převaze medvědího sentimentu se doporučuje spíše prodej. Možnost BUY je dána pouze z důvodu, že měsíční RSI se nachází na hodnotě 61, což může naznačovat potenciál pro další růst a korekci, ale na to je zatím příliš brzy. HOLD naznačuje vyčkávání na potvrzení trendu."
-}

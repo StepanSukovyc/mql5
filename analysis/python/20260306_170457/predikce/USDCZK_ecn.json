@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCZK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Denní RSI je překoupené (70.41), což naznačuje potenciální pokles. 1H a 4H RSI naznačují další růst, MA hodnoty na všech timeframe kromě měsíčního supportují růst. Měsíční RSI je pod 40 s MA nad aktuální cenou. Proto rozložení mezi BUY, SELL a HOLD."
-}

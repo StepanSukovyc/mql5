@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "GBPNZD_ecn exhibits mixed signals. RSI values are around the 50-60 range on shorter timeframes (1h, 4h), suggesting neither strongly overbought nor oversold conditions, while the daily RSI is around 50. On the other hand weekly RSI is bellow 50 which would suggest potential for downward movement. The price is above the moving average on shorter timeframes (1h, 4h, daily, monthly), indicating a possible uptrend, but below the weekly MA, suggesting medium term downward movement. Given the limited timeframe data (30 candles), a hold position is also reasonable to await further confirmation."
-}

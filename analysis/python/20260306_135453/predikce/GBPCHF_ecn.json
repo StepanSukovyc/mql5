@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Z technického hlediska vykazuje GBPCHF sestupný trend. Měsíční a týdenní RSI jsou hluboko v přeprodané zóně, naznačují potenciální odraz, ale denní RSI je také pod 50. MA na všech timeframech od denního výše leží nad cenou, což naznačuje rezistenci. Poslední hodinové svíčky naznačují pokus o odraz, ale celkově je tlak na pokles zřetelný. Vzhledem k převaze medvědích signálů doporučuji SELL pozici s opatrností, neboť potenciál pro krátkodobou korekci směrem vzhůru (BUY) tu je."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu je RSI blízko překoupené zóně (67.36), ale 4H RSI je na 56.43, což naznačuje prostor pro růst. Nicméně denní RSI je na 48.47, což je neutrální. Týdenní RSI je na 44.63 a měsíční RSI na 59.44. Cena je nad MA na 1H a 4H grafech, ale pod MA na týdenním grafu. Denní graf se pohybuje kolem MA. Celkově indikátory naznačují mírný prodejní tlak, ale nejednoznačný trend. Vzhledem k tomu, že cena dosáhla vrcholu a mírně se koriguje, preferuji SELL s vyšší váhou, následovaný HOLD a BUY."
-}

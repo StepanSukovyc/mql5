@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu je RSI v překoupené zóně (69.21), což naznačuje možnost korekce. Denní RSI je neutrální (49.77), ale týdenní a měsíční RSI jsou pod 50, což signalizuje potenciální medvědí trend. Aktuální cena je nad denním MA (1.364657), ale pod týdenním (1.379376) a měsíčním (1.389654), což naznačuje, že cena může mít problém s překonáním těchto úrovní. Poslední svíčky na 4H grafu jsou býčí, ale celkově je cena v konsolidační fázi. Z těchto důvodů je SELL mírně preferován."
-}

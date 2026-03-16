@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu je RSI v překoupené zóně (71.6), což naznačuje možnost korekce. 1H a 4H grafy ukazují RSI kolem 60, což není ani překoupené ani přeprodané. Aktuální cena (11.62983) je pod 1H MA (11.675503), ale nad 4H MA (11.612173). Na týdenním grafu se RSI pohybuje kolem 65, což indikuje potenciál pro další růst, ale denní graf naznačuje možnost korekce. Poslední 4H svíčka klesla, což naznačuje krátkodobý klesající trend. Doporučuje se opatrnost a zvážení krátkodobého SELL."
-}

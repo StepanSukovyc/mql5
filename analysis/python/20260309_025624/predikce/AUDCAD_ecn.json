@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 25,
-  "SELL": 60,
-  "HOLD": 15,
-  "reasoning": "AUDCAD is showing oversold conditions on shorter timeframes (1H, 4H) based on RSI. However, the overall trend on daily and weekly charts suggests a potential downward movement. The current price is below the daily MA, further reinforcing the short-term bearish outlook. Recent hourly candles confirm this downtrend with further decline. Monthy RSI is still showing uptrend and price is trading above MA. Taking all this into account, SELL is the more likely option, but BUY is considered due to oversold conditions and monthly uptrend. A HOLD position may be safe until the price further consolidates in order to not generate false signals."
-}

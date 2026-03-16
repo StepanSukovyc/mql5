@@ -1,7 +1,0 @@
-{
-  "symbol": "EURHUF_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Denní a 4H RSI jsou v překoupené zóně (76.27 a 70.16), což naznačuje potenciální korekci (SELL). Na druhou stranu, cena je nad MA na 1H, 4H, denní i týdenní bázi, což signalizuje uptrend (BUY). Měsíční MA je sice nad aktuální cenou, ale krátkodobý trend je rostoucí. Vzhledem k těmto faktorům a omezenému množství historických dat zvažuji HOLD s mírným BUY bias, dokud se nevyjasní silnější trend."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 35,
-  "SELL": 35,
-  "HOLD": 30,
-  "reasoning": "Technická analýza vykazuje smíšené signály. Denní RSI je překoupené (70.73), což naznačuje možnost korekce (SELL). Naopak, 1H a 4H RSI se pohybují kolem 50-70, což naznačuje potenciál pro další růst (BUY). Měsíční MA je nad současnou cenou, což by mohlo naznačovat dlouhodobý downtrend. Vzhledem k protichůdným signálům a relativně krátké historii je rozumné vyčkat (HOLD) na potvrzení trendu."
-}

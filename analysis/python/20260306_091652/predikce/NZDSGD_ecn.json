@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "The price is currently below the daily and monthly moving averages, suggesting a downtrend. The RSI on the monthly timeframe is also below 50, indicating bearish momentum. Recent hourly candles show some upward movement, but overall the momentum seems bearish. SELL is slightly favored due to trend indicators."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 60,
-  "SELL": 20,
-  "HOLD": 20,
-  "reasoning": "Na kratších časových rámcích (1h, 4h, day) se RSI nachází v neutrální až překoupené zóně, což naznačuje potenciální korekci. Dlouhodobější indikátory (week, month) ale ukazují na prostor pro růst. Cena se pohybuje pod týdenním a měsíčním MA, což implikuje rezistenci a potenciál pro otestování těchto úrovní a následný růst. Denní graf vykazuje rostoucí trend. Proto mírná převaha pro BUY, ale nutno brát v potaz riziko korekce. HOLD pozice slouží pro připad korekce a akumulaci pro delší pozici."
-}

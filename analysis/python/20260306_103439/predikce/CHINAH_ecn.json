@@ -1,7 +1,0 @@
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Technická analýza vykazuje smíšené signály. Měsíční RSI je relativně vysoké (60.59), což naznačuje možný potenciál k růstu. Nicméně denní a týdenní RSI se nachází pod hodnotou 40, což indikuje potenciální překoupenost a možný pokles. Denní Moving Average je výrazně nad aktuální cenou. Na hodinovém a 4H grafu je MA mírně pod aktuální cenou. Poslední svíčky na 1h grafu ukazují spíše stagnaci nebo mírný pokles. Celkově převládají spíše medvědí signály v krátkodobém horizontu."
-}

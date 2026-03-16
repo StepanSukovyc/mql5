@@ -1,7 +1,0 @@
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "XAGUSD_ecn is currently at 82.985. Monthly RSI is overbought at 78.88, suggesting a potential correction. The daily and 4-hour RSI are below 50, indicating bearish momentum. Recent hourly candles show volatility and indecision. The price is currently below the 4H MA and fluctuating around the daily MA. Overall, the short-term momentum appears bearish, suggesting a higher probability of a sell-off, while the long-term outlook from the weekly MA suggest it has more to run."
-}

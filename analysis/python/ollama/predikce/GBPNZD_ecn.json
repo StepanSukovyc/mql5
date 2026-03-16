@@ -1,9 +1,9 @@
 {
   "symbol": "GBPNZD_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "RSI ukazuje slabost s cenou blízko vrcholu. MA ukazuje trend směrem nahoru, ale je potřeba monitorovat divergence.",
-  "timestamp": "2026-03-13T20:19:48.701592+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Růstové potenciály jsou omezená z důvodu volatilního trhu a silnou odolností v RSI. Současný stav je nejistý s nízkou diverzifikací MA.",
+  "timestamp": "2026-03-16T01:22:27.299538+00:00",
   "model": "deepseek-coder-v2"
 }

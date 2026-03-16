@@ -1,7 +1,0 @@
-{
-  "symbol": "VIX_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Denní a týdenní RSI naznačují překoupenost (66.61 a 75.20), což zvyšuje pravděpodobnost korekce.  Cena je nad denním MA (21.515), ale hodinové MA jsou pod aktuální cenou (24.6145). Kombinace překoupenosti na vyšších timeframech a nedávného poklesu na hodinových grafech naznačuje potenciální prostor pro prodej, ale není to jisté. Měsíční RSI je 61, což není tolik nadsazené. Proto dáváme SELL 40%, BUY 30% a HOLD 30%."
-}

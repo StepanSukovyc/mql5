@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Denní RSI je na 71.61, což naznačuje překoupenost, ale týdenní RSI je 64.93, což stále naznačuje potenciál k růstu. 4H RSI je 58.46, což je neutrální. 1H RSI 47.23. Cena je aktuálně pod 1H MA, ale nad 4H, denní, týdenní a měsíční MA. Vzhledem k rozporuplným signálům a krátké historii dat (30 candles) doporučuji opatrný přístup. Zvážil bych BUY, pokud cena prorazí a udrží se nad 1H MA a 4H RSI překročí 60. SELL by byl riskantnější, ale pokud cena klesne pod 4H MA, je to potvrzení. HOLD je rozumná strategie pro sledování vývoje."
-}

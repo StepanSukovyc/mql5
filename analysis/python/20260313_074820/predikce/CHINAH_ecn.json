@@ -1,9 +1,0 @@
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických indikátorů, ale nárůst v poslední době může být způsoben diverzifikací produktů. RSI a MA ukazují směr trendu.",
-  "timestamp": "2026-03-13T07:25:38.027996+00:00",
-  "model": "deepseek-coder-v2"
-}

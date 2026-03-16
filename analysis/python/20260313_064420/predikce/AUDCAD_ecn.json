@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu je RSI pod 36, což naznačuje, že je AUDCAD přeprodaný. Nicméně, cena se nachází pod MA na 1H, 4H a Day grafech, což signalizuje pokles. Na týdenním a měsíčním grafu je cena nad MA a RSI je relativně vysoké, naznačující potenciál pro korekci. Nejnovější denní svíčka je bearish. Proto se doporučuje spíše prodej, držení pozice, než nákup."
-}

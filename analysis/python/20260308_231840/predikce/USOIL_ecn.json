@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 20,
-  "SELL": 70,
-  "HOLD": 10,
-  "reasoning": "Indikátory RSI ukazují překoupenost na všech timeframech, zejména denní (88.79%) a týdenní (86.01%). Cena se výrazně odchýlila od MA na denním a týdenním grafu, což naznačuje možnou korekci. Na druhou stranu měsíční RSI (69.07%) naznačuje, že ještě je prostor pro růst, ale aktuální momentum je pravděpodobně neudržitelné, proto doporučuji SELL. Z důvodu překoupenosti, a velké volatility doporučuji snížit pozice, a vyčkávat na korekci."
-}

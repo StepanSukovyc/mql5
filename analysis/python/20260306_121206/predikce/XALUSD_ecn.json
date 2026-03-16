@@ -1,7 +1,0 @@
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "Cena je nad MA na všech timeframech, kromě 1h, což naznačuje uptrend. Týdenní RSI je překoupené (80.64), což by mohlo vést ke korekci. Denní a 4h RSI jsou v rostoucím trendu. 1h RSI je v neutrální zóně. Kombinace uptrendu a potenciálního překoupení implikuje vyvážené riziko, nejlépe BUY s částečným HOLD a malou šancí na SELL."
-}

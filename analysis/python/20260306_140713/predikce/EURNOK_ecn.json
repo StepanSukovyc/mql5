@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Indikátory RSI na 1H, D a W time frame ukazují pod hodnotou 35, což značí překoupenost trhu. MA na všech time frame jsou nad aktuální cenou, což implikuje downtrend. Konkrétně Weekly RSI je na extrémně nízké hodnotě 23.67 což indikuje silný signál k SELL pozici. Na druhou stranu, je potřeba vzít v potaz, že se může jednat o korekci trhu, z toho důvodu BUY není vyloučen. HOLD doporučuji pro konzervativní obchodníky vyčkávající na jasnější signál. Z technického hlediska převládá SELL."
-}

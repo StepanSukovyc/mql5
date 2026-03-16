@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme nápadnou divergenci mezi cenou a indikátory, což naznačuje silnou potenciální změnu. Současně, fundamentální analýza neprokazuje žádné významné pozitivní události nebo novinky.",
-  "timestamp": "2026-03-08T21:48:04.743298+00:00",
-  "model": "deepseek-coder-v2"
-}

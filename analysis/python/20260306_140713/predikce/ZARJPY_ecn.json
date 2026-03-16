@@ -1,7 +1,0 @@
-{
-  "symbol": "ZARJPY_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Analýza ukazuje na převahu prodejců. Krátkodobé RSI na 1h a 4h timeframech jsou v oblasti přeprodanosti, naznačují možnou korekci nahoru. Nicméně denní RSI je stále pod 40, což potvrzuje klesající trend. MA na všech timeframech kromě týdenního timeframe je nad aktuální cenou, což naznačuje rezistenci. Cena se pohybuje pod denním MA, což je negativní signál. Týdenní RSI je relativně neutrální. Měsíční RSI je v býčím teritoriu, ale MA je daleko pod aktuální cenou, a tak má klesající momentum silnější váhu."
-}

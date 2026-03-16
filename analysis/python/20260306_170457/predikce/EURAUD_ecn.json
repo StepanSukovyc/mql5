@@ -1,7 +1,0 @@
-{
-  "symbol": "EURAUD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "EURAUD exhibits bearish signals across multiple timeframes. Daily and Weekly RSI are in oversold territory, suggesting potential for a reversal, but Monthly MA is significantly higher than current price. Recent price action shows a downtrend, further supported by the Daily MA being significantly above current price. 1H RSI is neutral, while price hovers around 1H MA suggesting volatility and potential consolidation. Given this mixed picture, SELL carries highest probability, BUY a lower one, and HOLD reflects the remaining possibility. "
-}

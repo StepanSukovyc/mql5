@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním a týdenním grafu je RSI hluboko v přeprodané zóně, což naznačuje potenciální odraz, ale MA na těchto timeframech klesají. Denní RSI se nachází v neutrální zóně, ale cena je nad MA. Na 1H a 4H timeframech vidíme oscilaci kolem MA, což naznačuje nerozhodnost. Vzhledem k klesajícímu trendu na vyšších časových rámcích sice vidíme potenciál pro korekci (BUY), ale převládá riziko dalšího poklesu (SELL)."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na denním a týdenním grafu je RSI překoupené (RSI > 70), týdenní RSI je na 84.25, což naznačuje silný prodejní tlak. Aktuální cena je nad MA na všech časových rámcích kromě měsíčního (kde data chybí), což naznačuje býčí trend, ale s ohledem na překoupenost RSI je pravděpodobná korekce. Proto je SELL pozice riskantnější a HOLD by mohl být strategie pro čekání na potvrzení trendu a reakci na překoupení trhu."
-}

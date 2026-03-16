@@ -1,7 +1,0 @@
-{
-  "symbol": "AU200_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "AU200_ecn je v klesajícím trendu. Denní RSI je 33.79, což naznačuje, že je překoupený. Cena je pod klouzavými průměry na hodinových, 4hodinových, denních a týdenních grafech. Měsíční RSI je 56.45, což ukazuje na neutrální sentiment. Na hodinovém grafu se cena pohybuje pod MA. Posledních několik 1H svíček naznačuje oslabování. Kombinace těchto faktorů naznačuje větší pravděpodobnost pro SELL, s opatrným přístupem a možností držení (HOLD) pro ty, kteří již v pozici jsou, a nižší pravděpodobnost pro BUY, protože trend je klesající."
-}

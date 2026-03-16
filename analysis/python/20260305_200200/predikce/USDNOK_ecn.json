@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "USDNOK is showing mixed signals. Short-term (1h, 4h, day) RSI is neutral to slightly bullish (55-63), and the price is above the hourly and 4-hour MA, suggesting some buying pressure. However, the weekly and monthly RSI are bearish (40, 36), and the price is below the weekly and monthly MA, indicating a longer-term downtrend. Recent price action suggests some consolidation. Therefore, holding a current position or cautious buying is reasonable, while a sell is also possible considering the overall downtrend."
-}

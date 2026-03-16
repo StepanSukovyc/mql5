@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "USOIL_ecn is currently showing extremely overbought conditions across multiple timeframes (hourly, 4-hourly, daily, and weekly) with RSI values consistently above 80, and even exceeding 90 on daily timeframe. This suggests a high probability of a price correction or pullback. Although monthly RSI is at 71 indicating the momentum is still quite bullish, the shorter term signals outweigh this. The most recent daily candle has also shown a sharp upward movement which is probably unsustainable. Given the overbought conditions and possibility of profit-taking, a SELL recommendation carries the highest risk assessment. A cautious approach with HOLD is also reasonable. BUY is less favorable given the risks."
-}

@@ -1,9 +1,9 @@
 {
   "symbol": "DXY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růst cenových trendů je potenciálně zastíren svíčkovými formacemi a nárůstem RSI, ale divergence mezi indikátory a cenou naznačuje nejistotu.",
-  "timestamp": "2026-03-13T19:38:22.197340+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení makroekonomických prognóz a nárůst rizika finanční krachu důvody pro BUY.",
+  "timestamp": "2026-03-16T00:40:17.862608+00:00",
   "model": "deepseek-coder-v2"
 }

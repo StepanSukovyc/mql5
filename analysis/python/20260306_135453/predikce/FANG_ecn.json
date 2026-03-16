@@ -1,7 +1,0 @@
-{
-  "symbol": "FANG_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na hourly a 4h timeframe je RSI lehce v překoupené zóně, ale day a month RSI naznačuje prostor pro růst.  Týdenní RSI je neutrální, ale cena je pod MA.  Cena se nachází nad denním MA, což by mohlo vést k dalšímu růstu.  Krátkodobá volatilita je vysoká. Nejsou jasné formace svíček.  Doporučuje se opatrný přístup s možností BUY, ale s ohledem na možný pullback. HOLD je rozumná strategie s ohledem na rozporuplné signály."
-}

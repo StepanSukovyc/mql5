@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "EURSEK is showing bearish signals across multiple timeframes. Monthly and weekly RSI values are below 35 indicating oversold conditions, but the price remains below monthly and weekly moving averages which are acting as resistance. The daily RSI is near 50 and the price is trading just above its daily MA, suggesting a neutral stance on the daily timeframe. Recent hourly candles indicate a downtrend and the 1h and 4h RSIs are below 50. The current price 10.6492 is trending downward, and a potential further decline is more likely than a significant upward move in the short term. Therefore, SELL has the highest probability."
-}

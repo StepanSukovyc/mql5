@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Měsíční RSI je hluboko v přeprodané zóně (24.53), což naznačuje potenciální obrat. Nicméně, MA na měsíčním grafu stále klesá (5.804421), což ukazuje na silný downtrend. Denní graf ukazuje RSI těsně nad 50 (56.79) a cenu nad MA, ale poslední svíčka je klesající. Krátkodobé timeframe (1h, 4h) ukazují RSI blízko k 50 a cenu pod MA, což signalizuje pokračující tlak na pokles. Proto je nejvhodnější SELL pozice, dokud se sentiment a indikátory neotočí."
-}

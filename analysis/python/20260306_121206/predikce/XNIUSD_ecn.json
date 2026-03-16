@@ -1,7 +1,0 @@
-{
-  "symbol": "XNIUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena se pohybuje pod MA na 1h, 4h i denním grafu, což naznačuje medvědí trend. RSI na těchto timeframech je také pod 50, což potvrzuje klesající momentum. Na týdenním grafu je sice RSI nad 50 a cena nad MA, ale data z vyšších TF nejsou k dispozici. Proto upřednostňuji SELL pozici, ale ponechávám i možnost BUY a HOLD vzhledem k týdennímu trendu a nedostatku dat na nejvyšším TF."
-}

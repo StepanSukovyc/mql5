@@ -1,7 +1,0 @@
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "XALUSD_ecn is currently trading at 3285.4. On the daily timeframe, the RSI is at 61.49, indicating upward momentum, while on the weekly, RSI is 79 suggesting overbought conditions. The price is above its daily and weekly moving averages, which supports a bullish outlook in the medium term. However, recent hourly candles suggest a possible pullback. Given the mixed signals, holding is recommended for some portion. The higher weekly RSI suggests caution, but the daily momentum favours buys."
-}

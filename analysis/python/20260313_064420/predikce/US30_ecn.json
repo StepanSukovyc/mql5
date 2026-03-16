@@ -1,7 +1,0 @@
-{
-  "symbol": "US30_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "US30_ecn is showing bearish signals. RSI values on 1H, 4H and Day charts are below 36, indicating oversold conditions but potential for further downward movement. Price is below MA on 1H, 4H, Day and Week charts, confirming downtrend. The Monthly chart shows RSI above 60 and price above MA, suggesting long-term bullishness but a potential correction is likely. Recent candle data indicates continued selling pressure. The risk/reward favors SELL at the moment, with a HOLD position to re-evaluate after further price action."
-}

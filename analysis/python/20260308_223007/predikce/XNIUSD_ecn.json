@@ -1,7 +1,0 @@
-{
-  "symbol": "XNIUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu se RSI nachází pod 50 (45.88), což naznačuje, že cena může mít stále prostor pro pokles. 1H a 4H RSI jsou neutrální. Týdenní RSI je kolem 60, signalizující uptrend, ale s ohledem na krátkodobější indikátory a candlestick patterny, je opatrnost na místě. Zvláště zvažte vysoké spready."
-}

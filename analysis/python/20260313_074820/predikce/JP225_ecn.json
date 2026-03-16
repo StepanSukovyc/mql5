@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Short-term bearish signals prevail. RSI values on hourly, 4-hour, and daily charts are below 50, indicating downward momentum. The price is currently below the moving averages on the 1h, 4h, and daily timeframes. The monthly and weekly RSI are higher, showing longer term bullish sentiment, but the price has fallen below weekly MA. Recent daily candles show a downward trend. I recommend a sell position."
-}

@@ -1,9 +1,9 @@
 {
   "symbol": "FRA40_ecn",
   "BUY": 25.0,
-  "SELL": 30.0,
-  "HOLD": 45.0,
-  "reasoning": "Předpokládám stabilitu s tržními indikátory ukazujícími mírný růst.",
-  "timestamp": "2026-03-13T20:11:11.211037+00:00",
+  "SELL": 50.0,
+  "HOLD": 25.0,
+  "reasoning": "Zohledněna fundamentální analýza s cílem zvýšit hodnotu portfolia. Svíčkové formace a RSI indikují nejistotu, doporučení držet pozici.",
+  "timestamp": "2026-03-16T01:13:49.054737+00:00",
   "model": "deepseek-coder-v2"
 }

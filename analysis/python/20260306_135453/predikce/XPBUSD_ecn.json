@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena klesá pod MA na všech timeframech, RSI je pod 50 na všech timeframech kromě 1h (kde je těsně), což signalizuje převahu medvědího trendu. Na denním grafu se RSI blíží překoupené zóně. Nicméně, absence dat za aktuální den, vysoký spread a volatilita signalizují nutnost opatrnosti, proto SELL s vyšší pravděpodobností, ale BUY a HOLD jsou relevantní varianty."
-}

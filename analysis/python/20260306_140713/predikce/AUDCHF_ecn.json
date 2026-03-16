@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCHF_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na hodinové a 4-hodinové bázi je RSI pod 50 a cena pod MA, což naznačuje medvědí trend. Denní RSI se pohybuje kolem 50, což signalizuje neutralitu. Týdenní RSI je nad 60, ale s ohledem na krátký lookback period (30 svíček) je nutné přistupovat k tomuto údaji s opatrností. Měsíční RSI je pod 50, což podporuje medvědí výhled. Celkově převládají medvědí signály v kratších timeframech a neutralita/slabé býčí signály v delších timeframech. Zvažuji prodej kvůli krátkodobému klesajícímu trendu, ale s ohledem na možné odrazy dávám i Buy a Hold možnost. Nejnovější hourly candles vykazují medvědí momentum, posilující pozici pro Sell."
-}

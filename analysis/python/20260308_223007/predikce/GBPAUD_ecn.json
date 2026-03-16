@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPAUD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "On the weekly and monthly timeframes, the price is trading below the moving average, indicating a potential downtrend. Weekly RSI is in oversold territory (23.77), suggesting a potential for a bounce. However, the daily RSI is still below 50 (39.39), indicating bearish momentum. Recent price action on the 1H and 4H charts shows some consolidation, thus a HOLD position might be considered for short-term traders."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na týdenním grafu je RSI překoupené (74.63), což naznačuje možnost korekce. Na denním grafu je RSI neutrální (52.42), ale cena se pohybuje kolem MA. Hodinové a čtyřhodinové RSI jsou pod 50, což naznačuje mírný prodejní tlak. Nedávný pokles ceny z 09.03. naznačuje potenciální další pokles. Celkově je více důvodů pro SELL nebo HOLD, než pro BUY."
-}

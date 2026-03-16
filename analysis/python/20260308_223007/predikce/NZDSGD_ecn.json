@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod denním i hodinovým MA, RSI na denní a 4h TF naznačují, že trh není ani překoupený, ani přeprodaný. Měsíční RSI je pod 50, což značí medvědí trend. Týdenní RSI je blízko 50. Proto je SELL považován za nejrizikovější s 40%. BUY a HOLD jsou rovnocenné, s rizikem 30% pro oba."
-}

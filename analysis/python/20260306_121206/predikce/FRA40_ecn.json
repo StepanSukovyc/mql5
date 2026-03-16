@@ -1,7 +1,0 @@
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "FRA40_ecn is showing bearish signals. RSI is oversold on 4h and approaching oversold on 1h and daily charts, suggesting potential for a bounce, but the overall trend is downwards. The price is below the moving averages on all timeframes except monthly, and the daily MA is significantly higher than the current price, indicating continued downward pressure. Recent hourly candles show indecision, which reduces certainty about a large movement in either direction. High spread is observed in hourly chart which also causes the indecision. Therefore, SELL is more probable, but a bounce due to oversold conditions warrants some consideration of a BUY position or HOLD."
-}

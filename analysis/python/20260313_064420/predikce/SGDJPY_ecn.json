@@ -1,7 +1,0 @@
-{
-  "symbol": "SGDJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "The price is currently at 124.482. On the 4H timeframe, the RSI is at 74.346, indicating overbought conditions, but on the monthly timeframe, RSI is only at 64.103 indicating a lot of potential for the price to go up. The current price is above the daily, weekly, and monthly moving averages, suggesting an upward trend. However, the hourly RSI is around 50, indicating indecision, and the price is below the hourly MA. Recent hourly candles show some choppiness.  Therefore, a HOLD or small BUY with tight stop-loss is more prudent than a SELL.  The high RSI on the 4H timeframe suggests a potential for a pullback (SELL).  A HOLD strategy allows observation of the price action to confirm a trend direction."
-}

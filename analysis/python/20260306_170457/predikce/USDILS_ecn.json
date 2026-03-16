@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na týdenním a měsíčním grafu je RSI hluboko v přeprodané zóně, což naznačuje možnou korekci vzhůru. Nicméně, dlouhodobý klesající trend naznačený klesající MA na vyšších časových rámcích (týdenní a měsíční) a nedávný pokles ceny naznačují převahu prodejců. Na denním a 4H grafu je RSI neutrální a cena se pohybuje kolem MA, což naznačuje nerozhodnost. Krátkodobý nárůst na 1H grafu může být pouze dočasný. S ohledem na tyto faktory je pravděpodobnější další pokles, proto SELL má vyšší procento, následováno HOLD (čekání na potvrzení trendu) a BUY má nejnižší procento."
-}

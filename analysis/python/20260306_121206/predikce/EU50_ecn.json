@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena EU50_ecn je aktuálně 5706.9. RSI indikuje přeprodanost na krátkodobých timeframe (1h, 4h, day), ale na týdenním grafu je RSI neutrální a na měsíčním ukazuje na překoupenost. Cena je pod MA na 1h, 4h, day a week timeframech, ale nad MA na měsíčním timeframe, což indikuje dlouhodobý uptrend, který může být v krátkodobé korekci. Na denním grafu klesající trend, RSI pod 35. SELL je preferovaná varianta, dokud se cena nedostane nad MA na denním grafu. HOLD je vhodný pro ty, kteří mají dlouhodobou pozici a věří v růst. BUY je rizikovější, ale možné při prolomení MA na 1H a 4H."
-}

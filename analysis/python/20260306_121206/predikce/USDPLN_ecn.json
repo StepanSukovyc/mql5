@@ -1,7 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "On the hourly chart, the RSI is showing a value of 57.07, which is neutral and doesn't suggest a clear buying or selling opportunity. The current price is 3.70813, and the moving average is at 3.683215. This suggests the price might be above the average, indicating an uptrend. On the 4H chart, the RSI is 70.15, nearing overbought conditions, but the MA is 3.6868, indicating a recent uptrend. The daily RSI is high at 72.53, and the price is above the MA, which is 3.5904. The weekly RSI is 62.22, and MA is 3.6139, showing a longer-term uptrend. The monthly RSI is at 43.32, and MA is 3.7877, which may indicate an overall downtrend. There is a potential opportunity for buys, but prices seem to be overbought on the daily timeframe. Additionally, considering the limited data, and recent high price, a retracement is possible and hence the risk is present."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCZK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě indikátory ukazují na rostoucí trend (RSI na denní bázi je vysoko a 4H RSI je nad 50), což naznačuje potenciál pro BUY. Nicméně, na měsíční bázi je RSI pod 50 a MA roste, což indikuje potenciální obrat a riziko SELL. Kvůli protichůdným signálům a vysoké volatilitě je HOLD rozumnou strategií pro část portfolia."
-}

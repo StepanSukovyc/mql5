@@ -1,7 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "DXY se konsoliduje kolem 99. Technické indikátory ukazují smíšené signály. Krátkodobě (1h, 4h) RSI naznačuje mírné překoupení. Denní RSI je také poměrně vysoké, ale týdenní RSI je neutrální. Měsíční RSI je pod 50. Cena je pod měsíčním MA (101.2305), ale nad denním a týdenním MA. Poslední 4H svíčka ukazuje na prodejní tlak. Celkově se doporučuje opatrnost. SELL je mírně preferovaný, BUY pouze pokud cena prorazí nad 99.50 s potvrzením."
-}

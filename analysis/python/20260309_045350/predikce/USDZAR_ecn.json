@@ -1,7 +1,0 @@
-{
-  "symbol": "USDZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "RSI na 1H, 4H a denních grafech naznačuje překoupenost, což mírně tlačí k SELL. Nicméně na týdenním grafu je RSI neutrální a na měsíčním dokonce v podprodané oblasti.  Aktuální cena je nad MA na kratších časových rámcích a pod MA na delších, což naznačuje nerozhodnost a silnější fundamentální vliv na pohyb. Proto HOLD je vyvážená strategie, dokud se trh nevyjasní. Poslední denní svíčka je býčí, což indikuje BUY, ale nutné monitorovat a zohlednit zprávy."
-}

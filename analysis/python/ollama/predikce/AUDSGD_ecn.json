@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu ceny a nárust RSI, ale překážka na hodinovém grafu svíčkových formací signalizuje nejistotu.",
-  "timestamp": "2026-03-13T19:19:13.866544+00:00",
+  "reasoning": "Převažují negativní signály z RSI a MA, ale svíčkové formace naznačují silnou oporu na úrovni X.",
+  "timestamp": "2026-03-16T00:21:24.383482+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,7 +1,0 @@
-{
-  "symbol": "XCUUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "XCUUSD_ecn currently shows a downward trend. Hourly and 4-hourly RSI are below 40, indicating oversold conditions, but not strong enough for a BUY signal. The daily RSI is at 45.36, suggesting further downside potential. Price is below daily MA, reinforcing the bearish outlook. Weekly RSI is high at 69.05, but recent price action suggests a correction is underway. Limited monthly data means minimal influence. SELL is favored due to continued bearish momentum. HOLD is considered due to potential for short-term bounces from oversold conditions."
-}

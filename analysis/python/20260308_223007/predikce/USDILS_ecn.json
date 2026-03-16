@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "On the weekly and monthly timeframes, RSI is showing an oversold condition, suggesting a potential for upward correction, but the price remains below the MA, so HOLD has a good amount of certainty. The 1H and 4H timeframes showing some buy pressure. However, on the daily timeframe, the price is consolidating around the MA. Considering this mixed signal, a HOLD strategy is appropriate, a potential SELL signal can be triggered as price remains below MA on daily chart, and RSI not showing extreme oversold condition on shorter timeframes."
-}

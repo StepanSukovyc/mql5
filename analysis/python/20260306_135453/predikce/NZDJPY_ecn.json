@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na kratších časových rámcích (1h, 4h) vidíme RSI pod 40, což naznačuje, že je měnový pár přeprodaný a mohl by dojít k odrazu. Nicméně cena je pod klouzavým průměrem (MA) na všech časových rámcích kromě týdenního a měsíčního, což indikuje downtrend. Na denním grafu je RSI kolem 50, a cena se konsoliduje. Na týdenním grafu je RSI kolem 60. Poslední svíčky na 1H a 4H grafu ukazují na pokračující pokles. Kombinace těchto faktorů naznačuje, že SELL má vyšší pravděpodobnost úspěchu, ale přeprodanost na kratších časových rámcích a potenciál pro korekci ospravedlňují určité procento pro BUY. HOLD reprezentuje neutralní postoj vzhledem k rozporuplným signálům."
-}

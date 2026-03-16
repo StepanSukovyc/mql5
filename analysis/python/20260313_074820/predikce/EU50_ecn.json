@@ -1,9 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě posledních cenových pohybů a hodnot RSI a MA je vidět stoupající tlak na pokles, ale dlouhodobý trend naznačuje stabilitu. Doporučuji držet pozici.",
-  "timestamp": "2026-03-13T07:32:34.416621+00:00",
-  "model": "deepseek-coder-v2"
-}

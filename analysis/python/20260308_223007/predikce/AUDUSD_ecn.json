@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažující pohled je do poklesu ceny v důsledku obecně negativního trhu a slabých svíčkových formací. RSI ukazuje stále silnou poptávku po prodeji, což podporuje myšlenku o nárůstu volatility.",
-  "timestamp": "2026-03-08T22:00:15.425174+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "CADJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "CADJPY is showing mixed signals. RSI on daily and weekly charts is approaching overbought levels, suggesting potential pullback (SELL pressure). However, the price is above the daily/weekly MA, indicating an upward trend (BUY pressure). Hourly and 4H charts show RSI not yet overbought and above MA, supporting potential short-term bullish continuation.  HOLD reflects uncertainty and the need for further confirmation before committing to a definitive direction."
-}

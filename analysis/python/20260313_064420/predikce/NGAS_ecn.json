@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Cena NGAS_ecn se pohybuje v rostoucím trendu na denním a 4H grafu, RSI indikuje mírně překoupené podmínky na 4H grafu, ale ne na denním. MA na denním grafu je pod současnou cenou, což naznačuje potenciální pokračování růstu. Na týdenním grafu je MA nad cenou, což by mohlo značit rezistenci. Měsíční RSI neutrální, cena pod MA. Celkově převažují signály pro nákup, ale týdenní a měsíční grafy ukazují na potenciální rezistenci a nutí nás ke konzervativnějšímu odhadu. HOLD je zde relevantní kvůli protichůdným signálům z různých časových rámců a nutnosti sledovat další vývoj."
-}

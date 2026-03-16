@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCZK_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "USDCZK is showing mixed signals. Short term (1h, 4h, day) RSI is trending upwards indicating buying pressure, but monthly RSI is low, suggesting potential for long term upside. Recent daily candles show some recovery after dips. However, the MA values across different timeframes suggest a range-bound market and not a clear trend. I suggest waiting for confirmation of trend continuation, consolidation or reversal."
-}

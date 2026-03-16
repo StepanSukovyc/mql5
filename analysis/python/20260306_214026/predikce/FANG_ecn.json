@@ -1,7 +1,0 @@
-{
-  "symbol": "FANG_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Current price is above the daily and 4H MA, suggesting bullish momentum, but below the weekly MA. RSI on 1H and 4H are nearing overbought conditions. Monthly RSI is relatively high. The recent price action shows some choppy behavior. Therefore, HOLD is reasonable with a slight bullish bias (BUY) and risk of a pullback (SELL)."
-}

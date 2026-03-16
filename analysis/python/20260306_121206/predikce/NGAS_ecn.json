@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 35,
-  "SELL": 40,
-  "HOLD": 25,
-  "reasoning": "NGAS_ecn currently trades at 3.071.  Hourly RSI (63.96) suggests overbought conditions, potentially signaling a short-term pullback. Daily RSI (44.28) is neutral, while weekly RSI (46.88) indicates slight downward momentum. The price is currently above the hourly and daily moving averages (2.9764, 2.9514), but below the weekly and monthly moving averages (3.734, 3.405).  Recent price action shows volatility and indecision. Overall, SELL is favored due to the price approaching resistance and the higher timeframe MA. BUY has limited evidence, HOLD is a safety measure based on possible market reversal."
-}

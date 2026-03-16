@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPSGD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "GBPSGD is showing mixed signals. Short-term (1H, 4H) RSI indicates slightly overbought conditions, while the daily RSI is neutral and weekly/monthly RSI leans towards oversold, suggesting potential for a bounce. The price is currently above the 1H and 4H MA, but below the daily, weekly and monthly MA. Recent hourly candles show some volatility. Overall, a HOLD position is warranted with a slight bias toward BUY due to the possibility of a short-term upward move, but caution is advised given longer-term bearish signals."
-}

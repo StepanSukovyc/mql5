@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPAUD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "On the hourly chart, the RSI is overbought, suggesting a potential pullback. The 4-hour RSI is also relatively high. Daily RSI is showing upward momentum. Weekly and monthly RSI are in neutral territory. The price is currently below the daily and monthly moving averages, suggesting possible resistance ahead. Recent hourly candles indicate a strong upward move, but this may be short-lived given the overbought conditions on the hourly chart and the proximity to resistance levels. Considering all these factors, holding or making small buys with tight stop-loss orders seems reasonable."
-}

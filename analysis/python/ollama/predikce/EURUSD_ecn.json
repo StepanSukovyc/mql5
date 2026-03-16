@@ -1,9 +1,9 @@
 {
   "symbol": "EURUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět, že cena se nachází v oblasti pod svým kratším MA, což naznačuje pokles. Nicméně, fundamentální analýza ukazuje stabilitu s růstem trhu a investicemi do zlateminingu.",
-  "timestamp": "2026-03-13T20:05:59.997414+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení makroekonomických prognóz způsobilo pokles RSI a MA, ale fundamentální analýza ukazuje stabilitu s poměrně silnou měnovou politikou ECB.",
+  "timestamp": "2026-03-16T01:08:38.366843+00:00",
   "model": "deepseek-coder-v2"
 }

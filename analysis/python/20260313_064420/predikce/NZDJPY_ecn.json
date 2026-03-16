@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "NZDJPY is showing bearish signals. The price is below the moving averages on the 1h, 4h and Daily charts, indicating a downtrend. The 1h RSI is heavily oversold at 24.58, but this could also indicate strong bearish momentum, not necessarily a buy signal, although there may be a short-term bounce. Daily RSI is 45.05 which doesn't signal a reversal. Weekly and Monthly RSI values of 61.44 and 52.96 respectively do suggest a general bullishness for the long term. However, recent price action, and particularly the close on the 12th March indicates continued selling pressure. The last day candle on the daily chart shows a large price decrease. Taking everything into account, I would suggest a short-term sell with risk of minor bounce. "
-}

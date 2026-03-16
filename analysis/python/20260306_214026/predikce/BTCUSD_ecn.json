@@ -1,7 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě SELL kvůli klesajícímu trendu na 1h, 4h a denním grafu, potvrzenému RSI a překřížením ceny pod MA. HOLD zvažován kvůli potenciálu odrazu na denním grafu. Dlouhodobější výhled zůstává nejistý, proto BUY alokace je nízká."
-}

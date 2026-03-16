@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě převládá prodejní tlak. 1h RSI je pod 35, což naznačuje přeprodanost, ale i tak cena klesá. Denní i týdenní RSI jsou pod 40, což potvrzuje klesající trend. Měsíční timeframe také ukazuje na klesající trend. MA na delších timeframech jsou nad aktuální cenou, což naznačuje rezistenci. Poslední 1h svíčky potvrzují pokračující prodejní tlak. Proto preferuji SELL."
-}

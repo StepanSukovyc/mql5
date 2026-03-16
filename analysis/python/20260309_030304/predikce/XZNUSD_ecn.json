@@ -1,7 +1,0 @@
-{
-  "symbol": "XZNUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "XZNUSD is showing mixed signals. The 1H and 4H RSI are around 50, suggesting neutrality. However, the Daily RSI is below 50 and Daily MA is above current price, indicating potential selling pressure. Weekly RSI is high. The recent price action on the daily chart looks like consolidation but it's more likely a correction from the previous move up. Limited monthly data makes long-term assessment difficult. Given the short-term downside pressure, a 'SELL' position appears to carry less risk than 'BUY', and 'HOLD' is appropriate until further confirmation."
-}

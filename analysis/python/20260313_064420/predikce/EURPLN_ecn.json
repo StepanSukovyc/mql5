@@ -1,7 +1,0 @@
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "EURPLN se pohybuje v rostoucím trendu, což naznačuje potenciál pro BUY pozice. Denní a týdenní RSI indikátory jsou v rostoucí tendenci, ale ještě ne v překoupené oblasti (61.31 a 64.26), což naznačuje prostor pro další růst. Nicméně hodinový RSI je na hodnotě 66.28, tedy blízko překoupené oblasti, což naznačuje možnou korekci.  Na denním grafu je cena nad MA (4.27041 > 4.235113) a na týdenním (4.27041 > 4.224019), což posiluje býčí sentiment. Na měsíčním grafu je RSI 48.39, což je neutrální. Z tohoto důvodu doporučuji BUY s opatrností. Korekce se může projevit v nejbližších hodinách. Záleží na osobní averzi k riziku, HOLD je tedy rozumnou alternativou, která minimalizuje ztráty."
-}

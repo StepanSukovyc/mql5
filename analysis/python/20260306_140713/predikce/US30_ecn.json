@@ -1,7 +1,0 @@
-{
-  "symbol": "US30_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Na 1h, 4h a denním timeframe je RSI pod 32, což indikuje překoupenost trhu. Cena je pod klouzavým průměrem na všech timeframe kromě měsíčního. Na týdenním timeframe RSI je 48, což je neutrální, ale cena je pod klouzavým průměrem. Měsíční RSI je 66, což je relativně vysoko, ale ne překoupené. Na základě celkového kontextu a aktuální ceny 47281.89 je větší pravděpodobnost poklesu ceny než růstu, proto SELL má největší procentuální hodnocení."
-}

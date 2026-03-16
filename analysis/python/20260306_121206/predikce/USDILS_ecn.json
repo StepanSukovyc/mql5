@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním a týdenním grafu je RSI hluboko v přeprodané zóně, ale MA stále roste, naznačuje tak downtrend. Denní a 4H grafy ukazují mírný růst RSI, ale cena je blízko MA. 1H RSI je neutrální, ale cena klesá pod MA. Celkově převládá downtrend, avšak přeprodanost na vyšších časových rámcích může vést ke korekci, takže HOLD je dobrá pozice."
-}

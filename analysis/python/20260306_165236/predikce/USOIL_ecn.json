@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 70,
-  "SELL": 10,
-  "HOLD": 20,
-  "reasoning": "USOIL_ecn vykazuje silný uptrend. RSI je překoupené na nižších timeframech (1h, 4h, day, week), což naznačuje možnost krátkodobé korekce, ale silný impuls z posledního dne naznačuje pokračování růstu. Měsíční RSI je na 61.7, což dává prostor pro další růst. MA na všech timeframech je pod současnou cenou, což podporuje býčí trend. Kombinace těchto faktorů naznačuje, že 'BUY' má největší pravděpodobnost úspěchu, ale překoupené podmínky vyžadují opatrnost a možné pullbacky. Proto je 'HOLD' zastoupen. 'SELL' je riskantní kvůli celkovému rostoucímu trendu."
-}

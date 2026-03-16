@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Short-term indicators (1h, 4h RSI) suggest oversold conditions, but the price is below moving averages on all timeframes except monthly, and daily/weekly RSI are still below 50. Last daily candle is bearish. Momentum is currently downwards."
-}

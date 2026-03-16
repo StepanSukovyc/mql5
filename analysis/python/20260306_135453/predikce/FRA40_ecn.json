@@ -1,7 +1,0 @@
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "FRA40_ecn is showing bearish signals across multiple timeframes. Hourly and 4-hour RSIs are deeply oversold, suggesting potential for a short-term bounce. However, daily RSI is also below 35 and continues to drop, and the price is below its moving averages on all timeframes, indicating significant downward momentum. The weekly chart shows a sharp drop this week, further strengthening the bearish outlook. A 'SELL' position is favored. Given heavily oversold conditions on shorter timeframes, a 'HOLD' position might be appropriate for extremely risk-averse individuals. A 'BUY' position is considered riskier given the overall downward trend, but should be considered with tight stop-loss."
-}

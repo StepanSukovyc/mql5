@@ -1,7 +1,0 @@
-{
-  "symbol": "EURHUF_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Cena je nad MA na 1h, 4h a denním grafu, což naznačuje uptrend. RSI na 1h a denním grafu je v překoupené zóně, což by mohlo signalizovat potenciální korekci. Na týdenním grafu je RSI neutrální. Měsíční MA je nad aktuální cenou. Kombinace faktorů naznačuje, že nákup má potenciál, ale je nutné brát v úvahu překoupenost na kratších timeframech. Sell se doporučuje s ohledem na překoupenost, riziko korekce a měsíční MA nad cenou. Hold je opatrný přístup, který vyčkává na potvrzení trendu."
-}

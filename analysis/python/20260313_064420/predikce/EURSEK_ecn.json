@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 60,
-  "SELL": 20,
-  "HOLD": 20,
-  "reasoning": "Na hodinovém grafu je RSI silně překoupené (83.78), což naznačuje potenciální korekci. Nicméně, na denním grafu RSI je 64.11, což je neutrální až býčí. Cena je nad MA na 1h, 4h i denním grafu. Na týdenním grafu cena mírně pod MA. Celkově převládá býčí momentum, ale s opatrností vzhledem k překoupenosti na kratším timeframe. Měsíční RSI na hodnotě 35 signalizuje potenciál pro růst z dlouhodobého hlediska. Silný růst během posledního dne naznačuje silný nákupní tlak."
-}

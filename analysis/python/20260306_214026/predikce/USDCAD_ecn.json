@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "Cena se nachází pod 1h, 4h, denním a týdenním MA, což naznačuje klesající trend. RSI na 1h a 4h je pod 40, což značí, že trh je blízko přeprodané oblasti, ale ještě ne v ní, tudíž je prostor pro další pokles. Denní RSI je také pod 50. Poslední svíčky na 1h timeframu jsou silně medvědí. Měsíční timeframe naznačuje downtrend (cena pod MA). Celkově převládá tlak na SELL. HOLD je vhodný pro ty, kteří již pozici mají a vyčkávají na další potvrzení trendu."
-}

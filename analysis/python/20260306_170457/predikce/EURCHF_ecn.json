@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 20,
-  "SELL": 65,
-  "HOLD": 15,
-  "reasoning": "EURCHF is showing oversold conditions across multiple timeframes (RSI under 30 on 1H, 4H, Daily, Weekly, and Monthly). However, the price is below the moving average on all timeframes, suggesting a strong downtrend. Recent hourly candles confirm the downtrend with a strong bearish move. The risk is high for a buy due to the prevailing downtrend; therefore, Sell is more probable.  A Hold stance is considered due to oversold conditions that could lead to a possible temporary correction, but a full bullish reversal is unlikely based on the data."
-}

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme stabilitu s tendencí k růstu. Nicméně, svíčková formační analýza naznačuje nejistotu s vysokými cenami v posledních měsících.",
-  "timestamp": "2026-03-13T19:45:10.258473+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme náznak zeslabování trendu k poklesu, ale ještě není jasné, zda dojde k obrácení nebo jenom pokračování současného pohybu. Současným cenovým pohybem je spousta nepřesností v predikci.",
+  "timestamp": "2026-03-16T00:47:26.414359+00:00",
   "model": "deepseek-coder-v2"
 }

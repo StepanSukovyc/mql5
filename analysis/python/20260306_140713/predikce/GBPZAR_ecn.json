@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "GBPZAR is showing mixed signals. Short-term (1h, 4h, day) RSI suggests overbought conditions, favoring a potential pullback (SELL). However, the price is above the MA on all timeframes except monthly, indicating a possible continued uptrend (BUY). The weekly RSI is neutral, and with limited data, HOLD is prudent, balancing bullish and bearish possibilities."
-}

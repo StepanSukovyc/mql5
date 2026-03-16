@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšený obrázek. Krátkodobě (1H) RSI je neutrální, ale cena se pohybuje blízko MA. 4H RSI je mírně býčí, ale denní RSI je pod 50, což naznačuje možný medvědí trend. Týdenní a měsíční MA jsou nad aktuální cenou. Svíčkové formace v 1H timeframe nenaznačují jasný směr. Celkově převládá opatrnost, SELL má mírnou převahu kvůli střednědobému medvědímu sentimentu. HOLD se doporučuje dokud nebudou zřetelnější signály."
-}

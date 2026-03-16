@@ -1,9 +1,0 @@
-{
-  "symbol": "CHFHUF_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě RSI a MA hodnot ukazuje trend směrem nahoru, ale svíčkové formace a cenový pohyb naznačují nejistotu.",
-  "timestamp": "2026-03-13T07:18:49.902002+00:00",
-  "model": "deepseek-coder-v2"
-}

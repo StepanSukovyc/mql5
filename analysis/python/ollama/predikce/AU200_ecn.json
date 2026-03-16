@@ -1,9 +1,9 @@
 {
   "symbol": "AU200_ecn",
-  "BUY": 40.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s tendencí k růstu, ale technické indikátory RSI a MA signalizují přehřátí trhu a následný pokles. Riziko je vyváženo mezi nadějemi na vzestupný trend a skutečností, že trh může už dříve dosáhnout svého vrcholu.",
-  "timestamp": "2026-03-13T19:10:28.233835+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Prognosticated based on fundamental analysis with a slight bullish indication from technical indicators.",
+  "timestamp": "2026-03-16T00:12:59.014346+00:00",
   "model": "deepseek-coder-v2"
 }

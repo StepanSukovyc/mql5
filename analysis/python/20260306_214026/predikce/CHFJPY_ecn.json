@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "CHFJPY is showing signs of overbought conditions on shorter timeframes (1h RSI 72.71). However, the daily and weekly charts also indicate bullish momentum (daily RSI 63.42, weekly RSI 72.79) with the price above the MA across all timeframes, indicating a longer-term uptrend. Recent hourly candles suggest a continuation of the uptrend, but the overbought RSI warrants caution. Therefore, a mixed approach with a slightly higher probability for a 'BUY' position seems reasonable, while monitoring for a potential pullback."
-}

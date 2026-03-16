@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI stále relativně vysoko (58.83), ale cena je nad MA, což naznačuje potenciální uptrend. Na týdenním a denním grafu RSI klesá (43.30 a 45.65) a cena se pohybuje pod MA. 4H a 1H timeframe naznačují mírné momentum, ale bez silného trendu. Protože na větších časových rámcích je cena pod MA a RSI klesá, dáváme přednost SELL pozici. HOLD doporučujeme, pokud investor čeká na jasnější signál. BUY pozice je nejrizikovější, vzhledem k aktuálním ukazatelům."
-}

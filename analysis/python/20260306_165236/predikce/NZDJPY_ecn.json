@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobé signály naznačují potenciál pro pokles. RSI na 1H a 4H je pod 40, což indikuje potenciální překoupenost. Denní RSI je sice kolem 50, ale cena je pod MA na denním grafu. Poslední denní svíčka je medvědí. Týdenní RSI je mírně nad 50, ale měsíční je kolem 50. Cena se nachází pod MA na kratších časových rámcích (1H, 4H, den), což může značit downtrend. Přestože existuje potenciál pro korekci, celkový krátkodobý bias je spíše medvědí. HOLD doporučuji kvůli potenciálnímu obratu trhu a celkově nejisté situaci na trhu."
-}

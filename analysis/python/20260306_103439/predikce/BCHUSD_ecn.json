@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena je pod denním MA, RSI na denním grafu je na 37, což naznačuje, že trh je blízko přeprodané zóny, ale ještě ne. Na týdenním grafu RSI také naznačuje downtrend. Zatímco 1h a 4h grafy ukazují menší odrazy, celkový trend se jeví jako klesající. Doporučuji opatrnost a zvážit SELL pozice s tight stop-loss."
-}

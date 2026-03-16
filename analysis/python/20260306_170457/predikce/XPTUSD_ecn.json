@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena XPTUSD prudce klesla za posledních 30 dní, což naznačuje silný prodejní tlak. RSI na 1h, 4h a denních grafech je pod 50, což naznačuje, že aktivum je potenciálně překoupené. Měsíční graf ale ukazuje překoupenost (RSI 74.73) a MA na týdenním a měsíčním grafu jsou výrazně pod aktuální cenou, což naznačuje dlouhodobý uptrend, ale krátkodobě je pravděpodobnější pokles. Proto je nejvyšší pravděpodobnost SELL, HOLD má střední pravděpodobnost a BUY nejnižší, dokud se situace nestabilizuje."
-}

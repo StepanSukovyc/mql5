@@ -1,9 +1,0 @@
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend cenového grafu směrem nahoru, ale svíčková formační analýza ukazuje na změnu trendu, což doporučuje mírnou pozornost.",
-  "timestamp": "2026-03-13T07:23:22.086586+00:00",
-  "model": "deepseek-coder-v2"
-}

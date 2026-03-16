@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "JP225_ecn is showing mixed signals. Short-term (1H, 4H) RSI is low, suggesting oversold conditions, but the price is below the moving average on these timeframes, indicating potential downward pressure. The daily RSI is below 50 and price is below MA indicating downtrend. Weekly RSI is at 59.47 and above MA hinting at slight bullish sentiment. However, the monthly RSI is at 68.2, which suggests less buying opportunity. With current price below 1H,4H,Daily MAs and descending candles, a SELL position has increased risk adjusted value. HOLD is recommended while monitoring, BUY position bears moderate risk."
-}

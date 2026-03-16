@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "EU50_ecn is showing a strong bearish signal. The current price is significantly below the MA on 1h, 4h, day and week charts, suggesting a downtrend. RSI values are also oversold on multiple timeframes (1h, 4h, day), indicating potential for further price decreases. Monthly RSI is still relatively high, but the recent price action points toward selling pressure. Therefore, sell is the predominant strategy."
-}

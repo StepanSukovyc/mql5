@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "EURSGD se nachází v downtrendu na denním, týdenním i měsíčním grafu, což naznačuje převahu prodejců. RSI na těchto timeframech je pod 50, což potvrzuje klesající momentum. Cena je pod klouzavými průměry na denním a týdenním grafu. Navíc, data z posledních hodin ukazují spíše konsolidaci než výrazný obrat. Měsíční graf má RSI lehce nad 50 a cenu nad MA, ale celkový obrázek signalizuje prodejní tlak. Proto dávám nejvyšší váhu prodeji (SELL), menší pro držení (HOLD) a nejmenší šanci pro nákup (BUY)."
-}

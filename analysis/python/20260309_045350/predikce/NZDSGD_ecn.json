@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Indikátory na kratších timeframech (1h, 4h) naznačují spíše prodejní tlak (RSI pod 50, cena pod MA na 4h), denní RSI je také pod 50 a cena pod MA. Týdenní RSI je nad 50, ale cena je nad MA. Měsíční RSI je nízko (41.19), ale cena je pod MA. Celkově převládá spíše prodejní signál s ohledem na MA a RSI na kratších timeframech a klesající trend denního MA. Pokles v posledních dnech také naznačuje oslabení. BUY je potenciální s ohledem na možný odraz od supportu, ale vyžaduje potvrzení."
-}

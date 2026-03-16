@@ -1,7 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Smíšené signály. Krátkodobě (1h) RSI naznačuje přeprodanost, avšak denní RSI (66) se blíží překoupenosti. Cena je nad denním MA, ale pod měsíčním. Týdenní graf ukazuje uptrend, ale poslední denní svíčka je medvědí. Proto je doporučena opatrnost a sledování vývoje."
-}

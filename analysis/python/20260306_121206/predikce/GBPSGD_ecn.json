@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "GBPSGD se nachází v downtrendu na denním a týdenním grafu, RSI je pod 50 a cena je pod MA na denním grafu. I přes drobné oživení na 1H a 4H grafech, fundamentální analýza a celkový trend naznačují větší pravděpodobnost poklesu. HOLD je opatrná strategie vzhledem ke kolísavosti."
-}

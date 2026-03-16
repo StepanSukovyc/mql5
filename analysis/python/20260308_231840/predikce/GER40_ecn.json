@@ -1,7 +1,0 @@
-{
-  "symbol": "GER40_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "GER40_ecn is showing bearish signals across multiple timeframes. Daily and 4-hour RSIs are in oversold territory but still decreasing, indicating continued downward momentum. The price is below its moving averages on the 1h, 4h, and daily charts, indicating a downtrend. Despite monthly RSI still showing overbought conditions, current price action shows a significant correction. Recent daily candles are bearish. There is some short-term support potential due to the oversold nature, therefore Hold is warranted."
-}

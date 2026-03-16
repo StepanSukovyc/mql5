@@ -1,7 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Dominantní signály pro SELL. Krátkodobé RSI (1h, 4h) silně pod 30 značí překoupenost a naznačují potenciální odraz. Denní RSI klesá (41.58) a cena se pohybuje pod denním MA (10587.22). Týdenní RSI je neutrální (59.79) a cena se pohybuje nad týdenním MA (10032.42). Měsíční RSI (69.23) je blízko překoupené zóny a cena je nad MA (9089.61), ale krátkodobý pokles naznačuje korekci. Vzhledem k prudkému poklesu v posledních hodinách a dnech se upřednostňuje SELL s tím, že je třeba sledovat, zda nedojde k odrazu. HOLD zvažujeme, pokud je trader konzervativní a čeká na jasnější potvrzení trendu."
-}

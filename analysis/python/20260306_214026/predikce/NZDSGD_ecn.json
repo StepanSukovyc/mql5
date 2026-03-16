@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod denním MA a měsíční MA, RSI na denním a 4H timeframe je pod 50, což naznačuje klesající momentum. Na 1H se zdá, že se RSI zvedá, ale celkový trend je stále klesající. Na týdenním timeframe je RSI kolem 50, což naznačuje neutralitu. Na měsíčním timeframe je RSI pod 50 což naznačuje klesající trend.  Podle svíčkových formací nevidím silné signály k BUY, a proto přikláním se k SELL."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje převahu prodejců. RSI na denním grafu je na úrovni 33.36, což signalizuje, že trh je blízko překoupení, ale ještě v něm není. Cena je pod denním MA (1.350891). Na 1h a 4h grafech je RSI blízko 40, což naznačuje slábnoucí momentum. Měsíční RSI je 56.2, což je neutrální. Kombinace těchto faktorů naznačuje, že prodej má mírně vyšší pravděpodobnost než nákup. Doporučuji HOLD a vyčkat na další vývoj."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XNIUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod denním i 4H klouzavým průměrem, RSI na denním grafu je pod 50. Týdenní graf je sice býčí, ale krátkodobé indikátory naznačují spíše korekci. Měsíční data jsou neúplná. Proto SELL má nejvyšší šanci. HOLD vyjadřuje neutralitu a Buy vyjadřuje riziko proti klesajicímu trendu."
-}

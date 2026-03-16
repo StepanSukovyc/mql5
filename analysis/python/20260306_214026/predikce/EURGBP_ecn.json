@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na kratších časových rámcích (1h, 4h) je RSI hluboko v přeprodané zóně, což naznačuje potenciál pro odraz nahoru. Nicméně denní a týdenní klouzavé průměry (MA) jsou stále nad aktuální cenou a RSI na denním grafu je pod 50, což naznačuje pokračující medvědí sentiment. Poslední svíčky na 1h a 4h grafu naznačují pokles ceny. Proto SELL má větší šanci, ale vzhledem k přeprodanosti na kratších timeframes, je třeba zvážit i BUY pozici s opatrností. HOLD je rozumná strategie pro ty, co nejsou rozhodnutí, nebo čekají na další potvrzení."
-}

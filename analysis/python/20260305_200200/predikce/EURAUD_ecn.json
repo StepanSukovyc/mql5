@@ -1,7 +1,0 @@
-{
-  "symbol": "EURAUD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Dlouhodobý trend je klesající (RSI na týdenní a denní bázi je nízké, cena je pod MA na denní, týdenní i měsíční bázi). Hodinový RSI je sice v překoupené zóně, což naznačuje krátkodobou možnost korekce nahoru, ale 4H RSI je neutrální.  Denní svíčky naznačují pokles. Doporučuji SELL s opatrností a sledováním vývoje."
-}

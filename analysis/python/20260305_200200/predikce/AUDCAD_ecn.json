@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "On the 1H and 4H timeframes, the RSI is below 35, indicating an oversold condition. Although it could rebound at any time, the price is below the MA for all timeframes, except the WEEK and MONTH. The WEEK RSI sits at 65 and the MONTH sits at 64, showing overbought conditions and expecting the pair to retrace down. With the price currently being 0.95563, the RSI on the hourly timeframe is around 25, indicating an oversold condition and expecting the pair to rebound slightly for a small timeframe, but in the long term, this pair looks to continue falling. A short-term buy would be extremely risky, but a short-term sell appears to be the play. I will be holding if my analysis is wrong."
-}

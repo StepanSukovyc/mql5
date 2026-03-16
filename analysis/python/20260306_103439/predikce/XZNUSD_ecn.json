@@ -1,7 +1,0 @@
-{
-  "symbol": "XZNUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena klesá, RSI na denním a 4H grafu je pod 50, což naznačuje klesající momentum. MA na 1H, 4H a denním grafu jsou nad aktuální cenou, což funguje jako rezistence. Týdenní RSI je sice nad 60, ale klesající trend na nižších timeframech naznačuje větší pravděpodobnost dalšího poklesu. Proto SELL má nejvyšší procentuální zastoupení, BUY je rizikové a HOLD je neutrální strategie."
-}

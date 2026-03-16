@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Technická analýza naznačuje převahu prodejců. RSI na 1H i 4H timeframe je pod 40 a blíží se přeprodané zóně, ale celkově klesající trend a klesající MA indikují spíše další pokles. Denní RSI je také pod 40 a cena je pod MA. Týdenní a měsíční RSI jsou v neutrální zóně, ale MA na těchto timeframes jsou výrazně nad současnou cenou, což naznačuje dlouhodobý down trend. 1H RSI je extrémně nízko (20.97) což značí možnou korekci vzhůru, ale celkový trend je spíše prodejní. Proto navrhuji držet menší podíl v hold a malou spekulativní pozici na buy z důvodu silného přeprodání na 1H."
-}

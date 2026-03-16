@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Krátkodobý prodejní tlak: RSI na 1H je hluboce v přeprodané zóně (27.69) a na 4H se blíží (40.52). Cena je pod MA na 1H a 4H, což naznačuje pokračující klesající trend. Měsíční RSI je také velmi nízké (24.97), indikující dlouhodobý klesající trend. Nicméně denní RSI je 53.06, což naznačuje možnou konsolidaci nebo mírný růst. HOLD je doporučen kvůli rozporům v datech a nutnosti dalšího potvrzení trendu."
-}

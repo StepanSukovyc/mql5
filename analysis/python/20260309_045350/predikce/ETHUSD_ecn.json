@@ -1,9 +1,0 @@
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na svíčkové grafy a RSI hodnoty je vidět tendence k poklesu. Nicméně, MA ukazuje stabilitu, což dovoluje přijmout HOLD pozici s malou expozicí.",
-  "timestamp": "2026-03-09T04:14:48.002965+00:00",
-  "model": "deepseek-coder-v2"
-}

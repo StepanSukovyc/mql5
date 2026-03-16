@@ -1,9 +1,0 @@
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend cenového grafu směrem dolů, ale svíčková formační analýza ukazuje silnou podporu blízko aktuálním cenám. Z tohoto důvodu doporučuji držet pozici s menší expozicí na pokles.",
-  "timestamp": "2026-03-13T07:30:15.699690+00:00",
-  "model": "deepseek-coder-v2"
-}

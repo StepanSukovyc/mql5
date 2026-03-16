@@ -1,7 +1,0 @@
-{
-  "symbol": "US500_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Aktuální cena je pod klouzavými průměry na kratších timeframech (1h, 4h, den), což signalizuje potenciální downtrend. RSI na 1h je v přeprodané zóně (24.48), ale na měsíčním timeframe je RSI v překoupené zóně (72.42), což naznačuje potenciální korekci. Denní graf vykazuje klesající trend a poslední den uzavřel nízko. Měsíční graf sice ukazuje dlouhodobý uptrend, ale současný pokles naznačuje krátkodobý tlak na SELL. Svíčkové formace nejsou specifikovány, proto se spoléhám primárně na indikátory. HOLD doporučuji pro případný odraz, BUY považuji za vysoce rizikový."
-}

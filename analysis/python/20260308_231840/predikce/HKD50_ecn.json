@@ -1,7 +1,0 @@
-{
-  "symbol": "HKD50_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měnový pár HKD50_ecn vykazuje smíšené signály. Na měsíční bázi je RSI relativně vysoké (64.84), což naznačuje potenciál pro korekci. Denní RSI (36.18) je blízko přeprodané zóně, ale cena je pod denním MA, což naznačuje downtrend. 1h a 4h RSI jsou neutrální. Vzhledem k dominanci downtrendu a blížící se korekci z měsíčního pohledu, mírně preferuji SELL. HOLD se doporučuje pro ty, kteří již mají pozici a chtějí vyčkat další vývoj."
-}

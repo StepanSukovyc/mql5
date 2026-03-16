@@ -1,7 +1,0 @@
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Analýza XAGUSD_ecn ukazuje smíšené signály. Měsíční RSI je v překoupené zóně (81.05), což naznačuje potenciální korekci. Denní a 4H grafy ukazují klesající trend s RSI pod 50. 1H RSI je 41.19, blíží se přeprodané zóně, což by mohlo vést k krátkodobému odrazu. Cena je pod klouzavými průměry na 1H, 4H a denním grafu, což naznačuje prodejní tlak. Vzhledem k těmto faktorům upřednostňuji SELL s menší váhou na BUY kvůli potenciálnímu krátkodobému odrazu. HOLD zahrnuje opatrnost v nejistém prostředí."
-}

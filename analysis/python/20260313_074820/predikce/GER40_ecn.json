@@ -1,7 +1,0 @@
-{
-  "symbol": "GER40_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na denním grafu je RSI hluboko v přeprodané oblasti (30.77), což naznačuje možný odraz. Nicméně, cena je pod klouzavým průměrem (MA) na denním, 4H i 1H grafu. Měsíční RSI je sice relativně vysoko (66.32), ale MA je hluboko pod aktuální cenou, což značí, že se stále jedná o býčí trh. Vzhledem k tomu, že se data omezují na 30 svíček, je třeba brát v úvahu, že se jedná o krátkodobou analýzu. S ohledem na downtrend a RSI pod 50 na krátkodobém grafu, je pravděpodobné, že bude trvat korekce, proto je SELL pravděpodobnější."
-}

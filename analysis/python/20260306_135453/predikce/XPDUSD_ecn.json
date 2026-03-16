@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena XPDUSD_ecn je v downtrendu. RSI na 1H, 4H a denních grafech je pod 40, což naznačuje, že je trh přeprodaný, ale stále s prostorem pro další pokles. Měsíční RSI je sice vysoké (67), ale klesá, což ukazuje na oslabování dlouhodobého uptrendu. Cena je pod MA na 1H, 4H a denních grafech. Na týdenním grafu se cena drží nad MA, ale momentum je slabé. Vzhledem k dominujícímu downtrendu a indikátorům, které potvrzují oslabující momentum, převládá SELL signal. BUY je riskantní kvůli downtrendu, ale možný v krátkodobém horizontu při překoupenosti na nižších TF. HOLD dává smysl pro investory s dlouhodobým výhledem, kteří věří v budoucí růst palladia."
-}

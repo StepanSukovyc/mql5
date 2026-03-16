@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažující trend je směrem dolů s nárůstem volatility. RSI ukazuje přeprodanost a MA indikuje slabší podporu.",
-  "timestamp": "2026-03-13T19:26:10.410930+00:00",
+  "reasoning": "Předběžné zhoršení trendu a nárůst volatility sugerují pokračující tendenci klesajícího trhu.",
+  "timestamp": "2026-03-16T00:28:13.835191+00:00",
   "model": "deepseek-coder-v2"
 }

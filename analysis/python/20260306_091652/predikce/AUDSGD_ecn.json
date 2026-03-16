@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě SELL s ohledem na pokles na 1H a 4H timeframe (RSI pod 50, cena pod MA), avšak denní graf naznačuje potenciál růstu (RSI 57.36, cena nad MA). Týdenní RSI je silně překoupené (76.94), což naznačuje možnost korekce. HOLD zvažuji s ohledem na nejistotu a rozporuplné signály z různých časových rámců. Celkově doporučuji opatrnost a sledování dalšího vývoje."
-}

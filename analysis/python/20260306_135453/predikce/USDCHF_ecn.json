@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měsíční RSI je na úrovni 31, což naznačuje, že je trh blízko k přeprodané zóně, ale MA na měsíčním grafu je vysoko nad současnou cenou, což naznačuje dlouhodobý klesající trend. Týdenní RSI je 44, což je neutrální. Denní RSI je kolem 55, také neutrální. Cena se pohybuje kolem denního MA, ale je pod 4h MA, což naznačuje možný odpor. 1h RSI je 57 a cena se pohybuje nad 1h MA, což naznačuje krátkodobý býčí potenciál. S ohledem na protichůdné signály a dominanci klesajícího trendu na vyšších časových rámcích (hlavně měsíční MA), je lepší zaujmout spíše vyčkávací postoj. HOLD je tedy vhodná strategie. SELL má vyšší pravděpodobnost než BUY, kvůli klesajícímu trendu na vyšších časových rámcích. Potřebujeme více konfirmace, než vstoupíme do BUY pozice."
-}

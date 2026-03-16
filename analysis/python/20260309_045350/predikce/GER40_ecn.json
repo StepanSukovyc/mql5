@@ -1,7 +1,0 @@
-{
-  "symbol": "GER40_ecn",
-  "BUY": 15,
-  "SELL": 75,
-  "HOLD": 10,
-  "reasoning": "Index GER40_ecn je silně přeprodaný na kratších časových rámcích (1h, 4h, den) s RSI pod 30. Nicméně, dlouhodobější trend (týdenní a měsíční data) stále indikuje možný klesající trend, i když měsíční RSI je 60. Současná cena je výrazně pod klouzavými průměry na 1h, 4h, denní a týdenní bázi, což naznačuje silný medvědí sentiment. Vzhledem k výraznému poklesu a přeprodanosti na krátkodobých timeframech by mohlo dojít k menší korekci (proto malé procento pro BUY), ale celkové riziko je spíše na straně SELL, dokud se neobjeví silnější signály obratu trendu. HOLD je zde z důvodu čekání na potvrzení obratu nebo pokračování trendu."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Short-term (1h) RSI is oversold (33.12), suggesting potential for a bounce. However, price is below the 1h MA (203.19) indicating downtrend. The 4h RSI is at 50.57 and 4h MA is at 203.17 also indicating a downtrend. Daily RSI is neutral (55.17) but the daily MA (201.50) is below the current price indicating a possible support. Weekly and monthly RSI are overbought, suggesting limited upside and a potential pullback. Considering the mixed signals and price below MAs on shorter timeframes, a sell position is more probable. Due to overbought conditions in longer term a HOLD position might be a safety bet in case it breaks current short term trend."
-}

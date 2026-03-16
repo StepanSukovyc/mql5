@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "XPDUSD_ecn is showing bearish signals. RSI is below 40 on 1H, 4H and Daily timeframes, indicating oversold but still bearish momentum. The price is below the moving averages (MA) on 1H, 4H and Daily charts, signalling downtrend. The Monthly RSI is relatively high, suggesting potential for correction. Recent price action reflects a strong downward trend. The daily chart shows a recent close near the low of the last candle, which reinforces a downward bias. While longer-term monthly MA is positive, short-term trends dominate. Therefore I recommend Sell, with medium confidence."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "FRA40_ecn is currently at 7995.37. The RSI is below 50 on all timeframes except monthly, indicating possible further downward movement. Price is below MA on shorter time frames but above on monthly timeframe. Price is below both daily and weekly MA. Considering the downtrend on shorter timeframes and the recent bearish price action based on candles data, a SELL position carries the highest probability. Considering current MA is below current price on monthly timeframe indicates long term price trend up, so HOLD and BUY carries similar probabilities."
-}

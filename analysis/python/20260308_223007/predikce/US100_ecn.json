@@ -1,7 +1,0 @@
-{
-  "symbol": "US100_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena je pod 1h, 4h, denním i týdenním MA, což indikuje sestupný trend. 1h RSI je pod 36, což naznačuje potenciální překoupenost, ale celkově převládá prodejní tlak. Měsíční RSI je stále relativně vysoké (67.7), ale trend naznačuje pokles, což snižuje jistotu BUY pozice. Důležité je sledovat další vývoj a potenciální support levels."
-}

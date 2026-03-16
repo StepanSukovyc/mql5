@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCZK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "EURCZK is showing mixed signals. Daily RSI is in overbought territory (71.40), suggesting a potential pullback. However, shorter timeframes (1H, 4H) have RSI values which indicate a neutral trending market. The price is currently above the daily MA, suggesting bullish momentum. Monthly RSI below 50 but price is below its MA. Overall market is trending upwards but momentum looks likely to slow down."
-}

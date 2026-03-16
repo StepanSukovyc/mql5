@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové tendence jsou slabší a překonání hlavního odporu je nejasné. Vysoký RSI a MA hodnoty naznačují potenciál pro růst, ale některé svíčkové formace a trend směřující dolů signalizují nejistotu.",
-  "timestamp": "2026-03-09T04:51:20.904301+00:00",
-  "model": "deepseek-coder-v2"
-}

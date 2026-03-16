@@ -1,7 +1,0 @@
-{
-  "symbol": "VIX_ecn",
-  "BUY": 60,
-  "SELL": 15,
-  "HOLD": 25,
-  "reasoning": "VIX roste. RSI je překoupené na krátkodobých timeframe (1h a 4h), ale na denním, týdenním i měsíčním grafu je stále prostor pro růst. MA potvrzují rostoucí trend. Poslední denní svíčka je silná býčí. Preferuji BUY, ale s ohledem na překoupenost na kratších timeframe je nutné být opatrný a nastavit stop-loss."
-}

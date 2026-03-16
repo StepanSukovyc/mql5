@@ -1,7 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Smíšené signály. Dlouhodobý měsíční RSI je nízký (41.78), což naznačuje potenciální prostor pro růst. Denní a 4H RSI jsou v rostoucím trendu, i když denní RSI (69.4) se blíží překoupené zóně. 1H RSI je neutrální. Cena je pod 1H a 4H MA, ale nad denní, týdenní a měsíční MA. Vzhledem k rozporuplným signálům a krátkému období dat je nutná opatrnost. BUY signal prevazuje pro překonání klesající tendence, je nutné sledovat delší time frame pro větší jistotu."
-}

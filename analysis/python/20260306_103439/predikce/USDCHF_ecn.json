@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "The monthly RSI suggests oversold conditions (31.14), but the MA is significantly higher, indicating a longer-term downtrend. The weekly RSI is also below 50 (44.27). While the daily RSI is around 56, suggesting neutral momentum, the price is currently below the daily MA. The 4H RSI is around 60, slightly bullish, but the 1H RSI is neutral at 47.48. Recent 1H price action shows a slight decline. Therefore, SELL is slightly favored due to the overall downtrend, while BUY is considered due to potential oversold bounce. HOLD is a possibility due to the mixed signals."
-}

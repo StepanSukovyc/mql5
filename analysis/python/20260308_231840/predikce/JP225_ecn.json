@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na 1h, 4h a denním grafu, což naznačuje sestupný trend. RSI na 1h a 4h je pod 40, naznačuje, že by se mohlo jednat o překoupený trh a tudíž možnost korekce směrem dolů. Týdenní RSI je kolem 50, takže se dá předpokládat, že cena bude klesat až do dalšího týdne. Data ukazují klesající trend. Proto převládá SELL signál."
-}

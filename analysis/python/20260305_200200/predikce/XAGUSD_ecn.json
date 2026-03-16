@@ -1,7 +1,0 @@
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Technická analýza ukazuje na silný prodejní tlak. RSI na 1H a 4H je v pásmu přeprodanosti (31.53 a 37.67), což sice naznačuje možnost korekce, ale celkový trend, patrný z denního, týdenního a měsíčního grafu (pokles ceny pod MA na denní bázi, pokles RSI z překoupených hodnot na měsíční bázi), naznačuje spíše další pokles. Navíc, cena je výrazně pod MA na 1H, 4H a denním grafu. Proto doporučuji SELL s opatrností (kvůli přeprodanosti), HOLD je relevantní pro ty, co již pozici mají a čekají na lepší podmínky, BUY je aktuálně rizikové."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "GER40_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na denním a 4H grafu je RSI hluboko v přeprodané zóně, což naznačuje možnost korekce směrem nahoru (BUY). Nicméně, cena se nachází pod 1h, 4h, denním a týdenním MA, což signalizuje silný sestupný trend (SELL). Měsíční RSI je relativně vysoko, ale cena je nad měsíčním MA. Celkově převládá medvědí sentiment. HOLD je rozumné pro ty, kteří mají stávající pozice a čekají na další vývoj."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "FANG_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "On the hourly timeframe, the RSI is 42.42 and the price is below the MA (14967.657), suggesting potential for further downward movement. The 4-hour RSI is 53.57, while the price is hovering near the MA (14809.721), showing a neutral trend. Daily timeframe also shows price above moving average, RSI neutral (48.97). Weekly timeframe indicates bearish trend, RSI 45.77, price is well below MA (15582.7235). On the monthly timeframe, RSI is 62.51 and price is above the MA (13941.024), suggesting bullishness on a long term. Recent price action is mixed. Given the conflicting signals, I suggest to lean on SELL, but also HOLD a portion to see which direction it will go."
-}

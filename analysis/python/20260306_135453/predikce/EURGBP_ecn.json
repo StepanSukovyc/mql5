@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "EURGBP is showing bearish signals. RSI is oversold on 4H, indicating potential for a bounce, but downtrend on daily/weekly charts and MA values above current price suggest SELL pressure. Month MA hints long-term upside, but that's too far off. Recent price action is consistently bearish, favoring sell. High spread on 06T00 indicates unstable market."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Krátkodobý býčí sentiment na 1h a 4h timeframech (RSI blízko překoupenosti, cena nad MA), ale dlouhodobý měsíční trend je stále spíše medvědí (RSI pod 40, cena pod MA). Týdenní RSI se odrazil. Doporučuji opatrnost, možná korekce. Zvažte HOLD nebo BUY s tight stop-loss."
-}

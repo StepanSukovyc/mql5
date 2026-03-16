@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Denní a týdenní RSI naznačuje přeprodanost, ale MA na všech časových rámcích (kromě 1h) je nad aktuální cenou, což značí klesající trend. Měsíční RSI je neutrální. Proto mírná převaha pro SELL, vzhledem k silnějšímu klesajícímu trendu. Hodnota 1h RSI se blíží k hranici překoupenosti, což snižuje šanci nákupu a zvyšuje prodeje."
-}

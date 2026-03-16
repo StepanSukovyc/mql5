@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCAD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na denním grafu je RSI velmi nízko (27.55), což naznačuje potenciální překoupenost a možnost odrazu nahoru. Nicméně, cena je pod MA na všech timeframech kromě 1H, což indikuje převahu medvědího trendu. Měsíční RSI je 56.97, což naznačuje neutrální směr. Z těchto dat se zdá, že pozice SELL je o něco pravděpodobnější než BUY, ale vzhledem k potenciální překoupenosti je třeba opatrnosti. Držet (HOLD) pozici se doporučuje, dokud se situace nevyjasní."
-}

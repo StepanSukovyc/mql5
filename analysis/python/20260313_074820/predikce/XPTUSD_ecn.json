@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena se nachází pod klouzavými průměry na kratších časových rámcích (1h, 4h, day), což naznačuje klesající trend. RSI na těchto timeframech je neutrální, ale na měsíčním timeframe se blíží překoupenosti (73.13), což by mohlo vést ke korekci. Vzhledem k nedávnému poklesu ceny a potenciální překoupenosti na vyšších časových rámcích převládá SELL signál, ale nejsem si jistý a ponechávám značný prostor pro HOLD a BUY s ohledem na globální ekonomickou situaci a fakt, že XPT je vzácný kov."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 35,
-  "SELL": 45,
-  "HOLD": 20,
-  "reasoning": "Krátkodobé momentum je sice býčí (RSI na 1h a 4h nad 60), ale na denním grafu je RSI pod 50. MA na týdenním grafu je nad současnou cenou, což naznačuje možný odpor. Nedávný nárůst ceny mohl být příliš rychlý a může dojít ke korekci. Kombinace těchto faktorů zvyšuje pravděpodobnost prodeje (SELL), dokud se situace nestabilizuje (HOLD) nebo se nevyskytne silnější signál pro nákup (BUY)."
-}

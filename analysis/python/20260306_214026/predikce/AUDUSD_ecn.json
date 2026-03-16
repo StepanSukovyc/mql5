@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "AUDUSD is showing mixed signals. Short-term (1H, 4H) RSI is below 50, suggesting potential for further downward movement. The price is below the 4H MA and around the 1H MA, also indicating potential selling pressure. Daily RSI is near 50. Weekly and monthly RSI values are high which might suggest an upward trend but may also be an indicator for overbought territory and a potential trend reversal. Recent hourly candles show a struggle to sustain upward momentum. Given these factors, SELL has a higher probability, followed by HOLD, then BUY."
-}

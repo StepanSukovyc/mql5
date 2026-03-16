@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. RSI na denní a týdenní bázi pod 40 naznačuje potenciál pro přeprodanost, ale cena je pod MA na denním a týdenním timeframe, což signalizuje downtrend. 1h a 4h RSI jsou neutrální a MA jsou blízko aktuální ceně. Vzhledem k nejistotě a protichůdným signálům doporučuji zvážit SELL s ohledem na širší downtrend nebo HOLD pro sledování dalšího vývoje. Nízké skóre BUY je dané tím, že cena se nachází pod MA na delších časových rámcích."
-}

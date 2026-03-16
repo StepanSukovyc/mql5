@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technické indikátory na kratších timeframech (1h, 4h) ukazují překoupenost (RSI nad 70), což naznačuje možnou korekci. Denní RSI je sice v neutrální zóně, ale týdenní a měsíční RSI jsou pod 50, což indikuje dlouhodobější downtrend. Cena je pod měsíčním MA a mírně nad týdenním MA. Poslední denní svíčka je rostoucí, ale s ohledem na překoupenost na kratších timeframech a klesající trend na delších, je SELL opatrnější než BUY. Hold je rozumná strategie, pokud si investor není jistý směrem."
-}

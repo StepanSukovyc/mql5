@@ -1,7 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Cena EURMXN je aktuálně 20.63032. Na hodinovém a 4-hodinovém grafu se RSI nachází v překoupené zóně (65.50 a 64.04). Denní RSI je na 56.51, což značí rostoucí momentum. Týdenní RSI je na 38.00, což naznačuje potenciál k růstu. Měsíční RSI je na 59.82, což je neutrální. Cena je nad MA na hodinovém, 4-hodinovém a denním grafu, ale pod MA na týdenním a měsíčním grafu. Vzhledem k rostoucímu dennímu RSI a ceně nad MA na kratších timeframech je zde potenciál k BUY. Nicméně RSI na kratších timeframech naznačuje potenciální korekci, což vede k rozdělení rizik BUY/SELL/HOLD."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod denním a týdenním MA, RSI na denním a týdenním timeframe naznačuje, že trh je blíže k přeprodanému stavu, ale stále má prostor pro pokles. Na 1h a 4h timeframe je RSI neutrální. Aktuální cena 1950.4 se nachází pod denním MA 1962.8425 a týdenním MA 1998.503, což naznačuje potenciální medvědí trend. Poslední denní svíčka je blízko minimu. Vzhledem k těmto faktorům se zdá, že SELL má mírně vyšší pravděpodobnost, ale vzhledem k neutrálnímu sentimentu na nižších timeframe a potenciálnímu obratu se doporučuje opatrnost a sledování dalšího vývoje."
-}

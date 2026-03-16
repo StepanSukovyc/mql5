@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI v překoupené zóně (75.32), což naznačuje potenciální korekci. Denní a 4H RSI jsou v neutrálních hodnotách, ale ukazují mírný klesající trend. Cena se pohybuje pod klouzavým průměrem na 1H i 4H grafu, což indikuje krátkodobý klesající tlak. I přes silný uptrend na týdenním grafu a MA nad cenou, klesající momentum na nižších časových rámcích a překoupenost na měsíční bázi vede k vyššímu riziku SELL pozic."
-}

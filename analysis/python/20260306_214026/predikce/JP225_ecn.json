@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Short-term bearish trend based on 1H and 4H RSI below 40 and price below MA on those timeframes. Daily RSI is also trending downwards, indicating further potential declines. While longer-term (weekly, monthly) trends are still bullish (RSI above 50, price above MA), recent price action suggests a correction is underway. High spread is also a factor."
-}

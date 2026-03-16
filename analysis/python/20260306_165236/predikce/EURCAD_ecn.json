@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCAD_ecn",
-  "BUY": 15,
-  "SELL": 70,
-  "HOLD": 15,
-  "reasoning": "Cena EURCAD je aktuálně 1.57883. Na denním a 4H grafu je RSI hluboko v přeprodané zóně (RSI 16.32 a 27.99), což naznačuje potenciální tlak na růst. Nicméně, cena je pod klouzavými průměry na všech časových rámcích (1H, 4H, den, týden), s výjimkou měsíčního, kde je cena lehce nad MA. Dlouhodobější trend je klesající. Proto upřednostňuji SELL. Měsíční RSI na 58.54 je relativně neutrální, což omezuje BUY a HOLD. Poslední svíčky na 1H a 4H naznačují pokračující pokles."
-}

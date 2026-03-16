@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 55,
-  "SELL": 25,
-  "HOLD": 20,
-  "reasoning": "Na kratších časových rámcích (1h, 4h, den) se RSI pohybuje v překoupené zóně (nad 60), což naznačuje potenciál pro korekci směrem dolů. Nicméně, cena je nad MA na většině timeframes, což značí pokračující uptrend, i když oslabující. Týdenní a měsíční RSI jsou neutrální, ale cena je pod MA na těchto timeframech, naznačuje to potenciální střednědobou konsolidaci. Proto se mírně přikláním k BUY vzhledem k aktuálnímu uptrendu a nedávnému proražení, ale se zvýšenou opatrností vzhledem k překoupenosti a možným korekcím."
-}

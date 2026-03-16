@@ -1,7 +1,0 @@
-{
-  "symbol": "NOKSEK_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "Na denním a týdenním grafu je RSI v překoupené zóně, což naznačuje potenciální korekci. Na druhou stranu hodinový a 4-hodinový graf RSI jsou neutrální. MA na všech časových rámcích (kromě měsíčního) jsou pod aktuální cenou, což indikuje býčí trend. Nicméně množství dat je poměrně omezené (pouze 30 svíček pro denní a týdenní grafy), což snižuje jistotu závěrů. Měsíční graf naznačuje konsolidaci. S ohledem na protichůdné signály je vhodné opatrné BUY s možností HOLD."
-}

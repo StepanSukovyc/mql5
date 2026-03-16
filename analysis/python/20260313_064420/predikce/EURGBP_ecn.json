@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena je pod MA na 4H, Day i Week timeframe, což indikuje downtrend. RSI na 4H je 31, což je blízko k oversold, ale na denním a týdenním grafu je prostor pro další pokles.  Měsíční graf je neutrální. Poslední svíčky na 1H naznačují mírnou konsolidaci, ale celkový tlak je spíše dolů. Proto preferuji SELL před BUY, HOLD je opatrná volba."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Na základě analýzy více časových rámců a indikátorů se jeví jako pravděpodobnější SELL pozice. Krátkodobé RSI indikátory (1h, 4h) ukazují na překoupenost. Denní RSI se pohybuje pod 50, naznačující medvědí momentum. Cena je pod denním MA, ale nad týdenním a měsíčním MA, což značí smíšený signál na střednědobém horizontu. Dlouhodobější indikátory (týdenní, měsíční RSI) jsou v zóně nákupu, ale současná cena se nachází v downtrendu.  Nedávné svíčky na 1h a 4h timeframe potvrzují downtrend. Proto je SELL pozice rizikově hodnocena výše než BUY nebo HOLD. BUY má nízkou pravděpodobnost z důvodu překoupenosti a downtrendu. HOLD je z důvodu nejasnosti na střednědobém horizontu. "
-}

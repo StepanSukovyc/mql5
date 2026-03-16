@@ -1,7 +1,0 @@
-{
-  "symbol": "XZNUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena je pod denním i 4H MA, 1H RSI je pod 50. Týdenní RSI je v překoupené zóně, což naznačuje potenciální korekci. Kombinace těchto faktorů naznačuje spíše SELL pozici. Historická data naznačují celkově rostoucí trend, proto je zde Buy opatrný. HOLD se drží z důvodu menší nejistoty celkového směru."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. RSI na denním a hodinovém grafu naznačuje, že ETHUSD může být překoupený, zatímco 4H timeframe je neutrální. MA na všech timeframech s výjimkou 4h je vyšší než současná cena, což naznačuje sestupný trend. Na týdenním grafu je RSI v oblasti přeprodání, což může signalizovat potenciální odraz, ale dlouhodobý trend zůstává klesající (MA na týdenní a měsíční bázi jsou vysoko nad cenou). Proto doporučuji opatrnost. Mírně vyšší pravděpodobnost pro SELL kvůli negativnímu trendu a RSI hodnotám."
-}

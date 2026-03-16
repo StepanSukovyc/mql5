@@ -1,7 +1,0 @@
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Hourly RSI is overbought (78.12), suggesting a potential pullback. However, daily and 4-hour RSIs are neutral (57.98 and 60.76 respectively), indicating continued momentum. Weekly and Monthly RSIs are around 43, indicating it is neither overbought or oversold on the longer trend. Price is above the daily MA, suggesting a possible uptrend, however below weekly and monthly MAs. Recent hourly candles showing a consolidation. Recommendation is a cautiously optimistic BUY due to the potential for continued short term upside, counterbalanced by overbought short-term conditions and resistance at longer timeframes."
-}

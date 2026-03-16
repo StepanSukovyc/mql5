@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "NZDJPY is currently at 92.59. The 1h RSI is oversold at 21.58 but the price is below all MAs and trending down. Daily RSI at 44.87 also suggests more downside. Recent price action on the daily chart shows a significant drop, indicating bearish momentum. The week RSI is 61.29 and month RSI is 52.89, but the current price is much lower than the weekly MA, suggesting a continuation of the recent bearish trend. Current sentiment is towards SELL."
-}

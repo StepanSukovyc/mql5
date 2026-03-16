@@ -1,7 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Short-term (1h) RSI is approaching overbought territory, while the price is below the 1h and day MA, suggesting potential short-term resistance. 4h RSI is neutral. Longer-term (week, month) indicators show an upward trend with RSI in neutral territory. Current price is near the 4h MA, acting as a pivot. The conflicting signals indicate a Hold position with a slight bias toward Sell due to the short term indicators and recent price action."
-}

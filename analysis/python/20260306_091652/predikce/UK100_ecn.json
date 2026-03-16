@@ -1,7 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena UK100 prudce klesá. RSI na 1H a 4H timeframe je hluboko v přeprodané zóně (pod 30), což naznačuje možný dočasný odraz. Denní RSI je 44.96, což je pod 50, což indikuje, že trend má stále prostor k poklesu. Cena je pod denním MA, což potvrzuje downtrend. Na týdenním a měsíčním grafu je RSI stále poměrně vysoko (nad 60 a 70), ale týdenní se od vrcholu otáčí. Celkově trh vykazuje silný klesající momentum. Z toho důvodu je short pozice více pravděpodobná než long. Hold pozice má rozumný rizikový profil, protože čeká, až se situace vyjasní."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "US100_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena je výrazně pod MA na všech timeframech kromě měsíčního, RSI je přeprodané na 1h a 4h, naznačuje potenciální korekci, ale celkový trend se zdá být klesající. Sell má největší váhu vzhledem k downtrendu. Hold zvažuje možnost odrazu po propadu."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Technická analýza ukazuje na převahu medvědího trendu. RSI na 1H a Weekly timeframe je pod 30, což signalizuje překoupenost, ale MA na všech timeframech kromě 1H a Daily jsou nad současnou cenou, což značí silný odpor. Poslední denní svíčka je bearish. Proto je nejvyšší pravděpodobnost SELL, následuje HOLD a nakonec BUY."
-}

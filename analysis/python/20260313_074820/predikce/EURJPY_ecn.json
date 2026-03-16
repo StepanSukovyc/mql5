@@ -1,7 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "EURJPY is currently showing mixed signals. On the monthly timeframe, the RSI is at 61.49, indicating upward momentum, and the price is well above its MA. However, on the daily and 1h timeframes, the RSI is below 50, and price is trending below MA indicating potential for further short-term downside. Given conflicting signals across timeframes, a 'HOLD' position is safest until the short-term downtrend can be confirmed or reversed. Recent hourly candles show consolidation, indicating indecision."
-}

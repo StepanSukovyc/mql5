@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCHF_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Měsíční RSI je hluboko v přeprodané zóně (28.34), což naznačuje potenciální obrat, ale dlouhodobý MA (0.488247) je daleko nad aktuální cenou (0.45905), což naznačuje silný downtrend. Denní a 4H RSI jsou neutrální, ale cena je pod denním a 4H MA.  Poslední hodinové svíčky jsou medvědí a RSI (1h) je 35. Z tohoto důvodu je SELL nejpravděpodobnější scénář, HOLD dává smysl pro ty, kteří již mají pozici a čekají na další signály a BUY pozice je riskantnější."
-}

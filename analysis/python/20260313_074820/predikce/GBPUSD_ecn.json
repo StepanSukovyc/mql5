@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "GBPUSD is currently at 1.32823. The daily RSI is at 30.88, indicating oversold conditions, but the price is still declining. The 1h and 4h RSI are also below 50, suggesting continued downward momentum. The price is below the moving averages on all timeframes except monthly, indicating a bearish trend. Recent hourly candles confirm the downtrend. Although the pair might be oversold in the short-term, the prevailing trend suggests further selling pressure. Therefore SELL is favored over BUY, but HOLD is recommended for risk adverse investors."
-}

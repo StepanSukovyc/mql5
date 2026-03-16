@@ -1,9 +1,9 @@
 {
   "symbol": "XAGUSD_ecn",
   "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Růst cenových trendů s podporou RSI a MA indikátorů, ale nízké hodnoty v měsíčním časovém rámci indikují nejistotu.",
-  "timestamp": "2026-03-13T21:24:23.715785+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje silnou polohu amerického dolaru a pokles měnových kurzů ostatních komodit. RSI i MA hodnoty indikují opravu v předchozím pohybu, což naznačuje možnost silnějšího pohybu směrem nahoru.",
+  "timestamp": "2026-03-16T02:26:35.399614+00:00",
   "model": "deepseek-coder-v2"
 }

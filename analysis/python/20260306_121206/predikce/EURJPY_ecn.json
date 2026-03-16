@@ -1,7 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technicky se EURJPY nachází v krátkodobém downtrendu. 1H a 4H RSI jsou pod 50, denní RSI je těsně pod 50. Cena je pod MA na 1H, 4H a denním grafu. Týdenní RSI je relativně neutrální. Měsíční RSI je sice nad 60, ale aktuální cena je výrazně pod MA. Recentní cenový vývoj indikuje spíše tlak na pokles. Z tohoto důvodu preferuji SELL, ale nejistota indikovaná krátkou historií dat vyžaduje i značnou dávku opatrnosti (HOLD)."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "USDZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu RSI 65 naznačuje potenciální překoupenost. Týdenní RSI je 48, což značí neutrální pozici. Měsíční RSI je 38, signalizující rostoucí potenciál. MA na denním grafu roste (16.07542). Cena (16.63346) je nad MA na 1h (16.618627), 4h (16.480655) i denním grafu, což hovoří pro BUY pozici, ale týdenní MA (16.643101) je lehce nad cenou. Dlouhodobý měsíční MA (17.601395) je vysoko nad cenou, naznačuje downtrend z dlouhodobého pohledu. Poslední denní svíčka je rostoucí, ale posledních pár hodin je mírný pokles. Rozhodnutí je HOLD, dokud se nepotvrdí jasnější trend."
-}

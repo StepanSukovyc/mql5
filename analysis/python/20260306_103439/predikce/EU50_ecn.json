@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Na denním a 4H grafu je RSI hluboko v přeprodané zóně, což naznačuje potenciální odraz nahoru (BUY). Nicméně, cena je pod klouzavými průměry na většině timeframe (1H, 4H, den), což naznačuje silný sestupný trend (SELL). Navíc, poslední týdenní svíčka je silně medvědí. Měsíční RSI je stále v býčí zóně, ale klesá, takže momentálně doporučuji HOLD a sledovat další vývoj."
-}

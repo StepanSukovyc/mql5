@@ -1,9 +1,0 @@
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě údajů o RSI a MA je vidět tendence poklesu ceny, ale fundamentální analýza ukazuje stabilitu s pozitivními trendy. Kompromisem je tedy HOLD s přijetelným rizikem.",
-  "timestamp": "2026-03-08T22:19:33.570537+00:00",
-  "model": "deepseek-coder-v2"
-}

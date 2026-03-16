@@ -1,7 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "NGAS_ecn vykazuje smíšené signály. Na hodinové bázi je RSI překoupené (74.48), což naznačuje potenciální korekci. Nicméně na denní bázi je RSI neutrální (47.67) a cena se nachází nad MA na denním grafu, což naznačuje potenciální býčí trend. Na týdenní a měsíční bázi je cena pod MA. Vzhledem k růstu ceny v posledních hodinách a neutrálnímu nastavení na denní bázi, je Buy strategie s mírným rizikem."
-}

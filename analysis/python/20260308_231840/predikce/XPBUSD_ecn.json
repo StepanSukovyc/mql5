@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Denní a týdenní RSI naznačují, že XPBUSD_ecn je blízko překoupení, ale ještě ne v extrémních hodnotách. Cena je pod denním a týdenním MA, což naznačuje sestupný trend. Absence dat o MA a RSI pro měsíční timeframe znemožňuje posouzení dlouhodobého trendu. Poslední denní svíčka je spíše neutrální. Na hodinovém a 4H grafu se zdá, že trh se pokouší o konsolidaci v okolí současné ceny. Vzhledem k sestupnému trendu na vyšších timeframe a neutrálnímu sentimentu na nižších timeframe převažuje SELL."
-}

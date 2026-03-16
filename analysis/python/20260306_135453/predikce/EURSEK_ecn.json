@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "EURSEK osciluje kolem hodnoty 10.70. Měsíční a týdenní RSI indikují, že trh je pod hranicí 40, což naznačuje potenciální překoupenost. Navíc MA na dlouhodobějších timeframech je stále nad aktuální cenou, což značí potenciální odpor. Na denní bázi vidíme pohyb okolo MA, což naznačuje spíše boční trend. Kombinace těchto faktorů, s ohledem na omezený počet svíček, naznačuje mírnou převahu SELL pozic, HOLD pozice dává smysl pro vyčkání na další data."
-}

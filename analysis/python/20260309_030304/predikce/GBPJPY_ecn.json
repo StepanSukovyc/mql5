@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstový tlak na GBP je potenciálně podpořen fondy investujícími do dlouhých pozic. RSI ukazuje slabost s opakovanými vrcholy a spadky, což naznačuje nejistotu trhu.",
-  "timestamp": "2026-03-09T02:16:52.241143+00:00",
-  "model": "deepseek-coder-v2"
-}

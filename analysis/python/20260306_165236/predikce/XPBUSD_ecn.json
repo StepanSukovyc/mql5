@@ -1,7 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena se nachází pod denním a týdenním MA, RSI na denním grafu je pod 50, což naznačuje klesající trend. Na 1h a 4h timeframe se RSI blíží k 50, což indikuje možnou konsolidaci. Sell má mírnou převahu kvůli dlouhodobějšímu sestupnému trendu a pozici ceny pod klíčovými MA. Buy potenciál je limitovaný nejistotou trhu a potenciální rezistencí kolem denního MA."
-}

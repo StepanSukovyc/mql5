@@ -1,7 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu se RSI pohybuje kolem 50, což naznačuje neutrální momentum. Cena se pohybuje nad MA na denním grafu, což je býčí signál. Nicméně na týdenním grafu je RSI pod 40, což naznačuje, že by mohl být trh překoupený. Měsíční MA je nad aktuální cenou a měsíční RSI je pod 60, takže je třeba opatrnost. Vzhledem k smíšeným signálům se doporučuje držet (HOLD) nebo při vstupu do pozice postupovat obezřetně. Poslední 4H svíčka je rostoucí."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena XPTUSD je pod MA na 1h, 4h i denním grafu, což naznačuje medvědí trend. RSI na 4h a denním grafu je pod 50, což také podporuje prodejní signál. Na měsíčním grafu je RSI překoupené (71.37), což naznačuje možnou korekci. Nicméně MA na týdenním a měsíčním grafu jsou pod aktuální cenou, což naznačuje dlouhodobější býčí trend. Vzhledem k protichůdným signálům a poklesu ceny v posledních dnech převládá mírně prodejní nálada, ale existuje i prostor pro oživení. Proto BUY 30%, SELL 40% a HOLD 30%."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "JP225_ecn is showing bearish signals across multiple timeframes. The 1H and 4H RSI are below 40, indicating oversold conditions but potentially more downside momentum. Daily RSI is below 50. The price is below the moving average on 1H, 4H and Daily charts, reinforcing the bearish trend. Monthly RSI is high, suggesting an overbought market and potential for correction. The recent price action confirms a downward trend.  While a bounce is possible, the overall trend favors selling."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "SGDJPY_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na hodinovém grafu je RSI v oblasti přeprodanosti (36.53), což naznačuje možný odraz nahoru. Nicméně, cena je pod klouzavým průměrem (MA) na všech časových rámcích kromě denního, což naznačuje klesající trend. Denní RSI je neutrální (53.39). Týdenní a měsíční RSI naznačují býčí sentiment, ale cena se blíží rezistenci. Kombinace těchto faktorů naznačuje, že prodejní tlak může převážit. Proto přikláním se k SELL pozici, ale s ohledem na potenciál odrazu na hodinovém grafu je BUY pozice stále možná. HOLD je konzervativní přístup vzhledem k nejistotě."
-}

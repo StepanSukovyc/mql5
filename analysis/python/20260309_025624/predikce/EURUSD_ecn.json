@@ -1,9 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Převládajícím signálem je pokles cen vyvolaný negativními zprávami o ekonomice USA a nespokojeností s politikou vlády. RSI indikuje překoupenost, což může vést k reverzi trendu.",
-  "timestamp": "2026-03-09T02:05:11.474692+00:00",
-  "model": "deepseek-coder-v2"
-}
