@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 65.0,
   "HOLD": 15.0,
-  "reasoning": "Riziko je závislé na volatilitě a trendu. Růstový potenciál omezen z důvodu nedostatečného objevení horní hranice MA. RSI indikuje přebujednost, což podporuje prodejní signály.",
-  "timestamp": "2026-03-15T23:48:32.847734+00:00",
+  "reasoning": "Růstový trend je omezen svíčkovou konfigurací a nárůstem RSI, ale vysoké riziko z důvodu politických událostí a nesrovnalostí v ekonomice.",
+  "timestamp": "2026-03-19T15:59:40.115498+00:00",
   "model": "deepseek-coder-v2"
 }

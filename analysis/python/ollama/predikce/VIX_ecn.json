@@ -1,9 +1,9 @@
 {
   "symbol": "VIX_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové potenciály je omezeno vlivem globální ekonomických faktorů a nedostatečný RSI signalizuje pokles.",
-  "timestamp": "2026-03-16T02:24:49.723271+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět nárust nad tečnou trendem, což naznačuje potenciální zesilování růstu. Nicméně, VIX ukazuje střední riziko s poklesem očekávání trhu.",
+  "timestamp": "2026-03-19T15:54:00.888227+00:00",
   "model": "deepseek-coder-v2"
 }

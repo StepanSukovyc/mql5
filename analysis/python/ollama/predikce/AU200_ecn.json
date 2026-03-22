@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Prognosticated based on fundamental analysis with a slight bullish indication from technical indicators.",
-  "timestamp": "2026-03-16T00:12:59.014346+00:00",
+  "reasoning": "Zhoršení makroekonomických indikátorů a technické signály směrující k poklesu. Nedostatečné potvrzení trendu z pohledu RSI a klouzavých průměrů.",
+  "timestamp": "2026-03-19T16:25:11.549193+00:00",
   "model": "deepseek-coder-v2"
 }

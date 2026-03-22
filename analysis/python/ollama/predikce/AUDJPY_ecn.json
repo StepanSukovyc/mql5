@@ -1,9 +1,9 @@
 {
   "symbol": "AUDJPY_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
+  "BUY": 20.0,
+  "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Vysoká úroveň RSI a MA signalizují potenciál růstu. Nicméně, nedostatečný objem transakcí naznačuje nejistotu.",
-  "timestamp": "2026-03-16T00:18:00.825549+00:00",
+  "reasoning": "Zhoršení makroekonomických prognóz způsobilo pokles RSI a MA, což naznačuje další pokles.",
+  "timestamp": "2026-03-19T16:30:47.588474+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "CHINAH_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové signály z fundamentální analýzy a svíčkových formací naznačují stabilitu, avšak RSI ukazuje překoupenost. Kombinace těchto faktorů doporučuje částečné držení pozice s rizikem poklesu.",
-  "timestamp": "2026-03-16T00:38:35.903539+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Riziko je vyšší vzhledem k nižším hodnotám RSI a MA, ale stále existuje potenciál pro růst na základě historických trendů.",
+  "timestamp": "2026-03-19T16:53:57.618147+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "USDSEK_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi BUY a HOLD je způsoben volatilitou trhu, zatímco SELL odráží silnou tendenci poklesu.",
-  "timestamp": "2026-03-16T02:17:54.765197+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Základní analýza ukazuje silnou měnu a růstové tendence. RSI i MA hodnoty indikují stabilitu a konzistentní pohyb směrem nahoru.",
+  "timestamp": "2026-03-19T15:46:22.241301+00:00",
   "model": "deepseek-coder-v2"
 }

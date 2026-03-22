@@ -1,9 +1,9 @@
 {
   "symbol": "USDJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je zřetelné, že cena může začít konsolidovat nebo dokonce poklesnout, což naznačuje nejistotu.",
-  "timestamp": "2026-03-16T02:11:01.665770+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zvýšení volatility a potenciální breakout na hodinovém grafu s podporou RSI nad 50 a MA. Snížení rizika vzhledem k nedávným cenovým pohybům.",
+  "timestamp": "2026-03-19T15:38:26.935689+00:00",
   "model": "deepseek-coder-v2"
 }

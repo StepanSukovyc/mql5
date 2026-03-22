@@ -1,9 +1,9 @@
 {
   "symbol": "USDNOK_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických prognóz a slabší MA ukazují na pokles kurzu. RSI indikuje přeprodanost, což může signalizovat opravu směrem nahoru.",
-  "timestamp": "2026-03-16T02:14:27.859880+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět trend směřující dolů, což svědčí o poklesových tendencích. Nicméně, zároveň jsou cenové úrovně blízko dlouhodobým supportům a RSI je nad hodnotou 50, což naznačuje slabou podporu růstu.",
+  "timestamp": "2026-03-19T15:42:30.673769+00:00",
   "model": "deepseek-coder-v2"
 }

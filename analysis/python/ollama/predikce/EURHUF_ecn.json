@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu. Nárůst RSI může být dočasný, zatímco SMA ukazuje slabší trend.",
-  "timestamp": "2026-03-16T00:54:32.112759+00:00",
+  "reasoning": "Růstové trendy jsou slabší v porovnání s minulými měsíci, ale stále pozitivní. RSI a MA ukazují smysluplnost růstu.",
+  "timestamp": "2026-03-19T17:12:25.649029+00:00",
   "model": "deepseek-coder-v2"
 }

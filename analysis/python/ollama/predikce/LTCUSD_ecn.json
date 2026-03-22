@@ -1,9 +1,9 @@
 {
   "symbol": "LTCUSD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením technických signálů a slabostí na horizontu Měsíc.",
-  "timestamp": "2026-03-16T01:34:30.579899+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení technického signálu a slabý trend, ale zlepšení v fundamentech.",
+  "timestamp": "2026-03-19T17:59:56.574633+00:00",
   "model": "deepseek-coder-v2"
 }

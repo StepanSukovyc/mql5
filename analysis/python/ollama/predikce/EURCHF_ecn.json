@@ -1,9 +1,9 @@
 {
   "symbol": "EURCHF_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové trendy jsou slabší a RSI indikuje přeuiverzi. Mírný pokles MA signalizuje další pokračující pohyb dolů.",
-  "timestamp": "2026-03-16T00:49:12.286514+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle svíčkových formací a RSI indikátoru ukazuje graf zeslabující se sílu v tendenci k poklesu, ale ještě stojí za to sledovat.",
+  "timestamp": "2026-03-19T17:06:25.817808+00:00",
   "model": "deepseek-coder-v2"
 }

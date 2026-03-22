@@ -1,9 +1,9 @@
 {
   "symbol": "ETHUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem obecního trhu a nedávných cenových pohybů. Převažující tendence je směrem dolů s určitými silami podporujícími ceny.",
-  "timestamp": "2026-03-16T00:42:03.347400+00:00",
+  "reasoning": "Na základě růstových trendů v RSI a MA hodnotách s viditelnou korekcí na svíčkovém grafu, ale stále nad hlavními trendliniemi, doporučuji BUY s nízkým rizikem.",
+  "timestamp": "2026-03-19T16:58:14.622872+00:00",
   "model": "deepseek-coder-v2"
 }

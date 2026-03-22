@@ -1,9 +1,9 @@
 {
   "symbol": "DXY_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršení makroekonomických prognóz a nárůst rizika finanční krachu důvody pro BUY.",
-  "timestamp": "2026-03-16T00:40:17.862608+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažující trend je poklesem hodnoty DXY, s několika potenciálními silnými body pro odrážení a možnou změnou směru. RSI indikuje přeprodanost, ale MA ukazuje stabilitu.",
+  "timestamp": "2026-03-19T16:56:05.625611+00:00",
   "model": "deepseek-coder-v2"
 }

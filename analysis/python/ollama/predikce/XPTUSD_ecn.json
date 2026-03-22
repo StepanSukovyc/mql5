@@ -1,9 +1,9 @@
 {
   "symbol": "XPTUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy podle svíčkových formací jsou slabší než poklesové. RSI a MA hodnoty ukazují směr trendu, ale volatilita způsobuje nejistotu.",
-  "timestamp": "2026-03-16T02:38:39.090006+00:00",
+  "reasoning": "Základní analýza a svíčkové formace upozorňují na pokles cen. RSI a klouzavé průměry ukazují nejistotu.",
+  "timestamp": "2026-03-19T16:09:06.563312+00:00",
   "model": "deepseek-coder-v2"
 }

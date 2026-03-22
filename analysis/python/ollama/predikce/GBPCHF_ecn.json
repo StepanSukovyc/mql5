@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCHF_ecn",
   "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zvýšení RSI a MA signalizují potenciál růstu, ale zároveň se snižuje fondy pro HOLD kvůli nedostatečným indikacím trendu.",
-  "timestamp": "2026-03-16T01:18:59.755195+00:00",
+  "SELL": 50.0,
+  "HOLD": 10.0,
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Klesající trend podle svíčkových formací je důsledkem.",
+  "timestamp": "2026-03-19T17:41:10.241398+00:00",
   "model": "deepseek-coder-v2"
 }

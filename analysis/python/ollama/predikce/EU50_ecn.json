@@ -1,9 +1,9 @@
 {
   "symbol": "EU50_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle fundamentální analýzy dochází k pozitivním trendům v dané oblasti. RSI a MA ukazují stabilitu s tendencí růstu.",
-  "timestamp": "2026-03-16T00:43:49.580382+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Na základě fundamentální analýzy a vzhledem k podporovaným technickým signálům (RSI a MA) se obecně oceňuje budoucí stabilita a potenciál růstu, což doporučuje BUY.",
+  "timestamp": "2026-03-19T17:00:19.986670+00:00",
   "model": "deepseek-coder-v2"
 }

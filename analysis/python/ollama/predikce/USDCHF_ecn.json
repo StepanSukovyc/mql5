@@ -1,9 +1,9 @@
 {
   "symbol": "USDCHF_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršení makroekonomických indikátorů a slabost v grafu svíčkových formací.",
-  "timestamp": "2026-03-16T02:02:22.353733+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI ukazuje slabost s opravami nad hladinou předchozího vrcholu. MA indikátor podporuje kontinuální trend.",
+  "timestamp": "2026-03-19T18:33:14.109634+00:00",
   "model": "deepseek-coder-v2"
 }

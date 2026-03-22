@@ -1,9 +1,9 @@
 {
   "symbol": "GBPAUD_ecn",
-  "BUY": 40.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Podle RSI a MA hodnot je trend směrem dolů, ale svíčkové formace ukazují silnou podporu blízko aktuální ceně.",
-  "timestamp": "2026-03-16T01:15:33.114934+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje silnou měnu GBP a slabou měnu AUD. RSI indikuje přeuiverzivní situaci s tendencí k poklesu, zatímco MA signalizuje střednědobý trend k nárůstu.",
+  "timestamp": "2026-03-19T17:37:05.620123+00:00",
   "model": "deepseek-coder-v2"
 }

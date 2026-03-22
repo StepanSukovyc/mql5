@@ -1,9 +1,9 @@
 {
   "symbol": "GBPNZD_ecn",
-  "BUY": 40.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Růstové potenciály jsou omezená z důvodu volatilního trhu a silnou odolností v RSI. Současný stav je nejistý s nízkou diverzifikací MA.",
-  "timestamp": "2026-03-16T01:22:27.299538+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růst cen může být podpořen silnou ekonomikou Spojeného království a slabším New Zélandem, ale také je třeba vzít v úvahu riziko inflace a možných nesrovnalostí.",
+  "timestamp": "2026-03-19T17:45:19.759973+00:00",
   "model": "deepseek-coder-v2"
 }

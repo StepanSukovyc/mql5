@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a negativní svíčková forma v poslední fázi může vést k poklesu kurzu.",
-  "timestamp": "2026-03-16T00:58:08.549530+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stochastický oscilátor nad úrovní překoupenosti, zatímco klouzavé průměry ukazují slabší trend. Historické svíčkové formace indikují nejistotu s určením směru.",
+  "timestamp": "2026-03-19T17:16:28.889892+00:00",
   "model": "deepseek-coder-v2"
 }

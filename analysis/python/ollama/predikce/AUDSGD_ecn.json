@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují negativní signály z RSI a MA, ale svíčkové formace naznačují silnou oporu na úrovni X.",
-  "timestamp": "2026-03-16T00:21:24.383482+00:00",
+  "reasoning": "Základní analýza ukazuje stabilitu měny s lehkovážním trendem. RSI a MA hodnoty podporují konzervativní přístup.",
+  "timestamp": "2026-03-19T16:34:39.024137+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "EURJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu trhu s lehčím tendence k poklesu, ale zároveň nedostatečnou silou růstu. RSI a MA hodnoty indikují nejistotu s mírným trendem k poklesu.",
-  "timestamp": "2026-03-16T00:56:21.591501+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Zhoršení klimatu a následný pokles cen ropy může vést k růstu EUR. Nicméně, politická nejistota a geopolitické napětí mohou přinést volatilitu.",
+  "timestamp": "2026-03-19T17:14:27.217272+00:00",
   "model": "deepseek-coder-v2"
 }

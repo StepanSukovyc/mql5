@@ -1,9 +1,9 @@
 {
   "symbol": "GBPSGD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Základní analýza ukazuje slabší pozitivní trendy, ale RSI a MA indikují překoupenost/přeprodanost. Svíčkové formace naznačují možnou reverzi.",
-  "timestamp": "2026-03-16T01:24:11.273967+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje silnou měnu GBP a volatilitu. RSI v růstové oblasti s klesajícím trendem, což naznačuje nejistotu.",
+  "timestamp": "2026-03-19T17:47:19.966227+00:00",
   "model": "deepseek-coder-v2"
 }

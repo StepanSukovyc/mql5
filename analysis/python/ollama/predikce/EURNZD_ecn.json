@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené vzhledem k historickým úrovním a slabosti světových ekonomik. Vysoké riziko volatilního rynku způsobené politickou neistotou.",
-  "timestamp": "2026-03-16T01:01:40.966067+00:00",
+  "reasoning": "Růst cen měny je podporován silnou základnou a pozitivním svíčkovým vzorem. RSI indikuje překoupenost, ale MA ukazuje silnou tendenci.",
+  "timestamp": "2026-03-19T17:20:33.275715+00:00",
   "model": "deepseek-coder-v2"
 }

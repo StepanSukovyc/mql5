@@ -1,9 +1,9 @@
 {
   "symbol": "NZDJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a volatilita trhu, ale stoupající MA signalizuje tendenci k růstu.",
-  "timestamp": "2026-03-16T01:43:14.335784+00:00",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Vysoká úroveň RSI v posledních měsících indikuje překoupenost. Dlouhodobý trend je směrem nahoru, ale krátkodobé pohyby ukazují slabost.",
+  "timestamp": "2026-03-19T18:10:21.288933+00:00",
   "model": "deepseek-coder-v2"
 }

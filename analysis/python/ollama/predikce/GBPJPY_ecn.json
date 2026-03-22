@@ -1,9 +1,9 @@
 {
   "symbol": "GBPJPY_ecn",
   "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Vysoká volatilita s různými směry indikátorů RSI a MA. Nízké procento HOLD znamená nejistotu.",
-  "timestamp": "2026-03-16T01:20:43.185989+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Malé svíčky a RSI nad 50 ukazují slabost trendu. MA ukazuje stabilitu.",
+  "timestamp": "2026-03-19T17:43:10.922236+00:00",
   "model": "deepseek-coder-v2"
 }

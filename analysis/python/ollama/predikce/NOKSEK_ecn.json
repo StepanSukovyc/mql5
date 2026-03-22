@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 65.0,
   "HOLD": 15.0,
-  "reasoning": "Růstové trendy jsou slabší, ale RSI a MA indikují opravu. Nízká volatilita znamená potenciál pro růst.",
-  "timestamp": "2026-03-16T01:37:58.716435+00:00",
+  "reasoning": "Na základě fundamentálních ukazatelů a svíčkových formací může býtk trhu přijetelným rizikem pro nákup, ale je potřeba dbát na riziko.",
+  "timestamp": "2026-03-19T18:04:06.307640+00:00",
   "model": "deepseek-coder-v2"
 }

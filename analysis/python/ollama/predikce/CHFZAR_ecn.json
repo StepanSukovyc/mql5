@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Rozdíly v RSI a MA hodnotách naznačují nejistotu s cenou. Historické svíčkové formace nejsou příliš jasné.",
-  "timestamp": "2026-03-16T00:36:51.196880+00:00",
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nicméně svíčková forma indikuje potenciální pokles.",
+  "timestamp": "2026-03-19T16:51:56.250937+00:00",
   "model": "deepseek-coder-v2"
 }

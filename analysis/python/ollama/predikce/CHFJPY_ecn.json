@@ -1,9 +1,9 @@
 {
   "symbol": "CHFJPY_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové síly jsou oslabeny v důsledku silných odporových hladin a nárůstu volatility. Technická analýza ukazuje měkkou podporu a zeslabené signály z RSI, což naznačuje nejistotu trhu.",
-  "timestamp": "2026-03-16T00:35:08.549569+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Převládajícím signálem je pokles ceny s mírně rostoucím RSI a MA, což naznačuje nejistotu trhu.",
+  "timestamp": "2026-03-19T16:49:55.651067+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "NZDCAD_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Zhoršení makroekonomických ukazatelů a silný sestup RSI a MA indikátorů naznačují silnou pravděpodobnost poklesu.",
-  "timestamp": "2026-03-16T01:39:44.407945+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Riziko volatilita a nejistota na trhu způsobuje, že hlavním doporučením je držet pozici, dokud nedojde k jasnějšímu signálu.",
+  "timestamp": "2026-03-19T18:06:11.113496+00:00",
   "model": "deepseek-coder-v2"
 }

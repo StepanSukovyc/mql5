@@ -1,9 +1,9 @@
 {
   "symbol": "USDZAR_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět trend směřující k poklesu, ale zároveň dochází k divergenci mezi cenovým grafem a indikátory. To naznačuje možnost otočení trendu. Nicméně, úzký rozsah svíček může být důsledkem volatilitu trhu.",
-  "timestamp": "2026-03-16T02:21:23.637052+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Riziko je z pohledu RSI a MA hodnot vyšší pro pokles ceny. Nicméně, fundamentální analýza neukazuje silnou poptávku ani stagnaci.",
+  "timestamp": "2026-03-19T15:50:14.208958+00:00",
   "model": "deepseek-coder-v2"
 }

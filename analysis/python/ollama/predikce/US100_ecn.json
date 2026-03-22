@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují negativní signály z RSI a MA, s několika potenciálními výkyvy směrem nahoru.",
-  "timestamp": "2026-03-16T01:55:29.133242+00:00",
+  "reasoning": "Převažují negativní signály z technické analýzy a pokles v fundamentech. RSI indikuje přečkávání mezi buy a sell signálem, což naznačuje nejistotu.",
+  "timestamp": "2026-03-19T18:25:04.787788+00:00",
   "model": "deepseek-coder-v2"
 }

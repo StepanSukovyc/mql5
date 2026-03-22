@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Riziko je vyvážené mezi růstem a poklesem. RSI ukazuje neutralitu s mírným trendem k poklesu.",
-  "timestamp": "2026-03-16T01:25:54.278064+00:00",
+  "reasoning": "Riziko je rozložené mezi růstovými a klesajícími trendy, s lehce favorizovanou pozicí pro přijetí slabších ztrát.",
+  "timestamp": "2026-03-19T17:49:22.656390+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "CADCHF_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle fundamentální analýzy měnového páru je situace neutrální s tendencí k poklesu. Technická analýza ukazuje silnou hladinu odporu a střet vážených pohybových průměrů, což naznačuje neistotu.",
-  "timestamp": "2026-03-16T00:29:58.749005+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Převládajícím signálem je pokles cen s některými indikátory naopak signalizujícím potenciální vzestup. Kompromis mezi rizikem a očekávaným ziskem.",
+  "timestamp": "2026-03-19T16:44:07.809365+00:00",
   "model": "deepseek-coder-v2"
 }

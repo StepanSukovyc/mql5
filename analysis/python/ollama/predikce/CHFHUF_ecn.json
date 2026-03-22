@@ -1,9 +1,9 @@
 {
   "symbol": "CHFHUF_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s trendem oslabováním. RSI a MA hodnoty indikují nejistotu s volatilitou.",
-  "timestamp": "2026-03-16T00:33:24.458088+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Podle RSI a MA je trend cenového grafu oslabující, ale zároveň dochází k nárůstu objemu obchodů, což naznačuje silnou volatilitu.",
+  "timestamp": "2026-03-19T16:47:55.868944+00:00",
   "model": "deepseek-coder-v2"
 }

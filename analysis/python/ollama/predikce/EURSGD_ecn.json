@@ -1,9 +1,9 @@
 {
   "symbol": "EURSGD_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Vysoké hodnoty RSI a MA signalizují silnou pozitivní tendenci. Nedávný růst podporuje myšlenku o prodloužení tohoto trendu.",
-  "timestamp": "2026-03-16T01:06:54.281494+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zatímco RSI ukazuje slabost, křivka MA indikuje pokles. Fundamentální analýza neposkytuje jasné rozhodující faktory.",
+  "timestamp": "2026-03-19T17:26:45.922072+00:00",
   "model": "deepseek-coder-v2"
 }

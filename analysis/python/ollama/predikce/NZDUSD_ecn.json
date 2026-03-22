@@ -1,9 +1,9 @@
 {
   "symbol": "NZDUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy s ohledem na silnou podporu MA a pozitivní divergence RSI naznačují potenciál růstu. Však také přijatým signálem prodeje je pokles cenem blíže k důležitým suportům.",
-  "timestamp": "2026-03-16T01:48:28.901293+00:00",
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nicméně, základní trend na rostoucí ceny může podporovat nákup.",
+  "timestamp": "2026-03-19T18:16:39.472612+00:00",
   "model": "deepseek-coder-v2"
 }

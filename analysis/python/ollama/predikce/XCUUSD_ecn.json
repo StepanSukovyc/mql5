@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením technických indikátorů a vlivem obecně negativního trhu.",
-  "timestamp": "2026-03-16T02:31:44.682665+00:00",
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují silnou podporu blízko těchto hodnot. Riziko může být umírněné.",
+  "timestamp": "2026-03-19T16:01:32.473739+00:00",
   "model": "deepseek-coder-v2"
 }
