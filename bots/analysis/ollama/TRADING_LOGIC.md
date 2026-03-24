@@ -21,6 +21,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
 7. **Aplikuje režim exekuce podle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3)
    - Každý N-tý obchod: použije se lot_size + take_profit z Gemini
    - Ostatní obchody: lot_size se vypočítá lokálně, take_profit se nepoužije
+   - Pokud lokálně vypočtený `lot_size` neprojde margin checkem (`Insufficient margin`), systém provede fallback na `lot_size` z finální Gemini predikce
 8. **Provede obchod** - automaticky otevře pozici na MT5
 9. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
 10. **Ukončení** - Ctrl+C
@@ -118,20 +119,22 @@ Dvojitá kontrola zajišťuje bezpečnost:
        │        ┌──────▼──────────────────────┐
        │        │ FINAL DECISION MODULE       │
        │        │ (final_decision.py)         │
-       │        │                            │
-       │        │ • Get open positions       │
-       │        │ • Get account state        │
-       │        │ • Combine with predictions │
-       │        │ • Ask Gemini for final     │
-       │        │   recommendation:          │
-       │        │   - 1 symbol (BUY/SELL)    │
-       │        │ • Calculate lot_size:      │
-       │        │   floor((balance+500)/500) │
-       │        │   /100                     │
-       │        │ • Execute trade on MT5     │
-       │        │ • Save to PREDIKCE_        │
-       │        │   <timestamp>.json         │
-       │        └──────┬───────────────────┘
+       │        │                             │
+       │        │ • Get open positions        │
+       │        │ • Get account state         │
+       │        │ • Combine with predictions  │
+       │        │ • Ask Gemini for final      │
+       │        │   recommendation:           │
+       │        │   - 1 symbol (BUY/SELL)     │
+       │        │ • Calculate lot_size:       │
+       │        │   floor((balance+500)/500)  │
+       │        │   /100                      │
+       │        │ • If margin is insufficient │
+       │        │   fallback to Gemini lot    │
+       │        │ • Execute trade on MT5      │
+       │        │ • Save to PREDIKCE_         │
+       │        │   <timestamp>.json          │
+       │        └──────┬──────────────────────┘
        │               │
        │        ┌──────▼──────┐
        │        │ Restart     │

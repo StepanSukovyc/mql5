@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-03-24 (Margin Fallback in Standard Execution Mode)
+
+- **Added Margin-Based Fallback to Gemini `lot_size`**
+  - In standard execution mode, the system still calculates `lot_size` locally from account balance
+  - If that calculated size fails pre-trade margin check with `Insufficient margin`, execution now retries with `lot_size` from the final Gemini decision
+  - `take_profit` remains disabled in standard mode; only the volume source changes during fallback
+  - Prevents otherwise valid trades from being skipped solely because the balance-based lot size is too large for current free margin
+
 ## 2026-03-08 (Code Refactoring - DRY Principle)
 
 - **Extracted Shared Market Data Functions to `market_data.py`**

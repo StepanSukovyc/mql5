@@ -26,6 +26,7 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
 7. **Režim exekuce dle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3):
   - Každý N-tý obchod: použije se `lot_size` i `take_profit` od Gemini
   - Ostatní obchody: `lot_size` se počítá vzorcem `floor((balance + 500) / 500) / 100` a `take_profit` se nepoužije
+  - Pokud takto vypočtený `lot_size` neprojde kontrolou marginu (`Insufficient margin`), použije se fallback na `lot_size` z finální Gemini predikce
 8. **Provede obchod** na MT5 podle aktivního režimu
 9. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
 10. **Vrátí se na krok 3** (restart monitoring)

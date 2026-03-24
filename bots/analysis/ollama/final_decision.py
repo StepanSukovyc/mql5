@@ -813,9 +813,27 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 					lot_size = calculate_lot_size(account_state['balance'])
 					take_profit = None
 					print("   Standard mode active: take_profit disabled for this trade")
+
+					has_margin, margin_msg = check_margin_requirements(symbol, action, lot_size)
+					if not has_margin and "insufficient margin" in margin_msg.lower():
+						print("   Calculated lot_size failed margin check in STANDARD mode")
+						print("   Trying lot_size from prediction instead...")
+
+						try:
+							fallback_lot_size = float(gemini_lot_size)
+						except (TypeError, ValueError):
+							print("⚠️  Prediction lot_size missing/invalid, cannot use margin fallback")
+							return False
+
+						if fallback_lot_size <= 0:
+							print(f"⚠️  Prediction lot_size invalid for fallback: {fallback_lot_size}")
+							return False
+
+						lot_size = fallback_lot_size
+						print(f"   Fallback to prediction lot_size: {lot_size}")
 				
 				if lot_size <= 0:
-					print(f"⚠️  Calculated lot size is {lot_size}, skipping trade execution")
+					print(f"⚠️  Final lot size is {lot_size}, skipping trade execution")
 					return False
 				
 				# Execute trade
