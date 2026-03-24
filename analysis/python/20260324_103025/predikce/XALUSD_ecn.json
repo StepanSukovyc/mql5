@@ -1,7 +1,0 @@
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "XALUSD_ecn vykazuje smíšené signály. Na týdenním grafu je RSI poměrně vysoké (62.93), což naznačuje překoupenost, ale zároveň je cena nad MA. Denní RSI je na 45.67 a cena je pod MA, což naznačuje potenciální další pokles. 1h a 4h RSI jsou pod 50, což podporuje krátkodobý prodejní tlak.  Celkově převládá krátkodobý prodejní tlak a nejistota, proto SELL má největší váhu, následovaný HOLD a nakonec BUY."
-}

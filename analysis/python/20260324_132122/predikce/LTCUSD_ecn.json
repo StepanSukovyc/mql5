@@ -1,7 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Short-term: 1H RSI (61.25) suggests slightly overbought. 4H RSI (45.49) and Daily RSI (52.32) are neutral. 1H MA (55.53) near current price (55.54). However, Weekly (29.16) and Monthly RSI (39.95) suggest oversold conditions in the longer term, though price is far from MAs.  Recent hourly candles show some consolidation. The weekly timeframe is still showing strong downwards trend. Thus, a sell position is slightly favoured, with a cautious outlook due to the oversold conditions on longer timeframes."
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy s ohledem na svíčkovou formaci a pozitivní RSI směřují nahoru. Nicméně, pokles MA signalizuje slabost trendu.",
-  "timestamp": "2026-03-24T13:06:09.836123+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Short-term bullish momentum supported by hourly RSI in overbought territory and price above hourly MA. However, daily RSI is elevated but not overbought. Longer-term (weekly/monthly) RSI is neutral and price is above their respective MA. There is a visible upward price movement at the daily and weekly level, but 30% of the volume happened at the end of the day. Therefore, the likelihood of continuation is less likely and price is likely to drop."
-}
-```

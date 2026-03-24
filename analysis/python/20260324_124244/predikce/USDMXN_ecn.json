@@ -1,9 +1,0 @@
-{
-  "symbol": "USDMXN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět, že cena může pokračovat v růstu díky silné podpoře. Nicméně, existuje také určitá neistota způsobená volatilitou trhu.",
-  "timestamp": "2026-03-24T12:07:38.396095+00:00",
-  "model": "deepseek-coder-v2"
-}

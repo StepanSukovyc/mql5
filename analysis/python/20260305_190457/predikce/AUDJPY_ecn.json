@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "AUDJPY_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na hodinovém grafu RSI je pod 35, což naznačuje překoupenost a potenciál pro růst. Nicméně, cena je pod MA na hodinových a 4hodinových grafech, což naznačuje downtrend. Na denním grafu je RSI kolem 55 a cena nad MA, ale poslední den poklesla. Na týdenním a měsíčním grafu je RSI vysoko (nad 70 a nad 60), což naznačuje potenciál pro korekci. Vzhledem k tomuto smíšenému signálu převažuje spíše SELL signál s ohledem na potenciální korekci z překoupených úrovní na vyšších timeframech a downtrend na kratších timeframech."
-}
-```

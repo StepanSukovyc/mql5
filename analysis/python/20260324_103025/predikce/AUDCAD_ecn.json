@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu sjednoceného trhu, RSI a MA indikují neutralitu s tendencí k poklesu.",
-  "timestamp": "2026-03-24T10:01:14.781142+00:00",
-  "model": "deepseek-coder-v2"
-}

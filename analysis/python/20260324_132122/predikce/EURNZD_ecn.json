@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Cena se nachází nad MA na denním grafu a RSI je na 62.19, což naznačuje býčí momentum. Na druhou stranu týdenní MA je nad aktuální cenou (medvědí signál) a 1h RSI je neutrální, což značí nerozhodnost. Poslední denní svíčka je býčí, ale potřebujeme více dat k potvrzení trendu. Proto doporučuji opatrnost a sledování dalšího vývoje."
-}

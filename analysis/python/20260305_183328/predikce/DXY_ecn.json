@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "DXY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "DXY is showing mixed signals. Daily and 4H RSI are above 60, suggesting bullish momentum, but not yet overbought. Hourly MA is below the current price. Monthly RSI is below 50, indicating a possible long-term downtrend. The recent candles on the 1H and 4H charts show some indecision. Therefore, BUY is favored, but not strongly. The risk is high for both BUY and SELL."
-}
-```

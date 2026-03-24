@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měsíční RSI pod 40 naznačuje potenciální býčí divergenci, ale MA klesá. Denní RSI mírně nad 50. 4H RSI neutrální. 1H RSI kolísá kolem 50. Aktuální cena se nachází pod denním MA a týdenním MA, což naznačuje mírný prodejní tlak. Celkově se jeví trh jako nerozhodný, avšak s mírnou preferencí pro SELL."
-}

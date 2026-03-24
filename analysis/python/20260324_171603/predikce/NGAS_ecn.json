@@ -1,9 +1,0 @@
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě klesajícího trendu RSI a poklesu hodnoty MA je riziko růstu nízké. Nicméně, fundamentální analýza svědčí o stabilitě ceny, což podporuje HOLD.",
-  "timestamp": "2026-03-24T17:12:59.667760+00:00",
-  "model": "deepseek-coder-v2"
-}

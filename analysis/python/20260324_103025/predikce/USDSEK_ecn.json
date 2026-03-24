@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měsíční RSI je pod 40, což naznačuje potenciální přeprodanost, ale MA na měsíčním grafu roste, což signalizuje dlouhodobý down trend. Na denním grafu RSI je kolem 60. Na hourly grafu se cena pohybuje pod MA, hourly RSI je 43 a signalizuje SELL, naopak 4H RSI je 53 a tím pádem HOLD. Kombinací těchto faktorů upřednostňuji krátkodobé SELL pozice. "
-}

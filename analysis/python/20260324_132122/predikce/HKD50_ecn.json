@@ -1,7 +1,0 @@
-{
-  "symbol": "HKD50_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na denním grafu RSI naznačuje překoupenost (34.61), a cena je pod denním MA (25616.81), což naznačuje potenciální tlak na pokles. 4H graf ukazuje RSI na 41.40, což je neutrální, ale pod MA. Měsíční graf indikuje rostoucí trend díky RSI nad 50 (62.04) a ceně nad MA (23346.007), ale krátkodobé indikátory signalizují spíše korekci. Kombinace faktorů vede k mírné převaze pro SELL. Spread je proměnlivý (290/190/590/890), nutno brát v potaz při vstupech."
-}

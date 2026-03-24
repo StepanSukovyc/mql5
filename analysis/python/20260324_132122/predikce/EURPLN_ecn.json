@@ -1,7 +1,0 @@
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Technicals are mixed. Daily and weekly RSI suggest upward momentum, while monthly RSI is neutral. Recent hourly data shows a slight pullback, suggesting a possible consolidation before further movement. Moving averages are closely aligned, indicating no strong trend. Increased spread in recent hourly candles is worrying. Given these conflicting signals, a moderate BUY probability is assigned, while SELL and HOLD are also viable options."
-}

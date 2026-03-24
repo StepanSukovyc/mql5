@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPUSD_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Mixed signals across timeframes. Hourly RSI suggests overbought conditions, but the price is below the hourly MA. Daily RSI is neutral. The monthly MA is significantly below the current price, suggesting long-term upside, but recent daily price action has been choppy, therefore HOLD is safest for now."
-}

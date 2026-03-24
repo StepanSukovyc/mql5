@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Denní a 4H RSI indikují překoupenost, cena je pod denním a týdenním MA, což naznačuje sestupný trend. Nicméně, hodinový RSI je neutrální a cena je nad hodinovým MA, což dává prostor pro krátkodobý růst. Měsíční RSI je také neutrální. Celkově převládá sestupný tlak, ale s ohledem na možnou korekci je doporučená strategie spíše držet pozici nebo spekulovat na pokles, než agresivně nakupovat."
-}

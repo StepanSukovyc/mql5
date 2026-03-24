@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na měsíčním timeframe je RSI hluboko v přeprodané zóně, což naznačuje potenciální obrat. Nicméně, MA na všech timeframech, kromě denního, je nad aktuální cenou, což signalizuje prodejní tlak. Na denním timeframe se cena pohybuje kolem MA. Hodinové a 4hodinové RSI jsou pod 50, což indikuje spíše medvědí momentum. Kombinace těchto faktorů naznačuje, že SELL má vyšší pravděpodobnost úspěchu než BUY, ale s ohledem na přeprodané měsíční RSI není vhodné otevírat pozici bez opatrnosti. HOLD je rozumná strategie pro ty, kteří již pozici drží a čekají na další potvrzení trendu."
-}

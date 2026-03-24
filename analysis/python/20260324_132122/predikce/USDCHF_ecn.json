@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena se nachází pod měsíčním MA, RSI na měsíčním grafu je nízké (33.95), což naznačuje potenciální býčí odraz, ale RSI na denním grafu je relativně vysoké (61.04), což naznačuje možnost korekce. Na 1h a 4h timeframe je RSI v neutrální zóně. Poslední denní svíčka je býčí, což může naznačovat krátkodobý růst. Celkově panuje nejistota, mírná převaha pro SELL vzhledem k delšímu down trendu (Měsíční graf). Není dostatek dat pro přesnější predikci. Je nutné sledovat další vývoj."
-}

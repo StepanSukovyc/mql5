@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1H timeframe je RSI v oblasti pod 40, což naznačuje potenciální překoupenost. Nicméně, na denním timeframe je RSI okolo 60, což značí, že trend by mohl stále pokračovat v růstu, ale už je blízko překoupenosti. Měsíční RSI je pod 40.  MA na měsíčním timeframe je výše než aktuální cena což naznačuje downtrend. Vzhledem k rozporuplným signálům a datům je vhodné zvážit SELL pozici (40%) s BUY pozici (30%) jako proti-hru a HOLD pozici (30%) do doby, než se situace vyjasní."
-}

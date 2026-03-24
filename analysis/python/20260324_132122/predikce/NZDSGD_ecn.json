@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje smíšený signál. Krátkodobé indikátory (1h RSI) jsou neutrální, ale střednědobé a dlouhodobé indikátory (4h, denní, týdenní RSI) ukazují spíše na prodejní tlak a možnost poklesu. Měsíční RSI je blízko přeprodané oblasti, ale je stále v downtrendu. Aktuální cena je pod MA na všech časových rámcích kromě 1h, což naznačuje klesající trend. Proto je SELL mírně preferován před BUY, a HOLD je vhodný pro vyčkávání na potvrzení trendu."
-}

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Technically, the pair is showing mixed signals. Hourly and daily RSI are near neutral, while the 4H RSI is showing overbought condition. Weekly RSI suggests oversold conditions but MA on weekly timeframe is above current price. Monthly RSI is neutral. Recent price action shows upward movement, but the momentum seems to be slowing. Given mixed indicators and short data history, HOLD seems appropriate, but considering recent bullish trend BUY is slightly favored. SELL opportunity could occur if the trend reverses."
-}
-```

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Smíšené signály. Krátkodobé indikátory (1h, 4h, den) naznačují rostoucí trend, RSI na 4h a denním grafu se blíží překoupené zóně. Týdenní RSI blízko 50. MA naznačují krátkodobý uptrend, ale týdenní MA je nad aktuální cenou, což signalizuje potenciální rezistenci. Měsíční graf naznačuje silný dlouhodobý uptrend, ale je potřeba počkat na potvrzení. Vzhledem k rozporuplným signálům je HOLD nejrozumnější, s možností BUY při potvrzení prolomení rezistence na týdenním grafu nebo SELL při potvrzení obratu."
-}

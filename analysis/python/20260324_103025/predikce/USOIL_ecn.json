@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena USOIL prudce klesla z úrovní kolem 100 na současných 90.711. Na hodinovém grafu je RSI 34.15 naznačující přeprodanost, avšak moving average (MA) na 1h je těsně pod aktuální cenou, indikující potenciální rezistenci. Na 4h grafu je RSI 41.22, MA je vysoko nad cenou (95.29), což naznačuje silný down trend. Denní RSI je 58, tedy v neutrální zóně, ale MA je pod cenou (85.52). Týdenní RSI je 70.67, což naznačuje překoupenost a možnost korekce, MA je výrazně níže. Měsíční RSI 62.2 je neutrální. Vzhledem k silnému propadu, MA a překoupenosti na týdenním grafu, vidím krátkodobý potenciál pro konsolidaci (HOLD), ale střednědobý tlak na pokles (SELL). BUY je riskantní, ale s ohledem na přeprodanost, je zde šance na korekci."
-}

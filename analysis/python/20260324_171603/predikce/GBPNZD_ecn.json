@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle svíčkových formací a RSI indikátoru je trend směrem nahoru, ale MA ukazuje silnou odolnost. Riziko ztráty je vysoké.",
-  "timestamp": "2026-03-24T16:57:46.035879+00:00",
-  "model": "deepseek-coder-v2"
-}

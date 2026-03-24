@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "GBPCHF is currently in a downtrend. Monthly and weekly RSI values are oversold (below 30), suggesting potential for a bounce, but downtrend momentum is significant. Daily RSI is also below 50, indicating bearish momentum. 4H RSI is at 50, showing indecision. The price is below the Moving Average on all timeframes except 4H, also supporting the SELL idea. Overall, the risk assessment leans towards SELL, but the oversold conditions at longer timeframes warrant a portion of the risk assessment for HOLD. A small allocation is given for BUY due to the possibility of short-term retracement."
-}
-```

@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "GBPJPY shows mixed signals. RSI on daily and weekly timeframes are approaching overbought conditions, suggesting potential pullback (SELL). However, the price is above its daily and weekly moving averages (BUY), indicating an uptrend. 1H and 4H RSI are neutral. Given this conflicting information, a cautious approach (HOLD) is warranted to see which direction prevails. Recent 1H candle data shows volatility but no clear trend."
-}

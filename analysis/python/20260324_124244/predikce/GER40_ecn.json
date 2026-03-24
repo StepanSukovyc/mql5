@@ -1,7 +1,0 @@
-{
-  "symbol": "GER40_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na denním a týdenním timeframe je index v downtrendu, RSI je pod 35 (oversold), ale MA na denním timeframe je vysoko nad cenou. 4H timeframe vykazuje mírný růst, ale celkově je trh volatilní a nedá se s jistotou říct, zda se odrazí nahoru nebo bude pokračovat v poklesu. Proto opatrný SELL postoj."
-}

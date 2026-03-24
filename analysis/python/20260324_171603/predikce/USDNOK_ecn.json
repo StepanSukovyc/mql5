@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě SELL: 1h RSI je 36.51 (blízko přeprodané oblasti, ale ještě ne), 4h, day RSI okolo 57 (neutrální, ale klesající trend), týdenní RSI 46.53. Měsíční RSI 36.53. Cena klesá pod denní MA, ale nad 4H MA. Vzhledem k timeframe a rozporuplným signalům doporučuji krátkodobě SELL (40%), zbytek HOLD (30%) a mírně BUY (30%) pokud dojde k dalšímu propadu."
-}

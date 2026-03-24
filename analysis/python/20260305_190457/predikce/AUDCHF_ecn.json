@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "AUDCHF_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na 1h a 4h timeframe je RSI pod 40, což naznačuje, že je trh překoupený a můžeme očekávat pokles. Denní RSI je na 52, týdenní na 63, měsíční na 40. MA na 1h a 4h je nad aktuální cenou, což také naznačuje pokles. Na denní timeframe se cena pohybuje pod MA, ale týdenní MA je pod cenou, což naznačuje potenciální růst v dlouhodobém horizontu. Proto je doporučeno SELL, ale s opatrností a sledováním trhu kvůli možným změnám v trendu."
-}
-```

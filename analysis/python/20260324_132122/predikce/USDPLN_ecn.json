@@ -1,7 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 35,
-  "SELL": 45,
-  "HOLD": 20,
-  "reasoning": "Na měsíčním grafu je RSI stále pod 50, což naznačuje medvědí momentum. I když denní graf vykazuje RSI nad 50, což naznačuje býčí momentum, krátkodobé indikátory (1h, 4h) jsou spíše neutrální. Aktuální cena se pohybuje pod měsíčním MA, což naznačuje downtrend. Konsolidace v posledních hodinách naznačuje potenciální moment klidu před dalším pohybem. Vyšší pravděpodobnost pro SELL."
-}

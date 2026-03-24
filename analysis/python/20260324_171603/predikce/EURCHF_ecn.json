@@ -1,9 +1,0 @@
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulsy jsou slabší, ale stále existují signály z RSI a MA ukazující stabilitu. Některé svíčkové formace naznačují mírný růst.",
-  "timestamp": "2026-03-24T16:21:48.432090+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI extrémně nízko (25.61), což naznačuje přeprodanost a potenciální obrat. Nicméně, MA na měsíčním grafu je vysoko nad současnou cenou (5.805241 vs 5.43247), což značí dlouhodobý sestupný trend. Na denním grafu se cena pohybuje kolem MA, RSI je neutrální. Na krátkodobých grafech (1h a 4h) se cena pohybuje pod MA a RSI je pod 50, což indikuje mírný sestupný trend. Kombinace těchto faktorů dělá pro BUY rizikové, SELL má mírnou převahu kvůli krátkodobým indikátorům a dlouhodobému trendu. HOLD je rozumná strategie pro vyčkání na jasnější signály."
-}

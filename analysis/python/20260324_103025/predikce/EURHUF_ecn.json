@@ -1,7 +1,0 @@
-{
-  "symbol": "EURHUF_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě SELL: RSI na 1h je na 36 (pod 50). MA na 1h je pod cenou. Dlouhodobě HOLD: RSI na denním grafu je 55. MA na denním grafu je pod cenou. Celkově je trh v konsolidaci, je vhodné vyčkat na potvrzení trendu, nebo hrát krátkodobé pozice. Vzhledem k volatilitě a rostoucím spreadům na 1h grafu doporučuji opatrnost. Vzhledem k divergenci mezi krátkodobými a dlouhodobými indikátory, taky indikuje spíše kratkodobou SELL pozici s možností změny."
-}

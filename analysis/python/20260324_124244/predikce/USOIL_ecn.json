@@ -1,9 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růst cen je omezován odporou na úrovni 80 USD, zatímco MACD a RSI ukazují slabost. Předpoklad poklesu.",
-  "timestamp": "2026-03-24T12:19:05.016731+00:00",
-  "model": "deepseek-coder-v2"
-}

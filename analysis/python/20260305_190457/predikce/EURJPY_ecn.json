@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Technická analýza ukazuje smíšený obraz. Na denním a 4h grafu je RSI pod 50, což naznačuje možnost dalšího poklesu. Cena se pohybuje pod denním a 4h MA. Na týdenním a měsíčním grafu je RSI nad 50 a cena nad MA, což signalizuje dlouhodobý býčí trend, ale momentálně je trh v krátkodobé korekci.  Svíčkové formace na 1h grafu nevykazují jasný směr. Vzhledem k celkovému kontextu a medvědímu sentimentu v kratších časových rámcích doporučuji upřednostnit pozici SELL, ale s ohledem na silný dlouhodobý trend je třeba s nimi zacházet opatrně. BUY je možné pouze v případě jasných signálů pro odraz od supportů.  HOLD je pro investory, kteří preferují vyčkávání na potvrzení trendu."
-}
-```

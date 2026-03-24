@@ -1,7 +1,0 @@
-{
-  "symbol": "XPDUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena je pod MA na denním a 4h timeframe, RSI je pod 40 na 4h a denním timeframe indikující downtrend, i když 1h RSI je neutrální. Svíčkové formace naznačují medvědí sentiment (poslední 1h svíčka klesající).  Měsíční MA signalizuje dlouhodobý uptrend, ale krátkodobé ukazatele hovoří spíše pro SELL pozici s ohledem na možné další poklesy. Zvýšené riziko velkých spreadů v krátkodobém horizontu."
-}

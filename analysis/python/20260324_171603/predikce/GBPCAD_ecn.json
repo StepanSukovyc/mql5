@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPCAD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko ztráty vzhledem k volatilitě a nedostatečnému trendu. RSI ukazuje slabost s cenou pod průměrem.",
-  "timestamp": "2026-03-24T16:52:04.321678+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "US100_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje na krátkodobý pokles. 1H RSI je na 40.73 a MA je nad současnou cenou, což naznačuje možný odpor. 4H RSI je 46.06, také pod 50, a cena se pohybuje pod MA. Denní graf ukazuje podobný obrázek. Týdenní graf je neutrální, ale měsíční graf ukazuje silné překoupení (RSI 71.83) a cena je vysoko nad MA, což může vést ke korekci. Navíc, poslední hodinová svíčka je výrazně bearish (dlouhý knot nahoru a close blízko minima). Kvůli překoupenosti na vyšších timeframe, nedávnému klesajícímu trendu a negativnímu nastavení na nižších timeframe je SELL mírně favorizován, HOLD je rozumná opatrná alternativa a BUY je riziková spekulace, dokud se situace nestabilizuje. Je důležité vzít v úvahu, že technická analýza je pouze jeden z faktorů a fundamentální analýza by měla být také zvážena."
-}
-```

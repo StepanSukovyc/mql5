@@ -1,7 +1,0 @@
-{
-  "symbol": "USDNOK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě se cena pohybuje kolem hodnoty MA na 1h timeframe, RSI je neutrální. 4h a denní RSI jsou mírně nad 50, což naznačuje mírný uptrend, ale týdenní a měsíční RSI jsou pod 50 a cena je pod MA na týdenním a měsíčním timeframe, což naznačuje potenciál pro downtrend. Vzhledem k protichůdným signálům doporučuji HOLD, s vyšší pravděpodobností pro SELL pozici v dlouhodobějším horizontu. Poslední hodinové svíčky naznačují spíše oslabování. Zvýšená volatilita na 1h timeframe a různé spready zvyšují riziko, proto nižší váha pro BUY."
-}

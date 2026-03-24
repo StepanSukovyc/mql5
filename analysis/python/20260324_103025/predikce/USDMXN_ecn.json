@@ -1,7 +1,0 @@
-{
-  "symbol": "USDMXN_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hourly grafu je RSI na 40, což naznačuje prostor pro pokles. Denní RSI je 58, což je blízko překoupené oblasti. Cena je nad denním MA (17.637458), ale pod měsíčním MA (19.163547), což indikuje potenciální střednědobý down trend. V posledních hodinách vidíme pokles. Kombinace těchto faktorů naznačuje mírnou převahu SELL, opatrný BUY, HOLD pozice je relevantní z důvodu nedostatečného počtu svíček a možné korekce."
-}

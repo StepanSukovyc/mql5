@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "The monthly RSI of 27.03 indicates oversold conditions and potential for a bounce, but the MA is still significantly higher than the current price. The weekly RSI is 37.25, suggesting further downside potential but approaching oversold levels. The 1H RSI is 41.14, while price moves sideways at 3.12107, indicating little upward momentum. The 4H RSI of 56.80 is neutral. MA on the day timeframe is below the current price. Overall, the trend seems sideways, with potential for a short-term bounce, but the long-term trend remains down."
-}

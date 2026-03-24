@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NZDUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "NZDUSD is showing bearish signals. The current price (0.58825) is below the daily MA (0.598874) and 4H MA (0.591236), indicating a downtrend. RSI values on the 1H (32.64) and 4H (34.78) timeframes are approaching oversold territory, but the overall trend is bearish. The daily RSI (41.43) is still below 50. The recent hourly candles show a continued downward movement. Therefore, SELL is the preferred position.  The week MA (0.58195) is below current price, RSI(week) is around 50, and month RSI(50) and MA(0.58828) are close to current price, so HOLD is possible if price rebounds. Considering oversold 1H and 4H RSI, and price may rebound, BUY is least preferrable"
-}
-```

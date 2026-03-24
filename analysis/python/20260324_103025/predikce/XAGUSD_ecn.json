@@ -1,7 +1,0 @@
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšený obraz. Krátkodobé indikátory (1h RSI 59.74) naznačují potenciál pro mírný růst, ale střednědobé (4h RSI 43.34) a dlouhodobé (denní RSI 35.87) indikují spíše medvědí sentiment. Cena je pod denním MA (81.62), ale nad měsíčním MA (44.92), což signalizuje nejistotu v trendu. Na týdenní bázi je RSI mírně nad 50. Měsíční RSI je sice vysoko (66.44), ale rapidně klesá. Během posledních hodin došlo k určitému oživení, nicméně celkový sestupný trend naznačuje vyšší pravděpodobnost pro SELL pozici. Proto rozdělení rizik: BUY: 30%, SELL: 40%, HOLD: 30%."
-}

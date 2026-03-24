@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHUF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "USDHUF is showing mixed signals. Short term (1H RSI 41.33) suggests oversold conditions, but longer term (Daily RSI 58.22) is neutral and monthly MA (353.55) is far above the current price (339.33). Recent daily candles show volatility. Considering the risk-reward, SELL has slightly higher probability due to overall downward pressure and MA levels, while BUY is risky."
-}

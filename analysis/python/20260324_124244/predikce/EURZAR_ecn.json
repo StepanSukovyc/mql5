@@ -1,7 +1,0 @@
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 35,
-  "SELL": 40,
-  "HOLD": 25,
-  "reasoning": "EURZAR is at 19.79906. Daily and 4H RSI are around 63-64, approaching overbought conditions, while weekly RSI is at 50. The price is slightly above the monthly MA (19.790001), suggesting a neutral to slightly bullish bias on the long term. However, the hourly timeframe shows indecision and a recent drop from a high, suggesting potential short-term pullback. Consider the elevated spreads and potential volatility associated with ZAR. Given the conflicting signals, a slight SELL bias is adopted, with a moderate BUY possibility if the price breaks above recent highs. A HOLD position is reasonable given the overall indecision."
-}

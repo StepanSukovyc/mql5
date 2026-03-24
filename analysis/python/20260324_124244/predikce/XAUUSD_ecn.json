@@ -1,9 +1,0 @@
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na svíčkové grafy a RSI indikátor vidím stochastický crossover, což naznačuje silnou tendenci k poklesu. Nicméně, MA hodnoty ukazují stabilitu, což může být základ pro očekávání nižšího rizika a volatilita je předpovězena jako nízká.",
-  "timestamp": "2026-03-24T12:26:43.924536+00:00",
-  "model": "deepseek-coder-v2"
-}

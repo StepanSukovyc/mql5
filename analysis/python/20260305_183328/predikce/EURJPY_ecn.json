@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Short-term indicators (1h, 4h RSI below 50, price below 4h MA) suggest bearish momentum. Daily RSI is neutral but trending downward. Weekly RSI is above 50 but recent price action is bearish. Monthly RSI is healthy but very slow-moving. Overall, SELL is favored, BUY carries moderate risk, and HOLD is a reasonable but less likely option due to the potential for further downside.  The recent hourly candles also show a lack of upward momentum."
-}
-```

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Technicky se BCHUSD_ecn nachází v downtrendu. RSI na denním a týdenním grafu indikuje, že trh není přeprodaný, což naznačuje prostor pro další pokles. Cena je pod denním i týdenním klouzavým průměrem, což posiluje medvědí sentiment. Na 1h timeframe je RSI kolem 45 a cena pod MA, což naznačuje lehký prodejní tlak, ale ne přehnaný. Zatímco existuje potenciál pro krátkodobé oživení (BUY), celkový trend a indikátory favorizují SELL. HOLD je opatrný přístup vzhledem k volatilitě trhu."
-}
-```

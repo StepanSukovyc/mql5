@@ -1,7 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "DXY shows mixed signals. Daily RSI is nearing overbought (57.99), but the hourly RSI (44.42) suggests some room for upward movement. However, the monthly RSI (43.87) remains relatively low, indicating long-term weakness. The price is above the daily (99.13) and weekly (98.70) moving averages, but below the monthly MA (101.26). Recent price action on the 1h and 4h charts shows a struggle to maintain upward momentum and increased volatility. Given the conflicting signals, a HOLD strategy, with slightly increased SELL pressure, is the safest approach, with potential for short-term upside but long-term downward pressure."
-}

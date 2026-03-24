@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NOKSEK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na denním a týdenním grafu je RSI překoupené (72.99 a 70.02). Nicméně, cena je nad MA na všech timeframech kromě 4H, což naznačuje býčí trend. Na 1H grafu je RSI neutrální (59.97) a cena se pohybuje kolem MA. Měsíční RSI je pod 50, což naznačuje potenciál pro růst. Celkově vidím potenciál pro další růst, ale s ohledem na překoupené úrovně na vyšších timeframech je rozumné zvážit i možnost korekce. Proto rozložení BUY/SELL/HOLD odráží opatrný optimismus."
-}
-```

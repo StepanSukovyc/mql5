@@ -1,9 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je v současné době vyvážené mezi nákupem a prodejem. RSI ukazuje slabost trhu, ale MA indikace silného růstu.",
-  "timestamp": "2026-03-24T09:43:43.858119+00:00",
-  "model": "deepseek-coder-v2"
-}

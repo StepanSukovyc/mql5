@@ -1,7 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "DXY currently shows mixed signals. Daily RSI is at 56.93, suggesting potential for further upside. However, recent 1H and 4H RSI values are below 50 indicating short-term downward momentum. Price is below 4H MA, but above daily MA. The monthly RSI is at 43.17 and price is below MA suggesting long-term weakness. Recent price action shows indecision. Given these mixed signals, SELL has slightly higher probability. Hold represents wait and see."
-}

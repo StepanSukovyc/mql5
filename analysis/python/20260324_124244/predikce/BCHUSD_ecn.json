@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje smíšený obraz. Na hodinové bázi je RSI (63.98) blízko překoupené zóně a cena je pod MA (476.41), což signalizuje potenciální korekci. Čtyřhodinový timeframe je neutrální (RSI 49.04). Denní graf má RSI (47.44) také neutrální, ale cena je nad MA (463.725), což mírně upřednostňuje nákup. Týdenní graf ukazuje RSI (39.84), což naznačuje potenciál pro růst, ale cena je výrazně pod MA (542.30), což naznačuje silný downtrend. Měsíční RSI (49.25) je neutrální a cena je nad MA (456.92). Kvůli protichůdným signálům a převládajícímu downtrendu na týdenním grafu, je vhodné zaujmout spíše opatrný postoj. Vzhledem k tomu SELL se zdá být mírně pravděpodobnější než BUY."
-}

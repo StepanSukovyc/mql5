@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NZDCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "NZDCAD is showing bearish signals across multiple timeframes. Hourly and 4-hourly RSI are oversold, suggesting potential for a short-term bounce, but overall trend is down as indicated by MA crossover on hourly and 4H timeframe. Daily RSI is also below 50 and the price is below the daily MA. While the weekly RSI is close to 50, the price action suggests continued downside potential. A significant sell off can be observed in the last week. Monthly MA is way above price and declining. Thus, SELL has the highest probability."
-}
-```

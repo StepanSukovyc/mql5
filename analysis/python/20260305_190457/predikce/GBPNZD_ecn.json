@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Cena je nad MA na 1h a 4h timeframe, RSI na 1h je v prekoupene zone. Denni RSI je neutralni. Tvorba vyssich maxim na 1h timeframe, naznacuje potencial dalsiho rustu. Na druhou stranu tydenni MA je vyse nez aktualni cena a posledni dva dny byly klesajici, cimz naznacuji potencialni selloff."
-}
-```

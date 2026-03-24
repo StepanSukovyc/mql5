@@ -1,9 +1,0 @@
-{
-  "symbol": "XCUUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI ukazuje slabost a možná další pokles, ale MA signalizují stabilitu.",
-  "timestamp": "2026-03-24T12:28:37.586119+00:00",
-  "model": "deepseek-coder-v2"
-}

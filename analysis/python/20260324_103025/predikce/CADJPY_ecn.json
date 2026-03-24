@@ -1,9 +1,0 @@
-{
-  "symbol": "CADJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růst cenových pohybů je potenciálně omezen vlivem zvýšeného rizika a nejasností na finančních trzích.",
-  "timestamp": "2026-03-24T10:19:24.642768+00:00",
-  "model": "deepseek-coder-v2"
-}

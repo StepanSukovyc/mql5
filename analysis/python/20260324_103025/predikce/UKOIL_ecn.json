@@ -1,7 +1,0 @@
-{
-  "symbol": "UKOIL_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena ropy prudce klesla z hodnot nad 110 USD na současných 101 USD. Hodinový RSI je pod 35, což naznačuje potenciální překoupenost, ale MA je nad aktuální cenou.  4h RSI je kolem 45 a 4h MA je také vysoko, což signalizuje spíše medvědí trend. Denní RSI je relativně vysoko na 61, což naznačuje sílu, ale prudký pokles v denních svíčkách naznačuje silný prodejní tlak. Týdenní a měsíční RSI naznačují překoupené podmínky. Celkově převládá prodejní tlak s potenciálem dalšího poklesu, avšak krátkodobé korekce nahoru jsou možné. Z důvodu vysoké volatility a nejistoty se doporučuje opatrnost a sledování vývoje."
-}

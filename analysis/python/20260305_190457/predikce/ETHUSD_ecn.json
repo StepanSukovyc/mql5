@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě SELL: 1h RSI pod 50, klesající cena v posledních hodinách. Střednědobě HOLD: 4h RSI kolem 50, cena pod 4h MA. Dlouhodobě SELL: Týdenní RSI je pod 32 a cena je pod týdenním i měsíčním MA. Celkově převládá negativní sentiment, ale potenciální volatilita vyžaduje opatrnost, proto i BUY má nějaké procento."
-}
-```

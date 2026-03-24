@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "NZDUSD je v downtrendu na denním grafu s RSI pod 40. 1H a 4H RSI jsou relativně neutrální. Cena je pod MA na 1H, 4H, Day a Month timeframech, což naznačuje downtrend. Konsolidace na 1H timeframe naznačuje nerozhodnost. SELL má vyšší pravděpodobnost vzhledem k celkovému downtrendu, ale potenciál BUY se objevuje na nižších timeframes."
-}

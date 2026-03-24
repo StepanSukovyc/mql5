@@ -1,7 +1,0 @@
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na denním grafu RSI pod 35 naznačuje překoupenost. Cena je pod MA na 1h, 4h i denním grafu. Měsíční graf sice ukazuje silný uptrend, ale poslední svíčka je silně negativní. Týdenní RSI je neutrální. Celkově převládá sentiment k SELL, ale není dost silný k 100% jistotě, proto je část i v BUY a HOLD."
-}

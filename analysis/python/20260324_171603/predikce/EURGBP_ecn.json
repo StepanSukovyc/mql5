@@ -1,9 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zhoršení fundamentalních ukazatelů, zeslabující svíčková forma a stoupající RSI indikují poklesovou perspektivu.",
-  "timestamp": "2026-03-24T16:25:34.727198+00:00",
-  "model": "deepseek-coder-v2"
-}

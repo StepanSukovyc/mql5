@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "On a higher timeframe (weekly & monthly) RSI is very low suggesting oversold conditions, while price is under MA which indicates downtrend. On the daily chart, the RSI is hovering around 50, indicating neutrality, and the price is near the MA. Shorter term (1H) RSI is above 50 showing short-term buying opportunities, while price is near MA. Considering this mixed picture with a bias towards the downtrend in the longer term, a HOLD position has some merit, but a SELL position is more probable. BUY positions are possible for quick intraday trades"
-}
-```

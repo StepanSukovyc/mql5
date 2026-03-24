@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na týdenním grafu je RSI překoupené (79.02), což naznačuje možné ochlazení. Denní RSI je na 61.49, což značí prostor pro růst, ale hodinový RSI je 42.41, což by mohlo naznačovat korekci. Cena je pod 1h MA, ale nad 4h, denním i týdenním MA, což vytváří smíšený signál. Proto preferuji SELL, ale riziko se rozkládá na BUY a HOLD. Z historického hlediska vidíme velký růst za poslední měsíc, což naznačuje možnou konsolidaci, nebo korekci. Poslední 1H svíčky klesají."
-}
-```

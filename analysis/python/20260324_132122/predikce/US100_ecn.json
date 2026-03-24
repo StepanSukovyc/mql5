@@ -1,7 +1,0 @@
-{
-  "symbol": "US100_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje smíšený signál. Měsíční RSI je sice v překoupené zóně (66.06), ale denní a 4H RSI jsou v přeprodané zóně (38.35 a 42.53). Cena je pod denním a týdenním MA, což indikuje potenciální klesající trend. Poslední denní svíčka je medvědí. BUY má podporu v měsíčním MA, ale momentálně převažuje prodejní tlak. HOLD je rozumný, dokud se neobjeví jasnější signál."
-}

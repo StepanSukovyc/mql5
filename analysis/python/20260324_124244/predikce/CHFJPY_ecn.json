@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě klesající trend. 1H a 4H RSI naznačují, že se aktivum blíží k přeprodané zóně, ale momentum je stále dolů. Denní MA je nad současnou cenou, což naznačuje rezistenci. Měsíční a týdenní indikátory jsou stále býčí, ale ztrácejí momentum. Proto SELL mírně preferován, ale vzhledem k silnému uptrendu v delším časovém rámci (měsíční) a konsolidaci na denním grafu je i HOLD relevantní. BUY je rizikový, dokud se neobjeví silnější signál obratu trendu."
-}

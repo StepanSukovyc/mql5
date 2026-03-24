@@ -1,7 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1h timeframe je RSI pod 50 a cena lehce nad MA, což naznačuje potenciál pro krátkodobý růst. Na 4h a denním timeframe je RSI blízko překoupené zóny, což naznačuje potenciál pro pokles. Týdenní RSI je pod 50, indikuje downtrend. Měsíční RSI je nad 50, značí uptrend.  Celkově je trh v konsolidaci s lehce převládajícím medvědím sentimentem v krátkodobém horizontu, proto je SELL mírně rizikovější než BUY a HOLD."
-}

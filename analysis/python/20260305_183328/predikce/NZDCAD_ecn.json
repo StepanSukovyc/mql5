@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NZDCAD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Dominantní je klesající trend na denním a 4H timeframe s RSI pod 40. Cena je pod MA na všech timeframes kromě týdenního, který je těsně nad. Absence jasných obratových formací naznačuje pokračování klesajícího trendu.  Tlak na prodej mírní fakt, že RSI na 4H a denním grafu se nachází v přeprodané zóně."
-}
-```

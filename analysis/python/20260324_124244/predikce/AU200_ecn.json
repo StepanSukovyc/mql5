@@ -1,7 +1,0 @@
-{
-  "symbol": "AU200_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "AU200_ecn: Bearish sentiment prevails. Daily and weekly RSI are below 40, indicating a potential oversold condition, but still favoring selling. The price is below daily and weekly MAs, reinforcing the downward trend. Recent hourly candles show consolidation, thus supporting HOLD. Upside limited by resistance at MAs. SELL is slightly favoured due to the longer timeframe momentum and placement of current price."
-}

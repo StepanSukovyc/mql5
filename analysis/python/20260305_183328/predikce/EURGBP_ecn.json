@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technické indikátory ukazují smíšený signál. Krátkodobé RSI (1h, 4h, den) naznačují, že trh je spíše překoupený nebo blízko překoupení, což naznačuje možnost poklesu. MA na všech timeframe kromě měsíčního jsou výše než aktuální cena, což signalizuje downtrend. Měsíční MA je pod aktuální cenou, což naznačuje support. Celkově převládá mírný tlak na prodej, ale absence silných signálů vede k rozdělení rizik mezi SELL, BUY a HOLD pozice."
-}
-```

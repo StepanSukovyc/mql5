@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "FANG_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu je RSI překoupené (72.65), což naznačuje možnost korekce. Na denním grafu je RSI neutrální (52.93), ale cena je nad MA. Na týdenním grafu je RSI 43.92 a cena pod MA, což indikuje potenciální downtrend. Měsíční RSI je 62.31, což je neutrální. Svíčky za poslední hodinu naznačují, že by downtrend mohl začít. Proto: mírná převaha pro SELL."
-}
-```

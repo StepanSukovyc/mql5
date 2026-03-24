@@ -1,7 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Z technického hlediska: Cena je pod denním MA, RSI na denním grafu je pod 50. Na 1h grafu RSI naznačuje mírný bullish moment, ale je blízko překoupené zóně. Dlouhodobější timeframe (týdenní, měsíční) naznačují oslabující trend. Nedostatek dat o svíčkových formacích brání přesnější analýze, proto se doporučuje vyčkat na další potvrzení trendu."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURAUD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "EURAUD is showing mixed signals. 4H RSI is in overbought territory (80.06), suggesting a potential pullback. Weekly RSI is low (33.14), but MA is way above price. Daily RSI is neutral (58.96), which hints possible continuation upwards. Overall, more likely to sell because RSI overbought on 4H and MA on weeks is far above the current price."
-}

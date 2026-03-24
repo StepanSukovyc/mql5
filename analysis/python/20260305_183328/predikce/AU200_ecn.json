@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "AU200_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "AU200_ecn aktuálně vykazuje silné prodejní signály. RSI na 1h a 4h timeframech je hluboko v přeprodané zóně (28.19 a 24.70), což naznačuje možný odraz, ale denní RSI je také pod 40 (37.84) a cena se nachází pod MA na 1h, 4h a denním timeframech.  Týdenní RSI je na 47.16 což naznačuje neutralitu. Měsíční RSI je relativně vysoké na 59.86, ale cena je nad měsíčním MA, což potvrzuje long-term uptrend. Poslední svíčky na 1h a 4h timeframech ukazují silný pokles. Vzhledem k silnějšímu downtrendu na nižších timeframech a tomu, že se cena výrazně vzdálila od týdenního MA, upřednostňuji pozici SELL. BUY je riskantní, protože i když je trh přeprodaný, stále pokračuje v propadu. HOLD je indikováno 20% z důvodu možného odrazu a celkově se nacházíme v uptrendu dle měsíčního timeframe."
-}
-```

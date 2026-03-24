@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena se nachází pod MA na všech časových rámcích, což naznačuje downtrend. RSI na denním grafu je pod 40, což naznačuje, že by trh mohl být překoupený, ale stále existuje prostor pro další pokles.  Na 4h grafu je RSI také pod 50, což podporuje prodejní tlak. Zatímco 1h RSI je neutrální, celkový kontext naznačuje spíše SELL. Poslední denní svíčka je také klesající. BUY má určité šance, protože potenciálně se cena může odrazit od support úrovně, ale pravděpodobnost je menší než pro SELL."
-}

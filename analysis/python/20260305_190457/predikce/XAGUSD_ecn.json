@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Short-term bearish signals dominate. Hourly RSI is oversold (28.56), suggesting a possible short-term bounce, however, the price is well below the hourly moving average (83.55), indicating continued downward pressure. The 4-hour RSI is approaching oversold (39.98) reinforcing the bearish momentum. The daily timeframe shows RSI at 43.23, and current price below the MA (82.61), confirming further short term downtrend. The monthly RSI is still in overbought territory (77.83), suggesting a possible correction in the longer term, but immediate risk is to the downside based on shorter-term timeframes. Recent hourly and 4H candle patterns also suggest continued sell pressure. This leads to a higher probability of a sell."
-}
-```

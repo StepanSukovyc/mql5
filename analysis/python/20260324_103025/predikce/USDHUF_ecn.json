@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHUF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě SELL (RSI 1h pod 40, MA 1h pod cenou, silný propad ceny v posledních hodinách). Dlouhodobě nejistota (RSI denní kolem 50, MA denní pod cenou, RSI týdenní kolem 50, MA týdenní pod cenou, RSI měsíční pod 50, MA měsíční nad cenou), proto HOLD, dokud se nevyjasní trend. Měsíční MA je nad aktuální cenou, což naznačuje potenciální rezistenci. Pro BUY je třeba sledovat proražení a udržení se nad denní a týdenní MA."
-}

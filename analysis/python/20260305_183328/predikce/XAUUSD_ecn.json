@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "XAUUSD_ecn is currently at 5075.89. Hourly RSI is oversold (23.07), but the price is below the hourly MA (5150.99), indicating short-term bearish momentum. Daily RSI is neutral (49.87), while the price is below the daily MA (5083.36). Weekly and monthly RSI are overbought (72.98 and 88.71), suggesting a potential pullback. Recent hourly candles show a decline, supporting a sell position. Therefore the analysis suggests SELL is more probable and HOLD is safer than BUY."
-}
-```

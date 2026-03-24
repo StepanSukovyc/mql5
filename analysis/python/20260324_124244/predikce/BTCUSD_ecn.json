@@ -1,7 +1,0 @@
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Smíšené signály. Krátkodobě (1h) RSI naznačuje mírné překoupení, cena nad MA. Střednědobě (4h, day) RSI neutrální, cena kolem MA. Dlouhodobě (week, month) RSI naznačuje, že trh je přeprodaný, ale cena je pod MA. Historická data naznačují potenciální podporu kolem 68000-70000. Vzhledem k těmto protichůdným indikátorům doporučuji opatrnost a vyčkávání na potvrzení trendu."
-}

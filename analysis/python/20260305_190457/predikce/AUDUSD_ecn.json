@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Krátkodobě SELL: Cena klesla pod MA na 1H a 4H. RSI na 1H a 4H naznačuje překoupenost. Denní RSI klesá. Dlouhodobě BUY: Měsíční i týdenní RSI ukazují stále uptrend, cena nad MA. Pokles by mohl být korekce před dalším růstem. Proto HOLD pro ty, kteří jsou v pozici a nechtějí ji uzavřít."
-}
-```

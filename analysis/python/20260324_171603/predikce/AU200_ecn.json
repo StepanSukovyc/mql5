@@ -1,7 +1,0 @@
-{
-  "symbol": "AU200_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "The daily and weekly RSI are below 40, suggesting possible oversold conditions, but the price is below the daily and weekly MA, indicating a downtrend. The current price is also below the monthly MA. Recent hourly candles show some upward movement, but not enough to reverse the overall bearish momentum. Considering the mixed signals, a cautious approach is recommended: slightly favoring a SELL position, but with a significant portion allocated to HOLD to observe further price action."
-}

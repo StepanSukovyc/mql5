@@ -1,9 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale svíčkové formace naznačují potenciální změnu. Kombinace těchto faktorů doporučuje mírnou pozitivní perspektivu s rizikem poklesu.",
-  "timestamp": "2026-03-24T16:42:34.428230+00:00",
-  "model": "deepseek-coder-v2"
-}

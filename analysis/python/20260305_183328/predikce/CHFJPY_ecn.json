@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 30,
-  "SELL": 35,
-  "HOLD": 35,
-  "reasoning": "CHFJPY is showing mixed signals. Monthly RSI is overbought (70.55), suggesting potential for a pullback. Shorter timeframes (1h, 4h) show RSI around 50, indicating indecision. Recent hourly candles show volatility. Daily RSI is at 56.08, indicating possible continued upward momentum. Weekly RSI is at 68.75, indicating strong momentum, but approaching overbought conditions. The current price is above the daily and weekly MA, supporting a bullish trend but further growth may be limited. Considering overbought conditions in higher timeframes and indecision in lower, a 'HOLD' strategy with caution towards 'SELL' is reasonable. A slight correction downwards is possible, making immediate buys riskier. Consider SELL if hourly RSI starts dropping significantly."
-}
-```

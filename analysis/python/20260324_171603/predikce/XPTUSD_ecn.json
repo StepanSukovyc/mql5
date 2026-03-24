@@ -1,7 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena klesá pod denní a týdenní MA, RSI naznačuje pokračující pokles na denním grafu (37.88). Hodinový RSI je sice nad 60, ale to může být krátkodobá korekce. Měsíční RSI je vysoko (65), ale je to způsobeno historickým růstem, současný trend je spíše klesající. Vzhledem k downtrendu na vyšších timeframech a klesajícím MA je SELL rizikovější než BUY. HOLD je nejbezpečnější, čekání na potvrzení trendu."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 30,
-  "SELL": 35,
-  "HOLD": 35,
-  "reasoning": "Na měsíčním grafu je patrný rostoucí trend (RSI 63.4, MA 169.7), ale na denním a hodinovém grafu se RSI pohybuje kolem 50-60, což naznačuje nerozhodnost. Poslední svíčky na 1H grafu ukazují spíše konsolidaci. Vyčkávání (HOLD) je vhodné pro potvrzení trendu. Mírná převaha SELL kvůli poslednímu dni, kde se trh spíše pohyboval do strany a indikátory to naznačují také. BUY opatrně s ohledem na rostoucí MA."
-}

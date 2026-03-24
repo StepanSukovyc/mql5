@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "US30_ecn",
-  "BUY": 20,
-  "SELL": 65,
-  "HOLD": 15,
-  "reasoning": "Cena US30_ecn je aktuálně 47686.2. Na 1H a 4H timeframe je RSI hluboko v přeprodané zóně (25.89 a 31.09), což by mohlo naznačovat potenciální korekci směrem nahoru. Nicméně, cena je pod MA na všech timeframe kromě měsíčního, což značí downtrend. Na denním grafu je RSI také poměrně nízko (35.30). Na týdenním grafu je RSI kolem 50, což je neutrální. Na měsíčním grafu je RSI na 68.24 což značí možnou překoupenost. Vzhledem k tomu, že se cena nachází pod MA na většině timeframe, se přikláním k SELL, protože trh má momentum dolů. Proto doporučuji SELL s ohledem na překoupené a přeprodané zóny."
-}
-```

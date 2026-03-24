@@ -1,7 +1,0 @@
-{
-  "symbol": "USDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1h timeframe je RSI pod 50, což naznačuje klesající momentum. 4h RSI je kolem 50, indikuje neutralitu. Denní RSI je nad 50, což by mohlo vést k pokračování rostoucího trendu. Nicméně, měsíční RSI je pod 40 a cena je pod měsíčním MA, což naznačuje dlouhodobější sestupný trend. Denní svíčka z 23. března je výrazně medvědí. Kombinace těchto faktorů naznačuje, že SELL pozice má mírně vyšší pravděpodobnost úspěchu než BUY pozice.  Držení (HOLD) pozice je rozumná strategie pro ty, kteří chtějí vyčkat na další vývoj."
-}

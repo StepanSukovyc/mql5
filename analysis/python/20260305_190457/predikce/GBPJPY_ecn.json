@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobý downtrend na 1H a 4H grafech, RSI se pohybuje kolem 50, což naznačuje neutrální momentum. Denní RSI pod 50. Týdenní a měsíční RSI nad 60 indikují potenciál k prodeji. Cena se pohybuje kolem denního MA. Poslední 1H svíčky naznačují pokles. Rizikové hodnocení: mírný tlak k prodeji, doporučeno sledovat další vývoj."
-}
-```

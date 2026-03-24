@@ -1,7 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Denní RSI je na 33.75, což naznačuje potenciál pro další pokles. Cena je pod denním MA (10370.51) a 4H MA (9998.95). Měsíční RSI je 62.02, což naznačuje, že dlouhodobý trend je stále rostoucí, ale krátkodobě by mohla nastat korekce. Z posledních svíček na 1H a 4H časovém rámci vidíme stagnaci ceny. Proto je větší pravděpodobnost poklesu ceny než růstu."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měsíční RSI je pod 30, což naznačuje překoupenost, ale MA na měsíčním a týdenním grafu jsou nad aktuální cenou. Denní a 4H RSI jsou neutrální. Na 1H timeframe je cena kolem MA. Převažuje mírný tlak na SELL vzhledem k dlouhodobějšímu downtrendu a MA. Potřebujeme více dat a potvrzení pro jednoznačnější strategii."
-}

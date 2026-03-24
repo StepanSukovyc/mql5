@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "SGDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu je RSI na úrovni 53, což naznačuje neutrální trend. Cena se pohybuje nad MA (122.45345), což naznačuje potenciál k růstu, ale hodinový a 4-hodinový RSI (43.2753 a 43.507538) naznačují spíše sestupný trend. Proto SELL má o něco větší prioritu vzhledem k aktuální ceně (122.997) a jejímu vztahu k MA na vyšších timeframech. Týdenní a měsíční RSI a MA ukazují na rostoucí trend, ale aktuální momentum je spíše negativní. HOLD je volba pro konzervativní obchodníky."
-}
-```

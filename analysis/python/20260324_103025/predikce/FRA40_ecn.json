@@ -1,7 +1,0 @@
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "FRA40_ecn shows a downward trend across multiple timeframes. Daily and weekly RSI indicate oversold conditions, but the price is still below the moving averages on 4H, Daily, and Weekly charts. The monthly MA is slightly above the current price. A recent bullish push can be seen in hourly candles but is not enough to change my overall sentiment. Therefore, SELL is more likely, HOLD is viable given RSI levels, and BUY is less likely. The risk associated with buying is higher than the risk associated with selling at these levels."
-}

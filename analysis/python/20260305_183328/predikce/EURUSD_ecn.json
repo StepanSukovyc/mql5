@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "EURUSD is currently at 1.15848. RSI across multiple timeframes (1h, 4h, Day) indicates oversold conditions, suggesting potential for a short-term bounce. However, the price is below the moving averages on shorter timeframes (1h, 4h, Day, Week), signalling continued bearish pressure. The monthly RSI is above 50, indicating a longer-term bullish trend, but current price action suggests a correction. Recent daily candles show strong bearish momentum, justifying a SELL bias.  A Hold recommendation reflects the potential for a short-term bounce due to oversold conditions but the overall downward trend."
-}
-```

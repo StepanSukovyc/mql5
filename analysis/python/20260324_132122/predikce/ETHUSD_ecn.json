@@ -1,7 +1,0 @@
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Na hodinové bázi je RSI lehce nad 50, což naznačuje potenciál k růstu. Denní RSI je neutrální, ale 4H RSI je relativně nízko, což ukazuje na prostor pro korekci nahoru. Týdenní RSI je pod 35 což značí potenciální překoupenost. MA na delších timeframech jsou nad aktuální cenou, což naznačuje možný tlak na pokles. Kombinace těchto faktorů naznačuje nejistotu, proto je vhodné zaujmout neutrální postoj, ale s mírnou preferencí k nákupu na základě krátkodobých indikátorů."
-}

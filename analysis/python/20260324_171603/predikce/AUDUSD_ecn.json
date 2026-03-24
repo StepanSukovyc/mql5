@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "AUDUSD is showing bearish signals across multiple timeframes. The 4H and Daily RSI are below 40, suggesting potential for further downside. 1H RSI is near neutral. Daily and 4H MAs are above the current price, acting as resistance. On a weekly basis RSI indicates that there is room for downward movement, and the price sits above the MA. Month RSI is fairly neutral. The recent price action, particularly on the daily timeframe, also suggests a downward trend, with the price failing to hold above key moving averages. Given these factors, a 'SELL' position is favored, while some level of uncertainty is suggested, therefore, split into BUY, SELL and HOLD based on the current assessment."
-}

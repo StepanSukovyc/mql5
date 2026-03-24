@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "BTCUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Cena BTCUSD je pod 1h MA a klesající. Denní a týdenní RSI naznačují prostor pro další pokles. Měsíční MA je vysoko nad současnou cenou, což značí silný odpor. 4h timeframe naznačuje klesající trend, i když RSI není vyloženě v přeprodané zóně. Poslední 4h svíčka je silně bearish. Celkově převládá spíše SELL signál, ale vzhledem k volatilitě BTC a možnosti obratu trhu, se HOLD a BUY dělí o zbytek procent."
-}
-```

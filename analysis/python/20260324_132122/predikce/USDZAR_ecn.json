@@ -1,7 +1,0 @@
-{
-  "symbol": "USDZAR_ecn",
-  "BUY": 35,
-  "SELL": 35,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu RSI (63.65) se blíží překoupené zóně, ale není tam. 4H RSI (61.16) také ukazuje na možný růst. Nicméně 1H RSI (49.19) je neutrální a cena se pohybuje kolem MA na většině timeframech. Měsíční RSI (42.94) naznačuje spíše konsolidaci. Poslední denní svíčka je býčí, ale předchozí prudký pokles ceny vyvolává obavy. Proto rozložení mezi BUY/SELL s ohledem na současnou volatilitu a HOLD pro vyčkávání na potvrzení trendu."
-}

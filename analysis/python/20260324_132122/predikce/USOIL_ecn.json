@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě indikuje hourly RSI pod 40 a denní timeframe kolem 60 spíše do strany, ale 4h RSI pod 50 naznačuje pokles. Týdenní RSI je vysoko (73.89), což signalizuje potenciální překoupenost. Vzhledem k prudkému propadu ceny a následnému pokusu o korekci, SELL má vyšší pravděpodobnost. MA na 1h timeframe je nad současnou cenou. Nicméně celkově historicky MA na větších timeframech indikuje spíše pohyb nahoru."
-}

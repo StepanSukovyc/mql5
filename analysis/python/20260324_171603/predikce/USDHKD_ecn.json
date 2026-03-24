@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHKD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1H a 4H timeframe je RSI pod 50 a cena je pod MA indikátorem. Na denním timeframe je RSI 54, což naznačuje neutrální sentiment. Na týdenním a měsíčním timeframe je RSI vyšší (63 a 52), což značí mírný býčí trend, ale denní pokles naznačuje možnost korekce. Poslední hodinové svíčky klesají, což posiluje SELL argument. Celkově doporučuji opatrnost, SELL má mírnou převahu, ale riziko pro BUY je omezené."
-}

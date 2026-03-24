@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCAD_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Smíšené signály. 1H RSI je překoupené (67.47), naznačuje možnost korekce, ale 4H, denní a měsíční RSI jsou neutrální (58.73, 52.45, 61.39). Cena je pod 1H MA, ale nad MA na ostatních časových rámcích. Poslední den vykazuje růst, ale týdenní graf je pod MA. Vzhledem k protichůdným signálům a absenci jasných svíčkových formací je nejrozumnější část držet a počkat na potvrzení trendu."
-}

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na 1h, 4h a denním grafu, což naznačuje downtrend. RSI je na 1h a 4h timeframu pod 50, což podporuje prodejní signál. Na denním grafu je RSI blízko 50. Týdenní RSI je nad 60 a měsíční nad 50, což indikuje dlouhodobější býčí trend, ale krátkodobě převládá tlak na prodej. Poslední 1h svíčky naznačují prodejní momentum. Proto převládá SELL signál, s menší šancí na BUY kvůli dlouhodobému uptrendu a možnou konsolidaci."
-}
-```

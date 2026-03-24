@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "FANG_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "Cena je nad 1h, 4h a denním MA, ale pod týdenním MA. Měsíční RSI je 62.46, což naznačuje býčí momentum, ale 1h RSI je na 61.25, což by mohlo naznačovat překoupenost na krátkodobém horizontu. Nedávná volatilita (rychlý růst a následný pokles ceny v posledních hodinách) vyžaduje opatrnost. Z tohoto důvodu doporučuji převážně HOLD, s mírným BUY, pokud se udrží nad denním MA a vyčkávací pozicí pro SELL."
-}
-```

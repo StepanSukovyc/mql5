@@ -1,7 +1,0 @@
-{
-  "symbol": "SGDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1h a 4h timeframe je RSI pod 50, což naznačuje medvědí trend. MA na 1h je nad cenou, posiluje Sell. Na denním a týdenním timeframe je RSI nad 50, ale klesá. Celkově vidím spíše SELL šanci (40%), vzhledem ke krátkodobému klesajícímu trendu. BUY má 30% vzhledem k delšímu trendu, který je rostoucí. HOLD má 30% - je potřeba další konsolidace, aby se potvrdil jeden z trendů."
-}

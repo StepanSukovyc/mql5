@@ -1,7 +1,0 @@
-{
-  "symbol": "XCUUSD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Denní a 4H RSI naznačují překoupenost, cena je pod denním MA, ale nad 1H MA. Týdenní RSI je neutrální. Krátkodobě SELL s ohledem na downtrend, ale s nízkou jistotou (30%) vzhledem k možné korekci.  HOLD je rozumný, protože dlouhodobý trend je nejasný a vyžaduje další sledování."
-}

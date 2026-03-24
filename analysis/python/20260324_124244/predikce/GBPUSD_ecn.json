@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Na hourly timeframe je RSI neutrální, ale cena je pod MA, což naznačuje krátkodobý prodejní tlak. Na denním a týdenním timeframe je RSI pod 50, což naznačuje potenciál pro další pokles. Měsíční timeframe naznačuje býčí trend s RSI nad 50 a cenou nad MA, ale krátkodobý sentiment je medvědí.  Vzhledem k těmto protichůdným signálům je vhodné zvážit HOLD pozici nebo SELL s opatrností.  Svíčkové formace z posledních hodin ukazují na korekci po prudkém nárůstu, což podporuje strategii čekání (HOLD) nebo drobného SELL."
-}

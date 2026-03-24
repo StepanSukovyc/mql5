@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GER40_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Technická analýza ukazuje na možný prodejní tlak. RSI je na nižších timeframe (1h, 4h, den) v oblasti překoupenosti, což naznačuje potenciální obrat. MA na denním, 4h a 1h timeframe se nachází nad aktuální cenou, což značí downtrend. Na měsíčním grafu je RSI vysoko, naznačující možnou korekci po dlouhém růstu. Nicméně, držení pozice může být vhodné pro ty, kteří věří v dlouhodobý růst, i když krátkodobě očekávají pokles."
-}
-```

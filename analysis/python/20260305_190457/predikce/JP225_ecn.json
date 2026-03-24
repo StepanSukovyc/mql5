@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "JP225_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "JP225_ecn aktuálně vykazuje silný sestupný trend. RSI na 1h a 4h timeframe je pod 35, což signalizuje překoupenost, ale MA na všech kratších timeframech (1h, 4h, den) je nad aktuální cenou, což naznačuje pokračující klesající trend. Dlouhodobější indikátory (týdenní a měsíční RSI a MA) sice naznačují býčí potenciál, ale v krátkodobém horizontu převažuje tlak na prodej. Poslední denní svíčka je medvědí, což posiluje signal k SELL."
-}
-```

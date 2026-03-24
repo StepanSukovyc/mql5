@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "USDJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "USDJPY is trending upwards in the short to medium term. RSI values on hourly and 4-hour charts are nearing overbought conditions but not decisively. Daily, Weekly RSI is also on the bullish side. Monthly RSI is neutral. Recent price action shows some consolidation. Moving averages also indicate bullish signal on short to medium term. The limited historical data increases uncertainty, therefore, a HOLD position should be considered."
-}
-```

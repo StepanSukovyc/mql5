@@ -1,9 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoké hodnoty RSI a MA ukazují na poklesový trend.",
-  "timestamp": "2026-03-24T09:39:55.145227+00:00",
-  "model": "deepseek-coder-v2"
-}

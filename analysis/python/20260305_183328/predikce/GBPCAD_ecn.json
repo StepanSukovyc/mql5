@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPCAD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "The price has been consistently decreasing over the last month, week, and day, indicating a potential downtrend. Daily and weekly RSI values are below 40, suggesting oversold conditions, but not yet at extreme levels. The daily moving average is also significantly above the current price. The hourly RSI is around 50 indicating neutral momentum, however, the 4h RSI is below 50. Therefore I am setting the buy percentage to 25, as there is a chance of a short term retracement, if the price reaches oversold levels on lower timeframes. I am setting the sell percentage to 45 as the trend suggests that a continuation of the downtrend is more likely. I am setting the hold percentage to 30 as I want to evaluate the market over the next few days, since the market is currently choppy. It should be noted that the data is only 30 days."
-}
-```

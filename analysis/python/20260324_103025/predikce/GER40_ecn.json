@@ -1,7 +1,0 @@
-{
-  "symbol": "GER40_ecn",
-  "BUY": 20,
-  "SELL": 55,
-  "HOLD": 25,
-  "reasoning": "GER40_ecn is showing bearish signals across multiple timeframes. The daily and weekly RSIs are below 40, suggesting oversold conditions, but the price is still trending downwards. The current price is below the moving averages on 1H, 4H, Day and Week timeframes indicating a downtrend. Although Monthly timeframe shows that the price is slightly above moving average, that is likely delayed information based on old data. 4H chart shows RSI around 40 which suggests downtrend, and indicates opportunity for a small bounce before further decline. Last Day candle is quite bearish as well."
-}

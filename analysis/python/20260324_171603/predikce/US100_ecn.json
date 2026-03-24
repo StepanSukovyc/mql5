@@ -1,7 +1,0 @@
-{
-  "symbol": "US100_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod MA na denním, týdenním i 4H grafu a RSI se na denním a 4H grafu pohybuje v oblasti pod 50. Na 1H grafu se RSI pohybuje kolem 50 a cena je pod MA. Měsíční graf naznačuje býčí trend, ale krátkodobé indikátory jsou spíše medvědí, doporučuji vyčkat na potvrzení trendu."
-}

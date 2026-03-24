@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "The price is currently below the daily and weekly moving averages, suggesting a bearish trend. The daily RSI is also below 40, indicating potential for further downside. However, the hourly RSI is near 50, implying a possibility of short-term consolidation. Overall a SELL with high probability is suggested."
-}

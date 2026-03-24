@@ -1,7 +1,0 @@
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 30,
-  "SELL": 55,
-  "HOLD": 15,
-  "reasoning": "Cena XAUUSD je aktuálně 4376.41. Na denním grafu je RSI velmi nízko (25.11), což naznačuje, že trh je přeprodaný. Nicméně MA na denním grafu (4989.484) je výrazně nad současnou cenou, což naznačuje silný downtrend. 4H timeframe indikuje rsi 35.8 a MA 4502.68. Měsíční graf ukazuje RSI 68.7 a MA na 3474.48, což naznačuje dlouhodobý uptrend, ale současný pokles je významný. Poslední denní svíčka je negativní. Zvažuji převahu pro SELL z důvodu downtrendu na denním grafu a nízkého RSI, který sice naznačuje přeprodanost, ale trh může ještě klesat.  BUY opatrně, ale možnost odrazu tu je. HOLD pro ty, co mají již otevřené pozice a čekají, co bude dál."
-}

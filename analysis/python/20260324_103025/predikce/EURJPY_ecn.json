@@ -1,7 +1,0 @@
-{
-  "symbol": "EURJPY_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "Na denním grafu je RSI lehce nad 50, MA roste, ale na 1h grafu je RSI kolem 50 a cena osciluje kolem MA. Na týdenním a měsíčním grafu RSI roste, což naznačuje potenciální nárůst v dlouhodobém horizontu. Celkově trh je volatilní a nevyskytuje se zřetelný trend. Proto je vhodné vyčkat a sledovat další vývoj."
-}

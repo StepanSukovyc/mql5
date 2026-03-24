@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Technická analýza naznačuje spíše prodejní tlak. RSI je na 1h, 4h i denním grafu pod 40, což značí, že trh je spíše v oblasti přeprodanosti. Cena se pohybuje pod klouzavými průměry (MA) na 1h, 4h i denním grafu, což potvrzuje klesající trend. Na týdenním grafu je RSI také pod 50 a cena pod MA. Pouze měsíční RSI je nad 50, ale vzhledem k poklesu v posledních dnech a týdnech se zaměřuji na kratší časové rámce. Proto upřednostňuji SELL pozici s rizikem 60%. Nízké hodnoty RSI by mohly naznačovat korekci, proto se vyhýbám silnému SELL a ponechávám BUY/HOLD pozici s nízkým rizikem."
-}
-```

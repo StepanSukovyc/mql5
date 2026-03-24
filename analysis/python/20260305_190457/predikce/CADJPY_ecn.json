@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "CADJPY_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na denním grafu je RSI na 62, což naznačuje potenciální překoupenost. Nicméně MA roste na denním, týdenním a měsíčním grafu a nachází se pod cenou, což naznačuje uptrend. Hodinový RSI je na 46, což není ani překoupené ani přeprodané, ale cena je mírně nad MA na hodinovém grafu. 4H timeframe se pohybuje spíše do strany. Celkově se domnívám, že trend je stále směrem nahoru (BUY 40%), ale krátkodobé korekce jsou možné (SELL 30%). Zbytek (HOLD 30%) vzhledem k nejasnosti."
-}
-```

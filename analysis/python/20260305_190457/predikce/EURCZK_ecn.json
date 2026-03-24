@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURCZK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Denní RSI je překoupené (71.24), což naznačuje možnost korekce dolů. Naopak, týdenní RSI (55.9) je neutrální a měsíční RSI (42.07) ukazuje potenciál pro růst. Aktuální cena je nad klouzavými průměry na kratších časových rámcích (1h, 4h, day, week) ale pod MA na měsíčním grafu což ukazuje na smíšené signály.  Proto doporučuji sice BUY, ale ne čistě, takže BUY s malou pozicí a případným posouzením po menší korekci."
-}
-```

@@ -1,9 +1,0 @@
-{
-  "symbol": "XALUSD_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoká volatilita na základě RSI a nedostatek trendu potvrzují předběžné riziko prodeje.",
-  "timestamp": "2026-03-24T12:24:47.361580+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFZAR_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje potenciální pokračování růstu. RSI na denním a 4h grafu se blíží překoupené zóně, ale není v ní. Na týdenním a měsíčním grafu je prostor pro růst. Cena je nad MA na všech timeframech. Nicméně poslední prudký pokles a následný růst na hodinovém grafu (svíčka z 2026-03-23T14:00:00+00:00) indikuje zvýšenou volatilitu a riziko. Doporučuji opatrnost a zvážit strategii 'HOLD' dokud se situace neustálí. Spread se zdá být relativně vysoký, což může snížit atraktivitu krátkodobých pozic."
-}

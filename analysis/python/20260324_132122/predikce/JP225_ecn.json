@@ -1,7 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "JP225_ecn se nachází v korekční fázi po silném růstu. Denní RSI je 38.55, což naznačuje, že trh není překoupený, ale klesající trend je patrný. MA na denním grafu je nad aktuální cenou (54887.512 vs 52333.67), což značí rezistenci. 4H RSI je 46.05, což je neutrální, ale MA na 4H grafu (52478.3) je blízko aktuální ceny, což může působit jako podpora, ale spíše je to stále medvědí signál.  Na týdenním grafu je RSI 55.23 a cena se drží pod MA, což značí, že trh není překoupený, ale ani vyloženě býčí. Měsíční RSI je 64.78, což naznačuje, že by se mohlo blížit překoupení, a MA je daleko pod aktuální cenou, což značí silný dlouhodobý uptrend, ale aktuálně vidíme korekci. S ohledem na tyto faktory je opatrnost na místě. Doporučuje se vyčkat na jasnější signál."
-}

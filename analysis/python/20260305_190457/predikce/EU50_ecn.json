@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EU50_ecn",
-  "BUY": 20,
-  "SELL": 65,
-  "HOLD": 15,
-  "reasoning": "Cena EU50_ecn je 5750.5. RSI je překoupené na 1h, 4h a denních grafech, což naznačuje silný prodejní tlak. MA na 1h, 4h, denních a týdenních grafech jsou nad aktuální cenou, což potvrzuje sestupný trend. Měsíční RSI je sice v rostoucím trendu, ale v kontextu prudkého propadu v kratších timeframech to nepředstavuje velkou oporu pro BUY. Silný pokles ceny za posledních pár hodin naznačuje, že i sentiment trhu je spíše prodejní. Doporučuji SELL."
-}
-```

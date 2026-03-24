@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURZAR_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "EURZAR is showing mixed signals. Hourly RSI is overbought (79.64), suggesting a potential pullback. However, the price is above the daily and 4h MA, indicating upward momentum. Weekly and Monthly RSIs are below 50, leaving the space for growth. Risk management is crucial, holding allows to see whether it will continue bull trend or revert downwards."
-}
-```

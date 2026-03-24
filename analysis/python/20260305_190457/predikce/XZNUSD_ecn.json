@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "XZNUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Na hodinových a 4-hodinových grafech je RSI hluboko v přeprodané zóně, což naznačuje potenciální odraz. Nicméně, denní RSI je stále pod 50 a cena je pod denním MA, což naznačuje pokračující medvědí trend. Týdenní graf ukazuje RSI blízko 60 a cena nad MA, což signalizuje dlouhodobý uptrend, ale současná cena je daleko od tohoto MA. Vzhledem k silnému poklesu ceny a tlaku z denního trendu dáváme přednost pozici SELL s opatrným BUY potenciálem na základě přeprodanosti a HOLD pro vyčkání na potvrzení trendu."
-}
-```

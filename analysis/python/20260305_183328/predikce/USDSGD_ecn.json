@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "USDSGD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšený signál. RSI na nižších timeframech (1h, 4h, den) se blíží překoupené zóně, což naznačuje potenciální korekci směrem dolů. Naopak, týdenní RSI je neutrální a měsíční RSI je pod 50, což by mohlo ukazovat na dlouhodobější potenciál pro růst.  Cena je nad denním MA, ale pod týdenním a měsíčním MA. Proto, vzhledem k překoupeným podmínkám v krátkodobém horizontu a potenciálu k růstu v delším, doporučuji rozdělení mezi BUY, SELL a HOLD."
-}
-```

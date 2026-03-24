@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCHF_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Na 1h a 4h timeframe je RSI pod 40, což naznačuje potenciální překoupenost a možnost korekce. Denní RSI je také pod 50. Cena je pod 1h, 4h a denním MA, což signalizuje downtrend. Týdenní RSI je sice nad 60, ale cena se nachází pod denním MA, což ukazuje na smíšený signál. BUY má malou šanci, pokud se trh odrazí od současných úrovní, nicméně SELL je pravděpodobnější, a HOLD dává smysl, dokud se situace nevyjasní."
-}

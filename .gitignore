@@ -1,3 +1,9 @@
+# Ignore all folders under analysis/python except selected ones
+analysis/python/*/
+!analysis/python/geminipredictions/
+!analysis/python/ollama/
+!analysis/python/trade_logs/
+
 # ---- Secrets and local environment ----
 .env
 .env.*

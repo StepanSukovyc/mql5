@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDNZD_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Převažují indikátory s poklesovým tlakem a nízké MA hodnoty signalizují nejasný trend.",
-  "timestamp": "2026-03-24T10:06:50.874061+00:00",
-  "model": "deepseek-coder-v2"
-}

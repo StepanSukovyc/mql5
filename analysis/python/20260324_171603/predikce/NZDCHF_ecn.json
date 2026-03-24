@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCHF_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Měsíční RSI je velmi nízko (28.20), což naznačuje potenciální překoupenost a možnost odrazu. Nicméně, cena je pod měsíčním MA (0.488222), což signalizuje dlouhodobý klesající trend. Denní RSI (45.81) je neutrální, ale cena je stále pod denním MA (0.460659). 1h RSI (58.26) ukazuje na mírný nárůst, ale 4h RSI (50.53) naznačuje neutralitu. Z hlediska rizikového hodnocení převládá krátkodobý prodej a opatrnost. Střednědobý trend je spíše medvědí. Proto má SELL vyšší procentuální vyjádření."
-}

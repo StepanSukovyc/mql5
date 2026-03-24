@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 35,
-  "SELL": 45,
-  "HOLD": 20,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Dlouhodobé indikátory (týdenní a měsíční RSI pod 50, klesající MA) naznačují medvědí trend. Denní RSI se blíží překoupenosti, ale MA stále roste, což poukazuje na možnost korekce. Krátkodobé indikátory (1h a 4h RSI) se pohybují v neutrální zóně.  Poslední denní svíčka je býčí, ale je třeba sledovat potvrzení. Proto je SELL mírně preferován, nicméně situace není zcela jasná a vyžaduje další sledování."
-}
-```

@@ -1,7 +1,0 @@
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "BCHUSD_ecn is currently at 474.6. The hourly RSI is neutral at 47.74, while the 4-hour RSI is slightly above neutral at 51.19. The daily RSI is also neutral at 48.03. However, the weekly RSI is in oversold territory at 39.92, suggesting potential for a bounce. The price is above the daily and monthly moving averages, but below the weekly moving average, which is a potential resistance point around 542.33. Given the mixed signals and the recent downward trend on the 1H chart, a SELL position has the highest probability due to short-term bearish momentum. BUY is allocated 30% due to oversold weekly RSI and the potential for a bounce back towards the weekly MA. HOLD is also allocated 30% reflecting the overall indecisiveness."
-}

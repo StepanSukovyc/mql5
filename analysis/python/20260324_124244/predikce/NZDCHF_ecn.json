@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCHF_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "The monthly RSI of 28.33 suggests oversold conditions, but the price is below all MAs, indicating a downtrend. Recent hourly candles show limited bullish momentum. The daily RSI is hovering around 45, suggesting neither overbought nor oversold conditions, while price action has been largely bearish for the last day. Considering the short-term and long-term trends, SELL position has the highest probability."
-}

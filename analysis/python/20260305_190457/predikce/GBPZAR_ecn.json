@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "GBPZAR is showing mixed signals. Shorter timeframes (1H, 4H) indicate overbought conditions (RSI > 70), suggesting a potential pullback. However, daily RSI is at 63, and weekly RSI is recovering from oversold territory indicating potential long-term upward movement. Current price is above the daily MA, close to the weekly MA, but below the monthly MA. Recent price action is bullish, confirmed with strong close price for the 03-05 daily candle. The strategy would be to hold but monitor for an oppotunity to BUY in case of a pullback."
-}
-```

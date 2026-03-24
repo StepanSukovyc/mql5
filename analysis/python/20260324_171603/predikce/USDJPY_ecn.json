@@ -1,7 +1,0 @@
-{
-  "symbol": "USDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "USDJPY se nachází v překoupené zóně na denním grafu (RSI 60.61), ale na týdenním grafu je RSI 63.8, což naznačuje pokračující uptrend, nicméně se blíží k překoupené zóně. Na 1h grafu je RSI 42.38 a cena se pohybuje nad MA, což indikuje možnost krátkodobého růstu, ale síla trendu se zdá být slabá. Svickove formace nejsou explicitne identifikovány, ale pokles z high 159.633 z 23.3 v 12:00 na 158.37 z 24.3 v 0:00 naznačuje bearish sentiment. Navíc, data ukazují, že cena je relativně vysoko (159.13) v porovnání s MA hodnotami na denním a týdenním grafu. Tudíž doporučuji spíše SELL, ale vzhledem k možnému pokračování uptrendu je riziko BUY relativně vysoké a není radno ignorovat HOLD."
-}

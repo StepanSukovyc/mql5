@@ -1,7 +1,0 @@
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "FRA40_ecn is showing bearish signals. Daily RSI is low at 33.7, indicating potential oversold conditions but still suggesting downward momentum. The price is below the daily MA of 8044.52 and even further from weekly MA of 8136.178, signaling a downtrend. The recent price action on the 1h and 4h charts confirms the short-term downtrend. While there was a significant upward spike on 2026-03-23T14:00:00+00:00 in the 1h chart, it appears to have been unsustainable. Therefore, SELL is the dominant signal, with HOLD considering the possibility of short-term consolidation and BUY allocated due to potential for a corrective bounce from oversold conditions."
-}

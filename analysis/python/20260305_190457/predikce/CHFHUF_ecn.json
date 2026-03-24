@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "CHFHUF_ecn",
-  "BUY": 40,
-  "SELL": 25,
-  "HOLD": 35,
-  "reasoning": "CHFHUF je v krátkodobém uptrendu, RSI na denním grafu je v překoupené zóně (72), což naznačuje možné korekce. Nicméně MA na všech časových rámcích s výjimkou 1H stále naznačuje růst. Absence svíčkových formací, které by signalizovaly obrat, vede k neutrálnímu hodnocení. SELL je opatrná reakce na krátkodobé překoupení a možnost korekce."
-}
-```

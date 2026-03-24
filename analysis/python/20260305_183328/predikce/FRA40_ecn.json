@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena výrazně klesla pod MA na všech časových rámcích. RSI je na 4H a denním grafu v oblasti přeprodanosti (22.26 a 33.81), což naznačuje potenciální odraz. Nicméně silný sestupný trend na týdenním grafu (RSI 45.48) a měsíčním grafu (RSI 49.77) naznačuje pokračující tlak na pokles. Upřednostňuji SELL kvůli silnému sestupnému trendu a MA, které ukazují pokles."
-}
-```

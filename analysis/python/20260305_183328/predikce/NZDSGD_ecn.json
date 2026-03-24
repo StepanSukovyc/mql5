@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena je pod denním i měsíčním MA, RSI na 1H a 4H timeframech naznačuje, že se trh nachází v neutrální oblasti. S ohledem na klesající trend na denním grafu a nedávný pokles ceny na 1H timeframe dává prodej větší smysl. Dlouhodobé MA (týdenní) ale naznačuje potenciál pro odraz, proto je doporučeno opatrné držení pozice. BUY je omezený klesajícím MA na vyšších timeframech."
-}
-```

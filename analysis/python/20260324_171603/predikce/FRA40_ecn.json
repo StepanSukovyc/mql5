@@ -1,9 +1,0 @@
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Zohlednil jsem svíčkové formace a RSI hodnoty, které ukazují na volatilitu trhu. MA indikátor podporuje stabilitu ceny.",
-  "timestamp": "2026-03-24T16:48:15.719066+00:00",
-  "model": "deepseek-coder-v2"
-}

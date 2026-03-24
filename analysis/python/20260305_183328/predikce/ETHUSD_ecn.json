@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "ETHUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Na týdenním grafu je RSI pod 35, což naznačuje potenciální přeprodanost, ale MA je vysoko. Na denním grafu RSI 41,92 a cena pod MA. Na 1h a 4h vidíme také pokles ceny. Proto převažuje SELL. Zároveň existuje možnost odrazu (BUY), ale nejistota je značná (HOLD)."
-}
-```

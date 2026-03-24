@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 50,
-  "SELL": 20,
-  "HOLD": 30,
-  "reasoning": "GBPZAR is showing bullish momentum on shorter timeframes (1H, 4H) with RSI above 60. However, the weekly RSI is below 50 and the price is above the weekly MA suggesting a potential for a pullback or consolidation. Monthly MA is significantly above the current price indicating a long-term downtrend. Therefore a buy position is risky, HOLD is preferred and SELL position has low probability."
-}
-```

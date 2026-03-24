@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "Cena je pod MA na 1H, 4H a denním grafu, což naznačuje downtrend. RSI na 1H, 4H a denním grafu je pod 40, což ukazuje na blížící se přeprodanost, ale nejedná se o silný signál k nákupu. RSI na měsíčním grafu je vysoko (74), indikující potenciální překoupenost a možnou korekci. Svíčkové formace za poslední hodiny vykazují převahu medvědího sentimentu. Celkově převládá SELL signál, ale je vhodné vyčkat na potvrzení a zvážit HOLD s ohledem na potenciální korekci po předchozím růstu, vyjádřenou vysokým RSI na měsíčním grafu. BUY se jeví jako rizikové vzhledem k downtrendu."
-}
-```

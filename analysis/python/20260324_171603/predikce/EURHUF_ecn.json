@@ -1,9 +1,0 @@
-{
-  "symbol": "EURHUF_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu měny, ale RSI a MA indikují slabost. Svíčkové formace a historické údaje podporují přijetí konzervativního postoje.",
-  "timestamp": "2026-03-24T16:27:27.977042+00:00",
-  "model": "deepseek-coder-v2"
-}

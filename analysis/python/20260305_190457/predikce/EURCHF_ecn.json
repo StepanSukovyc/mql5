@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURCHF_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "EURCHF is trending downwards, supported by RSI values in oversold territory on the Daily, Weekly and Monthly timeframes. The price is below the Moving Averages on all timeframes which indicates a potential strong downtrend. Hourly timeframe shows RSI around 50 indicating a lack of short-term direction. Last hourly candle is bullish but overall, the trend is more likely to continue downwards. Therefore, SELL has higher risk assessment. BUY has some risk due to short-term fluctuation. HOLD is neutral."
-}
-```

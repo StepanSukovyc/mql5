@@ -1,7 +1,0 @@
-{
-  "symbol": "VIX_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na týdenním grafu se RSI nachází v překoupené zóně (74.43), což naznačuje potenciální korekci. Denní RSI je také relativně vysoké (61.08). I když je cena nad denním MA, klesla v posledních dvou dnech. Prudký pokles ceny dne 23. března naznačuje silný prodejní tlak. Proto převládá SELL signál. BUY je založen na tom, že se VIX může v budoucnu odrazit, vzhledem k své volatilitě."
-}

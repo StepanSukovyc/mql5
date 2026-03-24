@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena je pod MA na všech timeframech kromě měsíčního, denní a 4h RSI jsou silně přeprodané, týdenní se blíží přeprodanému pásmu. Krátkodobě (1h) vidíme snahu o odraz (RSI 46.74), ale dlouhodobější trend je klesající. Proto převažuje SELL, malé procento pro BUY je odůvodněno možným krátkodobým odrazem od přeprodaných hodnot."
-}
-```

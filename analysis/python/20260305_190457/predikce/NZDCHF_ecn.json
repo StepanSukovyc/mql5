@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NZDCHF_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI hluboko v přeprodané zóně, ale cena je výrazně pod MA, což naznačuje silný downtrend. Denní a 4H grafy ukazují RSI kolem neutrálních hodnot, ale cena se pohybuje pod MA. 1H graf ukazuje RSI v přeprodané oblasti (33.43), ale cena je pod MA.  S ohledem na převládající downtrend a skutečnost, že cena se nachází pod MA na většině časových rámců, má prodej vyšší pravděpodobnost úspěchu. Možnost nákupu (buy) existuje kvůli přeprodanému RSI na kratších časových rámcích, ale je riskantní. 'HOLD' je rozumná strategie pro ty, kteří již mají pozici a chtějí počkat na další vývoj."
-}
-```

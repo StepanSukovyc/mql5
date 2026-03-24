@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 55,
-  "SELL": 25,
-  "HOLD": 20,
-  "reasoning": "USOIL_ecn is showing strong bullish momentum, particularly on the daily and weekly timeframes. The daily RSI is significantly overbought at 83.13, suggesting a potential for a pullback, but overall trend is up. The Moving Averages across all timeframes indicate a positive long term trend. The recent surge reflected in the 1H and 4H timeframes, with RSI hovering near overbought territory (72.54, 72.10). This suggest a short term buying opportunity but due to overbought conditions on daily timeframe some selling pressure is expectable. The monthly RSI is at 56.37, which does not indicate extreme overbought or oversold condition. Therefore, a HOLD position is reasonable."
-}
-```

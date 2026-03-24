@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "USDHUF_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Cena je nad MA na 1h, 4h, day a week timeframes, což naznačuje uptrend. RSI na 1h a 4h je v oblasti překoupenosti, ale ne extrémní. Monthly MA je nad aktuální cenou. Denní a týdenní timeframe naznačují silný uptrend, ale poslední den/týden ukazuje na zpomalení. BUY má šanci, ale vzhledem k rozporuplným signálům a omezenému množství dat, je dobré držet část pozice (HOLD) a být opatrný, SELL má šanci pokud se potvrdí reverz trendu."
-}
-```

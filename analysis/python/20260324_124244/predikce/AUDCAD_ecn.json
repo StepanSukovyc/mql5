@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena je pod 1h, 4h, a denním MA. RSI na 4h je v přeprodané zóně. Denní RSI je pod 50. Týdenní a měsíční RSI jsou nad 60, což indikuje býčí momentum na dlouhodobějších timeframech, ale aktuální krátkodobý trend je spíše klesající. Z toho důvodu SELL má vyšší procento. BUY je možný jako protitrendová spekulace."
-}

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPSGD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Mixed signals. Hourly and 4H RSI are approaching overbought, while Daily and Weekly RSI are showing downward pressure with price below Daily, Weekly and Monthly MA. Recent hourly price action shows potential resistance. Risk is high, favoring SELL slightly."
-}
-```

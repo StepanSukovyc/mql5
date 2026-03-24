@@ -1,7 +1,0 @@
-{
-  "symbol": "USDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hourly TF je RSI v neutrální zóně, ale pod MA. Na daily a weekly je RSI poměrně vysoko, což naznačuje potenciální překoupenost. Cena je aktuálně nad denním i týdenním MA. Vzhledem k výprodeji na konci 23. března vidím potenciál dalšího poklesu (SELL), ale vzhledem k obecnému uptrendu (dlouhodobé MA) je rozumné část pozice HOLD. BUY má nejmenší šanci, indikátory na nižších timeframech ukazují spíš na konsolidaci. Vzhledem k blížící se hranici 160.000 je riziko i potenciální zisk velký."
-}

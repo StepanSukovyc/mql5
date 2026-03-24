@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI nad 50, což naznačuje býčí trend, ale cena se pohybuje kolem MA. Týdenní a denní RSI pod 50 naznačují potenciální medvědí tlak. 1H RSI je kolem 50, MA hodnota 1.341117 je nad aktuální cenou 1.3372600000000001, což také ukazuje spíše na Sell. Denní data vykazují klesající trend, kdy cena klesla z 1.34151 na 1.33717 (i přesto, že open bylo 1.34151). Celkově, vzhledem k protichůdným signálům a blížící se úrovni rezistence na 1.3400-1.3420, je opatrný přístup (HOLD) rozumný, avšak SELL má dle indikátorů (RSI, MA) mírnou převahu."
-}

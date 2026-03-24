@@ -1,9 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je vyrovnané s malým podílem na poklesu a nárůstu. RSI ukazuje slabost trhu a MA trend mírně klesající.",
-  "timestamp": "2026-03-24T12:36:12.174984+00:00",
-  "model": "deepseek-coder-v2"
-}

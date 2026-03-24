@@ -1,7 +1,0 @@
-{
-  "symbol": "US30_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza naznačuje smíšené signály. Krátkodobě (1H) je RSI neutrální a cena kolem MA. Střednědobě (4H) RSI také neutrální, ale cena nad MA. Dlouhodobě (denní) je RSI pod 30, což značí překoupenost. Týdenní RSI je také neutrální. Měsíční RSI indikuje potenciální nákupní tlak, ale MA je daleko. Proto převládá SELL a HOLD kvůli nejistotě z dlouhodobého pohledu a potenciálnímu downtrendu."
-}

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Denní RSI (71.22) signalizuje překoupenost, což naznačuje potenciální korekci (SELL), nicméně MA na denní, týdenní a měsíční bázi rostou, indikujíce rostoucí trend (BUY). RSI na měsíční bázi je neutrální (49.16). Proto kombinace BUY/SELL/HOLD"
-}
-```

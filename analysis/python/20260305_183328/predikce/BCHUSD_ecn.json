@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "BCHUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Analýza naznačuje smíšené signály. RSI na denní a týdenní bázi je pod 40, což indikuje potenciální překoupenost, nicméně cena je pod MA na většině časových rámců (1h, den, týden) což naznačuje downtrend. Měsíční MA se blíží ceně, což může sloužit jako podpora. S ohledem na převahu negativních indikátorů je SELL o něco rizikovější než BUY, ale silnější než HOLD, protože potenciál dalšího poklesu je patrný. HOLD drží opatrný přístup, dokud se situace nevyjasní."
-}
-```

@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDJPY_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě SELL: Cena je pod MA na 1h, 4h i denním grafu a RSI na 4h je pod 50.  BUY riziko existuje z důvodu rostoucího MA na týdenním a měsíčním grafu a RSI nad 50.  Držení (HOLD) doporučeno pro opatrný přístup vzhledem k protichůdným signálům a nutnosti zvážit širší fundamentální kontext, který není v datech zahrnut."
-}

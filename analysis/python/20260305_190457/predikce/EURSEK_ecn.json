@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Mixed signals. Shorter timeframes (1H, 4H, Daily) show RSI in neutral to slightly overbought territory, suggesting potential for continued upward movement. However, longer-term (Weekly, Monthly) RSI is oversold and MA is declining, hinting at a possible trend reversal. Recent price action shows consolidation, hence the significant HOLD percentage. Increased volatility is expected."
-}
-```

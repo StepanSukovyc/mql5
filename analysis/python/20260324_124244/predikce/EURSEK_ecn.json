@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 35,
-  "SELL": 45,
-  "HOLD": 20,
-  "reasoning": "EURSEK is currently showing mixed signals. Daily RSI is at 62.59, suggesting bullish momentum, but monthly RSI at 36.82 indicates potential for further downside. The 1H RSI is at 48.07 and 4H RSI is at 54.51, both are suggesting consolidation. Although the price is currently around the 4H MA, the monthly MA is considerably higher. Given the consolidation on shorter timeframes and potential downside on monthly, a sell position is currently more favorable, hence high risk for BUY."
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Růst cen je oslabován vysokými úrovněmi odporu a slabou podporou. RSI indikuje přeprodanost, což naznačuje možnost poklesu.",
-  "timestamp": "2026-03-24T12:11:29.190662+00:00",
-  "model": "deepseek-coder-v2"
-}

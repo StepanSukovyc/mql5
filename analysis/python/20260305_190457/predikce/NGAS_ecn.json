@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NGAS_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě převládá prodejní tlak. RSI na 1H a denním grafu naznačuje, že trh není překoupený. MA na týdenním a měsíčním grafu je stále nad aktuální cenou. Denní graf klesá pod MA. Kombinace těchto faktorů naznačuje, že by mohl nastat další pokles, ale riziko, že cena půjde nahoru (zpět k průměrům) tu stále je. Držet pozici může být vhodné, pokud již investor pozici má a čeká na odraz, ale nové nákupy bych nedoporučoval. Střednědobě a dlouhodobě je trend spíše býčí, ale je potřeba počkat na lepší vstupní bod."
-}
-```

@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFHUF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na 1H a 4H timeframe je RSI pod 50, což indikuje, že trh není překoupený. Na denním timeframe je RSI lehce nad 50. Nicméně, cena je pod MA na 4H timeframe, což by naznačovalo klesající trend. Na týdenním a měsíčním timeframe je RSI nad 50, což poukazuje na uptrend v dlouhodobém horizontu.  Kvůli rozporuplným signálům z různých timeframes se doporučuje spíše vyčkat na potvrzení trendu (HOLD). Vzhledem k aktuální ceně blízko 1denní MA a klesajícímu trendu na 4H vidím větší riziko pro SELL. Dlouhodobější uptrend (týdenní a měsíční RSI) dává určitý potenciál pro BUY, ale celkově je situace nejistá."
-}

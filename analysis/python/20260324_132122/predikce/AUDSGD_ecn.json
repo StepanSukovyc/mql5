@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDSGD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět, že cena se nachází blízko hladině podporující růst, ale zároveň dochází k poklesu momentum. Nedostatečný tlak nákupu signalizuje nejistotu.",
-  "timestamp": "2026-03-24T13:00:46.803872+00:00",
-  "model": "deepseek-coder-v2"
-}

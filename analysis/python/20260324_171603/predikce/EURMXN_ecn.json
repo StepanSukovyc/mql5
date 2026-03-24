@@ -1,9 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je v současné době vyvážené mezi růstem a poklesem. RSI ukazuje neutralitu s mírným trendem k nárůstu.",
-  "timestamp": "2026-03-24T16:31:13.101435+00:00",
-  "model": "deepseek-coder-v2"
-}

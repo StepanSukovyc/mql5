@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPAUD_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Růstový impulz s ohledem na silnou podporu MA a nárůst RSI signalizuje potenciál růstu. Nicméně, vysoké riziko volatilita a negativní trend v posledních měsících vyvolává nejistotu.",
-  "timestamp": "2026-03-24T16:50:11.096354+00:00",
-  "model": "deepseek-coder-v2"
-}

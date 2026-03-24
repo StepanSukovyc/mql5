@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. 4H a 1H RSI se nachází v pásmu překoupenosti, což naznačuje možný pokles. Naopak, denní RSI je neutrální. Cena je nad denním MA, ale pod týdenním MA. Celkově, na základě dostupných dat je opatrný optimismus pro BUY s možností korekce, proto HOLD a SELL mají také své zastoupení."
-}

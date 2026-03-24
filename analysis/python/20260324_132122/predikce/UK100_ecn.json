@@ -1,7 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "UK100 currently shows bearish signals across multiple timeframes. Daily RSI is at 32, indicating oversold conditions, but the price is still below the daily MA. The 4H RSI is also low at 37, suggesting continued downward momentum. While a short-term bounce is possible, the overall trend suggests selling pressure. The hourly RSI is at 53, indicating a slightly bullish sentiment in the short term, but the price is still below its hourly MA. The monthly RSI is at 61 indicating a positive sentiment in the very long term, but there has been a sharp drop in price lately."
-}

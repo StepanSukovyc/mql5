@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "XAGUSD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "The hourly and 4-hourly RSI values indicate that the asset is nearing oversold territory, suggesting a possible short-term bounce. However, the price is below the Moving Average on the 1h, 4h and Day timeframes. Weekly timeframe suggests an uptrend, with RSI around 59 and price above MA. However, the monthly RSI is high at 77.8 suggesting overbought. Recent price action shows a strong downtrend on daily, 4-hourly, and hourly charts with significant volume. Therefore, SELL is preferred, but a HOLD position is acceptable to monitor the price action."
-}
-```

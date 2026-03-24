@@ -1,7 +1,0 @@
-{
-  "symbol": "USDHKD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobé indikátory (RSI na 1h a 4h pod 40) naznačují potenciální překoupenost a možný pokles. Denní RSI kolem 53 je neutrální. Cena je mírně nad denním MA, ale pod 1h a 4h MA, což naznačuje krátkodobý downtrend. Týdenní a měsíční RSI ukazují na mírný býčí sentiment, ale vzhledem k blížícímu se křížení krátkodobých MA dolů a současnému krátkodobému tlaku na pokles preferuji SELL před BUY.  Držení pozice je rozumné pro ty, kteří již pozici mají, s ohledem na potenciální odraz. Celkově, vzhledem k převládajícímu tlaku na pokles v krátkodobém horizontu, je Sell pozice o něco rizikovější než Buy."
-}

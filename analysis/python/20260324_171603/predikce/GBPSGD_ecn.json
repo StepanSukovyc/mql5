@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPSGD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje podporu pro růst kurzu GBP/SGD, zatímco RSI a MA hodnoty navrhují nejistotu s omezenou předpovědní schopností.",
-  "timestamp": "2026-03-24T16:59:40.600043+00:00",
-  "model": "deepseek-coder-v2"
-}

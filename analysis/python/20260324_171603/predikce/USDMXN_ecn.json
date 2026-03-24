@@ -1,7 +1,0 @@
-{
-  "symbol": "USDMXN_ecn",
-  "BUY": 35,
-  "SELL": 45,
-  "HOLD": 20,
-  "reasoning": "Z krátkodobého hlediska (1h, 4h) vidíme oscilaci kolem MA, RSI naznačuje spíše neutrální až mírně klesající trend. Denní RSI je sice nad 50, ale cena se drží blízko MA. Měsíční MA je vysoko nad současnou cenou, což indikuje dlouhodobý klesající trend. Prudký pokles ceny z 23.3. na 24.3. také svědčí pro spíše sestupný vývoj. Proto je SELL mírně upřednostněn před BUY, HOLD je opatrný postoj s ohledem na potenciální obrat."
-}

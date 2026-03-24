@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Krátkodobý pohled naznačuje SELL. Cena je pod MA na 1h, 4h a denním grafu. RSI na 1h je v downtrendu. Na týdenním grafu je MA nad aktuální cenou, což naznačuje potenciální růst. Měsíční MA je výrazně nad aktuální cenou, což naznačuje dlouhodobý downtrend. Proto SELL má nejvyšší pravděpodobnost, následován HOLD a poté BUY."
-}
-```

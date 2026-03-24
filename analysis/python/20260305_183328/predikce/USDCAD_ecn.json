@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Cena se nachází pod měsíčním a týdenním MA, RSI na denním grafu je neutrální, ale na 1h se blíží překoupenosti. Poslední 1H svíčky naznačují sílu BUYERU, ale celkově indikátory ukazují mírný SELL tlak. Proto SELL má vyšší prioritu."
-}
-```

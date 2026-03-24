@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EU50_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Cena klesá pod MA na všech krátkodobých timeframech (1h, 4h, day). RSI je pod 50 na 1h, 4h a day timeframech, což naznačuje medvědí momentum. Měsíční RSI je sice stále vysoké, ale klesá. Týdenní graf se blíží pod 50. Poslední denní svíčka je výrazně medvědí. Doporučuje se SELL, dokud se situace nestabilizuje. BUY je rizikové. HOLD je neutrální, čekání na potvrzení trendu."
-}
-```

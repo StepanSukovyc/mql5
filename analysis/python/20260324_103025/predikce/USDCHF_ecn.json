@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI v oblasti přeprodanosti (33.07), což naznačuje potenciál pro růst, ale MA na měsíčním grafu (0.8310) je výrazně nad aktuální cenou (0.78734), což naznačuje dlouhodobý klesající trend. Na denním grafu RSI je 58.27 a cena je nad MA (0.7818), naznačuje to mírný rostoucí trend. Na 1H grafu RSI (43.12) je pod 50 a cena je nad MA (0.78697), což naznačuje možnou konsolidaci nebo mírný pokles. Proto je rozumné držet (HOLD) pozici nebo spekulovat na pokles (SELL) s menší šancí na růst (BUY)."
-}

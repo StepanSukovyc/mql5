@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Z dlouhodobého hlediska (měsíční a týdenní grafy) je GBPCHF v downtrendu, RSI na těchto timeframech je pod 35, což značí překoupenost a potenciál pro další pokles. Denní RSI je také relativně nízko (41.97), MA klesá. Na 4H grafu je RSI kolem 50, což indikuje neutrální pozici, nicméně cena je mírně pod MA. 1H graf ukazuje RSI lehce nad 50 a cenu nad MA, což naznačuje krátkodobý potenciál pro růst.  S ohledem na silnější downtrend na vyšších timeframech a fakt, že cena se pohybuje pod denním MA, dáváme vyšší váhu SELL pozici. BUY je menší pravděpodobný vzhledem k celkovému klesajícímu trendu, ale krátkodobé pohyby mohou vést k růstu, HOLD je neutrální postoj."
-}
-```

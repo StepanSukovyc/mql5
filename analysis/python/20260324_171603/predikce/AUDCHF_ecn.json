@@ -1,7 +1,0 @@
-{
-  "symbol": "AUDCHF_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Technická analýza AUDCHF naznačuje medvědí sentiment. Cena je pod MA na timeframe 4h a day. RSI na 4h je pod 50, což značí potenciální downtrend. Na týdenním timeframe je RSI nad 50, naznačuje uptrend, ale je v rozporu s kratšími timeframe. Na měsíční bázi je RSI také pod 50. 1h timeframe ukazuje RSI kolem 50, což je spíše neutrální signál. Celkově převládá SELL signál."
-}

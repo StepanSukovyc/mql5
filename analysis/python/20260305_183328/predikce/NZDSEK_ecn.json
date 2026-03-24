@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 35,
-  "SELL": 40,
-  "HOLD": 25,
-  "reasoning": "Měsíční RSI je silně přeprodané (26.33), což naznačuje potenciální obrat. Týdenní RSI (48.82) je neutrální. Denní RSI (63.30) se blíží překoupené zóně, ale není tam. 4H RSI (52.69) je neutrální. 1H RSI (47.64) je neutrální. Cena je pod 1H MA, i 4H MA, ale nad denní a týdenní MA. Měsíční MA je vysoko nad cenou. Poslední 4H svíčka klesala. Převládá lehký medvědí sentiment, ale s potenciálem korekce nahoru (přeprodaný měsíční RSI). Proto vyvážený přístup: SELL mírně převládá, BUY s potenciálem a HOLD jako opatrnost."
-}
-```

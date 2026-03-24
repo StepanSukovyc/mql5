@@ -1,9 +1,0 @@
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoké hodnoty RSI a pokles MA sugerují silnou tendenci k poklesu.",
-  "timestamp": "2026-03-24T10:22:58.656121+00:00",
-  "model": "deepseek-coder-v2"
-}

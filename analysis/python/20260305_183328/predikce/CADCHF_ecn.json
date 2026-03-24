@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 35,
-  "SELL": 45,
-  "HOLD": 20,
-  "reasoning": "Měsíční RSI je hluboce pod 30, což naznačuje potenciální překoupenost, ale MA na měsíčním grafu klesá. Na týdenním grafu je RSI pod 50 a cena je pod MA, což naznačuje klesající trend. Na denním grafu RSI je blízko 60, ale cena se drží nad MA. 1H RSI je pod 50, cena klesá. Dominantní signál je SELL."
-}
-```

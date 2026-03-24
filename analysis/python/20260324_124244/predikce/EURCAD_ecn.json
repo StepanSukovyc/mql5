@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "The price is currently near the 1-hour moving average, while the RSI on the 1-hour chart is at 58 suggesting a slight bullish momentum. However, the weekly MA is significantly above the current price, indicating a possible long-term downtrend. The daily RSI is around 51, suggesting neutral momentum.  Considering the conflicting signals and the limited amount of recent candle data, a HOLD strategy is reasonable, with a slight bias towards a SELL position. The recent short-term upward movement might be a retracement within a larger downtrend."
-}

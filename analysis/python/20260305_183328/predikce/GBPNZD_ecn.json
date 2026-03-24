@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "GBPNZD_ecn: Cena 2.26736. Na 1H i 4H timeframe RSI naznačuje překoupenost (RSI 57.83 a 60.26), což zvyšuje pravděpodobnost korekce. Na denním timeframe je RSI 49.52, což je neutrální. Týdenní RSI je 44.71, což naznačuje, že by se mohlo jednat o medvědí trend. MA na týdenním timeframe je výrazně nad současnou cenou (2.3002 vs 2.26736). Zatímco měsíční RSI je 57.02 a MA je pod současnou cenou (2.2399 vs 2.26736), krátkodobá překoupenost a týdenní trend naznačují potenciál pro SELL. HOLD je rozumný, pokud investor preferuje čekat na další potvrzení trendu."
-}
-```

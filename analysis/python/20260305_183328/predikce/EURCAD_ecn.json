@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURCAD_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "Denní a týdenní RSI jsou v překoupené zóně, což naznačuje možnost poklesu. Cena je pod klouzavými průměry na 4H, denním a týdenním timeframe, což naznačuje sestupný trend. Naopak měsíční RSI naznačuje prostor pro růst, proto dáváme 25% BUY."
-}
-```

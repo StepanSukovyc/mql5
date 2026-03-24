@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPSGD_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "On the hourly and 4-hourly charts, the RSI indicates slightly overbought conditions, suggesting potential for a pullback. Daily RSI is neutral. Weekly and Monthly RSI are below 50 suggesting possible downtrend. Price is above daily MA and below weekly MA. Recent hourly candles show indecision. Overall, mixed signals suggest holding with slight bullish bias due to recent price action. Limited historical data could affect accuracy."
-}

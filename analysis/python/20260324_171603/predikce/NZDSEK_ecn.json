@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDSEK_ecn",
-  "BUY": 30,
-  "SELL": 45,
-  "HOLD": 25,
-  "reasoning": "Technická analýza naznačuje potenciální prodejní tlak. Měsíční RSI je hluboko v přeprodané oblasti (25.55), ale MA na měsíčním grafu (5.805) je výrazně nad aktuální cenou (5.43158), což naznačuje dlouhodobý klesající trend. Hodinové RSI je také v přeprodané oblasti (28.71) a cena je pod MA na 1h timeframe (5.453), což indikuje krátkodobý klesající trend. Denní RSI se nachází kolem 52.88 a cena je pod MA (5.432), což indikuje mírný klesající trend. S ohledem na rozpor mezi dlouhodobým přeprodaným stavem a stále klesajícím MA na měsíčním grafu a krátkodobým klesajícím trendem se doporučuje s opatrností zvážit prodej. Nicméně, v krátkodobém horizontu je možné očekávat korekci ceny vzhůru, proto je vhodné držet část pozice. Data jsou omezena na 30 svíček, což omezuje rozsah analýzy."
-}

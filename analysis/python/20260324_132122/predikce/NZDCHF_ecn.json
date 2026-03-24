@@ -1,7 +1,0 @@
-{
-  "symbol": "NZDCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "NZDCHF is showing bearish signals. RSI values on daily, weekly and monthly charts are below 50, indicating a downward trend. The price is below the moving average on all timeframes except 1H, further confirming the bearish outlook. While the 1H RSI suggests potential short-term upward movement, the overall trend points towards a potential sell. Therefore, Sell has the highest percentage. Holding is considered a safer approach than buying into a downtrend and short upward on 1H"
-}

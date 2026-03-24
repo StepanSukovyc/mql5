@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Mixed signals. 1H RSI is neutral, but trending downwards. 4H RSI is also neutral. Daily RSI around 50 suggesting indecision. Week RSI is negative, Month RSI is positive but declining. Price is currently below the weekly MA but above the daily MA. Recent hourly candles show some downwards momentum. Overall, suggests slight bearish pressure for short term, hold in mid-long term."
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDZAR_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíly v RSI a MA ukazují nejistotu, ale trend zásoby může být slabší síly.",
-  "timestamp": "2026-03-24T10:12:14.615024+00:00",
-  "model": "deepseek-coder-v2"
-}

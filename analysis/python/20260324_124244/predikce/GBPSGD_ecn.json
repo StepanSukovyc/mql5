@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPSGD_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "Smíšené signály. Krátkodobé RSI a MA (1h, 4h) naznačují mírný býčí sentiment, avšak týdenní RSI pod 50 a MA nad cenou naznačuje potenciální rezistenci. Denní RSI neutrální. Proto doporučuji opatrnost a spíše vyčkávací pozici (HOLD) s možností nákupu při prolomení rezistence nebo prodeje při oslabení."
-}

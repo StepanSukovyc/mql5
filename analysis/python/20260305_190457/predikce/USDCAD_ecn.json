@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu je RSI (62.37) blízko překoupené úrovni, ale MA (1.3652) je pod aktuální cenou (1.36879), což naznačuje potenciální další růst. Na 4H grafu je RSI (57.14) neutrální a MA (1.367468) těsně pod cenou. Denní RSI (51.33) je neutrální, ale cena je nad MA (1.364818), což naznačuje mírný býčí trend. Týdenní a měsíční grafy ukazují klesající MA (1.381804 a 1.389952) nad cenou, což naznačuje dlouhodobější medvědí trend. Nicméně, na krátkodobých timeframe je potenciál pro další růst ceny. Proto je doporučení rozděleno mezi BUY, SELL a HOLD."
-}
-```

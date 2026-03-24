@@ -1,7 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu je RSI pod 40, což naznačuje potenciální překoupenost a možnost korekce směrem nahoru (BUY). Na denním a týdenním grafu je RSI kolem 45-46, což je neutrální. Měsíční RSI je mírně nad 50, indikující mírný býčí sentiment. Cena je pod denním a týdenním MA, což naznačuje medvědí trend. Na měsíčním grafu je cena nad MA, což naznačuje dlouhodobý býčí trend. Celkově převládá mírně medvědí sentiment (SELL) s potenciálem pro krátkodobé korekce (BUY). Rozhodnutí držet (HOLD) je odůvodněno protichůdnými signály z různých časových rámců."
-}

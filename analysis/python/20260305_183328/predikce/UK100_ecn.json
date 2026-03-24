@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "UK100_ecn",
-  "BUY": 20,
-  "SELL": 60,
-  "HOLD": 20,
-  "reasoning": "Na hodinovem a ctyrhodinovem grafu je RSI hluboko v prepordane zone, coz naznacuje mozny odraz. Nicmene na dennim grafu klesa RSI a cena se pohybuje pod MA, coz svedci pro prodejni tlak. Tydenni a mesicni grafy sice ukazuji rust, ale aktualni pokles je vyrazny a kratkodobe prilis silny na nakup. Doporucuje se pockat na potvrzeni odrazu, pred vstupem do long pozice. S ohledem na silny downward momentum v kratkodobem horizontu a klesajici denni RSI prevazuje SELL. HOLD je kvuli moznemu odrazu z prepordane zony."
-}
-```

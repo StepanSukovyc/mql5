@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Na týdenním a denním timeframe je RSI pod 30, resp. 40, což naznačuje potenciál pro další pokles. Měsíční timeframe je také v downtrendu. Krátkodobě (1h, 4h) indikátory oscilují kolem neutrálních hodnot. Převažuje tlak na SELL, ale je potřeba opatrnosti vzhledem k potenciální korekci nahoru z přeprodaných úrovní."
-}
-```

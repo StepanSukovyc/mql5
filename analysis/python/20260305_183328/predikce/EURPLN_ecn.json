@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Denní RSI je překoupené (71), což naznačuje možnost poklesu. 1h RSI je neutrální (53), 4h RSI se blíží překoupenosti (60). Cena je nad MA na 1h, 4h, denní a týdenní bázi, ale pod MA na měsíční bázi, což naznačuje smíšený signál. Poslední 1h svíčky vykazují smíšené signály. Celkově je trh v krátkodobém uptrendu, ale s rizikem korekce."
-}
-```

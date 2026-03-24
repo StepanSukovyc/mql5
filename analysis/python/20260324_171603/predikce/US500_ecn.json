@@ -1,7 +1,0 @@
-{
-  "symbol": "US500_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Denní a týdenní RSI jsou relativně nízko (35.64 a 44.05), což naznačuje potenciál pro oživení. Nicméně, denní MA (6741.07) je výrazně nad aktuální cenou (6556.38), což značí silný odpor. Měsíční RSI (66.82) je relativně vysoko, což naznačuje, že trh by mohl být překoupený a náchylný k poklesu. Krátkodobá MA na 1h a 4h timeframe se nacházejí nad aktuální cenou. Poslední denní svíčky naznačují konsolidaci po předchozím poklesu, ale celkový trend se jeví jako klesající. Proto převažuje SELL nad BUY. HOLD je doporučen pro ty, kteří již mají pozici, a čekají na potvrzení trendu."
-}

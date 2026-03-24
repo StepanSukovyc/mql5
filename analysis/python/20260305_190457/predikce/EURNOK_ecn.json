@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 30,
-  "SELL": 50,
-  "HOLD": 20,
-  "reasoning": "Dlouhodobější trend je medvědí (klesající MA na týdenním a měsíčním grafu, nízké RSI), denní RSI pod 50 značí momentum na straně prodejců. Krátkodobě indikátory ukazují na mírné oslabení downtrendu. Proto je SELL nejpravděpodobnější, BUY vyžaduje opatrnost a HOLD čekání na další signály."
-}
-```

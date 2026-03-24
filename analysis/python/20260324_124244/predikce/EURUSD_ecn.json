@@ -1,7 +1,0 @@
-{
-  "symbol": "EURUSD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Na 1h a 4h timeframe je RSI mírně nad 50, což naznačuje potenciální nákupní tlak, ale MA na 1h je nad aktuální cenou (1.15985 > 1.15824), což působí jako rezistence. Denní a týdenní RSI jsou pod 50, naznačující spíše prodejní tlak. Měsíční RSI je sice nad 50, ale MA je hluboko pod aktuální cenou a trh se chystá na korekci. Celkově převažuje spíše medvědí sentiment, ale vzhledem k volatilitě doporučuji opatrnost a 'HOLD' pozici pro vyhodnocení dalšího vývoje."
-}

@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCAD_ecn",
-  "BUY": 35,
-  "SELL": 25,
-  "HOLD": 40,
-  "reasoning": "Smíšené signály. RSI na 1H a 4H naznačují, že nejsme v překoupené ani přeprodané zóně, ale blížíme se k překoupené. Denní RSI je neutrální. Týdenní RSI pod 50 naznačuje medvědí sentiment, měsíční se blíží překoupené. Cena se pohybuje okolo MA na 1H a 4H, nad MA na denním grafu. Na týdenním grafu cena mírně pod MA. Data za posledních 30 dní ukazují na kolísavý trh bez jasného trendu.  Z tohoto důvodu doporučuji vyčkat s pozicí."
-}

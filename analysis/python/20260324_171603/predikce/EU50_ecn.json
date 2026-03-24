@@ -1,7 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Měnový pár EU50_ecn se nachází v downtrendu. Denní RSI je pod 40, což naznačuje, že trh je blízko překoupení, ale týdenní RSI se také pohybuje pod 50. Klíčová je proto i delší perspektiva. Cena je pod denním a týdenním MA. Na 1h timeframe je cena nad MA, RSI téměř 60 a to naznačuje možnost korekce nahoru, ale celkový trend je stále dolů. Doporučuji opatrnost a sledování vývoje."
-}

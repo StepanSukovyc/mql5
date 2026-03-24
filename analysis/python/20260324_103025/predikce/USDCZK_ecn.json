@@ -1,7 +1,0 @@
-{
-  "symbol": "USDCZK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobě je pár v downtrendu (RSI 1h a 4h pod 50, cena pod MA 1h a 4h), denní RSI je v neutrální zóně, ale týdenní RSI je spíše pozitivní. Měsíční RSI je nízké, ale MA je vysoko, což naznačuje dlouhodobý downtrend. Prudký pokles 23.3. naznačuje silný medvědí tlak.  Celkově je krátkodobé riziko spíše pro SELL, dlouhodobý výhled je nejistý."
-}

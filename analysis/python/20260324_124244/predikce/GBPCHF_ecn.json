@@ -1,7 +1,0 @@
-{
-  "symbol": "GBPCHF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza GBPCHF_ecn naznačuje smíšené signály. Měsíční RSI je pod 40, což naznačuje potenciální překoupenost v budoucnu, ale zároveň značí silný downtrend. Týdenní RSI je na 46.8, denní RSI je kolem 57.7, 4H RSI na 59.8 - posouvá se k horní hranici, což naznačuje momentum růstu, ale 1H RSI je 49, takže momentálně bez jasaného směru. Cena je pod týdenním a měsíčním MA, nad denním MA, což naznačuje pokračující konsolidaci. Vzhledem k celkovému downtrendu (měsíční pohled) a momentální konsolidaci vidím mírnou převahu SELL signálu, ale bez výrazné jistoty. Proto doporučuji opatrnost."
-}

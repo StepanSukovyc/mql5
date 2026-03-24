@@ -1,9 +1,0 @@
-{
-  "symbol": "EURPLN_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Riziko měny je v současné době ohodnoceno jako středně vysoké. Historická data a aktuální trend RSI indikují nárůst kurzu EUR/PLN.",
-  "timestamp": "2026-03-24T16:36:53.343377+00:00",
-  "model": "deepseek-coder-v2"
-}

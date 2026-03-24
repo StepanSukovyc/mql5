@@ -1,7 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na hodinovém grafu RSI pod 50, na denním a 4H RSI nad 60 naznačuje potenciální překoupenost. Měsíční RSI je sice pod 40, ale dlouhodobý MA je vysoko. Aktuální cena 10.81525 se nachází pod hodinovým MA (10.830024), ale nad 4H a denním MA (10.801728 a 10.718373). Poslední hodinové svíčky klesají. Celkově, vzhledem k smíšeným signálům a krátkému lookback period, je prodej o něco pravděpodobnější než nákup. Doporučuje se sledovat vývoj na grafech."
-}

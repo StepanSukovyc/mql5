@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Cena XPTUSD prudce klesla a pohybuje se pod MA na 1H, 4H a denním grafu, což naznačuje pokračující sestupný trend. RSI na 1H, 4H a denním grafu je pod 40, což naznačuje, že je překoupen, a je zde silný SELL signál. Avšak měsíční RSI je na 74 a MA roste, což naznačuje dlouhodobý uptrend, proto HOLD. BUY je možný pouze pokud se cena dostane nad MA na denním grafu."
-}
-```

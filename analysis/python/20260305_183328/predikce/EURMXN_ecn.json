@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Technická analýza ukazuje smíšené signály. Na denním grafu je RSI neutrální (56.94), ale cena je nad MA. 4H graf vykazuje RSI v překoupené zóně (61.03), což naznačuje potenciální korekci. Týdenní RSI je pod 40 (37.41), což naznačuje možnost obratu. Měsíční graf RSI je neutrální (59.66), ale cena je pod MA, naznačuje tak korekci. Vzhledem k této smíšené analýze je vhodné sledovat situaci a být opatrný."
-}
-```

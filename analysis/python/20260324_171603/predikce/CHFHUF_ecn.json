@@ -1,7 +1,0 @@
-{
-  "symbol": "CHFHUF_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Krátkodobý downtrend na 1H a 4H timeframe naznačuje prodejní tlak. RSI na 1H je pod 35, což indikuje potenciální překoupenost v krátkodobém horizontu. Denní RSI je kolem 53, což je neutrální, ale cena je nad MA. Týdenní a měsíční RSI jsou v býčím teritoriu, ale aktuální cena je pod týdenní MA, což naznačuje potenciální odpor. Proto je SELL mírně preferovaný, HOLD s ohledem na delší časové rámce a BUY s nižší vahou s ohledem na downtrend v kratších časových rámcích."
-}

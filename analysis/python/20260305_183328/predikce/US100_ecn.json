@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "US100_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Na měsíčním grafu je RSI na překoupené úrovni (71.84), což naznačuje potenciální korekci. Denní a 4H grafy ukazují klesající RSI a cena se pohybuje pod MA, což indikuje medvědí momentum. Hodinový graf má RSI mírně nad 50, ale cena se pohybuje pod MA, což dále posiluje možnost poklesu. Týdenní graf ukazuje RSI okolo 50. Potenciál růstu je limitovaný, zatímco existuje vyšší riziko poklesu. HOLD doporučuji, pokud má investor long pozici. "
-}
-```

@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "JP225_ecn",
-  "BUY": 25,
-  "SELL": 55,
-  "HOLD": 20,
-  "reasoning": "JP225_ecn is showing bearish signals across multiple timeframes. Short-term RSI (1h, 4h) is oversold, suggesting a potential bounce, but the daily RSI is still below 50, indicating continued downward momentum. The current price is well below the daily MA, and recent price action shows a sharp decline. Weekly RSI is approaching neutral. Monthly is still high but downward. Given these factors, a sell position is riskier but has a better probability than buy. Holding is an option as the volatility might go either direction."
-}
-```

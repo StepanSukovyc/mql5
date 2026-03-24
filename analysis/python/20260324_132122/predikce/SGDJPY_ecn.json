@@ -1,7 +1,0 @@
-{
-  "symbol": "SGDJPY_ecn",
-  "BUY": 35,
-  "SELL": 30,
-  "HOLD": 35,
-  "reasoning": "The current price (124.128) is slightly below the 1h MA (124.1449) and 4h MA (124.0257), suggesting potential for a short-term bounce. The daily RSI is at 60.88, indicating a bullish trend but not yet overbought. The weekly and monthly RSI values (68.53 and 63.46 respectively) further support this bullish momentum in the medium to long term. However, the last few hourly candles show indecision, justifying a HOLD. Overall, the bias is slightly bullish due to the longer-term trend, but caution is warranted due to recent price action."
-}

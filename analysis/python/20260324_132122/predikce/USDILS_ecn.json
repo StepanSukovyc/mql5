@@ -1,7 +1,0 @@
-{
-  "symbol": "USDILS_ecn",
-  "BUY": 25,
-  "SELL": 45,
-  "HOLD": 30,
-  "reasoning": "Dlouhodobé (měsíční a týdenní) RSI indikují přeprodanost, ale MA naznačují downtrend. Denní a 4H RSI jsou neutrální. 1H RSI je pod 50, cena se pohybuje okolo MA. Poslední svíčky na 1H naznačují spíše konsolidaci. Celkově převažuje tlak k prodeji, dokud cena neprolomí rezistence na vyšších timeframech."
-}

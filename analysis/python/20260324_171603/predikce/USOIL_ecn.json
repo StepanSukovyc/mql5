@@ -1,7 +1,0 @@
-{
-  "symbol": "USOIL_ecn",
-  "BUY": 25,
-  "SELL": 50,
-  "HOLD": 25,
-  "reasoning": "Krátkodobě SELL vzhledem k RSI na 1h a 4h, které naznačují prostor pro pokles. Denní RSI je kolem 60, což naznačuje neutrální až mírně býčí sentiment. BUY pozice nejsou doporučeny, dokud se situace nestabilizuje. Z historického hlediska a dat za poslední měsíc lze pozorovat prudký nárůst ceny, korekce je tak dost pravděpodobná. Proto HOLD nebo spekulativní SELL."
-}

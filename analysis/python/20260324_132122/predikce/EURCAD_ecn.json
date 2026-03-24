@@ -1,7 +1,0 @@
-{
-  "symbol": "EURCAD_ecn",
-  "BUY": 30,
-  "SELL": 40,
-  "HOLD": 30,
-  "reasoning": "Technická analýza EURCAD ukazuje smíšený obrázek. Na měsíčním grafu je RSI stále nad 60, což naznačuje býčí trend, ale RSI na týdenním grafu je 42, naznačuje potenciální další pokles. Denní RSI je na 50, indikuje neutralitu, ale cena je pod MA (1.586737). Na 4h grafu, RSI je 61 a cena je lehce nad MA (1.587217). Na 1h grafu je cena pod MA (1.593081) a RSI je 55, indikuje možnou korekci. Vzhledem k těmto smíšeným signálům a krátkodobému poklesu ceny doporučuji SELL s 40% rizikem, HOLD s 30% rizikem a BUY s 30% rizikem, dokud nebudou jasnější signály o dalším směru."
-}

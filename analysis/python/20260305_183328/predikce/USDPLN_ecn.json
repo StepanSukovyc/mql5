@@ -1,9 +1,0 @@
-```json
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 40,
-  "SELL": 30,
-  "HOLD": 30,
-  "reasoning": "Short-term bullish momentum is indicated by RSI values on 1H, 4H, Daily, and Weekly timeframes. However, Monthly RSI is below 50, suggesting a potential for a long-term reversal or consolidation. The price is currently above the Daily and Weekly MA, but below the Monthly MA, indicating mixed signals.  Recent hourly candles show some volatility, so holding may be prudent until a clearer trend emerges."
-}
-```
