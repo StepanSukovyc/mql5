@@ -1,0 +1,7 @@
+{
+  "symbol": "UK100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Denní RSI je na 34, což naznačuje, že trh je blízko přeprodané oblasti, ale ještě v ní není. MA na denním grafu (10371.41) je výrazně nad současnou cenou (9923.74), což naznačuje downtrend. Na 4H grafu je RSI 42 a cena se nachází pod MA.  Týdenní RSI je na neutrálních 50. Hodinový RSI je 59 a cena je nad MA, což naznačuje krátkodobý rostoucí trend. Celkově převládá spíše medvědí sentiment. Krátkodobý růst je možný, proto ponechávám prostor pro BUY pozici. S ohledem na převládající downtrend a potenciál pro pokračování poklesu, je vhodné zvážit SELL. HOLD je rozumnou opcí vzhledem k nejednoznačnosti v krátkodobém horizontu."
+}

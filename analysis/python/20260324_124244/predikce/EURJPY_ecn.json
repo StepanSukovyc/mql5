@@ -1,0 +1,7 @@
+{
+  "symbol": "EURJPY_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "EURJPY is currently trading at 183.994.  While the longer-term (weekly and monthly) RSI values indicate an overbought condition, the daily RSI is neutral. Price is above daily MA and just above hourly MA which are bullish signals. However recent hourly price action indicates a slight pull back. Therefore, HOLD provides a balanced approach, BUY presents a moderate opportunity, and SELL carries more risk at this point."
+}

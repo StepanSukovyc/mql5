@@ -1,9 +1,9 @@
 {
   "symbol": "AUDSGD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu měny s lehkovážním trendem. RSI a MA hodnoty podporují konzervativní přístup.",
-  "timestamp": "2026-03-19T16:34:39.024137+00:00",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Převládajícím signálem je pokles ceny s nedostatečným potvrzením růstem v RSI a MA. Nízké hodnoty RSI a ztráta supportu na hlavním trendu sugerují silnou pravděpodobnost poklesu.",
+  "timestamp": "2026-03-24T15:52:13.285872+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,9 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle svíčkových formací a RSI může dojít k otočení trendu směrem nahoru. Nicméně, dlouhodobý pohled ukazuje na slabší výkonnost historických hodnot.",
+  "timestamp": "2026-03-24T13:07:58.825079+00:00",
+  "model": "deepseek-coder-v2"
+}

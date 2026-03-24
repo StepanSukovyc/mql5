@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Short-term: 1H RSI is around 60 and price is below MA, suggesting slight upward momentum but a potential pullback. 4H & Daily: RSI is below 50 and price is below MA, indicating downward pressure. Weekly RSI is slightly below 50 and price is below MA, pointing to more bearish trend. Monthly RSI is still high above 60 but the price is above MA, which may change, therefore the highest probability is of SELL."
+}

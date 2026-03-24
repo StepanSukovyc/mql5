@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSGD_ecn",
+  "BUY": 20,
+  "SELL": 50,
+  "HOLD": 30,
+  "reasoning": "The price is below the daily and weekly moving averages, and RSI values on these timeframes suggest oversold conditions are not yet extreme. Monthly RSI is also low and the price is trending downwards. Recent hourly candles indicate continued downward pressure with closing prices near lows. Therefore, SELL is favored. Holding might be suitable for a very short period while waiting for slightly oversold to initiate positions."
+}

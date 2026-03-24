@@ -1,0 +1,9 @@
+{
+  "symbol": "BCHUSD_ecn",
+  "BUY": 60.0,
+  "SELL": 20.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstový impuls podle svíčkového grafu a stabilita RSI nad 50. Nízká volatilita v MA ukazuje na silnou podporu.",
+  "timestamp": "2026-03-24T10:14:01.494963+00:00",
+  "model": "deepseek-coder-v2"
+}

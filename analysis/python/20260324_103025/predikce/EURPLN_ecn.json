@@ -1,0 +1,7 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na hodinovém grafu se RSI nachází pod 50 (44.38), což signalizuje medvědí trend. Nicméně na denním a týdenním grafu je RSI nad 50, což naznačuje potenciál pro růst. Cena je mírně nad MA na 4hodinovém a denním grafu. Nicméně pokles ceny v posledních hodinách naznačuje převahu prodejců. Proto SELL má mírnou převahu, ale vzhledem ke smíšeným signálům na různých časových rámcích, HOLD je také rozumná strategie."
+}

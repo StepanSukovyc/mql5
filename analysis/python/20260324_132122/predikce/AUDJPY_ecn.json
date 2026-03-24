@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDJPY_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Rozhodování je založeno na úbytku volatility a silných supportech podle svíčkových grafů. RSI ukazuje slabost s opakovanými body návratu kolem 50, což naznačuje nejistotu.",
+  "timestamp": "2026-03-24T12:57:08.035220+00:00",
+  "model": "deepseek-coder-v2"
+}

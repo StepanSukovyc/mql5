@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSGD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "NZDSGD_ecn currently shows a mixed signal. The RSI values on the daily and monthly charts are below 50, indicating potential downward momentum. The price is also below the MA on the daily, 4H and hourly chart. Although the 1H RSI shows some minor recovery, overall the indicators suggest selling pressure. Therefore, SELL is favored, but HOLD is also reasonable as the price is near a short term support and 1H RSI is near the 50 area. A long term investment is risky."
+}

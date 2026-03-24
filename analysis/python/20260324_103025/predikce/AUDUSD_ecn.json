@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle svíčkových formací a RSI indikátoru ukazuje graf trend konzolidace s tendencí klesajícímu. Nicméně, MA hodnoty signalizují stabilitu a možnou případnou změnu směru.",
+  "timestamp": "2026-03-24T10:10:27.852868+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XPBUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 2.5,
+  "reasoning": "V účtu nemám žádnou pozici s tímto symbolem. Predikce pro XPBUSD_ecn je SELL s 100% pravděpodobností. Aktuální equity je 1780.68 USD. Lot size 0.01 je konzervativní přístup a riziko pro účet je malé. Take profit je nastaven s ohledem na transakční poplatek 0.1 USD a očekávaný zisk vzhledem ke klesajícímu trendu. Technická analýza naznačuje silnou tendenci k poklesu."
+}

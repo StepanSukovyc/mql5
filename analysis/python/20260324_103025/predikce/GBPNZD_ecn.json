@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPNZD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na základě technické analýzy: Cena je nad MA na 1h, 4h a denním grafu, což naznačuje býčí trend. Nicméně RSI na 4h a denním grafu se blíží překoupené zóně (nad 70), což by mohlo signalizovat korekci. Na týdenním grafu se cena pohybuje okolo MA. Měsíční graf ukazuje uptrend. Proto je BUY spíše opatrný. SELL je podpořen možnou korekcí v blízké době. HOLD, indikuje nejistotu, jelikož trh vykazuje smíšené signály."
+}

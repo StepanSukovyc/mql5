@@ -1,0 +1,7 @@
+{
+  "symbol": "XAGUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI na úrovni 35.3, což naznačuje potenciál pro další pokles. MA na denním grafu je výrazně nad aktuální cenou, což potvrzuje downtrend. Na 4H grafu RSI i MA naznačují medvědí trend. Měsíční RSI je sice vysoké, ale cena se výrazně propadla pod MA. Celkově se zdá, že SELL má větší pravděpodobnost úspěchu než BUY. HOLD je neutrální, vzhledem k možným krátkodobým odrazům."
+}

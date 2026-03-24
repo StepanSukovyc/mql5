@@ -1,0 +1,7 @@
+{
+  "symbol": "XPBUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním a týdenním MA, RSI na denním a týdenním grafu naznačuje, že trh je spíše v downtrendu. Na 1h a 4h grafu se cena pohybuje kolem MA. Doporučuji sledovat vývoj ceny. BUY má nižší skóre kvůli dlouhodobějšímu downtrendu, SELL má vyšší skóre, jelikož se trh stále nachází v down trendu, ale je třeba brát na zřetel že RSI není v přeprodané zóně. HOLD doporučuji pro případ, že trh půjde do strany."
+}

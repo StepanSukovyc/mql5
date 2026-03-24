@@ -1,0 +1,7 @@
+{
+  "symbol": "FANG_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod denním i 4H MA, RSI na denním a 4H timeframe naznačuje prostor pro další pokles. Týdenní MA je výrazně nad aktuální cenou. Měsíční RSI je sice relativně vysoko, ale cena se nachází pod týdenním a denním MA, což naznačuje spíše medvědí sentiment. BUY indikuje měsíční MA, který je pod současnou cenou. Data za poslední týden nenaznačují jednoznačný směr. Na nižších timeframech vidíme konsolidaci."
+}

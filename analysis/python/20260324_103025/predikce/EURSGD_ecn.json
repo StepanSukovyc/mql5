@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSGD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the 1H and 4H timeframes, the RSI is nearing overbought conditions (61.41 and 66.38, respectively). However, the current price (1.48235) is above the MA on 1H (1.48052) and 4H (1.478794) suggesting upward momentum but needs confirmation. Daily RSI is neutral at 49.46, while Weekly RSI is below 50 (41.55), indicating that there might be a short-term bullish and long term bearish direction. Recent hourly candles show upward movement. Until weekly trends are confirmed or disproven, HOLD is a safe position."
+}

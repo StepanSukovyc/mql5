@@ -1,0 +1,7 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL (RSI 1h pod 40, cena pod MA 4h a day), střednědobě HOLD (RSI day neutrální, ale klesající trend), dlouhodobě BUY (RSI week nad 60, cena nad MA week, MA month silně rostoucí, ale je třeba sledovat další vývoj)."
+}

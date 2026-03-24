@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFZAR_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "On the daily timeframe, the RSI is at 63.57, suggesting a potential for further upward movement, but approaching overbought conditions. The price is above the MA, supporting a bullish trend. However, recent hourly candles show some pullback, and the hourly RSI is at 44.29. The weekly timeframe RSI is at 57.8, also indicating bullish momentum, but the most recent weekly candle is not strongly bullish. Given these mixed signals across different timeframes, a Hold strategy is prudent. There is a good chance of buying opportunity if the pair pulls back in the short-term, while a short-term sell should be considered if RSI values go above 70 in the daily timeframe. Due to these considerations HOLD is favored."
+}

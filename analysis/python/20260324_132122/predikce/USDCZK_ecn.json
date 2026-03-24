@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Smíšené signály. Krátkodobě 1H a 4H RSI neutrální (okolo 47), 1H MA pod cenou (21.08 < 21.138), ale denní RSI je nad 50 (59), což naznačuje potenciální uptrend, ale MA je stale pod cenou (20.99 < 21.138). Měsíční RSI pod 50 (40) naznačuje dlouhodobější downtrend, MA je nad cenou (22.04 > 21.138). Poslední pokles ceny na 1H timeframe a obecná nejistota vyžadují opatrnost. Vzhledem k silnému propadu 23.3 (14-15h) Sell má mírně vyšší pravděpodobnost, Hold zajišťuje vyčkávání na potvrzení trendu."
+}

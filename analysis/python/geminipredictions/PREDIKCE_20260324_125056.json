@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDCZK_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 23.00,
+  "reasoning": "Obchod #36 je řízen Gemini. Symbol USDCZK_ecn nebyl dosud v portfoliu. Model deepseek-coder-v2 doporučuje SELL s 50% pravděpodobností, což vychází ze zhoršení makroekonomických indikátorů a poklesu RSI, signalizující silný pohyb dolů. Preferuji konzervativní lot_size 0.01 s Take Profit na úrovni 23.00 CZK za USD. Take Profit zohledňuje transakční náklady (0.10 USD) a realistický potenciál zisku z poklesu ceny. Aktuální cena se pohybuje kolem 23.20, TP je tedy nastaven cca 200 pipů od aktuální hodnoty. Vzhledem k celkové situaci je to bezpečná úroveň zisku."
+}

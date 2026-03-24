@@ -1,0 +1,7 @@
+{
+  "symbol": "FRA40_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "FRA40_ecn is showing a bearish trend. Daily RSI is in oversold territory (32.26), but the price is below the daily and 4H moving averages, and weekly RSI is below 50. Recent price action shows a sharp decline. The hourly chart indicates potential short-term upward movement, but the overall trend remains bearish. Considering the broader downtrend and indicator positions, SELL is favored. BUY is risky. Holding is a neutral position."
+}

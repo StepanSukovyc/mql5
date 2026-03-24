@@ -1,0 +1,9 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem globálních faktorů a nedostatečným tlakem nákupu. Technická analýza s ohledem na RSI ukazuje slabost, což podporuje přijetí konzervativního postoju.",
+  "timestamp": "2026-03-24T11:52:20.138160+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
+  "BUY": 25.0,
+  "SELL": 45.0,
   "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezené v důsledku volatilního trhu a slabším fundamentem. Převaha HOLD je založena na nejistotě směřující k udržení pozice.",
-  "timestamp": "2026-03-19T18:27:06.493834+00:00",
+  "reasoning": "Na základě RSI a MA hodnot je vidět stabilita tržního prostředí s tendencí růstu. Nicméně, svíčkovými formacemi byly identifikovány přítomnosti odporu a podpora, což naznačuje nejistotu.",
+  "timestamp": "2026-03-24T14:42:30.492196+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Short-term bearish signals prevail. Daily RSI is at 38.92, indicating downside momentum. The price is below the daily MA (24692.44), suggesting selling pressure. 4H RSI is at 42.69, confirming the downward trend. While the 1H RSI is slightly above 50 (59.58) it´s below MA (24187.78) which can signal short-term correction before resuming the downtrend. Monthly RSI is high at 66.37, but MA (22448.24) is far below the current price, suggesting possible overvaluation in longer time frame. Therefore, SELL has the highest probability followed by HOLD and BUY."
+}

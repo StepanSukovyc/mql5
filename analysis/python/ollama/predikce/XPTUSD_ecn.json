@@ -1,9 +1,9 @@
 {
   "symbol": "XPTUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza a svíčkové formace upozorňují na pokles cen. RSI a klouzavé průměry ukazují nejistotu.",
-  "timestamp": "2026-03-19T16:09:06.563312+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstový impulz s ohledem na silnou podporu MA a pozitivní divergence RSI. Ceny se nacházejí v konzolidaci nad hlavním trendem.",
+  "timestamp": "2026-03-24T15:27:29.545103+00:00",
   "model": "deepseek-coder-v2"
 }

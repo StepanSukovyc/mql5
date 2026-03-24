@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena se pohybuje pod MA na 1h a 4h timeframech, naznačuje krátkodobý downtrend. RSI na týdenním timeframe je 31,7, což značí potenciální překoupenost, ale trend na delších timeframech je klesající. Data za poslední hodinu ukazují klesající trend. Doporučuje se vyčkat na potvrzení trendu."
+}

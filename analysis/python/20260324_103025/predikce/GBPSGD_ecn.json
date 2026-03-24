@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPSGD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Na 1H a 4H timeframe RSI blízko překoupenosti, na týdenním timeframe RSI pod 50. Cena mírně nad 1H a 4H MA, pod týdenní a měsíční MA. Na denním timeframe se RSI pohybuje kolem 50. Celkově nejasný signál, doporučuji vyčkat na potvrzení trendu. Měsíční graf naznačuje možnost korekce, ale krátkodobé oscilátory naznačují mírný růst."
+}

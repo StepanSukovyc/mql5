@@ -1,0 +1,7 @@
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje smíšené signály. RSI na denní bázi je na 36.24, což značí možnost překoupenosti, ale ne extrémní. MA na denní bázi je 25625.01, což je nad současnou cenou 24829.4, což by mohlo naznačovat downtrend. Na týdenní bázi je RSI 41.71 a MA 26094.32. Měsíční RSI je 62.21 a MA je 23347.76. Celkově vidím převahu medvědího sentimentu, ale zároveň není tak silný, aby se dalo s jistotou říci, že půjde cena dolů, taky je zde podpora na měsíčním MA. Proto SELL 40%, BUY 30% a HOLD 30%."
+}

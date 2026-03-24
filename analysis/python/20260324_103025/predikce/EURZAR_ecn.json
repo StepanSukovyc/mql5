@@ -1,0 +1,7 @@
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje potenciál pro SELL. Denní a 4H RSI se nachází v překoupené zóně nebo blízko ní, což naznačuje možnou korekci. Nicméně, týdenní RSI je neutrální a měsíční RSI je pod 50, což signalizuje nerozhodnost na dlouhodobějším horizontu. Aktuální cena je pod měsíčním MA, ale nad týdenním MA, denním MA a 4H MA, čož značí potenciální pokles. Po poklesu kolem 23. března se cena momentálně konsoliduje s neutrálním dopadem na trh."
+}

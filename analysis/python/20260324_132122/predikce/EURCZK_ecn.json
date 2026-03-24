@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě (1h, 4h) RSI neutrální, ale cena lehce pod MA. Denní RSI blízko překoupenosti, naznačuje možnost korekce. Měsíční RSI pod 50, s MA na vyšší hodnotě, což naznačuje dlouhodobější klesající trend. Poslední den pokles. Preferuji SELL/HOLD s ohledem na možné krátkodobé korekce a dlouhodobý klesající trend."
+}

@@ -1,0 +1,9 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tendence s nárustem v posledních měsících. Nicméně, cenový graf ukazuje složitou situaci s mnoha svíčkami, což naznačuje nejistotu.",
+  "timestamp": "2026-03-24T12:00:01.307160+00:00",
+  "model": "deepseek-coder-v2"
+}

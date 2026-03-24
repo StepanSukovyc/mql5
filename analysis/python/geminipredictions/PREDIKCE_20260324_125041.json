@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDILS_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 3.55,
+  "reasoning": "Doporučuji prodej USDILS_ecn. Nemám otevřenou pozici v tomto instrumentu, čímž dochází k diverzifikaci portfolia. Z dostupných predikcí má USDILS_ecn nejsilnější doporučení pro SELL (75%). Lot size 0.01 je bezpečný s ohledem na stav účtu a marži. Take profit je nastaven s ohledem na potenciální pokles a transakční náklady."
+}

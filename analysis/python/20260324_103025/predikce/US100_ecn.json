@@ -1,0 +1,7 @@
+{
+  "symbol": "US100_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním a týdenním MA, RSI na denním grafu je pod 50. Na hodinovém grafu je RSI nad 50, ale cena se blíží k MA. Na měsíčním grafu je RSI vysoké, což naznačuje potenciální překoupenost. Svíčkové formace nevykazují jasný signál. Celkově převládá krátkodobý býčí sentiment, ale střednědobý až dlouhodobý je spíše medvědí."
+}

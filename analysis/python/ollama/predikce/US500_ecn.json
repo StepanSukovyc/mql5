@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 40.0,
   "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s tržními pohyby v přijatelných mezích. RSI a MA indikátory signalizují nejistotu s mírně rostoucím trendem.",
-  "timestamp": "2026-03-19T18:29:08.596022+00:00",
+  "reasoning": "Zohlednil jsem svíčkové formace a RSI hodnoty, které ukazují nejistotu trhu. MA indikátory naznačují slabou tendenci růstu.",
+  "timestamp": "2026-03-24T14:44:22.862248+00:00",
   "model": "deepseek-coder-v2"
 }

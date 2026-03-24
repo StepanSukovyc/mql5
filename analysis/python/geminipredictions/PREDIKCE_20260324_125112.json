@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "SELL",
+  "lot_size": 0.02,
+  "take_profit": 77.00,
+  "reasoning": "Obchod #36 je řízený Gemini, takže beru v potaz Take Profit. Diverzifikace: Nemám otevřené pozice v USOIL_ecn. Predikce pro USOIL_ecn je SELL s 40% pravděpodobností.  Krátkodobě SELL signál na základě poklesu na 1h a 4h timeframe (RSI pod 50, cena pod MA). Denní RSI je neutrální (61.72), týdenní a měsíční timeframe naznačují potenciál pro další růst, ale beru v potaz krátkodobý SELL signál, který může průběžně generovat zisky. Důvodem je i prudký propad ceny v posledních dnech indikující vysokou volatilitu a nejistotu. Take Profit je nastaven realisticky tak, aby i po odečtení poplatků dával obchod ekonomický smysl. S lot size 0.02 (poplatek 0.20 USD) a rozdílem mezi aktuální cenou (cca 78.5) a take profit (77.00) vytváří obchod potenciál pro zisk. Beru v úvahu transakční náklady (0.2 USD / 0.02 lot) a zůstatek na účtu."
+}

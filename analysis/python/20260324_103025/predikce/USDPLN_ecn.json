@@ -1,0 +1,7 @@
+{
+  "symbol": "USDPLN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "USDPLN is showing mixed signals. The daily RSI is at 56, suggesting neutral to slightly bullish momentum. However, the hourly RSI is at 42, indicating potential for further downside. The monthly RSI is at 42, indicating potential for future upside. The price is below the 4H MA, suggesting a bearish trend on the short term. Recent hourly price action is showing signs of price recovery, but overall recent daily candle is bearish, closing near the low. Because of conflicting timeframes, HOLD is a reasonable strategy for the short term."
+}

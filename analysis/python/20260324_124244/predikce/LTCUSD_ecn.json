@@ -1,0 +1,7 @@
+{
+  "symbol": "LTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním grafu je RSI hluboko v přeprodané zóně (29.24), což naznačuje potenciální korekci nahoru, nicméně MA na týdenním grafu je daleko nad aktuální cenou (69.66), což naznačuje dlouhodobý klesající trend. Denní graf ukazuje RSI na neutrální úrovni (52.99) a cena se pohybuje kolem MA, což signalizuje nejistotu. 1h graf ukazuje RSI nad 60, což značí býčí momentum v krátkodobém horizontu, ale MA se nachází mírně pod aktuální cenou. Celkově převládá spíše medvědí sentiment, ale je zde potenciál pro krátkodobý nárůst. Proto SELL má největší procento rizika a HOLD a BUY jsou si podobné."
+}

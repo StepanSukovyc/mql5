@@ -1,0 +1,7 @@
+{
+  "symbol": "USDILS_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "The monthly RSI is very oversold (27.64), suggesting potential for upward correction. However, the longer-term moving average (monthly MA = 3.44) is significantly above the current price, indicating strong downward pressure. The weekly RSI is also below 40. The hourly RSI is increasing but still below 50. The price has also bounced within the last week which could lead to continued decline. Therefore I recommend a slight selling bias."
+}

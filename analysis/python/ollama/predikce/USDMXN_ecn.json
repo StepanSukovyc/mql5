@@ -1,9 +1,9 @@
 {
   "symbol": "USDMXN_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Převažují silné pohyby na pokles, ale některé indikátory ukazují slabost. Malý podíl HOLD je z důvodu nejistoty v krátkodobém horizontu.",
-  "timestamp": "2026-03-19T15:40:26.358439+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a nárůst rizika finanční krize vede k poklesu hodnoty měny. RSI a MA ukazují slabost trendu.",
+  "timestamp": "2026-03-24T14:59:23.963973+00:00",
   "model": "deepseek-coder-v2"
 }

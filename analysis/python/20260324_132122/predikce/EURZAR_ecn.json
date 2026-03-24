@@ -1,0 +1,7 @@
+{
+  "symbol": "EURZAR_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Technické indikátory vykazují smíšené signály. RSI na denním a 4H grafu je nad 60, což naznačuje potenciální překoupenost, ale týdenní RSI je neutrální. Cena je mírně pod měsíčním MA, ale nad ostatními MA.  Vzhledem k této nejednoznačnosti a krátkému lookback period, je doporučeno rozdělit riziko mezi BUY, SELL a HOLD pozice."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "CADCHF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI hluboko v přeprodané zóně (23.73), což naznačuje možný obrat. Nicméně, cena je stále pod měsíčním klouzavým průměrem (0.597394), což naznačuje silný dlouhodobý sestupný trend. Na denním a 4H grafu RSI osciluje kolem neutrální hodnoty 50, což nepodporuje jednoznačný směr. Krátkodobý trend (1H) je spíše do strany/mírně klesající. Proto doporučuji vyčkat (HOLD) nebo spekulativně SELL se stop lossem nad poslední high. Riziko je ale relativně vysoké, protože cena se snaží konsolidovat."
+}

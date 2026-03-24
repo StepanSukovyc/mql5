@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCAD_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "USDCAD je momentálně v konsolidační fázi. Denní a 4H RSI jsou v překoupené zóně, což naznačuje možný pullback. Týdenní MA je blízko aktuální ceny, což naznačuje silnou rezistenci. Měsíční MA je nad aktuální cenou, což značí dlouhodobý downtrend.  Doporučuji vyčkat na jasnější signál. Proto dělím procenta mezi BUY, SELL a HOLD. Nejsilnější je BUY kvůli odrazu od spodní hranice konsolidace, ale je potřeba opatrnost kvůli celkovému trendu a překoupenosti indikátorů."
+}

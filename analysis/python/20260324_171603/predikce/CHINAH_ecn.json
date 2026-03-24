@@ -1,0 +1,7 @@
+{
+  "symbol": "CHINAH_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "The price is currently below the daily, 4-hour, and hourly moving averages, suggesting a downtrend. Daily and weekly RSI values are below 40, indicating oversold conditions, but not extreme.  Recent hourly price action shows consolidation. Monthly RSI is at 59, which suggest an upward momentum but approaching overbought level. Considering the downtrend and recent price action, a sell position appears slightly more probable than a buy. Therefor SELL 45%, BUY 25%, HOLD 30%."
+}

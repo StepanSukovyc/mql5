@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XPTUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 930,
+  "reasoning": "Účet má otevřenou pozici na CHFZAR_ecn, jejíž typ je BUY a aktuálně je ztrátová. Dále má otevřenou pozici na EURNZD_ecn, jejíž typ je SELL a aktuálně je ztrátová. A má otevřené pozice na NGAS_ecn, jejichž typ je BUY a aktuálně jsou silně ztrátové (-297, -277.5, -277.5). Z predikcí jsem vybral XPTUSD_ecn, protože u něj je 50% šance na SELL. Zároveň tento symbol nemám v otevřených pozicích, čímž diverzifikuji portfolio. Aktuální cena XPTUSD_ecn je kolem 980 USD (není v datech, ale předpokládám dle take_profit), proto navrhuji take_profit na 930 USD. Doporučený lot size je 0.01, protože chci být konzervativní a vyzkoušet predikce. S ohledem na transakční náklady 0.10 USD za 0.01 lot dává obchod ekonomický smysl."
+}

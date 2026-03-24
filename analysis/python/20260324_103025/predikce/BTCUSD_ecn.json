@@ -1,0 +1,9 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zohlednil jsem svíčkové formace s potenciálem růstu, RSI indikátor ukazuje slabost a MA trend je mírně klesající.",
+  "timestamp": "2026-03-24T10:15:48.827390+00:00",
+  "model": "deepseek-coder-v2"
+}

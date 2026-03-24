@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převládajícím signálem je pokles cen s některými indikátory naopak signalizujícím potenciální vzestup. Kompromis mezi rizikem a očekávaným ziskem.",
-  "timestamp": "2026-03-19T16:44:07.809365+00:00",
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace ukazují slabost na růst. Malý podíl HOLD zohledňuje nejistotu trhu.",
+  "timestamp": "2026-03-24T16:01:14.055908+00:00",
   "model": "deepseek-coder-v2"
 }

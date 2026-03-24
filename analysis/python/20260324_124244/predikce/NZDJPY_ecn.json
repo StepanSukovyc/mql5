@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě převládá prodejní tlak. RSI na 1H, 4H a denním grafu se pohybuje pod 50, což naznačuje downtrend. Cena je pod MA na 1H, 4H a denním grafu. Na týdenním a měsíčním grafu je stále vidět uptrend, ale oslabuje. Poslední denní svíčka je také medvědí. Doporučuje se opatrnost a sledování situace."
+}

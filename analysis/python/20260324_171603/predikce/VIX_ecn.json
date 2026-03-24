@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "VIX roste v posledních měsících (měsíční RSI 61.92, MA roste), ale týdenní RSI je již v překoupené zóně (74.17) a denní RSI se blíží překoupené zóně (59.62). 1H RSI naznačuje prostor pro potenciální krátkodobý růst (42.08), ale zároveň 4H RSI je neutrální (52.53). Silný propad ceny 23.3. na 1H grafu je varovný signál. Vyčkávám."
+}

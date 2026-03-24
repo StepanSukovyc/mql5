@@ -1,0 +1,7 @@
+{
+  "symbol": "FANG_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu je RSI stále nad 60, což naznačuje uptrend, ale na týdenním a denním grafu se RSI pohybuje pod 50, a cena je pod denním i 4H klouzavým průměrem, což naznačuje potenciální sestupný trend. Krátkodobý downtrend převládá, ale dlouhodobý trend je stále uptrend. Proto doporučuji HOLD a sledovat další vývoj."
+}

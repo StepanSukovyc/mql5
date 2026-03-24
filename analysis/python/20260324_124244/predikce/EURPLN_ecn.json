@@ -1,0 +1,7 @@
+{
+  "symbol": "EURPLN_ecn",
+  "BUY": 35,
+  "SELL": 30,
+  "HOLD": 35,
+  "reasoning": "Smíšené signály napříč timeframe. Krátkodobě (1h, 4h) RSI neutrální, cena blízko MA. Denní RSI naznačuje mírný uptrend, týdenní RSI je relativně vysoko. Měsíční RSI neutrální. Nedávný pokles ceny naznačuje potenciální vyčerpání uptrendu, ale celkově trh nevykazuje jasný směr. Vyčkávání na potvrzení trendu."
+}

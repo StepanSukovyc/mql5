@@ -1,0 +1,7 @@
+{
+  "symbol": "USDPLN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL: RSI na 1H je 41.56, což naznačuje, že se blížíme k překoupené zóně, a cena je nad MA na 1H, což by mohlo vést k pullbacku. Dlouhodobě HOLD: RSI na denní bázi je 58.69, což naznačuje mírný býčí trend, ale s potenciálem korekce. Měsíční RSI je 42.98, což naznačuje neutrální trend. BUY riziko je zvýšené kvůli celkovému klesajícímu trendu na měsíčním grafu (MA je nad cenou) a nedávnému poklesu na denním grafu."
+}

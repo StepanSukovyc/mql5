@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "AUDZAR_ecn aktuálně vykazuje smíšené signály. Na denním a týdenním grafu je RSI v rostoucí tendenci (63 a 68.6), což naznačuje možný býčí trend. Nicméně, hodinové a 4hodinové RSI naznačují, že by mohlo dojít ke korekci. Cena se nachází nad MA na denním, týdenním i měsíčním grafu, ale pod MA na 1H a 4H, což ukazuje na nejistotu ohledně krátkodobého směru. Vysoký spread v některých hodinách naznačuje nižší likviditu a vyšší riziko. Vzhledem k těmto faktorům doporučuji opatrnost. Mírný SELL kvůli krátkodobé korekci, HOLD kvůli nejistotě a malý BUY kvůli dlouhodobějšímu potenciálu růstu."
+}

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XPBUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 22.0,
+  "reasoning": "Podle predikce pro XPBUSD_ecn je 100% pravděpodobnost poklesu. Nemám otevřenou pozici v tomto symbolu, takže ho preferuji z důvodu diverzifikace. Riziko je tak minimální a případný zisk bude malý, ale jistý, takže bude pravidelně generovat zisk na denní bázi. Poplatek za 0.01 lot je 0.10 USD. Cena XPBUSD nyní cca 23 USD, tak se budu snažit dosáhnout TP na 22 USD."
+}

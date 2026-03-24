@@ -1,0 +1,7 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL kvůli prudkému poklesu ceny v posledních dnech (day timeframe) a RSI na 1h pod 40, naznačujícímu přeprodanost. Střednědobě HOLD kvůli RSI na denním timeframe blízko 60 a MA roste. Dlouhodobě BUY vzhledem k rostoucím MA na týdenním a měsíčním grafu a RSI nad 60."
+}

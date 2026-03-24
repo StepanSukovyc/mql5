@@ -1,0 +1,7 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "Na kratších timeframech (1h, 4h, den) se RSI nachází pod 50, což naznačuje, že trh má klesající trend. Cena je pod MA na všech timeframech. Na týdenním a měsíčním timeframe RSI nad 50. Celkově převažuje krátkodobý klesající trend, proto SELL s vyšší pravděpodobností."
+}

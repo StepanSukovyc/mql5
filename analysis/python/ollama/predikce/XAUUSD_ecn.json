@@ -1,9 +1,9 @@
 {
   "symbol": "XAUUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstový trend je omezen svíčkovou konfigurací a nárůstem RSI, ale vysoké riziko z důvodu politických událostí a nesrovnalostí v ekonomice.",
-  "timestamp": "2026-03-19T15:59:40.115498+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Růst cen závisí na mnoha faktorech, včetně politiky danění a makroekonomických ukazatelů. RSI indikuje přeuiverzi s potenciálem k oživení.",
+  "timestamp": "2026-03-24T15:18:09.340103+00:00",
   "model": "deepseek-coder-v2"
 }

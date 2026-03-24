@@ -1,0 +1,7 @@
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 25,
+  "SELL": 50,
+  "HOLD": 25,
+  "reasoning": "Technická analýza ukazuje na downtrend. Krátkodobé RSI na 1H timeframe je na úrovni 37, což naznačuje, že trh není překoupený, ale stále relativně slabý. Moving Averages na delších časových rámcích (týdenní a měsíční) jsou výrazně nad aktuální cenou, což potvrzuje dlouhodobější klesající trend. Denní data ukazují na RSI pod 50. I přes možné krátkodobé korekce k růstu převažuje riziko dalšího poklesu ceny. Měsíční data naznačují, že RSI je v neutrální zóně, ale cena je pod MA, což naznačuje pokračující slabost v dlouhodobém horizontu.  Z posledních 30 denních svíček je patrný klesající trend. Doporučuji opatrnost při nákupech."
+}

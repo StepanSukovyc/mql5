@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCZK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL z důvodu klesajícího RSI na 1h a 4h timeframe a ceny pod MA na 4h timeframe. Dlouhodobě HOLD - RSI na denním a týdenním grafu se pohybuje kolem 50-60, což nenaznačuje silný trend. BUY je rizikový kvůli celkovému downtrendu a MA na měsíčním grafu je vysoko nad cenou."
+}

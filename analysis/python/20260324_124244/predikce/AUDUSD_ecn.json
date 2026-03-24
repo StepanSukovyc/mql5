@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Na 1h timeframe je RSI neutrální, ale cena je pod MA, což naznačuje možný krátkodobý down trend. Na 4h a denním grafu je RSI pod 40 (over-sold), cena je pod MA a celkově směřuje dolů. Na týdenním a měsíčním timeframe je RSI nad 50, což signalizuje rostoucí momentum, ale aktuální cena je pod týdenním MA, což signalizuje pokles a korekci z předchozího růstu.  Proto nejvýhodnější možnost je SELL. BUY je riskantní, HOLD je neutrální."
+}

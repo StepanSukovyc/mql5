@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na měsíčním grafu RSI je pod 40, což naznačuje potenciální překoupenost, ale MA je stále vysoko nad současnou cenou, indikuje downtrend. Denní i 4h RSI jsou pod 50. Cena je pod denním MA. 1h RSI je sice nad 50, ale cena klesá. Vzhledem k převaze medvědích signálů upřednostňuji SELL, ale kvůli 1h RSI a potenciálu pro krátkodobou korekci volím opatrnější rozložení. Celkově downtrend pokračuje, takže je vhodné zvážit prodejní pozici s ohledem na riziko dočasného odrazu ceny."
+}

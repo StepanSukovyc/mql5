@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI ukazuje slabost s opravami nad hladinou předchozího vrcholu. MA indikátor podporuje kontinuální trend.",
-  "timestamp": "2026-03-19T18:33:14.109634+00:00",
+  "reasoning": "Růstové impulzy podporované RSI a korekcí MA signalizuje možnost pokračujícího růstu. Nedostatek jasných divergencí nebo zásadních negativ v fundamentech.",
+  "timestamp": "2026-03-24T14:48:07.206164+00:00",
   "model": "deepseek-coder-v2"
 }

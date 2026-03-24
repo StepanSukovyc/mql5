@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDCZK_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 23.2,
+  "reasoning": "Pořadí obchodu je #36, což znamená, že nejde o plně řízený Gemini obchod, proto se lot_size a take_profit ignorují. Diverzifikace: USDCZK_ecn není aktuálně v otevřených pozicích. Predikce pro USDCZK_ecn doporučuje SELL s 50% pravděpodobností a zdůvodněním, že růstové tlaky jsou pozorovány v důsledku světových ekonomických událostí a politik aktivně podporujících měnu. Nicméně, pokles RSI a SMA signalizuje možnost přehřátí trhu a návalový efekt by mohl být brzy vyčerpán. Zvažuji SELL pro potenciální krátkodobou korekci, ale uvědomuji si riziko spojené s proti trendovým obchodováním, s ohledem na fakt, že pozici držím delší dobu. Lot_size jsem vybral minimální (0.01), abych minimalizoval riziko ztráty na tomto obchodu."
+}

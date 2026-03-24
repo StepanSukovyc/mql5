@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Denní RSI je na úrovni 30, což značí potenciální překoupenost. Cena se pohybuje pod denním MA, což naznačuje klesající trend. Nicméně, 1h a 4h RSI nejsou v extrémních hodnotách a cena je nad 4h MA. Měsíční RSI je 61, což naznačuje silný uptrend v dlouhodobém horizontu. Celkově vidím zvýšené riziko pro SELL (40%), držení stávající pozice HOLD (30%) a nízkou pravděpodobnost pro BUY (30%) z důvodu potenciální korekce v krátkodobém horizontu."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "NZDCAD is showing mixed signals. The short-term (1H & 4H) RSIs are near 50, suggesting neither strong overbought nor oversold conditions.  Price is below the moving average on most timeframes, hinting at potential further downside. Daily and weekly RSIs are below 50. Monthly MA is significantly higher than current price, indicating long-term bearish trend. Recent hourly candle data shows volatility and a lack of clear direction.  Overall, slightly more bearish sentiment than bullish. Thus, the risk assessment favours a SELL position slightly, with HOLD as a viable option considering the mixed signals."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCAD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod denním a měsíčním MA, RSI na denní bázi naznačuje spíše neutrální/mírně klesající trend. Na 1h timeframe RSI roste, ale MA na delších timeframech jsou výše. Celkově, klesající trend převažuje, ale existuje i prostor pro krátkodobé oživení (proto částečné BUY riziko)."
+}

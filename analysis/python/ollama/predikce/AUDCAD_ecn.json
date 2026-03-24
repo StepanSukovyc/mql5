@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCAD_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převládající trend je směrem dolů, ale jsou signály zpomalování poklesu a možnost růstu v příštích týdnech.",
-  "timestamp": "2026-03-19T16:27:03.455537+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstový impulz s ohledem na technickou analýzu a stabilita RSI a MA ukazuje potenciál růstu, ale také riziko následujícího pohybu.",
+  "timestamp": "2026-03-24T15:45:00.885698+00:00",
   "model": "deepseek-coder-v2"
 }

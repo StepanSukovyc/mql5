@@ -1,0 +1,7 @@
+{
+  "symbol": "USDHKD_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "Technically, the pair is showing mixed signals. Hourly RSI is around 58, suggesting some bullish momentum, but the price is below the hourly MA. 4H RSI is below 50 indicating bearish sign. Daily RSI is at 55, and Weekly RSI is at 65 suggesting a bullish view. Monthly RSI is at 53 which is neutral. Given the data, it's best to HOLD with slight preference towards BUY based on the short-term bullish momentum but acknowledging the overall uncertainty."
+}

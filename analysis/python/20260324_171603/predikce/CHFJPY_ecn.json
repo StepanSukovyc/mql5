@@ -1,0 +1,7 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě převládá prodejní tlak. RSI na 1H a 4H timeframe naznačuje, že trh není přeprodaný, a má tak prostor pro další pokles. Denní MA je nad aktuální cenou, což působí jako rezistence. Naopak týdenní a měsíční timeframe naznačují dlouhodobý uptrend, podpořený rostoucím MA a RSI v oblasti 60-70, což implikuje potenciál pro růst v delším horizontu. Nicméně, poslední denní svíce naznačuje medvědí sentiment. Proto je HOLD doporučení opatrné a zohledňuje protichůdné signály z různých timeframe."
+}

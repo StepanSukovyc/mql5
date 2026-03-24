@@ -1,0 +1,7 @@
+{
+  "symbol": "EURAUD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "EURAUD: Na denním grafu RSI 59 (neutrální). Na 4H grafu RSI 74 (překoupený). Týdenní graf RSI 33 (blízko přeprodanému). Měsíční graf RSI 45 (neutrální). Cena nad MA na denním a 4H grafu, pod MA na týdenním a měsíčním grafu. Nedávný růst ceny, ale RSI na 4H grafu je překoupený, což naznačuje možnou korekci. Silnější signál k prodeji než k nákupu. HOLD doporučen pro opatrné obchodníky."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDJPY_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Na měsíčním a týdenním grafu je RSI poměrně vysoko, naznačující potenciální překoupenost. Denní a 4H graf ukazují klesající RSI a cena se nachází pod MA, což naznačuje prodejní tlak. Proto má pozice SELL vyšší pravděpodobnost. 1H graf RSI je neutrální."
+}

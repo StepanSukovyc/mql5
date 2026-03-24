@@ -1,0 +1,9 @@
+{
+  "symbol": "USDILS_ecn",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Především z pohledu RSI a MA hodnot je trend směrem dolů s nízkými hodnotami RSI, což naznačuje pokles. Nicméně, svíčková forma (candle pattern) ukazuje na možnou reverzi v příštích třech svících, což mi dává pocit nejistoty.",
+  "timestamp": "2026-03-24T12:03:49.379518+00:00",
+  "model": "deepseek-coder-v2"
+}

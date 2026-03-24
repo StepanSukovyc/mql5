@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstový impulz s ohledem na technické indikátory a očekávání z vyvíjející se infrastruktury kryptoměny.",
-  "timestamp": "2026-03-19T16:40:20.750845+00:00",
+  "reasoning": "Zhoršení fundamentalních ukazatelů a nárůst bearish signálů svíčkovými formacemi a RSI",
+  "timestamp": "2026-03-24T15:57:37.281643+00:00",
   "model": "deepseek-coder-v2"
 }

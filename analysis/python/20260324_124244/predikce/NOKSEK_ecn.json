@@ -1,0 +1,7 @@
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě SELL. Cena je pod 4H MA a 1H RSI je pod 50. Denní RSI naznačuje neutralitu. Týdenní RSI je sice vyšší, ale celkový klesající trend na vyšších timeframech (měsíční MA nad cenou) a nedávný silný pokles ceny naznačují potenciál pro další pokles. BUY opatrně - možná korekce. HOLD pro dlouhodobé investory, kteří věří v posílení NOK oproti SEK."
+}

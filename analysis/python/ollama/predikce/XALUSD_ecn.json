@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy jsou slabší, ale stále pozitivní trend RSI a klouzavý průměr ukazuje smysluplnou podporu.",
-  "timestamp": "2026-03-19T15:57:47.785972+00:00",
+  "reasoning": "Základní analýza ukazuje slabost v trendu s několika bílými svíčkami, což může indikovat další pokles. RSI a MA hodnoty signalizují nejistotu s nižším trendem.",
+  "timestamp": "2026-03-24T15:16:15.540151+00:00",
   "model": "deepseek-coder-v2"
 }

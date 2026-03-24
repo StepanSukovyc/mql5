@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 40,
+  "SELL": 25,
+  "HOLD": 35,
+  "reasoning": "Na 1h a denním timeframe je RSI nad 60, indikuje rostoucí trend. 4h timeframe je RSI v překoupené zóně, což naznačuje možné ochlazení. Týdenní timeframe ukazuje RSI pod 40 a měsíční pod 50, což indikuje long-term bear. MA na kratších časových rámcích (1h, 4h, day) je pod cenou, což naznačuje support, zatímco na delších časových rámcích (week, month) je nad cenou, naznačuje rezistenci. Vzhledem k překoupenosti na 4h a celkovému rostoucímu trendu,  rozhodnutí závisí na toleranci rizika a časovém horizontu. Dlouhodobé držení je riskantní kvůli klesajícímu trendu na vyšších časových rámcích."
+}

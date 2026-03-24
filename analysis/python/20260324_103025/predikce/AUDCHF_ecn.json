@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDCHF_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Riziko je založeno na historických datech s nízkou volatilitou a nedávném poklesu cen. RSI ukazuje přeprodanost, což naznačuje potenciální opravu, ale MA trend indikuje slabší výkonnost.",
+  "timestamp": "2026-03-24T10:03:03.486466+00:00",
+  "model": "deepseek-coder-v2"
+}

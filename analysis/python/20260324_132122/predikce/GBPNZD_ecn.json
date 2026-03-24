@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPNZD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "GBPNZD is showing mixed signals. RSI on shorter timeframes (1h, 4h) indicates potential for further upward movement, but daily and weekly RSI values are also elevated. Price is currently above the daily MA, but near the weekly MA. There is no strong indication of a clear trend, leading to a mixed outlook. Recent hourly candles show some consolidation."
+}

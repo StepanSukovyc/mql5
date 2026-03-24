@@ -1,9 +1,9 @@
 {
   "symbol": "EURAUD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu, ale volatilita trhu indikuje riziko poklesu.",
-  "timestamp": "2026-03-19T17:02:22.662625+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažují signály pro pokles na základě divergence RSI a silných supportů. Malé množství BUY signalizuje pozitivní aspekty krátkodobého trendu.",
+  "timestamp": "2026-03-24T16:18:00.385527+00:00",
   "model": "deepseek-coder-v2"
 }

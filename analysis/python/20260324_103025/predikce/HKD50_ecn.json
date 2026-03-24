@@ -1,0 +1,7 @@
+{
+  "symbol": "HKD50_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Short-term bearish sentiment. Daily & 4H RSI below 50, price below daily & 4H MA. Recent hourly candles show some bullish momentum, but overall trend is down. Monthly RSI still indicates potential for upward movement long-term, but short to mid-term risks are skewed to the downside."
+}

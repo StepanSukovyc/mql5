@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "NZDUSD is trading below its daily and monthly moving averages, suggesting a downtrend. Daily RSI is below 50, also indicating bearish momentum. Recent hourly price action shows some consolidation, warranting caution. Given the overall bearish signals, SELL has the highest risk assessment. BUY is risky due to the dominant downtrend."
+}

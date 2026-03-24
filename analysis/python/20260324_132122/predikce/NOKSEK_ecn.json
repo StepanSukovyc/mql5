@@ -1,0 +1,7 @@
+{
+  "symbol": "NOKSEK_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Krátkodobě SELL kvůli klesajícímu RSI na 1h a 4h timeframe, které signalizují pokračující pokles ceny. Denní RSI je mírně nad 50, ale MA naznačuje support. Na týdenní bázi je RSI poměrně vysoké (66), což by mohlo naznačovat potenciální korekci. HOLD zvažuji kvůli neutrálnímu RSI na měsíční bázi a absenci jasného trendu."
+}

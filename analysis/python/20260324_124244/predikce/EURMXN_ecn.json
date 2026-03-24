@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1h timeframe je RSI neutrální (49) a cena mírně nad MA. Na 4h a denním timeframe je RSI v rostoucím trendu, ale ne v překoupené zóně (okolo 60), naznačuje potenciál pro další růst. Nicméně, na týdenním timeframe je RSI pod 50 a cena pod MA, což naznačuje downtrend. Měsíční timeframe RSI je v rostoucím trendu. Celkově indikátory ukazují smíšený obraz, s převahou signálů pro krátkodobý potenciální pokles (SELL), ale s dlouhodobým potenciálem růstu (BUY) . HOLD je rozumná strategie vzhledem k nejednoznačným signálům."
+}

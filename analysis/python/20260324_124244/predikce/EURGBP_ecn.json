@@ -1,0 +1,7 @@
+{
+  "symbol": "EURGBP_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "EURGBP is currently trading around 0.86483. The daily RSI is 44.9, indicating a slightly oversold condition, while the price is below the daily MA (0.8667). The weekly RSI is 45.6 and also below weekly MA (0.8710), suggesting potential for further downside. Hourly RSI has recently crossed 50 indicating short term buying momentum but longer term indicators suggest a downward trend, so a sell is more favorable. The risk of buying is moderate since the price has slightly crossed MA in hourly time frame, and it is more stable than previous day. HOLDing is the second least possible case because, it may lead to either loss or profit, since short term indicators are moving up while long term indicators are going down."
+}

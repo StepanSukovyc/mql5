@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPAUD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "GBPAUD is showing mixed signals. Hourly RSI is at 63 suggesting upward momentum, while 4H RSI is overbought at 83, indicating a potential pullback. Daily RSI is neutral around 60. The price is above the 1H and 4H moving averages, but below the weekly and monthly MAs. The recent daily candles show upward movement. Given these conflicting signals, a HOLD position is reasonable while awaiting further confirmation. A buy position is possible considering recent bullish movement, but an overbought signal and price below weekly MA suggest potential sell."
+}

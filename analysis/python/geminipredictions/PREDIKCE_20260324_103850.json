@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XAUUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 2150.0,
+  "reasoning": "Zlato (XAUUSD_ecn) vykazuje silné signály pro prodej. Denní RSI je silně přeprodané (26.74), což naznačuje potenciální korekci. Cena je pod MA na 4H a denním grafu. Dlouhodobý trend je sice rostoucí (měsíční graf), ale současný pullback vytváří prodejní tlak. Doporučuji malý lot 0.01 s TP na 2150.0, abych minimalizoval riziko a využil krátkodobý pokles. Aktuální otevřené pozice nepokrývají symbol XAUUSD_ecn, takže se jedná o diverzifikaci portfolia."
+}

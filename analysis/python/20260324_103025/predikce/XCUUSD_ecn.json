@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Cena je pod denním MA, RSI na denní bázi je v přeprodané zóně, ale stále klesá. Na 4H timeframe RSI také naznačuje přeprodanost. Nicméně hourly timeframe RSI je neutrální. Vzhledem k poslednímu poklesu a nejistotě trhu, SELL je mírně favorizován. Je potřeba počkat na potvrzení obratu (např. formace svíček) pro BUY pozici."
+}

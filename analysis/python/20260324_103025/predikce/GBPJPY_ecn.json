@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPJPY_ecn",
+  "BUY": 35,
+  "SELL": 25,
+  "HOLD": 40,
+  "reasoning": "On the hourly timeframe, RSI is at 55.58, suggesting neutral momentum. The current price (212.633) is slightly below the hourly MA (212.67725), indicating potential resistance. The 4-hour RSI is 51.92, also neutral, but the price is above the 4-hour MA (212.1933), suggesting support. The daily RSI is 60.31, indicating increasing bullish momentum, and the price is above the daily MA (211.6216). The weekly RSI is 66.16, and monthly RSI is 63.57 both point to continued bullish momentum and the price is well above the respective MAs.  Recent hourly candles show consolidation, leading to a hold recommendation.  Potential upside exists (BUY) but is capped by short term resistance levels. Downside potential exists as well (SELL) if price breaks below the 4-hour moving average.  Given the mixed signals, a HOLD strategy is warranted for now pending further confirmation of a clear trend."
+}

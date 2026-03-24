@@ -1,0 +1,7 @@
+{
+  "symbol": "BTCUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Price below 1h/4h/Day MA, RSI weakening on 1h and 4h timeframe indicates downward pressure. Weekly RSI oversold, but MA far above price indicates longer-term bearish sentiment. Recent hourly candles showing rejection of higher prices. Month MA too far to consider. Downward pressure outweighs oversold weekly RSI."
+}

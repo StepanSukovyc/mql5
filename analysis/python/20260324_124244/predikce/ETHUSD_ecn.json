@@ -1,0 +1,7 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "ETHUSD currently shows mixed signals. Hourly RSI is near overbought, suggesting potential pullback. 4H RSI is neutral. Daily RSI is also neutral. The price is above the daily MA suggesting bullish pressure. Weekly and Monthly RSI suggests oversold conditions but those are far away and could take some time to manifest. We are bouncing off lows. This would suggest BUY is the slightly more likely outcome, but there are risk factors that lead to HOLD/SELL."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURHUF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "EURHUF is currently trading at 389.883. The 1-hour RSI is 47.46, suggesting a neutral momentum, while the price is above its 1-hour MA of 388.22. The 4-hour RSI is 48.07 and the price is below its 4-hour MA of 390.90. Daily RSI is at 55.56, and the price is above its daily MA of 386.51.  Weekly RSI is 53.41, and the price is above its weekly MA of 384.19. Monthly RSI is 50.80, while the price is below its monthly MA of 396.34. The mix of overbought and oversold conditions across different timeframes suggests indecision. Recent hourly candles show volatility. Considering the longer-term monthly MA is above the current price, a SELL position carries slightly higher probability. HOLD is reasonable given the mixed signals.  BUY possibility exists as the price is supported by the daily/weekly MAs, but requires confirmation."
+}

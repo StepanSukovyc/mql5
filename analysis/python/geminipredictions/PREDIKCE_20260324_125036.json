@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDCZK_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 22.50,
+  "reasoning": "Pořadí obchodu je #36, tedy každý 3. obchod je plně řízen Gemini. Protože je to plně řízený obchod, mohu si dovolit otevřít pozici na symbolu, který nemám v otevřených pozicích.  USDCZK_ecn má SELL hodnocení 50% a  popisuje možnou korekci vlivem přehřátého trhu. S ohledem na dostupné prostředky a swingový charakter obchodu volím lot_size 0.01. Take profit je navržen tak, aby po odečtení transakčních nákladů (0.10 USD) byl obchod ziskový a realistický. Ostatní symboly již mám otevřené."
+}

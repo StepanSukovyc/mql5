@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu RSI je sice v překoupené zóně, ale ne extrémně. Cena se nachází nad denním MA. Na týdenním grafu je RSI neutrální a cena se pohybuje blízko MA. Měsíční graf RSI je pod 50 a cena je pod MA. Na H1 je RSI pod 50 a cena je nad MA. Na H4 je RSI nad 50 a cena se pohybuje blízko MA. Poslední 4H svíce je bearish. Celkově naznačuje mírnou převahu pro SELL, ale s ohledem na potenciální odraz od MA, je doporučeno opatrné HOLD s potenciálem pro SELL."
+}

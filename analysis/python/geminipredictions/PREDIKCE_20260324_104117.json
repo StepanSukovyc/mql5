@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XPBUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 10.0,
+  "reasoning": "Podle predikce je u XPBUSD_ecn 100% SELL. Aktuálně nemám žádnou otevřenou pozici v tomto symbolu, tudíž nejsem omezen diverzifikací. Balance je 3125.98 USD. Riziko 0.01 lotu je proto minimální. Take profit je nastavený velmi nízko, jelikož není cílem držet pozici dlouho a i tak po transakčním poplatku 0.10 USD by měl být zisk uspokojivý."
+}

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDILS_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 3.55,
+  "reasoning": "Based on the available predictions, USDILS_ecn has the highest SELL probability (75%). We don't have any open positions on this symbol, ensuring portfolio diversification. The reasoning suggests a downward trend with low RSI values. Using a small lot size (0.01) minimizes risk given the limited margin_free (764.24) on the account. Transaction cost is $0.1. Take profit is set conservatively below the current price to take advantage of the downward trend. The model also shows possible reversal based on candle patterns, therefore small lot_size is more suitable."
+}

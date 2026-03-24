@@ -1,0 +1,7 @@
+{
+  "symbol": "XZNUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Denní a 4H RSI naznačuje přeprodanost, ale MA na všech timeframes (kromě 1h) jsou nad aktuální cenou, což signalizuje downtrend. BUY má menší váhu vzhledem k potenciální korekci. SELL je preferovaný, downtrend se zdá silnější. HOLD - čekání na další potvrzení trendu."
+}

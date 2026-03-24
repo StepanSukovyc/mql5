@@ -1,0 +1,7 @@
+{
+  "symbol": "USDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL: 1H RSI pod 40, cena pod 4H MA. Střednědobě HOLD: Denní RSI kolem 60, potenciál k růstu, ale nejistota. Dlouhodobě BUY: Měsíční MA hluboko pod aktuální cenou. Riziko SELL limitováno denním grafem, potenciál BUY omezen 1H RSI."
+}

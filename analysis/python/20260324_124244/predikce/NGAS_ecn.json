@@ -1,0 +1,7 @@
+{
+  "symbol": "NGAS_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Short-term bearish pressure is indicated by the hourly and daily RSI values, which are below 50. The price is currently below the daily and 4-hour moving averages. While the monthly RSI is neutral, the weekly MA is significantly higher than the current price, suggesting a potential for further downside. Recent hourly candles show struggling price action. Overall, the data suggests a higher probability of selling. Buying is a counter-trend speculation, and holding would make sense if you think the price could go back up after a retracement."
+}

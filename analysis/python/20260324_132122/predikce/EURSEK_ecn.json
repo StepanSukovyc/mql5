@@ -1,0 +1,7 @@
+{
+  "symbol": "EURSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "On the hourly chart, the RSI is at 43.22 suggesting slightly oversold conditions. However, the price is below the MA (10.831351). The 4-hour RSI is at 55.24, indicating neutral momentum. The daily RSI is 64.04, nearing overbought conditions, and the price is above the MA (10.718544).  The weekly RSI is at 51.00.  Monthly RSI at 36.93, showing bearish momentum with price well below the MA (11.080812). Recent hourly candle data shows price fluctuations around 10.84, indicating indecisiveness. Overall, the mixed signals across timeframes suggests uncertainty.  The bearish monthly RSI and decreasing MA suggest a potential downward trend. The slightly overbought daily RSI suggests possibility of short term price correction. Therefore, sell and hold positions are stronger."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním a týdenním grafu RSI pod 50 naznačuje spíše medvědí momentum. MA na denním a týdenním grafu jsou nad aktuální cenou, což působí jako rezistence.  Na 1h a 4h grafu je RSI kolem 50, což indikuje nejistotu.  Celkově trh vykazuje známky potenciálního poklesu, ale s ohledem na nedávný růst (viz 1h a 4h graf) a měsíční RSI nad 50, je třeba opatrnosti.  Hold je rozumná strategie pro vyčkání a potvrzení trendu."
+}

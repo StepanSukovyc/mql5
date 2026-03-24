@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Mixed signals. Short-term (1H, 4H) indicators are neutral. Daily RSI is near overbought territory, while weekly is neutral. Monthly RSI is oversold but MA suggests a longer-term downtrend. Recent price action shows volatility. Considering the limited data and contradicting signals, SELL is slightly favored. A HOLD strategy is reasonable for risk-averse traders."
+}

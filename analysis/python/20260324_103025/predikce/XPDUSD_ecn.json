@@ -1,0 +1,9 @@
+{
+  "symbol": "XPDUSD_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Rozdělení pravděpodobnosti je založeno na analýze svíčkových grafů a indikátoru RSI. Svíčky ukazují signály pro nákup a pokles, ale zatímco MA ukazuje stoupající trend, RSI je nadprahový a může signalizovat zpomalení růstu.",
+  "timestamp": "2026-03-24T09:41:51.005278+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNOK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1h a 4h timeframe je RSI v překoupené zóně, což naznačuje možný obrat. MA na denním timeframe je pod aktuální cenou, což naznačuje uptrend, ale RSI není v extremních hodnotách. Na týdenním a měsíčním timeframe jsou RSI pod 40, což naznačuje potenciál pro růst, ale MA jsou stále nad aktuální cenou, což naznačuje downtrend. Proto navrhuji mírně preferovat SELL pozici, jelikož existuje potenciál pro korekci po nedávném růstu. HOLD pozice je rozumná, pokud investor preferuje vyčkat na jasnější signály."
+}

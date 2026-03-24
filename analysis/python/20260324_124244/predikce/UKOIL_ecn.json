@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě SELL signál na základě poklesu na 1h a 4h timeframe (RSI pod 50, cena pod MA). Denní RSI je neutrální (61.72), týdenní a měsíční timeframe naznačují potenciál pro další růst. Prudký propad ceny v posledních dnech naznačuje vysokou volatilitu a nejistotu. Proto HOLD."
+}

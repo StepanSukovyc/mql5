@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je aktuálně 11.88404. Na denním grafu je RSI na 63, což naznačuje překoupenost. Na týdenním grafu je RSI na 68.5, což potvrzuje překoupenost. 1H RSI 48 a 4H RSI 52 naznačuje momentální rovnováhu. Cena je pod 4h MA, ale nad 1h MA, což indikuje možný krátkodobý odpor. Na denním grafu je cena nad MA, což ukazuje na uptrend. Nicméně vzhledem k překoupenosti na denním a týdenním grafu, vysokému spreadu u některých hodinových svíček a nedávnému prudkému poklesu ceny, je riziko SELL vyšší než BUY. HOLD je rozumná strategie pro ty, kteří již mají pozici a chtějí počkat na další potvrzení trendu."
+}

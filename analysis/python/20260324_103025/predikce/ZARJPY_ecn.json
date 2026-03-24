@@ -1,0 +1,9 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 40.0,
+  "SELL": 50.0,
+  "HOLD": 10.0,
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu na trhu. Nižší hodnota MA může být signálem slabosti, ale zároveň nízké hodnocení RSI může indikovat překoupenost nebo přehnané očekávání růstu.",
+  "timestamp": "2026-03-24T09:47:32.380293+00:00",
+  "model": "deepseek-coder-v2"
+}

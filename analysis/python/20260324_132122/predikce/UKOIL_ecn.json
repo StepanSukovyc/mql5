@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Krátkodobý SELL signál kvůli prudkému poklesu ceny v posledních dnech, 1H RSI pod 35 a odklonu od MA. Dlouhodobější trend (denní, týdenní RSI) naznačuje potenciál pro růst, ale současná volatilita a nejistota vyžadují opatrnost. Riziko poklesu je vyšší než potenciální zisk v krátkodobém horizontu. Potenciální nákup, pokud se cena stabilizuje a 1H RSI se dostane do překoupené zóny."
+}

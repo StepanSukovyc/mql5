@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XPBUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 10.0,
+  "reasoning": "Symbol XPBUSD_ecn je doporučen k prodeji s 100% pravděpodobností. Jelikož tento symbol nemám v otevřených pozicích, preferuji ho kvůli diverzifikaci. Lot size volím minimální vzhledem ke konzervativní strategii a stavu účtu. Nastavuji take profit na symbolickou hodnotu 10.0 z důvodu povinnosti mít nějakou hodnotu nastavenou. Poplatek za minimální lot je 0.10 USD."
+}

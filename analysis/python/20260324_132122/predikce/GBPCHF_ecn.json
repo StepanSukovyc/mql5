@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPCHF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "GBPCHF is currently showing mixed signals. While shorter-term RSI (1h, 4h, day) suggest potential for upward movement, the monthly RSI indicates oversold conditions, but longer term MA suggests downwards trend, so this upward movement could be short-lived. Weekly MA is closing to the current price. SELL has the highest risk rating because of the longer term bearish signal, but is not a strong signal."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Technická analýza naznačuje převahu prodejců. Na 4H a denním grafu RSI pod 50 a klesající, cena pod MA. Na týdenním grafu je RSI nad 50, ale cena se blíží MA a posledni tyden klesala. Momentum je směrem dolů. Na hodinovém grafu je cena pod MA a RSI se pohybuje kolem 50. Proto má SELL vyšší pravděpodobnost úspěchu. Vzhledem k rostoucimu RSI na mesicnim grafu muze jit o korekci."
+}

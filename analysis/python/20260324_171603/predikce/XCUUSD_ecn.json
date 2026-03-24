@@ -1,0 +1,7 @@
+{
+  "symbol": "XCUUSD_ecn",
+  "BUY": 30,
+  "SELL": 45,
+  "HOLD": 25,
+  "reasoning": "Na denním grafu je RSI pod 35, což značí, že aktivum je překoupené, ale MA200 na denním grafu (12799.8) je výrazně nad aktuální cenou (12071.35) což naznačuje potenciální další pokles. Na 4h grafu je RSI 42.5 což není extremní ale trend se zdá klesající. Na týdenním grafu je RSI na 54, což je neutrální. MA200 na týdenním grafu (12316.935) je nad aktuální cenou, což naznačuje potenciální tlak k poklesu. Doporučuji opatrnost a spíše SELL pozici."
+}

@@ -1,9 +1,9 @@
 {
   "symbol": "USDSGD_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend cenového grafu oslabující, ale fundamentální analýza ukazuje stabilitu a růstové potenciály. Kompromisem může být pozitivní svíčková forma s vysokou šancí na růst.",
-  "timestamp": "2026-03-19T15:48:18.801024+00:00",
+  "reasoning": "Riziko volatilita a stoupající RSI indikují nárůst pohybu směrem dolů, zatímco MA ukazuje slabší trend.",
+  "timestamp": "2026-03-24T15:06:55.842339+00:00",
   "model": "deepseek-coder-v2"
 }

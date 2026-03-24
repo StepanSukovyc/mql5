@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCZK_ecn",
+  "BUY": 35,
+  "SELL": 40,
+  "HOLD": 25,
+  "reasoning": "Technické indikátory vykazují smíšené signály. Na denním grafu je RSI na 67, což naznačuje, že se blížíme překoupené úrovni, což by mohlo vést ke korekci směrem dolů. Měsíční RSI je na 43.74, což značí prostor pro růst, ale MA na měsíční bázi je nad aktuální cenou. Na hodinové bázi je cena nad MA. Vzhledem k těmto signálům a nedávné volatilitě (pokles ceny v 14:00 dne 23.3. na hodinovém grafu), preferuji spíše SELL pozici s ohledem na možnou korekci, ale nevylučuji možnost růstu, proto rozložení rizik. HOLD je volba pro konzervativní investory vyčkávající na jasnější signál."
+}

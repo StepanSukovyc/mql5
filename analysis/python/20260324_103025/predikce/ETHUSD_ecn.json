@@ -1,0 +1,9 @@
+{
+  "symbol": "ETHUSD_ecn",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení trendu a nárůst nedostatečných indičátorů signalizuje poklesovou perspektivu. Kombinace s fundamenty podporujícími konzervativní přístup.",
+  "timestamp": "2026-03-24T10:30:17.488760+00:00",
+  "model": "deepseek-coder-v2"
+}

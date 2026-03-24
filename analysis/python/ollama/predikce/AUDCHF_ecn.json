@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové trendy jsou slabší, ale RSI ukazuje signály k nákupu. Prodejní tlak je však silný díky MA a historickým úrovním.",
-  "timestamp": "2026-03-19T16:28:57.281802+00:00",
+  "reasoning": "Prognosticated based on the RSI indicating a slight bullish trend and MA suggesting upward movement; however, fundamental analysis points to potential risks.",
+  "timestamp": "2026-03-24T15:46:47.100280+00:00",
   "model": "deepseek-coder-v2"
 }

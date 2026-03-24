@@ -1,9 +1,9 @@
 {
   "symbol": "USDCAD_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Podle svíčkových formací a RSI indikátoru jsou signály směrem nahoru, zatímco MA ukazuje stabilitu. Fondamentální analýza naznačuje silnou měnu.",
-  "timestamp": "2026-03-19T18:31:12.941537+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s podporou RSI a MA indikátory. Nedostatek jasných signálů pro nárůst.",
+  "timestamp": "2026-03-24T14:46:15.312199+00:00",
   "model": "deepseek-coder-v2"
 }

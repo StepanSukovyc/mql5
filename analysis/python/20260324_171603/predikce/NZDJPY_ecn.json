@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDJPY_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Cena je pod 1h, 4h a denním MA, RSI na 4h je pod 50. Na týdenním grafu je RSI nad 50 a MA je pod cenou. Na měsíčním grafu je cena nad MA, ale RSI je okolo 50, což naznačuje nerozhodnost. Poslední 1h svíčky indikují pokles. Celkově převládá lehce medvědí sentiment. Doporučuje se sledovat trh a případně zaujmout short pozici. HOLD je varianta pro ty, co mají otevřenou pozici a chtějí počkat na další vývoj."
+}

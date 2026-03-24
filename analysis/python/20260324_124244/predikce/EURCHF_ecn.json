@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Z hlediska delších časových rámců (týdenní, měsíční) se RSI nachází v oblasti pod 50, což naznačuje, že pár je spíše přeprodaný. Nicméně, MA na týdenním a měsíčním grafu je nad aktuální cenou, což naznačuje downtrend. Na denním grafu je RSI neutrální a cena se pohybuje okolo MA. Na 4H grafu RSI indikuje překoupenost, ale cena se nachází nad MA. Na 1H grafu je RSI pod 50 a cena se pohybuje okolo MA, což indikuje krátkodobý potenciál růstu. Celkově, vzhledem k downtrendu na vyšších časových rámcích a krátkodobé překoupenosti, považuji SELL za pravděpodobnější variantu, ale ponechávám prostor pro Buy a Hold z důvodu možného odrazu od support úrovní na vyšších timeframech."
+}

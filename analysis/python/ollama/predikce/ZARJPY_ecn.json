@@ -1,9 +1,9 @@
 {
   "symbol": "ZARJPY_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem globálních trhů a negativního tlaku na měnu. Nedávný pokles podle svíčkových formací naznačuje, že se cena ještě dostane níže.",
-  "timestamp": "2026-03-19T16:12:55.231243+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Riziko je vyšší kvůli silnému poklesu RSI a nízkým hodnotám MA. Nicméně, přijetí měnového kurzu podle svíčkových formací naznačuje potenciál pro oživení.",
+  "timestamp": "2026-03-24T15:31:16.803065+00:00",
   "model": "deepseek-coder-v2"
 }

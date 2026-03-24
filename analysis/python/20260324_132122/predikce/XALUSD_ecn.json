@@ -1,0 +1,7 @@
+{
+  "symbol": "XALUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na hodinovém grafu je RSI 55.49, což naznačuje mírný nákupní tlak, ale cena je nad MA (3199.36). Na 4h grafu je RSI 40.44, což je relativně nízko, a cena je pod MA (3254.13), signalizující potenciální prodejní tlak. Denní RSI je 46.18, také relativně neutrální, a cena je pod MA (3307.11), což dále podporuje prodejní signál. Týdenní RSI je 63.24, což je blízko překoupené zóně, ale cena je nad MA (3077.28), což naznačuje dlouhodobější růst. Celkově převládá krátkodobý prodejní tlak s potenciálem pro další pokles, ale týdenní trend naznačuje, že by mohlo dojít ke korekci směrem nahoru, ale ne s velkou pravděpodobností. Vysoké spready a tick volume u některých svíček vyžadují opatrnost. Proto upřednostňuji SELL nad BUY."
+}

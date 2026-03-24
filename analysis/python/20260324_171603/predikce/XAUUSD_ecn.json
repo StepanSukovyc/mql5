@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 30,
+  "SELL": 50,
+  "HOLD": 20,
+  "reasoning": "Na denním grafu je RSI hluboko v přeprodané zóně (25.66), což naznačuje potenciál pro odraz, ale MA na denním, 4H timeframech jsou daleko nad aktuální cenou (4990.74 a 4487.73), což naznačuje silný downtrend. Navíc, 4H RSI je také pod 40. Na týdenním grafu je RSI blízko neutrální zóně (49.31) a cena je pod MA. Měsíční RSI je v překoupené zóně (69.21).  Celkově převládá medvědí sentiment, který upřednostňuje prodej, ale potenciální odraz vyžaduje obezřetnost."
+}

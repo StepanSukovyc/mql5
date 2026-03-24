@@ -1,0 +1,7 @@
+{
+  "symbol": "NZDCHF_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Měnový pár NZDCHF je v klesajícím trendu, což naznačuje převahu prodejců. Měsíční RSI je na hodnotě 28.24, což značí překoupenost. Cena je pod klouzavým průměrem na všech časových rámcích kromě týdenního, což posiluje signál pro SELL. Na 1h timeframe je RSI na neutrální hodnotě 49.89 a cena se pohybuje lehce pod MA, což naznačuje možnost krátkodobé korekce. Proto je doporučeno spíše SELL, s menší šancí na BUY při krátkodobé korekci a HOLD pokud jste již v pozici a čekáte na další vývoj. Různé timeframe naznačují další propad, proto se držím SELL."
+}

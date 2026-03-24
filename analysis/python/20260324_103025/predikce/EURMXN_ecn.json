@@ -1,0 +1,7 @@
+{
+  "symbol": "EURMXN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na týdenním timeframe je RSI pod 50, což naznačuje potenciální slabost. Měsíční MA je nad aktuální cenou, což může fungovat jako rezistence. Denní RSI a MA jsou neutrální. Nedávný pokles na 1H a 4H timeframu z vyšších hodnot naznačuje, že by trh mohl pokračovat v poklesu.  Proto je SELL mírně rizikovější než BUY nebo HOLD."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "SGDJPY_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "SGDJPY is showing mixed signals. Longer timeframes (week, month) RSI indicate overbought conditions, suggesting potential pullback. Daily RSI is also relatively high. However, the price is above daily MA. 1H and 4H RSI are neutral but the price is above the MAs. Recent price action on the 1H chart shows a consolidation. There's no clear momentum for a strong buy or sell, warranting a hold consideration while observing near term levels."
+}

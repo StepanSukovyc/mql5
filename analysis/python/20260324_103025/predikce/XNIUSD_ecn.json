@@ -1,0 +1,7 @@
+{
+  "symbol": "XNIUSD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Technické indikátory vykazují smíšené signály. RSI na denním grafu (41.54) naznačuje, že trh není překoupený, ale je blízko. Cena je pod denním MA (17387.555), což naznačuje potenciální downtrend. Na týdenním grafu je RSI (55.19) neutrální a cena je nad MA (16546.8315), což ukazuje na potenciální uptrend. Ovšem hodinový a 4hodinový graf naznačují oslabení, RSI se drží okolo 50 a cena se pohybuje okolo MA. Celkově trh konsoliduje. Prodej má mírnou převahu s ohledem na nedávný denní trend a hodinové/4hodinové signály."
+}

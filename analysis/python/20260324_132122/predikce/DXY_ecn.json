@@ -1,0 +1,9 @@
+{
+  "symbol": "DXY_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle svíčkových formací a RSI je trend směrem dolů, ale MA ukazuje stabilitu. Fundamentální analýza naznačuje podporu z důvodu ekonomických faktorů.",
+  "timestamp": "2026-03-24T13:20:39.258233+00:00",
+  "model": "deepseek-coder-v2"
+}

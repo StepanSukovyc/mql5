@@ -1,0 +1,7 @@
+{
+  "symbol": "USDZAR_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "USDZAR_ecn: Cena je 16.99724. Krátkodobě 1H RSI je 39.605517 (pod 50 = podpora prodeje). Dlouhodobý měsíční RSI 42.183482. 1H MA je pod cenou. 4H, Denní a Týdenní MA jsou pod cenou. Měsíční MA je nad cenou. Svíčkové formace na 1H ukazují na kolísavý trend. Denní RSI 62.311654 = mírně překoupeno. Celkově data indikují mírný tlak na prodej, proto doporučuji SELL, ale s ohledem na protichůdné signály a možný obrat trhu je BUY a HOLD také vhodné."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCAD_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI na 65, což naznačuje, že se blíží překoupené úrovni. 1H RSI je pod 50, což ukazuje na prodejní tlak. Týdenní MA je nad aktuální cenou, což naznačuje odpor. Měsíční MA je výrazně nad cenou, což naznačuje dlouhodobý klesající trend. Poslední 4H svíčky nevykazují jasný směr. Proto 'SELL' má mírnou převahu nad 'BUY' a 'HOLD'."
+}

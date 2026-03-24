@@ -1,0 +1,7 @@
+{
+  "symbol": "USDMXN_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Currently, the price is 17.88905. On the 1H chart, RSI is 44.26 (suggesting not overbought/oversold) and price is above MA (17.81). On the 4H chart, RSI is 55.75 (neutral) and price is above MA (17.83). On the daily, RSI is 60.14 (slightly overbought) and price is above MA (17.64). On the weekly, RSI is 47.92 (neutral) and price is slightly above the MA (17.79). On the monthly, RSI is 52.36 (neutral) but price is below the MA (19.16). Considering mixed signals and recent downward price action on the 1H and 4H charts, SELL is the slightly favored option due to the potential for further short-term downward movement. BUY is limited because the daily RSI suggests a possible pullback. HOLD reflects the conflicting signals across timeframes."
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "XAUUSD_ecn",
+  "BUY": 25,
+  "SELL": 55,
+  "HOLD": 20,
+  "reasoning": "Cena je pod MA na 4H a denním grafu a RSI je silně přeprodané na denním grafu (26.74). Na 1H grafu je cena nad MA s RSI 53.61, což naznačuje mírný býčí sentiment v krátkodobém horizontu. Měsíční graf s RSI 69.71 a MA 3476.704 indikuje dlouhodobý rostoucí trend, ale současný pullback vytváří prodejní tlak. Vzhledem k krátkodobému propadu a možného dosažení supportu, držení pozice (HOLD) a možné nákupy po potvrzení odrazu jsou rozumné. Overriding factor je silné přeprodání na denním grafu (RSI), které značí pravděpodobnost korekce a SELL pozice. "
+}

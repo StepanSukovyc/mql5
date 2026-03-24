@@ -1,0 +1,7 @@
+{
+  "symbol": "EURCHF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na základě dat je pár EURCHF v neutrální pozici. Na denním grafu se RSI pohybuje kolem 58 a cena je nad MA, což naznačuje mírný býčí sentiment. Ovšem na týdenním a měsíčním grafu je RSI pod 50 a cena pod MA, což naznačuje potenciál klesání. Doporučuji vyčkat na další potvrzení trendu."
+}

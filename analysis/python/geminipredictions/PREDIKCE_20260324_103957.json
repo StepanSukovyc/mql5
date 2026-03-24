@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XPBUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 0.5,
+  "reasoning": "XPBUSD_ecn má podle predikcí 100% SELL, což je silný signál. Momentálně nemám otevřenou pozici v XPBUSD_ecn, tudíž se jedná o diverzifikaci. Volím konzervativní lot_size 0.01 vzhledem ke stavu účtu a preferenci opatrnějšího obchodování. Take profit je nastaven na realistické úrovni (0.5). I když neznáme cenové rozpětí XPBUSD_ecn, tak se jedná o #35 obchod a je třeba minimalizovat riziko."
+}

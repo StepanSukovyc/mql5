@@ -1,0 +1,7 @@
+{
+  "symbol": "US500_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "US500_ecn se nachází v krátkodobém downtrendu (1h, 4h, day RSI pod 50). Cena je pod denním MA, což naznačuje medvědí momentum. Nicméně, měsíční RSI je stále relativně vysoké, což naznačuje potenciál pro další růst v dlouhodobém horizontu. Doporučuje se opatrnost, proto SELL má vyšší procento. HOLD a BUY jsou rozloženy pro vyvážení rizik.  Absence svíčkových formací v datech omezuje detailnější analýzu."
+}

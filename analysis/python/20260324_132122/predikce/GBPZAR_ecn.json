@@ -1,0 +1,7 @@
+{
+  "symbol": "GBPZAR_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI na hodnotě 69, což naznačuje potenciál překoupenosti, ale stále existuje prostor pro růst. Na týdenním grafu je RSI neutrální (53.98). Na měsíčním grafu RSI pod 50 (47.79) naznačuje mírný prodejní tlak, ale MA na měsíční bázi (23.19) je nad aktuální cenou (22.83), což by mohlo značit, že se cena blíží rezistenci. Na hodinové a 4H TF dochází ke konsolidaci, a tudíž 'Hold'. Střednědobý uptrend se silným momentum by mohl pokračovat, ale je potřeba sledovat, zda se nepotvrdí formace na kratších timeframe (1H, 4H), která by naznačovala oslabení a potenciální obrat (medvědí divergence, formace double top, apod.)"
+}

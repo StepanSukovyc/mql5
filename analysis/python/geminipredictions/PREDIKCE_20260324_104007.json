@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XAUUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 2140.0,
+  "reasoning": "Doporučuji SELL na XAUUSD_ecn. V otevřených pozicích tento symbol nemám, takže je to diverzifikace. Predikce udává 55% pravděpodobnost poklesu. Equity je 1775.19, takže 15% je 266.28. Pozice na XAUUSD_ecn nemám žádné, tudíž diverzifikace je nejlepší volba. Denní graf je silně přeprodaný (RSI 26.74).  TP nastavuji na 2140, což je realistický cíl a umožňuje zisk po odečtení poplatků."
+}

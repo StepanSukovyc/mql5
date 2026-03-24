@@ -1,0 +1,7 @@
+{
+  "symbol": "USDCHF_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Na denním grafu je RSI na úrovni 61.90, což naznačuje blížící se překoupenost. Na 4H grafu je RSI na 59.46, což je také relativně vysoko. Cena je nad denním MA, ale pod měsíčním MA, což naznačuje smíšené signály. Poslední 1H svíčky naznačují růst, ale celkový trend za poslední dny je spíše do strany. Měsíční RSI je na 34.44, což je relativně nízko a mohlo by signalizovat potenciál pro další růst. Kvůli smíšeným signálům a absenci jasné svíčkové formace je doporučeno rozdělit riziko mezi BUY, SELL a HOLD pozice."
+}

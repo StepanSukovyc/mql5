@@ -1,0 +1,7 @@
+{
+  "symbol": "EURNZD_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "On the hourly and 4-hourly charts, the RSI is approaching overbought territory, suggesting possible short-term pullback. The daily RSI is also elevated. However, the price is above the daily moving average, indicating an upward trend. The weekly MA is above the current price suggesting resistance, while the monthly MA is well below suggesting long term upside. This presents a mixed picture, justifying a hold rating while observing for either a continuation of the upward trend or a reversal."
+}

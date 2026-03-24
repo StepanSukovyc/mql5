@@ -1,0 +1,9 @@
+{
+  "symbol": "CADJPY_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tendence s nárůstem BUY šance, ale také přítomnost významných odporových hladin, které by mohly způsobit pokles.",
+  "timestamp": "2026-03-24T13:11:36.033024+00:00",
+  "model": "deepseek-coder-v2"
+}

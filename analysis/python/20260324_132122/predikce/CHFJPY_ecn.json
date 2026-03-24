@@ -1,0 +1,9 @@
+{
+  "symbol": "CHFJPY_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení makroekonomických indikátorů sčítá klesající trend. RSI a MA podporují pokračující pohyb směrem dolů.",
+  "timestamp": "2026-03-24T13:15:12.034263+00:00",
+  "model": "deepseek-coder-v2"
+}

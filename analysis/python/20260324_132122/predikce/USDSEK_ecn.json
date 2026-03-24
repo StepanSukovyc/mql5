@@ -1,0 +1,7 @@
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Na 1H timeframu je RSI pod 50, naznačuje medvědí trend. Měsíční RSI je také nízko, ale MA na tomto timeframe je vysoko, což naznačuje možnou změnu trendu. Denní RSI je přes 50, naznačuje býčí trend, ale MA je pod aktuální cenou, naznačuje, že trh je v nejistotě. Vzhledem k protichůdným signálům preferuji mírný prodej. HOLD je doporučen pro opatrné investory."
+}

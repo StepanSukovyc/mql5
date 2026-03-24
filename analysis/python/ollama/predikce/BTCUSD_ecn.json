@@ -1,9 +1,9 @@
 {
   "symbol": "BTCUSD_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Vysoká volatilita s omezeným pohybem. RSI a MA ukazují slabost, ale pozitivní divergence na RSI a zvýšení objemu naznačuje nával.",
-  "timestamp": "2026-03-19T16:42:14.051583+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Růstový tlak na BTC je potenciálně omezen zhoršením technického vzhledu a nespokojeností s rizikem uvnitř trhu.",
+  "timestamp": "2026-03-24T15:59:26.050991+00:00",
   "model": "deepseek-coder-v2"
 }

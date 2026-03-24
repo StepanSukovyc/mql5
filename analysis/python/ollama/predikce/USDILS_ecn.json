@@ -1,9 +1,9 @@
 {
   "symbol": "USDILS_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na grafu s omezeným potenciálem. RSI a MA ukazují slabost, ale zároveň nepřítomnost signálů pro pokles.",
-  "timestamp": "2026-03-19T15:36:26.922104+00:00",
+  "reasoning": "Zhoršení makroekonomických ukazatelů a slabé svíčkové formace signalizují pokles kurzu.",
+  "timestamp": "2026-03-24T14:55:37.139929+00:00",
   "model": "deepseek-coder-v2"
 }

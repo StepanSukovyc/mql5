@@ -1,0 +1,9 @@
+{
+  "symbol": "USDSEK_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje slabou finanční situaci v zemích, které používají světovou měnu. Svíčkové formace a RSI indikují volatilitu s tendencí k poklesu. MA ukazuje silnou podporu u 90 dolarů.",
+  "timestamp": "2026-03-24T12:13:24.689872+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "symbol": "US30_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Denní RSI je velmi nízko (30.33), což naznačuje, že trh je přeprodaný a mohl by se brzy odrazit. Nicméně, cena je stále pod denním MA (47473.074), což signalizuje pokračující downtrend. Týdenní a měsíční MA jsou výrazně výše než současná cena, což rovněž potvrzuje downtrend. Hodinový RSI je neutrální (58.18), cena se pohybuje kolem 4h MA. Doporučuje se sledovat situaci a počkat na jasnější signály. Momentálně převládá spíše prodejní tlak s možností krátkodobé konsolidace."
+}

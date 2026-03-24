@@ -1,9 +1,9 @@
 {
   "symbol": "CADJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Na základě svíčkových formací a RSI hodnot je vidět stabilita tržního prostředí s lehčím tendence k poklesu. MA ukazuje mírný trend ke vzestupu, ale nedostatečný pro silnou BUY pozici.",
-  "timestamp": "2026-03-19T16:46:01.847198+00:00",
+  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale překonanost cen v posledních svíčkách naznačuje oslabení sil, což mi dává nejistotu.",
+  "timestamp": "2026-03-24T16:03:02.355125+00:00",
   "model": "deepseek-coder-v2"
 }

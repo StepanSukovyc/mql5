@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDSGD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "Krátkodobě převládá prodejní tlak: RSI na 1H a 4H je pod 50 a 35, cena pod MA na 1H, 4H i denním grafu. Dlouhodobější výhled je smíšený: týdenní RSI je nad 60, měsíční kolem 55, což značí potenciál pro další růst, ale současný pokles může pokračovat. Doporučuje se vyčkat na potvrzení trendu. Vyšší tick volume u prodejních svíček naznačuje aktivní prodejní tlak."
+}

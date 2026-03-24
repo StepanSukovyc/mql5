@@ -1,0 +1,7 @@
+{
+  "symbol": "AUDCAD_ecn",
+  "BUY": 25,
+  "SELL": 45,
+  "HOLD": 30,
+  "reasoning": "AUDCAD je v klesajícím trendu na kratších časových rámcích (1h, 4h, day), jak indikuje RSI pod 50 a cena pod MA. Na týdenním a měsíčním timeframe je RSI nad 60, ale cena se pohybuje pod denním MA. 1H data vykazují pokračující klesající trend. HOLD je doporučen k vyčkání na potvrzení trendu."
+}

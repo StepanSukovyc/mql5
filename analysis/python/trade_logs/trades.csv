@@ -44,3 +44,51 @@ timestamp,symbol,action,lot_size,price,success,error_msg
 2026-03-13T06:57:02.416278+00:00,UKOIL_ecn,BUY,0.01,101.319,False,Invalid take_profit for BUY: TP (98.0) must be > market price (101.319)
 2026-03-13T06:57:08.800805+00:00,EURSEK_ecn,BUY,0.01,0.0,True,
 2026-03-13T07:57:15.391740+00:00,USDCZK_ecn,BUY,0.05,0.0,True,
+2026-03-24T10:38:40.609716+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.40, available 763.68"
+2026-03-24T10:38:45.569342+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.40, available 763.77"
+2026-03-24T10:38:50.594204+00:00,XAUUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1548.24, available 764.92"
+2026-03-24T10:38:55.693417+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.05, available 761.92"
+2026-03-24T10:39:00.000454+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.05, available 763.56"
+2026-03-24T10:39:04.356646+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.05, available 763.42"
+2026-03-24T10:39:08.797267+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.05, available 763.75"
+2026-03-24T10:39:13.168621+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.05, available 766.90"
+2026-03-24T10:39:17.558728+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.05, available 763.63"
+2026-03-24T10:39:22.212792+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.05, available 763.45"
+2026-03-24T10:39:26.865078+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.95, available 763.39"
+2026-03-24T10:39:31.392902+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.19, available 761.94"
+2026-03-24T10:39:35.382637+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.19, available 761.73"
+2026-03-24T10:39:39.566563+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.19, available 761.68"
+2026-03-24T10:39:44.178172+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.19, available 761.48"
+2026-03-24T10:39:48.964740+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.95, available 761.48"
+2026-03-24T10:39:53.175657+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.09, available 758.37"
+2026-03-24T10:39:57.765509+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.09, available 758.50"
+2026-03-24T10:40:02.416845+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.23, available 758.02"
+2026-03-24T10:40:07.171277+00:00,XAUUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1548.25, available 758.05"
+2026-03-24T10:40:11.777745+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.23, available 759.58"
+2026-03-24T10:40:16.752156+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.23, available 758.21"
+2026-03-24T10:40:21.741034+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.23, available 758.63"
+2026-03-24T10:40:26.302922+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.12, available 759.10"
+2026-03-24T10:40:30.687210+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.95, available 759.23"
+2026-03-24T10:40:36.036840+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.95, available 763.78"
+2026-03-24T10:40:40.531752+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.95, available 763.51"
+2026-03-24T10:40:45.246595+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.95, available 763.50"
+2026-03-24T10:40:49.314362+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.95, available 763.40"
+2026-03-24T10:40:54.416424+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.63, available 763.58"
+2026-03-24T10:40:58.815862+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.63, available 764.72"
+2026-03-24T10:41:03.142605+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.60, available 764.85"
+2026-03-24T10:41:07.784698+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1323.98, available 764.58"
+2026-03-24T10:41:13.432630+00:00,XPTUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1338.64, available 764.25"
+2026-03-24T10:41:17.947240+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.09, available 764.65"
+2026-03-24T10:41:22.571486+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.09, available 764.66"
+2026-03-24T10:41:27.173736+00:00,XPBUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1324.09, available 764.52"
+2026-03-24T10:41:32.392409+00:00,CHFJPY_ecn,SELL,0.07,0.0,True,
+2026-03-24T12:50:36.899495+00:00,USDCZK_ecn,SELL,0.01,21.1117,False,Invalid take_profit for SELL: TP (22.5) must be < market price (21.1117)
+2026-03-24T12:50:41.481730+00:00,USDILS_ecn,SELL,0.01,3.12488,False,Invalid take_profit for SELL: TP (3.55) must be < market price (3.12488)
+2026-03-24T12:50:47.069548+00:00,USDCZK_ecn,SELL,0.01,21.1122,False,Invalid take_profit for SELL: TP (23.2) must be < market price (21.1122)
+2026-03-24T12:50:51.577806+00:00,USDILS_ecn,SELL,0.01,3.12488,False,Invalid take_profit for SELL: TP (3.55) must be < market price (3.12488)
+2026-03-24T12:50:56.561538+00:00,USDCZK_ecn,SELL,0.01,21.1134,False,Invalid take_profit for SELL: TP (23.0) must be < market price (21.1134)
+2026-03-24T12:51:01.851403+00:00,USDILS_ecn,SELL,0.01,3.12488,False,Invalid take_profit for SELL: TP (3.5) must be < market price (3.12488)
+2026-03-24T12:51:06.671634+00:00,USDILS_ecn,SELL,0.01,3.12482,False,Invalid take_profit for SELL: TP (3.5) must be < market price (3.12482)
+2026-03-24T12:51:12.337860+00:00,USOIL_ecn,SELL,0.02,0.0,True,
+2026-03-24T13:29:47.841657+00:00,XAUUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1527.74, available 625.10"
+2026-03-24T17:23:18.245309+00:00,XAUUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1541.67, available 609.56"

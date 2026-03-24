@@ -1,0 +1,9 @@
+{
+  "symbol": "VIX_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály je omezeno vlivem globálních ekonomických faktorů a nálady investora. Vysoké hodnoty RSI a MA indikují stabilitu, což podporuje 'HOLD' strategii.",
+  "timestamp": "2026-03-24T12:20:58.817081+00:00",
+  "model": "deepseek-coder-v2"
+}

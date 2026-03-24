@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDNZD_ecn",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence k poklesu, ale svíčkové formace naznačují opakování minulých cenových hladin. Nedostatek jasných signálů pro nákup nebo držení.",
+  "timestamp": "2026-03-24T12:58:57.417576+00:00",
+  "model": "deepseek-coder-v2"
+}

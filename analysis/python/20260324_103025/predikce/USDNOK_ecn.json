@@ -1,0 +1,7 @@
+{
+  "symbol": "USDNOK_ecn",
+  "BUY": 40,
+  "SELL": 30,
+  "HOLD": 30,
+  "reasoning": "Short-term bullish bias as hourly RSI is approaching overbought levels. The price has broken the hourly MA and the 4H RSI is relatively high. The daily RSI is around 58, suggesting neutrality. Longer-term (weekly/monthly) indicators suggest a potential downward trend (RSI < 50 and downward moving MA). Considering this mixed picture, HOLD is a reasonable strategy. However, recent price action favors BUY in the short-term. Risk management is recommended."
+}

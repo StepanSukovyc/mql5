@@ -1,0 +1,9 @@
+{
+  "symbol": "AUDUSD_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje silnou měnu AUD, ale svíčkové formace a RSI indikují nejistotu s volatilitou. Doporučení držet pozici.",
+  "timestamp": "2026-03-24T13:02:34.713421+00:00",
+  "model": "deepseek-coder-v2"
+}

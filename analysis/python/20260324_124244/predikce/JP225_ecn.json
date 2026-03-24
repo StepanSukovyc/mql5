@@ -1,0 +1,7 @@
+{
+  "symbol": "JP225_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "JP225_ecn shows mixed signals. Daily RSI is at 39.9 indicating potential for further decline and the price is below the daily MA (54909.137). However, the 1h RSI is at 58.32 and price is below 1h MA which points to consolidation or small short term upswing, but no strong upward momentum. Weekly RSI is at 55.48, which does not support a strong trend up or down. Considering the short lookback periods and the potential for further downward movement based on the daily chart, SELL position appears slightly stronger. Need to be observed for changes."
+}

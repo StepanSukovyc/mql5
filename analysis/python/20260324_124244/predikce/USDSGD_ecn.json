@@ -1,0 +1,9 @@
+{
+  "symbol": "USDSGD_ecn",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zvýšení RSI a MA hodnot signalizuje pozitivní trend, ale nedostatečné svědectví z fundamentální analýzy.",
+  "timestamp": "2026-03-24T12:15:17.759598+00:00",
+  "model": "deepseek-coder-v2"
+}

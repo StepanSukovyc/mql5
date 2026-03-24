@@ -1,0 +1,7 @@
+{
+  "symbol": "JP225_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "Indikátory jsou smíšené. Krátkodobě (1h, 4h) se cena pohybuje kolem MA a RSI osciluje neutrálně. Denní RSI je pod 40, což naznačuje, že trh je spíše v prodejní náladě. Týdenní RSI je neutrální, ale měsíční RSI je již v překoupené zóně, což může vést ke korekci. Vzhledem k poklesu ceny pod denní MA a blížící se korekci na měsíčním grafu je riziko SELL vyšší, proto SELL 40%. BUY je riskantnější, ale stále možný s 30%. HOLD je opatrná strategie vzhledem k nejasnému výhledu 30%."
+}

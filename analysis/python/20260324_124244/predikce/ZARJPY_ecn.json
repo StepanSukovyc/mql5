@@ -1,0 +1,9 @@
+{
+  "symbol": "ZARJPY_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezená vysokým RSI a slabou MA. Vysoká volatilita s ohledem na nedávné výsledky analýzy může být důvodem pro zachování konzervativního postoje.",
+  "timestamp": "2026-03-24T12:40:01.081882+00:00",
+  "model": "deepseek-coder-v2"
+}

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XPBUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 1.0,
+  "reasoning": "Dle predikce má XPBUSD_ecn 100% pravděpodobnost poklesu. Nemám otevřenou pozici na XPBUSD_ecn. Velikost lotu 0.01 je malá, s ohledem na vysokou pravděpodobnost poklesu a volnou marži bych mohl otevřít i větší pozici, ale pro jistotu preferuji opatrnost. Cena take_profit je odhad. Transakční poplatek je 0.10 USD. Kvůli nedostatku dat o ceně je obtížné odhadnout rozumný take profit, proto nastavuji konzervativní. I když hodnota TP je nízká, pořád dává obchod vzhledem k vysoké pravděpodobnosti poklesu ekonomický smysl."
+}

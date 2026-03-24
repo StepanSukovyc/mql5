@@ -1,0 +1,9 @@
+{
+  "symbol": "CADCHF_ecn",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Rozhodujícím faktorem je pokles RSI a SMA, které signalizují silnou sílu trendu oslabuje. Ceny se nacházejí v oblasti podporou, ale tlak prodejců roste.",
+  "timestamp": "2026-03-24T10:17:37.286858+00:00",
+  "model": "deepseek-coder-v2"
+}

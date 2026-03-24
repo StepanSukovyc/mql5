@@ -1,0 +1,7 @@
+{
+  "symbol": "UKOIL_ecn",
+  "BUY": 30,
+  "SELL": 40,
+  "HOLD": 30,
+  "reasoning": "UKOIL_ecn: Krátkodobě SELL díky RSI pod 40 na 1h a 4h. Denní RSI nad 60 indikuje možnost dalšího růstu. MA na 1h pod cenou, MA na 4h nad cenou, denní MA pod cenou. Dlouhodobě je patrný uptrend, ale krátkodobé korekce jsou pravděpodobné. Velký pokles 23.3 indikuje oslabení."
+}
