@@ -16,6 +16,7 @@ from typing import Dict, List, Optional, Set
 
 import httpx
 
+from account_state import get_account_balance_cap
 from gemini_config import load_gemini_api_config
 from gemini_decision import clean_gemini_response
 
@@ -262,6 +263,7 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 		api_key, api_url = load_gemini_api_config()
 		
 		print(f"✅ Gemini config loaded")
+		print(f"🛡️  Strategy balance cap: {get_account_balance_cap():.2f}")
 	except Exception as exc:
 		print(f"❌ Failed to load Gemini config: {exc}")
 		return False, None

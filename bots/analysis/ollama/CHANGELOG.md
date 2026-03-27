@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-03-27 (Configurable Balance Cap + Validation Script)
+
+- **Made Strategy Balance Cap Configurable via `.env`**
+  - Added `TRADING_ACCOUNT_BALANCE_CAP` environment setting (default `5000`)
+  - Strategy balance is now capped dynamically from environment instead of hardcoded constant
+  - Effective free margin now subtracts the full reserve above the configured cap
+  - Preserves excess account funds outside strategy sizing and margin decisions
+
+- **Updated Execution Observability**
+  - Account state now exposes both effective and raw balance/free margin values
+  - Final decision and monitor logs now show reserve information when cap is active
+  - `trading_logic.py` now logs the active configured strategy balance cap at startup
+
+- **Added Validation Script**
+  - Added `verify_account_balance_cap.py` for quick local verification of capped balance and free margin scenarios
+
+- **Documentation Updated**
+  - Updated `TRADING_LOGIC.md` with `.env` configuration and reserve examples for capped balance behavior
+
 ## 2026-03-27 (Modular Refactor + Startup Fix)
 
 - **Refactored Trading Stack into Shared Helper Modules**

@@ -36,9 +36,14 @@ def print_account_status(account_info: dict) -> None:
 	
 	# Calculate free margin percentage
 	free_margin_percent = (account_info['margin_free'] / account_info['balance'] * 100) if account_info['balance'] > 0 else 0
+	balance_text = f"{account_info['balance']:.2f}"
+	free_margin_text = f"{account_info['margin_free']:.2f}"
+	if account_info.get('balance_reserve', 0) > 0:
+		balance_text += f" (raw {account_info['raw_balance']:.2f})"
+		free_margin_text += f" (raw {account_info['raw_margin_free']:.2f})"
 	
 	# Single line output
-	print(f"[{timestamp}] Balance: {account_info['balance']:.2f} | Equity: {account_info['equity']:.2f} | Margin: {account_info['margin']:.2f} | Free: {account_info['margin_free']:.2f} ({free_margin_percent:.2f}%)")
+	print(f"[{timestamp}] Balance: {balance_text} | Equity: {account_info['equity']:.2f} | Margin: {account_info['margin']:.2f} | Free: {free_margin_text} ({free_margin_percent:.2f}%)")
 
 
 def _get_margin_threshold() -> float:
@@ -58,7 +63,7 @@ def check_stop_condition(account_info: dict) -> bool:
 	"""
 	Check if monitoring should stop.
 	
-	Stop condition: Stop if margin_free exceeds threshold % of balance.
+	Stop condition: Stop if effective margin_free exceeds threshold % of effective balance.
 	Threshold is loaded from TRADING_MARGIN_THRESHOLD env variable (default 20%).
 	"""
 	margin_ratio = account_info['margin_free'] / account_info['balance'] if account_info['balance'] > 0 else 0
