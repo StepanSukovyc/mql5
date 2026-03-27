@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPBUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 20.00,
-  "reasoning": "XPBUSD_ecn predikuje 100% sell. Nemám otevřenou pozici pro tento symbol. Margin free je 761.76, takže 0.01 lot je bezpečná hodnota. Take profit je realistický na základě predikce."
-}

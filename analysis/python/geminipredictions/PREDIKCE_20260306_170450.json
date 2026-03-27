@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "VIX_ecn",
-  "action": "BUY",
-  "lot_size": 0.04,
-  "reasoning": "VIX roste. RSI je p\u0159ekoupen\u00e9 na kr\u00e1tkodob\u00fdch timeframe (1h a 4h), ale na denn\u00edm, t\u00fddenn\u00edm i m\u011bs\u00ed\u010dn\u00edm grafu je st\u00e1le prostor pro r\u016fst. MA potvrzuj\u00ed rostouc\u00ed trend. Posledn\u00ed denn\u00ed sv\u00ed\u010dka je siln\u00e1 b\u00fd\u010d\u00ed. Preferuji BUY, ale s ohledem na p\u0159ekoupenost na krat\u0161\u00edch timeframe je nutn\u00e9 b\u00fdt opatrn\u00fd a nastavit stop-loss. VIX_ecn není aktuálně v otevřených pozicích. Velikost lotu je stanovena s ohledem na volnou marži a minimalizaci rizika. "
-}

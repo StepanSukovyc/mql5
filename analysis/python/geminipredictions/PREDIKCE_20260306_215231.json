@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "NGAS_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "reasoning": "NGAS_ecn shows bullish momentum with hourly RSI overbought but daily RSI neutral, indicating further upside potential. Price is above daily and 4H MA signaling positive momentum.  Since there are no open positions for NGAS_ecn in the current portfolio, this trade diversifies the portfolio. Lot size is chosen to manage risk given margin free and balance."
-}

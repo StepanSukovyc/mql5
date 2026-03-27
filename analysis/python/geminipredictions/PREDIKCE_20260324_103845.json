@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPBUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 0.1,
-  "reasoning": "XPBUSD má 100% SELL predikci s odůvodněním vysokých RSI a MA hodnot ukazujících na poklesový trend. Nemám otevřenou pozici v tomto symbolu. Zvažuji minimální lot kvůli vysoké nejistotě a neznámé volatilitě aktiva. Poplatek za 0.01 lot je 0.10 USD, take_profit je nastaven velmi konzervativně, aby transakce měla smysl i po odečtení poplatků. Balance je 3125.98, takže riziko je minimální."
-}

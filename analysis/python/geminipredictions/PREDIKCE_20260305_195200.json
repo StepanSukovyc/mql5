@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "EURUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.04,
-  "reasoning": "EURUSD_ecn má nejvyšší pravděpodobnost SELL (60%). Účet má otevřenou SELL pozici na EURUSD_ecn s objemem 0.04, takže ponechávám objem beze změny. Důvodem pro SELL je klesající trend na většině časových rámců a RSI indikující přeprodanost, což naznačuje potenciál pro další pokles. Aktuální marže je dostatečná pro otevření této pozice."
-}

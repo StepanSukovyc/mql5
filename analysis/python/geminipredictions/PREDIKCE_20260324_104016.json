@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPBUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 1000.0,
-  "reasoning": "Vysoké hodnoty RSI a MA ukazují na silný poklesový trend u XPBUSD_ecn. Všechny predikce se shodují na prodeji (SELL: 100%). Doporučuji otevřít malou pozici (0.01 lot) a nastavit take_profit na 1000.0 (je to pouze zástupná hodnota, reálný take profit je potřeba spočítat dle volatility a price action). Beru v úvahu transakční náklady 0.10 USD. Tento symbol dosud nemám v otevřených pozicích, což zajišťuje diverzifikaci portfolia. Protože každý třetí obchod není plně řízen Gemini, tak se lot_size a take_profit ve finální exekuci ignoruje, což neohrozí stanovený risk management."
-}

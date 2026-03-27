@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XAUUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 2150.00,
-  "reasoning": "Stav účtu ukazuje relativně nízkou equity a margin_free, proto volím velmi konzervativní lot size 0.01. Symbol XAUUSD_ecn nabízí dle predikce převahu SELL (50%) oproti BUY (30%) s odůvodněním hlubokého propadu a downtrendu. Navrhuji SELL s TP na úrovni 2150.00, což je realistický swing obchod v souladu s preferovaným stylem. Otevřené pozice neobsahují XAUUSD_ecn, tedy se vyhýbám duplicitě symbolu. Poplatek za transakci je 0.10 USD, což je zanedbatelné vzhledem k potenciálnímu zisku v pips."
-}

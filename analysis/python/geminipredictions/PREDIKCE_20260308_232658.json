@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "UKOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 85.50,
-  "reasoning": "UKOIL_ecn vykazuje silný uptrend. RSI na denní a týdenní bázi signalizuje překoupenost, ale na měsíční bázi je stále prostor pro růst. MA na všech timeframes jsou pod cenou. Riziko korekce existuje, ale momentálně trh táhne silný býčí sentiment. Doporučuji BUY s lot_size 0.02 pro snížení rizika a take_profit 85.50."
-}

@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDCZK_ecn",
-  "action": "SELL",
-  "lot_size": 0.08,
-  "take_profit": 23.0,
-  "reasoning": "Na základě technické analýzy a dostupných obchodních predikcí pro USDCZK_ecn se doporučuje SELL. Predikce naznačují, že SELL má 65% pravděpodobnost úspěchu. Symbol USDCZK_ecn není aktuálně mezi otevřenými pozicemi, což zajišťuje diverzifikaci portfolia. S ohledem na stav účtu a marži je doporučená velikost lotu 0.08, aby byla zachována bezpečná úroveň rizika. Take_profit je nastaven na 23.0 pro swing obchod, berouc v úvahu transakční náklady a potenciální zisk."
-}

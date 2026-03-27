@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "EURUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "reasoning": "EURUSD_ecn má 60% pravděpodobnost SELL. I přes nízké RSI na kratších timeframech (potenciální krátkodobá korekce), převládá celkový klesající trend a cena je pod MA na 1H, 4H, denním i týdenním grafu. Vzhledem k equity 1667.21 a margin_free 513.08 je 0.01 lot konservativní volba pro minimalizaci rizika a zachování dostatečné volné marže."
-}

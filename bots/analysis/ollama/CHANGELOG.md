@@ -1,5 +1,34 @@
 # Changelog
 
+## 2026-03-27 (Modular Refactor + Startup Fix)
+
+- **Refactored Trading Stack into Shared Helper Modules**
+  - Extracted MT5 account helpers to `account_state.py`
+  - Extracted MT5 connection lifecycle to `mt5_connection.py`
+  - Extracted symbol/tick helpers to `mt5_symbols.py`
+  - Extracted open position serialization to `mt5_positions.py`
+  - Extracted trading validation to `trading_validation.py`
+  - Extracted trade execution and CSV logging to `trade_execution.py`
+  - Extracted trade history reading to `trade_history.py`
+  - Extracted standard lot-size risk logic to `trade_risk.py`
+  - Extracted Gemini config loading to `gemini_config.py`
+  - Extracted Gemini final-decision helpers to `gemini_decision.py`
+
+- **Simplified Orchestration Modules**
+  - `final_decision.py` is now primarily orchestration of the final decision workflow
+  - Added smaller internal helpers for parsing Gemini decision JSON, resolving trade parameters, saving final decision files, and handling symbol retry/exclusion flow
+  - `trading_logic.py` now reuses shared Gemini response cleaning and shared Gemini config loading instead of maintaining duplicate local helpers
+
+- **Documentation Updated**
+  - Updated `TRADING_LOGIC.md` to reflect the post-refactor architecture
+  - Added current module responsibilities and shared helper layer overview
+  - Updated lot-size documentation to reference `trade_risk.calculate_lot_size()`
+
+- **Fixed Startup Failure in Ollama Service**
+  - Resolved inconsistent tabs/spaces indentation in `ollama_service.py`
+  - Fixed `TabError` during startup when running `python logika.py`
+  - Verified that `logika.py` starts, connects to MT5, and enters the service loops without immediate traceback
+
 ## 2026-03-24 (Margin Fallback in Standard Execution Mode)
 
 - **Added Margin-Based Fallback to Gemini `lot_size`**

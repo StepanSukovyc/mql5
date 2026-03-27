@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "CADJPY_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 108.35,
-  "reasoning": "CADJPY vykazuje silné býčí momentum. RSI je v překoupené zóně na kratších časových rámcích, ale cena je nad MA na všech časových rámcích. Predikce signalizuje BUY s 60% pravděpodobností. Nemám otevřenou pozici na CADJPY, čímž zachovám diverzifikaci. S aktuálním stavem účtu a margin free je možné otevřít pozici 0.02 lotu. Take profit je nastaven realisticky s ohledem na denní volatilitu a transakční náklady."
-}

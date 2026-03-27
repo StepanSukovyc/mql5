@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "UKOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 85.50,
-  "reasoning": "Na základě dostupných predikcí je UKOIL_ecn vysoce doporučován pro BUY (60%). Vzhledem k tomu, že tento symbol nemám momentálně otevřený v portfoliu a nemám tedy existující korelaci, tak jej upřednostňuji z důvodu diverzifikace. Podle fundamentálních zpráv je poptávka po ropě stabilní a globální ekonomika se oživuje. Technická analýza ukazuje silný uptrend (RSI p\u0159ekoupen\u00e9, ale trend je siln\u00fd, MA na v\u0161ech timeframes rostou). Zohledňuji také transakční náklady a nastavuji take_profit tak, aby byl obchod ekonomicky smysluplný."
-}

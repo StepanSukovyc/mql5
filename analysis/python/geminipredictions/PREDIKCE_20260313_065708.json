@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSEK_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 11.45,
-  "reasoning": "EURSEK má silné momentum pro nákup. Na hodinovém grafu je sice RSI silně překoupené (83.78), což naznačuje potenciální korekci, ale na denním grafu je RSI 64.11, což je neutrální až býčí. Cena je nad MA na 1h, 4h i denním grafu. Měsíční RSI na hodnotě 35 signalizuje potenciál pro růst z dlouhodobého hlediska. Silný růst během posledního dne naznačuje silný nákupní tlak. Preferuji opatrnější lot size s ohledem na překoupenost na 1H. Diverzifikace: EURSEK není v aktuálně otevřených pozicích."
-}

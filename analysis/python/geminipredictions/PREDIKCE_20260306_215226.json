@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "NGAS_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "reasoning": "NGAS_ecn vykazuje silné býčí momentum. Hodinový RSI je sice překoupený, ale 4H RSI je také zvýšený, i když ne tak extrémní. Denní RSI je neutrální, což indikuje potenciál pro další růst. Cena je nad denním a 4H MA, což signalizuje pozitivní momentum. I když může nastat krátkodobé stažení, celkový trend je pozitivní. Aktuálně nemám otevřenou pozici na NGAS_ecn a vzhledem k dostupné marži a nízké volatilitě navrhuji konzervativní velikost lotu."
-}

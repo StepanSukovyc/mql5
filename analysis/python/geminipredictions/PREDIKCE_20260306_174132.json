@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "EURNOK_ecn",
-  "action": "SELL",
-  "lot_size": 0.04,
-  "reasoning": "EURNOK is showing bearish signals across multiple timeframes. The price is below moving averages on all timeframes, indicating a downtrend. RSI is indicating oversold conditions, however the recent price action is still bearish, therefore a sell position is favored. We don't have open positions on EURNOK, so it is suitable for diversification. I recommend a lot size of 0.04 as it is inline with open positions."
-}

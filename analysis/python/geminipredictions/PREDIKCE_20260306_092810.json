@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "UK100_ecn",
-  "action": "SELL",
-  "lot_size": 0.02,
-  "reasoning": "UK100_ecn vykazuje silné medvědí signály. RSI na 1H a 4H timeframe je hluboko v přeprodané zóně, což naznačuje možný dočasný odraz, ale denní RSI je pod 50, cena je pod denním MA a trh vykazuje silné klesající momentum. Zvažuji SELL pozici s ohledem na riziko a velikost lotu nastavuji opatrně, aby nepřesáhla rozumné riziko vzhledem k aktuálnímu stavu účtu. Nemám žádné otevřené pozice na UK100_ecn."
-}

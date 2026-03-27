@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "CHFHUF_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "reasoning": "CHFHUF_ecn is showing a strong buy signal (BUY: 55%, SELL: 20%). The price is above the MA on all timeframes, indicating a bullish trend. While RSI is overbought on shorter timeframes (1h and daily), the overall trend suggests further growth. Current open positions do not include this symbol, promoting portfolio diversification. A small lot size is recommended to manage risk."
-}

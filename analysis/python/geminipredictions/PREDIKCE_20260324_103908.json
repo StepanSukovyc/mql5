@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPBUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 0.5,
-  "reasoning": "XPBUSD_ecn má dle predikce 100% pravděpodobnost SELL. Preferuji diverzifikaci a tento symbol nemám otevřený. Vzhledem k vysoké pravděpodobnosti poklesu a opatrnému money managementu volím minimální lot size (0.01), abych minimalizoval riziko a otestoval predikci. Pro TP volím konzervativní hodnotu, abych maximalizoval pravděpodobnost zisku s ohledem na transakční náklady."
-}
