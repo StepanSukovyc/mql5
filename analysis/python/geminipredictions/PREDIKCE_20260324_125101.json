@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDILS_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 3.50,
-  "reasoning": "Účet má otevřeny pozice v EURNZD_ecn, CHFZAR_ecn, CADCHF_ecn, AUDCAD_ecn a NGAS_ecn. USDILS_ecn nemá žádné otevřené pozice a dle predikce má silné SELL (75%). Protože jsem obchod #36 (dělitelný 3), nebudu se soustředit na minimalizaci lot size, ale na řízení predikcí. Doporučený lot_size 0.01 zaručuje transakční poplatek 0.10 USD, což dává smysl i u swingového obchodu. Take_profit je 3.50, což je realistické zhodnocení s ohledem na historická data a volatilitu."
-}

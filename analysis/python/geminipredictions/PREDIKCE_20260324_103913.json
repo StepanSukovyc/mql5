@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPBUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 0.7,
-  "reasoning": "There are currently 9 open positions and I want to diversify my trading portfolio. Based on available predictions, XPBUSD_ecn shows strong downward trend with 100% SELL probability. Because margin is relatively high, I recommend a small lot size of 0.01. Transational fees are neglible. Because there is an extreme sell signal, I recommend a low take_profit around 0.7."
-}

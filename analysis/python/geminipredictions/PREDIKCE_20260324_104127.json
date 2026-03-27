@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPBUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 100,
-  "reasoning": "XPBUSD_ecn má podle predikcí 100% šanci na SELL. Symbol nemám v otevřených pozicích. Lot size 0.01 je konzervativní vzhledem k mému účtu a margin free, umožní mi udržet pozici i při mírných výkyvech. Take profit nastaven na teoretické maximum - systém vyžaduje číselnou hodnotu, ale reálný take profit bude stanoven až na základě technické analýzy po otevření pozice."
-}

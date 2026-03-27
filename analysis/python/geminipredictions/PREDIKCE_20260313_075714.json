@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDCZK_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 23.50,
-  "reasoning": "USDCZK_ecn má silný BUY signál (60%), cena se nachází nad MA na několika časových rámcích a i přes potenciální korekci je dlouhodobý trend rostoucí. Vzhledem k aktuálnímu stavu účtu a diverzifikaci (USDCZK_ecn není v současnosti otevřen), doporučuji malou pozici 0.01 lotu. Take profit je nastaven na 23.50, což je realistický cíl s ohledem na rostoucí trend a dává obchod ekonomický smysl i po odečtení transakčních nákladů."
-}

@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "reasoning": "USOIL_ecn is overbought across multiple timeframes, but the recent surge in price suggests strong bullish momentum. The BUY recommendation aligns with the bullish trend and MA values across all timeframes. The suggested lot size of 0.02 is conservative, given the account balance and current margin usage, allowing for potential pullbacks without significant risk. We avoid opening a position on EURNZD as it already exists, and USOIL is not represented in the existing positions, improving portfolio diversification."
-}

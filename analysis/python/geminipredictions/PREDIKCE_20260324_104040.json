@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPBUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 100.00,
-  "reasoning": "Symbol XPBUSD_ecn má 100% predikci na SELL. V portfoliu nemám tento symbol zastoupený. Kvůli vysoké jistotě a diverzifikaci doporučuji otevřít prodejní pozici s malým lotem. Protože se jedná o 35 obchod a není plně řízen Gemini, lot_size se ignoruje a doporučený TP je jen ilustrační. Poplatek za obchod bude zanedbatelný."
-}

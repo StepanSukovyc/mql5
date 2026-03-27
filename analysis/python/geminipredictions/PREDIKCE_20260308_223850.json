@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURAUD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 1.61,
-  "reasoning": "EURAUD má silný medvědí signál napříč časovými rámci. RSI je hluboce přeprodané na denních i 4H grafech, což naznačuje potenciál pro krátkodobý odraz, ale celkový trend je dolů. Pohyblivé průměry na 1H, 4H, denních a týdenních časových rámcích jsou vysoko nad aktuální cenou, což potvrzuje medvědí momentum. Cena je kolem 1.64. Vzhledem k mému swing obchodnímu stylu a tendenci držet pozice více dní, využívám převládajícího medvědího sentimentu s konzervativním cílem take profit na 1.61 pro zajištění zisku a snížení rizika. Transakční náklady činí 0.1 USD, což je zohledněno. Aktuálně nemám otevřenou pozici na tomto páru, diverzifikuji tak portfolio."
-}

@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPBUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 10.00,
-  "reasoning": "All models predict SELL with 100% certainty on XPBUSD_ecn. Given that this asset is not already in the open positions, it satisfies the diversification requirement. Given that this is not fully Gemini-managed order, lot_size and take_profit are arbitrary and may be ignored. Reasoning for SELL decision is high RSI and MA values pointing to downward trend."
-}

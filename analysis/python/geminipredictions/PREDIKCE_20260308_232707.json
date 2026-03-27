@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "CHFHUF_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 422.50,
-  "reasoning": "Doporučuji CHFHUF_ecn pro BUY. Aktuálně nemám otevřenou pozici v tomto symbolu, což zajišťuje diverzifikaci. Predikce uvádí 60% pravděpodobnost pro BUY, s odůvodněním, že cena roste, RSI na denní bázi je překoupené, ale trend je silný a MA na všech timeframes roste. Poslední denní svíčka ukazuje na pokračování růstu.  Take profit je nastaven na 422.50, aby bylo dosažitelné a po odečtení poplatku 0.20 USD (za 0.02 lot) zajistil profit."
-}

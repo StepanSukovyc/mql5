@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "CHFHUF_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "reasoning": "CHFHUF_ecn shows strong bullish momentum according to the predictions (BUY: 60%, SELL: 15%). RSI is high across all shorter timeframes (1h, 4h, day), however, the longer-term (week, month) RSI and MA suggest the upward trend is sustainable. There are no current open positions for CHFHUF_ecn which contributes to portfolio diversification. Given the margin_free is 620.99, a lot size of 0.02 allows for managing the risk."
-}

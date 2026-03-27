@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPDUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 700,
-  "reasoning": "XPDUSD_ecn má silné SELL doporučení (100%). Na základě dostupných informací se zdá, že je to nejvhodnější volba pro vstup do pozice, a diverzifikuje portfolio, protože tento symbol aktuálně v portfoliu chybí. Lot size je nastaven na minimální hodnotu, abychom minimalizovali riziko a poplatky. Očekává se pokles XPDUSD_ecn, a proto je nastaven take profit. Cena za lot je 0.1, takže se s tím počítá."
-}

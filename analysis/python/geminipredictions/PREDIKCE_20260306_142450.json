@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "reasoning": "USOIL_ecn má silné býčí momentum a prolomil denní i týdenní MA. Přestože je RSI překoupené na kratších časových rámcích, celkový trend je rostoucí a BUY je pravděpodobnější. Lot size 0.02 je navržen s ohledem na aktuální marži a diverzifikaci portfolia a snahu o snížení rizika spojeného s případným pullbackem."
-}

@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "GBPCAD_ecn",
-  "action": "SELL",
-  "lot_size": 0.02,
-  "reasoning": "GBPCAD is showing bearish signals across multiple timeframes. The daily and weekly RSI are in oversold territory, indicating potential for further downside. The price is below the moving average on the daily, weekly, and monthly charts, suggesting a downtrend. The overall trend favors selling. Margin free is 401.42, this will allow us to open a position for lot size 0.02 with sufficient margin."
-}

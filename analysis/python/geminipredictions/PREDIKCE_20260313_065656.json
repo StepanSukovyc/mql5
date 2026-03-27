@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "UKOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 97.0,
-  "reasoning": "Vybral jsem UKOIL_ecn, protože predikce naznačuje silný uptrend (BUY: 55%, SELL: 25%, HOLD: 20%).  Cena je nad MA na všech časových rámcích a i když denní a týdenní RSI jsou v překoupené zóně, měsíční RSI má stále prostor pro růst.  Ostatní měnové páry, které mám otevřené (EURNZD_ecn, CHFZAR_ecn, CADCHF_ecn, EURCAD_ecn, AUDCAD_ecn, NGAS_ecn, DXY_ecn) mají protichůdné signály nebo jsou v současné době ve ztrátě. Proto diverzifikace s UKOIL_ecn se zdá rozumná. Lot size je nastaven na 0.01, což je konzervativní, vzhledem k aktuální margin free (450.03 USD). Take profit je nastaven realisticky s ohledem na předpokládaný uptrend a transakční náklady."
-}

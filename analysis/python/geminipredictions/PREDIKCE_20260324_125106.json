@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDILS_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 3.50,
-  "reasoning": "Účet aktuálně prodělává a je třeba diverzifikovat portfolio. Symbol USDILS_ecn není v otevřených pozicích. Predikce pro tento symbol je SELL s pravděpodobností 75%. Na základě RSI a MA hodnot je trend sm\u011brem dol\u016f s n\u00edzk\u00fdmi hodnotami RSI, co\u017e nazna\u010duje pokles. Take profit nastaven s ohledem na denní zisk a transakční náklady."
-}

@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDZAR_ecn",
-  "action": "BUY",
-  "lot_size": 0.06,
-  "take_profit": 18.75,
-  "reasoning": "Otevřené pozice nepokrývají USDZAR_ecn. Dle predikce má pár USDZAR_ecn 40% šanci na BUY. Grafy ukazují rostoucí trend (RSI a MA rostou), ale svíčková formace signalizuje změnu trendu, proto volím konzervativní lot_size. Na základě technické analýzy je doporučen BUY, proto navrhuji zkusit dosáhnout zisku na odrazu od supportu (aktuální cena je kolem 18.25) s realistickým cílem 18.75 USD. Navržený lot size je 0.06, protože jsem chtěl maximalizovat pozici (s ohledem na balance 3179.27 a equity 1868.48) a současně ponechat dostatečnou volnou marži."
-}

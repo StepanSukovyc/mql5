@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "NGAS_ecn",
-  "action": "BUY",
-  "lot_size": 0.03,
-  "take_profit": 3.15,
-  "reasoning": "NGAS_ecn vykazuje býčí momentum na kratších časových rámcích (1h, 4h) s RSI v překoupené zóně (1h RSI=78.61), což naznačuje potenciál pro pullback. Nicméně, denní RSI (55.82) je neutrální a cena je nad svým denním MA (2.97), což naznačuje potenciál pro pokračující pohyb vzhůru. Týdenní MA (3.71) je výrazně výše než současná cena, což potenciálně nabízí rezistenci. Preferuji BUY, protože na měsíčním grafu je MA blízko aktuální ceny, a to podporuje dlouhodobý růst. Na účtu nemám otevřenou pozici na tomto symbolu. S ohledem na dostupné prostředky (margin_free 559.69) a transakční náklady 0.10 USD za každých 0.01 lot, navrhuji lot_size 0.03, což zajistí adekvátní margin pro případné pohyby proti pozici a umožní realistické nastavení take_profitu na 3.15."
-}

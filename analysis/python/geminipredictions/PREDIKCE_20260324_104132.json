@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "CHFJPY_ecn",
-  "action": "SELL",
-  "lot_size": 0.05,
-  "take_profit": 168.500,
-  "reasoning": "Nemám žádné otevřené pozice v CHFJPY_ecn. Predikce pro CHFJPY_ecn je jednoznačně SELL (100%).  Vysoké hodnoty RSI a pokles MA sugerují silnou tendenci k poklesu. S ohledem na dostupné prostředky a riziko (margin free: 764.52, margin percent: 24.46%), doporučuji lot_size 0.05. Aktuální cena CHFJPY_ecn se pohybuje kolem 170.277. Nastavuji take_profit na 168.500, aby to byl rozumný swing obchod, který reflektuje predikci a zároveň dává ekonomický smysl i po odečtení poplatků za transakci (0.05 lot = 0.50 USD poplatek)."
-}

@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 import MetaTrader5 as mt5
+from mt5_symbols import get_current_price
 
 
 def simple_moving_average(values: List[float], period: int) -> List[Optional[float]]:
@@ -182,8 +183,7 @@ def collect_symbol_payload(
     }
     
     # Get current price
-    tick = mt5.symbol_info_tick(symbol)
-    payload["current_price"] = float(tick.bid) if tick else None
+    payload["current_price"] = get_current_price(symbol)
     
     # Fetch data for each timeframe
     for tf_name, tf_value in timeframes.items():

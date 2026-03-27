@@ -1,6 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "reasoning": "USOIL_ecn is showing strong bullish momentum and has a high BUY probability (65%). Although overbought on shorter timeframes, the overall trend supports further upside. A small lot size is recommended due to overbought conditions and volatility, and to manage risk given existing open positions."
-}

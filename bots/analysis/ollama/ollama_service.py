@@ -18,6 +18,8 @@ import httpx
 import re
 import MetaTrader5 as mt5
 
+from account_state import get_account_login
+from mt5_connection import initialize_mt5, shutdown_mt5
 from market_data import (
     collect_symbol_payload,
     get_symbols,
@@ -448,18 +450,14 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
     
     # Initialize MT5 connection
     print("🔌 Připojuji se k MetaTrader 5...")
-    mt5_ok = False
-    if mt5_login and mt5_password and mt5_server:
-        mt5_ok = mt5.initialize(login=mt5_login, password=mt5_password, server=mt5_server)
-    else:
-        mt5_ok = mt5.initialize()
-    
-    if not mt5_ok:
-        print(f"❌ MT5 inicializace selhala: {mt5.last_error()}")
+    try:
+        initialize_mt5(login=mt5_login, password=mt5_password, server=mt5_server)
+    except RuntimeError as exc:
+        print(f"❌ MT5 inicializace selhala: {exc}")
         print("⚠️  Ollama Service nemůže pokračovat bez MT5 připojení")
         return
     
-    print(f"✅ MT5 připojen - účet: {mt5.account_info().login if mt5.account_info() else 'N/A'}")
+    print(f"✅ MT5 připojen - účet: {get_account_login()}")
     
     cycle_count = 0
     
@@ -477,7 +475,7 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
                 # Sleep in small intervals to allow graceful shutdown
                 for _ in range(300):  # 5 minutes = 300 seconds
                     if stop_event.is_set():
-                        mt5.shutdown()
+                        shutdown_mt5()
                         return
                     time.sleep(1)
                 continue
@@ -511,7 +509,7 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
                 
                 for _ in range(300):
                     if stop_event.is_set():
-                        mt5.shutdown()
+                        shutdown_mt5()
                         return
                     time.sleep(1)
                 continue
@@ -575,9 +573,9 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             
             for _ in range(300):
                 if stop_event.is_set():
-                    mt5.shutdown()
+                    shutdown_mt5()
                     return
                 time.sleep(1)
     
-    mt5.shutdown()
+    shutdown_mt5()
     print("\n🛑 Ollama Service Loop ukončen")
