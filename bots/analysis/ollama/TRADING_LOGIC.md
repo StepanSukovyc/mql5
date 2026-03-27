@@ -21,6 +21,8 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
 7. **Aplikuje režim exekuce podle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3)
    - Každý N-tý obchod: použije se lot_size + take_profit z Gemini
    - Ostatní obchody: lot_size se vypočítá lokálně, take_profit se nepoužije
+   - Lokální risk management používá konfigurovatelný strop `TRADING_ACCOUNT_BALANCE_CAP` z `.env`
+   - Pokud je skutečný balance nad stropem, strategie pracuje jen se zastropovaným balance a z free margin odečte celý přebytek nad stropem jako rezervu
    - Pokud lokálně vypočtený `lot_size` neprojde margin checkem (`Insufficient margin`), systém provede fallback na `lot_size` z finální Gemini predikce
 8. **Provede obchod** - automaticky otevře pozici na MT5
 9. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
@@ -226,7 +228,7 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
 
 3. **Dotaz na Gemini AI:**
    - Očekávané výstupy: 1 měnový pár + BUY/SELL + doporučená velikost lotu + take_profit
-   - Gemini bere v úvahu Risk Management (volná marže, otevřené pozice)
+   - Gemini bere v úvahu Risk Management (efektivní volná marže, otevřené pozice)
    - Gemini bere v úvahu styl obchodování: swing (pozice i několik dní), snaha o denní ziskovost a trading fee (0.10 USD za 0.01 lot)
    - **DIVERZIFIKACE:** Gemini preferuje symboly bez otevřených pozic. Pokud už pozice na doporučovaném symbolu existuje a aktuální tržní cena je blízko vstupní ceny (< 0.5% rozdíl), Gemini **povinně vybírá jiný kandidát** z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
 
@@ -247,10 +249,18 @@ Standardní režim (většina obchodů) počítá lot přes sdílený helper `tr
 lot_size = floor((balance + 500) / 500) / 100
 ```
 
+Před použitím vzorce se `balance` zastropuje pomocí `TRADING_ACCOUNT_BALANCE_CAP` z `.env` a free margin se pro risk/margin check sníží o rezervu nad tímto stropem.
+
+**Příklad rezervy:**
+- Pokud je balance 6200 a `TRADING_ACCOUNT_BALANCE_CAP=5000`, strategie používá balance 5000
+- Rezerva je 1200 a o stejnou částku se sníží i free margin pro margin check
+- Těchto 1200 zůstává mimo sizing strategie jako bezpečnostní polštář nebo částka pro výběr
+
 **Příklady:**
 - Balance 1893 → (1893 + 500) / 500 = 4.786 → floor = 4 → 4/100 = **0.04**
 - Balance 2500 → (2500 + 500) / 500 = 6.0 → floor = 6 → 6/100 = **0.06**
 - Balance 500 → (500 + 500) / 500 = 2.0 → floor = 2 → 2/100 = **0.02**
+- Balance 6200 při `TRADING_ACCOUNT_BALANCE_CAP=5000` → výpočet běží jako pro balance 5000 → **0.11**
 
 Každý N-tý obchod (N = `GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá lot_size a take_profit přímo z Gemini odpovědi.
 
@@ -280,7 +290,7 @@ Hlavní skript, který koordinuje **nekonečný obchodní cyklus** se zásadou F
 
 ### 2. account_monitor.py - Account Monitoring
 Monitoruje stav účtu v background threadu:
-- Pravidelně kontroluje **volnou marži** v procenta
+- Pravidelně kontroluje **efektivní volnou marži** v procentech vůči efektivnímu balance
 - Signalizuje překročení **20% prahu** (konfigurovatelné v .env) pomocí threading.Event
 - Zobrazuje info o účtu (zůstatek, equity, marže)
 - Běží bez blokování hlavního vlákna
@@ -312,8 +322,17 @@ Stahuje data a generuje predikce:
 - Načítá filtrované predikce, stav účtu a otevřené pozice
 - Spouští Gemini dotaz pro finální doporučení
 - Aplikuje obchodní režim podle pořadí obchodu (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`)
+- Pracuje s efektivním balance/free margin podle `TRADING_ACCOUNT_BALANCE_CAP`
 - Ukládá finální JSON rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
 - Předává hotové parametry exekuční vrstvě
+
+## Konfigurace .env
+
+Relevantní parametry pro risk management:
+
+- `TRADING_MARGIN_THRESHOLD=20` určuje, při jakém poměru efektivní volné marže k efektivnímu balance se spustí trading flow
+- `TRADING_ACCOUNT_BALANCE_CAP=5000` určuje maximální balance, se kterou strategie počítá lot sizing a margin check
+- Pokud je skutečný balance nižší než strop, žádná rezerva se neuplatní
 
 **Klíčové funkce:**
 - `make_final_trading_decision()` - hlavní orchestrátor finální fáze

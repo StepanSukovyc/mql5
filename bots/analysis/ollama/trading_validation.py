@@ -6,7 +6,7 @@ from typing import Tuple
 
 import MetaTrader5 as mt5
 
-from account_state import get_account_info_raw
+from account_state import get_account_info_raw, get_effective_free_margin
 from mt5_symbols import get_current_price, get_symbol_info
 
 
@@ -60,7 +60,9 @@ def check_margin_requirements(symbol: str, action: str, lot_size: float) -> Tupl
 	except RuntimeError:
 		return False, "Failed to get account info"
 
-	free_margin = account_info.margin_free
+	raw_balance = float(account_info.balance)
+	raw_free_margin = float(account_info.margin_free)
+	free_margin = get_effective_free_margin(raw_balance, raw_free_margin)
 	order_type = mt5.ORDER_TYPE_BUY if action == "BUY" else mt5.ORDER_TYPE_SELL
 
 	symbol_info = get_symbol_info(symbol)
@@ -76,7 +78,18 @@ def check_margin_requirements(symbol: str, action: str, lot_size: float) -> Tupl
 		return False, f"Cannot calculate margin for {symbol}"
 
 	if required_margin > free_margin:
+		if free_margin != raw_free_margin:
+			return False, (
+				f"Insufficient margin: required {required_margin:.2f}, available {free_margin:.2f} "
+				f"(strategy cap applied, raw free margin {raw_free_margin:.2f})"
+			)
 		return False, f"Insufficient margin: required {required_margin:.2f}, available {free_margin:.2f}"
 
-	print(f"   ✅ Margin check passed: required {required_margin:.2f}, available {free_margin:.2f}")
+	if free_margin != raw_free_margin:
+		print(
+			f"   ✅ Margin check passed: required {required_margin:.2f}, "
+			f"available {free_margin:.2f} (strategy cap applied, raw {raw_free_margin:.2f})"
+		)
+	else:
+		print(f"   ✅ Margin check passed: required {required_margin:.2f}, available {free_margin:.2f}")
 	return True, ""

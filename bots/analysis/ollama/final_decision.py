@@ -34,9 +34,14 @@ def _get_gemini_full_control_every_n_trades() -> int:
 def _print_account_state(account_state: Dict) -> None:
 	"""Print a concise account-state summary."""
 	print("\n💰 Getting account state...")
+	print(f"   Strategy Balance Cap: {account_state['balance_cap']:.2f}")
 	print(f"   Balance: {account_state['balance']:.2f}")
 	print(f"   Equity: {account_state['equity']:.2f}")
 	print(f"   Free Margin: {account_state['margin_free']:.2f} ({account_state['margin_percent']:.2f}%)")
+	if account_state.get("balance_reserve", 0) > 0:
+		print(f"   Safety reserve outside strategy: {account_state['balance_reserve']:.2f}")
+		print(f"   Raw Balance: {account_state['raw_balance']:.2f}")
+		print(f"   Raw Free Margin: {account_state['raw_margin_free']:.2f}")
 
 
 def _print_open_positions(open_positions: List[Dict]) -> None:
