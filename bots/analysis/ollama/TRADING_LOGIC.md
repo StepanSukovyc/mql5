@@ -19,11 +19,9 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Gemini AI vybere **1 měnový pár**, rozhodne BUY/SELL, navrhne lot_size a take_profit
    - V promptu je explicitně swing styl (ne intraday), denní cíl zisků a poplatek 0.10 USD za 0.01 lotu
 7. **Aplikuje režim exekuce podle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3)
-   - Každý N-tý obchod: použije se lot_size + take_profit z Gemini
-   - Ostatní obchody: lot_size se vypočítá lokálně, take_profit se nepoužije
-   - Lokální risk management používá konfigurovatelný strop `TRADING_ACCOUNT_BALANCE_CAP` z `.env`
-   - Pokud je skutečný balance nad stropem, strategie pracuje jen se zastropovaným balance a z free margin odečte celý přebytek nad stropem jako rezervu
-   - Pokud lokálně vypočtený `lot_size` neprojde margin checkem (`Insufficient margin`), systém provede fallback na `lot_size` z finální Gemini predikce
+   - lot_size se vždy použije z finální Gemini predikce
+   - Každý N-tý obchod: použije se i take_profit z Gemini
+   - Ostatní obchody: take_profit se nepoužije
 8. **Provede obchod** - automaticky otevře pozici na MT5
 9. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
 10. **Ukončení** - Ctrl+C
@@ -128,11 +126,9 @@ Dvojitá kontrola zajišťuje bezpečnost:
        │        │ • Ask Gemini for final      │
        │        │   recommendation:           │
        │        │   - 1 symbol (BUY/SELL)     │
-       │        │ • Calculate lot_size:       │
-       │        │   floor((balance+500)/500)  │
-       │        │   /100                      │
-       │        │ • If margin is insufficient │
-       │        │   fallback to Gemini lot    │
+      │        │ • Use Gemini lot_size       │
+      │        │ • Every N-th trade also     │
+      │        │   uses Gemini take_profit   │
        │        │ • Execute trade on MT5      │
        │        │ • Save to PREDIKCE_         │
        │        │   <timestamp>.json          │
@@ -235,29 +231,16 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
 4. **Uložení a provedení obchodu:**
    - Parsuje JSON odpověď od Gemini (symbol, action, lot_size, take_profit)
    - Aplikuje režim `GEMINI_FULL_CONTROL_EVERY_N_TRADES`:
-     - Každý N-tý obchod: použije Gemini lot_size i take_profit
-     - Ostatní obchody: použije lokální lot vzorec a obchoduje bez take_profit
+       - lot_size použije vždy z Gemini
+       - Každý N-tý obchod: použije i Gemini take_profit
+       - Ostatní obchody: obchoduje bez take_profit
    - Provede obchod na MT5 (BUY nebo SELL)
    - Uloží rozhodnutí do: `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json`
    - Proces se poté ukončí
 
 ## Lot Size Calculation
 
-Standardní režim (většina obchodů) počítá lot přes sdílený helper `trade_risk.calculate_lot_size()`:
-
-```
-lot_size = floor((balance + 500) / 500) / 100
-```
-
-Před použitím vzorce se `balance` zastropuje pomocí `TRADING_ACCOUNT_BALANCE_CAP` z `.env` a free margin se pro risk/margin check sníží o rezervu nad tímto stropem.
-
-**Příklad rezervy:**
-- Pokud je balance 6200 a `TRADING_ACCOUNT_BALANCE_CAP=5000`, strategie používá balance 5000
-- Rezerva je 1200 a o stejnou částku se sníží i free margin pro margin check
-- Těchto 1200 zůstává mimo sizing strategie jako bezpečnostní polštář nebo částka pro výběr
-
-**Příklady:**
-- Balance 1893 → (1893 + 500) / 500 = 4.786 → floor = 4 → 4/100 = **0.04**
+Lot size se nyní bere vždy z finální Gemini predikce a před exekucí se už jen validuje proti pravidlům symbolu a dostupné marži.
 - Balance 2500 → (2500 + 500) / 500 = 6.0 → floor = 6 → 6/100 = **0.06**
 - Balance 500 → (500 + 500) / 500 = 2.0 → floor = 2 → 2/100 = **0.02**
 - Balance 6200 při `TRADING_ACCOUNT_BALANCE_CAP=5000` → výpočet běží jako pro balance 5000 → **0.11**
@@ -356,7 +339,8 @@ Refaktor rozdělil původní monolit do menších odpovědností:
 - `trading_validation.py` - validace symbolu, lot size a marže
 - `trade_execution.py` - logování a provedení obchodu na MT5
 - `trade_history.py` - čtení historie úspěšných obchodů z CSV
-- `trade_risk.py` - výpočet standardního lot size
+
+Trade log nyní obsahuje i pole `lot_source`, takže je vidět, že lot pochází z finální predikce.
 
 **Expected Gemini Response:**
 ```json

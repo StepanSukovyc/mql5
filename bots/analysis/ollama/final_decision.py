@@ -14,7 +14,6 @@ from gemini_decision import ask_gemini_final_decision, load_predictions
 from mt5_positions import get_open_positions
 from trade_execution import execute_trade
 from trade_history import count_successful_trades
-from trade_risk import calculate_lot_size
 from trading_validation import check_margin_requirements, validate_symbol
 
 
@@ -62,13 +61,13 @@ def _print_trade_mode(successful_trades: int, next_trade_number: int, full_contr
 	print("\n🧭 Trade Execution Mode")
 	print(f"   Successful trades so far: {successful_trades}")
 	print(f"   Current trade number: #{next_trade_number}")
-	print(f"   Full Gemini control every N trades: N={full_control_every_n}")
+	print(f"   Gemini take_profit control every N trades: N={full_control_every_n}")
 	print(
 		"   Mode: "
 		+ (
-			"FULL GEMINI (lot_size + take_profit from Gemini)"
+			"FULL GEMINI TP MODE (lot_size + take_profit from Gemini)"
 			if gemini_full_control_mode
-			else "STANDARD (calculated lot_size, no take_profit)"
+			else "PREDICTION LOT MODE (lot_size from Gemini, no take_profit)"
 		)
 	)
 
@@ -129,44 +128,35 @@ def _resolve_trade_parameters(
 	action: str,
 ) -> Optional[Tuple[float, Optional[float]]]:
 	"""Resolve final lot size and take profit for the selected trading mode."""
-	if gemini_full_control_mode:
-		try:
-			lot_size = float(gemini_lot_size)
-		except (TypeError, ValueError):
-			print("⚠️  Gemini lot_size missing/invalid in FULL GEMINI mode")
-			return None
+	try:
+		lot_size = float(gemini_lot_size)
+	except (TypeError, ValueError):
+		print("⚠️  Gemini lot_size missing/invalid in final decision")
+		return None
 
+	if lot_size <= 0:
+		print(f"⚠️  Gemini lot_size invalid: {lot_size}")
+		return None
+
+	print(f"   Using Gemini lot_size: {lot_size}")
+
+	if gemini_full_control_mode:
 		try:
 			take_profit = float(gemini_take_profit)
 		except (TypeError, ValueError):
 			print("⚠️  Gemini take_profit missing/invalid in FULL GEMINI mode")
 			return None
 
-		print(f"   Using Gemini lot_size: {lot_size}")
 		print(f"   Using Gemini take_profit: {take_profit}")
 		return lot_size, take_profit
 
-	lot_size = calculate_lot_size(account_state["balance"])
 	take_profit = None
 	print("   Standard mode active: take_profit disabled for this trade")
 
 	has_margin, margin_msg = check_margin_requirements(symbol, action, lot_size)
 	if not has_margin and "insufficient margin" in margin_msg.lower():
-		print("   Calculated lot_size failed margin check in STANDARD mode")
-		print("   Trying lot_size from prediction instead...")
-
-		try:
-			fallback_lot_size = float(gemini_lot_size)
-		except (TypeError, ValueError):
-			print("⚠️  Prediction lot_size missing/invalid, cannot use margin fallback")
-			return None
-
-		if fallback_lot_size <= 0:
-			print(f"⚠️  Prediction lot_size invalid for fallback: {fallback_lot_size}")
-			return None
-
-		lot_size = fallback_lot_size
-		print(f"   Fallback to prediction lot_size: {lot_size}")
+		print("⚠️  Prediction lot_size failed margin check in STANDARD mode")
+		return None
 
 	return lot_size, take_profit
 
@@ -249,7 +239,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				print(f"⚠️  Final lot size is {lot_size}, skipping trade execution")
 				return False
 
-			if execute_trade(symbol, action, lot_size, service_folder, take_profit):
+			if execute_trade(symbol, action, lot_size, service_folder, take_profit, lot_source="gemini_prediction"):
 				print("\n🎉 Trade executed successfully!")
 				print("\n" + "=" * 60)
 				print("✅ Final Trading Decision Completed")

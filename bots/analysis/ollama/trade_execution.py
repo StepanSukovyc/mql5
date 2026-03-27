@@ -5,7 +5,7 @@ from __future__ import annotations
 import csv
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 import MetaTrader5 as mt5
 
@@ -13,10 +13,60 @@ from mt5_symbols import get_symbol_tick
 from trading_validation import check_margin_requirements, validate_lot_size, validate_symbol
 
 
+TRADE_LOG_HEADERS = ["timestamp", "symbol", "action", "lot_size", "lot_source", "price", "success", "error_msg"]
+
+
+def _ensure_trade_log_schema(log_file: Path) -> None:
+	"""Ensure trade log CSV contains the current headers, migrating legacy files if needed."""
+	if not log_file.exists():
+		return
+
+	with open(log_file, "r", newline="", encoding="utf-8") as f:
+		reader = csv.reader(f)
+		rows = list(reader)
+
+	if not rows:
+		return
+
+	headers = rows[0]
+	if headers == TRADE_LOG_HEADERS:
+		return
+
+	data_rows: List[List[str]] = []
+	for row in rows[1:]:
+		if not row:
+			continue
+
+		if len(headers) == 7:
+			mapped = dict(zip(headers, row))
+			data_rows.append(
+				[
+					mapped.get("timestamp", ""),
+					mapped.get("symbol", ""),
+					mapped.get("action", ""),
+					mapped.get("lot_size", ""),
+					"legacy_unknown",
+					mapped.get("price", ""),
+					mapped.get("success", ""),
+					mapped.get("error_msg", ""),
+				]
+			)
+			continue
+
+		padded = row[: len(TRADE_LOG_HEADERS)] + [""] * max(0, len(TRADE_LOG_HEADERS) - len(row))
+		data_rows.append(padded[: len(TRADE_LOG_HEADERS)])
+
+	with open(log_file, "w", newline="", encoding="utf-8") as f:
+		writer = csv.writer(f)
+		writer.writerow(TRADE_LOG_HEADERS)
+		writer.writerows(data_rows)
+
+
 def log_trade(
 	symbol: str,
 	action: str,
 	lot_size: float,
+	lot_source: str,
 	price: float,
 	success: bool,
 	error_msg: str = "",
@@ -30,13 +80,14 @@ def log_trade(
 	logs_folder.mkdir(parents=True, exist_ok=True)
 
 	log_file = logs_folder / "trades.csv"
+	_ensure_trade_log_schema(log_file)
 	file_exists = log_file.exists()
 
 	with open(log_file, "a", newline="", encoding="utf-8") as f:
 		writer = csv.writer(f)
 
 		if not file_exists:
-			writer.writerow(["timestamp", "symbol", "action", "lot_size", "price", "success", "error_msg"])
+			writer.writerow(TRADE_LOG_HEADERS)
 
 		writer.writerow(
 			[
@@ -44,6 +95,7 @@ def log_trade(
 				symbol,
 				action,
 				lot_size,
+				lot_source,
 				price,
 				success,
 				error_msg,
@@ -59,6 +111,7 @@ def execute_trade(
 	lot_size: float,
 	service_folder: Path = None,
 	take_profit: Optional[float] = None,
+	lot_source: str = "unknown",
 ) -> bool:
 	"""Execute a trade on MT5 with validation and logging."""
 	print(f"\n🔄 Executing trade...")
@@ -70,13 +123,13 @@ def execute_trade(
 	is_valid, error_msg = validate_symbol(symbol)
 	if not is_valid:
 		print(f"❌ Symbol validation failed: {error_msg}")
-		log_trade(symbol, action, lot_size, 0.0, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
 		return False
 
 	adjusted_lot, lot_msg = validate_lot_size(symbol, lot_size)
 	if adjusted_lot == 0.0:
 		print(f"❌ Lot size validation failed: {lot_msg}")
-		log_trade(symbol, action, lot_size, 0.0, False, lot_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, lot_msg, service_folder)
 		return False
 
 	if lot_msg:
@@ -84,18 +137,19 @@ def execute_trade(
 
 	lot_size = adjusted_lot
 	print(f"   Final Lot Size: {lot_size}")
+	print(f"   Lot Source: {lot_source}")
 
 	has_margin, margin_msg = check_margin_requirements(symbol, action, lot_size)
 	if not has_margin:
 		print(f"❌ Margin check failed: {margin_msg}")
-		log_trade(symbol, action, lot_size, 0.0, False, margin_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, margin_msg, service_folder)
 		return False
 
 	tick = get_symbol_tick(symbol)
 	if tick is None:
 		error_msg = f"Failed to get tick for {symbol}: {mt5.last_error()}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, 0.0, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
 		return False
 
 	if action == "BUY":
@@ -107,7 +161,7 @@ def execute_trade(
 	else:
 		error_msg = f"Invalid action: {action} (must be BUY or SELL)"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, 0.0, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
 		return False
 
 	print(f"   Price: {price}")
@@ -119,25 +173,25 @@ def execute_trade(
 		except (TypeError, ValueError):
 			error_msg = f"Invalid take_profit value: {take_profit}"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
 			return False
 
 		if validated_tp <= 0:
 			error_msg = f"Invalid take_profit <= 0: {validated_tp}"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
 			return False
 
 		if action == "BUY" and validated_tp <= price:
 			error_msg = f"Invalid take_profit for BUY: TP ({validated_tp}) must be > market price ({price})"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
 			return False
 
 		if action == "SELL" and validated_tp >= price:
 			error_msg = f"Invalid take_profit for SELL: TP ({validated_tp}) must be < market price ({price})"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
 			return False
 
 		print(f"   Validated TP: {validated_tp}")
@@ -162,13 +216,13 @@ def execute_trade(
 	if result is None:
 		error_msg = f"Order send failed: {mt5.last_error()}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
 		return False
 
 	if result.retcode != mt5.TRADE_RETCODE_DONE:
 		error_msg = f"Order failed with retcode: {result.retcode} - {result.comment}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, price, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
 		return False
 
 	print(f"✅ Trade executed successfully!")
@@ -176,5 +230,5 @@ def execute_trade(
 	print(f"   Volume: {result.volume}")
 	print(f"   Price: {result.price}")
 
-	log_trade(symbol, action, lot_size, result.price, True, "", service_folder)
+	log_trade(symbol, action, lot_size, lot_source, result.price, True, "", service_folder)
 	return True

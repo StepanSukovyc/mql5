@@ -96,7 +96,8 @@ def ask_gemini_final_decision(
 			f"\n\nREŽIM AKTUÁLNÍHO OBCHODU:\n"
 			f"- Pořadí obchodu: #{trade_number}\n"
 			f"- Každý {full_control_every_n}. obchod je plně řízen Gemini (lot + take_profit): {mode_label}\n"
-			f"- U ne-plně řízených obchodů se lot_size a take_profit ve finální exekuci ignoruje."
+			f"- lot_size se ve finální exekuci vždy použije z této odpovědi.\n"
+			f"- U ne-plně řízených obchodů se take_profit ve finální exekuci ignoruje."
 		)
 
 	prompt = f"""Jsi expert obchodní poradce. Musíš na základě analýzy učinit finální obchodní rozhodnutí.

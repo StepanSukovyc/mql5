@@ -24,9 +24,9 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Gemini AI vybere **1 měnový pár**, rozhodne **BUY/SELL**, navrhne `lot_size` a `take_profit`
   - V promptu zohledňuje swing styl (nejde o intraday), denní cíl ziskovosti a poplatek `0.10 USD` za každých `0.01` lotu
 7. **Režim exekuce dle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3):
-  - Každý N-tý obchod: použije se `lot_size` i `take_profit` od Gemini
-  - Ostatní obchody: `lot_size` se počítá vzorcem `floor((balance + 500) / 500) / 100` a `take_profit` se nepoužije
-  - Pokud takto vypočtený `lot_size` neprojde kontrolou marginu (`Insufficient margin`), použije se fallback na `lot_size` z finální Gemini predikce
+  - `lot_size` se vždy použije z finální Gemini predikce
+  - Každý N-tý obchod: použije se i `take_profit` od Gemini
+  - Ostatní obchody: `take_profit` se nepoužije
 8. **Provede obchod** na MT5 podle aktivního režimu
 9. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
 10. **Vrátí se na krok 3** (restart monitoring)
@@ -212,8 +212,9 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - Hardening: Pokud filtr smaže všechny existující predikce, obchodní krok se bezpečně přeskočí
 - Hardening: Reuse Ollama predikce ověřuje konzistenci symbolu, aby nedošlo ke křížení párů
 - Finální rozhodnutí se dělá na **právě jednom měnovém páru** s vypočtenou velikostí lotu
+- Finální rozhodnutí se dělá na **právě jednom měnovém páru** s velikostí lotu převzatou z Gemini predikce
 - Každý `N`-tý obchod (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá `lot_size + take_profit` od Gemini
-- Ostatní obchody používají vlastní lot výpočet: `floor((balance + 500) / 500) / 100` a bez take profit
+- Ostatní obchody používají `lot_size` od Gemini a bez take profit
 - **Nekonečný loop:** Skript běží dokola, dokud není ručně zastaven
 - Ukončení skriptu: `Ctrl+C`
 

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení technických indikátorů a pokles RSI signalizují silnou tendenci pokračovat v ústupu.",
-  "timestamp": "2026-03-27T14:56:42.748403+00:00",
+  "reasoning": "Převažující trend je směrem dolů s náznaky zpomalování poklesu, ale stále přetrvávají silné pohyby na spadových svíčkách. RSI a MA ukazují slabost, což podporuje možnost dalšího poklesu.",
+  "timestamp": "2026-03-27T17:50:00.173474+00:00",
   "model": "deepseek-coder-v2"
 }

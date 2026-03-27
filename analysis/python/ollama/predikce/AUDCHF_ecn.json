@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCHF_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Riziko významného poklesu na základě vysokých hodnot RSI a MA, které indikují silnou odporovou sílu. Konvergence RSI směrem nahoru signalizuje slabší tendenci poklesu.",
-  "timestamp": "2026-03-27T16:21:50.534967+00:00",
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu, ale nedostatečný trend v posledních měsících naznačuje nejistotu.",
+  "timestamp": "2026-03-27T17:59:55.678497+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-03-27 (Prediction Lot Sizing + Trade Log Source)
+
+- **Removed Remaining Balance-Based Lot Sizing**
+  - Final trade execution now always uses `lot_size` from the final Gemini prediction
+  - Removed the no-longer-used `trade_risk.py` helper and current-state references to local balance-based sizing
+  - Updated docs to reflect that execution mode now changes only `take_profit`, not the lot source
+
+- **Added Explicit `lot_source` Trade Logging**
+  - `trade_logs/trades.csv` now includes `lot_source`
+  - Current executions write `gemini_prediction` so the origin of volume is visible in audit logs
+  - Legacy CSV files are migrated automatically on next write by inserting `legacy_unknown` for older rows
+
 ## 2026-03-27 (Configurable Balance Cap + Validation Script)
 
 - **Made Strategy Balance Cap Configurable via `.env`**
@@ -29,7 +41,6 @@
   - Extracted trading validation to `trading_validation.py`
   - Extracted trade execution and CSV logging to `trade_execution.py`
   - Extracted trade history reading to `trade_history.py`
-  - Extracted standard lot-size risk logic to `trade_risk.py`
   - Extracted Gemini config loading to `gemini_config.py`
   - Extracted Gemini final-decision helpers to `gemini_decision.py`
 
@@ -41,20 +52,19 @@
 - **Documentation Updated**
   - Updated `TRADING_LOGIC.md` to reflect the post-refactor architecture
   - Added current module responsibilities and shared helper layer overview
-  - Updated lot-size documentation to reference `trade_risk.calculate_lot_size()`
+  - Updated lot-size documentation to reflect prediction-driven execution
 
 - **Fixed Startup Failure in Ollama Service**
   - Resolved inconsistent tabs/spaces indentation in `ollama_service.py`
   - Fixed `TabError` during startup when running `python logika.py`
   - Verified that `logika.py` starts, connects to MT5, and enters the service loops without immediate traceback
 
-## 2026-03-24 (Margin Fallback in Standard Execution Mode)
+## 2026-03-24 (Margin Handling in Standard Execution Mode)
 
-- **Added Margin-Based Fallback to Gemini `lot_size`**
-  - In standard execution mode, the system still calculates `lot_size` locally from account balance
-  - If that calculated size fails pre-trade margin check with `Insufficient margin`, execution now retries with `lot_size` from the final Gemini decision
-  - `take_profit` remains disabled in standard mode; only the volume source changes during fallback
-  - Prevents otherwise valid trades from being skipped solely because the balance-based lot size is too large for current free margin
+- **Standard Mode Margin Validation**
+  - `lot_size` from the final Gemini decision is validated against current free margin before execution
+  - `take_profit` remains disabled in standard mode
+  - Trades with insufficient margin are skipped instead of switching to a separate local balance-based lot formula
 
 ## 2026-03-08 (Code Refactoring - DRY Principle)
 
