@@ -475,7 +475,7 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
                 # Sleep in small intervals to allow graceful shutdown
                 for _ in range(300):  # 5 minutes = 300 seconds
                     if stop_event.is_set():
-						shutdown_mt5()
+                        shutdown_mt5()
                         return
                     time.sleep(1)
                 continue
@@ -509,7 +509,7 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
                 
                 for _ in range(300):
                     if stop_event.is_set():
-						shutdown_mt5()
+                        shutdown_mt5()
                         return
                     time.sleep(1)
                 continue
@@ -573,9 +573,9 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             
             for _ in range(300):
                 if stop_event.is_set():
-					shutdown_mt5()
+                    shutdown_mt5()
                     return
                 time.sleep(1)
     
-	shutdown_mt5()
+    shutdown_mt5()
     print("\n🛑 Ollama Service Loop ukončen")
