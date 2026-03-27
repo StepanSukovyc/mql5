@@ -1,9 +1,9 @@
 {
   "symbol": "CHFZAR_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle svíčkových formací a trendu RSI může dojít k poklesu ceny, ale také je zde silná linie podpory na MA. Riziko však roste kvůli volatilitě trhu.",
-  "timestamp": "2026-03-27T13:53:37.004177+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA trendů je základní tendence cenového pohybu směrem dolů s některými fluktuacemi. Nicméně, pozitivní divergence v RSI signalizuje slabší sílu poklesu.",
+  "timestamp": "2026-03-27T16:44:58.462876+00:00",
   "model": "deepseek-coder-v2"
 }

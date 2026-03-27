@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Rozdíly v RSI a MA ukazují nejistotu, ale svíčkové formace naznačují pokles.",
-  "timestamp": "2026-03-27T14:22:59.945202+00:00",
+  "reasoning": "Riziko je v růstu cen, ale vysoké RSI a MA hodnoty ukazují na potenciál růstu. Nicméně, zhoršení situace ekonomického prostředí a technických indikátorů naznačuje riziko poklesu.",
+  "timestamp": "2026-03-27T17:14:15.069680+00:00",
   "model": "deepseek-coder-v2"
 }

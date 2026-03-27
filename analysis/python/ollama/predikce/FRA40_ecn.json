@@ -1,9 +1,9 @@
 {
   "symbol": "FRA40_ecn",
-  "BUY": 30.0,
+  "BUY": 25.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle svíčkových formací a RSI je trend zeslabující s určitou nadějí na oživení trhu. Nicméně, fundamentalní analýza a historická data podporují přijetí konzervativního postoju.",
-  "timestamp": "2026-03-27T14:34:29.745365+00:00",
+  "HOLD": 25.0,
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nárůst BUY pravděpodobnosti je omezen slabostí v datech.",
+  "timestamp": "2026-03-27T17:26:02.056453+00:00",
   "model": "deepseek-coder-v2"
 }

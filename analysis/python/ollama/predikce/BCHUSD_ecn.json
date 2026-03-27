@@ -1,9 +1,9 @@
 {
   "symbol": "BCHUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a klouzavých průměrů je trend cenného papíru směrem dolů, avšak cenová historie ukazuje několik příznaků divergence, což naznačuje možnou změnu. Doporučuji tedy držet pozici.",
-  "timestamp": "2026-03-27T13:41:38.675747+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Zhoršení trendu, nízké RSI a SMA signalizují pokles. Malý podíl BUY je způsoben pouze nevysokým objemem transakcí.",
+  "timestamp": "2026-03-27T16:33:27.067040+00:00",
   "model": "deepseek-coder-v2"
 }

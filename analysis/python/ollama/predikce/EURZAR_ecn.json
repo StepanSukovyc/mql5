@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují indikátory SELL a HOLD s nízkým potenciálem růstu.",
-  "timestamp": "2026-03-27T14:30:37.673343+00:00",
+  "reasoning": "Riziko je závislé na volatilitě měny a historii cen. Historický pohyb ukazuje tendenci k poklesu, ale nízké hodnoty RSI a MA sugerují možnou rekci.",
+  "timestamp": "2026-03-27T17:22:03.969206+00:00",
   "model": "deepseek-coder-v2"
 }

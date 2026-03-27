@@ -1,9 +1,9 @@
 {
   "symbol": "EURSEK_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Riziko nárůstu je omezeno silnou podporou na MA a stabilitou RSI. Nedostatek signálů pro zvýšení rizika.",
-  "timestamp": "2026-03-27T14:24:53.607846+00:00",
+  "BUY": 40.0,
+  "SELL": 20.0,
+  "HOLD": 40.0,
+  "reasoning": "Podle RSI a klouzavých průměrů ukazuje cena na hraně trendu. Historické hodnoty podporují stabilitu.",
+  "timestamp": "2026-03-27T17:16:11.860539+00:00",
   "model": "deepseek-coder-v2"
 }

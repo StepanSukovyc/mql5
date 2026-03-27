@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.05,
+  "take_profit": 85.50,
+  "reasoning": "USOIL_ecn has a strong buy signal (60%) based on the prediction, with increasing RSI and MA values, indicating a bullish trend. There are no existing open positions for this symbol, ensuring portfolio diversification. Given the account balance, a lot size of 0.05 is a reasonable risk. A take profit of 85.50 offers a realistic profit target considering the current market conditions, swap is negligible."
+}

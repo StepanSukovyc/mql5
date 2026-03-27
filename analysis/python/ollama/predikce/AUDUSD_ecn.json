@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Zvýšení RSI a MA v posledních měsících signalizuje potenciální zesílení trendu. Nicméně, pokles v minulých třech měsících ukazuje na určitou nejistotu.",
-  "timestamp": "2026-03-27T13:37:18.178609+00:00",
+  "reasoning": "Zvýšení RSI a MA ukazují na vzestupnou tendenci. Nicméně, pokles v posledních měsících indikuje určitou nejistotu.",
+  "timestamp": "2026-03-27T16:29:35.138927+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "FANG_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Analýza svíčkových formací naznačuje stabilitu s omezeným potenciálem růstu. RSI a MA hodnoty indikují nejistotu s mírně negativním výhledem.",
-  "timestamp": "2026-03-27T14:32:33.524631+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Podle RSI a MA je trend cenového grafu směrem nahoru, ale index P/E je vysoký což naznačuje přehřátí trhu. Dodatečná analýza svíčkových formací neprokazuje silnou tendenci.",
+  "timestamp": "2026-03-27T17:24:00.452375+00:00",
   "model": "deepseek-coder-v2"
 }

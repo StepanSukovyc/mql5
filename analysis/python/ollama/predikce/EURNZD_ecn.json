@@ -1,9 +1,9 @@
 {
   "symbol": "EURNZD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA trendu je cena očekávána stabilita. Na základě fundamentálních faktorů s ohledem na úroveň inflace a politiky jsou příznaky růstu cen.",
-  "timestamp": "2026-03-27T14:21:06.900920+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažující pohled je na pokles kurzu v důsledku silného růstu eura a oslabování novozélandského dolaru.",
+  "timestamp": "2026-03-27T17:12:16.540879+00:00",
   "model": "deepseek-coder-v2"
 }

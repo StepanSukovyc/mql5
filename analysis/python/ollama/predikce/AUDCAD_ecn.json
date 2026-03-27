@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují indikátory ukazující na pokles ceny vzhledem k minulým pohybům. RSI a MA svědčí o silném tlaku ke snížení.",
-  "timestamp": "2026-03-27T13:26:09.797192+00:00",
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu s trendem. Nárůst cen v posledním období ale podporují pozitivní pohled.",
+  "timestamp": "2026-03-27T16:19:44.816716+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezeny silnou odolou směrem k úrovni 14.000 a výrazným objemem na sedmidenním timeframe. MACD signalizuje slabší signál pro pokles, zatímco RSI se nachází blízko přeplnění.",
-  "timestamp": "2026-03-27T14:51:10.388666+00:00",
+  "reasoning": "Převažují signály pro prodej a nejistota z důvodu volatilního trhu. Nízký stupeň BUY je způsoben tím, že ceny začínají růst, ale RSI ukazuje přeprodanost.",
+  "timestamp": "2026-03-27T17:44:01.534331+00:00",
   "model": "deepseek-coder-v2"
 }

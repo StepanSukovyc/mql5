@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují indikátory prodeje a nízké hodnoty MA sugerují pokračování sestupu.",
-  "timestamp": "2026-03-27T13:45:51.030588+00:00",
+  "reasoning": "Převládajícím signálem je pokles cen pomocí svíčkových formací a RSI ukazuje slabost. Mimo to, MA hodnoty indikují další pokračování trendu dolů.",
+  "timestamp": "2026-03-27T16:37:17.480038+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "EURNOK_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje slabou eura a silnou švédskou korunu. RSI indikuje přeprodanost na krátkodobějších časových úhravlech, zatímco MA signalizuje pokračující trend směrem dolů. Kombinace těchto faktorů podporuje SELL.",
-  "timestamp": "2026-03-27T14:19:12.457237+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Převaha negativních signálů z RSI a MA, s nárustem rizika poklesu ceny.",
+  "timestamp": "2026-03-27T17:10:19.884190+00:00",
   "model": "deepseek-coder-v2"
 }

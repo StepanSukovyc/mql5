@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCAD_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové síly jsou omezeny silnou hladinou odporu na úrovni 1.8600, zatímco MACD divergence naznačuje potenciální pokles.",
-  "timestamp": "2026-03-27T14:38:18.775985+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Převažujícím signálem je pokles RSI a nižší hodnota MA oproti minulým měsícům, což naznačuje pokračující tendenci k poklesu.",
+  "timestamp": "2026-03-27T17:30:17.514862+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "CHINAH_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažující trend je směrem dolů s nárustem volatility. RSI a MA ukazují silné odporové síly, ale také potenciál pro oživení.",
-  "timestamp": "2026-03-27T13:55:37.271713+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Riziko je vyvážené mezi růstem a poklesem. Hodnocení RSI ukazuje slabost trendu, zatímco MA signalizuje stabilitu.",
+  "timestamp": "2026-03-27T16:46:51.546141+00:00",
   "model": "deepseek-coder-v2"
 }

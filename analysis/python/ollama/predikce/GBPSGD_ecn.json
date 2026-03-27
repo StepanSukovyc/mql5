@@ -1,9 +1,9 @@
 {
   "symbol": "GBPSGD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Historické svíčkové formace můžou signalizovat pokračování trendu.",
-  "timestamp": "2026-03-27T14:45:38.228554+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení makroekonomických prognóz a slabá svíčková formační analýza naznačují nejistotu trhu.",
+  "timestamp": "2026-03-27T17:38:05.914649+00:00",
   "model": "deepseek-coder-v2"
 }

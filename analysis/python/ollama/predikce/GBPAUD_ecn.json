@@ -1,9 +1,9 @@
 {
   "symbol": "GBPAUD_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převažují indikátory RSI a MA ukazující trend směrem nahoru, ale cenové svíčky sugerují mírný opakovaný pohyb.",
-  "timestamp": "2026-03-27T14:36:25.326923+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály je omezeno silnou odporovou hladinou RSI a zeslabením MA. Tržní podmínky naznačují pokles.",
+  "timestamp": "2026-03-27T17:28:19.955347+00:00",
   "model": "deepseek-coder-v2"
 }

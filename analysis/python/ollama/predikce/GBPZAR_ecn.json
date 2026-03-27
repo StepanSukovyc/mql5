@@ -1,9 +1,9 @@
 {
   "symbol": "GBPZAR_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové impulsy podle RSI a MA ukazují potenciál růstu, ale divergence mezi cenou a indikátory naznačuje nejistotu.",
-  "timestamp": "2026-03-27T14:49:18.334277+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle svíčkových formací a trendu v RSI je tendence k poklesu, ale MA ukazuje stabilitu. Fondamentální analýza neposkytuje jasné rozhodující faktory.",
+  "timestamp": "2026-03-27T17:42:03.723545+00:00",
   "model": "deepseek-coder-v2"
 }

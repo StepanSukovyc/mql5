@@ -1,9 +1,9 @@
 {
   "symbol": "GBPUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují silnou podporu na určitých úrovních.",
-  "timestamp": "2026-03-27T14:47:28.356636+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují sílu na úrovni 1.3800 až 1.4000.",
+  "timestamp": "2026-03-27T17:40:03.337527+00:00",
   "model": "deepseek-coder-v2"
 }

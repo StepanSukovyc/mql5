@@ -1,9 +1,9 @@
 {
   "symbol": "CHFJPY_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu měny s lehčím trendem poklesu. RSI a MA hodnoty podporují potenciál růstu, ale svíčkové formace signalizují nejistotu.",
-  "timestamp": "2026-03-27T13:51:38.379001+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje silnou měnu JPY, což vede k lepšímu hodnocení CHF. RSI i MA signalizují opravu ceny a tendenci růstu.",
+  "timestamp": "2026-03-27T16:43:02.876027+00:00",
   "model": "deepseek-coder-v2"
 }

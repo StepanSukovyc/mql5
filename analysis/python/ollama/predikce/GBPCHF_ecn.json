@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCHF_ecn",
-  "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Růstové trendy jsou slabší, ale stále pozitivní. RSI ukazuje přetíženost prodejem.",
-  "timestamp": "2026-03-27T14:40:07.251658+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu cen s lehkovážním trendem. RSI a MA hodnoty podporují neistotu.",
+  "timestamp": "2026-03-27T17:32:13.394982+00:00",
   "model": "deepseek-coder-v2"
 }

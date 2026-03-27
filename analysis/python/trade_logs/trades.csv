@@ -140,3 +140,5 @@ timestamp,symbol,action,lot_size,price,success,error_msg
 2026-03-27T15:59:29.611848+00:00,USOIL_ecn,BUY,0.03,98.6,False,Invalid take_profit for BUY: TP (85.5) must be > market price (98.6)
 2026-03-27T15:59:34.622178+00:00,USOIL_ecn,BUY,0.01,98.599,False,Invalid take_profit for BUY: TP (85.5) must be > market price (98.599)
 2026-03-27T15:59:39.425441+00:00,USDCHF_ecn,BUY,0.02,0.0,True,
+2026-03-27T16:40:06.596624+00:00,USOIL_ecn,BUY,0.09,0.0,True,
+2026-03-27T16:59:12.023916+00:00,USOIL_ecn,BUY,0.09,0.0,True,
