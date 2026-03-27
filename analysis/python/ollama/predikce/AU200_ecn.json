@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převaha negativních signálů z RSI a MA ukazuje na poklesový trend, ale některé fundamentální aspekty naznačují stabilitu.",
-  "timestamp": "2026-03-27T04:01:10.566830+00:00",
+  "reasoning": "Zhoršení makroekonomických prognóz a pokles technického analytického indikátoru RSI svědčí o nižším riziku růstu. Vysoká volatilita v poslední době naznačuje nejistotu na trhu.",
+  "timestamp": "2026-03-27T16:17:51.431408+00:00",
   "model": "deepseek-coder-v2"
 }

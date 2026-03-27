@@ -1,9 +1,9 @@
 {
   "symbol": "EURUSD_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle fundamentálních faktorů je situace neutrální. Technické indikátory RSI a MA ukazují na pokles cen, ale trend v těchto datech není jasný.",
-  "timestamp": "2026-03-27T04:56:20.348926+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme několik signálů. RSI je v překoupené oblasti (RSIn(14) = 70), což naznačuje možný pokles. Nicméně, SMA 20 a 50 se pohybují pozitivně, což může být podklad pro nejistotu.",
+  "timestamp": "2026-03-27T14:28:44.022063+00:00",
   "model": "deepseek-coder-v2"
 }

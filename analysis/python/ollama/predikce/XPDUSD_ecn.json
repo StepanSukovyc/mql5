@@ -1,9 +1,9 @@
 {
   "symbol": "XPDUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko ztráty je vyšší v důsledku silného pohybu cenami. Svíčkový graf ukazuje složitou strukturu s nedávným poklesem a nynější stabilitou, což naznačuje nejistotu.",
-  "timestamp": "2026-03-27T03:44:02.632553+00:00",
+  "BUY": 0.0,
+  "SELL": 100.0,
+  "HOLD": 0.0,
+  "reasoning": "Vysoké hodnoty RSI a MA indikují pokles ceny. Nedostatek signálů pro nákup.",
+  "timestamp": "2026-03-27T16:04:41.574671+00:00",
   "model": "deepseek-coder-v2"
 }

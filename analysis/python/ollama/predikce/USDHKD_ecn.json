@@ -1,9 +1,9 @@
 {
   "symbol": "USDHKD_ecn",
   "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Při pohledu na svíčkové formace a RSI indikátor vidíme několik potenciálních signálů pro růst. Nicméně, MA ukazuje střih dolů což může být znamením silného pohybu ceny dolů.",
-  "timestamp": "2026-03-27T05:54:38.346944+00:00",
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Růst cen je podporován zvýšením poptávky a stabilitou ekonomického prostředí. RSI ukazuje silnou tendenci na růst, ale také některé indikace vyčerpání impulsů.",
+  "timestamp": "2026-03-27T15:30:55.620996+00:00",
   "model": "deepseek-coder-v2"
 }

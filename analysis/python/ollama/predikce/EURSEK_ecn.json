@@ -1,9 +1,9 @@
 {
   "symbol": "EURSEK_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršující se makroekonomické podmínky a slabá svíčková formační analýza. RSI i MA ukazují směr pohybu ceny.",
-  "timestamp": "2026-03-27T04:52:50.072410+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Riziko nárůstu je omezeno silnou podporou na MA a stabilitou RSI. Nedostatek signálů pro zvýšení rizika.",
+  "timestamp": "2026-03-27T14:24:53.607846+00:00",
   "model": "deepseek-coder-v2"
 }

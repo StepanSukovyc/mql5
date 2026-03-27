@@ -1,9 +1,9 @@
 {
   "symbol": "EURZAR_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Rozhodujícím faktorem je pozitivní trend RSI a MA, které podporují BUY. Sell signály jsou oslabené vlivem silných supportů.",
-  "timestamp": "2026-03-27T04:58:07.020286+00:00",
+  "reasoning": "Převažují indikátory SELL a HOLD s nízkým potenciálem růstu.",
+  "timestamp": "2026-03-27T14:30:37.673343+00:00",
   "model": "deepseek-coder-v2"
 }

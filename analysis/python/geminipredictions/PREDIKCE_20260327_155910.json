@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 85.50,
+  "reasoning": "Účet je v mírné ztrátě. Doporučuji otevírat nové pozice s nízkým lot_size. Symbol USOIL_ecn vykazuje dle predikce silné BUY signály (60%). Nemám otevřenou pozici na USOIL_ecn, což vede k diverzifikaci portfolia. Vzhledem ke stavu účtu a risk managementu volím lot 0.02. Take profit je nastaven konzervativně na 85.50 USD, aby byla reálná šance na zisk v horizontu několika dní a aby se pokryly transakční poplatky."
+}

@@ -1,9 +1,9 @@
 {
   "symbol": "EURCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Vysoké hodnoty RSI a pokles MA sugerují obnovení růstu. Nicméně, cenový model svíček indikuje silnou odolnost proti poklesu.",
-  "timestamp": "2026-03-27T04:35:16.414999+00:00",
+  "BUY": 40.0,
+  "SELL": 50.0,
+  "HOLD": 10.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a pokles RSI indikují silnou pravděpodobnost poklesu ceny.",
+  "timestamp": "2026-03-27T14:05:48.131530+00:00",
   "model": "deepseek-coder-v2"
 }

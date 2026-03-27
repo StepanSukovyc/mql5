@@ -1,9 +1,9 @@
 {
   "symbol": "EURCHF_ecn",
   "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Vysoká volatilita s různými indikátory (RSI a MA) signalizující silnou pohyblivost cen. Překrývání RSI s MA naznačuje pokračující trend, ale nízké hodnoty v měsíčních datech indikují opravu.",
-  "timestamp": "2026-03-27T04:37:02.741430+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace ukazují návaly zeslabení síly poklesu.",
+  "timestamp": "2026-03-27T14:07:42.095009+00:00",
   "model": "deepseek-coder-v2"
 }

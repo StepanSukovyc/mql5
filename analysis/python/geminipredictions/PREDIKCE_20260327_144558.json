@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDCAD_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 1.365,
+  "reasoning": "USDCAD není aktuálně v portfoliu. Na 4H a denním grafu je RSI p\u0159ekoupen\u00e9 (RSI > 70), což nazna\u010duje mo\u017enost korekce. Na druhou stranu, t\u00fddenn\u00ed RSI je neutr\u00e1ln\u00ed (55.62) a cena se dr\u017e\u00ed nad t\u00fddenn\u00edm MA. M\u011bs\u00ed\u010dn\u00ed RSI je tak\u00e9 neutr\u00e1ln\u00ed a cena je pod m\u011bs\u00ed\u010dn\u00edm MA. Posledn\u00ed hodinov\u00e1 sv\u00ed\u010dka nazna\u010duje uptrend, ale celkov\u00fd kontext signalizuje potenci\u00e1ln\u00ed korekci.  Riziko je omezené vzhledem k nastavené velikosti lotu a zohledňuje spread, transakční náklady a swingový styl obchodování. Take profit je nastavený realisticky na základě analýzy, kde by se cena mohla pohybovat v průběhu několika dní a přinést tak uspokojivý zisk."
+}

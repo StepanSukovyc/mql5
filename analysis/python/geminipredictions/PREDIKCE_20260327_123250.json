@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "NZDJPY_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 86.80,
+  "reasoning": "Aktuální stav účtu: margin_free = 789.14. NZDJPY_ecn nemá otevřenou pozici. Predikce pro NZDJPY_ecn je SELL (75%). I kdyz jsou rizika vysoka, technicka analyza ukazuje na klesajici trend. Nastavuji maly lot_size (0.01) a take_profit 86.80 kvuli vysokymu riziku. Aktuální cena je cca 87.47. Transakční náklady budou 0.10 USD. Cílem je generovat průběžné zisky na denní bázi, i menšími obchody."
+}

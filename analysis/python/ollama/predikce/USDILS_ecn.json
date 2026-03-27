@@ -1,9 +1,9 @@
 {
   "symbol": "USDILS_ecn",
   "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence růstu, ale zároveň nízké hodnoty RSI indikují možnost zpomalení či reverzi. Kombinace těchto faktorů doporučuje mírný buy s nejistotou.",
-  "timestamp": "2026-03-27T05:58:31.561694+00:00",
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s podporou RSI a MA signalizují potenciál pro růst. Nicméně, pokles v minulosti může být zdrojem nejistoty.",
+  "timestamp": "2026-03-27T15:34:46.932751+00:00",
   "model": "deepseek-coder-v2"
 }

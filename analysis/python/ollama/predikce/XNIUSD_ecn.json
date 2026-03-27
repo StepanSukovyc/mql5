@@ -1,9 +1,9 @@
 {
   "symbol": "XNIUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje slabost v cenovém pohybu s několika svíčkovými formacemi naznačujícími další pokles. RSI a MA hodnoty podporují tendenci k poklesu, zatímco nedávná fundamentální analýza nevykazuje pozitivní trendy.",
-  "timestamp": "2026-03-27T03:40:30.958202+00:00",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět trend směřující dolů, ale svíčkové formace naznačují silnou podporu. Nedostatek jasných signálů ze světa fundamenta mě řídí k nejistotě.",
+  "timestamp": "2026-03-27T16:00:59.428895+00:00",
   "model": "deepseek-coder-v2"
 }

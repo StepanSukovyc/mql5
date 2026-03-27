@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové tendence jsou slabší, ale je zde silný trend směrem nahoru. Hodnocení RSI a MA ukazuje stabilitu s určitými nebezpečími poklesu.",
-  "timestamp": "2026-03-27T05:24:32.369159+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je zřejmé, že cena má tendenci se odrážet od horní hranice MA, což naznačuje silnou odolnost. Nicméně, nedostatek jasných signálů pro nákup a přítomnost diverzifikovaných rizik může vést k nejistotě.",
+  "timestamp": "2026-03-27T14:58:36.676821+00:00",
   "model": "deepseek-coder-v2"
 }

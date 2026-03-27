@@ -1,9 +1,9 @@
 {
   "symbol": "CHFHUF_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zohledňuji svíčkové formace s potenciálem růstu, ale také vysokou volatilitou a nedostatečným RSI signalizujícím silnou tendenci.",
-  "timestamp": "2026-03-27T04:21:33.168980+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI a MA indikátory ukazují slabost cen, což naznačuje nejistotu.",
+  "timestamp": "2026-03-27T13:49:41.672785+00:00",
   "model": "deepseek-coder-v2"
 }

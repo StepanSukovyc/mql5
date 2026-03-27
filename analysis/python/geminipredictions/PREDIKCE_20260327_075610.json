@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "VIX_ecn",
+  "action": "BUY",
+  "lot_size": 0.01,
+  "take_profit": 23.0,
+  "reasoning": "VIX_ecn je zajímavý, protože nemáme žádnou otevřenou pozici v tomto symbolu, čímž podporujeme diverzifikaci.  Denní a měsíční RSI jsou nad 60, ale týdenní RSI je vysoké na 76, což naznačuje potenciální podmínky překoupenosti. Cena je nad denními a 4H klouzavými průměry, což naznačuje krátkodobý býčí trend. Doporučuji nákup s lot size 0.01 a Take Profit na úrovni 23.0 USD. To by měl být konzervativní cíl, který zohledňuje potenciální volatilitu. Riziko odpovídá 0.10 USD transakčního poplatku. Dává ekonomický smysl generovat zisk na denní bázi při současné marži. "
+}

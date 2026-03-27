@@ -1,9 +1,9 @@
 {
   "symbol": "JP225_ecn",
   "BUY": 30.0,
-  "SELL": 40.0,
-  "HOLD": 30.0,
-  "reasoning": "Zohledňuji růstové potenciály s ohledem na pozitivní světové trendy a stabilitu japonské ekonomiky. Nicméně přítomnost vysokých hodnot RSI v období horní divergence signalizuje možnou přehřátost trhu, což může být indikací konzervativního postoje.",
-  "timestamp": "2026-03-27T05:21:00.539343+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle RSI a klouzavých průměrů je trend cenového grafu nejistý. Síla pozitivních pohybů je slabá, což naznačuje, že cena může dál kolísat.",
+  "timestamp": "2026-03-27T14:54:53.148657+00:00",
   "model": "deepseek-coder-v2"
 }

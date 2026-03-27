@@ -98,3 +98,45 @@ timestamp,symbol,action,lot_size,price,success,error_msg
 2026-03-25T17:10:19.919720+00:00,USDZAR_ecn,BUY,0.06,0.0,True,
 2026-03-25T19:58:45.609160+00:00,XPDUSD_ecn,SELL,0.01,0.0,True,
 2026-03-26T08:40:32.418188+00:00,USDCAD_ecn,BUY,0.07,0.0,True,
+2026-03-27T07:39:04.774149+00:00,NOKSEK_ecn,BUY,0.07,0.0,True,
+2026-03-27T07:56:10.623083+00:00,VIX_ecn,BUY,0.07,0.0,True,
+2026-03-27T07:56:15.215876+00:00,NOKSEK_ecn,BUY,0.07,0.0,True,
+2026-03-27T08:57:57.063713+00:00,USOIL_ecn,BUY,0.02,96.713,False,Invalid take_profit for BUY: TP (82.5) must be > market price (96.713)
+2026-03-27T08:58:01.776310+00:00,USOIL_ecn,BUY,0.05,96.733,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.733)
+2026-03-27T08:58:06.074190+00:00,USOIL_ecn,BUY,0.02,96.743,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.743)
+2026-03-27T08:58:11.398365+00:00,USOIL_ecn,BUY,0.02,96.733,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.733)
+2026-03-27T08:58:16.510857+00:00,USOIL_ecn,BUY,0.01,96.783,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.783)
+2026-03-27T08:58:22.048797+00:00,USOIL_ecn,BUY,0.02,96.793,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.793)
+2026-03-27T08:58:26.654893+00:00,USOIL_ecn,BUY,0.02,96.823,False,Invalid take_profit for BUY: TP (84.5) must be > market price (96.823)
+2026-03-27T08:58:32.194585+00:00,USOIL_ecn,BUY,0.02,96.823,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.823)
+2026-03-27T08:58:36.936723+00:00,USOIL_ecn,BUY,0.02,96.843,False,Invalid take_profit for BUY: TP (84.5) must be > market price (96.843)
+2026-03-27T08:58:42.211406+00:00,USOIL_ecn,BUY,0.05,96.833,False,Invalid take_profit for BUY: TP (88.5) must be > market price (96.833)
+2026-03-27T08:58:46.949814+00:00,USOIL_ecn,BUY,0.02,96.863,False,Invalid take_profit for BUY: TP (88.5) must be > market price (96.863)
+2026-03-27T08:58:52.103907+00:00,USOIL_ecn,BUY,0.05,96.883,False,Invalid take_profit for BUY: TP (84.5) must be > market price (96.883)
+2026-03-27T08:58:56.366244+00:00,USOIL_ecn,BUY,0.05,96.843,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.843)
+2026-03-27T08:59:01.632699+00:00,USOIL_ecn,BUY,0.02,96.813,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.813)
+2026-03-27T08:59:06.456476+00:00,USOIL_ecn,BUY,0.02,96.813,False,Invalid take_profit for BUY: TP (88.5) must be > market price (96.813)
+2026-03-27T08:59:11.161473+00:00,USOIL_ecn,BUY,0.01,96.813,False,Invalid take_profit for BUY: TP (84.5) must be > market price (96.813)
+2026-03-27T08:59:15.930132+00:00,USOIL_ecn,BUY,0.02,96.843,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.843)
+2026-03-27T08:59:20.333734+00:00,USOIL_ecn,BUY,0.05,96.813,False,Invalid take_profit for BUY: TP (84.5) must be > market price (96.813)
+2026-03-27T08:59:25.255992+00:00,USOIL_ecn,BUY,0.02,96.813,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.813)
+2026-03-27T08:59:30.454032+00:00,USOIL_ecn,BUY,0.01,96.783,False,Invalid take_profit for BUY: TP (84.5) must be > market price (96.783)
+2026-03-27T08:59:35.053350+00:00,USOIL_ecn,BUY,0.01,96.763,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.763)
+2026-03-27T08:59:41.300611+00:00,USOIL_ecn,BUY,0.02,96.753,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.753)
+2026-03-27T08:59:46.320252+00:00,USOIL_ecn,BUY,0.02,96.773,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.773)
+2026-03-27T08:59:50.802233+00:00,USOIL_ecn,BUY,0.05,96.773,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.773)
+2026-03-27T08:59:56.046634+00:00,USOIL_ecn,BUY,0.04,96.753,False,Invalid take_profit for BUY: TP (85.5) must be > market price (96.753)
+2026-03-27T09:00:00.802721+00:00,USOIL_ecn,BUY,0.02,96.763,False,Invalid take_profit for BUY: TP (84.5) must be > market price (96.763)
+2026-03-27T09:07:36.486118+00:00,BTCUSD_ecn,SELL,0.01,0.0,True,
+2026-03-27T12:32:50.803291+00:00,NZDJPY_ecn,SELL,0.08,0.0,True,
+2026-03-27T12:59:57.390223+00:00,GBPCHF_ecn,SELL,0.08,0.0,True,
+2026-03-27T13:00:02.991392+00:00,CHFZAR_ecn,BUY,0.01,0.0,True,
+2026-03-27T13:14:24.613099+00:00,USDNOK_ecn,SELL,0.08,0.0,True,
+2026-03-27T14:45:59.103887+00:00,USDCAD_ecn,BUY,0.09,0.0,True,
+2026-03-27T15:59:10.450302+00:00,USOIL_ecn,BUY,0.02,98.64,False,Invalid take_profit for BUY: TP (85.5) must be > market price (98.64)
+2026-03-27T15:59:15.333206+00:00,USOIL_ecn,BUY,0.08,98.621,False,Invalid take_profit for BUY: TP (85.5) must be > market price (98.621)
+2026-03-27T15:59:19.947928+00:00,USOIL_ecn,BUY,0.08,98.619,False,Invalid take_profit for BUY: TP (85.5) must be > market price (98.619)
+2026-03-27T15:59:24.350009+00:00,USOIL_ecn,BUY,0.05,98.62,False,Invalid take_profit for BUY: TP (84.5) must be > market price (98.62)
+2026-03-27T15:59:29.611848+00:00,USOIL_ecn,BUY,0.03,98.6,False,Invalid take_profit for BUY: TP (85.5) must be > market price (98.6)
+2026-03-27T15:59:34.622178+00:00,USOIL_ecn,BUY,0.01,98.599,False,Invalid take_profit for BUY: TP (85.5) must be > market price (98.599)
+2026-03-27T15:59:39.425441+00:00,USDCHF_ecn,BUY,0.02,0.0,True,

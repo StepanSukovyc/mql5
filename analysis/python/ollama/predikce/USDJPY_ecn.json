@@ -1,9 +1,9 @@
 {
   "symbol": "USDJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na grafy RSI a MA lze vidět signály pro pokles ceny. Nicméně, zhoršení finanční situace Japonska může podporovat americký dolar.",
-  "timestamp": "2026-03-27T06:00:42.633042+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických prognóz pro japonský trh, ale zároveň silné suporty na úrovni RSI a MA sugerují potenciál růstu.",
+  "timestamp": "2026-03-27T15:36:42.149191+00:00",
   "model": "deepseek-coder-v2"
 }

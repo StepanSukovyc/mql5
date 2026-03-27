@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 85.50,
+  "reasoning": "Dostupné predikce pro USOIL_ecn ukazují, že má poměrně silný signál k nákupu (BUY: 50%). Týdenní RSI je sice překoupené, což naznačuje možný pullback, ale denní RSI a cena nad MA potvrzují rostoucí trend. Navíc, vzhledem k mé diverzifikační strategii, USOIL_ecn není aktuálně zastoupen v mých otevřených pozicích, což jej činí atraktivnějším kandidátem. Lot_size 0.02 se zdá být rozumný s ohledem na volnou marži a celkový risk management. Poplatek za transakci bude 0.2 USD. Take Profit je nastaven na 85.50 USD, což je realistický cíl s potenciálem pro zisk s ohledem na současný trend a volatilitu, odečítá se poplatek. Swing obchod by mohl těžit z tohoto nárůstu."
+}

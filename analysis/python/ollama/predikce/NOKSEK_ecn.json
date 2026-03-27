@@ -1,9 +1,9 @@
 {
   "symbol": "NOKSEK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezené vzhledem k volatilitě a historickým trendům. RSI ukazuje překoupenost s možnými signály pro zpomalení růstu. Doporučuji držet pozici, dokud trhy neprozkoumají nové směry.",
-  "timestamp": "2026-03-27T05:26:19.458142+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Základní analýza ukazuje stabilitu ceny a růst MA, ale RSI indikuje přeuiverzivní trh. Současně je důležité vzít v úvahu kritické hladiny podpory/odporu.",
+  "timestamp": "2026-03-27T15:00:28.561425+00:00",
   "model": "deepseek-coder-v2"
 }

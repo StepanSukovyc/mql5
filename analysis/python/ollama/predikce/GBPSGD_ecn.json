@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "RSI ukazuje přeuiverzi s možností retracementu, ale SMA signalizuje pokračující trend. Kombinace svíčkových formací a RSI sugeruje nejistotu.",
-  "timestamp": "2026-03-27T05:12:09.542713+00:00",
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Historické svíčkové formace můžou signalizovat pokračování trendu.",
+  "timestamp": "2026-03-27T14:45:38.228554+00:00",
   "model": "deepseek-coder-v2"
 }

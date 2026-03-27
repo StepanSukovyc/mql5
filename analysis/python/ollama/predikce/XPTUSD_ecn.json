@@ -1,9 +1,9 @@
 {
   "symbol": "XPTUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulsy jsou slabší s každým měsícem, ale stále je zde nějaký podpora. RSI a MA ukazují směr růstu.",
-  "timestamp": "2026-03-27T03:45:48.375905+00:00",
+  "BUY": 0.0,
+  "SELL": 100.0,
+  "HOLD": 0.0,
+  "reasoning": "Vysoké hodnoty RSI a pokles MA ukazují na silnou tendenci poklesu.",
+  "timestamp": "2026-03-27T16:06:30.996955+00:00",
   "model": "deepseek-coder-v2"
 }

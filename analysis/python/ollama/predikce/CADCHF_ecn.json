@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové trendy jsou slabší, ale stále pozitivní. RSI a MA ukazují stabilitu.",
-  "timestamp": "2026-03-27T04:18:10.825474+00:00",
+  "reasoning": "Převažují indikátory prodeje a nízké hodnoty MA sugerují pokračování sestupu.",
+  "timestamp": "2026-03-27T13:45:51.030588+00:00",
   "model": "deepseek-coder-v2"
 }

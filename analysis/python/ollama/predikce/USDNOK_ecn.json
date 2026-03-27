@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu s růstovým potenciálem. RSI a MA hodnoty podporují pozitivní pohyb.",
-  "timestamp": "2026-03-27T06:05:27.977836+00:00",
+  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale zhoršuje se volatilita. Svíčkové formace naznačují nejistotu.",
+  "timestamp": "2026-03-27T15:40:32.613301+00:00",
   "model": "deepseek-coder-v2"
 }

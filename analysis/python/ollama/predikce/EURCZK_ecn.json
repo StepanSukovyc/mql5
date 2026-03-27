@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové tendence jsou slabší, sílí tlak na spad. RSI a MA dávají směr, ale stochastický oscilátor ukazuje přeplněnost trhu.",
-  "timestamp": "2026-03-27T04:38:47.646907+00:00",
+  "reasoning": "Růstové tlaky jsou slabší než poklesové, ale stále je potřeba monitorovat další indikátory a trh.",
+  "timestamp": "2026-03-27T14:09:35.751441+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -11,8 +11,8 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
    - Pokud ne → stáhne data z MT5 + získá nové predikce od Gemini AI
    - Pro každý symbol se před dotazem na Gemini kontroluje `SERVICE_DEST_FOLDER/ollama/predikce/{symbol}.json`
-   - Pokud je `timestamp` validní a soubor není starší než 1 hodina, použije se Ollama predikce
-   - Pokud Ollama predikce chybí / je nevalidní / je starší než 1h, provede se fallback na `ask_gemini_prediction`
+   - Pokud je `timestamp` validní a soubor není starší než limit `OLLAMA_PREDICTION_MAX_AGE_MINUTES` z `.env` (default 120 minut), použije se Ollama predikce
+   - Pokud Ollama predikce chybí / je nevalidní / je starší než nastavený limit, provede se fallback na `ask_gemini_prediction`
 4. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
 5. **Kontroluje kritických hodin (znovu)** - pokud je trading signal v 23:00-23:30, zahodí ho a čeká
 6. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi

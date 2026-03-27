@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Zhoršení sentimentu a pokles RSI signalizují období nejistoty. BUY omezeny nižším objemem transakcí.",
-  "timestamp": "2026-03-27T06:19:44.938434+00:00",
+  "reasoning": "Riziko trhu je vyšší, ale síla trendu (MA a RSI) naznačuje pokračující stabilitu. Křivka VIX ukazuje určitou neutrálnost.",
+  "timestamp": "2026-03-27T15:51:50.106511+00:00",
   "model": "deepseek-coder-v2"
 }

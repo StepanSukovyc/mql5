@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje slabou finanční situaci země a negativní trendy. Svíčkové formace a RSI indikují další pokles.",
-  "timestamp": "2026-03-27T06:10:11.697417+00:00",
+  "reasoning": "Zhoršení makroekonomických prognóz a nárůst volatility RSI indikuje nejistotu na trhu.",
+  "timestamp": "2026-03-27T15:44:19.693576+00:00",
   "model": "deepseek-coder-v2"
 }

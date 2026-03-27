@@ -1,9 +1,9 @@
 {
   "symbol": "EURHUF_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Riziko je umístěno v oblasti nejistoty s ohledem na volatilitu trhu a nedostatečné diverzifikace.",
-  "timestamp": "2026-03-27T04:42:16.428792+00:00",
+  "reasoning": "Základní analýza ukazuje slabost v ekonomice maďarského forintu, ale svíčkové formace a RSI indikují nadějné signály pro obchodování. Kompromis mezi zachováním pozice a případnou ztrátou z prodloužení pozice.",
+  "timestamp": "2026-03-27T14:13:27.503099+00:00",
   "model": "deepseek-coder-v2"
 }

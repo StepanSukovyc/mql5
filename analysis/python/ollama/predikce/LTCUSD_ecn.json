@@ -1,9 +1,9 @@
 {
   "symbol": "LTCUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle svíčkových formací a RSI je trend cenového grafu směrem dolů s určitou fluktuací. Historická data ukazují silnou odolnost proti růstu, ale nízké hodnoty MA sugerují slabší signály pro nákup.",
-  "timestamp": "2026-03-27T05:22:47.403750+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení technických indikátorů a pokles RSI signalizují silnou tendenci pokračovat v ústupu.",
+  "timestamp": "2026-03-27T14:56:42.748403+00:00",
   "model": "deepseek-coder-v2"
 }

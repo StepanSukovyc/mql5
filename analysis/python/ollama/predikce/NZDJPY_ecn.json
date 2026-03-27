@@ -1,9 +1,9 @@
 {
   "symbol": "NZDJPY_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko růstu je omezeno nižším indexem RSI a klesající MA, což naznačuje nejistotu trhu.",
-  "timestamp": "2026-03-27T05:31:33.301640+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Převažují indikátory poklesu s přítomností stochastického rsi pod 50 a klouzavým průměrem MA pod trendem. Nízká volatilita svíčkových grafů.",
+  "timestamp": "2026-03-27T15:06:01.479626+00:00",
   "model": "deepseek-coder-v2"
 }

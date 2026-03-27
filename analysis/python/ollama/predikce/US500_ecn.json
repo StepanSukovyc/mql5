@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené v důsledku nižších hodnot RSI a MA, které signalizují slabost trendu. Nicméně, zvýšení volatility s ohledem na fundamentální analýzu naznačuje určitou stabilitu.",
-  "timestamp": "2026-03-27T05:47:29.269550+00:00",
+  "reasoning": "Riziko je vyšší kvůli silnému pohybu směrem dolů v RSI a poklesu MA. Nicméně, základní pozitivní trend podle fundamentální analýzy naznačuje potenciál pro obrat.",
+  "timestamp": "2026-03-27T15:23:13.767367+00:00",
   "model": "deepseek-coder-v2"
 }

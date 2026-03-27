@@ -151,12 +151,61 @@ def _parse_iso_datetime(value: str) -> Optional[datetime]:
 		return None
 
 
+def _load_dotenv_value(key: str) -> Optional[str]:
+	"""Load a specific value from .env files to allow runtime config changes."""
+	base_dir = Path(__file__).resolve().parent
+	env_paths = (
+		base_dir / ".env",
+		base_dir.parent / ".env",
+		Path.cwd() / ".env",
+	)
+
+	for env_path in env_paths:
+		if not env_path.exists():
+			continue
+
+		for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+			line = raw_line.strip()
+			if not line or line.startswith("#") or "=" not in line:
+				continue
+			loaded_key, value = line.split("=", 1)
+			loaded_key = loaded_key.strip()
+			value = value.strip().strip('"').strip("'")
+			if loaded_key == key:
+				return value
+
+	return None
+
+
+def get_ollama_prediction_max_age() -> timedelta:
+	"""Read Ollama prediction max age from .env on demand."""
+	default_minutes = 120
+	configured_value = _load_dotenv_value("OLLAMA_PREDICTION_MAX_AGE_MINUTES")
+	if configured_value is None:
+		return timedelta(minutes=default_minutes)
+
+	try:
+		minutes = int(configured_value)
+		if minutes <= 0:
+			raise ValueError
+		return timedelta(minutes=minutes)
+	except ValueError:
+		print(
+			f"⚠️  Nevalidni OLLAMA_PREDICTION_MAX_AGE_MINUTES='{configured_value}', "
+			f"pouzivam {default_minutes} min"
+		)
+		return timedelta(minutes=default_minutes)
+
+
 def load_recent_ollama_prediction(
 	ollama_predictions_folder: Path,
 	symbol: str,
-	max_age: timedelta = timedelta(hours=1),
+	max_age: Optional[timedelta] = None,
 ) -> Optional[Dict[str, object]]:
 	"""Load Ollama prediction for symbol when timestamp is not older than max_age."""
+	if max_age is None:
+		max_age = get_ollama_prediction_max_age()
+
 	prediction, _ = load_recent_ollama_prediction_with_reason(
 		ollama_predictions_folder=ollama_predictions_folder,
 		symbol=symbol,
@@ -168,9 +217,12 @@ def load_recent_ollama_prediction(
 def load_recent_ollama_prediction_with_reason(
 	ollama_predictions_folder: Path,
 	symbol: str,
-	max_age: timedelta = timedelta(hours=1),
+	max_age: Optional[timedelta] = None,
 ) -> tuple[Optional[Dict[str, object]], str]:
 	"""Load recent Ollama prediction and return decision reason for diagnostics."""
+	if max_age is None:
+		max_age = get_ollama_prediction_max_age()
+
 	prediction_file = ollama_predictions_folder / f"{symbol}.json"
 	if not prediction_file.exists():
 		return None, "soubor neexistuje"
@@ -192,9 +244,10 @@ def load_recent_ollama_prediction_with_reason(
 	age = now_utc - parsed_ts
 	if age < timedelta(0) or age > max_age:
 		age_minutes = int(age.total_seconds() // 60)
+		max_age_minutes = int(max_age.total_seconds() // 60)
 		if age < timedelta(0):
 			return None, f"timestamp je v budoucnosti ({age_minutes} min)"
-		return None, f"timestamp je starsi nez 1h ({age_minutes} min)"
+		return None, f"timestamp je starsi nez limit {max_age_minutes} min ({age_minutes} min)"
 
 	if not all(key in prediction for key in ("BUY", "SELL", "HOLD", "reasoning")):
 		return None, "chybi BUY/SELL/HOLD/reasoning"
@@ -316,10 +369,13 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 		try:
 			print(f"\n📈 Processing {symbol}...")
 
-			# Prefer prepared Ollama prediction when not older than one hour.
+			# Prefer prepared Ollama prediction when not older than configured limit.
+			ollama_prediction_max_age = get_ollama_prediction_max_age()
+			ollama_prediction_max_age_minutes = int(ollama_prediction_max_age.total_seconds() // 60)
 			recent_ollama, ollama_reason = load_recent_ollama_prediction_with_reason(
 				ollama_predictions_folder,
 				symbol,
+				max_age=ollama_prediction_max_age,
 			)
 			if recent_ollama is not None:
 				prediction_file = predictions_folder / f"{symbol}.json"
@@ -327,7 +383,10 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 					json.dumps(recent_ollama, ensure_ascii=False, indent=2),
 					encoding="utf-8",
 				)
-				print(f"  ♻️  Použita Ollama predikce (<= 1h): {prediction_file.name}")
+				print(
+					f"  ♻️  Použita Ollama predikce (<= {ollama_prediction_max_age_minutes} min): "
+					f"{prediction_file.name}"
+				)
 				print(f"  ℹ️  Duvod: {ollama_reason}")
 
 				archive_file = source_archive_folder / json_file.name

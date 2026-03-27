@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.01,
+  "take_profit": 85.50,
+  "reasoning": "Pořadí obchodu #45 spadá do plně řízeného obchodu Gemini. USOIL_ecn nebyl dosud obchodován, takže podporuje diverzifikaci. Technická analýza naznačuje smíšené signály, ale s preferencí pro BUY. Týdenní RSI je sice překoupené (79.58), což naznačuje potenciální pullback, ale denní RSI (64.49) ukazuje na pokračující býčí momentum. Aktuální cena je nad denním a 4H MA, což indikuje pozitivní trend. Poslední denní svíčka je býčí. Navrhovaný take_profit je realistický a ziskový po odečtení poplatků (0.10 USD za 0.01 lot). Aktuální margin free umožňuje otevření pozice o velikosti 0.01 lot. Chceme průběžně generovat zisky na denní bázi. A z dlouhodobého hlediska předpokládám další růst ceny ropy díky omezené nabídce na trhu."
+}

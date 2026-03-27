@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 85.50,
+  "reasoning": "Analyzoval jsem dostupné predikce a zohlednil fakt, že se jedná o obchod řízený Gemini. USOIL_ecn se jeví jako vhodný kandidát pro BUY. I když weekly RSI indikuje p\u0159ekoupenost (79.58), denn\u00ed RSI (64.49) signalizuje pokra\u010duj\u00edc\u00ed b\u00fd\u010d\u00ed momentum. Aktu\u00e1ln\u00ed cena je nad denn\u00edm a 4H MA, což posiluje pozitivn\u00ed trend. Z\u00e1rove\u0148, v m\u00e9m portfoliu tento symbol chybi, tak\u017ee je dodr\u017een princip diverzifikace. Take_profit 85.50 je dle m\u00e9ho n\u00e1zoru realistick\u00e1 \u00farove\u0148 s ohledem na aktu\u00e1ln\u00ed volatilitu a trend. Lot size 0.02 je konzervativn\u00ed s ohledem na aktu\u00e1ln\u00ed margin free (661.1). Transak\u010dn\u00ed poplatek bude minim\u00e1ln\u00ed (0.2 USD), a obchod m\u00e1 potenci\u00e1l pro denni zisk. "
+}

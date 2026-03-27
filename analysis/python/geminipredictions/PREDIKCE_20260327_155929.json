@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.03,
+  "take_profit": 85.50,
+  "reasoning": "Na základě dostupných predikcí, USOIL_ecn vykazuje silný býčí signál (BUY: 60%, SELL: 20%, HOLD: 20%). Aktuálně nemám otevřenou pozici v tomto symbolu, což je v souladu s požadavkem na diverzifikaci. Predikce zdůrazňuje zvýšení RSI a MA hodnot, což signalizuje silnou pozici a nedostatek signálů pro SELL. Zohledňuji i transakční náklady. Velikost lotu 0.03 je zvolena s ohledem na volnou marži (821.0 USD) a přijatelnou míru rizika. Take_profit 85.50 je realistický cíl, který zohledňuje potenciální růst a zároveň dává obchodu ekonomický smysl po odečtení poplatků."
+}

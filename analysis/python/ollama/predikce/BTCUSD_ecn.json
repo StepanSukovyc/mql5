@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení technických indikátorů RSI a pokles MA hodnot signalizuje potenciální zeslabení trendu. Nicméně, fundamentální analýza naznačuje stabilitu s trvalým růstem.",
-  "timestamp": "2026-03-27T04:16:30.121369+00:00",
+  "reasoning": "Zhoršení technických indikátorů RSI a pokles MA signalizují silnou změnu trendu. Nicméně, fundamentální analýza naznačuje stabilitu s dalšími faktory ukazující na růst.",
+  "timestamp": "2026-03-27T13:43:45.767814+00:00",
   "model": "deepseek-coder-v2"
 }

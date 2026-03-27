@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.05,
+  "take_profit": 85.50,
+  "reasoning": "USOIL_ecn shows mixed signals, but the overall trend seems bullish. The weekly RSI is overbought, suggesting a possible pullback, but the daily RSI indicates continued upward momentum. The price is currently above daily and 4H MA, which indicates a positive trend. As I am a swing trader looking for daily profits I will enter with a smaller lot size than I could technically afford, to account for the current volatility and a possible short term pullback."
+}

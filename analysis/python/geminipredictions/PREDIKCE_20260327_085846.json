@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 88.50,
+  "reasoning": "Vybral jsem USOIL_ecn, protože predikce naznačuje BUY (50%). Mám na účtu dostatek volné marže (659.37 USD).  Při LOT 0.02 a ceně okolo 83, to dá marži cca 166 USD. Riziko je tedy zvládnutelné. Take profit jsem nastavil realisticky s ohledem na weekly overbought RSI. Protože aktuálně nemám žádnou otevřenou pozici na USOIL_ecn, neporušuji podmínku diverzifikace.  Nastavený take_profit 88.50 USD je dostatečně vzdálený, aby se po odečtení transakčního poplatku 0.2 USD (za 0.02 lot) obchod vyplatil."
+}

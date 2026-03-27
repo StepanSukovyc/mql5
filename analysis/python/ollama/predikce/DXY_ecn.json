@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růst cenových impulsů na svíčkovém grafu s podporou RSI a MA indikátory. Historické trendy ukazují stabilitu, ale zhoršení finanční situace v některých zemích může způsobit volatilitu.",
-  "timestamp": "2026-03-27T04:28:17.167283+00:00",
+  "reasoning": "Předběžný pohyb ceny je očekáván směrem nahoru na základě pozitivních svíčkových formací a rostoucího RSI. Nicméně, pokles v poslední době naznačuje určitou nejistotu.",
+  "timestamp": "2026-03-27T13:57:40.181178+00:00",
   "model": "deepseek-coder-v2"
 }

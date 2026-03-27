@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.05,
+  "take_profit": 84.50,
+  "reasoning": "Vybrán USOIL_ecn, protože ho nemám otevřený v pozicích a analýza ukazuje BUY s 50% pravděpodobností. Weekly RSI je sice overbought, ale daily RSI signalizuje pokračující bullish momentum. Current price je nad daily a 4H MA. Riziko transakčních nákladů je zohledněno. Take profit je nastaven realisticky a zisk by měl kompenzovat transakční poplatky a denní zisky."
+}

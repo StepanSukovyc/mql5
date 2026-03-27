@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.05,
+  "take_profit": 84.50,
+  "reasoning": "USOIL_ecn vykazuje smíšené signály. Týdenní RSI je sice překoupené (79.58), což naznačuje potenciální pullback, ale denní RSI (64.49) signalizuje pokračující býčí momentum. Aktuální cena je nad denním a 4H MA, což indikuje pozitivní trend. Poslední denní svíčka je býčí. Vzhledem k nedávné volatilitě a rozporuplným signálům napříč různými časovými rámci, se doporučuje BUY. Vzhledem ke swingovému stylu obchodování a touze po průběžných ziscích je TP nastaveno na 84.50 USD. Protože tento symbol nedržíme, diverzifikuje naše portfolio. Transakční náklady 0.5 USD jsou zohledněny. Velikost lotu 0.05 je zvolena s ohledem na dostupnou marži (margin_free: 659.11) a snahu o minimalizaci rizika."
+}

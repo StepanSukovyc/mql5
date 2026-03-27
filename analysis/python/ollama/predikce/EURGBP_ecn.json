@@ -1,9 +1,9 @@
 {
   "symbol": "EURGBP_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Vysoké hodnoty RSI a MA indikují potenciál růstu, ale volatilita způsobená nedávným poklesem může být riziková.",
-  "timestamp": "2026-03-27T04:40:32.476670+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulsy a SMA ukazují na možnost dalšího růstu. Ale RSI nadprahový a některé svíčkové formace signalizují případné prodejní signály.",
+  "timestamp": "2026-03-27T14:11:30.969699+00:00",
   "model": "deepseek-coder-v2"
 }

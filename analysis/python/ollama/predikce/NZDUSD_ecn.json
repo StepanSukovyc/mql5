@@ -1,9 +1,9 @@
 {
   "symbol": "NZDUSD_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Riziko je rozložené s převahou rizika poklesu založeného na volatilitě a nedávných pohybech. RSI ukazuje slabost s hodnotami pod 50, MA indikace trendu směřující k poklesu.",
-  "timestamp": "2026-03-27T05:36:49.940511+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Převažující pohled je do poklesu na základě silného trendu a negativní divergence RSI.",
+  "timestamp": "2026-03-27T15:11:42.816127+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "FANG_ecn",
-  "BUY": 30.0,
-  "SELL": 45.0,
-  "HOLD": 25.0,
-  "reasoning": "Zvýšení RSI v posledních třech měsících a stabilita MA indikují potenciál růstu. Nicméně, pokles v současném měsíci s nízkou volatilitou naznačuje nejistotu.",
-  "timestamp": "2026-03-27T04:59:55.359313+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Analýza svíčkových formací naznačuje stabilitu s omezeným potenciálem růstu. RSI a MA hodnoty indikují nejistotu s mírně negativním výhledem.",
+  "timestamp": "2026-03-27T14:32:33.524631+00:00",
   "model": "deepseek-coder-v2"
 }

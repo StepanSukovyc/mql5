@@ -1,9 +1,9 @@
 {
   "symbol": "UKOIL_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tendence, zatímco svíčkové formace naznačují stabilitu. Fundamentální analýza neprokazuje silný růst.",
-  "timestamp": "2026-03-27T05:42:08.913531+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s podporou RSI a MA ukazují potenciál růstu. Nicméně, pokles v minulosti může být důsledkem nedávných událostí.",
+  "timestamp": "2026-03-27T15:17:29.242711+00:00",
   "model": "deepseek-coder-v2"
 }

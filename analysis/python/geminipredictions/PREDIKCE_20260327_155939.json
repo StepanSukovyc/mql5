@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDCHF_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 0.93,
+  "reasoning": "Obchod #51 je plně řízen Gemini (lot + take_profit). Preferuji diverzifikaci, USDCHF_ecn nemám v otevřených pozicích. Podle analýzy má tento instrument potenciál růstu (BUY: 60%, SELL: 30%). Aktuální balance je 4008.08 USD, lot_size 0.02 je bezpečný z pohledu margin_free, a TP 0.93 je rozumný swing cíl. Transakční náklady jsou 0.20 USD, které zohledňuji v TP."
+}

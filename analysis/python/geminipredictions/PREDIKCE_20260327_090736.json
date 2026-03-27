@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "BTCUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 58000.0,
+  "reasoning": "BTCUSD is showing a clear downtrend across all timeframes. The price is below its moving averages, and the RSI values indicate oversold conditions, but the momentum remains bearish. While a short-term bounce is possible, the overall trend favors selling. Since there is no current BTCUSD position, diversification is also achieved.  Taking into consideration the account balance and margin requirements, a lot size of 0.01 is appropriate. A take-profit at 58000 seems reasonable given recent price action and support levels and allows for profit after transaction fees."
+}

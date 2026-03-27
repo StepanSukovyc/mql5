@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje slabou cenovou akci s mírně klesajícím trendem. RSI indikátor signalizuje přeuiverzi a MA ukazuje silnou odporovou hladinu, což doporučuje držení pozice.",
-  "timestamp": "2026-03-27T03:47:35.511858+00:00",
+  "reasoning": "Především zhoršení makroekonomických podmínek a pokles RSI indikuje možnost dalšího poklesu.",
+  "timestamp": "2026-03-27T16:08:19.874028+00:00",
   "model": "deepseek-coder-v2"
 }

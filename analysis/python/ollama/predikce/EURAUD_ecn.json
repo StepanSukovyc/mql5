@@ -1,9 +1,9 @@
 {
   "symbol": "EURAUD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech s náznakem zeslabení. RSI indikuje přeuiverzi a možnost odrážení od úrovně předpokladu poklesu. MA ukazuje stoupající trend.",
-  "timestamp": "2026-03-27T04:33:31.283405+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s potvrzením nad MA a pozitivní RSI indikují silnou pohyblivost ceny. Nicméně, pokles RSI pod hladinu 50% signalizuje možnost zpomalení růstu.",
+  "timestamp": "2026-03-27T14:03:49.551216+00:00",
   "model": "deepseek-coder-v2"
 }

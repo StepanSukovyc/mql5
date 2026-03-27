@@ -1,9 +1,9 @@
 {
   "symbol": "AUDJPY_ecn",
   "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Růst cenových úrovní a silné signály z RSI a MA sugerují potenciál růstu, ale také nebezpečí přehnaného pohybu. Riziko je vyváženo mezi nadějí na růst a obavami z poklesu.",
-  "timestamp": "2026-03-27T04:06:16.673603+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle svíčkových formací a RSI indikátoru ukazuje cenový pohyb směr dolů, ale MA hodnoty signalizují korekci. Doporučuji tedy držet pozici.",
+  "timestamp": "2026-03-27T13:30:09.845411+00:00",
   "model": "deepseek-coder-v2"
 }

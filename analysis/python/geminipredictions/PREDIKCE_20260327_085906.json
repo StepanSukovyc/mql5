@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 88.50,
+  "reasoning": "Účet má otevřenou pozici na NGAS, kterou drží dlouho a je v silné ztrátě. Proto je diverzifikace klíčová. USOIL nabízí dle predikcí BUY s 50% pravděpodobností. Weekly RSI je sice overbought, ale denní RSI naznačuje pokračující bullish momentum.  Aktuální cena je nad denním i 4H MA. I když poslední 1H svíčka je skoro plochá, celkový trend je pozitivní. Take profit 88.50 zohledňuje nedávná maxima a transakční náklady. lot_size 0.02 je konzervativní vzhledem k dostupné marži a balance."
+}

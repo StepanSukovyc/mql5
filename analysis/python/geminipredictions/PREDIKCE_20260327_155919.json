@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.08,
+  "take_profit": 85.50,
+  "reasoning": "USOIL_ecn má nejvyšší BUY rating (60%) ze všech instrumentů. Aktuálně nemám na USOIL_ecn otevřenou žádnou pozici, takže diverzifikuji portfolio. Podle reasoningu: Zv\u00fd\u0161en\u00ed RSI a MA hodnot signalizuje silnou pozici. Nedostatek sign\u00e1l\u016f pro SELL. Proto BUY. Lot size 0.08, take profit 85.50 zohledňuje poplatky (0.8 USD) a dává realistickou šanci na zisk."
+}

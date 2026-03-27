@@ -1,9 +1,9 @@
 {
   "symbol": "EURMXN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zhoršení klimatu a následky pro ekonomiku jsou zohledněny. Nízké hodnoty RSI a MA indikují pokles.",
-  "timestamp": "2026-03-27T04:45:47.310276+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Na základě RSI a MA hodnot dochází k indikaci poklesu ceny v rámci nejbližšího horizontu. Nicméně, fundamentální analýza svědčí o stabilitě a růstových tendencích v oblasti ekonomiky.",
+  "timestamp": "2026-03-27T14:17:15.802084+00:00",
   "model": "deepseek-coder-v2"
 }

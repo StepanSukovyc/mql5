@@ -1,9 +1,9 @@
 {
   "symbol": "EU50_ecn",
-  "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Růstové potenciály jsou omezená vysokými úrovněmi odporu. Nedávný pokles pod MA a RSI signalizují silnou sílu prodejních signálů.",
-  "timestamp": "2026-03-27T04:31:45.060946+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend cenového grafu střednědobým růstovým, ale s nárůstem volatilitu. Fond se nachází na horní hranici svého klasického rozpětí, což naznačuje nejistotu a potenciál pro korekci.",
+  "timestamp": "2026-03-27T14:01:46.468182+00:00",
   "model": "deepseek-coder-v2"
 }

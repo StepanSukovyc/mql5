@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "NOKSEK_ecn",
+  "action": "BUY",
+  "lot_size": 0.05,
+  "take_profit": 0.985,
+  "reasoning": "V portfoliu nemáme otevřenou pozici na NOKSEK_ecn. Predikce dává BUY s 55% pravděpodobností. Denní a týdenní RSI se blíží překoupené zóně, ale měsíční je neutrální a trend je rostoucí. Vzhledem ke swingovému stylu obchodování zohledňuji i dlouhodobější potenciál růstu. Navrhuji take_profit 0.985 pro realistický zisk po započtení transakčních nákladů. Riziko je omezeno malou velikostí lotu."
+}

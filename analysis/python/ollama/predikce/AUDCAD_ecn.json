@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Převažují negativní signály s ohledem na volatilitu a nedostatečnou jasnost trendu. RSI ukazuje přítomnost silného pohybu do strany, což naznačuje nespokojenost trhů.",
-  "timestamp": "2026-03-27T04:02:52.394765+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažují indikátory ukazující na pokles ceny vzhledem k minulým pohybům. RSI a MA svědčí o silném tlaku ke snížení.",
+  "timestamp": "2026-03-27T13:26:09.797192+00:00",
   "model": "deepseek-coder-v2"
 }

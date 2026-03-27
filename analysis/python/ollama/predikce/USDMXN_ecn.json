@@ -1,9 +1,9 @@
 {
   "symbol": "USDMXN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi BUY a HOLD je v tom, že RSI ukazuje slabší bullish signály, zatímco MA indikuje stabilitu. SELL odráží silnější bearish tlak s omezenými nákupními impulsů.",
-  "timestamp": "2026-03-27T06:03:06.904419+00:00",
+  "BUY": 20.0,
+  "SELL": 70.0,
+  "HOLD": 10.0,
+  "reasoning": "Vysoké hodnoty RSI a MA indikují silnou tendenci růstu. Nicméně, záporné fundamentální ukazatele a těsnější svíčkové formace naznačují omezenou předpovědní schopnost.",
+  "timestamp": "2026-03-27T15:38:38.201474+00:00",
   "model": "deepseek-coder-v2"
 }

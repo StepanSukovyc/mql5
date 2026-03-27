@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "NOKSEK_ecn",
+  "action": "BUY",
+  "lot_size": 0.07,
+  "take_profit": 1.025,
+  "reasoning": "Symbol NOKSEK_ecn není v aktuálně otevřených pozicích, což napomáhá diverzifikaci portfolia. Predikce pro tento pár ukazuje na silný potenciál pro BUY (55%), podpořený tím, že RSI na denním a týdenním timeframe směřuje k překoupené zóně. Denní a týdenní timeframe naznačují pokračující růstový trend. Cena je nad MA na většině časových rámců. Navrhovaný lot_size 0.07 je konzervativní s ohledem na stav účtu a volnou marži a transakční poplatek je započítán do take_profit."
+}

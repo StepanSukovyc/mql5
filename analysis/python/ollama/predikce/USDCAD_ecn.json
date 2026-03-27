@@ -1,9 +1,9 @@
 {
   "symbol": "USDCAD_ecn",
-  "BUY": 50.0,
-  "SELL": 30.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Kombinace růstových indikátorů (RSI a MA) s nízkým rizikem na základě fundamenta.",
-  "timestamp": "2026-03-27T05:49:15.031241+00:00",
+  "reasoning": "Podle fundamentální analýzy je situace neutrální s tendencemi k poklesu. RSI a MA ukazují slabost trendu.",
+  "timestamp": "2026-03-27T15:25:07.913034+00:00",
   "model": "deepseek-coder-v2"
 }
