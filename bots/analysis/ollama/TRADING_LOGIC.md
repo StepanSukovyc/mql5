@@ -241,7 +241,7 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
 
 ## Lot Size Calculation
 
-Standardní režim (většina obchodů) počítá lot lokálně:
+Standardní režim (většina obchodů) počítá lot přes sdílený helper `trade_risk.calculate_lot_size()`:
 
 ```
 lot_size = floor((balance + 500) / 500) / 100
@@ -286,7 +286,7 @@ Monitoruje stav účtu v background threadu:
 - Běží bez blokování hlavního vlákna
 
 **Klíčové funkce:**
-- `get_account_info()` - dotaz do MT5
+- `get_account_state_snapshot()` - dotaz do MT5 včetně timestampu
 - `print_account_status()` - výpis na konzoli (včetně % volné marže)
 - `check_stop_condition()` - ověří margin > threshold%, nastavuje event
 - `run_account_monitor()` - monitoring loop v threadu
@@ -307,24 +307,37 @@ Stahuje data a generuje predikce:
 
 **Vrací:** `tuple[bool, Optional[Path]]` - úspěch a cesta ke složce predikcí
 
-### 4. final_decision.py - Final Trading Decision
-Dělá finální inteligentní obchodní rozhodnutí a **provádí obchod**:
-- Načítá **všechny otevřené pozice** z MT5 (bez filtrování)
-- Sbírá **stav účtu** (zůstatek, equity, margin %)
-- Načítá **filtrované predikce** (BUY/SELL >= 35%)
-- Dotazuje se Gemini na finální doporučení
+### 4. final_decision.py - Final Decision Orchestration
+Řídí finální workflow, ale většinu specializované logiky deleguje do sdílených helper modulů:
+- Načítá filtrované predikce, stav účtu a otevřené pozice
+- Spouští Gemini dotaz pro finální doporučení
 - Aplikuje obchodní režim podle pořadí obchodu (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`)
-- **Provede obchod** na MT5
-- Ukladdá výsledek do `geminipredictions/PREDIKCE_<timestamp>.json`
+- Ukládá finální JSON rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
+- Předává hotové parametry exekuční vrstvě
 
 **Klíčové funkce:**
-- `get_open_positions()` - vrací seznam pozic s PnL, swap
-- `get_account_state()` - vrací stav účtu (balance, equity, margin %)
-- `load_predictions()` - načítá filtrované predikce
-- `ask_gemini_final_decision()` - Gemini query pro finální doporučení
-- `calculate_lot_size(balance)` - vypočítá lot: `floor((balance + 500) / 500) / 100`
-- `execute_trade(symbol, action, lot_size, take_profit)` - provede obchod na MT5 (TP je volitelný)
-- `make_final_trading_decision()` - orchestruje celý proces včetně obchodování
+- `make_final_trading_decision()` - hlavní orchestrátor finální fáze
+- `_resolve_trade_parameters()` - volí STANDARD vs FULL GEMINI režim
+- `_parse_decision()` - validuje a parsuje Gemini JSON odpověď
+
+### 5. Shared Helper Modules
+Refaktor rozdělil původní monolit do menších odpovědností:
+
+**MT5 / account / symbol vrstva:**
+- `account_state.py` - stav účtu, raw account info, login účtu
+- `mt5_connection.py` - inicializace a shutdown MT5 spojení
+- `mt5_symbols.py` - symbol metadata, tick data, current price
+- `mt5_positions.py` - serializace otevřených pozic
+
+**Gemini / decision vrstva:**
+- `gemini_config.py` - načtení `GEMINI_API_KEY` a `GEMINI_URL`
+- `gemini_decision.py` - čištění Gemini odpovědí, načtení predikcí, finální Gemini decision query
+
+**Trading / execution vrstva:**
+- `trading_validation.py` - validace symbolu, lot size a marže
+- `trade_execution.py` - logování a provedení obchodu na MT5
+- `trade_history.py` - čtení historie úspěšných obchodů z CSV
+- `trade_risk.py` - výpočet standardního lot size
 
 **Expected Gemini Response:**
 ```json

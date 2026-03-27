@@ -3,11 +3,11 @@
 import os
 import threading
 import time
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-import MetaTrader5 as mt5
+from account_state import get_account_state
+from mt5_connection import initialize_mt5, shutdown_mt5
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -25,19 +25,9 @@ def _load_dotenv(dotenv_path: Path) -> None:
 		if key and key not in os.environ:
 			os.environ[key] = value
 
-def get_account_info() -> dict:
+def get_account_state_snapshot() -> dict:
 	"""Get current account status: balance, equity, margin, available margin."""
-	account = mt5.account_info()
-	if account is None:
-		raise RuntimeError(f"Failed to get account info: {mt5.last_error()}")
-	
-	return {
-		"timestamp": datetime.now(tz=timezone.utc).isoformat(),
-		"balance": float(account.balance),
-		"equity": float(account.equity),
-		"margin": float(account.margin),
-		"margin_free": float(account.margin_free),
-	}
+	return get_account_state(include_timestamp=True)
 
 
 def print_account_status(account_info: dict) -> None:
@@ -108,7 +98,7 @@ def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: 
 			check_count += 1
 			
 			try:
-				account_info = get_account_info()
+				account_info = get_account_state_snapshot()
 				print_account_status(account_info)
 				
 				# Check if we should trigger trading logic
@@ -148,12 +138,10 @@ if __name__ == "__main__":
 	_load_dotenv(Path.cwd() / ".env")
 	
 	# Initialize MT5
-	ok = mt5.initialize()
-	if not ok:
-		raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
+	initialize_mt5()
 	
 	try:
 		run_account_monitor(check_interval_seconds=60)
 	finally:
-		mt5.shutdown()
+		shutdown_mt5()
 		print("MetaTrader 5 connection closed.")

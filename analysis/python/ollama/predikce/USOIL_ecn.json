@@ -1,9 +1,9 @@
 {
   "symbol": "USOIL_ecn",
-  "BUY": 40.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Základní analýza a svíčkové formace upozorňují na pokles cen. RSI ukazuje přetížení prodejných signálů, ale MA indikuje slabost růstu.",
-  "timestamp": "2026-03-27T03:29:53.306693+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy s ohledem na svíčkovou formaci a stabilitu RSI a MA hodnot ukazují potenciál pro pokračující růst, ale také přítomnost rizika výkyvů cen.",
+  "timestamp": "2026-03-27T06:17:24.547643+00:00",
   "model": "deepseek-coder-v2"
 }

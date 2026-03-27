@@ -16,45 +16,8 @@ from typing import Dict, List, Optional, Set
 
 import httpx
 
-
-def _clean_gemini_response(text: str) -> str:
-	"""
-	Clean Gemini response by removing markdown code blocks.
-	
-	Args:
-		text: Raw response from Gemini (may contain ```json ... ```)
-	
-	Returns:
-		Clean JSON string
-	"""
-	text = text.strip()
-	
-	# Remove markdown code blocks
-	if text.startswith("```json"):
-		text = text[7:]  # Remove ```json
-	elif text.startswith("```"):
-		text = text[3:]  # Remove ```
-	
-	if text.endswith("```"):
-		text = text[:-3]  # Remove trailing ```
-	
-	return text.strip()
-
-
-def _load_gemini_config() -> Dict[str, str]:
-	"""Load Gemini configuration from environment variables."""
-	api_key = os.getenv("GEMINI_API_KEY")
-	api_url = os.getenv("GEMINI_URL")
-	
-	if not api_key:
-		raise ValueError("GEMINI_API_KEY not found in .env")
-	if not api_url:
-		raise ValueError("GEMINI_URL not found in .env")
-	
-	return {
-		"GEMINI_API_KEY": api_key,
-		"GEMINI_URL": api_url
-	}
+from gemini_config import load_gemini_api_config
+from gemini_decision import clean_gemini_response
 
 
 def ask_gemini_prediction(symbol: str, data: Dict, api_key: str, api_url: str) -> Optional[str]:
@@ -162,7 +125,7 @@ Odpověď pošli POUZE v JSON formátu:
 		
 		if text_response:
 			# Clean markdown formatting from response
-			cleaned_response = _clean_gemini_response(text_response)
+			cleaned_response = clean_gemini_response(text_response)
 			print(f"  ✅ Predikce získána pro {symbol}")
 			# Delay to respect API limits
 			time.sleep(5)
@@ -262,7 +225,7 @@ def filter_predictions(predictions_folder: Path) -> int:
 				content = f.read()
 			
 			# Clean markdown formatting if present
-			cleaned_content = _clean_gemini_response(content)
+			cleaned_content = clean_gemini_response(content)
 			prediction = json.loads(cleaned_content)
 			
 			buy_pct = prediction.get("BUY", 0)
@@ -296,12 +259,7 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	
 	# Load Gemini configuration
 	try:
-		gemini_config = _load_gemini_config()
-		api_key = gemini_config.get("GEMINI_API_KEY")
-		api_url = gemini_config.get("GEMINI_URL")
-		
-		if not api_key or not api_url:
-			raise ValueError("GEMINI_API_KEY or GEMINI_URL not found in gemini/.env")
+		api_key, api_url = load_gemini_api_config()
 		
 		print(f"✅ Gemini config loaded")
 	except Exception as exc:

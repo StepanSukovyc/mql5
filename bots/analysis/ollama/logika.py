@@ -23,6 +23,7 @@ import MetaTrader5 as mt5
 from account_monitor import run_account_monitor
 from trading_logic import run_trading_logic
 from final_decision import make_final_trading_decision
+from mt5_connection import initialize_mt5, shutdown_mt5
 from ollama_service import ollama_service_loop
 from market_data import (
 	collect_symbol_payload,
@@ -101,23 +102,6 @@ def write_symbol_file(dest_folder: Path, symbol: str, payload: Dict[str, object]
 		out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 	else:
 		out_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
-
-
-def mt5_initialize(cfg: Config) -> None:
-	ok: bool
-	if cfg.mt5_login and cfg.mt5_password and cfg.mt5_server:
-		ok = mt5.initialize(
-			login=cfg.mt5_login,
-			password=cfg.mt5_password,
-			server=cfg.mt5_server,
-		)
-	else:
-		ok = mt5.initialize()
-
-	if not ok:
-		raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
-
-
 def run_cycle(cfg: Config) -> None:
 	symbols = get_symbols(cfg.symbol_suffix)
 	if not symbols:
@@ -337,7 +321,7 @@ def main() -> int:
 	ollama_thread = None
 
 	try:
-		mt5_initialize(cfg)
+		initialize_mt5(login=cfg.mt5_login, password=cfg.mt5_password, server=cfg.mt5_server)
 		print("Connected to MetaTrader 5.")
 		
 		print("\n" + "="*60)
@@ -468,7 +452,7 @@ def main() -> int:
 			print("🛑 Čekám na ukončení Ollama Service...")
 			ollama_thread.join(timeout=10)
 		
-		mt5.shutdown()
+		shutdown_mt5()
 		print("MetaTrader 5 connection closed.")
 
 
