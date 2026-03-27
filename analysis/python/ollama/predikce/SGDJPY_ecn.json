@@ -1,9 +1,9 @@
 {
   "symbol": "SGDJPY_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růst cen vyvolaný dobrou ekonomickou politikou a nízkými úrokovými sazbami. Vzestupná trendová linie s podporou RSI nad 50 a klouzavým průměrem MA signalizující kontinuální růst.",
-  "timestamp": "2026-03-24T14:34:56.999321+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růst cenových pohybů je potenciálně omezen vysokými náklady na držení pozice. Dlouhodobé trendy ukazují stabilitu s lehkým tendence k poklesu.",
+  "timestamp": "2026-03-27T05:38:34.764539+00:00",
   "model": "deepseek-coder-v2"
 }

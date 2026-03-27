@@ -1,9 +1,9 @@
 {
   "symbol": "USDHKD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje podporu na úrovni 7.78, což by mohlo vést k růstu. RSI a MA hodnoty indikují nejistotu s omezenou pohyblivostí cen.",
-  "timestamp": "2026-03-24T14:51:53.451945+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na svíčkové formace a RSI indikátor vidíme několik potenciálních signálů pro růst. Nicméně, MA ukazuje střih dolů což může být znamením silného pohybu ceny dolů.",
+  "timestamp": "2026-03-27T05:54:38.346944+00:00",
   "model": "deepseek-coder-v2"
 }

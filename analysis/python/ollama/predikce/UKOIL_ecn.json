@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Převažují silné pohyby na růst a technická analýza ukazuje poptávku. Nicméně, základní analýza může být omezená a riziko je středně vysoké.",
-  "timestamp": "2026-03-24T14:38:44.118628+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tendence, zatímco svíčkové formace naznačují stabilitu. Fundamentální analýza neprokazuje silný růst.",
+  "timestamp": "2026-03-27T05:42:08.913531+00:00",
   "model": "deepseek-coder-v2"
 }

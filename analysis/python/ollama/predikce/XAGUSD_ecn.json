@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle svíčkových formací a RSI indikátoru ukazuje graf trend k poklesu, ale MA hodnoty signalizují přijetí na nižší úrovni. Riziko pohybů je vyvážené mezi nákupem a držením.",
-  "timestamp": "2026-03-24T15:14:22.131660+00:00",
+  "reasoning": "Zhoršení makroekonomických podmínek a pokles RSI indikují silnější pokles cen do budoucna.",
+  "timestamp": "2026-03-27T03:33:25.331376+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují signály pro pokles na základě divergence RSI a silných supportů. Malé množství BUY signalizuje pozitivní aspekty krátkodobého trendu.",
-  "timestamp": "2026-03-24T16:18:00.385527+00:00",
+  "reasoning": "Růstové impulzy na svíčkových grafech s náznakem zeslabení. RSI indikuje přeuiverzi a možnost odrážení od úrovně předpokladu poklesu. MA ukazuje stoupající trend.",
+  "timestamp": "2026-03-27T04:33:31.283405+00:00",
   "model": "deepseek-coder-v2"
 }

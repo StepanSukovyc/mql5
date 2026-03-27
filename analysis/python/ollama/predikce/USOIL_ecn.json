@@ -1,9 +1,9 @@
 {
   "symbol": "USOIL_ecn",
-  "BUY": 50.0,
-  "SELL": 30.0,
-  "HOLD": 20.0,
-  "reasoning": "Balanced risk assessment considering fundamental and technical indicators.",
-  "timestamp": "2026-03-24T15:10:36.025798+00:00",
+  "BUY": 40.0,
+  "SELL": 50.0,
+  "HOLD": 10.0,
+  "reasoning": "Základní analýza a svíčkové formace upozorňují na pokles cen. RSI ukazuje přetížení prodejných signálů, ale MA indikuje slabost růstu.",
+  "timestamp": "2026-03-27T03:29:53.306693+00:00",
   "model": "deepseek-coder-v2"
 }

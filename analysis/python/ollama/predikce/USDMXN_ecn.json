@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a nárůst rizika finanční krize vede k poklesu hodnoty měny. RSI a MA ukazují slabost trendu.",
-  "timestamp": "2026-03-24T14:59:23.963973+00:00",
+  "reasoning": "Rozdíl mezi BUY a HOLD je v tom, že RSI ukazuje slabší bullish signály, zatímco MA indikuje stabilitu. SELL odráží silnější bearish tlak s omezenými nákupními impulsů.",
+  "timestamp": "2026-03-27T06:03:06.904419+00:00",
   "model": "deepseek-coder-v2"
 }

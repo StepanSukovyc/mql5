@@ -1,9 +1,9 @@
 {
   "symbol": "NZDCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové potenciály jsou omezená z důvodu volatilního trhu a slabším podkladem. Nedávný pokles může signalizovat další pokles, ale také příležitost pro nákup na úkor nižších rizik.",
-  "timestamp": "2026-03-24T17:18:38.331626+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulsy na svíčkových grafech s omezeným pohybem. RSI indikátor ukazuje slabost, ale MA trendu dodává jistotu.",
+  "timestamp": "2026-03-27T05:29:49.256797+00:00",
   "model": "deepseek-coder-v2"
 }

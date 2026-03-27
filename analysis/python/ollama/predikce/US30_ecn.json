@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
-  "BUY": 25.0,
-  "SELL": 45.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě RSI a MA hodnot je vidět stabilita tržního prostředí s tendencí růstu. Nicméně, svíčkovými formacemi byly identifikovány přítomnosti odporu a podpora, což naznačuje nejistotu.",
-  "timestamp": "2026-03-24T14:42:30.492196+00:00",
+  "BUY": 45.0,
+  "SELL": 20.0,
+  "HOLD": 35.0,
+  "reasoning": "Růstové signaly z fundamentální analýzy a svíčkových formací naznačují stabilitu. RSI ukazuje neutralitu s lehce klesajícím trendem.",
+  "timestamp": "2026-03-27T05:45:41.565584+00:00",
   "model": "deepseek-coder-v2"
 }

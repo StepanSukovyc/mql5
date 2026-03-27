@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažující trend je poklesem hodnoty DXY, který podporuje RSI a MA indikátory. Nicméně, zhoršení finanční situace Ruska může v budoucích týdnech podpořit růst amerického dolaru.",
-  "timestamp": "2026-03-24T16:12:16.989655+00:00",
+  "reasoning": "Růst cenových impulsů na svíčkovém grafu s podporou RSI a MA indikátory. Historické trendy ukazují stabilitu, ale zhoršení finanční situace v některých zemích může způsobit volatilitu.",
+  "timestamp": "2026-03-27T04:28:17.167283+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Riziko volatilita a stoupající RSI indikují nárůst pohybu směrem dolů, zatímco MA ukazuje slabší trend.",
-  "timestamp": "2026-03-24T15:06:55.842339+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět silný pokles s cenou, což naznačuje další pokles. Nicméně svíčková formační analýza ukazuje na možnost zpomalení růstu.",
+  "timestamp": "2026-03-27T06:12:37.573066+00:00",
   "model": "deepseek-coder-v2"
 }

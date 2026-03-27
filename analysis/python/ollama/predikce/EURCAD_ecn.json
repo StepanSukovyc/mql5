@@ -1,9 +1,9 @@
 {
   "symbol": "EURCAD_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezeny silnou oblastí odporu a poklesový tlak je podpořen trendem. Kombinace RSI a MA signalizuje prodejní signál.",
-  "timestamp": "2026-03-24T16:19:54.479472+00:00",
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Vysoké hodnoty RSI a pokles MA sugerují obnovení růstu. Nicméně, cenový model svíček indikuje silnou odolnost proti poklesu.",
+  "timestamp": "2026-03-27T04:35:16.414999+00:00",
   "model": "deepseek-coder-v2"
 }

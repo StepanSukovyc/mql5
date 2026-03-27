@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDCZK_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 20.84,
+  "reasoning": "Aktuální otevřené pozice neobsahují měnový pár USDCZK_ecn, což zajišťuje diverzifikaci. Predikce pro USDCZK_ecn doporučuje SELL s 40% pravděpodobností, což je nejvyšší mezi BUY/SELL predikcemi. Technická analýza naznačuje potenciál pro pokles, a poplatek za obchod 0.1 USD je minimalizován díky malému lot size."
+}

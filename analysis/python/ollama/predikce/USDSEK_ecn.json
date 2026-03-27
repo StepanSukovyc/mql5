@@ -1,9 +1,9 @@
 {
   "symbol": "USDSEK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Důvody pro BUY jsou zejména nárust RSI a MA v měsíčním období, které naznačují potenciální stabilizaci nebo růst.",
-  "timestamp": "2026-03-24T15:05:04.017439+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje slabou finanční situaci země a negativní trendy. Svíčkové formace a RSI indikují další pokles.",
+  "timestamp": "2026-03-27T06:10:11.697417+00:00",
   "model": "deepseek-coder-v2"
 }

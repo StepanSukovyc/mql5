@@ -1,9 +1,9 @@
 {
   "symbol": "US100_ecn",
-  "BUY": 25.0,
-  "SELL": 70.0,
-  "HOLD": 5.0,
-  "reasoning": "Růstový impulz s náznaky zesílení trendu potvrzen korekcemi a RSI nad 50. Malé procento HOLD je způsobeno nejasnostmi vzhledem k cenovým hladinám.",
-  "timestamp": "2026-03-24T14:40:37.225586+00:00",
+  "BUY": 30.0,
+  "SELL": 40.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s tržním profilem. RSI a MA hodnoty podporují přijatelnou hladinu rizika.",
+  "timestamp": "2026-03-27T05:43:55.261797+00:00",
   "model": "deepseek-coder-v2"
 }

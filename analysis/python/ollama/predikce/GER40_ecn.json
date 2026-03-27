@@ -1,9 +1,9 @@
 {
   "symbol": "GER40_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s tržním indexem. RSI a MA hodnoty indikují slabost, ale svíčkové formace naznačují pokračování trendu.",
-  "timestamp": "2026-03-24T17:05:22.072573+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Převažují negativní signály z RSI a MA, ale některé fundamentální ukazatele naznačují potenciál růstu.",
+  "timestamp": "2026-03-27T05:17:27.483718+00:00",
   "model": "deepseek-coder-v2"
 }

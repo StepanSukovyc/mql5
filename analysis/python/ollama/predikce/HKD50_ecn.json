@@ -1,9 +1,9 @@
 {
   "symbol": "HKD50_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Zohlednil jsem fundamentální analýzu s cílem zvýšit hodnocení BUY. Svíčkové formace a RSI indikují nejistotu, což podporuje HOLD. SELL je vyšší kvůli obecnějším tržním pohledavkám.",
-  "timestamp": "2026-03-24T17:07:17.334612+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Riziko je vyšší kvůli volatilitě trhu a silným pohybmům na cenovém grafech. RSI ukazuje přeuzerání, což naznačuje možnost poklesu.",
+  "timestamp": "2026-03-27T05:19:12.830928+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "EURNZD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tendence s nárustem v posledních měsících, ale zároveň jsou cenové úrovně odmítající prolomit dlouhodobý trend. Riziko poklesu je vyšší.",
-  "timestamp": "2026-03-24T16:34:59.994333+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažující pohled je na pokles měny s určitým potenciálem růstu vzhledem k nedávnému propadu a následnému obnovení trendu. RSI ukazuje překoupenost, což naznačuje možnost poklesu.",
+  "timestamp": "2026-03-27T04:49:19.512958+00:00",
   "model": "deepseek-coder-v2"
 }

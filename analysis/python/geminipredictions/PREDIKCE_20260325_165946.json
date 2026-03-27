@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XALUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.01,
+  "take_profit": 2500.00,
+  "reasoning": "Dle predikce má XALUSD_ecn 60% šanci na růst a nemá otevřenou pozici. Ostatní instrumenty nemají tak silný BUY signál. Proto otevírám nákupní pozici v instrumentu XALUSD_ecn. Cílová cena je nastavena na 2500 USD."
+}

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převládajícím signálem je pokles hodnoty RSI a trend klesajících MA, ale nárůst v poslední době svíčkovými formacemi naznačuje silnou rezistenci. Vysoké procento SELL odráží riziko poklesu.",
-  "timestamp": "2026-03-24T15:03:11.553617+00:00",
+  "reasoning": "Převažují pohledy na pokles měny s nárustem RSI a MA ukazuje silnou podporu.",
+  "timestamp": "2026-03-27T06:07:49.833228+00:00",
   "model": "deepseek-coder-v2"
 }

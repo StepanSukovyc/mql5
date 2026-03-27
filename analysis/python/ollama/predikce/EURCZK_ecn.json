@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle svíčkových formací a RSI je trend stále směrem dolů, ale MA ukazuje slabou podporu. Riziko ztráty je vysoké.",
-  "timestamp": "2026-03-24T16:23:41.784622+00:00",
+  "reasoning": "Růstové tendence jsou slabší, sílí tlak na spad. RSI a MA dávají směr, ale stochastický oscilátor ukazuje přeplněnost trhu.",
+  "timestamp": "2026-03-27T04:38:47.646907+00:00",
   "model": "deepseek-coder-v2"
 }

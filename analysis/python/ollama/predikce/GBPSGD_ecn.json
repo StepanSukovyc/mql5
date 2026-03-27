@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje podporu pro růst kurzu GBP/SGD, zatímco RSI a MA hodnoty navrhují nejistotu s omezenou předpovědní schopností.",
-  "timestamp": "2026-03-24T16:59:40.600043+00:00",
+  "reasoning": "RSI ukazuje přeuiverzi s možností retracementu, ale SMA signalizuje pokračující trend. Kombinace svíčkových formací a RSI sugeruje nejistotu.",
+  "timestamp": "2026-03-27T05:12:09.542713+00:00",
   "model": "deepseek-coder-v2"
 }

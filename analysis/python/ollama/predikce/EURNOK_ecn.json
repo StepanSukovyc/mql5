@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických indikátorů a pokles technické analýzy RSI svědčí o nejistotě trhu.",
-  "timestamp": "2026-03-24T16:33:05.017523+00:00",
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nárůst BUY šance je omezen záporným tlakem sekundárních indikátorů.",
+  "timestamp": "2026-03-27T04:47:32.947432+00:00",
   "model": "deepseek-coder-v2"
 }

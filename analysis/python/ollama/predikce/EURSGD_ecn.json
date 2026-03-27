@@ -1,9 +1,9 @@
 {
   "symbol": "EURSGD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a klouzavých průměrů (MA) je trend stále směrem dolů, ale cenové úrovně svíčkových grafů indikují silnou podporu. Riziko ztráty je vyšší, doporučuji držet pozici.",
-  "timestamp": "2026-03-24T16:40:39.759933+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s výhledem na růst. RSI a MA hodnoty podporují tento trend.",
+  "timestamp": "2026-03-27T04:54:35.049273+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDCAD_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 1.37,
+  "reasoning": "Na účtu nemám žádnou otevřenou pozici pro USDCAD_ecn. Predikce uvádí silné BUY signály (60%) založené na fundamentální analýze a svíčkových formacích, indikující možný růst. RSI a MA ukazují stabilitu s tendencí růstu. Vzhledem k aktuální volné marži a snaze o diverzifikaci je doporučená velikost lotu 0.02. Take profit je nastaven na 1.37, což by mělo pokrýt transakční náklady a generovat rozumný zisk."
+}

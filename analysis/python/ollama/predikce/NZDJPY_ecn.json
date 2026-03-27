@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růst cen je omezen nízkým RSI a slabými pohyby MA. Vysoká volatilita a střet s odpory svíčkového grafu naznačují nejistotu.",
-  "timestamp": "2026-03-24T17:20:28.387445+00:00",
+  "reasoning": "Riziko růstu je omezeno nižším indexem RSI a klesající MA, což naznačuje nejistotu trhu.",
+  "timestamp": "2026-03-27T05:31:33.301640+00:00",
   "model": "deepseek-coder-v2"
 }

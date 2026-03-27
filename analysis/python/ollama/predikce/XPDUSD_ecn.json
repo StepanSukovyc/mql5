@@ -1,9 +1,9 @@
 {
   "symbol": "XPDUSD_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstový impulz s korekcí, RSI a MA indikují neutralitu s tendencí k poklesu.",
-  "timestamp": "2026-03-24T15:25:36.696135+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Riziko ztráty je vyšší v důsledku silného pohybu cenami. Svíčkový graf ukazuje složitou strukturu s nedávným poklesem a nynější stabilitou, což naznačuje nejistotu.",
+  "timestamp": "2026-03-27T03:44:02.632553+00:00",
   "model": "deepseek-coder-v2"
 }

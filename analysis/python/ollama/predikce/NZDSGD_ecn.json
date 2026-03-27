@@ -1,9 +1,9 @@
 {
   "symbol": "NZDSGD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s mírně růstajícím trendem. Technické indikátory RSI a MA podporují tento pohyb.",
-  "timestamp": "2026-03-24T17:24:07.720167+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza a hodnocení technického analyzéru ukazují střednědobou stability s tendencí k poklesu. RSI indikuje přeprodanost, ale MA signalizuje slabší trend.",
+  "timestamp": "2026-03-27T05:35:04.263917+00:00",
   "model": "deepseek-coder-v2"
 }

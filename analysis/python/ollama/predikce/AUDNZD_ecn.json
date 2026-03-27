@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace ukazují na možnost otočení. Fundamentální analýza neukazuje žádné změny, které by tomuto pohybu daly posílit.",
-  "timestamp": "2026-03-24T15:50:24.396935+00:00",
+  "reasoning": "Podle RSI a klouzavých průměrů dochází k divergenci, což naznačuje pokračování trendu. Nicméně, zhoršení makroekonomických ukazatelů a potenciální přijetí úředníkům RBNZ může vést k poklesu.",
+  "timestamp": "2026-03-27T04:08:00.568143+00:00",
   "model": "deepseek-coder-v2"
 }

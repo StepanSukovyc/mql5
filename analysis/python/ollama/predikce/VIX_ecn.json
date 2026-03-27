@@ -1,9 +1,9 @@
 {
   "symbol": "VIX_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Riziko je vyšší s poklesem trhu, ale nárust cenových pohybů je omezen díky očekáváním růstu ekonomiky.",
-  "timestamp": "2026-03-24T15:12:28.401182+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle fundamentální analýzy a svíčkových formací může dojít k poklesu trhu. Nicméně RSI ukazuje nasycenost na straně prodávajících, což naznačuje možnou změnu trendu směrem nahoru.",
+  "timestamp": "2026-03-27T03:31:40.489556+00:00",
   "model": "deepseek-coder-v2"
 }

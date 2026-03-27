@@ -1,9 +1,9 @@
 {
   "symbol": "BTCUSD_ecn",
   "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Růstový tlak na BTC je potenciálně omezen zhoršením technického vzhledu a nespokojeností s rizikem uvnitř trhu.",
-  "timestamp": "2026-03-24T15:59:26.050991+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení technických indikátorů RSI a pokles MA hodnot signalizuje potenciální zeslabení trendu. Nicméně, fundamentální analýza naznačuje stabilitu s trvalým růstem.",
+  "timestamp": "2026-03-27T04:16:30.121369+00:00",
   "model": "deepseek-coder-v2"
 }

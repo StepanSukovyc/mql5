@@ -92,3 +92,9 @@ timestamp,symbol,action,lot_size,price,success,error_msg
 2026-03-24T12:51:12.337860+00:00,USOIL_ecn,SELL,0.02,0.0,True,
 2026-03-24T13:29:47.841657+00:00,XAUUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1527.74, available 625.10"
 2026-03-24T17:23:18.245309+00:00,XAUUSD_ecn,SELL,0.07,0.0,False,"Insufficient margin: required 1541.67, available 609.56"
+2026-03-24T20:34:36.590807+00:00,USDCZK_ecn,SELL,0.07,0.0,True,
+2026-03-25T12:03:01.540820+00:00,USDCZK_ecn,SELL,0.07,0.0,True,
+2026-03-25T16:59:46.560626+00:00,XALUSD_ecn,BUY,0.01,3246.95,False,Invalid take_profit for BUY: TP (2500.0) must be > market price (3246.95)
+2026-03-25T17:10:19.919720+00:00,USDZAR_ecn,BUY,0.06,0.0,True,
+2026-03-25T19:58:45.609160+00:00,XPDUSD_ecn,SELL,0.01,0.0,True,
+2026-03-26T08:40:32.418188+00:00,USDCAD_ecn,BUY,0.07,0.0,True,
