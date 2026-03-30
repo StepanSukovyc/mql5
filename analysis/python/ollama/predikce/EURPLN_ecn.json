@@ -1,9 +1,9 @@
 {
   "symbol": "EURPLN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem obav z inflace a volatilita na trhu. RSI ukazuje neutralitu s tendencí k poklesu, což naznačuje nejistotu.",
-  "timestamp": "2026-03-30T10:41:29.103645+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Především zhoršení makroekonomických prognóz a pokles RSI oproti minulosti indikují silný pohyb ceny směrem dolů. Mimo to je MA ukazatel slabý, což dává prostor pro další pokles.",
+  "timestamp": "2026-03-30T13:10:40.495618+00:00",
   "model": "deepseek-coder-v2"
 }

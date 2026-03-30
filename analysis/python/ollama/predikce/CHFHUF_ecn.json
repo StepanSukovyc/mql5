@@ -1,9 +1,9 @@
 {
   "symbol": "CHFHUF_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Rozdíly v RSI a MA ukazují nejistotu s tím, že cena může narůstat nebo pokleset.",
-  "timestamp": "2026-03-30T10:09:07.125744+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezené zhoršením technických indikátorů a některými negativními fundamenty. Riziko poklesu je vyšší.",
+  "timestamp": "2026-03-30T12:38:18.755130+00:00",
   "model": "deepseek-coder-v2"
 }

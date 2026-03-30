@@ -1,9 +1,9 @@
 {
   "symbol": "CHFZAR_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle svíčkových formací a trendu RSI může dojít k poklesu ceny. Nicméně MA ukazuje stabilitu, což naznačuje nejistotu.",
-  "timestamp": "2026-03-30T10:12:47.089676+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s podporou RSI a MA hodnotami. Nedostatek jasných trendů způsobuje nejistotu.",
+  "timestamp": "2026-03-30T12:41:59.747194+00:00",
   "model": "deepseek-coder-v2"
 }

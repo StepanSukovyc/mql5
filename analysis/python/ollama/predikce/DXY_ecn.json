@@ -1,9 +1,9 @@
 {
   "symbol": "DXY_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Růst hodnoty RSI a MA indikátorů naznačuje budoucí stabilitu nebo růst DXY. Nicméně, pokles v posledních třech měsících ukazuje na určitou nejistotu.",
-  "timestamp": "2026-03-30T10:16:33.602563+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růst cenových trendů a nízké hodnoty RSI indikují potenciál růstu. Nicméně, pokles v měsíčních datech naznačuje určitou nejistotu.",
+  "timestamp": "2026-03-30T12:45:46.543082+00:00",
   "model": "deepseek-coder-v2"
 }

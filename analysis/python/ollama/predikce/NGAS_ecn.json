@@ -1,9 +1,9 @@
 {
   "symbol": "NGAS_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převažující tendence je klesající s ohledem na technické indikátory a pokles cen v minulosti. Nicméně, fundamentální analýza naznačuje stabilitu s pozitivními aspekty.",
-  "timestamp": "2026-03-30T09:18:35.854276+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy jsou slabší, ale stále existují signály pro nákup. Převaha poklesových tlaků je však značná.",
+  "timestamp": "2026-03-30T13:47:13.021599+00:00",
   "model": "deepseek-coder-v2"
 }

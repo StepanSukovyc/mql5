@@ -1,9 +1,9 @@
 {
   "symbol": "NOKSEK_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s cenným papírem. Svíčkové formace a RSI indikují nejistotu s omezenou poptávkou.",
-  "timestamp": "2026-03-30T09:20:32.936824+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Rozdíl mezi BUY a HOLD je v tom, že RSI ukazuje slabší nárůst než MA, což naznačuje nejistotu. SELL je vyšší z důvodu silnějšího tlaku směrem dolů.",
+  "timestamp": "2026-03-30T13:49:13.607333+00:00",
   "model": "deepseek-coder-v2"
 }

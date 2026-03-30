@@ -1,9 +1,9 @@
 {
   "symbol": "GBPZAR_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a klouzavých průměrů je trend směrem dolů, ale zároveň dochází k nárustu v posledním období indikujícím připravnou k otočení.",
-  "timestamp": "2026-03-30T09:08:54.086218+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale zároveň dochází k divergenci mezi cenovým pohybem a indikátory, což naznačuje možnou změnu trendu. Navržení BUY je však méně intenzivní kvůli ostatním faktorům.",
+  "timestamp": "2026-03-30T13:37:33.681317+00:00",
   "model": "deepseek-coder-v2"
 }

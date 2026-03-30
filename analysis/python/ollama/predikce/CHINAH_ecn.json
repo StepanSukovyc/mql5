@@ -1,9 +1,9 @@
 {
   "symbol": "CHINAH_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezené v důsledku silných odporových hladin. Nedávný pokles RSI a MA hodnot signalizuje možnost dalšího poklesu ceny, zatímco fundamentální analýza naznačuje stabilitu.",
-  "timestamp": "2026-03-30T10:14:38.392883+00:00",
+  "reasoning": "Zvýšení RSI v posledních měsících ukazuje silnou pozici s tendencí k růstu. MA indikátor podporuje tato tvrzení.",
+  "timestamp": "2026-03-30T12:43:51.817123+00:00",
   "model": "deepseek-coder-v2"
 }

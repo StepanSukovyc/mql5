@@ -1,9 +1,9 @@
 {
   "symbol": "ETHUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě pozitivního trendu RSI a MA s tendencí k růstu, ale nárůstem ceny v posledních měsících je považována za stabilní.",
-  "timestamp": "2026-03-30T10:18:28.482174+00:00",
+  "BUY": 60.0,
+  "SELL": 25.0,
+  "HOLD": 15.0,
+  "reasoning": "Zvýšení RSI a MA ukazují na stabilitu a potenciál růstu. Nicméně, pokles v posledních týdnech může být indikací nejistoty.",
+  "timestamp": "2026-03-30T12:47:40.688492+00:00",
   "model": "deepseek-coder-v2"
 }

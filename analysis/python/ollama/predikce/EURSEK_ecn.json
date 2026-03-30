@@ -1,9 +1,9 @@
 {
   "symbol": "EURSEK_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "RSI ukazuje přeouzení do přeužitých oblastí, MA indikátor nepodporuje jasný trend. Nedostatek jasných signálů.",
-  "timestamp": "2026-03-30T10:43:23.998829+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale svíčkové formace naznačují možnost zpomalení růstu. Fondamentální analýza ukazuje stabilitu, což podporuje HOLD.",
+  "timestamp": "2026-03-30T13:12:35.492791+00:00",
   "model": "deepseek-coder-v2"
 }

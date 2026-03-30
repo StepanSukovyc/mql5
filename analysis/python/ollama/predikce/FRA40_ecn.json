@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s nižším rizikem a svíčkové formace podporují konzervativní přístup.",
-  "timestamp": "2026-03-30T10:52:59.132904+00:00",
+  "reasoning": "Růstové potenciály jsou omezená v důsledku obecně negativního sentimentu trhu. Nízká volatilita a silný support MA sugerují stabilitu, ale nedostatečné pohyby na RSI signalizují slabost.",
+  "timestamp": "2026-03-30T13:22:09.490849+00:00",
   "model": "deepseek-coder-v2"
 }

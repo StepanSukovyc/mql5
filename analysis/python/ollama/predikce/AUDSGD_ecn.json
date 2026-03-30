@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Rozdíl mezi BUY a SELL je založen na pohybu cen v posledních měsících. RSI ukazuje slabost trhu, ale MA trend signalizuje stabilitu.",
-  "timestamp": "2026-03-30T09:56:19.632188+00:00",
+  "reasoning": "Rozdíl mezi BUY a HOLD je v tom, že RSI ukazuje slabou podporu s růstovými potenciály. SELL je silně ovlivněna měsíčním MA a poklesem cen.",
+  "timestamp": "2026-03-30T12:25:22.964956+00:00",
   "model": "deepseek-coder-v2"
 }

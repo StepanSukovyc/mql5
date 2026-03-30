@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza měny a technické indikátory svíčkových grafů ukazují stabilitu s tendencí poklesu.",
-  "timestamp": "2026-03-30T10:37:39.285412+00:00",
+  "reasoning": "Zhoršení makroekonomických indikátorů a slabé svíčkové formace naznačují pokles hodnoty měny. RSI a MA ukazují střednědobou negativní tendenci.",
+  "timestamp": "2026-03-30T13:06:51.250876+00:00",
   "model": "deepseek-coder-v2"
 }

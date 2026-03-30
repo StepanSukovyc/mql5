@@ -1,9 +1,9 @@
 {
   "symbol": "GBPSGD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje podporu na úrovni 1.4000 pro GBP/SGD, zatímco RSI a MA indikují slabší vývoj.",
-  "timestamp": "2026-03-30T11:04:57.836366+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje slabost britské libry v současné situaci s ohledem na ekonomická a politická rizika. Svíčkové formace a RSI indikují potenciál pro pokles, zatímco MA ukazuje stabilitu. Kombinace těchto faktorů doporučuje přijmout konzervativní postoj.",
+  "timestamp": "2026-03-30T13:33:40.769100+00:00",
   "model": "deepseek-coder-v2"
 }

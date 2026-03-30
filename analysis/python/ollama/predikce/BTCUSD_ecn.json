@@ -1,9 +1,9 @@
 {
   "symbol": "BTCUSD_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstový impulz s náznakem zotavení počtvrtletního poklesu. RSI a MA indikují stabilitu.",
-  "timestamp": "2026-03-30T10:03:38.260244+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Riziko je v současné době vyšší s ohledem na volatilitu a nedávný pokles. Síla trendu není jasná, ale předběžná data ukazují mírnou korekci.",
+  "timestamp": "2026-03-30T12:32:47.480154+00:00",
   "model": "deepseek-coder-v2"
 }

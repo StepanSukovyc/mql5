@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCAD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem globální ekonomických faktorů a následkem koronavirové epidemie. RSI ukazuje slabost s opakovanými poklesy pod úrovní 50, což naznačuje další pokles. MACD indikátor také signalizuje silnou změnu směru.",
-  "timestamp": "2026-03-30T11:12:56.423584+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje silnou měnu AUD a slabou měnu CAD. RSI indikuje pře prodej a MA ukazuje pokles trendu.",
+  "timestamp": "2026-03-30T12:17:54.924443+00:00",
   "model": "deepseek-coder-v2"
 }

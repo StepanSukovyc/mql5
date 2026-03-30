@@ -1,3 +1,6 @@
-timestamp,dry_run,daily_clean_profit,balance_buffer,z_limit,symbol,ticket,volume,profit,swap,fee,loss_amount,closed,message
-2026-03-30T09:45:37.119569+00:00,True,28.35,41.36,-13.01,,,,,,,,False,"Z <= 0, no position can be closed safely"
-2026-03-30T10:45:38.855764+00:00,True,32.31,41.36,-9.05,,,,,,,,False,"Z <= 0, no position can be closed safely"
+timestamp,dry_run,daily_clean_profit,balance_buffer,z_limit,counted_closing_deals,latest_counted_deal_time_utc,latest_counted_deal_time_prague,symbol,ticket,volume,profit,swap,fee,loss_amount,closed,message
+2026-03-30T09:45:37.119569+00:00,True,28.35,41.36,-13.01,,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-30T10:45:38.855764+00:00,True,32.31,41.36,-9.05,,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-30T11:45:51.156923+00:00,True,38.45,41.36,-2.91,,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-30T12:45:12.245616+00:00,True,59.35,41.36,17.99,6,2026-03-30T11:51:46+00:00,2026-03-30T13:51:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T13:45:13.949396+00:00,True,59.35,41.36,17.99,6,2026-03-30T11:51:46+00:00,2026-03-30T13:51:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z

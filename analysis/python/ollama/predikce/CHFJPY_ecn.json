@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a technická analýza svědčí pro nárůst volatility. RSI indikuje přeprodanost, ale MA ukazuje slabou tendenci.",
-  "timestamp": "2026-03-30T10:10:57.199243+00:00",
+  "reasoning": "Růstové potenciály jsou omezená vysokým RSI a MA, zatímco poklesové riziko roste s nízkými hodnotami.",
+  "timestamp": "2026-03-30T12:40:09.119141+00:00",
   "model": "deepseek-coder-v2"
 }

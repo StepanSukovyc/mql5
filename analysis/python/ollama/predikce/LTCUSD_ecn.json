@@ -1,9 +1,9 @@
 {
   "symbol": "LTCUSD_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend směrem nahoru, ale cenový model svíček indikuje nejistotu s možnostmi růstu.",
-  "timestamp": "2026-03-30T09:16:32.753908+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend ceny LTC klesající, ale svíčkové formace ukazují signály pro obnovení. Riziko ztráty je vyšší, ale příležitosti pro nákup se objevují.",
+  "timestamp": "2026-03-30T13:45:17.269716+00:00",
   "model": "deepseek-coder-v2"
 }

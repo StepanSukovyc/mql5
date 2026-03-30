@@ -1,9 +1,9 @@
 {
   "symbol": "BCHUSD_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět mírný pokles. Nicméně, základní analýza ukazuje stabilitu s rostoucí cenou v posledních měsících.",
-  "timestamp": "2026-03-30T10:01:49.083026+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstový impuls podle svíčkových formací je potenciálně silný, ale přítomnost vysokého RSI a MA ukazuje na možnou nadhodnocenost trhu. Riziko poklesu je vyšší kvůli volatilitě.",
+  "timestamp": "2026-03-30T12:30:56.169547+00:00",
   "model": "deepseek-coder-v2"
 }

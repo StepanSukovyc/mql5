@@ -21,6 +21,25 @@ DEFAULT_DRY_RUN = True
 ACCOUNT_BALANCE_BUFFER_RATIO = 0.01
 MIN_POSITION_AGE = timedelta(days=7)
 FEE_PER_001_LOT = 0.10
+LOSS_CLEANUP_LOG_HEADERS = [
+	"timestamp",
+	"dry_run",
+	"daily_clean_profit",
+	"balance_buffer",
+	"z_limit",
+	"counted_closing_deals",
+	"latest_counted_deal_time_utc",
+	"latest_counted_deal_time_prague",
+	"symbol",
+	"ticket",
+	"volume",
+	"profit",
+	"swap",
+	"fee",
+	"loss_amount",
+	"closed",
+	"message",
+]
 
 _LAST_EVALUATED_HOUR_KEY: Optional[str] = None
 
@@ -141,24 +160,14 @@ def _get_daily_deals(now_utc: datetime) -> tuple[datetime, tuple[Any, ...], set[
 	return day_start_utc, tuple(deals), _get_closing_entries()
 
 
-def _get_open_position_ids() -> set[int]:
-	positions = mt5.positions_get()
-	if positions is None:
-		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
-	return {int(position.ticket) for position in positions}
-
-
-def _get_today_closed_position_ids(orders: tuple[Any, ...], open_position_ids: set[int]) -> set[int]:
-	filled_state = getattr(mt5, "ORDER_STATE_FILLED", 4)
+def _get_today_closed_position_ids(deals: tuple[Any, ...], closing_entries: set[int]) -> set[int]:
 	closed_position_ids: set[int] = set()
 
-	for order in orders:
-		position_id = int(getattr(order, "position_id", 0) or 0)
+	for deal in deals:
+		position_id = int(getattr(deal, "position_id", 0) or 0)
 		if position_id <= 0:
 			continue
-		if position_id in open_position_ids:
-			continue
-		if int(getattr(order, "state", -1)) != filled_state:
+		if getattr(deal, "entry", None) not in closing_entries:
 			continue
 		closed_position_ids.add(position_id)
 
@@ -183,6 +192,25 @@ def _calculate_daily_clean_profit(
 	return clean_profit
 
 
+def _get_latest_counted_deal_time(
+	deals: tuple[Any, ...],
+	closing_entries: set[int],
+	closed_position_ids: set[int],
+) -> Optional[datetime]:
+	latest_time: Optional[datetime] = None
+	for deal in deals:
+		position_id = int(getattr(deal, "position_id", 0) or 0)
+		if position_id not in closed_position_ids:
+			continue
+		if getattr(deal, "entry", None) not in closing_entries:
+			continue
+		deal_time = datetime.fromtimestamp(int(getattr(deal, "time", 0)), tz=timezone.utc)
+		if latest_time is None or deal_time > latest_time:
+			latest_time = deal_time
+
+	return latest_time
+
+
 def _ensure_loss_cleanup_log_schema(log_file: Path) -> None:
 	if not log_file.exists():
 		return
@@ -194,14 +222,22 @@ def _ensure_loss_cleanup_log_schema(log_file: Path) -> None:
 		return
 
 	headers = rows[0]
-	if "daily_gross_profit" not in headers:
+	headers = ["daily_clean_profit" if header == "daily_gross_profit" else header for header in headers]
+	if headers == LOSS_CLEANUP_LOG_HEADERS:
 		return
 
-	updated_headers = ["daily_clean_profit" if header == "daily_gross_profit" else header for header in headers]
+	updated_headers = LOSS_CLEANUP_LOG_HEADERS
+	updated_rows = []
+	for row in rows[1:]:
+		padded_row = list(row[: len(updated_headers)])
+		if len(padded_row) < len(updated_headers):
+			padded_row.extend([""] * (len(updated_headers) - len(padded_row)))
+		updated_rows.append(padded_row)
+
 	with open(log_file, "w", newline="", encoding="utf-8") as handle:
 		writer = csv.writer(handle)
 		writer.writerow(updated_headers)
-		writer.writerows(rows[1:])
+		writer.writerows(updated_rows)
 
 
 def _log_daily_deals_snapshot(
@@ -222,7 +258,9 @@ def _log_daily_deals_snapshot(
 	file_exists = log_file.exists()
 	headers = [
 		"snapshot_timestamp",
+		"snapshot_timestamp_prague",
 		"day_start_utc",
+		"day_start_prague",
 		"deal_time_utc",
 		"deal_time_prague",
 		"deal_ticket",
@@ -253,7 +291,9 @@ def _log_daily_deals_snapshot(
 			writer.writerow(
 				[
 					now_utc.isoformat(),
+					now_utc.astimezone(PRAGUE_TZ).isoformat(),
 					day_start_utc.isoformat(),
+					day_start_utc.astimezone(PRAGUE_TZ).isoformat(),
 					deal_time_utc.isoformat(),
 					deal_time_prague.isoformat(),
 					getattr(deal, "ticket", ""),
@@ -322,6 +362,8 @@ def _log_cleanup_action(
 	daily_clean_profit: float,
 	balance_buffer: float,
 	z_limit: float,
+	counted_closing_deals: int,
+	latest_counted_deal_time: Optional[datetime],
 	candidate: Optional[CleanupCandidate],
 	closed: bool,
 	message: str,
@@ -333,28 +375,12 @@ def _log_cleanup_action(
 	log_dir.mkdir(parents=True, exist_ok=True)
 	log_file = log_dir / "loss_cleanup.csv"
 	_ensure_loss_cleanup_log_schema(log_file)
-	headers = [
-		"timestamp",
-		"dry_run",
-		"daily_clean_profit",
-		"balance_buffer",
-		"z_limit",
-		"symbol",
-		"ticket",
-		"volume",
-		"profit",
-		"swap",
-		"fee",
-		"loss_amount",
-		"closed",
-		"message",
-	]
 	file_exists = log_file.exists()
 
 	with open(log_file, "a", newline="", encoding="utf-8") as handle:
 		writer = csv.writer(handle)
 		if not file_exists:
-			writer.writerow(headers)
+			writer.writerow(LOSS_CLEANUP_LOG_HEADERS)
 
 		writer.writerow(
 			[
@@ -363,6 +389,9 @@ def _log_cleanup_action(
 				f"{daily_clean_profit:.2f}",
 				f"{balance_buffer:.2f}",
 				f"{z_limit:.2f}",
+				counted_closing_deals,
+				latest_counted_deal_time.isoformat() if latest_counted_deal_time else "",
+				latest_counted_deal_time.astimezone(PRAGUE_TZ).isoformat() if latest_counted_deal_time else "",
 				candidate.symbol if candidate else "",
 				candidate.ticket if candidate else "",
 				f"{candidate.volume:.2f}" if candidate else "",
@@ -409,6 +438,8 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 				daily_clean_profit=0.0,
 				balance_buffer=0.0,
 				z_limit=0.0,
+				counted_closing_deals=0,
+				latest_counted_deal_time=None,
 				candidate=None,
 				closed=False,
 				message=message,
@@ -425,8 +456,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 
 		_, orders = _get_daily_orders(now_utc)
 		day_start_utc, deals, closing_entries = _get_daily_deals(now_utc)
-		open_position_ids = _get_open_position_ids()
-		closed_position_ids = _get_today_closed_position_ids(orders, open_position_ids)
+		closed_position_ids = _get_today_closed_position_ids(deals, closing_entries)
 		daily_clean_profit = round(_calculate_daily_clean_profit(deals, closing_entries, closed_position_ids), 2)
 		balance_buffer = round(raw_balance * ACCOUNT_BALANCE_BUFFER_RATIO, 2)
 		z_limit = round(daily_clean_profit - balance_buffer, 2)
@@ -436,6 +466,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			if int(getattr(deal, "position_id", 0) or 0) in closed_position_ids
 			and getattr(deal, "entry", None) in closing_entries
 		)
+		latest_counted_deal_time = _get_latest_counted_deal_time(deals, closing_entries, closed_position_ids)
 
 		_log_daily_deals_snapshot(
 			service_folder=service_folder,
@@ -454,6 +485,11 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			f"closed_positions={len(closed_position_ids)}, closing_deals={closing_deals_count}"
 		)
 		print(f"   Daily clean profit (excl. swap/fees): {daily_clean_profit:.2f}")
+		if latest_counted_deal_time is not None:
+			print(
+				"   Snapshot includes closing deals up to "
+				f"{latest_counted_deal_time.astimezone(PRAGUE_TZ).strftime('%Y-%m-%d %H:%M:%S')} Prague time"
+			)
 		print(f"   Balance buffer (1%): {balance_buffer:.2f}")
 		print(f"   Z limit: {z_limit:.2f}")
 
@@ -466,6 +502,8 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 				daily_clean_profit=daily_clean_profit,
 				balance_buffer=balance_buffer,
 				z_limit=z_limit,
+				counted_closing_deals=closing_deals_count,
+				latest_counted_deal_time=latest_counted_deal_time,
 				candidate=None,
 				closed=False,
 				message=message,
@@ -482,6 +520,8 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 				daily_clean_profit=daily_clean_profit,
 				balance_buffer=balance_buffer,
 				z_limit=z_limit,
+				counted_closing_deals=closing_deals_count,
+				latest_counted_deal_time=latest_counted_deal_time,
 				candidate=None,
 				closed=False,
 				message=message,
@@ -514,6 +554,8 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			daily_clean_profit=daily_clean_profit,
 			balance_buffer=balance_buffer,
 			z_limit=z_limit,
+			counted_closing_deals=closing_deals_count,
+			latest_counted_deal_time=latest_counted_deal_time,
 			candidate=candidate,
 			closed=closed,
 			message=message,
@@ -526,6 +568,8 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			daily_clean_profit=0.0,
 			balance_buffer=0.0,
 			z_limit=0.0,
+			counted_closing_deals=0,
+			latest_counted_deal_time=None,
 			candidate=None,
 			closed=False,
 			message=f"Strategy failed: {exc}",

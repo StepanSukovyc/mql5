@@ -1,9 +1,9 @@
 {
   "symbol": "EURSGD_ecn",
-  "BUY": 60.0,
-  "SELL": 25.0,
+  "BUY": 20.0,
+  "SELL": 65.0,
   "HOLD": 15.0,
-  "reasoning": "Zvýšení RSI a MA ukazují na pozitivní tendenci, ale nízké hodnoty v měsíčním timeframe indikují nejistotu.",
-  "timestamp": "2026-03-30T10:45:18.274383+00:00",
+  "reasoning": "Převažující sentiment je negativní s ohledem na volatilitu a slabé fundamentální ukazatele. RSI indikuje přílišnou pohyblivost cen.",
+  "timestamp": "2026-03-30T13:14:30.033891+00:00",
   "model": "deepseek-coder-v2"
 }

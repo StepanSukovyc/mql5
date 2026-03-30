@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Podle RSI a klouzavých průměrů je trend stoupající, ale s nárustem volatility. Hodnocení zohledňuje riziko a potenciál růstu.",
-  "timestamp": "2026-03-30T10:20:23.731999+00:00",
+  "reasoning": "Zohlednil jsem svíčkové formace a RSI hodnoty, které ukazují na zlepšení trendu s nárůstem poptávky. MA hodnoty podporují tento pohyb.",
+  "timestamp": "2026-03-30T12:49:35.742112+00:00",
   "model": "deepseek-coder-v2"
 }

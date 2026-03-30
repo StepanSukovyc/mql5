@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCAD_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a pokles technického analyzovaného indikátoru RSI signalizují silnější pohyb směrem dolů.",
-  "timestamp": "2026-03-30T10:56:53.856221+00:00",
+  "SELL": 60.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení klimatických politik a nedostatečná odpověď na zvýšené emise způsobují negativní vlivy na tržní ceny.",
+  "timestamp": "2026-03-30T13:25:58.569688+00:00",
   "model": "deepseek-coder-v2"
 }

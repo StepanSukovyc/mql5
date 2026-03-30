@@ -1,9 +1,9 @@
 {
   "symbol": "EURCAD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi BUY a HOLD je v tom, že RSI ukazuje slabší růstové signály oproti MA, což indikuje nejistotu.",
-  "timestamp": "2026-03-30T10:24:10.575419+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle svíčkových formací a RSI je trend směrem dolů s několika příznky zeslabení. Hodnoty MA ukazují stabilitu, což podporuje HOLD.",
+  "timestamp": "2026-03-30T12:53:25.034428+00:00",
   "model": "deepseek-coder-v2"
 }
