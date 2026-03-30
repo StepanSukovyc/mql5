@@ -9,7 +9,8 @@
 This signal generator is an intelligent, fully automated trading system that monitors 
 market conditions, analyzes price action across multiple timeframes, and generates 
 actionable trading signals in real-time. Currently combines **Google Gemini AI** for 
-primary trading decisions with **local Ollama AI** for parallel independent predictions.
+primary trading decisions with **local Ollama AI** for parallel independent predictions 
+and prediction reuse.
 
 ## HOW IT WORKS
 
@@ -21,20 +22,24 @@ averages) on all levels.
 **AI-Powered Decisions**
 Complete market data is analyzed by the AI model for pattern recognition. The AI evaluates 
 price formations, technical metrics, and historical relationships to generate probability-
-weighted predictions: confidence levels for buying, selling, or holding.
+weighted predictions: confidence levels for buying, selling, or holding. The main flow 
+first reuses fresh Ollama predictions from the current hour and falls back to Gemini when 
+no valid local prediction is available.
 
-**Smart Filtering & Execution**
-Weak, low-conviction signals are automatically filtered out. The system dynamically 
-calculates position size based on account equity and includes continuous margin monitoring 
-to prevent over-leverage. When conditions align, trades are executed to your platform with 
-full logging.
+**Smart Filtering, Execution, and Safety**
+Weak, low-conviction signals are automatically filtered out. Continuous margin monitoring 
+controls when the trading flow is allowed to start. Final trade size always comes from the 
+Gemini final decision, while take-profit is applied only on each configured N-th trade. 
+Trading is paused during restricted hours (23:00-23:30 CET/CEST). The system also runs an 
+hourly loss-cleanup strategy that can close one older losing position only when the daily 
+clean profit budget allows it; this cleanup can run in safe `dry-run` mode for testing.
 
 ## TECHNOLOGY STACK
 
 - **Primary**: Google Gemini AI for market analysis and trade execution
 - **Secondary**: Local Ollama AI (deepseek-coder-v2) for independent prediction service
 - **Data Source**: MetaTrader 5 (MT5)
-- **Automation**: Python-based continuous monitoring and dual-AI execution
+- **Automation**: Python-based continuous monitoring, dual-AI prediction flow, guarded trade execution, and hourly cleanup controls
 
 ═════════════════════════════════════════════════════════════════════════════════
 
@@ -49,7 +54,8 @@ full logging.
 Tento generátor signálů je inteligentní, plně automatizovaný obchodní systém, který 
 monitoruje tržní podmínky, analyzuje pohyby cen na více timeframech a generuje v reálném 
 čase použitelné obchodní signály. Aktuálně kombinuje **Google Gemini AI** pro hlavní 
-obchodní rozhodování s **lokálním Ollama AI** pro paralelní nezávislou predikční službu.
+obchodní rozhodování s **lokálním Ollama AI** pro paralelní nezávislou predikční službu 
+a opakované použití čerstvých predikcí.
 
 ## ZPŮSOB FUNGOVÁNÍ
 
@@ -61,18 +67,23 @@ průměry) na všech úrovních.
 **Rozhodování Poháněné AI**
 Kompletní tržní data jsou analyzována AI modelem pro rozpoznávání vzorů. AI vyhodnocuje 
 cenové formace, technické metriky a historické vztahy, aby vygenerovala vážené predikce: 
-nákup, prodej nebo čekání s úrovní důvěry.
+nákup, prodej nebo čekání s úrovní důvěry. Hlavní tok nejdřív zkouší použít čerstvé 
+Ollama predikce z aktuální hodiny a teprve při jejich absenci nebo neplatnosti volá Gemini.
 
-**Inteligentní Filtrování a Provádění**
-Slabé signály jsou automaticky filtrovány. Systém dynamicky vypočítává velikost pozice 
-na základě equity účtu a monitoruje margin, aby zabránil přílišné páce. Když jsou 
-podmínky splněny, obchody se provádějí na vaší platformě s plným záznamem.
+**Inteligentní Filtrování, Exekuce a Ochrany**
+Slabé signály jsou automaticky filtrovány. Nepřetržitý monitoring marginu rozhoduje, kdy 
+je dovoleno spustit obchodní tok. Finální velikost pozice se vždy bere z finálního Gemini 
+rozhodnutí, zatímco take-profit se aplikuje jen na každý konfigurovaný N-tý obchod. 
+Obchodování je pozastaveno v omezeném čase 23:00-23:30 CET/CEST. Součástí systému je také 
+hodinová cleanup strategie, která může uzavřít jednu starší ztrátovou pozici pouze tehdy, 
+když to dovolí rozpočet denního čistého zisku; pro testování může běžet v bezpečném 
+režimu `dry-run`.
 
 ## TECHNOLOGICKÝ STACK
 
 - **Primární**: Google Gemini AI pro analýzu trhů a provádění obchodů
 - **Sekundární**: Lokální Ollama AI (deepseek-coder-v2) pro nezávislou predikční službu
 - **Zdroj dat**: MetaTrader 5 (MT5)
-- **Automatizace**: Python s nepřetržitým monitoringem a duální AI exekucí
+- **Automatizace**: Python s nepřetržitým monitoringem, duálním AI tokem, řízenou exekucí a hodinovými ochrannými mechanismy
 
 ═════════════════════════════════════════════════════════════════════════════════

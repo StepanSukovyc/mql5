@@ -1,9 +1,9 @@
 {
   "symbol": "AU200_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem globálních trhů a negativního tlaku. Klesající MA signalizuje pokračující sílu prodlužování, což podporuje SELL opci.",
-  "timestamp": "2026-03-30T09:46:41.967727+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s tržním prostředím, RSI a MA indikují silnou podporu, což naznačuje potenciál růstu.",
+  "timestamp": "2026-03-30T11:10:52.635454+00:00",
   "model": "deepseek-coder-v2"
 }
