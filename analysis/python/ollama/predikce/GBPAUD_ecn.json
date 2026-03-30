@@ -1,9 +1,9 @@
 {
   "symbol": "GBPAUD_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Základní analýza ukazuje silnou finanční situaci Spojeného království a slabou v Austrálii. Technická analýza s využitím svíčkových formací a RSI indikátoru signalizuje pokles ceny, zatímco MA ukazatele podporují tento pohyb.",
-  "timestamp": "2026-03-30T08:56:00.196794+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Převažující trend je směrem dolů s nízkým RSI a SMA. Nákup by byl rizikový.",
+  "timestamp": "2026-03-30T10:54:56.396343+00:00",
   "model": "deepseek-coder-v2"
 }

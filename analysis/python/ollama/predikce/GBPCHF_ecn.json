@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCHF_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 50.0,
+  "SELL": 30.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové síly jsou omezené cenou v minulosti a aktuálně silným odporovým úsilím. RSI a MA ukazují nejistotu.",
-  "timestamp": "2026-03-30T08:59:39.814591+00:00",
+  "reasoning": "Analýza svíčkových grafů ukazuje potenciální vzestupnou hladinu. RSI a MA indikátory signalizují stabilitu s tendencí k růstu.",
+  "timestamp": "2026-03-30T10:58:51.325223+00:00",
   "model": "deepseek-coder-v2"
 }

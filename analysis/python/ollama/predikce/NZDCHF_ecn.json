@@ -1,9 +1,9 @@
 {
   "symbol": "NZDCHF_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu Nový Zéland a slabší švýcarskou franku. RSI indikuje neutralitu s lehkovážným cenovým chováním, MA hodnoty signalizují opakované pokusy o zeslabení měny.",
-  "timestamp": "2026-03-30T06:30:31.821729+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale na základě fundamentální analýzy může dojít k oživení.",
+  "timestamp": "2026-03-30T09:24:23.441060+00:00",
   "model": "deepseek-coder-v2"
 }

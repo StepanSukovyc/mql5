@@ -1,5 +1,32 @@
 # Changelog
 
+## 2026-03-30 (Hourly Loss Cleanup Strategy + Dry Run)
+
+- **Added Hourly Loss Cleanup Strategy**
+  - Added `loss_cleanup_strategy.py` for an hourly review of stale losing positions
+  - Strategy runs once per hour at `LOSS_CLEANUP_STRATEGY_MINUTE` when `LOSS_CLEANUP_STRATEGY_ENABLED=true`
+  - Computes daily clean profit from closed MT5 deals without swap and fee deductions
+  - Subtracts 1% of current account balance to derive cleanup budget `Z`
+  - Scans open positions older than 7 days and selects the largest losing candidate whose effective loss stays below `Z`
+  - Effective loss includes current position profit, swap, and synthetic fee `0.10 USD` per `0.01` lot
+
+- **Added Safe Position Close Helper**
+  - `trade_execution.py` now exposes `close_position_by_ticket()` for closing existing MT5 positions via opposite market order
+
+- **Added Runtime Safety Controls**
+  - Added `LOSS_CLEANUP_STRATEGY_DRY_RUN` to `.env` and `.env.example`
+  - Default is `true`, so the strategy only logs which position would be closed and does not send an MT5 close order
+  - Cleanup strategy is also blocked during restricted trading window `23:00-23:30 CET/CEST`
+
+- **Added Observability**
+  - Cleanup actions are logged to `trade_logs/loss_cleanup.csv`
+  - Audit log includes timestamp, dry-run mode, daily clean profit, balance buffer, `Z`, candidate details, and result message
+  - Added `trade_logs/loss_cleanup_daily_deals.csv` with raw MT5 deal snapshots returned by `history_deals_get()` for discrepancy diagnostics
+
+- **Adjusted Daily Profit Source**
+  - Loss cleanup now derives daily clean profit from today's closed positions using `history_orders_get()` plus `position_id` matching
+  - This is intended to better align the strategy with the position-style history shown in the MT5 mobile app
+
 ## 2026-03-27 (Prediction Lot Sizing + Trade Log Source)
 
 - **Removed Remaining Balance-Based Lot Sizing**

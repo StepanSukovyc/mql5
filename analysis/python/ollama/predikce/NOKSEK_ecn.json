@@ -1,9 +1,9 @@
 {
   "symbol": "NOKSEK_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Na základě RSI a MA hodnot ukazuje tendenci k poklesu, ale svíčkové formace naznačují obnovení růstu. Fundamentální analýza neposkytuje jasné rozhodnutí.",
-  "timestamp": "2026-03-30T06:26:37.839161+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s cenným papírem. Svíčkové formace a RSI indikují nejistotu s omezenou poptávkou.",
+  "timestamp": "2026-03-30T09:20:32.936824+00:00",
   "model": "deepseek-coder-v2"
 }

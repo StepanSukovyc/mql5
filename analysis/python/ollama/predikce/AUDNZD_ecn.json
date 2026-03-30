@@ -1,9 +1,9 @@
 {
   "symbol": "AUDNZD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle svíčkových formací a RSI je trend stále směrem dolů, ale MA ukazuje stabilitu. Kombinace těchto faktorů doporučuje částečnou konzervativní pozici.",
-  "timestamp": "2026-03-30T07:56:06.216908+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převaha pohybu směrem dolů na základě RSI a MA hodnot. Nedostatek trendu pro BUY.",
+  "timestamp": "2026-03-30T09:54:21.729989+00:00",
   "model": "deepseek-coder-v2"
 }

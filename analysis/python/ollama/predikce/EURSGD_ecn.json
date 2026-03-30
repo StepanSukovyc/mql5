@@ -1,9 +1,9 @@
 {
   "symbol": "EURSGD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu v EUR s potenciálem růstu, ale svíčkové formace a RSI indikují nejistotu s vysokou volatilitou.",
-  "timestamp": "2026-03-30T08:46:44.663615+00:00",
+  "BUY": 60.0,
+  "SELL": 25.0,
+  "HOLD": 15.0,
+  "reasoning": "Zvýšení RSI a MA ukazují na pozitivní tendenci, ale nízké hodnoty v měsíčním timeframe indikují nejistotu.",
+  "timestamp": "2026-03-30T10:45:18.274383+00:00",
   "model": "deepseek-coder-v2"
 }

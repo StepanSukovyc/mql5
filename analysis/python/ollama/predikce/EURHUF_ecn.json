@@ -1,9 +1,9 @@
 {
   "symbol": "EURHUF_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažují indikátory poklesu ceny a silný trend nižších hodnot. I přes některé signály růstu je riziko vyšší.",
-  "timestamp": "2026-03-30T08:33:29.345953+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Zohledňuji svíčkovou formací na vykresleném grafu, kde je vidět potenciál pro pokles. RSI ukazuje překoupenost s tím souvisejícím rizikem růstu. MA hodnoty indikují směr trendu, ale slabost v posledních datech naznačuje nejistotu.",
+  "timestamp": "2026-03-30T10:31:51.479663+00:00",
   "model": "deepseek-coder-v2"
 }

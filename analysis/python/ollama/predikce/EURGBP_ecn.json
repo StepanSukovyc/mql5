@@ -1,9 +1,9 @@
 {
   "symbol": "EURGBP_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle RSI a klouzavých průměrů ukazuje cenový graf slabost, ale fundamentální analýza naznačuje stabilitu s mírným trendem růstu.",
-  "timestamp": "2026-03-30T08:31:35.305663+00:00",
+  "BUY": 50.0,
+  "SELL": 30.0,
+  "HOLD": 20.0,
+  "reasoning": "Rizikové hodnocení je založeno na analýze cenových svíček s tendencí konzolidace a volatilitou. RSI ukazuje střet mezi silnou poptávkou a nabídkou, což naznačuje nejistotu v budoucím směru ceny.",
+  "timestamp": "2026-03-30T10:29:54.925239+00:00",
   "model": "deepseek-coder-v2"
 }

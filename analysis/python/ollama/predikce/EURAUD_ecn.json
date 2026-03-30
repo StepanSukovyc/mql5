@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují signály pro pokles na základě diverzifikovaných indikátorů a svíčkových formací. RSI ukazuje přetíženost trhu.",
-  "timestamp": "2026-03-30T08:23:56.762085+00:00",
+  "reasoning": "Zhoršení makroekonomických podmínek a pokles RSI signalizují silnou pravděpodobnost poklesu kurzu.",
+  "timestamp": "2026-03-30T10:22:16.653327+00:00",
   "model": "deepseek-coder-v2"
 }

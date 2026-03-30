@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
-  "BUY": 25.0,
-  "SELL": 50.0,
-  "HOLD": 25.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem globálních ekonomických faktorů a nedávnými cenovými pohyby. Současně se zhoršením technických signálů RSI a MA indikuje nejistotu.",
-  "timestamp": "2026-03-30T06:47:34.130172+00:00",
+  "BUY": 50.0,
+  "SELL": 20.0,
+  "HOLD": 30.0,
+  "reasoning": "Převažují neutrální nebo pozitivní signály z MA a RSI, s určitými indikacemi přítomnosti koupěnícího tlaku.",
+  "timestamp": "2026-03-30T09:42:34.291696+00:00",
   "model": "deepseek-coder-v2"
 }

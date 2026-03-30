@@ -1,9 +1,9 @@
 {
   "symbol": "FANG_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstový potenciál je omezen zhoršením finančních výsledků společnosti a oslabením trhu, zatímco riziko poklesu roste kvůli volatilitě.",
-  "timestamp": "2026-03-30T08:52:16.378226+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Rozdělení rizikového hodnocení je založeno na analýze RSI a MA. Vzhledem k tomu, že RSI ukazuje slabost v posledních pohybech a MA trendu, je nejvyšší pravděpodobnost pro SELL, s menším rizikem ztráty na HOLD.",
+  "timestamp": "2026-03-30T10:51:03.501353+00:00",
   "model": "deepseek-coder-v2"
 }

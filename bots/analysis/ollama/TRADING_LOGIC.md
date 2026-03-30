@@ -22,9 +22,17 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - lot_size se vždy použije z finální Gemini predikce
    - Každý N-tý obchod: použije se i take_profit z Gemini
    - Ostatní obchody: take_profit se nepoužije
-8. **Provede obchod** - automaticky otevře pozici na MT5
-9. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
-10. **Ukončení** - Ctrl+C
+8. **Vyhodnotí hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
+   - Běží během minutového account monitoru jednou za hodinu v minutě `LOSS_CLEANUP_STRATEGY_MINUTE` (default 45)
+   - Spočítá čistý denní zisk z uzavřených obchodů bez swapů a poplatků
+   - Od něj odečte 1 % z aktuální bilance účtu a získá limit `Z`
+   - Najde otevřenou ztrátovou pozici starší než 7 dní s nejvyšší ztrátou, která je stále menší než `Z`
+   - Do ztráty počítá i swap a syntetický fee `0.10 USD` za každých `0.01` lotu
+   - Pokud je `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáta jen zaloguje a nic nezavírá
+   - V čase 23:00-23:30 CET/CEST se cleanup nespouští
+9. **Provede obchod** - automaticky otevře pozici na MT5
+10. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
+11. **Ukončení** - Ctrl+C
 
 ### Restricted Trading Hours (23:00-23:30 CET/CEST)
 
@@ -37,6 +45,8 @@ Forex trh se v tomto období chová nepředvídatelně. systém tedy:
 Dvojitá kontrola zajišťuje bezpečnost:
 1. Na začátku cyklu: Pokud je restricted time → sleep na 30 minut
 2. Před obchodováním: Pokud je trading trigger v restricted time → zahodí signál a čeká
+
+Stejné okno 23:00-23:30 CET/CEST platí i pro hodinovou cleanup strategii, takže v tomto čase neuzavírá žádné pozice ani v případě, že je dosažena její plánovaná minuta.
 
 ## Ollama Service (Paralelní Proces)
 
@@ -276,6 +286,7 @@ Monitoruje stav účtu v background threadu:
 - Pravidelně kontroluje **efektivní volnou marži** v procentech vůči efektivnímu balance
 - Signalizuje překročení **20% prahu** (konfigurovatelné v .env) pomocí threading.Event
 - Zobrazuje info o účtu (zůstatek, equity, marže)
+- Spouští i hodinovou cleanup strategii, pokud je povolena a je dosažena správná minuta
 - Běží bez blokování hlavního vlákna
 
 **Klíčové funkce:**
@@ -283,6 +294,19 @@ Monitoruje stav účtu v background threadu:
 - `print_account_status()` - výpis na konzoli (včetně % volné marže)
 - `check_stop_condition()` - ověří margin > threshold%, nastavuje event
 - `run_account_monitor()` - monitoring loop v threadu
+
+### 2a. loss_cleanup_strategy.py - Hourly Loss Cleanup
+Volitelná bezpečnostní strategie pro průběžné odlehčení starých ztrátových pozic:
+- Čte runtime konfiguraci přímo z `.env`, takže ji lze za běhu zapnout, vypnout nebo přepnout mezi dry-run a live režimem
+- Vyhodnocuje se nejvýše jednou za hodinu podle `LOSS_CLEANUP_STRATEGY_MINUTE`
+- Počítá `Z = čistý denní zisk - 1 % aktuální bilance`
+- Čistý denní zisk bere z dnešních uzavřených pozic identifikovaných přes `history_orders_get()` a `position_id`, ne pouze z holého seznamu uzavíracích dealů
+- Prochází otevřené pozice starší než 7 dní a vybírá největší ztrátu menší než `Z`
+- Do efektivní ztráty zahrnuje `profit`, `swap` a syntetický fee `0.10 USD / 0.01 lotu`
+- V `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` pouze vypíše kandidáta a zapíše audit do CSV
+- V ostrém režimu používá `close_position_by_ticket()` ze sdílené exekuční vrstvy
+- Zapisuje audit do `trade_logs/loss_cleanup.csv`
+- Pro diagnostiku rozdílů proti mobilní aplikaci zapisuje i raw snapshot dealů z `history_deals_get()` do `trade_logs/loss_cleanup_daily_deals.csv`
 
 ### 3. trading_logic.py - Trading Predictions
 Stahuje data a generuje predikce:
@@ -315,6 +339,9 @@ Relevantní parametry pro risk management:
 
 - `TRADING_MARGIN_THRESHOLD=20` určuje, při jakém poměru efektivní volné marže k efektivnímu balance se spustí trading flow
 - `TRADING_ACCOUNT_BALANCE_CAP=5000` určuje maximální balance, se kterou strategie počítá lot sizing a margin check
+- `LOSS_CLEANUP_STRATEGY_ENABLED=true` zapíná hodinovou cleanup strategii
+- `LOSS_CLEANUP_STRATEGY_MINUTE=45` určuje minutu v hodině, kdy se má cleanup vyhodnotit
+- `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání pozic
 - Pokud je skutečný balance nižší než strop, žádná rezerva se neuplatní
 
 **Klíčové funkce:**

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Vysoká volatilita s omezeným pohybem. RSI a MA ukazují slabost. Potenciál pro zeslabení koruna.",
-  "timestamp": "2026-03-30T08:44:54.792455+00:00",
+  "reasoning": "RSI ukazuje přeouzení do přeužitých oblastí, MA indikátor nepodporuje jasný trend. Nedostatek jasných signálů.",
+  "timestamp": "2026-03-30T10:43:23.998829+00:00",
   "model": "deepseek-coder-v2"
 }

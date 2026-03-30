@@ -27,9 +27,17 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - `lot_size` se vždy použije z finální Gemini predikce
   - Každý N-tý obchod: použije se i `take_profit` od Gemini
   - Ostatní obchody: `take_profit` se nepoužije
-8. **Provede obchod** na MT5 podle aktivního režimu
-9. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
-10. **Vrátí se na krok 3** (restart monitoring)
+8. **Hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
+  - Každou hodinu v minutě `LOSS_CLEANUP_STRATEGY_MINUTE` (default 45) spočítá čistý denní zisk bez swapů a poplatků
+  - Pro výpočet používá dnešní ukončené pozice podle `position_id`, aby se výsledek víc blížil přehledu Pozice v MT5 aplikaci
+  - Od výsledku odečte 1 % z aktuální bilance účtu a získá limit `Z`
+  - Z otevřených pozic starších než 7 dní najde největší ztrátovou pozici, jejíž ztráta včetně swapu a poplatku `0.10 USD` za každých `0.01` lotu je stále menší než `Z`
+  - Pokud taková pozice existuje, uzavře ji; jinak neudělá nic
+  - V čase 23:00-23:30 CET/CEST se cleanup nespouští stejně jako běžné obchodování
+  - Přepínač `LOSS_CLEANUP_STRATEGY_DRY_RUN` (default `true`) vypíše kandidáta a zaloguje akci, ale pozici skutečně nezavře
+9. **Provede obchod** na MT5 podle aktivního režimu
+10. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
+11. **Vrátí se na krok 3** (restart monitoring)
 
 **Automatické pozastavení v kritických hodinách:**
 - **23:00-23:30 CET/CEST**: Trh se chová nepředvídatelně, žádné obchody a analýzy
@@ -114,6 +122,9 @@ GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-fl
 
 # Každý N-tý obchod je plně řízen Gemini (lot_size + take_profit)
 GEMINI_FULL_CONTROL_EVERY_N_TRADES=3
+LOSS_CLEANUP_STRATEGY_ENABLED=true
+LOSS_CLEANUP_STRATEGY_MINUTE=45
+LOSS_CLEANUP_STRATEGY_DRY_RUN=true
 
 # Ollama service konfigurace (nezávislé predikce)
 OLLAMA_ENABLED=true
@@ -189,6 +200,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 
 - **logika.py** - Hlavní orchestrace nekonečného cyklu (monitoring → predikce → finální rozhodnutí → obchod → restart)
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
+- **loss_cleanup_strategy.py** - Volitelná hodinová strategie pro uzavření jedné starší ztrátové pozice podle limitu `Z`
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
 - **ollama_service.py** - Paralelní služba generující predikce pomocí lokálního Ollama AI (běží v samostatném threadu)
@@ -199,6 +211,9 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - `<SERVICE_DEST_FOLDER>/<timestamp>/predikce/*.json` - Filtrované predikce
 - `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json` - Finální rozhodnutí
 - `<SERVICE_DEST_FOLDER>/ollama/predikce/{symbol}.json` - Předchystané Ollama predikce (použitelné v hlavní logice při stáří <= 1h)
+- `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup.csv` - Audit hodinové cleanup strategie včetně hodnot `daily_clean_profit`, `Z` a případně uzavřené pozice
+- `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup_daily_deals.csv` - Diagnostický snapshot všech dealů, které MT5 API při cleanup běhu skutečně vrátilo
+- Dokud testujete, nechte `LOSS_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
 
 ## Poznamky
 

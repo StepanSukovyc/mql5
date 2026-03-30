@@ -1,9 +1,9 @@
 {
   "symbol": "GBPNZD_ecn",
   "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu. Buysignály jsou slabší, zatímco sellsignály jsou méně jasné.",
-  "timestamp": "2026-03-30T09:03:21.317160+00:00",
+  "SELL": 50.0,
+  "HOLD": 10.0,
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace indikují závěr na úrovni supportu.",
+  "timestamp": "2026-03-30T11:02:56.581561+00:00",
   "model": "deepseek-coder-v2"
 }

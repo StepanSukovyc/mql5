@@ -1,9 +1,9 @@
 {
   "symbol": "US100_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
-  "HOLD": 20.0,
-  "reasoning": "Zvýšení RSI v posledních třech měsících ukazuje silnou pozitivní tendenci. Klíčové podporové hladiny na MA pomáhají potvrdit tento trend.",
-  "timestamp": "2026-03-30T06:45:40.071709+00:00",
+  "BUY": 25.0,
+  "SELL": 50.0,
+  "HOLD": 25.0,
+  "reasoning": "Kombinace RSI pod 30 a MA trendem dolů indikují pokles. Nicméně, svíčková formační analýza ukazuje na mírný nárůst v posledních třech měsících.",
+  "timestamp": "2026-03-30T09:40:24.542990+00:00",
   "model": "deepseek-coder-v2"
 }

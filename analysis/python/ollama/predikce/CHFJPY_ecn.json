@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vysokým RSI a nízkou cenou. Vysoký objem v období měsíce indikuje silnou volatilitu, což naznačuje nejistotu.",
-  "timestamp": "2026-03-30T08:12:41.126232+00:00",
+  "reasoning": "Zhoršení makroekonomických podmínek a technická analýza svědčí pro nárůst volatility. RSI indikuje přeprodanost, ale MA ukazuje slabou tendenci.",
+  "timestamp": "2026-03-30T10:10:57.199243+00:00",
   "model": "deepseek-coder-v2"
 }

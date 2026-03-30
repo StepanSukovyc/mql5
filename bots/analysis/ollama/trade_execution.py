@@ -16,6 +16,63 @@ from trading_validation import check_margin_requirements, validate_lot_size, val
 TRADE_LOG_HEADERS = ["timestamp", "symbol", "action", "lot_size", "lot_source", "price", "success", "error_msg"]
 
 
+def close_position_by_ticket(
+	position_ticket: int,
+	symbol: str,
+	position_type: int,
+	volume: float,
+	*,
+	comment: str = "Close position",
+) -> bool:
+	"""Close an existing MT5 position by sending the opposite market order."""
+	tick = get_symbol_tick(symbol)
+	if tick is None:
+		print(f"❌ Failed to get tick for closing {symbol}: {mt5.last_error()}")
+		return False
+
+	if position_type == mt5.POSITION_TYPE_BUY:
+		close_type = mt5.ORDER_TYPE_SELL
+		price = tick.bid
+	elif position_type == mt5.POSITION_TYPE_SELL:
+		close_type = mt5.ORDER_TYPE_BUY
+		price = tick.ask
+	else:
+		print(f"❌ Unsupported position type for ticket {position_ticket}: {position_type}")
+		return False
+
+	request = {
+		"action": mt5.TRADE_ACTION_DEAL,
+		"symbol": symbol,
+		"volume": volume,
+		"type": close_type,
+		"position": position_ticket,
+		"price": price,
+		"deviation": 20,
+		"magic": 234000,
+		"comment": comment,
+		"type_time": mt5.ORDER_TIME_GTC,
+		"type_filling": mt5.ORDER_FILLING_IOC,
+	}
+
+	result = mt5.order_send(request)
+	if result is None:
+		print(f"❌ Position close failed for ticket {position_ticket}: {mt5.last_error()}")
+		return False
+
+	if result.retcode != mt5.TRADE_RETCODE_DONE:
+		print(
+			f"❌ Position close failed for ticket {position_ticket}: "
+			f"{result.retcode} - {result.comment}"
+		)
+		return False
+
+	print(
+		f"✅ Position closed: ticket={position_ticket}, symbol={symbol}, "
+		f"volume={volume}, price={result.price}"
+	)
+	return True
+
+
 def _ensure_trade_log_schema(log_file: Path) -> None:
 	"""Ensure trade log CSV contains the current headers, migrating legacy files if needed."""
 	if not log_file.exists():

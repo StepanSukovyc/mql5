@@ -1,9 +1,9 @@
 {
   "symbol": "EURMXN_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle svíčkových formací a RSI indikátoru může být trend směrem dolů s některými cenovými pohyby, ale MA hodnoty ukazují stabilitu. Kombinace těchto faktorů vede k nejistotě a doporučení držet pozici.",
-  "timestamp": "2026-03-30T08:37:19.122125+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažující pohled je na pokles kurzu z důvodu negativních fundamentálních indikátorů a silného RSI ve směru klesajícímu. MA ukazuje slabší signál, ale je potřeba dbát pozor na možnost zotavení.",
+  "timestamp": "2026-03-30T10:35:44.041127+00:00",
   "model": "deepseek-coder-v2"
 }

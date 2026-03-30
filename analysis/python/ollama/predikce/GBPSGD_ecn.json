@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem měnových politik a globální ekonomické stavby. Historické trendy podporují stabilitu, ale nedostatečné objemy obchodů naznačují neistotu.",
-  "timestamp": "2026-03-30T09:05:12.100528+00:00",
+  "reasoning": "Základní analýza ukazuje podporu na úrovni 1.4000 pro GBP/SGD, zatímco RSI a MA indikují slabší vývoj.",
+  "timestamp": "2026-03-30T11:04:57.836366+00:00",
   "model": "deepseek-coder-v2"
 }

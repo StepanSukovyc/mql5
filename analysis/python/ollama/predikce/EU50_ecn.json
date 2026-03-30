@@ -1,9 +1,9 @@
 {
   "symbol": "EU50_ecn",
-  "BUY": 30.0,
-  "SELL": 40.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Zohledňuji svíčkové formace a RSI signalizuje překoupenost. Nicméně, MA ukazuje silnou podporu, což mi dává jistotu o tom, že cena může i nadále růst.",
-  "timestamp": "2026-03-30T08:22:02.816199+00:00",
+  "reasoning": "Podle RSI a klouzavých průměrů je trend stoupající, ale s nárustem volatility. Hodnocení zohledňuje riziko a potenciál růstu.",
+  "timestamp": "2026-03-30T10:20:23.731999+00:00",
   "model": "deepseek-coder-v2"
 }

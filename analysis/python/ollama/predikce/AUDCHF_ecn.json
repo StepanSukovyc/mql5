@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCHF_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozhodování je založeno na známkách podporujících růst ceny (MA a RSI ukazují pozitivní vývoj), ale také existuje tlak směřující k poklesu způsobený silnou pohyblivostí cen. Kompromisem je tedy HOLD.",
-  "timestamp": "2026-03-30T07:52:29.379325+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Zhoršení fundamentálních ukazatelů s růstem volatility a slabší signály z MA indikuje nejistotu.",
+  "timestamp": "2026-03-30T09:50:30.238618+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "UK100_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 60.0,
+  "SELL": 20.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové momentum je slabší, ale zároveň cenový model ukazuje podporu. RSI a MA indikují nejistotu s volatilitou.",
-  "timestamp": "2026-03-30T06:41:52.540312+00:00",
+  "reasoning": "Zvýšení RSI v posledních měsících a stabilita MA sugerují potenciál růstu. Nicméně, pokles v minulých třech měsících naznačuje určitou nejistotu.",
+  "timestamp": "2026-03-30T09:36:18.158011+00:00",
   "model": "deepseek-coder-v2"
 }

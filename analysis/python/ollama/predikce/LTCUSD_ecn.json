@@ -1,9 +1,9 @@
 {
   "symbol": "LTCUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět nárůst tlaku kupujících, ale stále převažuje tlak prodávajících. Doporučuji držet pozici dokud trh neobjeví jasný směr.",
-  "timestamp": "2026-03-30T06:22:46.713957+00:00",
+  "BUY": 60.0,
+  "SELL": 20.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle RSI a MA je trend směrem nahoru, ale cenový model svíček indikuje nejistotu s možnostmi růstu.",
+  "timestamp": "2026-03-30T09:16:32.753908+00:00",
   "model": "deepseek-coder-v2"
 }

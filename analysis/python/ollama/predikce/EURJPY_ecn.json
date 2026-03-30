@@ -1,9 +1,9 @@
 {
   "symbol": "EURJPY_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s tržním prostředím. Svíčkové formace a RSI indikují mírný pokles, ale MA trend ukazuje silnou podporu.",
-  "timestamp": "2026-03-30T08:35:23.506662+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět nárůst tlaku prodlužujícího se trendu, ale také přítomnost silných odporových hladin. V současné době může být nejbezpečnější strategie držet pozici.",
+  "timestamp": "2026-03-30T10:33:47.714316+00:00",
   "model": "deepseek-coder-v2"
 }

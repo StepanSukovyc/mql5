@@ -1,9 +1,9 @@
 {
   "symbol": "EURCZK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršení makroekonomických indikátorů s lednem a únorou, ale nárůst v březnu může signalizovat stabilizaci.",
-  "timestamp": "2026-03-30T08:29:41.348266+00:00",
+  "BUY": 20.0,
+  "SELL": 60.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle svíčkových formací a RSI může dojít k poklesu ceny, ale zároveň MA ukazuje silnou podporu, což mi dává pocit nejistoty.",
+  "timestamp": "2026-03-30T10:27:59.544160+00:00",
   "model": "deepseek-coder-v2"
 }

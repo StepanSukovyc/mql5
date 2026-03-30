@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Při pohledu na svíčkové grafy je zřejmé sestupné tlaku, což podporuje SELL. RSI ukazuje přetížení prodejního signálu a MA indikace divergence, která může být impulzivním pohybem směrem nahoru.",
-  "timestamp": "2026-03-30T06:24:42.710184+00:00",
+  "reasoning": "Převažující tendence je klesající s ohledem na technické indikátory a pokles cen v minulosti. Nicméně, fundamentální analýza naznačuje stabilitu s pozitivními aspekty.",
+  "timestamp": "2026-03-30T09:18:35.854276+00:00",
   "model": "deepseek-coder-v2"
 }

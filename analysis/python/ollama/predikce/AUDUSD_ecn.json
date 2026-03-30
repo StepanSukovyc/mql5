@@ -1,9 +1,9 @@
 {
   "symbol": "AUDUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stabilita s tendencí k růstu. Nicméně, cenový model svíček naznačuje možnost dalšího poklesu.",
-  "timestamp": "2026-03-30T07:59:53.433842+00:00",
+  "reasoning": "Růstový impulz s náznaky zotavení počasím a silnou MA. RSI indikuje překoupenost.",
+  "timestamp": "2026-03-30T09:58:09.515841+00:00",
   "model": "deepseek-coder-v2"
 }

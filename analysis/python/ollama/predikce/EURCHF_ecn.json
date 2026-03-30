@@ -1,9 +1,9 @@
 {
   "symbol": "EURCHF_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Podle RSI a klouzavých průměrů je trend směrem nahoru, ale zároveň dochází k oslabení síly růstu. Doporučuji držet pozici kvůli stabilitě v méně pohyblivých časových úsecích.",
-  "timestamp": "2026-03-30T08:27:47.730755+00:00",
+  "reasoning": "Růstové impulzy podle MA a pozitivní divergence RSI signalizují obnovu růstových tendencí. Nicméně, silná odolnost proti růstu indikovala riziko poklesu v těchto situacích.",
+  "timestamp": "2026-03-30T10:26:05.652525+00:00",
   "model": "deepseek-coder-v2"
 }
