@@ -1,9 +1,9 @@
 {
   "symbol": "EURPLN_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je v růstu cen, ale vysoké RSI a MA hodnoty ukazují na potenciál růstu. Nicméně, zhoršení situace ekonomického prostředí a technických indikátorů naznačuje riziko poklesu.",
-  "timestamp": "2026-03-27T17:14:15.069680+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale cenový model svíček naznačuje možnost otočení. Současná podmínka měny je neutrální s ohledem na základní analýzu.",
+  "timestamp": "2026-03-30T08:43:01.702069+00:00",
   "model": "deepseek-coder-v2"
 }

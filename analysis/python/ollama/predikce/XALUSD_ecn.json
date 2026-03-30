@@ -1,9 +1,9 @@
 {
   "symbol": "XALUSD_ecn",
   "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy jsou slabší než klesající trend, ale stále pozitivně vibruje podpora na nižších časových úrovních.",
-  "timestamp": "2026-03-27T15:55:29.570512+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení makroekonomických podmínek a pokles RSI signalizují opakované pohyby na trhu.",
+  "timestamp": "2026-03-30T07:21:51.710541+00:00",
   "model": "deepseek-coder-v2"
 }

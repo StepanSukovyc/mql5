@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDCAD_ecn",
+  "action": "BUY",
+  "lot_size": 0.03,
+  "take_profit": 1.37,
+  "reasoning": "Nemám otevřenou pozici USDCAD_ecn. Predikce uvádí 60% šanci na BUY. RSI je v p\u0159ekoupen\u00e9 z\u00f3n\u011b na krat\u0161\u00edch timeframech (1h, 4h, day), co\u017e nazna\u010duje mo\u017enou korekci. Dlouhodob\u011bj\u0161\u00ed (week, month) RSI indikuj\u00ed prostor pro dal\u0161\u00ed r\u016fst. Cena je aktu\u00e1ln\u011b pod m\u011bs\u00ed\u010dn\u00edm MA, ale nad ostatn\u00edmi MA. Sv\u00ed\u010dkov\u00e9 formace z posledn\u00edch hodin ukazuj\u00ed na pokra\u010duj\u00edc\u00ed n\u00e1kupn\u00ed tlak. Stanovil jsem take_profit na 1.37, co\u017e je realistick\u00e1 hodnota s ohledem na p\u0159edpov\u011bd"
+}

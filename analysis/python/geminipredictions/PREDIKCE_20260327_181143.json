@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XPDUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 700.00,
+  "reasoning": "Obchod #54 je plně řízen Gemini (každý 3.). XPDUSD_ecn má 100% SELL predikci. Momentální equity je 2867.92 USD. Doporučený lot size 0.01 je velmi konzervativní a minimalizuje riziko. Take profit nastaven na 700.00 USD. Transakční poplatek je 0.10 USD, takže i při dosažení TP má obchod dobrý potenciál zisku. Diverzifikace je splněna, protože tento symbol není aktuálně v otevřených pozicích."
+}

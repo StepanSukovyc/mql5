@@ -1,9 +1,9 @@
 {
   "symbol": "USDNOK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale zhoršuje se volatilita. Svíčkové formace naznačují nejistotu.",
-  "timestamp": "2026-03-27T15:40:32.613301+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové signály jsou potenciálně podpořeny silnou měnovou politikou centrální banky a pozitivním světovým ekonomickým ukazateli. Nicméně, riziko volatilita je vysoké kvůli politickým a ekonomickým nepředvídatelnostem.",
+  "timestamp": "2026-03-30T07:06:39.791459+00:00",
   "model": "deepseek-coder-v2"
 }

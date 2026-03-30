@@ -1,9 +1,9 @@
 {
   "symbol": "EURGBP_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezeny silnou odporovou hladinou. Indikátor RSI indikuje přebujednost prodlužující se divergence a následný pokles.",
-  "timestamp": "2026-03-27T17:02:26.529239+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Podle RSI a klouzavých průměrů ukazuje cenový graf slabost, ale fundamentální analýza naznačuje stabilitu s mírným trendem růstu.",
+  "timestamp": "2026-03-30T08:31:35.305663+00:00",
   "model": "deepseek-coder-v2"
 }

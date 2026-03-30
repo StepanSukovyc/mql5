@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURSGD_ecn",
+  "action": "BUY",
+  "lot_size": 0.08,
+  "take_profit": 1.465,
+  "reasoning": "EURSGD_ecn má podle predikce 60% šanci na BUY. Navrhuji BUY, protože symbol není aktuálně v portfoliu, což zajistí diverzifikaci. Aktuální volná marže je 1254.93 USD. S lot size 0.08 bude transakční poplatek 0.8 USD, což je zanedbatelné. Take profit jsem nastavil na 1.465, aby obchod dával ekonomický smysl i po odečtení poplatků a zohledňoval aktuální rostoucí trend."
+}

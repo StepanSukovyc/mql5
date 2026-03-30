@@ -1,9 +1,9 @@
 {
   "symbol": "NZDSGD_ecn",
   "BUY": 30.0,
-  "SELL": 40.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové potenciály jsou omezená z důvodu nižších hodnot MA a RSI. Nicméně, cenový pohyb ukazuje stabilitu, což naznačuje, že nemusí dojít k prudkým pohybům.",
-  "timestamp": "2026-03-27T15:09:49.088975+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Riziko ztráty je vyšší kvůli volatilitě trhu. RSI a MA ukazují slabost síly ceny, ale také potenciál pro obrat.",
+  "timestamp": "2026-03-30T06:36:12.806136+00:00",
   "model": "deepseek-coder-v2"
 }

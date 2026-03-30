@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURSGD_ecn",
+  "action": "BUY",
+  "lot_size": 0.08,
+  "take_profit": 1.465,
+  "reasoning": "Podle sv\u00ed\u010dkov\u00fdch formac\u00ed a RSI indik\u00e1toru ukazuj\u00ed cenov\u00fd graf potenci\u00e1l pro r\u016fst u symbolu EURSGD_ecn. Historick\u00e9 hodnoty MA podporuj\u00ed tento pohyb. Nemám otevřenou pozici na EURSGD_ecn, což je v souladu s diverzifikací. Vzhledem ke stavu účtu a transakčním nákladům doporučuji lot_size 0.08 a take_profit 1.465, aby obchod dával ekonomický smysl. Jde o 57. obchod, který není plně řízen Gemini, takže TP se pošle, ale nebude použit."
+}

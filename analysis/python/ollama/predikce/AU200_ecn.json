@@ -1,9 +1,9 @@
 {
   "symbol": "AU200_ecn",
-  "BUY": 60.0,
-  "SELL": 30.0,
-  "HOLD": 10.0,
-  "reasoning": "Podle RSI a klouzavých průměrů indikuje nárust trhu s tendencí pokračovat v růstu, ale také vysoká volatilita signalizuje riziko.",
-  "timestamp": "2026-03-27T17:56:20.224191+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem globálních trhů a negativního sentimentu. Nedávný pokles naznačuje další pohyb dolů.",
+  "timestamp": "2026-03-30T07:48:52.359231+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "CADCHF_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převládajícím signálem je pokles cen pomocí svíčkových formací a RSI ukazuje slabost. Mimo to, MA hodnoty indikují další pokračování trendu dolů.",
-  "timestamp": "2026-03-27T16:37:17.480038+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace ukazují zeslabování síly poklesu.",
+  "timestamp": "2026-03-30T08:07:12.312749+00:00",
   "model": "deepseek-coder-v2"
 }

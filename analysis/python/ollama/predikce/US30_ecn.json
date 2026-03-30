@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
   "BUY": 25.0,
-  "SELL": 40.0,
-  "HOLD": 35.0,
-  "reasoning": "Zohlednil jsem svíčkové formace a RSI, které ukazují tendenci k oživení, ale důležité úrovně podpory/odporu ještě nebyly překonány.",
-  "timestamp": "2026-03-27T15:21:18.352041+00:00",
+  "SELL": 50.0,
+  "HOLD": 25.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem globálních ekonomických faktorů a nedávnými cenovými pohyby. Současně se zhoršením technických signálů RSI a MA indikuje nejistotu.",
+  "timestamp": "2026-03-30T06:47:34.130172+00:00",
   "model": "deepseek-coder-v2"
 }

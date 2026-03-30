@@ -1,9 +1,9 @@
 {
   "symbol": "EURSEK_ecn",
-  "BUY": 40.0,
-  "SELL": 20.0,
-  "HOLD": 40.0,
-  "reasoning": "Podle RSI a klouzavých průměrů ukazuje cena na hraně trendu. Historické hodnoty podporují stabilitu.",
-  "timestamp": "2026-03-27T17:16:11.860539+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Vysoká volatilita s omezeným pohybem. RSI a MA ukazují slabost. Potenciál pro zeslabení koruna.",
+  "timestamp": "2026-03-30T08:44:54.792455+00:00",
   "model": "deepseek-coder-v2"
 }

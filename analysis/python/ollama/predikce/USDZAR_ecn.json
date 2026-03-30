@@ -1,9 +1,9 @@
 {
   "symbol": "USDZAR_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě fundamentálních faktorů a svíčkových formací s ohledem na RSI a MA hodnoty je nejistota v rámci range cenového pohybu. Doporučuji držet pozici.",
-  "timestamp": "2026-03-27T15:48:10.079081+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Riziko růstu je omezováno vysokými úrovněmi RSI a MA, zatímco riziko poklesu roste v souvislosti s negativním fundamentem.",
+  "timestamp": "2026-03-30T07:14:16.212921+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "VIX_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Riziko trhu je vyšší, ale síla trendu (MA a RSI) naznačuje pokračující stabilitu. Křivka VIX ukazuje určitou neutrálnost.",
-  "timestamp": "2026-03-27T15:51:50.106511+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Převládající sentiment je neutrální s tendencí růstu na základě pozitivních fundamentálních faktorů a potenciálu restrukturalizace trhu.",
+  "timestamp": "2026-03-30T07:18:03.309767+00:00",
   "model": "deepseek-coder-v2"
 }

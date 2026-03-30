@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "SELL",
+  "lot_size": 0.02,
+  "take_profit": 105.00,
+  "reasoning": "Účet nemá otevřenou pozici na USOIL_ecn. Predikce doporučuje SELL (60%) s tím, že trh je overextended a může dojít ke korekci. RSI na týdenním grafu je overbought, což naznačuje potenciální pullback. Zvážil jsem transakční náklady 0.20 USD a zvolil take_profit na realistické úrovni. Lot size 0.02 je zvolen s ohledem na volnou marži a snahu o minimalizaci rizika."
+}

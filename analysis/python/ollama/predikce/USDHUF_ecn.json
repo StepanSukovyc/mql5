@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Dle fundamentální analýzy je měna silně ovlivňována makroekonomickými faktory. Svíčkové formace a RSI indikují nejistotu s tržním tempem, doporučuji tedy držet pozici.",
-  "timestamp": "2026-03-27T15:32:51.217860+00:00",
+  "reasoning": "Podle RSI a MA je trend ceny stále směrem dolů, ale fundamentální analýza ukazuje stabilitu a očekává se pokračování v růstu.",
+  "timestamp": "2026-03-30T06:58:57.996382+00:00",
   "model": "deepseek-coder-v2"
 }

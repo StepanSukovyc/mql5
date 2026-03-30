@@ -1,9 +1,9 @@
 {
   "symbol": "NGAS_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je zřejmé, že cena má tendenci se odrážet od horní hranice MA, což naznačuje silnou odolnost. Nicméně, nedostatek jasných signálů pro nákup a přítomnost diverzifikovaných rizik může vést k nejistotě.",
-  "timestamp": "2026-03-27T14:58:36.676821+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na svíčkové grafy je zřejmé sestupné tlaku, což podporuje SELL. RSI ukazuje přetížení prodejního signálu a MA indikace divergence, která může být impulzivním pohybem směrem nahoru.",
+  "timestamp": "2026-03-30T06:24:42.710184+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "EU50_ecn",
-  "BUY": 20.0,
-  "SELL": 70.0,
-  "HOLD": 10.0,
-  "reasoning": "Převažují signály pro prodej založené na přehnaně návalovitých cenách a silném pohybu dolů. Technická analýza s RSI ukazuje velmi nízké hodnoty, což naznačuje nadprůměrnou poptávku po prodeji.",
-  "timestamp": "2026-03-27T16:52:45.957199+00:00",
+  "BUY": 30.0,
+  "SELL": 40.0,
+  "HOLD": 30.0,
+  "reasoning": "Zohledňuji svíčkové formace a RSI signalizuje překoupenost. Nicméně, MA ukazuje silnou podporu, což mi dává jistotu o tom, že cena může i nadále růst.",
+  "timestamp": "2026-03-30T08:22:02.816199+00:00",
   "model": "deepseek-coder-v2"
 }

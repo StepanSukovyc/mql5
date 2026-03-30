@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURSGD_ecn",
+  "action": "BUY",
+  "lot_size": 0.07,
+  "take_profit": 1.455,
+  "reasoning": "Order #57 je fully managed (Gemini), takže generuji lot i take profit. Account balance je 4079.27. Diverzifikace je zajištěna, symbol EURSGD_ecn není aktuálně otevřený. EURSGD_ecn má predikci BUY: 60, SELL: 25, HOLD: 15, reasoning: \"Podle sv\u00ed\u010dkov\u00fdch formac\u00ed a RSI indik\u00e1toru ukazuj\u00ed cenov\u00fd graf potenci\u00e1l pro r\u016fst. Historick\u00e9 hodnoty MA podporuj\u00ed tento pohyb.\" Zvolil jsem lot_size 0.07 tak, aby transakční náklady byly nízké, ale zároveň pozice generovala zajímavé zisky v řádu jednotek USD.  Take profit 1.455 je realistický cíl na základě historických cen. Za každých 0.01 lot je poplatek 0.10 USD, takže poplatek za 0.07 lot je 0.70 USD. I po odečtení tohoto poplatku by měl obchod přinést zisk."
+}

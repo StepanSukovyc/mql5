@@ -1,9 +1,9 @@
 {
   "symbol": "USDHKD_ecn",
   "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Růst cen je podporován zvýšením poptávky a stabilitou ekonomického prostředí. RSI ukazuje silnou tendenci na růst, ale také některé indikace vyčerpání impulsů.",
-  "timestamp": "2026-03-27T15:30:55.620996+00:00",
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza a RSI ukazují slabost na trhu, ale MA poskytuje stabilitu. Doporučuji držet pozici.",
+  "timestamp": "2026-03-30T06:57:03.719074+00:00",
   "model": "deepseek-coder-v2"
 }

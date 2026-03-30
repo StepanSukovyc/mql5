@@ -3,7 +3,7 @@
   "BUY": 25.0,
   "SELL": 50.0,
   "HOLD": 25.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nárůst BUY pravděpodobnosti je omezen slabostí v datech.",
-  "timestamp": "2026-03-27T17:26:02.056453+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět střednědobý trend směřující nahoru, avšak krátkodobé cenové akce naznačují možnost dalšího poklesu. Riziko se tedy rozděluje mezi nákup a držení pozice.",
+  "timestamp": "2026-03-30T08:54:08.063268+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "USDMXN_ecn",
-  "BUY": 20.0,
-  "SELL": 70.0,
-  "HOLD": 10.0,
-  "reasoning": "Vysoké hodnoty RSI a MA indikují silnou tendenci růstu. Nicméně, záporné fundamentální ukazatele a těsnější svíčkové formace naznačují omezenou předpovědní schopnost.",
-  "timestamp": "2026-03-27T15:38:38.201474+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Převažují indikátory pro pokles cen z důvodu silného trendu a nárůstu volatility.",
+  "timestamp": "2026-03-30T07:04:43.698802+00:00",
   "model": "deepseek-coder-v2"
 }

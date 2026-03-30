@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURSGD_ecn",
+  "action": "BUY",
+  "lot_size": 0.06,
+  "take_profit": 1.46,
+  "reasoning": "Aktuální pořadí obchodu je #57, což znamená, že každý 3. obchod je plně řízen Gemini. Protože 57 není dělitelné 3, tento obchod není plně řízen Gemini, takže take_profit se ve finální exekuci ignoruje. Preferuji diverzifikaci portfolia, takže se vyhýbám symbolům, které již mám otevřené pozice. EURSGD_ecn není mezi mými otevřenými pozicemi. Dle obchodní predikce má EURSGD_ecn BUY s pravděpodobností 60%, což je nejvyšší z nabízených měnových párů. Cena má potenciál pro růst dle svíčkových formací a RSI indikátoru. Historické hodnoty MA podporují tento pohyb. Výpočet lot_size: Mám margin_free 1258.05 USD. Chci riskovat maximálně 2 % balance, což je 4079.27 * 0.02 = 81.59 USD.  EUR SGD má aktuální cenu cca 1.45.  Předpokládám, že budu riskovat cca 100 pipů (0.0100).  Velikost lotu = (81.59 / 100 pipů) / (0.10 USD / 0.01 lot) = 0.08159 lot. Zvolil jsem konzervativnější lot_size 0.06. Poplatek za obchod: 0.06 / 0.01 * 0.10 USD = 0.60 USD. Take_profit: Nastavuji realistický take_profit 1.46, což představuje zisk zhruba 100 pipů. Zisk bez poplatku: 0.06 lot * 100 pipů * 10 USD/pip = 60 USD. Zisk s poplatkem: 60 - 0.60 = 59.40 USD."
+}

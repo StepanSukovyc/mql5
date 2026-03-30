@@ -1,9 +1,9 @@
 {
   "symbol": "EURCAD_ecn",
-  "BUY": 0.0,
-  "SELL": 85.0,
-  "HOLD": 15.0,
-  "reasoning": "Na základě fundamentální analýzy (stabilita makroekonomických ukazatelů) a svíčkových formací s ohledem na RSI a MA hodnoty je přijetí strategie SELL vhodnější rizikové rozhodnutí.",
-  "timestamp": "2026-03-27T16:56:38.850088+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tendence, což naznačuje potenciální zlepšení. Nicméně, přítomnost významných supportů a resistance úrovní dává prostor pro volatilitu.",
+  "timestamp": "2026-03-30T08:25:51.933869+00:00",
   "model": "deepseek-coder-v2"
 }

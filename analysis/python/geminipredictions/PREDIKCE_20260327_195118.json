@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURSGD_ecn",
+  "action": "BUY",
+  "lot_size": 0.05,
+  "take_profit": 1.445,
+  "reasoning": "EURSGD_ecn má silný nákupní signál (BUY 60%, SELL 25%). Model predikuje potenciál pro růst ceny na základě svíčkových formací a indikátoru RSI a MA. V současnosti nemám na tomto symbolu žádnou otevřenou pozici, čímž se diverzifikuje portfolio. Současný margin free je 1259.54. Poplatek za 0.05 lot bude 0.50 USD (5*0.10 USD). Realistický take profit je nastaven tak, aby pokryl poplatek a generoval zisk."
+}

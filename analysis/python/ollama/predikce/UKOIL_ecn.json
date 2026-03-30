@@ -1,9 +1,9 @@
 {
   "symbol": "UKOIL_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech s podporou RSI a MA ukazují potenciál růstu. Nicméně, pokles v minulosti může být důsledkem nedávných událostí.",
-  "timestamp": "2026-03-27T15:17:29.242711+00:00",
+  "reasoning": "Riziko je závislé na volatilitě a trendu. Růstový potenciál je omezen krátkodobým růstem, zatímco poklesové riziko roste v důsledku silného klesajícího trendu.",
+  "timestamp": "2026-03-30T06:43:46.548920+00:00",
   "model": "deepseek-coder-v2"
 }

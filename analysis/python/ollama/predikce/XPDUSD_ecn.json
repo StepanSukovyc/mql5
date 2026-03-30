@@ -1,9 +1,9 @@
 {
   "symbol": "XPDUSD_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoké hodnoty RSI a MA indikují pokles ceny. Nedostatek signálů pro nákup.",
-  "timestamp": "2026-03-27T16:04:41.574671+00:00",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět poptávka po prodeji, ale zároveň pozitivní trend v MA. Kombinace těchto faktorů doporučuje držet pozici.",
+  "timestamp": "2026-03-30T07:31:20.566407+00:00",
   "model": "deepseek-coder-v2"
 }

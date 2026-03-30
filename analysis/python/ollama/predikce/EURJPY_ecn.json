@@ -1,9 +1,9 @@
 {
   "symbol": "EURJPY_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale mnoho svíček ukazuje prodejní signály. Hodnocení zohledňuje riziko i poptávku.",
-  "timestamp": "2026-03-27T17:06:24.040329+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s tržním prostředím. Svíčkové formace a RSI indikují mírný pokles, ale MA trend ukazuje silnou podporu.",
+  "timestamp": "2026-03-30T08:35:23.506662+00:00",
   "model": "deepseek-coder-v2"
 }

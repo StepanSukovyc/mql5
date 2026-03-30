@@ -1,9 +1,9 @@
 {
   "symbol": "EURUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme signály divergence a pokles trendu. Nicméně, fundamentální analýza ukazuje stabilitu s růstem tržních podmínek.",
-  "timestamp": "2026-03-27T17:20:07.403873+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstový impulz s ohledem na silnou podporu MA a pozitivní RSI signalizuje možnost růstu. Nicméně, pokles v posledních třech měsících naznačuje určitou nejistotu.",
+  "timestamp": "2026-03-30T08:48:35.719950+00:00",
   "model": "deepseek-coder-v2"
 }

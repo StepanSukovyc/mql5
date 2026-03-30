@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Převažující pohled je na pokles kurzu v důsledku silného růstu eura a oslabování novozélandského dolaru.",
-  "timestamp": "2026-03-27T17:12:16.540879+00:00",
+  "reasoning": "Růstové potenciály jsou omezeny vlivem makroekonomických faktorů a technických signálů ukazuje na volatilitu.",
+  "timestamp": "2026-03-30T08:41:06.811830+00:00",
   "model": "deepseek-coder-v2"
 }

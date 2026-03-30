@@ -1,9 +1,9 @@
 {
   "symbol": "USDSEK_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických prognóz a nárůst volatility RSI indikuje nejistotu na trhu.",
-  "timestamp": "2026-03-27T15:44:19.693576+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení makroekonomických prognóz a nárůst rizika finanční krize vede k poklesu hodnoty měny. RSI indikuje přeprodanost a MA ukazuje silnou odporovou hladinu, což podporuje možnost růstu.",
+  "timestamp": "2026-03-30T07:10:29.626578+00:00",
   "model": "deepseek-coder-v2"
 }

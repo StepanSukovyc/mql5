@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle fundamentální analýzy je situace neutrální s tendencemi k poklesu. RSI a MA ukazují slabost trendu.",
-  "timestamp": "2026-03-27T15:25:07.913034+00:00",
+  "reasoning": "Podle fundamentální analýzy je měna zdravě hodnocena, ale technické indikátory (svíčkové formace a RSI) ukazují na pokles. Riziko je vyvážené mezi přijetím nižších ztrát v současné době a očekáváním silnějšího růstu v budoucích obdobích.",
+  "timestamp": "2026-03-30T06:51:22.229092+00:00",
   "model": "deepseek-coder-v2"
 }

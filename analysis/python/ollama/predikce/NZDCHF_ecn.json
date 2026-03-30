@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje slabost v úspěšnosti při prodeji a růstu. RSI a MA indikují směr trhu, ale nedostatečné divergence nepodporuje silnou volbu jednoho ze tří stavů.",
-  "timestamp": "2026-03-27T15:04:10.502867+00:00",
+  "reasoning": "Základní analýza ukazuje silnou měnu Nový Zéland a slabší švýcarskou franku. RSI indikuje neutralitu s lehkovážným cenovým chováním, MA hodnoty signalizují opakované pokusy o zeslabení měny.",
+  "timestamp": "2026-03-30T06:30:31.821729+00:00",
   "model": "deepseek-coder-v2"
 }

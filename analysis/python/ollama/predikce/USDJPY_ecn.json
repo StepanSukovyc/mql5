@@ -1,9 +1,9 @@
 {
   "symbol": "USDJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických prognóz pro japonský trh, ale zároveň silné suporty na úrovni RSI a MA sugerují potenciál růstu.",
-  "timestamp": "2026-03-27T15:36:42.149191+00:00",
+  "reasoning": "Riziko ztráty je vyšší v důsledku silného trendu poklesu, ale stále existují signály pro obrat a některé indikátory ukazují slabost.",
+  "timestamp": "2026-03-30T07:02:50.407484+00:00",
   "model": "deepseek-coder-v2"
 }

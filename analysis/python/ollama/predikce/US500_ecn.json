@@ -1,9 +1,9 @@
 {
   "symbol": "US500_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je vyšší kvůli silnému pohybu směrem dolů v RSI a poklesu MA. Nicméně, základní pozitivní trend podle fundamentální analýzy naznačuje potenciál pro obrat.",
-  "timestamp": "2026-03-27T15:23:13.767367+00:00",
+  "BUY": 30.0,
+  "SELL": 40.0,
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence k poklesu, ale zároveň výrazné podporující svíčkové formace naznačují nejistotu.",
+  "timestamp": "2026-03-30T06:49:27.012230+00:00",
   "model": "deepseek-coder-v2"
 }

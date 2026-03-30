@@ -1,9 +1,9 @@
 {
   "symbol": "GBPAUD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály je omezeno silnou odporovou hladinou RSI a zeslabením MA. Tržní podmínky naznačují pokles.",
-  "timestamp": "2026-03-27T17:28:19.955347+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Základní analýza ukazuje silnou finanční situaci Spojeného království a slabou v Austrálii. Technická analýza s využitím svíčkových formací a RSI indikátoru signalizuje pokles ceny, zatímco MA ukazatele podporují tento pohyb.",
+  "timestamp": "2026-03-30T08:56:00.196794+00:00",
   "model": "deepseek-coder-v2"
 }

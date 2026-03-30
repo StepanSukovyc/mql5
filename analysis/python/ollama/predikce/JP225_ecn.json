@@ -1,9 +1,9 @@
 {
   "symbol": "JP225_ecn",
   "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Růstové trendy v RSI a MA indikátorech naznačují další pokles. Finanční analýza svíčkových grafů s ohledem na ztrátu podpory ukazuje silnou tendenci k propadu.",
-  "timestamp": "2026-03-27T17:47:57.200332+00:00",
+  "SELL": 40.0,
+  "HOLD": 30.0,
+  "reasoning": "Zohledňuje se fundamentální analýza s růstem trhu a potvrzení svíčkových formací. RSI ukazuje slabost s tendencí k poklesu, ale MA podporuje stabilitu.",
+  "timestamp": "2026-03-30T09:14:30.096048+00:00",
   "model": "deepseek-coder-v2"
 }

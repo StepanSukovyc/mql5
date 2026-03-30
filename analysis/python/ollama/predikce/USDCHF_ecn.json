@@ -1,9 +1,9 @@
 {
   "symbol": "USDCHF_ecn",
-  "BUY": 60.0,
-  "SELL": 30.0,
-  "HOLD": 10.0,
-  "reasoning": "Podle RSI a MA je trend stoupající, ale cenový graf ukazuje složitou strukturu s několika svíčkami na odpory. Riziko ztráty je vyšší než příznivé perspektivy růstu.",
-  "timestamp": "2026-03-27T15:27:03.281410+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI a MA ukazují slabost, ale fundamentální analýza neprokazuje silný pokles.",
+  "timestamp": "2026-03-30T06:53:15.351041+00:00",
   "model": "deepseek-coder-v2"
 }

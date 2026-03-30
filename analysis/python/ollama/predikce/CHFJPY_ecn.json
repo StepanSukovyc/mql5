@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu JPY, což vede k lepšímu hodnocení CHF. RSI i MA signalizují opravu ceny a tendenci růstu.",
-  "timestamp": "2026-03-27T16:43:02.876027+00:00",
+  "reasoning": "Růstové potenciály jsou omezená vysokým RSI a nízkou cenou. Vysoký objem v období měsíce indikuje silnou volatilitu, což naznačuje nejistotu.",
+  "timestamp": "2026-03-30T08:12:41.126232+00:00",
   "model": "deepseek-coder-v2"
 }

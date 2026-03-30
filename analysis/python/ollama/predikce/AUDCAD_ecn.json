@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 70.0,
-  "HOLD": 10.0,
-  "reasoning": "Vysoká pravděpodobnost poklesu je vyvolána silnou tendencí klesajícího RSI a sníženou hodnotou MA, zatímco nízký podíl BUY signalizuje omezené poptávkové prostředky.",
-  "timestamp": "2026-03-27T17:58:06.022943+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět, že cena může začít podporovaná horní hranicí MA, což naznačuje potenciální sílu. Nicméně, fundamentální analýza ukazuje určitou nejistotu a volatilitu trhu.",
+  "timestamp": "2026-03-30T07:50:39.084072+00:00",
   "model": "deepseek-coder-v2"
 }

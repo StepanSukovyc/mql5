@@ -1,9 +1,9 @@
 {
   "symbol": "BTCUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle RSI a MA hodnot je trend směrem dolů s mírným opakováním cenových úderů. Nicméně, zdá se, že následující krok na trhu by mohl být silný růst.",
-  "timestamp": "2026-03-27T16:35:22.499811+00:00",
+  "BUY": 60.0,
+  "SELL": 20.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle svíčkových formací ukazuje spouštěcí signál pro nákup. RSI i MA hodnoty podporují tento pohyb.",
+  "timestamp": "2026-03-30T08:05:23.061286+00:00",
   "model": "deepseek-coder-v2"
 }

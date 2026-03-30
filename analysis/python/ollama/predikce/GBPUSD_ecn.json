@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 65.0,
   "HOLD": 15.0,
-  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují sílu na úrovni 1.3800 až 1.4000.",
-  "timestamp": "2026-03-27T17:40:03.337527+00:00",
+  "reasoning": "Riziko ztráty je vyšší kvůli silnému trendu poklesu. Technickým signálem je překlenutí klouzavých průměrů s nárustem hodnoty.",
+  "timestamp": "2026-03-30T09:07:02.646149+00:00",
   "model": "deepseek-coder-v2"
 }

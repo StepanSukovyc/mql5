@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Zohledňuji fundamentální analýzu s pozitivním vlivem japonské politiky a svíčkovými formacemi ukazujícími směr trendu. RSI indikuje přeuiverzi, ale MA signalizuje silnou podporu. Kompromis mezi technickou analýzou a makroekonomickým prostředím.",
-  "timestamp": "2026-03-27T15:13:39.670838+00:00",
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují možnost zotavení.",
+  "timestamp": "2026-03-30T06:39:59.820868+00:00",
   "model": "deepseek-coder-v2"
 }

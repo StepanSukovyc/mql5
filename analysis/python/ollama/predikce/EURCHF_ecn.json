@@ -1,9 +1,9 @@
 {
   "symbol": "EURCHF_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a nárůst volatility může vést k poklesu hodnoty EUR/CHF.",
-  "timestamp": "2026-03-27T16:58:34.041116+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Podle RSI a klouzavých průměrů je trend směrem nahoru, ale zároveň dochází k oslabení síly růstu. Doporučuji držet pozici kvůli stabilitě v méně pohyblivých časových úsecích.",
+  "timestamp": "2026-03-30T08:27:47.730755+00:00",
   "model": "deepseek-coder-v2"
 }

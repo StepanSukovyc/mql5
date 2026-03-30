@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "BUY",
+  "lot_size": 0.08,
+  "take_profit": 105.50,
+  "reasoning": "Vybrán USOIL_ecn, protože nemám otevřenou pozici v tomto instrumentu, čímž se diverzifikuje portfolio. Předpověď naznačuje převahu BUY (50%), s argumentací o uptrendu a ceně nad MA na všech časových rámcích. I přes overbought hourly/weekly RSI (které naznačují možnost korekce) a historii propadu během března, celkový dlouhodobý trend (monthly candle) je bullish. \n\nPro výpočet lot_size, nejprve odhadnu ztrátu, kterou jsem ochoten podstoupit. Rozhodl jsem se riskovat maximálně 2% aktuálního balance, což je 4090.98 * 0.02 = 81.82 USD. Stop loss nastavím na 102.00, čímž se sníží riziko na obchod. Potenciální zisk je (105.50 - 102.983) * 1000 * lot_size, kde lot_size je 0.08 (81.82/102.983-102) * 1000  = 0.08, což dává potenciální zisk (2.517 * 1000 * 0.08) = 201.36 USD. Poplatek za transakci (0.08/0.01)*0.10 = 0.80 USD. Čistý zisk 200.56 USD."
+}

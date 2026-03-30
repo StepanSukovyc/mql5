@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURSGD_ecn",
+  "action": "BUY",
+  "lot_size": 0.05,
+  "take_profit": 1.455,
+  "reasoning": "Pořadí obchodu je #57, což znamená, že se jedná o obchod řízený Gemini (každý třetí obchod). Preferuji diverzifikaci, a proto vybírám měnový pár EURSGD_ecn, který aktuálně nemám otevřený v portfoliu. Dle predikce má tento pár vysokou pravděpodobnost BUY (60 %). Dle popisu, svíčkové formace a RSI indikátor ukazují potenciál pro růst. Historické hodnoty MA podporují tento pohyb. Velikost lotu 0.05 je stanovena s ohledem na stav účtu a aktuální marži. Take_profit je nastaven realisticky na 1.455 s ohledem na potenciální zisky a transakční náklady."
+}

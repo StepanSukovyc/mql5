@@ -1,9 +1,9 @@
 {
   "symbol": "LTCUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažující trend je směrem dolů s náznaky zpomalování poklesu, ale stále přetrvávají silné pohyby na spadových svíčkách. RSI a MA ukazují slabost, což podporuje možnost dalšího poklesu.",
-  "timestamp": "2026-03-27T17:50:00.173474+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět nárůst tlaku kupujících, ale stále převažuje tlak prodávajících. Doporučuji držet pozici dokud trh neobjeví jasný směr.",
+  "timestamp": "2026-03-30T06:22:46.713957+00:00",
   "model": "deepseek-coder-v2"
 }

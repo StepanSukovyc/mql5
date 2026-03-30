@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Především zhoršení makroekonomických podmínek a pokles RSI indikuje možnost dalšího poklesu.",
-  "timestamp": "2026-03-27T16:08:19.874028+00:00",
+  "reasoning": "Rizikové hodnocení je založeno na analýze cenových svíček a indikátorů. RSI ukazuje neutrální tendenci s mírně klesajícím tlakem, což naznačuje nejistotu a potenciál volatilit.",
+  "timestamp": "2026-03-30T07:35:11.352952+00:00",
   "model": "deepseek-coder-v2"
 }

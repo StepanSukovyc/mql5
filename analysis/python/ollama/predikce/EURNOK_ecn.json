@@ -1,9 +1,9 @@
 {
   "symbol": "EURNOK_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Převaha negativních signálů z RSI a MA, s nárustem rizika poklesu ceny.",
-  "timestamp": "2026-03-27T17:10:19.884190+00:00",
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nicméně fundamentální analýza a trend směruje k poklesu.",
+  "timestamp": "2026-03-30T08:39:12.876237+00:00",
   "model": "deepseek-coder-v2"
 }

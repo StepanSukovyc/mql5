@@ -1,9 +1,9 @@
 {
   "symbol": "NZDCAD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je vyšší kvůli volatilitě trhu a nedostatečnému trendu růstu. Hodnocení RSI a MA ukazuje slabost cenových pohybů.",
-  "timestamp": "2026-03-27T15:02:18.903113+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI a MA ukazují směr trendu.",
+  "timestamp": "2026-03-30T06:28:34.013921+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "AUDJPY_ecn",
-  "BUY": 40.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Růstové impulzy s ohledem na svíčkovou formaci a stabilitu RSI vzhledem k MA signalizuje pokračující pohyb.",
-  "timestamp": "2026-03-27T18:01:43.545984+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Podle svíčkových formací ukazuje předběžně silnou pozici. RSI a MA hodnoty signalizují směr trhu.",
+  "timestamp": "2026-03-30T07:54:16.950260+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "GER40_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažují signály pro prodej a nejistota z důvodu volatilního trhu. Nízký stupeň BUY je způsoben tím, že ceny začínají růst, ale RSI ukazuje přeprodanost.",
-  "timestamp": "2026-03-27T17:44:01.534331+00:00",
+  "BUY": 25.0,
+  "SELL": 70.0,
+  "HOLD": 5.0,
+  "reasoning": "Převaha pohybů odpovídajících trendu s náznaky potenciálního oslabení až do těsně nad hranici pěti procent.",
+  "timestamp": "2026-03-30T09:10:45.926648+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "EURCZK_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem globálních ekonomických faktorů a negativního tlaku na měnu. Technická analýza ukazuje silnou odolnost proti poklesům, ale také nedostatek signálů pro růst.",
-  "timestamp": "2026-03-27T17:00:31.830153+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení makroekonomických indikátorů s lednem a únorou, ale nárůst v březnu může signalizovat stabilizaci.",
+  "timestamp": "2026-03-30T08:29:41.348266+00:00",
   "model": "deepseek-coder-v2"
 }

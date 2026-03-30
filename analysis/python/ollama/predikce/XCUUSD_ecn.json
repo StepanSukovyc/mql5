@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená zhoršením technických indikátorů a poklesem na úrovni trendu. Riziko je vyváženo kontrakcemi v rámci mezihodinových svíček.",
-  "timestamp": "2026-03-27T15:59:08.905221+00:00",
+  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI a MA ukazují slabost, ale zároveň nedostatek signálů pro nákup.",
+  "timestamp": "2026-03-30T07:25:38.524505+00:00",
   "model": "deepseek-coder-v2"
 }

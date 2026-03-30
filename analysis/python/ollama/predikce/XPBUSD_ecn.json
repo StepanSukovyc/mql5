@@ -1,9 +1,9 @@
 {
   "symbol": "XPBUSD_ecn",
   "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Přítomnost silného supportu pod cenou s následkem růstu. Vysoký RSI a MA hodnoty svědčí o potenciálu růstu.",
-  "timestamp": "2026-03-27T16:02:49.863069+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Nízké hodnoty RSI a stoupající ceny indikují silnou pozici BUY, ale nedostatek trendu pro změnu směru naznačuje nejistotu v HOLD.",
+  "timestamp": "2026-03-30T07:29:26.693708+00:00",
   "model": "deepseek-coder-v2"
 }

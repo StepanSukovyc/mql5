@@ -1,9 +1,9 @@
 {
   "symbol": "NZDUSD_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažující pohled je do poklesu na základě silného trendu a negativní divergence RSI.",
-  "timestamp": "2026-03-27T15:11:42.816127+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Zhoršení makroekonomických prognóz pro Nový Zéland může vést k poklesu hodnoty NZD, zatímco stabilita USA jako dominantního ekonomika podporuje dolar. Kombinace slabšího novozélandského a silnějšího amerického pesa je tendencí.",
+  "timestamp": "2026-03-30T06:38:08.215763+00:00",
   "model": "deepseek-coder-v2"
 }

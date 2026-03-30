@@ -1,9 +1,9 @@
 {
   "symbol": "DXY_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růst cenových úrovní RSI a MA indikátorů naznačuje potenciální pokračující růst. Nicméně, zhoršení finanční situace v některých zemích může způsobit oslabení dolaru.",
-  "timestamp": "2026-03-27T16:48:48.467865+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Především na základě fundamentální analýzy a výsledků RSI je vidět nárůst tlaku nabídky, což naznačuje pokles hodnoty DXY. Nicméně, MA ukazuje stabilitu, což dává lehce pohodlí investoři.",
+  "timestamp": "2026-03-30T08:18:13.880420+00:00",
   "model": "deepseek-coder-v2"
 }
