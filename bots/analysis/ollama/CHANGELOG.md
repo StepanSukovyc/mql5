@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-04-01 (Minute Profit Cleanup Strategy)
+
+- **Added Minute Profit Cleanup Strategy**
+  - Added `profit_cleanup_strategy.py` for minute-by-minute review of open profitable positions
+  - Strategy computes `VOLUME = ((int)(B / 500) + 1) * 0.01` from the current account balance `B`
+  - For each open position it computes `ZISK = profit + swap - fee`, where fee is `0.10 USD` per `0.01` lot
+  - Target profit threshold is `PCZ = (0.01 * L / VOLUME) * B` with a hard minimum of `0.005`
+  - All currently eligible positions are closed in a single run when `ZISK > PCZ`
+
+- **Added Runtime Controls And Observability**
+  - Added `PROFIT_CLEANUP_STRATEGY_ENABLED` and `PROFIT_CLEANUP_STRATEGY_DRY_RUN` to `.env` and `.env.example`
+  - Default dry-run is `true` to allow safe validation before enabling live closes
+  - Added audit log `trade_logs/profit_cleanup.csv`
+
+- **Added Validation Script**
+  - Added `verify_profit_cleanup_strategy.py` for quick local verification of `VOLUME`, `ZISK`, and `PCZ`
+  - Validation script reuses the same calculation helper as the live strategy
+
+- **Added Calculation Unit Tests**
+  - Added `test_profit_cleanup_strategy.py` using stdlib `unittest`
+  - Tests cover the user example, an eligible scenario, `PCZ` minimum floor, and swap/fee impact
+
+- **Integrated With Account Monitor**
+  - Account monitor now evaluates the minute profit cleanup before the hourly loss cleanup
+
 ## 2026-03-30 (Hourly Loss Cleanup Strategy + Dry Run)
 
 - **Added Hourly Loss Cleanup Strategy**

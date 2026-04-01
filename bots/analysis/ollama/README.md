@@ -27,7 +27,15 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - `lot_size` se vždy použije z finální Gemini predikce
   - Každý N-tý obchod: použije se i `take_profit` od Gemini
   - Ostatní obchody: `take_profit` se nepoužije
-8. **Hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
+8. **Minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`):
+  - Běží v account monitoru každou minutu od spuštění
+  - Vezme aktuální bilanci účtu `B` a spočítá referenční objem `VOLUME = ((int)(B / 500) + 1) * 0.01`
+  - Pro každou otevřenou pozici spočítá čistý zisk `ZISK = profit + swap - fee`, kde `fee = 0.10 USD` za každých `0.01` lotu
+  - Cílový zisk pozice `PCZ` počítá jako `(0.01 * L / VOLUME) * B`, kde `L` je objem pozice; minimum `PCZ` je `0.005`
+  - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření a strategie ji uzavře
+  - V jednom průchodu uzavírá všechny aktuálně vhodné pozice
+  - Přepínač `PROFIT_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
+9. **Hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
   - Každou hodinu v minutě `LOSS_CLEANUP_STRATEGY_MINUTE` (default 45) spočítá čistý denní zisk bez swapů a poplatků
   - Pro výpočet používá dnešní ukončené pozice podle `position_id`, aby se výsledek víc blížil přehledu Pozice v MT5 aplikaci
   - Od výsledku odečte 1 % z aktuální bilance účtu a získá limit `Z`
@@ -122,6 +130,8 @@ GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-fl
 
 # Každý N-tý obchod je plně řízen Gemini (lot_size + take_profit)
 GEMINI_FULL_CONTROL_EVERY_N_TRADES=3
+PROFIT_CLEANUP_STRATEGY_ENABLED=true
+PROFIT_CLEANUP_STRATEGY_DRY_RUN=true
 LOSS_CLEANUP_STRATEGY_ENABLED=true
 LOSS_CLEANUP_STRATEGY_MINUTE=45
 LOSS_CLEANUP_STRATEGY_DRY_RUN=true
@@ -148,6 +158,18 @@ ollama pull deepseek-coder-v2
 **Spuštění aplikace:**
 ```bash
 python logika.py
+```
+
+Pro rychlé ověření výpočtu profit cleanup bez MT5 můžete spustit:
+
+```bash
+python verify_profit_cleanup_strategy.py
+```
+
+Automatické testy výpočtu spustíte takto:
+
+```bash
+python -m unittest test_profit_cleanup_strategy.py
 ```
 
 Skript běží jako **nekonečný obchodní automat**:
@@ -200,6 +222,8 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 
 - **logika.py** - Hlavní orchestrace nekonečného cyklu (monitoring → predikce → finální rozhodnutí → obchod → restart)
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
+- **profit_cleanup_strategy.py** - Volitelná minutová strategie pro uzavírání všech otevřených profitních pozic, které překročí svůj vypočtený limit `PCZ`
+- **verify_profit_cleanup_strategy.py** - Lokální validační skript pro výpočet `VOLUME`, `ZISK` a `PCZ` na zadaných scénářích
 - **loss_cleanup_strategy.py** - Volitelná hodinová strategie pro uzavření jedné starší ztrátové pozice podle limitu `Z`
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
@@ -211,8 +235,10 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - `<SERVICE_DEST_FOLDER>/<timestamp>/predikce/*.json` - Filtrované predikce
 - `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json` - Finální rozhodnutí
 - `<SERVICE_DEST_FOLDER>/ollama/predikce/{symbol}.json` - Předchystané Ollama predikce (použitelné v hlavní logice při stáří <= 1h)
+- `<SERVICE_DEST_FOLDER>/trade_logs/profit_cleanup.csv` - Audit minutové profit cleanup strategie včetně `B`, referenčního `VOLUME`, `ZISK`, `PCZ` a výsledku close pokusu
 - `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup.csv` - Audit hodinové cleanup strategie včetně hodnot `daily_clean_profit`, `Z` a případně uzavřené pozice
 - `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup_daily_deals.csv` - Diagnostický snapshot všech dealů, které MT5 API při cleanup běhu skutečně vrátilo
+- Dokud testujete, nechte `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
 - Dokud testujete, nechte `LOSS_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
 
 ## Poznamky

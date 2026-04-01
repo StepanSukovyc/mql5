@@ -22,7 +22,15 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - lot_size se vždy použije z finální Gemini predikce
    - Každý N-tý obchod: použije se i take_profit z Gemini
    - Ostatní obchody: take_profit se nepoužije
-8. **Vyhodnotí hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
+8. **Vyhodnotí minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`)
+   - Běží během minutového account monitoru při každém ticku monitoru, nejvýše jednou za minutu
+   - Vezme aktuální raw bilanci účtu `B` a spočítá referenční objem `VOLUME = ((int)(B / 500) + 1) * 0.01`
+   - Pro každou otevřenou pozici vypočte čistý zisk `ZISK = profit + swap - fee`
+   - Syntetický `fee` je `0.10 USD` za každých `0.01` lotu
+   - Cílový profit `PCZ = (0.01 * L / VOLUME) * B`, minimum `PCZ` je `0.005`
+   - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
+   - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
+9. **Vyhodnotí hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru jednou za hodinu v minutě `LOSS_CLEANUP_STRATEGY_MINUTE` (default 45)
    - Spočítá čistý denní zisk z uzavřených obchodů bez swapů a poplatků
    - Od něj odečte 1 % z aktuální bilance účtu a získá limit `Z`
@@ -286,7 +294,7 @@ Monitoruje stav účtu v background threadu:
 - Pravidelně kontroluje **efektivní volnou marži** v procentech vůči efektivnímu balance
 - Signalizuje překročení **20% prahu** (konfigurovatelné v .env) pomocí threading.Event
 - Zobrazuje info o účtu (zůstatek, equity, marže)
-- Spouští i hodinovou cleanup strategii, pokud je povolena a je dosažena správná minuta
+- Spouští minutovou profit cleanup strategii a hodinovou loss cleanup strategii, pokud jsou povolené
 - Běží bez blokování hlavního vlákna
 
 **Klíčové funkce:**
@@ -307,6 +315,30 @@ Volitelná bezpečnostní strategie pro průběžné odlehčení starých ztrát
 - V ostrém režimu používá `close_position_by_ticket()` ze sdílené exekuční vrstvy
 - Zapisuje audit do `trade_logs/loss_cleanup.csv`
 - Pro diagnostiku rozdílů proti mobilní aplikaci zapisuje i raw snapshot dealů z `history_deals_get()` do `trade_logs/loss_cleanup_daily_deals.csv`
+
+### 2b. profit_cleanup_strategy.py - Minute Profit Cleanup
+Volitelná strategie pro průběžné uzavírání otevřených profitních pozic podle objemu a velikosti účtu:
+- Čte runtime konfiguraci přímo z `.env`, takže ji lze za běhu zapnout, vypnout nebo přepnout mezi dry-run a live režimem
+- Vyhodnocuje se nejvýše jednou za minutu během account monitoru
+- Počítá `VOLUME = ((int)(B / 500) + 1) * 0.01` z aktuální raw bilance účtu `B`
+- Pro každou otevřenou pozici počítá `ZISK = profit + swap - fee`, kde `fee = 0.10 USD / 0.01 lotu`
+- Cílový profit `PCZ` počítá jako `(0.01 * L / VOLUME) * B`, kde `L` je objem pozice; minimum `PCZ` je `0.005`
+- V jednom běhu uzavírá všechny pozice, kde platí `ZISK > PCZ`
+- V `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` pouze vypíše kandidáty a zapíše audit do CSV
+- V ostrém režimu používá `close_position_by_ticket()` ze sdílené exekuční vrstvy
+- Zapisuje audit do `trade_logs/profit_cleanup.csv`
+
+### 2c. verify_profit_cleanup_strategy.py - Validation Script
+Pomocný lokální skript pro ověření výpočtu profit cleanup strategie bez připojení k MT5:
+- Používá stejnou helper funkci jako runtime strategie, takže nekopíruje výpočty bokem
+- Umí vypsat předdefinované scénáře i scénáře z CLI argumentů ve formátu `balance volume profit swap`
+- Vypisuje `VOLUME`, `fee`, `ZISK`, `PCZ` a boolean `eligible`
+
+### 2d. test_profit_cleanup_strategy.py - Unit Tests
+Lehká automatická kontrola správnosti výpočtu profit cleanup strategie:
+- Používá standardní `unittest`, takže nepotřebuje nové dependency
+- Ověřuje uživatelský příklad, pozitivní scénář, minimum `PCZ` i vliv swapu a fee
+- Dá se spustit přes `python -m unittest test_profit_cleanup_strategy.py`
 
 ### 3. trading_logic.py - Trading Predictions
 Stahuje data a generuje predikce:
@@ -339,6 +371,8 @@ Relevantní parametry pro risk management:
 
 - `TRADING_MARGIN_THRESHOLD=20` určuje, při jakém poměru efektivní volné marže k efektivnímu balance se spustí trading flow
 - `TRADING_ACCOUNT_BALANCE_CAP=5000` určuje maximální balance, se kterou strategie počítá lot sizing a margin check
+- `PROFIT_CLEANUP_STRATEGY_ENABLED=true` zapíná minutovou profit cleanup strategii
+- `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání profitních pozic
 - `LOSS_CLEANUP_STRATEGY_ENABLED=true` zapíná hodinovou cleanup strategii
 - `LOSS_CLEANUP_STRATEGY_MINUTE=45` určuje minutu v hodině, kdy se má cleanup vyhodnotit
 - `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání pozic
