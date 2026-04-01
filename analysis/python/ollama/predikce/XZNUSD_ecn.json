@@ -1,9 +1,9 @@
 {
   "symbol": "XZNUSD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rizikové hodnocení je založeno na analýze cenových svíček a indikátorů. RSI ukazuje neutrální tendenci s mírně klesajícím tlakem, což naznačuje nejistotu a potenciál volatilit.",
-  "timestamp": "2026-03-30T07:35:11.352952+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s náznaky zeslabení. RSI indikuje přeprodanost, ale MA ukazuje silnou podporu.",
+  "timestamp": "2026-04-01T11:24:30.127520+00:00",
   "model": "deepseek-coder-v2"
 }

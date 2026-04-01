@@ -1,9 +1,9 @@
 {
   "symbol": "EURMXN_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Růstové potenciály omezeno vlivem ztráty podpory na úrovni 1.3800, vysoký RSI a MA divergence ukazují silnou sílu prodlužování poklesu.",
-  "timestamp": "2026-03-30T13:04:56.579595+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "RSI ukazuje přečkávání nad úrovní nadměrného pohybu (přeuvedení), což naznačuje silnou tendenci. MACD indikuje slabší růst, ale stále pozitivní.",
+  "timestamp": "2026-04-01T12:22:00.202654+00:00",
   "model": "deepseek-coder-v2"
 }

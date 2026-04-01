@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vysokým RSI a MA, zatímco poklesové riziko roste s nízkými hodnotami.",
-  "timestamp": "2026-03-30T12:40:09.119141+00:00",
+  "reasoning": "Podle fundamentální analýzy může dojít k růstu švýcarského franku vzhledem k európě. Svíčkové formace a RSI indikují nejistotu s určitou tendencí poklesu, ale zároveň nedostatečný nárust pro úplný BUY signál.",
+  "timestamp": "2026-04-01T11:59:58.498885+00:00",
   "model": "deepseek-coder-v2"
 }

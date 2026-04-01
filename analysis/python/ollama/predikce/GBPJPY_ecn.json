@@ -1,9 +1,9 @@
 {
   "symbol": "GBPJPY_ecn",
   "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle svíčkových formací a RSI je trend směrem dolů, ale MA ukazuje stabilitu. Kombinace těchto faktorů doporučí částečné držení pozice.",
-  "timestamp": "2026-03-30T13:29:47.523227+00:00",
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Podle svíčkových formací a RSI je trend směrem dolů, ale MA ukazuje stabilitu. Riziko ztráty je vysoké, ale také existuje malá příležitost pro obrat.",
+  "timestamp": "2026-04-01T12:44:31.645922+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "FANG_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením kvality společností v rámci skupiny FANG. Technická analýza ukazuje signály pro pokles, ale zároveň fundamentální indikátory nejsou příliš silné.",
-  "timestamp": "2026-03-30T13:20:13.460085+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Zohlednil jsem fundamentální analýzu s klesajícím trhem a poklesem ceny, ale také pozitivní signály z RSI a MA ukazující stabilitu.",
+  "timestamp": "2026-04-01T12:35:39.362431+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "GBPNZD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je větší kvůli volatilitě na trhu a nedostatečnému trendu růstu. RSI a MA ukazují slabost, ale zároveň i potenciál pro oživení.",
-  "timestamp": "2026-03-30T13:31:42.886178+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA trendu je cenový pohyb nejistý. Svíčkové formace a fundamentální analýza naznačují slabší růst.",
+  "timestamp": "2026-04-01T12:46:18.236098+00:00",
   "model": "deepseek-coder-v2"
 }

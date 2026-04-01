@@ -1,9 +1,9 @@
 {
   "symbol": "EURAUD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence k poklesu. Nicméně, svíčková formační analýza naznačuje možnost silného odrazu směrem nahoru.",
-  "timestamp": "2026-03-30T12:51:31.190213+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a klouzavých průměrů (MA) je trend stále směrem dolů, ale nárust cen může být brzy odsouhlasen cenovými svíčkami. Z tohoto důvodu se doporučuje držet pozici.",
+  "timestamp": "2026-04-01T12:10:07.574323+00:00",
   "model": "deepseek-coder-v2"
 }

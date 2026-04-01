@@ -1,9 +1,9 @@
 {
   "symbol": "CHINAH_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zvýšení RSI v posledních měsících ukazuje silnou pozici s tendencí k růstu. MA indikátor podporuje tato tvrzení.",
-  "timestamp": "2026-03-30T12:43:51.817123+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza a svíčkové formace naznačují potenciál růstu, ale RSI a MA hodnoty signalizují nejistotu.",
+  "timestamp": "2026-04-01T12:03:19.962880+00:00",
   "model": "deepseek-coder-v2"
 }

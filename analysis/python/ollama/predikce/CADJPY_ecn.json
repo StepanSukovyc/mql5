@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "RSI ukazuje slabost s poklesem pod úroveň 30, ale MA indikace divergence a nízké objemy signalizují nejistotu.",
-  "timestamp": "2026-03-30T12:36:27.969806+00:00",
+  "reasoning": "Růst cen měny podporovaný silnou fundamentální analýzou a technickými signály z MA a RSI.",
+  "timestamp": "2026-04-01T11:56:34.249435+00:00",
   "model": "deepseek-coder-v2"
 }

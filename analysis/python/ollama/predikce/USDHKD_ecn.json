@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Základní analýza a RSI ukazují slabost na trhu, ale MA poskytuje stabilitu. Doporučuji držet pozici.",
-  "timestamp": "2026-03-30T06:57:03.719074+00:00",
+  "reasoning": "Na základě fundamentální analýzy a svíčkových formací může dojít k oslabení amerického dolaru vůči hongkonbškému dolaru. RSI indikuje překoupenost, což potenciálně signalizuje pokles hodnoty, zatímco MA ukazuje stoupající trend.",
+  "timestamp": "2026-04-01T13:35:38.218418+00:00",
   "model": "deepseek-coder-v2"
 }

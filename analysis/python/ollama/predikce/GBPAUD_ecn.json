@@ -1,9 +1,9 @@
 {
   "symbol": "GBPAUD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu GBP s pozitivními makroekonomickými indikátory. RSI a MA hodnoty podporují trend růstu.",
-  "timestamp": "2026-03-30T13:24:03.884990+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Převažují negativní signály z RSI a MA, síla cenových pohybů je slabá.",
+  "timestamp": "2026-04-01T12:39:11.732325+00:00",
   "model": "deepseek-coder-v2"
 }

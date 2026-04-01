@@ -4,3 +4,49 @@ timestamp,dry_run,daily_clean_profit,balance_buffer,z_limit,counted_closing_deal
 2026-03-30T11:45:51.156923+00:00,True,38.45,41.36,-2.91,,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
 2026-03-30T12:45:12.245616+00:00,True,59.35,41.36,17.99,6,2026-03-30T11:51:46+00:00,2026-03-30T13:51:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
 2026-03-30T13:45:13.949396+00:00,True,59.35,41.36,17.99,6,2026-03-30T11:51:46+00:00,2026-03-30T13:51:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T14:45:09.163686+00:00,False,59.35,41.44,17.91,6,2026-03-30T11:51:46+00:00,2026-03-30T13:51:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T15:45:45.638519+00:00,False,59.35,41.43,17.92,6,2026-03-30T11:51:46+00:00,2026-03-30T13:51:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T16:45:47.590793+00:00,False,59.35,41.43,17.92,6,2026-03-30T11:51:46+00:00,2026-03-30T13:51:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T17:45:49.531357+00:00,False,67.40,41.43,25.97,8,2026-03-30T17:38:23+00:00,2026-03-30T19:38:23+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T18:45:51.236434+00:00,False,67.85,41.43,26.42,9,2026-03-30T18:00:46+00:00,2026-03-30T20:00:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T19:45:52.919571+00:00,False,67.85,41.43,26.42,9,2026-03-30T18:00:46+00:00,2026-03-30T20:00:46+02:00,AUDCAD_ecn,26275438,0.05,-17.41,-5.79,0.50,23.70,True,Position closed
+2026-03-30T20:45:09.199459+00:00,False,67.85,41.20,26.65,9,2026-03-30T18:00:46+00:00,2026-03-30T20:00:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T21:45:10.747328+00:00,False,67.85,41.20,26.65,9,2026-03-30T18:00:46+00:00,2026-03-30T20:00:46+02:00,,,,,,,,False,No losing position older than 7 days fits below Z
+2026-03-30T22:45:17.723458+00:00,False,0.00,41.20,-41.20,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-30T23:45:19.459499+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T00:45:21.662912+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T01:45:24.171933+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T02:45:25.831264+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T03:45:27.481966+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T04:45:29.599525+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T05:45:31.341666+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T07:45:13.427334+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T08:45:15.178742+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T09:45:17.268403+00:00,False,-17.38,41.20,-58.58,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T10:45:19.709661+00:00,False,-17.38,41.57,-58.95,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T11:45:21.447160+00:00,False,-17.38,41.57,-58.95,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T12:45:23.448630+00:00,False,-17.38,41.57,-58.95,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T13:45:18.151055+00:00,False,-17.38,41.56,-58.94,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T14:45:43.217704+00:00,False,-17.38,41.60,-58.98,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T15:45:45.133067+00:00,False,-17.38,41.60,-58.98,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T16:45:46.913086+00:00,False,-17.38,41.60,-58.98,1,2026-03-30T22:45:52+00:00,2026-03-31T00:45:52+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T17:45:48.596327+00:00,False,-13.33,41.68,-55.01,2,2026-03-31T17:10:32+00:00,2026-03-31T19:10:32+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T19:45:37.561680+00:00,False,-13.33,41.68,-55.01,2,2026-03-31T17:10:32+00:00,2026-03-31T19:10:32+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T20:45:39.338350+00:00,False,-5.94,41.68,-47.62,5,2026-03-31T20:08:21+00:00,2026-03-31T22:08:21+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T21:45:41.073002+00:00,False,-5.94,41.68,-47.62,5,2026-03-31T20:08:21+00:00,2026-03-31T22:08:21+02:00,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T22:45:42.973615+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-03-31T23:45:44.694788+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T00:45:46.788307+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T01:45:48.529797+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T02:45:50.261259+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T03:45:52.265272+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T04:45:54.021974+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T05:45:55.789655+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T06:45:58.000418+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T07:45:59.713510+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T08:45:01.444588+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T09:45:03.471130+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T10:45:07.324466+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T11:45:09.572139+00:00,False,0.00,41.68,-41.68,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T12:45:22.948321+00:00,False,0.00,32.56,-32.56,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"
+2026-04-01T13:45:31.720945+00:00,False,0.00,32.61,-32.61,0,,,,,,,,,,False,"Z <= 0, no position can be closed safely"

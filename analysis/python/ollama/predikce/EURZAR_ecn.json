@@ -1,9 +1,9 @@
 {
   "symbol": "EURZAR_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem globálních ekonomických faktorů a volatilita trhu může být vysoká.",
-  "timestamp": "2026-03-30T13:18:17.673067+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují silnou podporu blízko úrovním minulých vrcholů.",
+  "timestamp": "2026-04-01T12:33:57.186693+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "CADCHF_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růst cenových pohybů je potenciálně omezen nízkými objemy v období s nejistotou trhu. RSI a MA ukazují slabost, což naznačuje pokles.",
-  "timestamp": "2026-03-30T11:29:57.548630+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstový impuls s nárustem RSI a MA, ale stále pod hlavním trendem. Vysoké riziko na pokles v důsledku volatilního trhu.",
+  "timestamp": "2026-04-01T11:54:54.095452+00:00",
   "model": "deepseek-coder-v2"
 }

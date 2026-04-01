@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCHF_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je zřetelný pokles trendu, který může být důsledkem očekávaného klima ekonomiky. Nicméně svíčkové formace naznačují silnou podporu na úrovni 0.7500, což mi dává pocit mírného zesilování síly kupního tlaku.",
-  "timestamp": "2026-03-30T12:19:49.488206+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Převažují sell signály z RSI a MA divergence, ale mírný růst v posledních datech.",
+  "timestamp": "2026-04-01T11:41:25.068739+00:00",
   "model": "deepseek-coder-v2"
 }

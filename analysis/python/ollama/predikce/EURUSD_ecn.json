@@ -1,9 +1,9 @@
 {
   "symbol": "EURUSD_ecn",
-  "BUY": 50.0,
-  "SELL": 30.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstový trend je vidět v měsíčních grafech RSI a MA, ale krátkodobé pohyby ukazují na nejistotu.",
-  "timestamp": "2026-03-30T13:16:23.634868+00:00",
+  "reasoning": "Podle RSI a klouzavých průměrů (MA) je trend stále směrem dolů, ale cenové akce svíčkovými formacemi naznačují možnost otočení. Současně fundamentální analýza ukazuje stabilitu s eurozónou a globální ekonomikou.",
+  "timestamp": "2026-04-01T12:32:15.482135+00:00",
   "model": "deepseek-coder-v2"
 }

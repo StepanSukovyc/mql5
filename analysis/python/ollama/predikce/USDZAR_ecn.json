@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Riziko růstu je omezováno vysokými úrovněmi RSI a MA, zatímco riziko poklesu roste v souvislosti s negativním fundamentem.",
-  "timestamp": "2026-03-30T07:14:16.212921+00:00",
+  "reasoning": "Převažují signály pro pokles na základě RSI a negativních svíčkových formací, ale některé MA hodnoty ukazují stabilitu.",
+  "timestamp": "2026-04-01T13:57:00.965255+00:00",
   "model": "deepseek-coder-v2"
 }

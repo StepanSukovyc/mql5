@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růst cenových trendů a nízké hodnoty RSI indikují potenciál růstu. Nicméně, pokles v měsíčních datech naznačuje určitou nejistotu.",
-  "timestamp": "2026-03-30T12:45:46.543082+00:00",
+  "reasoning": "Růst cen ropy a pokles amerického doláru indikují silnou pohyblivost trhu. RSI ukazuje překoupenost s možným odtokem, zatímco MA signalizuje prodejní signály.",
+  "timestamp": "2026-04-01T12:05:01.714239+00:00",
   "model": "deepseek-coder-v2"
 }

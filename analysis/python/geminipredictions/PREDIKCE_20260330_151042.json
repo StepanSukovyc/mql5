@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDSGD_ecn",
+  "action": "BUY",
+  "lot_size": 0.08,
+  "take_profit": 1.3585,
+  "reasoning": "Dle dostupných predikcí se USDSGD jeví jako vhodná příležitost k nákupu. Predikce udává 50% šanci na BUY a zdůvodňuje to tím, že na kratších časových rámcích (1H & 4H) RSI indikuje překoupené podmínky (RSI nad 70), což naznačuje potenciální pullback, ale denní RSI je stále v býčím teritoriu. Cena je v současnosti nad denním MA, což naznačuje pokračující vzestupný momentum. Měsíční RSI je stále pod 50, což naznačuje potenciál pro další růst. Mám otevřenou pozici v USDCZK_ecn, AUDCAD_ecn, EURNZD_ecn, CHFZAR_ecn a USDSEK_ecn, proto se zaměřuji na diverzifikaci. Vzhledem ke stavu účtu a marži je doporučená velikost lotu 0.08. Take profit je nastaven na 1.3585, což zohledňuje transakční náklady a potenciální zisk."
+}

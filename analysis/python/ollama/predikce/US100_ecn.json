@@ -1,9 +1,9 @@
 {
   "symbol": "US100_ecn",
-  "BUY": 25.0,
-  "SELL": 50.0,
-  "HOLD": 25.0,
-  "reasoning": "Kombinace RSI pod 30 a MA trendem dolů indikují pokles. Nicméně, svíčková formační analýza ukazuje na mírný nárůst v posledních třech měsících.",
-  "timestamp": "2026-03-30T09:40:24.542990+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstový impuls podle svíčkových formací a potenciál restrukturalizace ekonomiky může podporovat růst. Nicméně, zhoršení finanční situace v Rusku a USA může přinést nejistotu.",
+  "timestamp": "2026-04-01T13:21:50.066374+00:00",
   "model": "deepseek-coder-v2"
 }

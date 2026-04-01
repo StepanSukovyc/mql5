@@ -1,9 +1,9 @@
 {
   "symbol": "NZDSEK_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové potenciály jsou omezené v důsledku negativních makroekonomických ukazatelů a divergujícího RSI. Vysoká volatilita svíčkových grafů indikuje nejistotu, což doporučuje HOLD.",
-  "timestamp": "2026-03-30T09:28:17.400025+00:00",
+  "BUY": 40.0,
+  "SELL": 50.0,
+  "HOLD": 10.0,
+  "reasoning": "Vysoká volatilita a nízké hodnoty RSI indikují nejistotu. Vývoj MA ukazuje slabost, ale fundamentální analýza naznačuje stabilitu.",
+  "timestamp": "2026-04-01T13:09:11.739728+00:00",
   "model": "deepseek-coder-v2"
 }

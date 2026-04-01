@@ -1,9 +1,9 @@
 {
   "symbol": "USDJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko ztráty je vyšší v důsledku silného trendu poklesu, ale stále existují signály pro obrat a některé indikátory ukazují slabost.",
-  "timestamp": "2026-03-30T07:02:50.407484+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Růst cen v posledních měsících s podporou MA a RSI signalizuje další růst. Nicméně, nárůst volatility indikovaný vysokými hodnotami RSI naznačuje riziko.",
+  "timestamp": "2026-04-01T13:42:45.687777+00:00",
   "model": "deepseek-coder-v2"
 }

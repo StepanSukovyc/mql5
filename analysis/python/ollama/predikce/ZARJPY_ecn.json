@@ -1,9 +1,9 @@
 {
   "symbol": "ZARJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Riziko je převážně směřováno k poklesu na základě úbytku hodnoty v měsíčním timeframe. BUY signalizuje nízkou pravděpodobnost s ohledem na nedávné pohyby a podporující indikátory.",
-  "timestamp": "2026-03-30T07:37:06.586485+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Vysoká úroveň RSI a MA indikují silnou podporu. Nedávným růstem je dána naděje na pokračující růst.",
+  "timestamp": "2026-04-01T11:26:16.444659+00:00",
   "model": "deepseek-coder-v2"
 }

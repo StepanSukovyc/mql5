@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale svíčkové formace naznačují možnost zpomalení růstu. Fondamentální analýza ukazuje stabilitu, což podporuje HOLD.",
-  "timestamp": "2026-03-30T13:12:35.492791+00:00",
+  "reasoning": "Podle RSI a klouzavých průměrů ukazuje trend střednědobého poklesu. Nicméně, základní analýza a svíčkové formace naznačují silnou podporu kolem 1.50 SEK.",
+  "timestamp": "2026-04-01T12:28:50.038382+00:00",
   "model": "deepseek-coder-v2"
 }

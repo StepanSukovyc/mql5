@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA hodnot může docházet k poklesu ceny, ale zároveň fundamentální analýza svědčí o stabilitě a růstových příležitostech.",
-  "timestamp": "2026-03-30T07:27:32.820816+00:00",
+  "reasoning": "Zhoršení makroekonomických podmínek a nárůst volatility měnového trhu vedly k poklesu hodnoty XNIUSD. RSI i MA indikují pokles trendu.",
+  "timestamp": "2026-04-01T11:17:23.789301+00:00",
   "model": "deepseek-coder-v2"
 }

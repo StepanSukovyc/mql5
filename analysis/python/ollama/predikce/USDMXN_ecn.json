@@ -1,9 +1,9 @@
 {
   "symbol": "USDMXN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 50.0,
+  "SELL": 30.0,
   "HOLD": 20.0,
-  "reasoning": "Převažují indikátory pro pokles cen z důvodu silného trendu a nárůstu volatility.",
-  "timestamp": "2026-03-30T07:04:43.698802+00:00",
+  "reasoning": "Růstový impulz s RSI nad 50 a korekcí pod MA. Snížená volatilita, ale stále potenciál pro růst.",
+  "timestamp": "2026-04-01T13:45:07.654297+00:00",
   "model": "deepseek-coder-v2"
 }

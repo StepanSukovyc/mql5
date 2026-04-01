@@ -1,9 +1,9 @@
 {
   "symbol": "XPTUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Vysoké hodnoty RSI a MA sugerují další růst. Nicméně, zhoršení situace v globálních ekonomikách a nedostatek jasných svíčkových formací přináší určitou nejistotu.",
-  "timestamp": "2026-03-30T07:33:16.120832+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Podle svíčkových formací a trendu RSI ukazuje slabost. MA indikátor podporuje pokles.",
+  "timestamp": "2026-04-01T11:22:43.113254+00:00",
   "model": "deepseek-coder-v2"
 }

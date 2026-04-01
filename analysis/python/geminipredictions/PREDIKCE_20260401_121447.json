@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XCUUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 4.00,
+  "reasoning": "XCUUSD_ecn má silný signál SELL (100 %). Nemám otevřenou pozici na tomto symbolu. I když je riziko vysoké, stav účtu umožňuje malou pozici. Realistický take_profit s ohledem na poplatek 0.10 USD."
+}

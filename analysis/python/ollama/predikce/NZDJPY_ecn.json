@@ -1,9 +1,9 @@
 {
   "symbol": "NZDJPY_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Zhoršení fundamentalních ukazatelů, ale svíčková formační pattern indikuje možnost otočení trendu směrem nahoru.",
-  "timestamp": "2026-03-30T09:26:20.117661+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Riziko je vyšší kvůli volatilitě trhu a nedostatečnému trendu růstu. RSI ukazuje slabost, ale MA signaluje stabilitu.",
+  "timestamp": "2026-04-01T13:07:29.264054+00:00",
   "model": "deepseek-coder-v2"
 }

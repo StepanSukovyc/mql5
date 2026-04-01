@@ -1,9 +1,9 @@
 {
   "symbol": "AU200_ecn",
-  "BUY": 60.0,
-  "SELL": 30.0,
-  "HOLD": 10.0,
-  "reasoning": "Podle svíčkových formací a trendu RSI je pozitivní síla. MA ukazuje silnou podporu.",
-  "timestamp": "2026-03-30T12:16:03.467754+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s náznakem zesílení. RSI a MA ukazují směr trendu.",
+  "timestamp": "2026-04-01T11:38:06.291699+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Rozhodování je založeno na analýze cenových svíček a indikátorů RSI a MA. Ceny ukazují potenciální odraz od důležitých úrovní podpory/odporu, zatímco hodnoty RSI naznačují přeprodanost resp. překoupenost. Kombinace těchto faktorů doporučuje částečnou pozici v BUY a zvýšenou pozornost k riziku SELL.",
-  "timestamp": "2026-03-30T07:00:56.340855+00:00",
+  "reasoning": "Rozhodování je založeno na analýze cen a indikátorů technické analýzy. RSI ukazuje neutralitu trhu, ale MA signalizuje pokles ceny. Finanční situace může vést k oslabení měny.",
+  "timestamp": "2026-04-01T13:40:25.028303+00:00",
   "model": "deepseek-coder-v2"
 }

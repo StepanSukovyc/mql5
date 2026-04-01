@@ -1,9 +1,9 @@
 {
   "symbol": "SGDJPY_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Vysoká hodnota RSI a MA signalizuje silnou pozitivní tendenci. Nicméně, pokles v posledních třech měsících svíčkovými formacemi indikuje potenciál pro další pokles.",
-  "timestamp": "2026-03-30T09:34:17.292253+00:00",
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Rozpětí svíček ukazuje na volatilitu s tendencí k poklesu. RSI a MA hodnoty indikují slabost síly, ale zároveň nedostatek signálů pro prodej.",
+  "timestamp": "2026-04-01T13:14:58.947354+00:00",
   "model": "deepseek-coder-v2"
 }

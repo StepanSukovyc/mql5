@@ -1,9 +1,9 @@
 {
   "symbol": "NZDUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle fundamentální analýzy je měna NZD silně ovlivňována očekáváním Fedovy úrokové politiky a červencovými volavkami v USA. Technická analýza ukazuje, že cena prošla podporou na 0.583526 s RSI nad 50 a MA směrem nahoru, což naznačuje potenciál růstu.",
-  "timestamp": "2026-03-30T09:32:16.454365+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje silnou polohu dolaru Nového Zélandu v současné době. RSI a MA hodnoty indikují stabilitu s tendencí k růstu, ale vysoká volatilita způsobená nedávnými událostmi (např. politikou úspor) vyvolává nejistotu.",
+  "timestamp": "2026-04-01T13:12:42.920274+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických indikátorů a pokles v RSI ukazuje na poklesovou tendenci. Nicméně, MA signalizuje opakované pokusy o zotavení.",
-  "timestamp": "2026-03-30T13:01:06.368601+00:00",
+  "reasoning": "Růstové potenciály jsou omezené vlivem globálních ekonomických faktorů a volatilita je vysoká.",
+  "timestamp": "2026-04-01T12:18:35.770399+00:00",
   "model": "deepseek-coder-v2"
 }

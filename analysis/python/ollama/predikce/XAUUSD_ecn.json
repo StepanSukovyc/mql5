@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a snížení cen ropy mohou vést k poklesu hodnoty zlata. Doporučuji držet pozici.",
-  "timestamp": "2026-03-30T07:23:45.035778+00:00",
+  "reasoning": "Růst cen metálu je podporován diverzifikací rizika a pozitivním světovým signálem. Nicméně, následující týden může přinést negativní zprávy.",
+  "timestamp": "2026-04-01T11:13:51.665098+00:00",
   "model": "deepseek-coder-v2"
 }

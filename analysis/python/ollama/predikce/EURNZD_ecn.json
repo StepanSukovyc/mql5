@@ -1,9 +1,9 @@
 {
   "symbol": "EURNZD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je vyvážené mezi růstem a poklesem, s větším zázemím pro pokles na základě volatilního trhu.",
-  "timestamp": "2026-03-30T13:08:45.233839+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem globálních ekonomických faktorů a nedávnými cenovými pohyby. Současně se zhoršující se situací v Evropě může dojít k poklesu, ale ještě nejsou dostatečně prokazatelné signály.",
+  "timestamp": "2026-04-01T12:25:25.711189+00:00",
   "model": "deepseek-coder-v2"
 }

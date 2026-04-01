@@ -1,9 +1,9 @@
 {
   "symbol": "EURGBP_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale nárůst volatility naznačuje možnou změnu. Doporučuji tedy držet pozici s malými riziky.",
-  "timestamp": "2026-03-30T12:59:11.124250+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Riziko je převážně negativní s lehčím trendem k prodeji, ale nárust cen může být omezován vlivem divergence RSI.",
+  "timestamp": "2026-04-01T12:16:55.041036+00:00",
   "model": "deepseek-coder-v2"
 }

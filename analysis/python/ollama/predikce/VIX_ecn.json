@@ -1,9 +1,9 @@
 {
   "symbol": "VIX_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převládající sentiment je neutrální s tendencí růstu na základě pozitivních fundamentálních faktorů a potenciálu restrukturalizace trhu.",
-  "timestamp": "2026-03-30T07:18:03.309767+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zhoršení situace v globálním trhu s ohledem na inflaci a růst cen energií podporuje názor o možném poklesu akciových trhů. Nicméně, pozitivní svíčkové formace a stabilita v domácí ekonomice doporučují částečnou přizpůsobivost k trhu.",
+  "timestamp": "2026-04-01T14:01:48.360573+00:00",
   "model": "deepseek-coder-v2"
 }

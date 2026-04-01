@@ -1,9 +1,9 @@
 {
   "symbol": "NZDCAD_ecn",
   "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zatímco cenový graf ukazuje signály podporující růst, indikátory jako RSI a MA svědčí o poklesu. Riziko ztráty je vyšší.",
-  "timestamp": "2026-03-30T09:22:28.226847+00:00",
+  "SELL": 45.0,
+  "HOLD": 25.0,
+  "reasoning": "Převažují silné signály pro pokles na základě růstových trendů a překročení hladin podpory. RSI ukazuje nadvládu prodlužovaní se v oblasti pod 50, což je negativní signál.",
+  "timestamp": "2026-04-01T13:04:04.862907+00:00",
   "model": "deepseek-coder-v2"
 }

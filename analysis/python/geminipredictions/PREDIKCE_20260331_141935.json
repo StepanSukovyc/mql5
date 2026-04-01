@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "GBPNZD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 2.030,
+  "reasoning": "GBPNZD_ecn is showing a strong SELL signal (65%). I don't have any open positions for this symbol, making it ideal for diversification. Although recent open_price of EURNZD_ecn is losing -47.62, which less than 15% of account value, that is not the same symbol and diversifications is fine. The reasoning suggests a potential price decrease. Lot size is set to 0.01 to manage risk, given the account balance and open positions. Take profit is set at 2.030 to provide a realistic profit target, while accounting for transaction fees. Transakční náklady za 0.01 lot je 0.10 USD."
+}

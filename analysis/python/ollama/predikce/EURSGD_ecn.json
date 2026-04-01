@@ -1,9 +1,9 @@
 {
   "symbol": "EURSGD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Převažující sentiment je negativní s ohledem na volatilitu a slabé fundamentální ukazatele. RSI indikuje přílišnou pohyblivost cen.",
-  "timestamp": "2026-03-30T13:14:30.033891+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulsy jsou pozitivně ovlivněny silnou podporou na nižších časových úrovních a stoupajícím RSI. Nicméně, pokles MA ukazuje na tlak prodeje, což omezuje růst.",
+  "timestamp": "2026-04-01T12:30:32.486391+00:00",
   "model": "deepseek-coder-v2"
 }

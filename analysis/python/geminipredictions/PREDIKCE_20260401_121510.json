@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XCUUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 3.50,
+  "reasoning": "Symbol XCUUSD_ecn má silné SELL doporučení (100%) a nemám ho v otevřených pozicích. I když je nejmenší možný lot 0.01, využívám této příležitosti pro potenciální rychlý zisk v souladu s denní strategií, jelikož předpověď je velmi silná. Poplatek 0.1 USD mi nezabrání v případném zisku a diverzifikuje mé portfolio."
+}

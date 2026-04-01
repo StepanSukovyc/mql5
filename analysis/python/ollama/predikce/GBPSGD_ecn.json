@@ -1,9 +1,9 @@
 {
   "symbol": "GBPSGD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje slabost britské libry v současné situaci s ohledem na ekonomická a politická rizika. Svíčkové formace a RSI indikují potenciál pro pokles, zatímco MA ukazuje stabilitu. Kombinace těchto faktorů doporučuje přijmout konzervativní postoj.",
-  "timestamp": "2026-03-30T13:33:40.769100+00:00",
+  "reasoning": "Na základě posledních cenových pohybů a indikátorů jako RSI a MA, které ukazují tendenci k oživení, ale ještě nejsou v jasném trendu, volím strategii hromadění s pozitivními perspektivami.",
+  "timestamp": "2026-04-01T12:48:06.206255+00:00",
   "model": "deepseek-coder-v2"
 }

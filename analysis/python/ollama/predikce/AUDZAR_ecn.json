@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na grafu s náznaky zesílení trendu, ale volatilita způsobuje nejistotu.",
-  "timestamp": "2026-03-30T12:29:04.693824+00:00",
+  "reasoning": "Převažují silné signály pro pokles trhu na základě vysokých hodnot RSI a negativní svíčkové formace.",
+  "timestamp": "2026-04-01T11:49:50.973104+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA trendu je zřejmé, že cena může pokračovat v růstu, ale současný index síly (RSI) ukazuje na přehřátí trhu. Navrhuji tedy držet pozici a sledovat další signály.",
-  "timestamp": "2026-03-30T13:35:36.455022+00:00",
+  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI a MA indikátory ukazují slabost cenového trendu.",
+  "timestamp": "2026-04-01T12:49:52.600367+00:00",
   "model": "deepseek-coder-v2"
 }

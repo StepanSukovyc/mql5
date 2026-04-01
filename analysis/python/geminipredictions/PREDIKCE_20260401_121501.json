@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "VIX_ecn",
+  "action": "SELL",
+  "lot_size": 0.06,
+  "take_profit": 23.50,
+  "reasoning": "VIX_ecn je doporučeno SELL. Aktuální otevřené pozice neobsahují tento symbol, takže diverzifikace je splněna. Predikce uvádí SELL s 55% pravděpodobností. Poplatky za transakci budou $0.60 (6 * $0.10). Take profit 23.50, poskytuje prostor pro zisk, berouc v úvahu poplatky a swing styl obchodování.  Stav účtu umožňuje otevřít pozici o velikosti 0.06 lotu s ohledem na marži a risk management, margin free je $694.27."
+}

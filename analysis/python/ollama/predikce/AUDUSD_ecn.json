@@ -1,9 +1,9 @@
 {
   "symbol": "AUDUSD_ecn",
-  "BUY": 50.0,
+  "BUY": 40.0,
   "SELL": 30.0,
-  "HOLD": 20.0,
-  "reasoning": "Kombinace růstových trendů na všech časových úrovních s nárustem RSI a MA indikátorů podporuje pozitivní pohled.",
-  "timestamp": "2026-03-30T12:27:14.752526+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Zvýšení RSI a MA hodnot signalizuje potenciální zesílení trendu. Nicméně, pokles v posledních třech měsících naznačuje určitou nejistotu.",
+  "timestamp": "2026-04-01T11:48:10.635891+00:00",
   "model": "deepseek-coder-v2"
 }

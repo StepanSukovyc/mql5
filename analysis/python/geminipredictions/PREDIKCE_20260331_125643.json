@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "ZARJPY_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 7.0,
+  "reasoning": "Nemám otevřenou pozici v ZARJPY_ecn. Predikce uvádí 70% pravděpodobnost SELL. Volatilita je vysoká a historická data naznačují silný pohyb dolů. Aktuální equity je 2756.23 USD. Poplatek za obchod 0.01 lot bude 0.10 USD. Realistický TP, který dává ekonomický smysl.  Otevření malé pozice 0.01 lot umožňuje opatrný přístup k vysoce volatilnímu instrumentu, zatímco stále existuje potenciál pro zisk v krátkodobém horizontu na základě předpovědi SELL."
+}

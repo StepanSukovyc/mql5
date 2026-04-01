@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
+  "BUY": 30.0,
+  "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení klimatických politik a nedostatečná odpověď na zvýšené emise způsobují negativní vlivy na tržní ceny.",
-  "timestamp": "2026-03-30T13:25:58.569688+00:00",
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace ukazují zeslabování síly ústupu.",
+  "timestamp": "2026-04-01T12:40:57.745603+00:00",
   "model": "deepseek-coder-v2"
 }

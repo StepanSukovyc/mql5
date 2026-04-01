@@ -1,9 +1,9 @@
 {
   "symbol": "EURCHF_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence k oživení. Změna trendu by mohla být indikována zvýšenou volatilitou v případě silného trhu.",
-  "timestamp": "2026-03-30T12:55:19.985170+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle fundamentální analýzy může dojít k růstu úrokových sazeb v Evropě a tedy i k poklesu švýcarského franku. RSI ukazuje slabost na trhu, což podporuje možnost dalšího poklesu.",
+  "timestamp": "2026-04-01T12:13:32.789925+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "USDPLN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu s potenciálem růstu, ale RSI a MA indikují přehřátí trhu. Stabilita je ztracena na krátkodobé perspektive.",
-  "timestamp": "2026-03-30T07:08:33.915638+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové trendy jsou pozitivní, ale některé technické indikátory (např. RSI) ukazují přeprodanost a potenciál na odraz, což mi dává nejistotu.",
+  "timestamp": "2026-04-01T13:49:54.347368+00:00",
   "model": "deepseek-coder-v2"
 }

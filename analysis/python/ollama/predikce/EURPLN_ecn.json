@@ -1,9 +1,9 @@
 {
   "symbol": "EURPLN_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
+  "BUY": 60.0,
+  "SELL": 25.0,
   "HOLD": 15.0,
-  "reasoning": "Především zhoršení makroekonomických prognóz a pokles RSI oproti minulosti indikují silný pohyb ceny směrem dolů. Mimo to je MA ukazatel slabý, což dává prostor pro další pokles.",
-  "timestamp": "2026-03-30T13:10:40.495618+00:00",
+  "reasoning": "Vysoká úroveň RSI a MA signalizují silnou pozici. Nicméně, pokles v posledních týdnech indikuje určitou nejistotu.",
+  "timestamp": "2026-04-01T12:27:07.353500+00:00",
   "model": "deepseek-coder-v2"
 }

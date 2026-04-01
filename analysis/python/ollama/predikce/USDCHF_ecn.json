@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI a MA ukazují slabost, ale fundamentální analýza neprokazuje silný pokles.",
-  "timestamp": "2026-03-30T06:53:15.351041+00:00",
+  "reasoning": "Předběžné zhoršení světových ekonomik a pokles RSI indikuje riziko poklesu. Nicméně MA ukazuje stabilitu.",
+  "timestamp": "2026-04-01T13:30:51.675584+00:00",
   "model": "deepseek-coder-v2"
 }

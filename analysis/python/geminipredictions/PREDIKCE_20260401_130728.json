@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURPLN_ecn",
+  "action": "BUY",
+  "lot_size": 0.07,
+  "take_profit": 4.34,
+  "reasoning": "Nemám otevřenou pozici v EURPLN_ecn. Podle predikce má symbol EURPLN_ecn BUY 60%, což je nejvyšší hodnota BUY ze všech dostupných predikcí. Vysoke RSI a MA signalizuji silnou pozici. Nastavuji relativně vysoký Take Profit, protože se jedná o swing obchod a chci z potenciálního silného růstu vytěžit maximum. Aktuální margin free je 745.05. 0.07 lot by mělo být adekvátní s ohledem na balance. Transakční poplatek je 0.7 USD, což je zanedbatelné vzhledem k potenciálnímu zisku, pokud trh půjde dle predikce."
+}

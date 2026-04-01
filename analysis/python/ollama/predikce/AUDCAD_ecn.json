@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje silnou měnu AUD a slabou měnu CAD. RSI indikuje pře prodej a MA ukazuje pokles trendu.",
-  "timestamp": "2026-03-30T12:17:54.924443+00:00",
+  "reasoning": "Základní analýza ukazuje stabilitu měny s lehčím trendem růstu. RSI a MA hodnoty podporují tento pohyb.",
+  "timestamp": "2026-04-01T11:39:45.515470+00:00",
   "model": "deepseek-coder-v2"
 }
