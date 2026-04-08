@@ -1,9 +1,9 @@
 {
   "symbol": "AUDJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace ukazují signály pro obnovení.",
-  "timestamp": "2026-04-08T02:44:07.683524+00:00",
+  "BUY": 0.0,
+  "SELL": 100.0,
+  "HOLD": 0.0,
+  "reasoning": "Vysoké hodnoty RSI a pokles MA indikují silnou tendenci poklesu ceny.",
+  "timestamp": "2026-04-08T05:25:27.640631+00:00",
   "model": "deepseek-coder-v2"
 }

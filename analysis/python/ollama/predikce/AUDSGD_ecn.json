@@ -1,9 +1,9 @@
 {
   "symbol": "AUDSGD_ecn",
-  "BUY": 30.0,
-  "SELL": 40.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu a mírný růst cen. RSI a MA indikují potenciál pro další růst.",
-  "timestamp": "2026-04-08T02:47:28.972846+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem světových trhů a negativního tlaku na ceny. Historické trendy indikují pokles s ohledem na silnou opoziční hladinu.",
+  "timestamp": "2026-04-08T05:30:08.394486+00:00",
   "model": "deepseek-coder-v2"
 }

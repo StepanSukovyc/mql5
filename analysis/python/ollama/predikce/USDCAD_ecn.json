@@ -1,9 +1,9 @@
 {
   "symbol": "USDCAD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech s podporou RSI a MA signalizují možný nárůst. Nicméně, pokles v minulosti může být důsledkem silného tlaku prodávajících.",
-  "timestamp": "2026-04-08T01:45:05.074739+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je zřetelný trend směrem nahoru. Nicméně, cenová akce ukazuje silnou odporovou úroveň, což může vést k potenciálnímu oslabení.",
+  "timestamp": "2026-04-08T04:26:06.098155+00:00",
   "model": "deepseek-coder-v2"
 }

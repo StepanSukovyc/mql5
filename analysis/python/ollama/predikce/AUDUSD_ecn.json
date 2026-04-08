@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme slabost v růstových tendencích. Nicméně, fundamentální analýza ukazuje stabilitu s trvalým růstem.",
-  "timestamp": "2026-04-08T02:49:08.873511+00:00",
+  "reasoning": "Růstový impulz je potvrzen svíčkovou formací a rostoucím RSI. Nicméně, pokles MA signalizuje silnou odolnost a možná překonání horní hranice.",
+  "timestamp": "2026-04-08T05:32:27.794492+00:00",
   "model": "deepseek-coder-v2"
 }

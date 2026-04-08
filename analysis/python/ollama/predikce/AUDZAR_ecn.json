@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "RSI ukazuje slabost s opakovanými vrcholy a důlními formacemi, což naznačuje možné poklesy. MA ukazuje střih dolů, ale ještě nedokázalo otestovat podpěrnou úroveň.",
-  "timestamp": "2026-04-08T02:50:49.923247+00:00",
+  "reasoning": "Převaha negativních signálů z RSI a MA indikátorů, s malou podporou ze svíčkových formací.",
+  "timestamp": "2026-04-08T05:34:46.528493+00:00",
   "model": "deepseek-coder-v2"
 }

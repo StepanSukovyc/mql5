@@ -30,15 +30,16 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Cílový profit `PCZ = (0.01 * L / VOLUME) * B`, minimum `PCZ` je `0.005`
    - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
    - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
-9. **Vyhodnotí hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
-   - Běží během minutového account monitoru jednou za hodinu v minutě `LOSS_CLEANUP_STRATEGY_MINUTE` (default 45)
-   - Spočítá denní realizovaný výsledek z dnešních MT5 dealů včetně swapů, komisí a poplatků
-   - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z dnešních uzavřených pozic
-   - Od realizovaného výsledku odečte 1 % z aktuální bilance účtu a získá limit `Z`
+9. **Vyhodnotí denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
+   - Běží během minutového account monitoru nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
+   - Použije realizovaný výsledek za předchozí uzavřený pražský den z MT5 deal historie včetně `profit`, `swap`, `commission` a `actual deal.fee`
+   - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z uzavřených pozic referenčního dne
+   - K tomuto realizovanému výsledku přičte jen záporný aktuální open P/L (`equity - raw_balance`) a odečte 1 % z aktuální bilance účtu; tím vznikne limit `Z`
    - Najde otevřenou ztrátovou pozici starší než 7 dní s nejvyšší ztrátou, která je stále menší než `Z`
-   - Kandidáta navíc odmítne, pokud by po close spadl denní realizovaný výsledek pod `0.00`
+   - Kandidáta navíc odmítne, pokud by po close spadl efektivní profit budget pod `0.00`
    - Pokud mají dva bezpeční kandidáti stejnou ztrátu, ponechá první nalezenou pozici
    - Do ztráty počítá i swap a syntetický fee `0.10 USD` za každých `0.01` lotu
+   - Stavový soubor `trade_logs/loss_cleanup_state.json` brání opakovanému spuštění ve stejný pražský den i po restartu procesu
    - Pokud je `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáta jen zaloguje a nic nezavírá
    - V čase 23:00-23:30 CET/CEST se cleanup nespouští
 9. **Provede obchod** - automaticky otevře pozici na MT5
@@ -297,7 +298,7 @@ Monitoruje stav účtu v background threadu:
 - Pravidelně kontroluje **efektivní volnou marži** v procentech vůči efektivnímu balance
 - Signalizuje překročení **20% prahu** (konfigurovatelné v .env) pomocí threading.Event
 - Zobrazuje info o účtu (zůstatek, equity, marže)
-- Spouští minutovou profit cleanup strategii a hodinovou loss cleanup strategii, pokud jsou povolené
+- Spouští minutovou profit cleanup strategii a denní loss cleanup strategii, pokud jsou povolené
 - Běží bez blokování hlavního vlákna
 
 **Klíčové funkce:**
@@ -306,21 +307,22 @@ Monitoruje stav účtu v background threadu:
 - `check_stop_condition()` - ověří margin > threshold%, nastavuje event
 - `run_account_monitor()` - monitoring loop v threadu
 
-### 2a. loss_cleanup_strategy.py - Hourly Loss Cleanup
-Volitelná bezpečnostní strategie pro průběžné odlehčení starých ztrátových pozic:
+### 2a. loss_cleanup_strategy.py - Daily Loss Cleanup
+Volitelná bezpečnostní strategie pro jednorázové denní odlehčení starých ztrátových pozic:
 - Čte runtime konfiguraci přímo z `.env`, takže ji lze za běhu zapnout, vypnout nebo přepnout mezi dry-run a live režimem
-- Vyhodnocuje se nejvýše jednou za hodinu podle `LOSS_CLEANUP_STRATEGY_MINUTE`
-- Počítá `Z = denní realizovaný výsledek - 1 % aktuální bilance`
-- Denní realizovaný výsledek bere ze všech dnešních dealů včetně `profit`, `swap`, `commission` a `fee`
-- Pro diagnostiku dál počítá i `daily_clean_profit` z dnešních uzavřených pozic identifikovaných přes `position_id`
+- Vyhodnocuje se nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE`
+- Počítá `Z` z realizovaného výsledku za předchozí uzavřený pražský den, záporného aktuálního open P/L a 1 % bufferu z aktuální bilance
+- Předchozí realizovaný výsledek bere ze všech dealů referenčního dne včetně `profit`, `swap`, `commission` a `actual deal.fee`
+- Pro diagnostiku dál počítá i `daily_clean_profit` z uzavřených pozic referenčního dne identifikovaných přes `position_id`
 - Prochází otevřené pozice starší než 7 dní a vybírá největší ztrátu menší než `Z`
-- Kandidáta navíc blokuje, pokud by po zavření klesl `daily_realized_profit` pod nulu
+- Kandidáta navíc blokuje, pokud by po zavření klesl efektivní profit budget pod nulu
 - Pokud mají dva kandidáti stejný `loss_amount`, zůstává vybraný první nalezený kandidát
 - Do efektivní ztráty zahrnuje `profit`, `swap` a syntetický fee `0.10 USD / 0.01 lotu`
 - V `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` pouze vypíše kandidáta a zapíše audit do CSV
 - V ostrém režimu používá `close_position_by_ticket()` ze sdílené exekuční vrstvy
 - Zapisuje audit do `trade_logs/loss_cleanup.csv`
 - Pro diagnostiku rozdílů proti mobilní aplikaci zapisuje i raw snapshot dealů z `history_deals_get()` do `trade_logs/loss_cleanup_daily_deals.csv`
+- Zapisuje i stavový soubor `trade_logs/loss_cleanup_state.json`, který zabraňuje opakovanému spuštění ve stejný pražský den
 
 ### 2b. profit_cleanup_strategy.py - Minute Profit Cleanup
 Volitelná strategie pro průběžné uzavírání otevřených profitních pozic podle objemu a velikosti účtu:
@@ -379,8 +381,9 @@ Relevantní parametry pro risk management:
 - `TRADING_ACCOUNT_BALANCE_CAP=5000` určuje maximální balance, se kterou strategie počítá lot sizing a margin check
 - `PROFIT_CLEANUP_STRATEGY_ENABLED=true` zapíná minutovou profit cleanup strategii
 - `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání profitních pozic
-- `LOSS_CLEANUP_STRATEGY_ENABLED=true` zapíná hodinovou cleanup strategii
-- `LOSS_CLEANUP_STRATEGY_MINUTE=45` určuje minutu v hodině, kdy se má cleanup vyhodnotit
+- `LOSS_CLEANUP_STRATEGY_ENABLED=true` zapíná denní cleanup strategii
+- `LOSS_CLEANUP_STRATEGY_HOUR=12` určuje hodinu pražského času, po které se má cleanup vyhodnotit
+- `LOSS_CLEANUP_STRATEGY_MINUTE=45` určuje minutu pražského času, po které se má cleanup vyhodnotit
 - `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání pozic
 - Pokud je skutečný balance nižší než strop, žádná rezerva se neuplatní
 

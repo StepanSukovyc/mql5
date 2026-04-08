@@ -1,9 +1,9 @@
 {
   "symbol": "AUDNZD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nicméně, zvýšená volatilita indikovaná vysokými RSI hodnotami může být příznakem silného pohybu na stranu klesající.",
-  "timestamp": "2026-04-08T02:45:49.119849+00:00",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Zhoršení kvality životního prostředí a ztráta důvěry investorů v růstové scénáře.",
+  "timestamp": "2026-04-08T05:27:46.709254+00:00",
   "model": "deepseek-coder-v2"
 }

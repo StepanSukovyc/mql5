@@ -1,9 +1,9 @@
 {
   "symbol": "BTCUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle svíčkových formací a RSI je trend směrem dolů, ale MA ukazuje stabilitu. Kombinace těchto faktorů doporučuje částečné držení pozice.",
-  "timestamp": "2026-04-08T02:54:10.867905+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Zvýšení RSI v posledních měsících a stabilita MA sugerují potenciál růstu, ale volatilita způsobuje nejistotu.",
+  "timestamp": "2026-04-08T05:39:26.465458+00:00",
   "model": "deepseek-coder-v2"
 }

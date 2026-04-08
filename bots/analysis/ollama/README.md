@@ -35,14 +35,19 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření a strategie ji uzavře
   - V jednom průchodu uzavírá všechny aktuálně vhodné pozice
   - Přepínač `PROFIT_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
-9. **Hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
-  - Každou hodinu v minutě `LOSS_CLEANUP_STRATEGY_MINUTE` (default 45) spočítá denní realizovaný výsledek z dnešních MT5 dealů včetně swapů, komisí a poplatků
-  - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z dnešních uzavřených pozic podle `position_id`
-  - Od realizovaného výsledku odečte 1 % z aktuální bilance účtu a získá limit `Z`
+9. **Denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
+  - Spustí se nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
+  - Použije realizovaný výsledek za předchozí uzavřený pražský den z historie MT5 dealů jako `profit + swap + commission + actual deal.fee`
+  - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z uzavřených pozic referenčního dne podle `position_id`
+  - Tento údaj není totéž jako aktuální floating P/L otevřených pozic v panelu Obchodování
+  - Modelový poplatek `0.10 USD` za každých `0.01` lotu se nepoužívá pro `daily_realized_profit`; používá se jen při hodnocení ztráty kandidátní otevřené pozice
+  - K realizovanému výsledku z předchozího dne přičte jen záporný aktuální open P/L (`equity - raw_balance`), aby nezavíral další ztrátu v momentě, kdy jsou otevřené pozice už celkově v mínusu
+  - Od takto upraveného bezpečného rozpočtu odečte 1 % z aktuální bilance účtu a získá limit `Z`
   - Z otevřených pozic starších než 7 dní najde největší ztrátovou pozici, jejíž ztráta včetně swapu a poplatku `0.10 USD` za každých `0.01` lotu je stále menší než `Z`
-  - Zároveň kandidáta odmítne, pokud by po jeho uzavření klesl `daily_realized_profit` pod `0.00`
+  - Zároveň kandidáta odmítne, pokud by po jeho uzavření klesl tento bezpečný rozpočet pod `0.00`
   - Pokud mají dva bezpeční kandidáti stejnou ztrátu, ponechá první nalezenou pozici
   - Pokud taková pozice existuje, uzavře ji; jinak neudělá nic
+  - Stavový soubor `trade_logs/loss_cleanup_state.json` brání tomu, aby se po restartu proces spustil vícekrát ve stejný pražský den
   - V čase 23:00-23:30 CET/CEST se cleanup nespouští stejně jako běžné obchodování
   - Přepínač `LOSS_CLEANUP_STRATEGY_DRY_RUN` (default `true`) vypíše kandidáta a zaloguje akci, ale pozici skutečně nezavře
 9. **Provede obchod** na MT5 podle aktivního režimu
@@ -239,7 +244,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - `<SERVICE_DEST_FOLDER>/ollama/predikce/{symbol}.json` - Předchystané Ollama predikce (použitelné v hlavní logice při stáří <= 1h)
 - `<SERVICE_DEST_FOLDER>/trade_logs/profit_cleanup.csv` - Audit minutové profit cleanup strategie včetně `B`, referenčního `VOLUME`, `ZISK`, `PCZ` a výsledku close pokusu
 - `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup.csv` - Audit hodinové cleanup strategie včetně hodnot `daily_clean_profit`, `daily_realized_profit`, `Z` a případně uzavřené pozice
-- `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup_daily_deals.csv` - Diagnostický snapshot všech dealů, které MT5 API při cleanup běhu skutečně vrátilo
+- `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup_daily_deals.csv` - Diagnostický snapshot všech dealů, které MT5 API při cleanup běhu skutečně vrátilo, včetně `actual_fee`, `modeled_fee` a `realized_component`
 - Dokud testujete, nechte `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
 - Dokud testujete, nechte `LOSS_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
 

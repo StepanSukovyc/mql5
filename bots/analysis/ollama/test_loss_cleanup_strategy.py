@@ -7,7 +7,13 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from loss_cleanup_strategy import _find_cleanup_candidate, _would_keep_realized_profit_non_negative
+from loss_cleanup_strategy import (
+	_calculate_effective_profit_budget,
+	_get_previous_prague_day_bounds_utc,
+	_is_after_daily_run_time,
+	_find_cleanup_candidate,
+	_would_keep_realized_profit_non_negative,
+)
 
 
 class LossCleanupStrategyTests(unittest.TestCase):
@@ -16,6 +22,23 @@ class LossCleanupStrategyTests(unittest.TestCase):
 
 	def test_non_negative_realized_profit_guard_rejects_negative_remainder(self) -> None:
 		self.assertFalse(_would_keep_realized_profit_non_negative(121.98, 121.99))
+
+	def test_effective_profit_budget_includes_negative_open_profit_only(self) -> None:
+		self.assertEqual(_calculate_effective_profit_budget(90.67, -129.26), -38.59)
+		self.assertEqual(_calculate_effective_profit_budget(90.67, 25.00), 90.67)
+
+	def test_previous_prague_day_bounds_respect_timezone(self) -> None:
+		now_utc = datetime(2026, 4, 8, 10, 45, tzinfo=timezone.utc)
+		reference_day, start_utc, end_utc = _get_previous_prague_day_bounds_utc(now_utc)
+
+		self.assertEqual(str(reference_day), "2026-04-07")
+		self.assertEqual(start_utc, datetime(2026, 4, 6, 22, 0, tzinfo=timezone.utc))
+		self.assertEqual(end_utc, datetime(2026, 4, 7, 22, 0, tzinfo=timezone.utc))
+
+	def test_after_daily_run_time_allows_late_same_day_run(self) -> None:
+		now_prague = datetime(2026, 4, 8, 13, 0, tzinfo=timezone(timedelta(hours=2)))
+		self.assertTrue(_is_after_daily_run_time(now_prague, 12, 45))
+		self.assertFalse(_is_after_daily_run_time(now_prague, 13, 1))
 
 	@patch("loss_cleanup_strategy.mt5.positions_get")
 	def test_candidate_is_rejected_when_close_would_make_realized_profit_negative(self, mock_positions_get) -> None:
@@ -36,7 +59,7 @@ class LossCleanupStrategyTests(unittest.TestCase):
 		candidate = _find_cleanup_candidate(
 			z_limit=132.22,
 			now_utc=now_utc,
-			daily_realized_profit=121.98,
+			effective_profit_budget=121.98,
 		)
 
 		self.assertIsNone(candidate)
@@ -60,13 +83,38 @@ class LossCleanupStrategyTests(unittest.TestCase):
 		candidate = _find_cleanup_candidate(
 			z_limit=132.22,
 			now_utc=now_utc,
-			daily_realized_profit=121.99,
+			effective_profit_budget=121.99,
 		)
 
 		self.assertIsNotNone(candidate)
 		assert candidate is not None
 		self.assertEqual(candidate.ticket, 26912003)
 		self.assertEqual(candidate.loss_amount, 121.99)
+
+	@patch("loss_cleanup_strategy.mt5.positions_get")
+	def test_candidate_is_rejected_when_account_is_currently_in_open_loss(self, mock_positions_get) -> None:
+		now_utc = datetime(2026, 4, 8, 4, 45, tzinfo=timezone.utc)
+		opened_at = int((now_utc - timedelta(days=173)).timestamp())
+		mock_positions_get.return_value = (
+			SimpleNamespace(
+				ticket=26864451,
+				symbol="CHFZAR_ecn",
+				type=0,
+				volume=0.01,
+				time=opened_at,
+				profit=-45.66,
+				swap=-3.12,
+			),
+		)
+
+		effective_profit_budget = _calculate_effective_profit_budget(90.67, -129.26)
+		candidate = _find_cleanup_candidate(
+			z_limit=-71.36,
+			now_utc=now_utc,
+			effective_profit_budget=effective_profit_budget,
+		)
+
+		self.assertIsNone(candidate)
 
 	@patch("loss_cleanup_strategy.mt5.positions_get")
 	def test_largest_safe_candidate_is_selected_from_multiple_positions(self, mock_positions_get) -> None:
@@ -105,7 +153,7 @@ class LossCleanupStrategyTests(unittest.TestCase):
 		candidate = _find_cleanup_candidate(
 			z_limit=132.22,
 			now_utc=now_utc,
-			daily_realized_profit=121.75,
+			effective_profit_budget=121.75,
 		)
 
 		self.assertIsNotNone(candidate)
@@ -142,7 +190,7 @@ class LossCleanupStrategyTests(unittest.TestCase):
 		candidate = _find_cleanup_candidate(
 			z_limit=132.22,
 			now_utc=now_utc,
-			daily_realized_profit=121.75,
+			effective_profit_budget=121.75,
 		)
 
 		self.assertIsNotNone(candidate)

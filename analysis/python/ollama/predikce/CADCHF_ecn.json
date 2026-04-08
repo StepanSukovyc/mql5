@@ -1,9 +1,9 @@
 {
   "symbol": "CADCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend směrem dolů s některými korekcemi, ale zároveň jsou indikátory překoupené co do růstu. Kombinace těchto faktorů doporučuje částečně držet pozici.",
-  "timestamp": "2026-04-08T02:55:51.316631+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Růst cen měny je podpořen silnou svíčkovou formací a pozitivním trendem RSI. Nicméně, pokles v posledních týdnech ukazuje na určitou nejistotu.",
+  "timestamp": "2026-04-08T04:47:37.935586+00:00",
   "model": "deepseek-coder-v2"
 }

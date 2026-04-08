@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-04-08 (Daily Loss Cleanup Scheduling)
+
+- **Changed Loss Cleanup To Run Once Daily Using Previous Prague-Day Profit**
+  - Loss cleanup now evaluates only once per Prague day after `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` instead of every hour
+  - Profit budget now uses the previous completed Prague-day realized result while keeping the existing candidate selection and open P/L safety rules
+  - Added persistent state file `trade_logs/loss_cleanup_state.json` so the strategy cannot execute more than once per Prague day after a process restart
+
+## 2026-04-08 (Loss Cleanup Diagnostics Clarification)
+
+- **Separated Actual MT5 Fee From Modeled Fee In Daily Deal Snapshot**
+  - `loss_cleanup_daily_deals.csv` now stores `actual_fee` from MT5 separately from the modeled per-volume fee used for candidate scoring
+  - Added per-deal `realized_component` so the reported `daily_realized_profit` can be traced directly from the snapshot rows
+  - Console and docs now state explicitly that `daily_realized_profit` uses `profit + swap + commission + actual deal.fee`
+
+## 2026-04-08 (Loss Cleanup Floating P/L Guard)
+
+- **Blocked Loss Cleanup When Open P/L Is Already Negative**
+  - Loss cleanup now subtracts the current negative open P/L (`equity - raw_balance`) from the daily realized profit budget before computing `Z`
+  - Strategy no longer closes an old losing position purely because today's realized deals are positive while the account is already negative on open positions
+  - Console output and audit log now show `current_open_profit` and the resulting effective profit budget for transparency
+
 ## 2026-04-08 (Loss Cleanup Safety Guard)
 
 - **Hardened Hourly Loss Cleanup Safety Check**
