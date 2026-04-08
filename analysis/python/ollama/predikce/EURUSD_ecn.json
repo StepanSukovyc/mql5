@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle RSI a klouzavých průměrů (MA) je trend stále směrem dolů, ale cenové akce svíčkovými formacemi naznačují možnost otočení. Současně fundamentální analýza ukazuje stabilitu s eurozónou a globální ekonomikou.",
-  "timestamp": "2026-04-01T12:32:15.482135+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tendence s nárůstem volatility. Nicméně, fundamentální analýza naznačuje stabilitu s mírným potenciálem růstu.",
+  "timestamp": "2026-04-08T03:33:21.765967+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové síly jsou ohroženy silnou odolností v měsíčním MA a poklesem RSI. Nicméně, cenový model svíček naznačuje možnosti růstu.",
-  "timestamp": "2026-04-01T13:47:31.831643+00:00",
+  "reasoning": "Převažující trend je poklesový, ale některé indikátory ukazují možnost odrážení dolů. Kompromis mezi rizikem a nadcházejícím pohybem.",
+  "timestamp": "2026-04-08T01:59:07.936626+00:00",
   "model": "deepseek-coder-v2"
 }

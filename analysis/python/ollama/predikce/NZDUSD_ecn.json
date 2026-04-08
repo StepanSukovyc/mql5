@@ -1,9 +1,9 @@
 {
   "symbol": "NZDUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje silnou polohu dolaru Nového Zélandu v současné době. RSI a MA hodnoty indikují stabilitu s tendencí k růstu, ale vysoká volatilita způsobená nedávnými událostmi (např. politikou úspor) vyvolává nejistotu.",
-  "timestamp": "2026-04-01T13:12:42.920274+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Základní analýza ukazuje slabost v NZD, zatímco USD je silný. RSI a MA hodnoty podporují pokles.",
+  "timestamp": "2026-04-08T01:33:16.803625+00:00",
   "model": "deepseek-coder-v2"
 }

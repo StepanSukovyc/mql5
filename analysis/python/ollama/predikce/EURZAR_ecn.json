@@ -1,9 +1,9 @@
 {
   "symbol": "EURZAR_ecn",
   "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují silnou podporu blízko úrovním minulých vrcholů.",
-  "timestamp": "2026-04-01T12:33:57.186693+00:00",
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend střednědobý směřující nahoru, ale dlouhodobý trend ukazuje na pokles. Svíčkové formace sugerují nejistotu.",
+  "timestamp": "2026-04-08T03:35:01.620894+00:00",
   "model": "deepseek-coder-v2"
 }

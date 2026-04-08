@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růst cen metálu je podporován diverzifikací rizika a pozitivním světovým signálem. Nicméně, následující týden může přinést negativní zprávy.",
-  "timestamp": "2026-04-01T11:13:51.665098+00:00",
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět tendence k poklesu, ale zároveň výrazné supporty. Změna trendu může být brzy očekávána.",
+  "timestamp": "2026-04-08T02:14:47.996585+00:00",
   "model": "deepseek-coder-v2"
 }

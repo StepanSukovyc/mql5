@@ -1,9 +1,9 @@
 {
   "symbol": "US100_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstový impuls podle svíčkových formací a potenciál restrukturalizace ekonomiky může podporovat růst. Nicméně, zhoršení finanční situace v Rusku a USA může přinést nejistotu.",
-  "timestamp": "2026-04-01T13:21:50.066374+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Zhoršení makroekonomických indikátorů a nárůst rizika volatilního trhu.",
+  "timestamp": "2026-04-08T01:40:00.666078+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "USDILS_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozhodování je založeno na analýze cen a indikátorů technické analýzy. RSI ukazuje neutralitu trhu, ale MA signalizuje pokles ceny. Finanční situace může vést k oslabení měny.",
-  "timestamp": "2026-04-01T13:40:25.028303+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend směrem nahoru, ale cenový model svíček indikuje nejistotu s možným prelominem do konzistence.",
+  "timestamp": "2026-04-08T01:53:52.708436+00:00",
   "model": "deepseek-coder-v2"
 }

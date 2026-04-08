@@ -1,9 +1,9 @@
 {
   "symbol": "FRA40_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 60.0,
+  "SELL": 20.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických prognóz a nárůst rizik může vést k poklesu ceny. Současně technické indikátory RSI a MA svízelně ukazují na zeslabování trendu.",
-  "timestamp": "2026-04-01T12:37:25.891859+00:00",
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují další růst. Malá volatilita znamená stabilitu.",
+  "timestamp": "2026-04-08T03:38:19.622519+00:00",
   "model": "deepseek-coder-v2"
 }

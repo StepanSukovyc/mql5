@@ -1,9 +1,9 @@
 {
   "symbol": "USDHKD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě fundamentální analýzy a svíčkových formací může dojít k oslabení amerického dolaru vůči hongkonbškému dolaru. RSI indikuje překoupenost, což potenciálně signalizuje pokles hodnoty, zatímco MA ukazuje stoupající trend.",
-  "timestamp": "2026-04-01T13:35:38.218418+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem, zeslabení RSI a pokles MA sugerují další korekci.",
+  "timestamp": "2026-04-08T01:50:21.739017+00:00",
   "model": "deepseek-coder-v2"
 }

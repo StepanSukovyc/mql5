@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "GBPJPY_ecn",
+  "action": "SELL",
+  "lot_size": 0.02,
+  "take_profit": 210.00,
+  "reasoning": "Order #89 je plně řízený Gemini, proto vybírám měnový pár s největší šancí na zisk. GBPJPY_ecn má dle predikce 100% SELL. Mám již otevřenou pozici GBPJPY_ecn, ale její pnl je -0.32 a -0.17, což nepředstavuje ztrátu větší než 15 % hodnoty účtu. Proto otevírám další pozici GBPJPY_ecn, protože riziko je minimální. Navrhuji lot size 0.02, aby obchod nezabíral příliš volné marže. Transakční poplatek je 0.20 USD, take profit nastaven na 210.00, aby zisk po odečtení poplatku byl ekonomicky smysluplný."
+}

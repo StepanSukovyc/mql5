@@ -1,9 +1,9 @@
 {
   "symbol": "NZDSEK_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Vysoká volatilita a nízké hodnoty RSI indikují nejistotu. Vývoj MA ukazuje slabost, ale fundamentální analýza naznačuje stabilitu.",
-  "timestamp": "2026-04-01T13:09:11.739728+00:00",
+  "BUY": 50.0,
+  "SELL": 30.0,
+  "HOLD": 20.0,
+  "reasoning": "Analýza fundamentálních ukazatelů a svíčkových formací sugeruje nejistotu s ohledem na volatilitu trhu. RSI indikátor signalizuje neutralitu, zatímco klouzavé průměry (MA) neindikují jasný trend.",
+  "timestamp": "2026-04-08T01:30:00.107288+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "BCHUSD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 67000,
+  "reasoning": "BCHUSD_ecn má silný medvědí sentiment. Cena je pod MA na všech časových rámcích a RSI je přeprodané na 1h, 4h a denním grafu, celkový trend je medvědí. Transakční poplatek je 0.1 USD. Take profit je nastaven na rozumnou úroveň vzhledem k aktuální ceně a volatilitě. Preferuji diverzifikaci a tento symbol není v současných otevřených pozicích. Volná marže je dostatečná."
+}

@@ -1,9 +1,9 @@
 {
   "symbol": "USDSGD_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
-  "HOLD": 10.0,
-  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace ukazují zlepšení. Riziko ztráty je vyšší.",
-  "timestamp": "2026-04-01T13:54:38.686215+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět pokles trendu, ale zároveň nízké hodnoty RSI indikují příležitost k obratu. Současný stav může být volatilní s vysokým rizikem.",
+  "timestamp": "2026-04-08T02:04:17.887132+00:00",
   "model": "deepseek-coder-v2"
 }

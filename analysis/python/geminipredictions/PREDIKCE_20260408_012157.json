@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "NZDCHF_ecn",
+  "action": "BUY",
+  "lot_size": 0.03,
+  "take_profit": 0.5445,
+  "reasoning": "Dle dostupných predikcí je NZDCHF_ecn doporučován k nákupu (BUY: 55%). RSI na měsíčním grafu je silně přeprodané (22.96), což naznačuje dlouhodobý potenciál růstu. Poslední hodinová svíčka silně prorazila nad MA na denním grafu, což dává signál k nákupu. Beru v úvahu, že aktuální pozice jsou v mínusu, a tedy diverzifikace je žádoucí. Doporučená velikost lotu (0.03) je vypočítána tak, aby zohledňovala dostupné prostředky a potenciální riziko. Take_profit je nastaven realisticky vzhledem k volatilitě a potenciálu růstu."
+}

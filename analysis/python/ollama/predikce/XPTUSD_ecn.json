@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 65.0,
   "HOLD": 15.0,
-  "reasoning": "Podle svíčkových formací a trendu RSI ukazuje slabost. MA indikátor podporuje pokles.",
-  "timestamp": "2026-04-01T11:22:43.113254+00:00",
+  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčková formační analýza ukazuje silnou podporu blízko hodnotě 100 SMA, což naznačuje nejistotu.",
+  "timestamp": "2026-04-08T02:23:35.831850+00:00",
   "model": "deepseek-coder-v2"
 }

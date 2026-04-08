@@ -1,9 +1,9 @@
 {
   "symbol": "EURSEK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a klouzavých průměrů ukazuje trend střednědobého poklesu. Nicméně, základní analýza a svíčkové formace naznačují silnou podporu kolem 1.50 SEK.",
-  "timestamp": "2026-04-01T12:28:50.038382+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme signály podporující růst ceny. Nicméně, fundamentalní analýza ukazuje některé slabiny v ekonomických datech, což doporučuje nejistotu.",
+  "timestamp": "2026-04-08T03:29:58.706255+00:00",
   "model": "deepseek-coder-v2"
 }

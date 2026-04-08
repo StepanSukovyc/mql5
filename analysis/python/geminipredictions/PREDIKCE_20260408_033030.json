@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "GBPAUD_ecn",
+  "action": "SELL",
+  "lot_size": 0.06,
+  "take_profit": 1.885,
+  "reasoning": "Otevřené pozice neobsahují GBPAUD_ecn, což zajišťuje diverzifikaci. Predikce pro GBPAUD_ecn je SELL s 60% pravděpodobností, což je silný signál. Z analýzy vyplývá, že GBPAUD vykazuje klesající signály na více časových rámcích. Mám dostatek volné marže (margin_free = 1037.53 USD) pro otevření pozice 0.06 lotu. Take Profit je nastaven na 1.885, s ohledem na potenciál poklesu, poplatky (0.6 USD) a potřebu generování realistického zisku."
+}

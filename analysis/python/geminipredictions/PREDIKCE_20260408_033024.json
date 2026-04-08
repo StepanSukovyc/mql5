@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "NZDJPY_ecn",
+  "action": "BUY",
+  "lot_size": 0.03,
+  "take_profit": 95.50,
+  "reasoning": "Pořadí obchodu #95 implikuje plnou kontrolu Gemini. Analýza NZDJPY_ecn ukazuje smíšené signály, ale s převahou BUY (50%). Krátkodobé grafy (1h, 4h) indikují překoupenost, ale denní RSI je neutrální. Trend na denním grafu je uptrend, supportovaný MA. Otevření BUY pozice je odůvodněné potenciálním dalším růstem, zatímco HOLD je pro případ pohybu do strany, a SELL pro krátkodobou korekci. Symbol NZDJPY_ecn v současnosti není v otevřených pozicích, což podporuje diverzifikaci portfolia. Take Profit je nastaven na 95.50, aby zohlednil transakční náklady a potenciální zisk."
+}

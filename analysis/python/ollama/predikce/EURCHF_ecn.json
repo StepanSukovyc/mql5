@@ -1,9 +1,9 @@
 {
   "symbol": "EURCHF_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle fundamentální analýzy může dojít k růstu úrokových sazeb v Evropě a tedy i k poklesu švýcarského franku. RSI ukazuje slabost na trhu, což podporuje možnost dalšího poklesu.",
-  "timestamp": "2026-04-01T12:13:32.789925+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu euro/franku. RSI a MA indikují neutrální tendenci s několi volatilitou způsobenou ekonomickými faktory.",
+  "timestamp": "2026-04-08T03:14:36.331884+00:00",
   "model": "deepseek-coder-v2"
 }

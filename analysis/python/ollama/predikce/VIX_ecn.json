@@ -1,9 +1,9 @@
 {
   "symbol": "VIX_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
+  "BUY": 20.0,
+  "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Zhoršení situace v globálním trhu s ohledem na inflaci a růst cen energií podporuje názor o možném poklesu akciových trhů. Nicméně, pozitivní svíčkové formace a stabilita v domácí ekonomice doporučují částečnou přizpůsobivost k trhu.",
-  "timestamp": "2026-04-01T14:01:48.360573+00:00",
+  "reasoning": "Zohlednil jsem svíčkové formace jako spouštěcí signály pro nárůst a pokles ceny. RSI ukazuje neutralitu s mírným trendem klesajícímu, zatímco MA hodnoty indikují střednědobý růst.",
+  "timestamp": "2026-04-08T02:09:32.075095+00:00",
   "model": "deepseek-coder-v2"
 }

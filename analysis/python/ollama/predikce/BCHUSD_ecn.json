@@ -1,9 +1,9 @@
 {
   "symbol": "BCHUSD_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale nárust cenových hladin v minulosti může naznačovat opravu.",
-  "timestamp": "2026-04-01T11:51:31.986862+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět slabost v růstových tendencích. Nicméně, základní analýza a historické ceny svíček ukazují potenciál pro opravu směřující nahoru.",
+  "timestamp": "2026-04-08T02:52:31.124944+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "EURCZK_ecn",
-  "BUY": 30.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Zohlednil jsem svíčkové formace a pokles RSI, který může signalizovat další pokles. Nicméně, MA ukazuje stabilitu, což mi nedává silnou poptávku po BUY.",
-  "timestamp": "2026-04-01T12:15:14.439028+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem globálních trhů a nedostatečným tlakem nákupu. Klesající trend RSI a MA indikují pokračující stabilitu nebo pokles.",
+  "timestamp": "2026-04-08T03:16:20.345436+00:00",
   "model": "deepseek-coder-v2"
 }

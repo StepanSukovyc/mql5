@@ -1,9 +1,9 @@
 {
   "symbol": "GBPUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 20.0,
+  "SELL": 60.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech s omezeným pohybem. RSI a MA indikátory ukazují slabost cenového trendu.",
-  "timestamp": "2026-04-01T12:49:52.600367+00:00",
+  "reasoning": "Základní analýza a svíčkové formace upozorňují na možnost silného pohybu směrem dolů. RSI a MA ukazují slabost trhu, ale zároveň nedokazují silnou připravu pro opakovaný růst.",
+  "timestamp": "2026-04-08T03:50:07.435930+00:00",
   "model": "deepseek-coder-v2"
 }

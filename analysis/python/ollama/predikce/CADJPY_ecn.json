@@ -1,9 +1,9 @@
 {
   "symbol": "CADJPY_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růst cen měny podporovaný silnou fundamentální analýzou a technickými signály z MA a RSI.",
-  "timestamp": "2026-04-01T11:56:34.249435+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje silnou měnu Japonska s růstovým potenciálem. RSI a MA hodnoty podporují trend směřující nahoru.",
+  "timestamp": "2026-04-08T02:57:31.612013+00:00",
   "model": "deepseek-coder-v2"
 }

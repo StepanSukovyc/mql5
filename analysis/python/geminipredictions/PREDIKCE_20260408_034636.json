@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USDILS_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 3.60,
+  "reasoning": "Účet je řízen Gemini a jedná se o #97 obchod. USDILS_ecn vykazuje silný klesající trend. Měsíční RSI je velmi nízké (27.49) a pod MA, což naznačuje silný prodejní tlak. Denní RSI (45.70) je sice blízko neutrální zóny, ale cena je pod MA. 1H RSI (20.59) silně přeprodané. Doporučuje se SELL. Aktuální balance je $3255.19, equity $3061.7 a margin free $895.74. USDILS_ecn není v současných otevřených pozicích, což napomáhá diverzifikaci. Transakční náklady na 0.01 lot jsou $0.10 USD, take_profit je nastaven realisticky tak, aby zohlednil transakční náklady. Aktuální cena je cca 3.75. Take profit je nastaven na 3.60, což je realistický cíl s ohledem na současný trend."
+}

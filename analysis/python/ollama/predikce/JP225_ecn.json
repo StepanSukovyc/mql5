@@ -1,9 +1,9 @@
 {
   "symbol": "JP225_ecn",
   "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a nárůst rizika krizí v Evropě svědčí za SELL. Zatímco RSI ukazuje slabost na trhu s nižšími hodnotami, MA trend signalizuje pokles.",
-  "timestamp": "2026-04-01T12:57:04.622018+00:00",
+  "SELL": 40.0,
+  "HOLD": 30.0,
+  "reasoning": "Zohlednil jsem fundamentální analýzu s klesajícím trendem ceny a poklesem RSI. Svíčkové formace naznačují možnost dalšího poklesu, zatímco klouzavé průměry ukazují slabost trhu.",
+  "timestamp": "2026-04-08T03:57:05.616634+00:00",
   "model": "deepseek-coder-v2"
 }

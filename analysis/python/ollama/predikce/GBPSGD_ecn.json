@@ -1,9 +1,9 @@
 {
   "symbol": "GBPSGD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě posledních cenových pohybů a indikátorů jako RSI a MA, které ukazují tendenci k oživení, ale ještě nejsou v jasném trendu, volím strategii hromadění s pozitivními perspektivami.",
-  "timestamp": "2026-04-01T12:48:06.206255+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Vysoká volatilita s omezeným pohybem. RSI a MA ukazují slabost. Některé svíčkové formace signalizují pokles.",
+  "timestamp": "2026-04-08T03:48:26.759870+00:00",
   "model": "deepseek-coder-v2"
 }

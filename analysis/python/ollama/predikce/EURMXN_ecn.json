@@ -1,9 +1,9 @@
 {
   "symbol": "EURMXN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "RSI ukazuje přečkávání nad úrovní nadměrného pohybu (přeuvedení), což naznačuje silnou tendenci. MACD indikuje slabší růst, ale stále pozitivní.",
-  "timestamp": "2026-04-01T12:22:00.202654+00:00",
+  "BUY": 20.0,
+  "SELL": 75.0,
+  "HOLD": 5.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují silnou pozitivní tendenci, ale zároveň je rostoucí volatility známkou nejistoty.",
+  "timestamp": "2026-04-08T03:23:11.931987+00:00",
   "model": "deepseek-coder-v2"
 }

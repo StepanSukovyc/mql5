@@ -1,9 +1,9 @@
 {
   "symbol": "USOIL_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
-  "HOLD": 20.0,
-  "reasoning": "Zvýšení RSI a MA hodnot v posledních měsících indikuje silnou pozici. Malé pohyby v posledním období naznačují nejistotu.",
-  "timestamp": "2026-04-01T13:59:23.803160+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Podle RSI a MA je trend směrem nahoru, ale svíčkové formace indikují nejistotu.",
+  "timestamp": "2026-04-08T02:07:45.775944+00:00",
   "model": "deepseek-coder-v2"
 }

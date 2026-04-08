@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a nárůst volatility měnového trhu vedly k poklesu hodnoty XNIUSD. RSI i MA indikují pokles trendu.",
-  "timestamp": "2026-04-01T11:17:23.789301+00:00",
+  "reasoning": "Převaha pohybů směrem dolů ve všech časových úrovních RSI a MA s těmi nejnovějšími svíčkovými formacemi signalizuje pokles.",
+  "timestamp": "2026-04-08T02:18:19.359575+00:00",
   "model": "deepseek-coder-v2"
 }

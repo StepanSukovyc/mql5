@@ -1,9 +1,9 @@
 {
   "symbol": "EURSGD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulsy jsou pozitivně ovlivněny silnou podporou na nižších časových úrovních a stoupajícím RSI. Nicméně, pokles MA ukazuje na tlak prodeje, což omezuje růst.",
-  "timestamp": "2026-04-01T12:30:32.486391+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Rizikové hodnocení je založeno na analýze fundamentálních ukazatelů a technické analýzy. Zvýšení RSI a MA signalizuje potenciál růstu, ale také některé obavy ohledně globálního trhu a volatilita měnového páru.",
+  "timestamp": "2026-04-08T03:31:41.012029+00:00",
   "model": "deepseek-coder-v2"
 }

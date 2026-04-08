@@ -197,3 +197,46 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-01T12:15:01.254439+00:00,VIX_ecn,SELL,0.06,gemini_prediction,0.0,True,
 2026-04-01T12:15:20.085656+00:00,XPDUSD_ecn,SELL,0.01,gemini_prediction,0.0,True,
 2026-04-01T13:07:28.551771+00:00,EURPLN_ecn,BUY,0.07,gemini_prediction,0.0,True,
+2026-04-02T04:54:03.670453+00:00,EURNZD_ecn,BUY,0.06,gemini_prediction,2.02067,False,Invalid take_profit for BUY: TP (1.975) must be > market price (2.02067)
+2026-04-02T04:54:09.000731+00:00,USOIL_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-04-08T00:09:23.708162+00:00,BCHUSD_ecn,SELL,0.01,gemini_prediction,443.3,False,Invalid take_profit for SELL: TP (67000.0) must be < market price (443.3)
+2026-04-08T00:20:10.065986+00:00,USOIL_ecn,SELL,0.1,gemini_prediction,0.0,True,
+2026-04-08T00:20:14.689102+00:00,BTCUSD_ecn,BUY,0.01,gemini_prediction,72014.0,False,Invalid take_profit for BUY: TP (71000.0) must be > market price (72014.0)
+2026-04-08T00:20:20.703378+00:00,XAUUSD_ecn,BUY,0.02,gemini_prediction,4832.05,False,Invalid take_profit for BUY: TP (2385.0) must be > market price (4832.05)
+2026-04-08T00:20:25.835707+00:00,BTCUSD_ecn,BUY,0.01,gemini_prediction,71989.0,False,Invalid take_profit for BUY: TP (70000.0) must be > market price (71989.0)
+2026-04-08T00:20:31.868606+00:00,XAUUSD_ecn,BUY,0.02,gemini_prediction,4829.92,False,Invalid take_profit for BUY: TP (2385.0) must be > market price (4829.92)
+2026-04-08T00:20:37.998397+00:00,XAUUSD_ecn,BUY,0.05,gemini_prediction,0.0,False,"Insufficient margin: required 1207.41, available 1084.88"
+2026-04-08T00:20:43.834893+00:00,XAUUSD_ecn,BUY,0.02,gemini_prediction,4830.57,False,Invalid take_profit for BUY: TP (2410.0) must be > market price (4830.57)
+2026-04-08T00:20:49.554001+00:00,XAUUSD_ecn,BUY,0.02,gemini_prediction,4831.09,False,Invalid take_profit for BUY: TP (2385.0) must be > market price (4831.09)
+2026-04-08T00:20:55.198283+00:00,XAUUSD_ecn,BUY,0.02,gemini_prediction,4831.92,False,Invalid take_profit for BUY: TP (2370.0) must be > market price (4831.92)
+2026-04-08T00:21:00.582792+00:00,BTCUSD_ecn,BUY,0.02,gemini_prediction,0.0,False,"Insufficient margin: required 1439.82, available 1079.72"
+2026-04-08T00:21:06.928664+00:00,XAUUSD_ecn,BUY,0.05,gemini_prediction,0.0,False,"Insufficient margin: required 1206.98, available 1069.47"
+2026-04-08T00:21:12.023503+00:00,XAUUSD_ecn,BUY,0.02,gemini_prediction,4829.42,False,Invalid take_profit for BUY: TP (2385.0) must be > market price (4829.42)
+2026-04-08T00:21:17.543984+00:00,XAUUSD_ecn,BUY,0.07,gemini_prediction,0.0,False,"Insufficient margin: required 1690.01, available 1059.33"
+2026-04-08T00:21:23.228308+00:00,BTCUSD_ecn,BUY,0.01,gemini_prediction,0.0,True,
+2026-04-08T00:22:28.523330+00:00,USOIL_ecn,SELL,0.08,gemini_prediction,0.0,True,
+2026-04-08T00:53:35.537729+00:00,ETHUSD_ecn,BUY,0.02,gemini_prediction,0.0,True,
+2026-04-08T00:53:40.360536+00:00,XAUUSD_ecn,BUY,0.02,gemini_prediction,4822.04,False,Invalid take_profit for BUY: TP (2300.0) must be > market price (4822.04)
+2026-04-08T00:53:45.966113+00:00,USDCZK_ecn,SELL,0.08,gemini_prediction,20.929,False,Invalid take_profit for SELL: TP (23.2) must be < market price (20.929)
+2026-04-08T00:53:51.592977+00:00,USOIL_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-04-08T01:21:14.121861+00:00,GBPJPY_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-08T01:21:36.131336+00:00,NZDUSD_ecn,BUY,0.06,gemini_prediction,0.0,True,
+2026-04-08T01:21:41.843142+00:00,XAGUSD_ecn,BUY,0.01,gemini_prediction,0.0,True,
+2026-04-08T01:21:46.803301+00:00,GBPJPY_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-08T01:21:51.619560+00:00,EURAUD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-08T01:21:57.407689+00:00,NZDCHF_ecn,BUY,0.03,gemini_prediction,0.0,True,
+2026-04-08T01:22:02.691678+00:00,NZDSEK_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-04-08T01:24:09.232930+00:00,GBPNZD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-08T01:24:14.806179+00:00,XAGUSD_ecn,BUY,0.05,gemini_prediction,0.0,False,"Insufficient margin: required 1908.35, available 1000.47"
+2026-04-08T01:24:20.498248+00:00,GBPJPY_ecn,SELL,0.02,gemini_prediction,0.0,True,
+2026-04-08T01:24:26.228028+00:00,XAGUSD_ecn,BUY,0.02,gemini_prediction,0.0,True,
+2026-04-08T01:47:32.390905+00:00,ZARJPY_ecn,BUY,0.08,gemini_prediction,0.0,True,
+2026-04-08T01:47:37.494758+00:00,US100_ecn,BUY,0.05,gemini_prediction,0.0,True,
+2026-04-08T01:47:43.001571+00:00,XAGUSD_ecn,BUY,0.04,gemini_prediction,0.0,False,"Insufficient margin: required 1530.10, available 815.63"
+2026-04-08T01:47:48.415981+00:00,XAGUSD_ecn,BUY,0.01,gemini_prediction,0.0,True,
+2026-04-08T01:51:54.454948+00:00,XAGUSD_ecn,BUY,0.06,gemini_prediction,0.0,False,"Insufficient margin: required 2298.48, available 821.16"
+2026-04-08T01:51:59.978860+00:00,XAGUSD_ecn,BUY,0.01,gemini_prediction,0.0,True,
+2026-04-08T03:30:25.128953+00:00,NZDJPY_ecn,BUY,0.03,gemini_prediction,0.0,True,
+2026-04-08T03:30:30.669941+00:00,GBPAUD_ecn,SELL,0.06,gemini_prediction,0.0,True,
+2026-04-08T03:46:36.935921+00:00,USDILS_ecn,SELL,0.01,gemini_prediction,3.10182,False,Invalid take_profit for SELL: TP (3.6) must be < market price (3.10182)
+2026-04-08T03:46:41.854741+00:00,USOIL_ecn,SELL,0.05,gemini_prediction,0.0,True,

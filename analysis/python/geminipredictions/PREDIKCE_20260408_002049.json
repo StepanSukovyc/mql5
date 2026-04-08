@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XAUUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 2385.00,
+  "reasoning": "Dle predikcí má XAUUSD_ecn poměrně silný BUY signál (55%), navíc tento symbol nemám aktuálně otevřený, čímž podpořím diverzifikaci. Denní RSI je neutrální, ale cena se nachází nad MA. Riziko je v podobě potenciální korekce na základě overbought monthly RSI a spread variability. Aktuální cena je kolem 2350. Cílová cena take profit je nastavena na 2385, což je cca 35 USD nad aktuální cenou. Transakční náklady budou 0.20 USD, takže potenciální zisk (po odečtení poplatků) je (2385-2350) * 100 * 0.02 - 0.20 = 69.80 USD."
+}

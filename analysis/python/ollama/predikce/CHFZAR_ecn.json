@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezeny silnou odolností na úrovni RSI a MA, které ukazují slabou tendenci k růstu.",
-  "timestamp": "2026-04-01T12:01:38.902092+00:00",
+  "reasoning": "Rozdíly v RSI a MA ukazují nejistotu s růstovými potenciály, ale fundamentální analýza poskytuje přesvědčivé důvody pro očekávání poklesu.",
+  "timestamp": "2026-04-08T03:02:33.010560+00:00",
   "model": "deepseek-coder-v2"
 }

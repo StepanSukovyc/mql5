@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Růstový impuls s nárustem RSI a MA, ale stále pod hlavním trendem. Vysoké riziko na pokles v důsledku volatilního trhu.",
-  "timestamp": "2026-04-01T11:54:54.095452+00:00",
+  "reasoning": "Podle RSI a MA je trend směrem dolů s některými korekcemi, ale zároveň jsou indikátory překoupené co do růstu. Kombinace těchto faktorů doporučuje částečně držet pozici.",
+  "timestamp": "2026-04-08T02:55:51.316631+00:00",
   "model": "deepseek-coder-v2"
 }

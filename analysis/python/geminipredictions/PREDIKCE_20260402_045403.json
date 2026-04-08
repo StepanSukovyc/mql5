@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "EURNZD_ecn",
+  "action": "BUY",
+  "lot_size": 0.06,
+  "take_profit": 1.975,
+  "reasoning": "Aktuálně mám otevřenou SELL pozici na EURNZD_ecn, která je ve ztrátě -52.29 USD. Dle podmínek diverzifikace bych neměl otevírat další pozici, pokud ztráta nepřesahuje 15% aktuálního stavu účtu (2517.75 USD). Limitní ztráta pro EURNZD_ecn je 377.66 USD, což je víc, než aktuální ztráta -52.29. Z dostupných predikcí EURNZD_ecn má 55% šanci na BUY, cena je nad MA na většině timeframe. Take profit je nastaven realisticky s ohledem na denní volatilitu a potenciální zisky."
+}

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "SELL",
+  "lot_size": 0.08,
+  "take_profit": 93.0,
+  "reasoning": "USOIL_ecn vykazuje silný klesající trend. Aktuální pozice na USOIL_ecn má ztrátu pouze -10.1 USD, tedy zdaleka nedosahuje 15% hodnoty účtu (3333.09 * 0.15 = 499.96). Proto můžeme zvážit vstup do pozice opačným směrem, abychom minimalizovali ztráty. Dle analýzy predikcí SELL má 65% šanci, cena nedávno klesla a indikátory naznačují další pokles. Take profit nastaven realisticky vzhledem k volatilite trhu."
+}

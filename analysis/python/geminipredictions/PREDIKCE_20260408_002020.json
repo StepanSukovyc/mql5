@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XAUUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 2385.00,
+  "reasoning": "XAUUSD vykazuje býčí momentum na kratších časových rámcích (1H, 4H), přičemž RSI trenduje vzhůru, ale na 4H se blíží překoupeným podmínkám. Denní RSI je neutrální. Měsíční RSI je vysoké, což naznačuje potenciál pro korekci. Cena je výrazně nad měsíčním MA, což naznačuje dlouhodobý uptrend, ale potenciál pro pullback. Nedávný nárůst naznačuje nákupní tlak, ale doporučuje se opatrnost kvůli překoupenému měsíčnímu RSI. Preferuji diverzifikaci - tento symbol nemám v otevřených pozicích. Volím menší lot size kvůli vyšší ceně XAUUSD a zajištění adekvátní margin free. Realistický Take Profit pro swingový obchod na základě historických dat a transakčních nákladů. Poplatek za obchod bude 0.20 USD."
+}

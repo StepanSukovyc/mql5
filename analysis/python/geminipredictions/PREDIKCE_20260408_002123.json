@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "BTCUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.01,
+  "take_profit": 72000.0,
+  "reasoning": "Aktuální equity je 2868.64 USD. BTCUSD prolomil denní MA a 4H RSI roste, což signalizuje potenciál pro růst. I když týdenní RSI je stále nízko, a měsíční MA vysoko, vidím potenciál pro short-term profit. Zohledňuji riziko a volím menší lot_size 0.01, abych minimalizoval případné ztráty a zachoval free margin. Take profit je stanoven realisticky s ohledem na volatilitu BTC a potenciální transakční náklady (0.10 USD za 0.01 lot). Žádnou otevřenou pozici na BTCUSD_ecn nemám, diverzifikace je zachována."
+}

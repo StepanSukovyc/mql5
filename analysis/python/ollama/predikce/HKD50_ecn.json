@@ -1,9 +1,9 @@
 {
   "symbol": "HKD50_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je převážně směrováno k poklesu vzhledem k vysokým hodnotám RSI a MA, které naznačují trend. Nicméně, zvýšení volatility indikované RSI s nárustem pravděpodobnosti pro pohyb trhu směřuje k nejistotě.",
-  "timestamp": "2026-04-01T12:55:16.297205+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Na základě fundamentální analýzy a relativních indikátorů (RSI a MA) ukazuje signál pro nákup, ale riziko je vyváženo doporučením držet pozici.",
+  "timestamp": "2026-04-08T03:55:17.392501+00:00",
   "model": "deepseek-coder-v2"
 }

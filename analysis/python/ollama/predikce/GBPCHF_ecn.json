@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCHF_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle svíčkových formací a RSI indikátoru ukazuje cenový graf slabost, zatímco MA trend je středně silný. Riziko poklesu je vyšší.",
-  "timestamp": "2026-04-01T12:42:44.603230+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Podle RSI a MA trendu je stále tendence k poklesu. Nicméně, fundamentální analýza naznačuje stabilitu s mírným potenciálem růstu.",
+  "timestamp": "2026-04-08T03:43:21.699056+00:00",
   "model": "deepseek-coder-v2"
 }

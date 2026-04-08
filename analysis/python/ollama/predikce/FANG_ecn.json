@@ -1,9 +1,9 @@
 {
   "symbol": "FANG_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zohlednil jsem fundamentální analýzu s klesajícím trhem a poklesem ceny, ale také pozitivní signály z RSI a MA ukazující stabilitu.",
-  "timestamp": "2026-04-01T12:35:39.362431+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezená vysokými RSI hodnotami a nedávným poklesem. Prodejní tlak je silný s trendem nižších cen.",
+  "timestamp": "2026-04-08T03:36:41.276208+00:00",
   "model": "deepseek-coder-v2"
 }

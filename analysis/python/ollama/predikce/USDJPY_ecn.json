@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Růst cen v posledních měsících s podporou MA a RSI signalizuje další růst. Nicméně, nárůst volatility indikovaný vysokými hodnotami RSI naznačuje riziko.",
-  "timestamp": "2026-04-01T13:42:45.687777+00:00",
+  "reasoning": "Základní analýza ukazuje stabilitu, RSI a MA indikují neutralitu s náznakem růstu. Svíčkové formace nejsou jasné.",
+  "timestamp": "2026-04-08T01:55:37.510027+00:00",
   "model": "deepseek-coder-v2"
 }

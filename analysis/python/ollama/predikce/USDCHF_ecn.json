@@ -1,9 +1,9 @@
 {
   "symbol": "USDCHF_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Předběžné zhoršení světových ekonomik a pokles RSI indikuje riziko poklesu. Nicméně MA ukazuje stabilitu.",
-  "timestamp": "2026-04-01T13:30:51.675584+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstové síly jsou slabší než klesající tendence, ale mírný růst je pozitivně ohodnocen.",
+  "timestamp": "2026-04-08T01:46:49.961414+00:00",
   "model": "deepseek-coder-v2"
 }

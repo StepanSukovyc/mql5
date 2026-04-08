@@ -1,9 +1,9 @@
 {
   "symbol": "XCUUSD_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoké hodnoty RSI a MA ukazují na přehnaně nákladný pohyb cen.",
-  "timestamp": "2026-04-01T11:15:37.074970+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály je omezeno silnou odolností v důsledku nedostatečných nákupních impulsů a poklesem RSI. Vysoká volatilita a nepředvídatelnost trhu naznačují nejistotu.",
+  "timestamp": "2026-04-08T02:16:33.957824+00:00",
   "model": "deepseek-coder-v2"
 }

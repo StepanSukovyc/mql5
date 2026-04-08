@@ -1,9 +1,9 @@
 {
   "symbol": "GBPAUD_ecn",
-  "BUY": 20.0,
+  "BUY": 40.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převažují negativní signály z RSI a MA, síla cenových pohybů je slabá.",
-  "timestamp": "2026-04-01T12:39:11.732325+00:00",
+  "HOLD": 10.0,
+  "reasoning": "Převládajícím signálem je pokles RSI a SMA, což svědčí o potenciálním oslabení měny. Nicméně, některé indikátory (RSI v měsíčních datech) ukazují nadšení, což doporučuje částečně držet pozici.",
+  "timestamp": "2026-04-08T03:40:01.713237+00:00",
   "model": "deepseek-coder-v2"
 }

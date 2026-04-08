@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "USOIL_ecn",
+  "action": "SELL",
+  "lot_size": 0.05,
+  "take_profit": 81.00,
+  "reasoning": "USOIL_ecn vykazuje silný klesající trend. Predikce naznačuje převahu SELL (55%). Cena je pod MA na několika časových rámcích a RSI signalizuje přeprodanost, což naznačuje potenciální další pokles. V účtu nemám otevřenou pozici na tento symbol a je tedy vhodný pro diverzifikaci. Take_profit 81.00 USD zohledňuje transakční náklady a potenciál zisku.  Poplatek za obchod 0.05 lot bude $0.50."
+}

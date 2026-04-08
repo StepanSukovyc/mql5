@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Růst cen ropy a pokles amerického doláru indikují silnou pohyblivost trhu. RSI ukazuje překoupenost s možným odtokem, zatímco MA signalizuje prodejní signály.",
-  "timestamp": "2026-04-01T12:05:01.714239+00:00",
+  "reasoning": "Riziko volatilita USDCAD a USDJPY sčítá. RSI ukazuje pře prodej a MA mírně směřuje dolů.",
+  "timestamp": "2026-04-08T03:05:53.430138+00:00",
   "model": "deepseek-coder-v2"
 }

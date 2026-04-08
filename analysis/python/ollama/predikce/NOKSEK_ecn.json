@@ -1,9 +1,9 @@
 {
   "symbol": "NOKSEK_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami indikuje nejistotu. Nárůst v RSI je ale potvrzen cenovým pohybem, což naznačuje silnou reakci.",
-  "timestamp": "2026-04-01T13:02:20.982351+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem obecního trendu a slabším pozitivním svědectvím z finančních trhů. Nedostatek jasných signálů pro nárůst nebo pokles, ale také absence silných důvodů pro obavy.",
+  "timestamp": "2026-04-08T04:02:33.942895+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XAUUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 2370.00,
+  "reasoning": "Obchod #77 je řízen Gemini. XAUUSD vykazuje býčí momentum na kratších časových rámcích (1H, 4H) a i když je RSI na měsíčním grafu vysoké, což naznačuje potenciál korekce, cena je výrazně nad měsíčním MA, což ukazuje na dlouhodobý rostoucí trend. Nedávný nárůst naznačuje nákupní tlak. Navrhuji BUY pozici s lot size 0.02 a take profit 2370.00, aby se využilo krátkodobého růstu a zároveň minimalizovalo riziko spojené s potenciální korekcí. XAUUSD není momentálně v otevřených pozicích, což přidává diverzifikaci portfolia."
+}

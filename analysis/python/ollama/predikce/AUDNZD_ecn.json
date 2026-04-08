@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Rozpětí svíčkových grafů naznačuje volatilitu. RSI a MA ukazují směr trendu, ale nedostatečná data pro silnou predikci.",
-  "timestamp": "2026-04-01T09:03:02.252855+00:00",
+  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu trhu. Nicméně, zvýšená volatilita indikovaná vysokými RSI hodnotami může být příznakem silného pohybu na stranu klesající.",
+  "timestamp": "2026-04-08T02:45:49.119849+00:00",
   "model": "deepseek-coder-v2"
 }

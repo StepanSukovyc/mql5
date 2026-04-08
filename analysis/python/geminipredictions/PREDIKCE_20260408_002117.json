@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XAUUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.07,
+  "take_profit": 2360.0,
+  "reasoning": "XAUUSD (zlato) vykazuje rostoucí momentum na kratších časových rámcích (1H, 4H) a zdá se být v uptrendu. Měsíční RSI je sice vysoké, ale denní RSI je neutrální a cena je výrazně nad měsíčním klouzavým průměrem, což naznačuje dlouhodobý uptrend s možností pullbacku. Současný prudký nárůst ceny ukazuje na nákupní tlak. Doporučuji BUY s lot size 0.07, což je konzervativní velikost, která minimalizuje riziko s ohledem na margin free 1070.08 a zohledňuje transakční náklady (cca 0.7 USD). Take profit je nastaven na 2360.0, což je realistický cíl, který by měl generovat rozumný zisk. Z otevřených pozic nemám žádnou pozici na XAUUSD, čímž zajistím diverzifikaci."
+}

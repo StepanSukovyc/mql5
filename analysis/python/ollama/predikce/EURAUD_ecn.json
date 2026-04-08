@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Podle RSI a klouzavých průměrů (MA) je trend stále směrem dolů, ale nárust cen může být brzy odsouhlasen cenovými svíčkami. Z tohoto důvodu se doporučuje držet pozici.",
-  "timestamp": "2026-04-01T12:10:07.574323+00:00",
+  "reasoning": "Růstové tlaky s převahou poklesových impulzů, ale silná podpora na hodinovém grafu a RSI nad 50 indikuje potenciál pro obrat směrem nahoru.",
+  "timestamp": "2026-04-08T03:11:07.123236+00:00",
   "model": "deepseek-coder-v2"
 }

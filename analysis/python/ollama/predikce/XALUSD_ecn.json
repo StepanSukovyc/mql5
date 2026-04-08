@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Zohledňuji svíčkovou formací na měsíčním grafu, která naznačuje pokles. RSI a MA ukazují směr trendu, ale nedostatek dat pro měsíc způsobuje nejistotu.",
-  "timestamp": "2026-04-01T14:06:35.142284+00:00",
+  "reasoning": "Základní analýza svíčkových grafů ukazuje středně silnou tendenci poklesu. RSI a klouzavé průměry indikují nejistotu s nižší poptávkou.",
+  "timestamp": "2026-04-08T02:13:02.857755+00:00",
   "model": "deepseek-coder-v2"
 }

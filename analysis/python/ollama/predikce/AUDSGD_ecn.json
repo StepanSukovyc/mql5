@@ -1,9 +1,9 @@
 {
   "symbol": "AUDSGD_ecn",
   "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle fundamentální analýzy a svíčkových formací může dojít k oslabení australského dolaru vzhledem k aktuálnímu tlaku na dolary, zatímco RSI a MA hodnoty ukazují slabost trendu.",
-  "timestamp": "2026-04-01T11:46:29.266576+00:00",
+  "SELL": 40.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu a mírný růst cen. RSI a MA indikují potenciál pro další růst.",
+  "timestamp": "2026-04-08T02:47:28.972846+00:00",
   "model": "deepseek-coder-v2"
 }

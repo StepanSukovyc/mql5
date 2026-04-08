@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XAUUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 2385.00,
+  "reasoning": "XAUUSD shows bullish momentum on shorter timeframes (1H, 4H) with RSI trending upward. The price is significantly above the monthly MA, indicating a long-term uptrend, but potential for pullback. Because I don't have any open position on this symbol, and the predictions have BUY signal with 55%, I'm opening a BUY position. Current balance is 3333.35, so using 0.02 lot will cost me 0.20 USD of fees. My take profit target is set considering this cost."
+}

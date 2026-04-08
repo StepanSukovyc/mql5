@@ -1,9 +1,9 @@
 {
   "symbol": "USDHUF_ecn",
-  "BUY": 40.0,
-  "SELL": 50.0,
+  "BUY": 30.0,
+  "SELL": 60.0,
   "HOLD": 10.0,
-  "reasoning": "Především z pohledu RSI a MA hodnot je vidět trend směřující k poklesu. Nicméně, fundamentální analýza ukazuje stabilitu a silnou měnu USD vůči forintu.",
-  "timestamp": "2026-04-01T13:38:00.004551+00:00",
+  "reasoning": "Předběžná analýza založená na fundamentech a technickém analyzování ukazuje silnou tendenci poklesu měny Huf. RSI i MA hodnoty podporují tento pohyb.",
+  "timestamp": "2026-04-08T01:52:08.123275+00:00",
   "model": "deepseek-coder-v2"
 }

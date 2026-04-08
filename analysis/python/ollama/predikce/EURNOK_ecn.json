@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a slabá svíčková formační analýza s RSI a MA indikátory ukazují na nejistotu trhu.",
-  "timestamp": "2026-04-01T12:23:41.698368+00:00",
+  "reasoning": "Převažující pohled je na pokles kurzu EUR vzhledem k NOK. RSI ukazuje přetíženost prodejných signálů a některé svíčkové formace naznačují, že cena může dále klesa.",
+  "timestamp": "2026-04-08T03:24:52.804537+00:00",
   "model": "deepseek-coder-v2"
 }

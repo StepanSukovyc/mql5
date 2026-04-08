@@ -1,9 +1,9 @@
 {
   "symbol": "CHFHUF_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezeny nízkými hodnotami RSI a MA, zatímco poklesové tlaky se projevují silnějším trendem.",
-  "timestamp": "2026-04-01T11:58:15.683142+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s rostoucím trendem, RSI a MA indikují potenciál růstu, ale svíčkové formace signalizují nejistotu.",
+  "timestamp": "2026-04-08T02:59:11.412968+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "USDMXN_ecn",
-  "BUY": 50.0,
-  "SELL": 30.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstový impulz s RSI nad 50 a korekcí pod MA. Snížená volatilita, ale stále potenciál pro růst.",
-  "timestamp": "2026-04-01T13:45:07.654297+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale svíčkové formace naznačují možnost zpětného pohybu. Riziko ztráty je omezené.",
+  "timestamp": "2026-04-08T01:57:22.764475+00:00",
   "model": "deepseek-coder-v2"
 }

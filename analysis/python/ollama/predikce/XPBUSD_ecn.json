@@ -1,9 +1,9 @@
 {
   "symbol": "XPBUSD_ecn",
   "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Zhoršení fundamentalních ukazatelů a překročení dolní hranice RSI signalizuje poklesový tlak.",
-  "timestamp": "2026-04-01T11:19:09.569721+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Základní analýza ukazuje silnou podporu na nižších časových úrovních a divergenci RSI, což naznačuje potenciál růstu. Nicméně, nedostatek signálů z vyšších časových úrovní a vysoké RSI hodnoty indikují přítomnost rizika.",
+  "timestamp": "2026-04-08T02:20:06.348391+00:00",
   "model": "deepseek-coder-v2"
 }

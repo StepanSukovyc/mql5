@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Předběžné hodnocení na základě fundamentálních faktorů a technických indikátorů ukazuje na nejistotu s růstem ceny, který je ale silně podporován vlivem časových období.",
-  "timestamp": "2026-04-01T12:11:49.810490+00:00",
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace naznačují obnovení naopak. Riziko ztráty ale roste s volatilitou.",
+  "timestamp": "2026-04-08T03:12:51.904478+00:00",
   "model": "deepseek-coder-v2"
 }

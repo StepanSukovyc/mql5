@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "XAUUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 2410.0,
+  "reasoning": "Obchod #77 je prvni plne rizeny Gemini obchod. XAUUSD vykazuje silne nakupni momentum na kratsich casovych ramech (1H, 4H), prestoze je RSI blizko prekoupene zone na 4H. Denni RSI je neutralni. Mesicni RSI je sice vysoke, coz naznacuje potencial pro korekci, ale cena je vyrazne nad mesicni MA, coz ukazuje na dlouhodoby vzestupny trend, a soucasny narust naznacuje nakupni tlak. Vzhledem k stavu uctu a otevrenym pozicim, bezpecna velikost lotu je 0.02. Transakcni naklad je 0.2 USD. Take profit je realisticky nastaven s ohledem na potencialni dalsi rust a transakcni naklady."
+}

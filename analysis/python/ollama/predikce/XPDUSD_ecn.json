@@ -1,9 +1,9 @@
 {
   "symbol": "XPDUSD_ecn",
   "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Růstový impulz na svíčkovém grafu s potvrzením RSI a MA signalizuje zlepšení trendu.",
-  "timestamp": "2026-04-01T11:20:56.979308+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech jsou slabší, RSI ukazuje pře продаваность, ale MA signalizují kontinuální podporu.",
+  "timestamp": "2026-04-08T02:21:50.673146+00:00",
   "model": "deepseek-coder-v2"
 }

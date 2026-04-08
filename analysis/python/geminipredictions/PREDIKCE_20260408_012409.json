@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "GBPNZD_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 2.10,
+  "reasoning": "Na základě analýzy dostupných predikcí a současných otevřených pozic, GBPNZD_ecn se jeví jako vhodná příležitost k prodeji (SELL). Předpověď uvádí 65% pravděpodobnost poklesu ceny. V současném portfoliu nemáme žádnou otevřenou pozici na GBPNZD_ecn, čímž se podpoří diverzifikace. I přes malou hodnotu Margin Free (1064.47), je možné otevřít pozici s lot_size 0.01, čímž se minimalizuje riziko velkých ztrát. Take profit je nastaven na 2.10, což představuje rozumný ziskový cíl s ohledem na aktuální volatilitu a denní bázi. Riziko je nižší díky tomu, že se jedná o obchod plně řízený systémem Gemini."
+}

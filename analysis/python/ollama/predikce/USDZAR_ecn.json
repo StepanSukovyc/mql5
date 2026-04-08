@@ -1,9 +1,9 @@
 {
   "symbol": "USDZAR_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažují signály pro pokles na základě RSI a negativních svíčkových formací, ale některé MA hodnoty ukazují stabilitu.",
-  "timestamp": "2026-04-01T13:57:00.965255+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové potenciály jsou omezené v důsledku silných podporovacích hladin RSI a MA. Vysoké riziko volatilnosti způsobené politickou situací v zemi a měnovými restrikcemi, což doporučuje konzervativní přístup.",
+  "timestamp": "2026-04-08T02:06:04.846061+00:00",
   "model": "deepseek-coder-v2"
 }

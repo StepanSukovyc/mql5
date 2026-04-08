@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
-  "BUY": 25.0,
-  "SELL": 40.0,
-  "HOLD": 35.0,
-  "reasoning": "Při pohledu na svíčkové formace a vývoj RSI lze pozorovat slabost tržního signálu. Nicméně, MA trend ukazuje stabilitu což může být příznakem silné podpory.",
-  "timestamp": "2026-04-01T13:24:05.233436+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Převaha SELL z důvodu obecního trhu a nedostatečného potvrzení trendu růstem.",
+  "timestamp": "2026-04-08T01:41:39.015324+00:00",
   "model": "deepseek-coder-v2"
 }

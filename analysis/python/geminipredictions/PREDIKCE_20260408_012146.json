@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "GBPJPY_ecn",
+  "action": "SELL",
+  "lot_size": 0.01,
+  "take_profit": 211.51,
+  "reasoning": "GBPJPY_ecn má silné doporučení na SELL (100%). Aktuálně mám na tomto symbolu otevřenou pozici SELL, která je ale zanedbatelná (-0.09 USD). Protože je riziko malé a predikce velmi silná, otvírám další SELL pozici. Take profit beru o 100 pipů níže než open price."
+}

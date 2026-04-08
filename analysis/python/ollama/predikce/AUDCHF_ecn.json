@@ -1,9 +1,9 @@
 {
   "symbol": "AUDCHF_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převažují sell signály z RSI a MA divergence, ale mírný růst v posledních datech.",
-  "timestamp": "2026-04-01T11:41:25.068739+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstový impulz s nárůstem RSI a MA indikuje potenciál růstu. Nicméně, pokles v měsíčním grafu ukazuje na určitou nejistotu.",
+  "timestamp": "2026-04-08T02:42:29.208822+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "BTCUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.02,
+  "take_profit": 72000.0,
+  "reasoning": "Preferuji BTCUSD_ecn, protože nemám žádnou otevřenou pozici v tomto symbolu. Aktuální predikce naznačuje BUY s 55% pravděpodobností, což je relativně silný signál. Důvodem je, že BTCUSD prolomil denní MA a 4H RSI roste. I když týdenní RSI je stále nízko a měsíční MA vysoko, očekávám, že se udrží trend nad denním MA, jinak bych uvažoval o prodeji. S ohledem na zůstatek účtu a margin free (1072.14 USD), doporučuji lot size 0.02 pro minimalizaci rizika. Transakční náklady pro lot 0.02 jsou 0.20 USD. Take profit nastavuji na 72000 USD s ohledem na potenciální růst a minimalizaci rizika."
+}

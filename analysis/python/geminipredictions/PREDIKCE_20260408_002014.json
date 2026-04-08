@@ -1,0 +1,7 @@
+{
+  "recommended_symbol": "BTCUSD_ecn",
+  "action": "BUY",
+  "lot_size": 0.01,
+  "take_profit": 71000.0,
+  "reasoning": "Analýza ukazuje, že BTCUSD prolomil denní MA a 4H RSI roste, což naznačuje potenciální růst. Důvodem pro menší lot size je opatrnost vzhledem k celkové situaci na trhu a snaha o ochranu kapitálu. Take profit je nastaven na základě potenciálních rezistenčních úrovní a s ohledem na swingový charakter obchodu. Poplatek za transakci je 0.10 USD."
+}
