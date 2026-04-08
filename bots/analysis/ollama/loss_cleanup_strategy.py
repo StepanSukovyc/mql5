@@ -39,6 +39,7 @@ LOSS_CLEANUP_LOG_HEADERS = [
 	"loss_amount",
 	"closed",
 	"message",
+	"daily_realized_profit",
 ]
 
 _LAST_EVALUATED_HOUR_KEY: Optional[str] = None
@@ -192,6 +193,31 @@ def _calculate_daily_clean_profit(
 	return clean_profit
 
 
+def _get_deal_realized_profit(deal: Any) -> float:
+	return (
+		float(getattr(deal, "profit", 0.0) or 0.0)
+		+ float(getattr(deal, "swap", 0.0) or 0.0)
+		+ float(getattr(deal, "commission", 0.0) or 0.0)
+		+ float(getattr(deal, "fee", 0.0) or 0.0)
+	)
+
+
+def _calculate_daily_realized_profit(deals: tuple[Any, ...]) -> float:
+	realized_profit = 0.0
+	for deal in deals:
+		realized_profit += _get_deal_realized_profit(deal)
+
+	return realized_profit
+
+
+def _would_keep_realized_profit_non_negative(
+	daily_realized_profit: float,
+	loss_amount: float,
+) -> bool:
+	remaining_realized_profit = round(daily_realized_profit - loss_amount, 2)
+	return remaining_realized_profit >= 0
+
+
 def _get_latest_counted_deal_time(
 	deals: tuple[Any, ...],
 	closing_entries: set[int],
@@ -313,7 +339,11 @@ def _log_daily_deals_snapshot(
 			)
 
 
-def _find_cleanup_candidate(z_limit: float, now_utc: datetime) -> Optional[CleanupCandidate]:
+def _find_cleanup_candidate(
+	z_limit: float,
+	now_utc: datetime,
+	daily_realized_profit: float,
+) -> Optional[CleanupCandidate]:
 	positions = mt5.positions_get()
 	if positions is None:
 		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
@@ -335,6 +365,8 @@ def _find_cleanup_candidate(z_limit: float, now_utc: datetime) -> Optional[Clean
 		if loss_amount <= 0:
 			continue
 		if loss_amount >= z_limit:
+			continue
+		if not _would_keep_realized_profit_non_negative(daily_realized_profit, loss_amount):
 			continue
 
 		candidate = CleanupCandidate(
@@ -360,6 +392,7 @@ def _log_cleanup_action(
 	service_folder: Optional[Path],
 	now_utc: datetime,
 	daily_clean_profit: float,
+	daily_realized_profit: float,
 	balance_buffer: float,
 	z_limit: float,
 	counted_closing_deals: int,
@@ -401,6 +434,7 @@ def _log_cleanup_action(
 				f"{candidate.loss_amount:.2f}" if candidate else "",
 				str(closed),
 				message,
+				f"{daily_realized_profit:.2f}",
 			]
 		)
 
@@ -436,6 +470,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 				service_folder=service_folder,
 				now_utc=now_utc,
 				daily_clean_profit=0.0,
+				daily_realized_profit=0.0,
 				balance_buffer=0.0,
 				z_limit=0.0,
 				counted_closing_deals=0,
@@ -458,8 +493,9 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 		day_start_utc, deals, closing_entries = _get_daily_deals(now_utc)
 		closed_position_ids = _get_today_closed_position_ids(deals, closing_entries)
 		daily_clean_profit = round(_calculate_daily_clean_profit(deals, closing_entries, closed_position_ids), 2)
+		daily_realized_profit = round(_calculate_daily_realized_profit(deals), 2)
 		balance_buffer = round(raw_balance * ACCOUNT_BALANCE_BUFFER_RATIO, 2)
-		z_limit = round(daily_clean_profit - balance_buffer, 2)
+		z_limit = round(daily_realized_profit - balance_buffer, 2)
 		closing_deals_count = sum(
 			1
 			for deal in deals
@@ -485,13 +521,14 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			f"closed_positions={len(closed_position_ids)}, closing_deals={closing_deals_count}"
 		)
 		print(f"   Daily clean profit (excl. swap/fees): {daily_clean_profit:.2f}")
+		print(f"   Daily realized profit (incl. swap/fees/commission): {daily_realized_profit:.2f}")
 		if latest_counted_deal_time is not None:
 			print(
 				"   Snapshot includes closing deals up to "
 				f"{latest_counted_deal_time.astimezone(PRAGUE_TZ).strftime('%Y-%m-%d %H:%M:%S')} Prague time"
 			)
 		print(f"   Balance buffer (1%): {balance_buffer:.2f}")
-		print(f"   Z limit: {z_limit:.2f}")
+		print(f"   Z limit (from realized profit): {z_limit:.2f}")
 
 		if z_limit <= 0:
 			message = "Z <= 0, no position can be closed safely"
@@ -500,6 +537,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 				service_folder=service_folder,
 				now_utc=now_utc,
 				daily_clean_profit=daily_clean_profit,
+				daily_realized_profit=daily_realized_profit,
 				balance_buffer=balance_buffer,
 				z_limit=z_limit,
 				counted_closing_deals=closing_deals_count,
@@ -510,7 +548,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			)
 			return
 
-		candidate = _find_cleanup_candidate(z_limit, now_utc)
+		candidate = _find_cleanup_candidate(z_limit, now_utc, daily_realized_profit)
 		if candidate is None:
 			message = "No losing position older than 7 days fits below Z"
 			print(f"   {message}")
@@ -518,6 +556,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 				service_folder=service_folder,
 				now_utc=now_utc,
 				daily_clean_profit=daily_clean_profit,
+				daily_realized_profit=daily_realized_profit,
 				balance_buffer=balance_buffer,
 				z_limit=z_limit,
 				counted_closing_deals=closing_deals_count,
@@ -533,6 +572,26 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			f"loss={candidate.loss_amount:.2f} "
 			f"(profit={candidate.profit:.2f}, swap={candidate.swap:.2f}, fee={candidate.fee:.2f})"
 		)
+		remaining_realized_profit = round(daily_realized_profit - candidate.loss_amount, 2)
+		print(f"   Remaining daily realized profit after close: {remaining_realized_profit:.2f}")
+
+		if not _would_keep_realized_profit_non_negative(daily_realized_profit, candidate.loss_amount):
+			message = "Candidate rejected: closing it would make daily realized profit negative"
+			print(f"   {message}")
+			_log_cleanup_action(
+				service_folder=service_folder,
+				now_utc=now_utc,
+				daily_clean_profit=daily_clean_profit,
+				daily_realized_profit=daily_realized_profit,
+				balance_buffer=balance_buffer,
+				z_limit=z_limit,
+				counted_closing_deals=closing_deals_count,
+				latest_counted_deal_time=latest_counted_deal_time,
+				candidate=candidate,
+				closed=False,
+				message=message,
+			)
+			return
 
 		if dry_run:
 			closed = False
@@ -552,6 +611,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			service_folder=service_folder,
 			now_utc=now_utc,
 			daily_clean_profit=daily_clean_profit,
+			daily_realized_profit=daily_realized_profit,
 			balance_buffer=balance_buffer,
 			z_limit=z_limit,
 			counted_closing_deals=closing_deals_count,
@@ -566,6 +626,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 			service_folder=service_folder,
 			now_utc=now_utc,
 			daily_clean_profit=0.0,
+			daily_realized_profit=0.0,
 			balance_buffer=0.0,
 			z_limit=0.0,
 			counted_closing_deals=0,

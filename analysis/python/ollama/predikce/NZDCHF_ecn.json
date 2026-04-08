@@ -1,9 +1,9 @@
 {
   "symbol": "NZDCHF_ecn",
-  "BUY": 60.0,
-  "SELL": 20.0,
-  "HOLD": 20.0,
-  "reasoning": "Zvýšení RSI a MA hodnot indikuje silnou pozitivní tendenci, ale některé svíčkové formace naznačují potenciální konverzi.",
-  "timestamp": "2026-04-08T01:26:32.947462+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové impulzy na grafu s náznaky zesílení trendu a relativně vysoký RSI nad 50 signalizují pohyb k BUY. SELL je vyloučen kvůli silnému podporujícímu trendu.",
+  "timestamp": "2026-04-08T04:06:14.760628+00:00",
   "model": "deepseek-coder-v2"
 }

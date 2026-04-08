@@ -1,9 +1,9 @@
 {
   "symbol": "NZDSGD_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoký RSI a pokles MA sugerují silnou tendenci k poklesu.",
-  "timestamp": "2026-04-08T01:31:38.094443+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové signály jsou slabší v porovnání s minulými měsíci. RSI a MA ukazují nejistotu s růstem.",
+  "timestamp": "2026-04-08T04:11:41.146882+00:00",
   "model": "deepseek-coder-v2"
 }

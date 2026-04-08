@@ -32,9 +32,12 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
 9. **Vyhodnotí hodinový loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru jednou za hodinu v minutě `LOSS_CLEANUP_STRATEGY_MINUTE` (default 45)
-   - Spočítá čistý denní zisk z uzavřených obchodů bez swapů a poplatků
-   - Od něj odečte 1 % z aktuální bilance účtu a získá limit `Z`
+   - Spočítá denní realizovaný výsledek z dnešních MT5 dealů včetně swapů, komisí a poplatků
+   - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z dnešních uzavřených pozic
+   - Od realizovaného výsledku odečte 1 % z aktuální bilance účtu a získá limit `Z`
    - Najde otevřenou ztrátovou pozici starší než 7 dní s nejvyšší ztrátou, která je stále menší než `Z`
+   - Kandidáta navíc odmítne, pokud by po close spadl denní realizovaný výsledek pod `0.00`
+   - Pokud mají dva bezpeční kandidáti stejnou ztrátu, ponechá první nalezenou pozici
    - Do ztráty počítá i swap a syntetický fee `0.10 USD` za každých `0.01` lotu
    - Pokud je `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáta jen zaloguje a nic nezavírá
    - V čase 23:00-23:30 CET/CEST se cleanup nespouští
@@ -307,9 +310,12 @@ Monitoruje stav účtu v background threadu:
 Volitelná bezpečnostní strategie pro průběžné odlehčení starých ztrátových pozic:
 - Čte runtime konfiguraci přímo z `.env`, takže ji lze za běhu zapnout, vypnout nebo přepnout mezi dry-run a live režimem
 - Vyhodnocuje se nejvýše jednou za hodinu podle `LOSS_CLEANUP_STRATEGY_MINUTE`
-- Počítá `Z = čistý denní zisk - 1 % aktuální bilance`
-- Čistý denní zisk bere z dnešních uzavřených pozic identifikovaných přes `history_orders_get()` a `position_id`, ne pouze z holého seznamu uzavíracích dealů
+- Počítá `Z = denní realizovaný výsledek - 1 % aktuální bilance`
+- Denní realizovaný výsledek bere ze všech dnešních dealů včetně `profit`, `swap`, `commission` a `fee`
+- Pro diagnostiku dál počítá i `daily_clean_profit` z dnešních uzavřených pozic identifikovaných přes `position_id`
 - Prochází otevřené pozice starší než 7 dní a vybírá největší ztrátu menší než `Z`
+- Kandidáta navíc blokuje, pokud by po zavření klesl `daily_realized_profit` pod nulu
+- Pokud mají dva kandidáti stejný `loss_amount`, zůstává vybraný první nalezený kandidát
 - Do efektivní ztráty zahrnuje `profit`, `swap` a syntetický fee `0.10 USD / 0.01 lotu`
 - V `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` pouze vypíše kandidáta a zapíše audit do CSV
 - V ostrém režimu používá `close_position_by_ticket()` ze sdílené exekuční vrstvy

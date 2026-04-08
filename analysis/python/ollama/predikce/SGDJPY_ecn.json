@@ -1,9 +1,9 @@
 {
   "symbol": "SGDJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růst cen v posledních týdnech je podporován pozitivním světovým ekonomickým vývojem a zvýšenou poptávkou po jpy. RSI ukazuje signály kupní, ale nízké hodnoty MA signalizují potenciál poklesu.",
-  "timestamp": "2026-04-08T01:35:02.863477+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "RSI indikuje přeprodanost, ale MA ukazuje silnou podporu. Pravděpodobný pohyb je omezován.",
+  "timestamp": "2026-04-08T04:15:13.071340+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Zhoršení makroekonomických indikátorů a nárůst rizika volatilního trhu.",
-  "timestamp": "2026-04-08T01:40:00.666078+00:00",
+  "reasoning": "Převaha negativních signálů z RSI a MA ukazuje na pokles trhu, ale některé fundamentální faktory naznačují stabilitu.",
+  "timestamp": "2026-04-08T04:20:32.301362+00:00",
   "model": "deepseek-coder-v2"
 }

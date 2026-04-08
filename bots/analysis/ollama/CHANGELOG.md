@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-04-08 (Loss Cleanup Safety Guard)
+
+- **Hardened Hourly Loss Cleanup Safety Check**
+  - Loss cleanup now computes `Z` from daily realized profit including `profit`, `swap`, `commission`, and `fee`
+  - Strategy keeps logging `daily_clean_profit` separately for diagnostics against MT5 history views
+  - Added explicit guard that rejects any candidate which would push daily realized profit below `0.00` after close
+  - Audit log `trade_logs/loss_cleanup.csv` now also stores `daily_realized_profit`
+
 ## 2026-04-01 (Minute Profit Cleanup Strategy)
 
 - **Added Minute Profit Cleanup Strategy**

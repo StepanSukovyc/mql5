@@ -3,7 +3,7 @@
   "BUY": 25.0,
   "SELL": 50.0,
   "HOLD": 25.0,
-  "reasoning": "Růstové impulzy s předzvětím na základě RSI a MA signalizují potenciál pro pokračující růst. Nicméně, korekce mohou být očekávány v souvislosti s volatilitou.",
-  "timestamp": "2026-04-08T01:36:43.556607+00:00",
+  "reasoning": "Růstové impulsy jsou pozitivně ohodnoceny svíčkovými formacemi a RSI ukazuje silnou korelaci s cenou. Nicméně, MA trendu je nejistý a může signalizovat potenciální přiblížení k rozhodující úrovni.",
+  "timestamp": "2026-04-08T04:16:59.201481+00:00",
   "model": "deepseek-coder-v2"
 }

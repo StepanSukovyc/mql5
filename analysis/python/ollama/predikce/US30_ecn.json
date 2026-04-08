@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převaha SELL z důvodu obecního trhu a nedostatečného potvrzení trendu růstem.",
-  "timestamp": "2026-04-08T01:41:39.015324+00:00",
+  "BUY": 60.0,
+  "SELL": 20.0,
+  "HOLD": 20.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu. Nicméně, pokles v posledních měsících naznačuje určitou nejistotu.",
+  "timestamp": "2026-04-08T04:22:22.629749+00:00",
   "model": "deepseek-coder-v2"
 }
