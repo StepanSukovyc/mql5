@@ -1,9 +1,9 @@
 {
   "symbol": "USDHUF_ecn",
-  "BUY": 30.0,
-  "SELL": 60.0,
-  "HOLD": 10.0,
-  "reasoning": "Předběžná analýza založená na fundamentech a technickém analyzování ukazuje silnou tendenci poklesu měny Huf. RSI i MA hodnoty podporují tento pohyb.",
-  "timestamp": "2026-04-08T01:52:08.123275+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je zřetelné, že cena měla výrazný pokles. Nicméně, svíčkové formace naznačují silnou podporu, což mi dává pocit, že cenový pohyb je spíše náhodou než důsledkem tržních tlaků.",
+  "timestamp": "2026-04-08T07:28:02.745998+00:00",
   "model": "deepseek-coder-v2"
 }

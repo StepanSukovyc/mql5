@@ -1,9 +1,9 @@
 {
   "symbol": "XAGUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty vidíme nápadnou divergenci mezi cenou a indikátorem, což naznačuje potenciál pro pokles. Nicméně, fundamentální analýza ukazuje silnou podporu ceny vzhledem k měnovému páru.",
-  "timestamp": "2026-04-08T02:11:17.983956+00:00",
+  "BUY": 30.0,
+  "SELL": 40.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové impulzy na svíčkových grafech a nárůst RSI indikátoru signalizují silnou tendenci. Historické MA ukazuje stabilitu ceny.",
+  "timestamp": "2026-04-08T07:48:52.243659+00:00",
   "model": "deepseek-coder-v2"
 }

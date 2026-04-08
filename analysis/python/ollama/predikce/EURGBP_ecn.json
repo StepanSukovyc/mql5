@@ -1,9 +1,9 @@
 {
   "symbol": "EURGBP_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
+  "BUY": 20.0,
+  "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale svíčkové formace indikují nejistotu s možným odklonem ceny. Fundamentální analýza ukazuje stabilitu v zahraniční politice a ekonomice.",
-  "timestamp": "2026-04-08T03:18:04.878110+00:00",
+  "reasoning": "Zhoršení makroekonomických indikátorů a potenciální ztráta podpory na RSI signalizuje riziko poklesu. Nicméně, SMA ukazuje stabilitu, což podporuje HOLD.",
+  "timestamp": "2026-04-08T06:08:31.349517+00:00",
   "model": "deepseek-coder-v2"
 }

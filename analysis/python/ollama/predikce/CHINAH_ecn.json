@@ -1,9 +1,9 @@
 {
   "symbol": "CHINAH_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem obecních faktorů a nedostatečným tlakem koupě. RSI ukazuje slabost s trendem pod svým předchozím vrcholem, což naznačuje potenciální pokles.",
-  "timestamp": "2026-04-08T03:04:14.016057+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu s přijatelnou likviditou. Svíčkové formace a indikátory RSI a MA signalizují nejistotu s volatilitou.",
+  "timestamp": "2026-04-08T05:54:19.389195+00:00",
   "model": "deepseek-coder-v2"
 }

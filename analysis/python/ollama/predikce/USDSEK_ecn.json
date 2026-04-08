@@ -1,9 +1,9 @@
 {
   "symbol": "USDSEK_ecn",
   "BUY": 30.0,
-  "SELL": 45.0,
-  "HOLD": 25.0,
-  "reasoning": "Základní analýza ukazuje podporu na úrovni 1.2800 s potenciálem pro růst, ale RSI a MA indikují střednědobou nejistotu.",
-  "timestamp": "2026-04-08T02:02:34.940905+00:00",
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tlak prodávajících, což naznačuje pokles. Nicméně, fundamentální analýza neprokazuje silnou přítomnost růstových trendů.",
+  "timestamp": "2026-04-08T07:39:21.341114+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCAD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend směrem dolů, ale svíčkové formace naznačují opravu. Kombinace rizika a příležitostí doporučuje částečný zásah.",
-  "timestamp": "2026-04-08T03:41:41.789431+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Růstové potenciály jsou omezeny silnou podporou na hodinovém grafu a nízkými hodnotami RSI. Zatímco se nacházíme v korekci, je třeba důkladněji sledovat další pohyby cen.",
+  "timestamp": "2026-04-08T06:34:06.755731+00:00",
   "model": "deepseek-coder-v2"
 }

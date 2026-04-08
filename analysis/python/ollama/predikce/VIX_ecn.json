@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Zohlednil jsem svíčkové formace jako spouštěcí signály pro nárůst a pokles ceny. RSI ukazuje neutralitu s mírným trendem klesajícímu, zatímco MA hodnoty indikují střednědobý růst.",
-  "timestamp": "2026-04-08T02:09:32.075095+00:00",
+  "reasoning": "Růstové potenciály je omezující faktory včetně nižších hodnot RSI a MA, které signalizují slabost trendu. Nicméně, pokles volatility (VIX) může být považován za stabilitu, což podporuje HOLD.",
+  "timestamp": "2026-04-08T07:46:58.564155+00:00",
   "model": "deepseek-coder-v2"
 }

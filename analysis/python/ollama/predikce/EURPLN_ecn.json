@@ -1,9 +1,9 @@
 {
   "symbol": "EURPLN_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem nahoru, ale cenový model svíček indikuje možnost zpětného pohybu.",
-  "timestamp": "2026-04-08T03:28:17.903903+00:00",
+  "BUY": 20.0,
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Převažující trend je oslabování eura vůči zlotýu, což naznačuje nižší hodnoty RSI a MA. Nicméně, svíčkové formace a RSI ukazují slabost síly, což doporučuje ostražitost.",
+  "timestamp": "2026-04-08T06:19:36.027497+00:00",
   "model": "deepseek-coder-v2"
 }

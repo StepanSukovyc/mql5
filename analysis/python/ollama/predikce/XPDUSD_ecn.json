@@ -1,9 +1,9 @@
 {
   "symbol": "XPDUSD_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech jsou slabší, RSI ukazuje pře продаваность, ale MA signalizují kontinuální podporu.",
-  "timestamp": "2026-04-08T02:21:50.673146+00:00",
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Podle svíčkových formací a trendu RSI může dojít k poklesu ceny. Nicméně, MA ukazuje silnou podporu, což naznačuje nejistotu.",
+  "timestamp": "2026-04-08T08:00:16.555021+00:00",
   "model": "deepseek-coder-v2"
 }

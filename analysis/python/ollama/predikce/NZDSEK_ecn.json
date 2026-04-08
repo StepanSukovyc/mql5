@@ -1,9 +1,9 @@
 {
   "symbol": "NZDSEK_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza a technické indikátory ukazují rostoucí tendenci s některými potížemi v posledních měsících.",
-  "timestamp": "2026-04-08T04:09:52.859021+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují další růst. Nicméně, pokles v posledních týdnech může být zahozen.",
+  "timestamp": "2026-04-08T07:04:05.165273+00:00",
   "model": "deepseek-coder-v2"
 }

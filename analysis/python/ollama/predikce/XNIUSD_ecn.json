@@ -1,9 +1,9 @@
 {
   "symbol": "XNIUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převaha pohybů směrem dolů ve všech časových úrovních RSI a MA s těmi nejnovějšími svíčkovými formacemi signalizuje pokles.",
-  "timestamp": "2026-04-08T02:18:19.359575+00:00",
+  "BUY": 20.0,
+  "SELL": 65.0,
+  "HOLD": 15.0,
+  "reasoning": "Růstové signály jsou slabší v důsledku nižších cen a vysoce diverzifikovaným rizikem. Nedostatek trendu a vysoké RSI hodnoty prodeje signalizují potenciální pokles.",
+  "timestamp": "2026-04-08T07:56:22.803767+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "GBPSGD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Vysoká volatilita s omezeným pohybem. RSI a MA ukazují slabost. Některé svíčkové formace signalizují pokles.",
-  "timestamp": "2026-04-08T03:48:26.759870+00:00",
+  "BUY": 40.0,
+  "SELL": 35.0,
+  "HOLD": 25.0,
+  "reasoning": "Podle fundamentální analýzy je zdůvodněno očekávání růstu měny na základě pozitivních makroekonomických ukazatelů. Svíčkové formace a indikátory RSI i MA podporují trend s opakovanými nákupními signály, což naznačuje potenciální silnou polohu na trhu.",
+  "timestamp": "2026-04-08T06:41:27.806236+00:00",
   "model": "deepseek-coder-v2"
 }

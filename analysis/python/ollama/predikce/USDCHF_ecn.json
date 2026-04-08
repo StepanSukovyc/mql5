@@ -1,9 +1,9 @@
 {
   "symbol": "USDCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Růstové síly jsou slabší než klesající tendence, ale mírný růst je pozitivně ohodnocen.",
-  "timestamp": "2026-04-08T01:46:49.961414+00:00",
+  "reasoning": "Růstové impulzy na svíčkových grafech s podporou RSI a MA signalizují potenciál růstu. Nicméně, klesající hodnoty RSI v posledních měsících indikuje pokles trendu.",
+  "timestamp": "2026-04-08T07:22:30.190473+00:00",
   "model": "deepseek-coder-v2"
 }

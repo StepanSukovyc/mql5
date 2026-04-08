@@ -1,9 +1,9 @@
 {
   "symbol": "GBPCHF_ecn",
   "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle RSI a MA trendu je stále tendence k poklesu. Nicméně, fundamentální analýza naznačuje stabilitu s mírným potenciálem růstu.",
-  "timestamp": "2026-04-08T03:43:21.699056+00:00",
+  "SELL": 50.0,
+  "HOLD": 30.0,
+  "reasoning": "Růstové zájemce o GBP jsou omezení pozitivním vývojem MA a stabilizací RSI. Nízké hodnoty RSI naznačují slabost trhu.",
+  "timestamp": "2026-04-08T06:35:54.810256+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "EURCAD_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace naznačují obnovení naopak. Riziko ztráty ale roste s volatilitou.",
-  "timestamp": "2026-04-08T03:12:51.904478+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Základní analýza ukazuje stabilitu ceny. RSI a MA indikují nejistotu s omezenou pohyblivostí trhu.",
+  "timestamp": "2026-04-08T06:03:13.583863+00:00",
   "model": "deepseek-coder-v2"
 }

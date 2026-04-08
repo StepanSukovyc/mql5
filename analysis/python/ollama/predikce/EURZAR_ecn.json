@@ -3,7 +3,7 @@
   "BUY": 40.0,
   "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Podle RSI a MA je trend střednědobý směřující nahoru, ale dlouhodobý trend ukazuje na pokles. Svíčkové formace sugerují nejistotu.",
-  "timestamp": "2026-04-08T03:35:01.620894+00:00",
+  "reasoning": "Růstové tendence jsou potenciálně podpořeny svíčkovými formacemi a pozitivním RSI. Nicméně, pokles MA signalizuje slabost.",
+  "timestamp": "2026-04-08T06:26:52.414354+00:00",
   "model": "deepseek-coder-v2"
 }

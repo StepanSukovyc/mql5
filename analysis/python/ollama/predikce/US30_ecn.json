@@ -1,9 +1,9 @@
 {
   "symbol": "US30_ecn",
-  "BUY": 60.0,
+  "BUY": 40.0,
   "SELL": 20.0,
-  "HOLD": 20.0,
-  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu. Nicméně, pokles v posledních měsících naznačuje určitou nejistotu.",
-  "timestamp": "2026-04-08T04:22:22.629749+00:00",
+  "HOLD": 40.0,
+  "reasoning": "Základní analýza svíčkových formací ukazuje potenciální suporty a resistence. RSI indikátor indikuje stabilitu s mírným trendem nahoru. Moving Averages signalizují pozitivní momentum.",
+  "timestamp": "2026-04-08T07:17:03.827190+00:00",
   "model": "deepseek-coder-v2"
 }

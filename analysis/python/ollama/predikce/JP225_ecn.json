@@ -1,9 +1,9 @@
 {
   "symbol": "JP225_ecn",
-  "BUY": 30.0,
-  "SELL": 40.0,
+  "BUY": 40.0,
+  "SELL": 30.0,
   "HOLD": 30.0,
-  "reasoning": "Zohlednil jsem fundamentální analýzu s klesajícím trendem ceny a poklesem RSI. Svíčkové formace naznačují možnost dalšího poklesu, zatímco klouzavé průměry ukazují slabost trhu.",
-  "timestamp": "2026-04-08T03:57:05.616634+00:00",
+  "reasoning": "Zvýšení RSI a MA v posledních měsících indikuje silnou pozici, ale nedostatečné změny v ceně svíček naznačují nejistotu.",
+  "timestamp": "2026-04-08T06:50:54.554678+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "EURUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 60.0,
+  "SELL": 20.0,
   "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět stoupající tendence s nárůstem volatility. Nicméně, fundamentální analýza naznačuje stabilitu s mírným potenciálem růstu.",
-  "timestamp": "2026-04-08T03:33:21.765967+00:00",
+  "reasoning": "Podle svíčkových formací a RSI indikátoru je trend bullish s tendencí k dalšímu růstu. Klíčové úrovně podpory jsou silné, což podporuje předpoklad růstu.",
+  "timestamp": "2026-04-08T06:25:03.591142+00:00",
   "model": "deepseek-coder-v2"
 }

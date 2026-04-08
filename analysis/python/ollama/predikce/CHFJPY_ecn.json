@@ -1,9 +1,9 @@
 {
   "symbol": "CHFJPY_ecn",
-  "BUY": 20.0,
+  "BUY": 30.0,
   "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové impulzy na grafu s náznakem kontratrendu. RSI a MA ukazují neutrální tendenci.",
-  "timestamp": "2026-04-08T03:00:50.757572+00:00",
+  "HOLD": 20.0,
+  "reasoning": "Růstové potenciály jsou omezená vlivem globálních trhů a negativního tlaku na švýcarský frank. Historické trendy indikují stabilitu nebo slabost kurzu.",
+  "timestamp": "2026-04-08T05:50:49.093703+00:00",
   "model": "deepseek-coder-v2"
 }

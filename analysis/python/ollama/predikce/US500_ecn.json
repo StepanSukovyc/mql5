@@ -1,9 +1,9 @@
 {
   "symbol": "US500_ecn",
   "BUY": 30.0,
-  "SELL": 40.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s tržním prostředím. RSI a MA hodnoty indikují střednědobou stability s tendencí k růstu.",
-  "timestamp": "2026-04-08T04:24:16.761808+00:00",
+  "SELL": 60.0,
+  "HOLD": 10.0,
+  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu, ale zároveň také indikace přehřátí trhu.",
+  "timestamp": "2026-04-08T07:18:52.051398+00:00",
   "model": "deepseek-coder-v2"
 }

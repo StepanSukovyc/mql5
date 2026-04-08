@@ -1,9 +1,9 @@
 {
   "symbol": "US100_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
+  "BUY": 60.0,
+  "SELL": 20.0,
   "HOLD": 20.0,
-  "reasoning": "Převaha negativních signálů z RSI a MA ukazuje na pokles trhu, ale některé fundamentální faktory naznačují stabilitu.",
-  "timestamp": "2026-04-08T04:20:32.301362+00:00",
+  "reasoning": "Zvýšení RSI a MA indikují silnou pozici. Nedávné svíčkové formace podporují růst.",
+  "timestamp": "2026-04-08T07:15:13.451302+00:00",
   "model": "deepseek-coder-v2"
 }

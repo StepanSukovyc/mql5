@@ -1,9 +1,9 @@
 {
   "symbol": "LTCUSD_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoké hodnoty RSI a pokles MA sugerují silnou tendenci k poklesu.",
-  "timestamp": "2026-04-08T03:58:53.989256+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Růstové impulzy podle svíčkových formací a stabilita RSI s MA ukazují na potenciál růstu, ale volatilita trhu signalizuje riziko.",
+  "timestamp": "2026-04-08T06:52:47.986137+00:00",
   "model": "deepseek-coder-v2"
 }

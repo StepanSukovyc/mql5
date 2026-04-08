@@ -3,7 +3,7 @@
   "BUY": 30.0,
   "SELL": 50.0,
   "HOLD": 20.0,
-  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale zároveň dochází k nárustu volatility. Doporučuji držet pozici.",
-  "timestamp": "2026-04-08T03:53:31.935562+00:00",
+  "reasoning": "Růstové potenciály jsou omezená zatímco riziko poklesu je vyšší díky volatilitě trhu.",
+  "timestamp": "2026-04-08T06:47:05.486593+00:00",
   "model": "deepseek-coder-v2"
 }

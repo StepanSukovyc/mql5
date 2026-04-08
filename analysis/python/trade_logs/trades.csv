@@ -242,3 +242,4 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-08T03:46:41.854741+00:00,USOIL_ecn,SELL,0.05,gemini_prediction,0.0,True,
 2026-04-08T05:33:29.881478+00:00,USDILS_ecn,SELL,0.06,gemini_prediction,0.0,True,
 2026-04-08T05:33:35.441703+00:00,USDMXN_ecn,BUY,0.12,gemini_prediction,0.0,True,
+2026-04-08T06:19:43.992811+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,0.0,True,

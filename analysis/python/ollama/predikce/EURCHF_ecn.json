@@ -3,7 +3,7 @@
   "BUY": 20.0,
   "SELL": 50.0,
   "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu euro/franku. RSI a MA indikují neutrální tendenci s několi volatilitou způsobenou ekonomickými faktory.",
-  "timestamp": "2026-04-08T03:14:36.331884+00:00",
+  "reasoning": "Podle svíčkových formací a RSI je trend stále směrem dolů, ale MA ukazuje stabilitu. Kombinace indikátorů naznačuje nejistotu.",
+  "timestamp": "2026-04-08T06:04:58.806968+00:00",
   "model": "deepseek-coder-v2"
 }

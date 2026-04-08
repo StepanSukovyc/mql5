@@ -1,9 +1,9 @@
 {
   "symbol": "EURJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové trendy jsou slabší, ale stále pozitivní. RSI ukazuje přečerpání a možnost pro pokles.",
-  "timestamp": "2026-04-08T03:21:31.257114+00:00",
+  "BUY": 30.0,
+  "SELL": 50.0,
+  "HOLD": 20.0,
+  "reasoning": "Podle RSI a MA je trend stále směrem dolů, ale svíčkové formace ukazují na oslabení, což naznačuje nejistotu.",
+  "timestamp": "2026-04-08T06:12:16.122976+00:00",
   "model": "deepseek-coder-v2"
 }

@@ -1,9 +1,9 @@
 {
   "symbol": "XALUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza svíčkových grafů ukazuje středně silnou tendenci poklesu. RSI a klouzavé průměry indikují nejistotu s nižší poptávkou.",
-  "timestamp": "2026-04-08T02:13:02.857755+00:00",
+  "BUY": 0.0,
+  "SELL": 100.0,
+  "HOLD": 0.0,
+  "reasoning": "Vysoké RSI hodnoty a pokles MA signalizují silnou tendenci poklesu ceny.",
+  "timestamp": "2026-04-08T07:50:44.651343+00:00",
   "model": "deepseek-coder-v2"
 }

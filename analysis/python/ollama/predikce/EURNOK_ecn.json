@@ -1,9 +1,9 @@
 {
   "symbol": "EURNOK_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Převažující pohled je na pokles kurzu EUR vzhledem k NOK. RSI ukazuje přetíženost prodejných signálů a některé svíčkové formace naznačují, že cena může dále klesa.",
-  "timestamp": "2026-04-08T03:24:52.804537+00:00",
+  "BUY": 40.0,
+  "SELL": 30.0,
+  "HOLD": 30.0,
+  "reasoning": "Zvýšení RSI v měsíčním timeframe indikuje silnou pozici. Podporují ji růstující MA a stabilita fundamentální analýzy.",
+  "timestamp": "2026-04-08T06:15:56.356324+00:00",
   "model": "deepseek-coder-v2"
 }

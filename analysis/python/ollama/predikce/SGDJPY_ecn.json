@@ -1,9 +1,9 @@
 {
   "symbol": "SGDJPY_ecn",
-  "BUY": 30.0,
+  "BUY": 20.0,
   "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "RSI indikuje přeprodanost, ale MA ukazuje silnou podporu. Pravděpodobný pohyb je omezován.",
-  "timestamp": "2026-04-08T04:15:13.071340+00:00",
+  "HOLD": 30.0,
+  "reasoning": "Na základě fundamentální analýzy je trh stabilní s tendencí klesání. RSI a MA hodnoty indikují směr trendu, ale nedostatečné signály svíčkových formací naznačují nejistotu.",
+  "timestamp": "2026-04-08T07:09:42.103054+00:00",
   "model": "deepseek-coder-v2"
 }

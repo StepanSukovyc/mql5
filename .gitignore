@@ -1,7 +1,6 @@
 # Ignore all folders under analysis/python except selected ones
 analysis/python/*/
 !analysis/python/geminipredictions/
-!analysis/python/ollama/
 !analysis/python/trade_logs/
 analysis/python/ollama/predikce/**
 analysis/python/ollama/source/**

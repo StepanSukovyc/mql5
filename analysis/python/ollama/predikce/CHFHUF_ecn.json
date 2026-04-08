@@ -1,9 +1,9 @@
 {
   "symbol": "CHFHUF_ecn",
   "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s rostoucím trendem, RSI a MA indikují potenciál růstu, ale svíčkové formace signalizují nejistotu.",
-  "timestamp": "2026-04-08T02:59:11.412968+00:00",
+  "SELL": 60.0,
+  "HOLD": 20.0,
+  "reasoning": "Při pohledu na grafy RSI a MA je vidět stoupající tlak prodlužovacích svíček, což naznačuje silnou poptávku. Nicméně, dlouhodobý trend ukazuje na pokles hodnoty, což vede k nejistotě.",
+  "timestamp": "2026-04-08T05:49:04.150027+00:00",
   "model": "deepseek-coder-v2"
 }
