@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPAUD_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s růstovými potenciály v zásobě. Technické indikátory RSI a MA signalizují pohyb směrem nahoru, což podporuje BUY.",
-  "timestamp": "2026-04-08T06:32:17.479582+00:00",
-  "model": "deepseek-coder-v2"
-}

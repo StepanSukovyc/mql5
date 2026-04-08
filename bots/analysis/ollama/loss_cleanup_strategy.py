@@ -12,6 +12,7 @@ from typing import Any, Optional
 import MetaTrader5 as mt5
 import pytz
 
+from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
 
 
@@ -147,8 +148,8 @@ def _get_service_folder() -> Optional[Path]:
 	return Path(raw_value)
 
 
-def _is_in_restricted_trading_hours(now_prague: datetime) -> bool:
-	return now_prague.hour == 23 and 0 <= now_prague.minute < 30
+def _is_in_restricted_trading_hours(now_utc: datetime) -> bool:
+	return get_swap_block_window(now_utc=now_utc).contains(now_utc)
 
 
 def _get_position_fee(volume: float) -> float:
@@ -619,8 +620,12 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 	_persist_last_run_day_key(service_folder, day_key)
 
 	try:
-		if _is_in_restricted_trading_hours(now_prague):
-			message = "Restricted trading hours 23:00-23:30 Prague time, cleanup skipped"
+		if _is_in_restricted_trading_hours(now_utc):
+			window = get_swap_block_window(now_utc=now_utc)
+			message = (
+				"Swap rollover block window "
+				f"{window.start_utc.strftime('%H:%M')}-{window.end_utc.strftime('%H:%M')} UTC, cleanup skipped"
+			)
 			print("\n🧹 Hourly loss cleanup strategy")
 			print(f"   Time (Prague): {now_prague.strftime('%Y-%m-%d %H:%M:%S')}")
 			print(f"   {message}")

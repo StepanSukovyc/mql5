@@ -1,9 +1,0 @@
-{
-  "symbol": "XZNUSD_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Riziko je vyvážené mezi nákupem a držením. RSI ukazuje slabost trhu, ale MA signalizuje stabilitu.",
-  "timestamp": "2026-04-08T08:03:56.042618+00:00",
-  "model": "deepseek-coder-v2"
-}

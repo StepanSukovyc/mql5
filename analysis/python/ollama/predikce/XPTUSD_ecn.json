@@ -1,9 +1,0 @@
-{
-  "symbol": "XPTUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s rostoucím trendem na základě svíčkových formací a RSI. MA hodnoty podporují tento pohyb.",
-  "timestamp": "2026-04-08T08:02:07.274913+00:00",
-  "model": "deepseek-coder-v2"
-}

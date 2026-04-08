@@ -1,9 +1,0 @@
-{
-  "symbol": "VIX_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové potenciály je omezující faktory včetně nižších hodnot RSI a MA, které signalizují slabost trendu. Nicméně, pokles volatility (VIX) může být považován za stabilitu, což podporuje HOLD.",
-  "timestamp": "2026-04-08T07:46:58.564155+00:00",
-  "model": "deepseek-coder-v2"
-}

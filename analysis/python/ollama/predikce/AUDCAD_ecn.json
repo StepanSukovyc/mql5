@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDCAD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstový impulz s ohledem na technickou analýzu a pozitivní svědectví z fundamentálních faktorů.",
-  "timestamp": "2026-04-08T05:20:39.516826+00:00",
-  "model": "deepseek-coder-v2"
-}

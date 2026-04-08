@@ -1,9 +1,0 @@
-{
-  "symbol": "USDMXN_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převažují signály pro nákup na základě silného trendu a robustní podpory RSI. Mírný pokles v MA ale signalizuje potenciální oslabení.",
-  "timestamp": "2026-04-08T07:33:35.137018+00:00",
-  "model": "deepseek-coder-v2"
-}

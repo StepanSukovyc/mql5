@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPZAR_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je spíše směrem dolů s náznakem podporujícího pohybu. RSI ukazuje slabost a MA trend je mírně klesající.",
-  "timestamp": "2026-04-08T06:45:12.872466+00:00",
-  "model": "deepseek-coder-v2"
-}

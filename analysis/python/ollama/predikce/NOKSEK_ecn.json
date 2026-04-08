@@ -1,9 +1,0 @@
-{
-  "symbol": "NOKSEK_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením situace v oblasti financí a nízkými hodnotami RSI. Vzestupné svědectví je slabé.",
-  "timestamp": "2026-04-08T06:56:35.034417+00:00",
-  "model": "deepseek-coder-v2"
-}

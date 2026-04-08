@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDNZD_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Zhoršení kvality životního prostředí a ztráta důvěry investorů v růstové scénáře.",
-  "timestamp": "2026-04-08T05:27:46.709254+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "USDCAD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Vysoké hodnoty RSI a MA sugerují potenciál růstu, ale také silný pohyb směrem k SELL.",
-  "timestamp": "2026-04-08T07:20:39.970871+00:00",
-  "model": "deepseek-coder-v2"
-}

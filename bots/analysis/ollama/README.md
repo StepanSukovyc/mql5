@@ -28,14 +28,22 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Každý N-tý obchod: použije se i `take_profit` od Gemini
   - Ostatní obchody: `take_profit` se nepoužije
 8. **Minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`):
-  - Běží v account monitoru každou minutu od spuštění
+  - Běží v account monitoru každou minutu od spuštění, ale pouze mimo swap blokovací okno
   - Vezme aktuální bilanci účtu `B` a spočítá referenční objem `VOLUME = ((int)(B / 500) + 1) * 0.01`
   - Pro každou otevřenou pozici spočítá čistý zisk `ZISK = profit + swap - fee`, kde `fee = 0.10 USD` za každých `0.01` lotu
   - Cílový zisk pozice `PCZ` počítá jako `(0.01 * L / VOLUME) * B`, kde `L` je objem pozice; minimum `PCZ` je `0.005`
   - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření a strategie ji uzavře
   - V jednom průchodu uzavírá všechny aktuálně vhodné pozice
   - Přepínač `PROFIT_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
-9. **Denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
+9. **Swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`):
+  - Běží v account monitoru každou minutu, ale pouze uvnitř swap blokovacího okna
+  - Swap blokovací okno se odvozuje z broker server time podle detekovaného času swap rolloveru z MT5 historie
+  - Okno je symetrické: 30 minut před rolloverem a 30 minut po rolloveru
+  - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
+  - Spočítá čistý zisk `ZISK = profit + swap - fee`, kde `fee = 0.10 USD` za každých `0.01` lotu
+  - Pokud je čistý zisk alespoň `0.10 USD`, pozice je vhodná k uzavření kvůli vyhnutí se swapu
+  - Přepínač `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
+10. **Denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
   - Spustí se nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
   - Použije realizovaný výsledek za předchozí uzavřený pražský den z historie MT5 dealů jako `profit + swap + commission + actual deal.fee`
   - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z uzavřených pozic referenčního dne podle `position_id`
@@ -48,17 +56,17 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Pokud mají dva bezpeční kandidáti stejnou ztrátu, ponechá první nalezenou pozici
   - Pokud taková pozice existuje, uzavře ji; jinak neudělá nic
   - Stavový soubor `trade_logs/loss_cleanup_state.json` brání tomu, aby se po restartu proces spustil vícekrát ve stejný pražský den
-  - V čase 23:00-23:30 CET/CEST se cleanup nespouští stejně jako běžné obchodování
+  - V čase swap blokovacího okna se cleanup nespouští stejně jako běžné obchodování
   - Přepínač `LOSS_CLEANUP_STRATEGY_DRY_RUN` (default `true`) vypíše kandidáta a zaloguje akci, ale pozici skutečně nezavře
-9. **Provede obchod** na MT5 podle aktivního režimu
-10. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
-11. **Vrátí se na krok 3** (restart monitoring)
+11. **Provede obchod** na MT5 podle aktivního režimu
+12. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
+13. **Vrátí se na krok 3** (restart monitoring)
 
-**Automatické pozastavení v kritických hodinách:**
-- **23:00-23:30 CET/CEST**: Trh se chová nepředvídatelně, žádné obchody a analýzy
-  - Cyklus se zastaví (lock) na 30 minut
-  - Jakákoli připravená rozhodnutí se zahodí
-  - Obchody se automaticky obnoví v 23:30
+**Automatické pozastavení v swap blokovacím okně:**
+- Blokace se řídí broker server time, ne lokálním časem počítače ani fixně Prague `23:00-23:30`
+  - Systém se zastaví 30 minut před detekovaným swap rolloverem a obnoví se 30 minut po něm
+  - Jakákoli připravená rozhodnutí se v tomto okně zahodí
+  - Pokud MT5 historie rollover čas neposkytne, lze použít ruční fallback přes `.env`
 
 **Ukončení:** Ctrl+C
 
@@ -139,6 +147,14 @@ GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-fl
 GEMINI_FULL_CONTROL_EVERY_N_TRADES=3
 PROFIT_CLEANUP_STRATEGY_ENABLED=true
 PROFIT_CLEANUP_STRATEGY_DRY_RUN=true
+SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED=true
+SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN=true
+
+# Optionalni fallback pro detekci swap rolloveru
+# SWAP_ROLLOVER_HOUR=23
+# SWAP_ROLLOVER_MINUTE=0
+# SWAP_ROLLOVER_LOOKBACK_DAYS=14
+# SWAP_BLOCK_HALF_WINDOW_MINUTES=30
 LOSS_CLEANUP_STRATEGY_ENABLED=true
 LOSS_CLEANUP_STRATEGY_MINUTE=45
 LOSS_CLEANUP_STRATEGY_DRY_RUN=true

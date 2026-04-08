@@ -1,9 +1,0 @@
-{
-  "symbol": "EURNOK_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zvýšení RSI v měsíčním timeframe indikuje silnou pozici. Podporují ji růstující MA a stabilita fundamentální analýzy.",
-  "timestamp": "2026-04-08T06:15:56.356324+00:00",
-  "model": "deepseek-coder-v2"
-}

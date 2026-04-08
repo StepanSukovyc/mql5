@@ -1,9 +1,0 @@
-{
-  "symbol": "USDCZK_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růst cen energií a politická nejistota v Rusku svědčí pro nákup dolaru. RSI ukazuje slabost s opakovanými signály kolem 50, což naznačuje, že se cena může obrátit.",
-  "timestamp": "2026-04-08T07:24:20.546333+00:00",
-  "model": "deepseek-coder-v2"
-}

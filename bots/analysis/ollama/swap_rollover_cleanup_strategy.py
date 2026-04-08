@@ -1,4 +1,4 @@
-"""Minute-by-minute strategy for closing sufficiently profitable positions."""
+"""Close profitable open positions during the swap rollover block window."""
 
 from __future__ import annotations
 
@@ -16,14 +16,15 @@ from trade_execution import close_position_by_ticket
 
 DEFAULT_ENABLED = True
 DEFAULT_DRY_RUN = True
-ACCOUNT_BALANCE_STEP = 500.0
-MIN_TARGET_PROFIT = 0.005
 FEE_PER_001_LOT = 0.10
-PROFIT_CLEANUP_LOG_HEADERS = [
+MIN_NET_PROFIT_TO_CLOSE = 0.10
+ROLLOVER_CLEANUP_LOG_HEADERS = [
 	"timestamp",
 	"dry_run",
 	"balance",
-	"reference_volume",
+	"rollover_source",
+	"window_start_utc",
+	"window_end_utc",
 	"symbol",
 	"ticket",
 	"position_volume",
@@ -40,7 +41,7 @@ _LAST_EVALUATED_MINUTE_KEY: Optional[str] = None
 
 
 @dataclass
-class ProfitCleanupCandidate:
+class SwapRolloverCleanupCandidate:
 	ticket: int
 	symbol: str
 	position_type: int
@@ -53,9 +54,8 @@ class ProfitCleanupCandidate:
 
 
 @dataclass
-class ProfitCleanupMetrics:
+class SwapRolloverCleanupMetrics:
 	balance: float
-	reference_volume: float
 	position_volume: float
 	profit: float
 	swap: float
@@ -97,11 +97,11 @@ def _to_bool(value: Optional[str], *, default: bool) -> bool:
 
 
 def _get_strategy_enabled() -> bool:
-	return _to_bool(_load_dotenv_value("PROFIT_CLEANUP_STRATEGY_ENABLED"), default=DEFAULT_ENABLED)
+	return _to_bool(_load_dotenv_value("SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED"), default=DEFAULT_ENABLED)
 
 
 def _get_strategy_dry_run() -> bool:
-	return _to_bool(_load_dotenv_value("PROFIT_CLEANUP_STRATEGY_DRY_RUN"), default=DEFAULT_DRY_RUN)
+	return _to_bool(_load_dotenv_value("SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN"), default=DEFAULT_DRY_RUN)
 
 
 def _get_service_folder() -> Optional[Path]:
@@ -115,64 +115,51 @@ def _get_position_fee(volume: float) -> float:
 	return round((float(volume) / 0.01) * FEE_PER_001_LOT, 2)
 
 
-def _get_reference_volume(balance: float) -> float:
-	reference_volume = ((int(float(balance) / ACCOUNT_BALANCE_STEP) + 1) * 0.01)
-	if reference_volume <= 0:
-		return 0.01
-	return round(reference_volume, 2)
-
-
-def _get_target_profit(balance: float, reference_volume: float, position_volume: float) -> float:
-	if reference_volume <= 0:
-		return MIN_TARGET_PROFIT
-
-	target_profit = (0.01 * float(position_volume) / float(reference_volume)) * float(balance)
-	return max(target_profit, MIN_TARGET_PROFIT)
-
-
-def calculate_profit_cleanup_metrics(balance: float, position_volume: float, profit: float, swap: float) -> ProfitCleanupMetrics:
-	"""Return all derived values used by the minute profit cleanup strategy."""
-	reference_volume = _get_reference_volume(balance)
+def calculate_swap_rollover_cleanup_metrics(
+	balance: float,
+	position_volume: float,
+	profit: float,
+	swap: float,
+) -> SwapRolloverCleanupMetrics:
+	"""Return all derived values used by the rollover-window cleanup strategy."""
 	fee = _get_position_fee(position_volume)
 	net_profit = round(float(profit) + float(swap) - fee, 2)
-	target_profit = _get_target_profit(balance, reference_volume, position_volume)
-	return ProfitCleanupMetrics(
+	target_profit = MIN_NET_PROFIT_TO_CLOSE
+	return SwapRolloverCleanupMetrics(
 		balance=float(balance),
-		reference_volume=reference_volume,
 		position_volume=float(position_volume),
 		profit=float(profit),
 		swap=float(swap),
 		fee=fee,
 		net_profit=net_profit,
 		target_profit=target_profit,
-		eligible=net_profit > target_profit,
+		eligible=net_profit >= target_profit,
 	)
 
 
-def _find_candidates(balance: float, reference_volume: float) -> list[ProfitCleanupCandidate]:
+def _find_candidates(balance: float) -> list[SwapRolloverCleanupCandidate]:
 	positions = mt5.positions_get()
 	if positions is None:
 		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
 
-	candidates: list[ProfitCleanupCandidate] = []
+	candidates: list[SwapRolloverCleanupCandidate] = []
 	for position in positions:
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
-		if volume <= 0:
+		profit = float(getattr(position, "profit", 0.0) or 0.0)
+		if volume <= 0 or profit <= 0:
 			continue
 
-		metrics = calculate_profit_cleanup_metrics(
+		metrics = calculate_swap_rollover_cleanup_metrics(
 			balance=balance,
 			position_volume=volume,
-			profit=float(getattr(position, "profit", 0.0) or 0.0),
+			profit=profit,
 			swap=float(getattr(position, "swap", 0.0) or 0.0),
 		)
-		if metrics.net_profit <= 0:
-			continue
-		if metrics.net_profit <= metrics.target_profit:
+		if not metrics.eligible:
 			continue
 
 		candidates.append(
-			ProfitCleanupCandidate(
+			SwapRolloverCleanupCandidate(
 				ticket=int(position.ticket),
 				symbol=str(position.symbol),
 				position_type=int(position.type),
@@ -193,8 +180,10 @@ def _log_cleanup_action(
 	service_folder: Optional[Path],
 	now_utc: datetime,
 	balance: float,
-	reference_volume: float,
-	candidate: Optional[ProfitCleanupCandidate],
+	rollover_source: str,
+	window_start_utc: datetime,
+	window_end_utc: datetime,
+	candidate: Optional[SwapRolloverCleanupCandidate],
 	closed: bool,
 	message: str,
 ) -> None:
@@ -203,20 +192,22 @@ def _log_cleanup_action(
 
 	log_dir = service_folder / "trade_logs"
 	log_dir.mkdir(parents=True, exist_ok=True)
-	log_file = log_dir / "profit_cleanup.csv"
+	log_file = log_dir / "swap_rollover_cleanup.csv"
 	file_exists = log_file.exists()
 
 	with open(log_file, "a", newline="", encoding="utf-8") as handle:
 		writer = csv.writer(handle)
 		if not file_exists:
-			writer.writerow(PROFIT_CLEANUP_LOG_HEADERS)
+			writer.writerow(ROLLOVER_CLEANUP_LOG_HEADERS)
 
 		writer.writerow(
 			[
 				now_utc.isoformat(),
 				str(_get_strategy_dry_run()),
 				f"{balance:.2f}",
-				f"{reference_volume:.2f}",
+				rollover_source,
+				window_start_utc.isoformat(),
+				window_end_utc.isoformat(),
 				candidate.symbol if candidate else "",
 				candidate.ticket if candidate else "",
 				f"{candidate.volume:.2f}" if candidate else "",
@@ -224,15 +215,15 @@ def _log_cleanup_action(
 				f"{candidate.swap:.2f}" if candidate else "",
 				f"{candidate.fee:.2f}" if candidate else "",
 				f"{candidate.net_profit:.2f}" if candidate else "",
-				f"{candidate.target_profit:.4f}" if candidate else "",
+				f"{candidate.target_profit:.2f}" if candidate else "",
 				str(closed),
 				message,
 			]
 		)
 
 
-def run_profit_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = None) -> None:
-	"""Evaluate the profit cleanup strategy at most once per minute."""
+def run_swap_rollover_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = None) -> None:
+	"""Evaluate the swap rollover cleanup strategy at most once per minute."""
 	global _LAST_EVALUATED_MINUTE_KEY
 
 	if not _get_strategy_enabled():
@@ -249,7 +240,7 @@ def run_profit_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = 
 
 	try:
 		window = get_swap_block_window(now_utc=now_utc)
-		if window.contains(now_utc):
+		if not window.contains(now_utc):
 			return
 
 		if account_info is None:
@@ -260,35 +251,40 @@ def run_profit_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = 
 		else:
 			balance = float(account_info.get("raw_balance", account_info.get("balance", 0.0)))
 
-		reference_volume = _get_reference_volume(balance)
-		candidates = _find_candidates(balance, reference_volume)
+		candidates = _find_candidates(balance)
 		if not candidates:
 			return
 
-		print("\n💰 Minute profit cleanup strategy")
+		print("\n💰 Swap rollover cleanup strategy")
 		print(f"   Time (UTC): {now_utc.strftime('%Y-%m-%d %H:%M:%S')}")
+		print(
+			"   Swap block window (UTC): "
+			f"{window.start_utc.strftime('%H:%M')} - {window.end_utc.strftime('%H:%M')} "
+			f"around rollover {window.rollover_at_utc.strftime('%H:%M')}"
+		)
+		print(f"   Rollover source: {window.rollover_time.source}")
 		print(f"   Dry run: {'ON' if dry_run else 'OFF'}")
 		print(f"   Balance B: {balance:.2f}")
-		print(f"   Reference volume: {reference_volume:.2f}")
+		print(f"   Minimum net profit: {MIN_NET_PROFIT_TO_CLOSE:.2f}")
 		print(f"   Eligible positions: {len(candidates)}")
 
 		for candidate in candidates:
 			print(
 				f"   Candidate: {candidate.symbol} ticket={candidate.ticket} "
 				f"net_profit={candidate.net_profit:.2f} "
-				f"target={candidate.target_profit:.4f} volume={candidate.volume:.2f}"
+				f"threshold={candidate.target_profit:.2f} volume={candidate.volume:.2f}"
 			)
 
 			if dry_run:
 				closed = False
-				message = "DRY-RUN: position matches profit cleanup rules and would be closed"
+				message = "DRY-RUN: profitable position would be closed before swap rollover"
 			else:
 				closed = close_position_by_ticket(
 					position_ticket=candidate.ticket,
 					symbol=candidate.symbol,
 					position_type=candidate.position_type,
 					volume=candidate.volume,
-					comment="Profit cleanup strategy",
+					comment="Swap rollover cleanup",
 				)
 				message = "Position closed" if closed else "Position close failed"
 
@@ -297,18 +293,23 @@ def run_profit_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = 
 				service_folder=service_folder,
 				now_utc=now_utc,
 				balance=balance,
-				reference_volume=reference_volume,
+				rollover_source=window.rollover_time.source,
+				window_start_utc=window.start_utc,
+				window_end_utc=window.end_utc,
 				candidate=candidate,
 				closed=closed,
 				message=message,
 			)
 	except Exception as exc:  # pylint: disable=broad-except
-		print(f"⚠️  Minute profit cleanup strategy failed: {exc}")
+		print(f"⚠️  Swap rollover cleanup strategy failed: {exc}")
+		window = get_swap_block_window(now_utc=now_utc)
 		_log_cleanup_action(
 			service_folder=service_folder,
 			now_utc=now_utc,
 			balance=0.0,
-			reference_volume=0.0,
+			rollover_source=window.rollover_time.source,
+			window_start_utc=window.start_utc,
+			window_end_utc=window.end_utc,
 			candidate=None,
 			closed=False,
 			message=f"Strategy failed: {exc}",

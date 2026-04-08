@@ -1,9 +1,0 @@
-{
-  "symbol": "HKD50_ecn",
-  "BUY": 30.0,
-  "SELL": 40.0,
-  "HOLD": 30.0,
-  "reasoning": "Na základě fundamentální analýzy a technického analyzování (RSI a MA) se cena pohybuje v rozmezí nejistoty s mírným trendem. Předpoklad je, že dojde k poklesu nebo růstu trhu v závislosti na budoucích událostech.",
-  "timestamp": "2026-04-08T06:49:00.858240+00:00",
-  "model": "deepseek-coder-v2"
-}

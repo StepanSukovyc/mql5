@@ -1,9 +1,0 @@
-{
-  "symbol": "UK100_ecn",
-  "BUY": 30.0,
-  "SELL": 45.0,
-  "HOLD": 25.0,
-  "reasoning": "Růstové trendy jsou slabší, ale MA a RSI indikátory ukazují signály pro obnovení růstu. Riziko poklesu je vyšší kvůli volatilitě, ale stále existuje příležitost pro držení pozice.",
-  "timestamp": "2026-04-08T07:11:34.550636+00:00",
-  "model": "deepseek-coder-v2"
-}

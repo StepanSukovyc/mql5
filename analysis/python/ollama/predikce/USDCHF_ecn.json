@@ -1,9 +1,0 @@
-{
-  "symbol": "USDCHF_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech s podporou RSI a MA signalizují potenciál růstu. Nicméně, klesající hodnoty RSI v posledních měsících indikuje pokles trendu.",
-  "timestamp": "2026-04-08T07:22:30.190473+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "NZDSGD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s tržním prostředím, RSI a MA indikují slabost trendu, ale svíčkové formace signalizují možnost opakování minulých pohybů.",
-  "timestamp": "2026-04-08T07:05:57.873296+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "EURSGD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstový impulz s RSI nad 50 a klíčová úroveň MA podporuje nákup. Nedostatek jasných trendu a vysoké volatilita naznačují nejistotu.",
-  "timestamp": "2026-04-08T06:23:13.769266+00:00",
-  "model": "deepseek-coder-v2"
-}

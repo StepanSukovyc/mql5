@@ -1,9 +1,0 @@
-{
-  "symbol": "LTCUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy podle svíčkových formací a stabilita RSI s MA ukazují na potenciál růstu, ale volatilita trhu signalizuje riziko.",
-  "timestamp": "2026-04-08T06:52:47.986137+00:00",
-  "model": "deepseek-coder-v2"
-}

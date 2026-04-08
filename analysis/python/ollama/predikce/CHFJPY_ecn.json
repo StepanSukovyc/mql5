@@ -1,9 +1,0 @@
-{
-  "symbol": "CHFJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem globálních trhů a negativního tlaku na švýcarský frank. Historické trendy indikují stabilitu nebo slabost kurzu.",
-  "timestamp": "2026-04-08T05:50:49.093703+00:00",
-  "model": "deepseek-coder-v2"
-}

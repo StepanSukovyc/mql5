@@ -1,9 +1,0 @@
-{
-  "symbol": "EU50_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem obecně klesajícího trendu na trhu a negativních zpráv. Dlouhodobý pohled naznačuje pokračující tendenci, ale krátkodobé signály podporují přijetí pozitivnějších rizikových strategií.",
-  "timestamp": "2026-04-08T05:59:41.275978+00:00",
-  "model": "deepseek-coder-v2"
-}

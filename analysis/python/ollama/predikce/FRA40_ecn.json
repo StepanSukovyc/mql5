@@ -1,9 +1,0 @@
-{
-  "symbol": "FRA40_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové signály z fundamentální analýzy a svíčkových formací s potvrzením RSI a MA hodnot.",
-  "timestamp": "2026-04-08T06:30:29.129761+00:00",
-  "model": "deepseek-coder-v2"
-}

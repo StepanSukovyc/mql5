@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-08 (Broker Swap Window Blocking)
+
+- **Moved Trading Block Window To Broker-Derived Swap Rollover Time**
+  - Added `swap_rollover.py` to detect rollover time from MT5 history deals and build a symmetric block window around it
+  - Trading lock now uses 30 minutes before and 30 minutes after detected rollover instead of fixed `23:00-23:30 CET/CEST`
+  - Loss cleanup skips the same broker-derived rollover window for consistent behavior across strategies
+
+- **Added Separate Rollover Cleanup Alongside Original Minute Profit Cleanup**
+  - Restored the original minute profit cleanup logic and limited it to run only outside the broker-derived swap block window
+  - Added `swap_rollover_cleanup_strategy.py` as a separate strategy that runs only inside the broker-derived swap block window
+  - The new rollover cleanup closes profitable positions with net profit at least `0.10 USD` to avoid carrying positive trades through swap posting
+
 ## 2026-04-08 (Daily Loss Cleanup Scheduling)
 
 - **Changed Loss Cleanup To Run Once Daily Using Previous Prague-Day Profit**

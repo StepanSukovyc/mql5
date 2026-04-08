@@ -1,9 +1,0 @@
-{
-  "symbol": "EURSEK_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Podle svíčkových formací a trendu RSI může dojít k poklesu ceny. Nicméně, MA ukazuje silnou podporu, což naznačuje nejistotu.",
-  "timestamp": "2026-04-08T06:21:25.098793+00:00",
-  "model": "deepseek-coder-v2"
-}

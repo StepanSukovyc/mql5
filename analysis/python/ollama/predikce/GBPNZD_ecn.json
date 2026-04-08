@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPNZD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové potenciály jsou omezené v důsledku obecně konzervativního ekonomického prostředí. Nízký RSI a MA hodnoty signalizují poklesovou perspektivu, zatímco některé svíčkové formace naznačují nejistotu.",
-  "timestamp": "2026-04-08T06:39:36.813439+00:00",
-  "model": "deepseek-coder-v2"
-}

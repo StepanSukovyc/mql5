@@ -1,9 +1,0 @@
-{
-  "symbol": "UKOIL_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Převažující trend směrem dolů s náznaky oslabování. RSI a MA ukazují slabost s určitým potenciálem pro další pokles.",
-  "timestamp": "2026-04-08T07:13:24.594631+00:00",
-  "model": "deepseek-coder-v2"
-}

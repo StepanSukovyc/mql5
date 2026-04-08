@@ -1,9 +1,0 @@
-{
-  "symbol": "XPBUSD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové impulzy na svíčkových grafech a RSI ukazuje nadprůměrnou sílu. Nicméně, MA indikátory nejsou v koridoru trendu.",
-  "timestamp": "2026-04-08T07:58:21.207634+00:00",
-  "model": "deepseek-coder-v2"
-}

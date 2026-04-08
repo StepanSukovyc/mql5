@@ -1,9 +1,0 @@
-{
-  "symbol": "USDPLN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením finanční situace v Evropě a snížením očekávání růstu. Na druhou stranu, pokles je také předpovězený na základě těchto faktorů.",
-  "timestamp": "2026-04-08T07:37:28.509121+00:00",
-  "model": "deepseek-coder-v2"
-}

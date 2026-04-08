@@ -1,9 +1,0 @@
-{
-  "symbol": "CADJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Předvídá se pokles kurzu JPY v důsledku expanze monetární politiky USA a zhoršení finanční situace Japonska. RSI indikuje přeprodanost, ale MA ukazuje slabou podporu, což svědčí o nejistotě.",
-  "timestamp": "2026-04-08T05:47:18.498879+00:00",
-  "model": "deepseek-coder-v2"
-}

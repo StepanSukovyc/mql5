@@ -1,9 +1,0 @@
-{
-  "symbol": "EURCAD_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu ceny. RSI a MA indikují nejistotu s omezenou pohyblivostí trhu.",
-  "timestamp": "2026-04-08T06:03:13.583863+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -17,14 +17,13 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
-import pytz
-
 import MetaTrader5 as mt5
 from account_monitor import run_account_monitor
 from trading_logic import run_trading_logic
 from final_decision import make_final_trading_decision
 from mt5_connection import initialize_mt5, shutdown_mt5
 from ollama_service import ollama_service_loop
+from swap_rollover import get_swap_block_window
 from market_data import (
 	collect_symbol_payload,
 	get_symbols,
@@ -251,53 +250,39 @@ def process_existing_predictions(predictions_folder: Path) -> bool:
 
 def is_in_restricted_trading_hours() -> bool:
 	"""
-	Check if current time is in restricted trading hours (23:00-23:30 CET/CEST).
-	
-	Forex market behaves unpredictably during this period. No trading should occur.
-	
-	Returns:
-		True if current time is between 23:00:00 and 23:29:59 Czech time
+	Check if current time is in the broker-derived swap rollover block window.
+
+	Trading is paused from 30 minutes before to 30 minutes after the detected
+	swap rollover time.
 	"""
-	tz_czech = pytz.timezone('Europe/Prague')
-	now_czech = datetime.now(tz=tz_czech)
-	current_hour = now_czech.hour
-	current_minute = now_czech.minute
-	
-	# Restricted: 23:00 - 23:29:59
-	if current_hour == 23 and 0 <= current_minute < 30:
-		return True
-	return False
+	now_utc = datetime.now(tz=timezone.utc)
+	window = get_swap_block_window(now_utc=now_utc)
+	return window.contains(now_utc)
 
 
 def wait_until_trading_allowed() -> None:
 	"""
-	Wait until restricted trading hours have passed (until 23:30).
-	
-	No analysis or trading during 23:00-23:30 CET/CEST.
+	Wait until the broker-derived swap rollover block window has passed.
 	"""
-	tz_czech = pytz.timezone('Europe/Prague')
-	
 	while True:
-		now_czech = datetime.now(tz=tz_czech)
-		current_hour = now_czech.hour
-		current_minute = now_czech.minute
-		current_second = now_czech.second
-		
-		if current_hour != 23 or current_minute >= 30:
-			# We're out of restricted hours
+		now_utc = datetime.now(tz=timezone.utc)
+		window = get_swap_block_window(now_utc=now_utc)
+		if not window.contains(now_utc):
 			break
-		
-		# Calculate sleep time until 23:30
-		target_time = now_czech.replace(hour=23, minute=30, second=0, microsecond=0)
-		sleep_seconds = (target_time - now_czech).total_seconds()
-		
+
+		sleep_seconds = (window.end_utc - now_utc).total_seconds()
 		if sleep_seconds > 0:
-			loc_time = now_czech.strftime("%H:%M:%S")
-			print(f"\n⏸️  TRADING PAUSE - Restricted hours: 23:00-23:30 CET")
-			print(f"   Current time:     {loc_time}")
-			print(f"   Resuming trades:  23:30")
+			print("\n⏸️  TRADING PAUSE - Swap rollover block window")
+			print(f"   Current UTC:      {now_utc.strftime('%H:%M:%S')}")
+			print(
+				"   Block window:     "
+				f"{window.start_utc.strftime('%H:%M')} - {window.end_utc.strftime('%H:%M')} UTC"
+			)
+			print(f"   Rollover center:  {window.rollover_at_utc.strftime('%H:%M')} UTC")
+			print(f"   Source:           {window.rollover_time.source}")
+			print(f"   Resuming trades:  {window.end_utc.strftime('%H:%M:%S')} UTC")
 			print(f"   Sleeping for:     {int(sleep_seconds)} seconds (~{int(sleep_seconds/60)} minutes)")
-			print(f"   Reason:           Market behavior unpredictable during this period\n")
+			print("   Reason:           Avoid swap on rollover-adjacent trading\n")
 			
 			# Sleep in 10-second intervals to allow graceful shutdown
 			remaining = sleep_seconds
@@ -348,7 +333,7 @@ def main() -> int:
 		
 		# Infinite trading loop
 		while True:
-			# Check if we're in restricted trading hours (23:00-23:30)
+			# Check if we're in the broker-derived swap block window.
 			if is_in_restricted_trading_hours():
 				wait_until_trading_allowed()
 			
@@ -382,10 +367,14 @@ def main() -> int:
 			
 			# Check if trading trigger was set by monitor
 			if trading_trigger_event.is_set():
-				# Double-check we're not in restricted trading hours before proceeding
+				# Double-check we're not in the broker-derived swap block window before proceeding.
 				if is_in_restricted_trading_hours():
-					print("\n🛑 TRADING BLOCKED - Restricted hours (23:00-23:30)")
-					print("   Discarding prepared signals and waiting until 23:30...")
+					window = get_swap_block_window()
+					print("\n🛑 TRADING BLOCKED - Swap rollover block window")
+					print(
+						"   Discarding prepared signals and waiting until "
+						f"{window.end_utc.strftime('%H:%M:%S')} UTC..."
+					)
 					wait_until_trading_allowed()
 				else:
 					print("\n🚀 Stop condition met - proceeding with trading...")

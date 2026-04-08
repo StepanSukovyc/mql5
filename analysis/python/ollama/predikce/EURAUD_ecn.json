@@ -1,9 +1,0 @@
-{
-  "symbol": "EURAUD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na RSI a MA hodnoty je vidět nárůst tlaku nabídky, což naznačuje pokles cen. Nicméně, svíčkový graf ukazuje složitou strukturu s nedávnými středy, což může být příznakem volatilního trhu.",
-  "timestamp": "2026-04-08T06:01:29.000226+00:00",
-  "model": "deepseek-coder-v2"
-}

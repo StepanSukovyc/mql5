@@ -1,9 +1,0 @@
-{
-  "symbol": "XAUUSD_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je v oblasti silného pohybu cenem a síly RSI. Vysoká volatilita a pokles MA signalizují potenciál konzolidace nebo poklesu.",
-  "timestamp": "2026-04-08T07:52:37.396038+00:00",
-  "model": "deepseek-coder-v2"
-}

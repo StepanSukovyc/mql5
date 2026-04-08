@@ -1,9 +1,0 @@
-{
-  "symbol": "EURMXN_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené vlivem obav z inflace a klesajícího světového růstu. Nedávný pokles RSI a MA signalizuje možný pokles ceny.",
-  "timestamp": "2026-04-08T06:14:06.357231+00:00",
-  "model": "deepseek-coder-v2"
-}

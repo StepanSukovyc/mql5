@@ -1,9 +1,0 @@
-{
-  "symbol": "XCUUSD_ecn",
-  "BUY": 0.0,
-  "SELL": 100.0,
-  "HOLD": 0.0,
-  "reasoning": "Vysoký RSI a MA ukazují poklesovou tendenci s nejistotou o dopad fundamentálních faktorů.",
-  "timestamp": "2026-04-08T07:54:29.008836+00:00",
-  "model": "deepseek-coder-v2"
-}

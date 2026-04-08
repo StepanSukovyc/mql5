@@ -1,9 +1,0 @@
-{
-  "symbol": "NZDUSD_ecn",
-  "BUY": 60.0,
-  "SELL": 25.0,
-  "HOLD": 15.0,
-  "reasoning": "Podle RSI a MA je trend cenového grafu směrem nahoru, ale přítomnost silných odporových úrovní v minulosti může způsobit pokles.",
-  "timestamp": "2026-04-08T07:07:49.541947+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "GER40_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezená zatímco riziko poklesu je vyšší díky volatilitě trhu.",
-  "timestamp": "2026-04-08T06:47:05.486593+00:00",
-  "model": "deepseek-coder-v2"
-}

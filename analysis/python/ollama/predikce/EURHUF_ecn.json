@@ -1,9 +1,0 @@
-{
-  "symbol": "EURHUF_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstové potenciály jsou omezené zhoršením makroekonomických podmínek a nedostatečným tlakem na růst. Přesto ještě není dostačující signál pro nákup.",
-  "timestamp": "2026-04-08T06:10:28.446147+00:00",
-  "model": "deepseek-coder-v2"
-}

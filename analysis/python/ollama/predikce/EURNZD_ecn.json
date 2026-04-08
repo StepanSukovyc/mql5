@@ -1,9 +1,0 @@
-{
-  "symbol": "EURNZD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Rozdíl mezi RSI a MA hodnotami naznačuje nejistotu. Nárůst cen v posledních třech měsících ale podporuje nákup.",
-  "timestamp": "2026-04-08T06:17:45.421273+00:00",
-  "model": "deepseek-coder-v2"
-}

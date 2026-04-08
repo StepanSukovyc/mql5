@@ -1,9 +1,0 @@
-{
-  "symbol": "AU200_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Růstový impulz s náznakem divergence RSI a zeslabení MA. Riziko většího pohybu směrem dolů.",
-  "timestamp": "2026-04-08T05:18:17.453629+00:00",
-  "model": "deepseek-coder-v2"
-}

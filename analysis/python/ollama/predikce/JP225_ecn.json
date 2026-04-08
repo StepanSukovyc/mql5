@@ -1,9 +1,0 @@
-{
-  "symbol": "JP225_ecn",
-  "BUY": 40.0,
-  "SELL": 30.0,
-  "HOLD": 30.0,
-  "reasoning": "Zvýšení RSI a MA v posledních měsících indikuje silnou pozici, ale nedostatečné změny v ceně svíček naznačují nejistotu.",
-  "timestamp": "2026-04-08T06:50:54.554678+00:00",
-  "model": "deepseek-coder-v2"
-}

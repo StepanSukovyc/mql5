@@ -1,9 +1,0 @@
-{
-  "symbol": "USDHKD_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Základní analýza ukazuje slabou pozitivní tendenci s několika svíčkovými formacemi signalizujícími pokles. RSI a MA hodnoty podporují tento pohyb.",
-  "timestamp": "2026-04-08T07:26:10.075148+00:00",
-  "model": "deepseek-coder-v2"
-}

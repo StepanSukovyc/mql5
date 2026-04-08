@@ -1,9 +1,0 @@
-{
-  "symbol": "FANG_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Růstový impuls podle svíčkových formací s potenciálem pro další pohyb. RSI indikuje pře продавану, ale MACD ukazuje silnou tendenci.",
-  "timestamp": "2026-04-08T06:28:41.191878+00:00",
-  "model": "deepseek-coder-v2"
-}

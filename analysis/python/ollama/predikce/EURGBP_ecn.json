@@ -1,9 +1,0 @@
-{
-  "symbol": "EURGBP_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršení makroekonomických indikátorů a potenciální ztráta podpory na RSI signalizuje riziko poklesu. Nicméně, SMA ukazuje stabilitu, což podporuje HOLD.",
-  "timestamp": "2026-04-08T06:08:31.349517+00:00",
-  "model": "deepseek-coder-v2"
-}

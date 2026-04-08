@@ -1,9 +1,0 @@
-{
-  "symbol": "GBPJPY_ecn",
-  "BUY": 30.0,
-  "SELL": 50.0,
-  "HOLD": 20.0,
-  "reasoning": "Riziko je centrálním faktorem. S rostoucími cenami kryptoměn a nespokojeností s výsledky na akciových trzích, se zvýšuje riziko poklesu GBP/JPY. Navzdory této předběžné analýze, stále existují signály podporující růst a je tedy nejistota o tom, jakým směrem se trh pohne.",
-  "timestamp": "2026-04-08T06:37:46.940121+00:00",
-  "model": "deepseek-coder-v2"
-}

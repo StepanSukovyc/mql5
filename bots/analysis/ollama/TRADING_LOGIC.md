@@ -5,7 +5,7 @@
 Komplexní event-driven trading systém monitoruje volnou marži a dělá inteligentní obchodní rozhodnutí. **Nově** běží paralelně nezávislý **Ollama Service** pro kontinuální generování predikcí pomocí lokálního AI modelu.
 
 **Hlavní proces (Gemini AI - nekonečný cyklus):**
-1. **Kontroluje kritické hodiny** - pokud je 23:00-23:30 CET/CEST, počká do 23:30 (bez analýz)
+1. **Kontroluje swap blok okno** - pokud je aktuální čas v intervalu 30 minut před a 30 minut po brokerem detekovaném swap rolloveru, počká do konce okna (bez analýz)
 2. **Monitoruje volnou marži** - kontroluje stav účtu
 3. **Rozhoduje se pružně**:
    - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
@@ -14,7 +14,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Pokud je `timestamp` validní a soubor není starší než limit `OLLAMA_PREDICTION_MAX_AGE_MINUTES` z `.env` (default 120 minut), použije se Ollama predikce
    - Pokud Ollama predikce chybí / je nevalidní / je starší než nastavený limit, provede se fallback na `ask_gemini_prediction`
 4. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
-5. **Kontroluje kritických hodin (znovu)** - pokud je trading signal v 23:00-23:30, zahodí ho a čeká
+5. **Kontroluje swap blok okno (znovu)** - pokud trading signal přijde v rollover okně, zahodí ho a čeká
 6. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
    - Gemini AI vybere **1 měnový pár**, rozhodne BUY/SELL, navrhne lot_size a take_profit
    - V promptu je explicitně swing styl (ne intraday), denní cíl zisků a poplatek 0.10 USD za 0.01 lotu
@@ -24,13 +24,21 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Ostatní obchody: take_profit se nepoužije
 8. **Vyhodnotí minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru při každém ticku monitoru, nejvýše jednou za minutu
+   - Běží pouze mimo swap blok okno
    - Vezme aktuální raw bilanci účtu `B` a spočítá referenční objem `VOLUME = ((int)(B / 500) + 1) * 0.01`
    - Pro každou otevřenou pozici vypočte čistý zisk `ZISK = profit + swap - fee`
    - Syntetický `fee` je `0.10 USD` za každých `0.01` lotu
    - Cílový profit `PCZ = (0.01 * L / VOLUME) * B`, minimum `PCZ` je `0.005`
    - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
    - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
-9. **Vyhodnotí denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
+9. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
+   - Běží během minutového account monitoru nejvýše jednou za minutu, ale pouze uvnitř swap blok okna
+   - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
+   - Pro každou spočítá čistý zisk `ZISK = profit + swap - fee`
+   - Syntetický `fee` je `0.10 USD` za každých `0.01` lotu
+   - Pokud `ZISK >= 0.10 USD`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
+   - Pokud je `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
+10. **Vyhodnotí denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
    - Použije realizovaný výsledek za předchozí uzavřený pražský den z MT5 deal historie včetně `profit`, `swap`, `commission` a `actual deal.fee`
    - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z uzavřených pozic referenčního dne
@@ -41,7 +49,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Do ztráty počítá i swap a syntetický fee `0.10 USD` za každých `0.01` lotu
    - Stavový soubor `trade_logs/loss_cleanup_state.json` brání opakovanému spuštění ve stejný pražský den i po restartu procesu
    - Pokud je `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáta jen zaloguje a nic nezavírá
-   - V čase 23:00-23:30 CET/CEST se cleanup nespouští
+   - V čase swap blok okna se cleanup nespouští
 9. **Provede obchod** - automaticky otevře pozici na MT5
 10. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
 11. **Ukončení** - Ctrl+C

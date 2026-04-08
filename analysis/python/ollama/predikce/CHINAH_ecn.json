@@ -1,9 +1,0 @@
-{
-  "symbol": "CHINAH_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Základní analýza ukazuje stabilitu s přijatelnou likviditou. Svíčkové formace a indikátory RSI a MA signalizují nejistotu s volatilitou.",
-  "timestamp": "2026-04-08T05:54:19.389195+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "USDJPY_ecn",
-  "BUY": 20.0,
-  "SELL": 75.0,
-  "HOLD": 5.0,
-  "reasoning": "Vysoká hodnota RSI a MA ukazují na silnou pozici. Nicméně cenový model svíček indikuje pokles.",
-  "timestamp": "2026-04-08T07:31:43.653618+00:00",
-  "model": "deepseek-coder-v2"
-}

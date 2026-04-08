@@ -1,9 +1,0 @@
-{
-  "symbol": "CADCHF_ecn",
-  "BUY": 20.0,
-  "SELL": 50.0,
-  "HOLD": 30.0,
-  "reasoning": "Zhoršení makroekonomických podmínek a slabá svíčková formační analýza signalizují nárůst rizika, ale stále existuje potenciál pro stabilizaci nebo lehký růst.",
-  "timestamp": "2026-04-08T05:45:36.241547+00:00",
-  "model": "deepseek-coder-v2"
-}

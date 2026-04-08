@@ -1,9 +1,0 @@
-{
-  "symbol": "CHFHUF_ecn",
-  "BUY": 20.0,
-  "SELL": 60.0,
-  "HOLD": 20.0,
-  "reasoning": "Při pohledu na grafy RSI a MA je vidět stoupající tlak prodlužovacích svíček, což naznačuje silnou poptávku. Nicméně, dlouhodobý trend ukazuje na pokles hodnoty, což vede k nejistotě.",
-  "timestamp": "2026-04-08T05:49:04.150027+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "USDSGD_ecn",
-  "BUY": 40.0,
-  "SELL": 20.0,
-  "HOLD": 40.0,
-  "reasoning": "Podle RSI a klouzavých průměrů má cenový model potenciál k růstu, ale také je zde střet s odpory. Riziko se tedy nachází mezi BUY a HOLD.",
-  "timestamp": "2026-04-08T07:41:15.639200+00:00",
-  "model": "deepseek-coder-v2"
-}

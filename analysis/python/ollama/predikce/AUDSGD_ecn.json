@@ -1,9 +1,0 @@
-{
-  "symbol": "AUDSGD_ecn",
-  "BUY": 20.0,
-  "SELL": 65.0,
-  "HOLD": 15.0,
-  "reasoning": "Růstové potenciály jsou omezená vlivem světových trhů a negativního tlaku na ceny. Historické trendy indikují pokles s ohledem na silnou opoziční hladinu.",
-  "timestamp": "2026-04-08T05:30:08.394486+00:00",
-  "model": "deepseek-coder-v2"
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "DXY_ecn",
-  "BUY": 40.0,
-  "SELL": 35.0,
-  "HOLD": 25.0,
-  "reasoning": "Růst technického indikátoru RSI a Moving Average sugerují potenciální zeslabení trendu poklesu. Nicméně, fundamentální analýza nepodporuje silný růst, což omezuje možnosti BUY.",
-  "timestamp": "2026-04-08T05:56:05.955594+00:00",
-  "model": "deepseek-coder-v2"
-}
