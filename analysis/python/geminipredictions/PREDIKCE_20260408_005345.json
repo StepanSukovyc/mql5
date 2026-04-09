@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDCZK_ecn",
-  "action": "SELL",
-  "lot_size": 0.08,
-  "take_profit": 23.20,
-  "reasoning": "Aktuální stav účtu je uspokojivý, margin_free je dostatečný. Nemám otevřenou pozici na USDCZK_ecn. Dle predikce má USDCZK_ecn 60% šanci na SELL. RSI na 1H a 4H timeframe je hluboko v přeprodané zóně, což naznačuje potenciální odraz nahoru. Nicméně, celkový trend je klesající. Nastavuji SELL s lot_size 0.08, abych omezil riziko, a take_profit na 23.20, což zohledňuje transakční náklady. Take profit je konzervativní, protože pozici chci držet déle. Upřednostňuji SELL, protože věřím v dlouhodobější klesající trend."
-}

@@ -1,10 +1,24 @@
 # Changelog
 
+## 2026-04-09 (Broker Rollover Detection Fallback)
+
+- **Added Manual Block-Window Fallback When Broker Rollover Detection Is Unavailable**
+  - `swap_rollover.py` now first tries to infer rollover from MT5 broker history and also recognizes closing deals carrying non-zero `swap`
+  - If broker history still does not expose a usable rollover timestamp, the trading lock and rollover cleanup now fall back to a manual `.env` interval defined by `SWAP_BLOCK_START_*` and `SWAP_BLOCK_END_*`
+  - Current fallback configuration is `22:30-23:30` and is used consistently by both the main trading lock and the rollover cleanup strategy
+
+## 2026-04-08 (Configurable Loss Cleanup Buffer)
+
+- **Made Loss Cleanup Safety Buffer Configurable And Set It To 2%**
+  - Added `LOSS_CLEANUP_BALANCE_BUFFER_PERCENT` to `.env` and `.env.example`
+  - Loss cleanup no longer uses a hardcoded 1% reserve; it now reads the configured percentage from environment
+  - Current configuration is set to `2`, so cleanup leaves a 2% raw-balance safety buffer before closing a losing position
+
 ## 2026-04-08 (Broker Swap Window Blocking)
 
 - **Moved Trading Block Window To Broker-Derived Swap Rollover Time**
-  - Added `swap_rollover.py` to detect rollover time from MT5 history deals and build a symmetric block window around it
-  - Trading lock now uses 30 minutes before and 30 minutes after detected rollover instead of fixed `23:00-23:30 CET/CEST`
+  - Added `swap_rollover.py` to detect rollover time from MT5 history deals and build the trading block window from broker timestamps when available
+  - Trading lock now prefers broker-derived rollover timing and otherwise uses the configured manual fallback interval from `.env`
   - Loss cleanup skips the same broker-derived rollover window for consistent behavior across strategies
 
 - **Added Separate Rollover Cleanup Alongside Original Minute Profit Cleanup**

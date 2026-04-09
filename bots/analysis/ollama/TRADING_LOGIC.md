@@ -5,7 +5,7 @@
 Komplexní event-driven trading systém monitoruje volnou marži a dělá inteligentní obchodní rozhodnutí. **Nově** běží paralelně nezávislý **Ollama Service** pro kontinuální generování predikcí pomocí lokálního AI modelu.
 
 **Hlavní proces (Gemini AI - nekonečný cyklus):**
-1. **Kontroluje swap blok okno** - pokud je aktuální čas v intervalu 30 minut před a 30 minut po brokerem detekovaném swap rolloveru, počká do konce okna (bez analýz)
+1. **Kontroluje swap blok okno** - nejdřív se pokusí odvodit rollover z broker MT5 historie; pokud to nejde, použije ruční `.env` interval `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*` a počká do konce okna (bez analýz)
 2. **Monitoruje volnou marži** - kontroluje stav účtu
 3. **Rozhoduje se pružně**:
    - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
@@ -33,6 +33,9 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
 9. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za minutu, ale pouze uvnitř swap blok okna
+   - Swap blok okno se bere primárně z broker timestampů v MT5 historii; pokud broker neposílá použitelný rollover deal, použije se ruční fallback interval z `.env`
+   - Detekce uznává i closing dealy s nenulovým `swap`, takže funguje i u brokerů, kteří swap zapisují až na uzavírací deal
+   - Aktuální fallback konfigurace je `22:30-23:30` UTC
    - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
    - Pro každou spočítá čistý zisk `ZISK = profit + swap - fee`
    - Syntetický `fee` je `0.10 USD` za každých `0.01` lotu
@@ -42,7 +45,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Běží během minutového account monitoru nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
    - Použije realizovaný výsledek za předchozí uzavřený pražský den z MT5 deal historie včetně `profit`, `swap`, `commission` a `actual deal.fee`
    - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z uzavřených pozic referenčního dne
-   - K tomuto realizovanému výsledku přičte jen záporný aktuální open P/L (`equity - raw_balance`) a odečte 1 % z aktuální bilance účtu; tím vznikne limit `Z`
+   - K tomuto realizovanému výsledku přičte jen záporný aktuální open P/L (`equity - raw_balance`) a odečte `LOSS_CLEANUP_BALANCE_BUFFER_PERCENT` % z aktuální bilance účtu; tím vznikne limit `Z` (default `2`)
    - Najde otevřenou ztrátovou pozici starší než 7 dní s nejvyšší ztrátou, která je stále menší než `Z`
    - Kandidáta navíc odmítne, pokud by po close spadl efektivní profit budget pod `0.00`
    - Pokud mají dva bezpeční kandidáti stejnou ztrátu, ponechá první nalezenou pozici
@@ -54,19 +57,19 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
 10. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
 11. **Ukončení** - Ctrl+C
 
-### Restricted Trading Hours (23:00-23:30 CET/CEST)
+### Swap Block Window
 
-Forex trh se v tomto období chová nepředvídatelně. systém tedy:
-- **Zastavuje se** (lock) každodenně od 23:00 do 23:30
+Forex trh se v rollover okně chová nepředvídatelně. Systém tedy:
+- **Zastavuje se** (lock) v brokerem odvozeném rollover okně, nebo ve fallback intervalu z `.env`
 - **Vypíná analýzu** - žádné stahování dat, žádné Gemini AI dotazy
 - **Blokuje obchody** - jakékoli signály jsou zahozeny
-- **Automaticky obnovuje** v 23:30 bez zásahu
+- **Automaticky obnovuje** na konci vypočteného okna bez zásahu
 
 Dvojitá kontrola zajišťuje bezpečnost:
-1. Na začátku cyklu: Pokud je restricted time → sleep na 30 minut
-2. Před obchodováním: Pokud je trading trigger v restricted time → zahodí signál a čeká
+1. Na začátku cyklu: Pokud je swap block window aktivní → čeká do konce okna
+2. Před obchodováním: Pokud trading trigger dorazí uvnitř swap block window → zahodí signál a čeká
 
-Stejné okno 23:00-23:30 CET/CEST platí i pro hodinovou cleanup strategii, takže v tomto čase neuzavírá žádné pozice ani v případě, že je dosažena její plánovaná minuta.
+Stejné vypočtené okno platí i pro cleanup strategie, takže v tomto čase neběží běžné obchodování ani loss cleanup. Pokud broker rollover čas nedokáže poskytnout, použije se fallback `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`.
 
 ## Ollama Service (Paralelní Proces)
 
@@ -283,9 +286,10 @@ Každý N-tý obchod (N = `GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá lot_s
 Hlavní skript, který koordinuje **nekonečný obchodní cyklus** se zásadou Forex market safety:
 - Inicializuje MT5 připojení a konfiguraci
 - Běží v nekonečné smyčce (while True)
-- **Kontroluje restricted trading hours** (23:00-23:30 CET/CEST)
-   - Pokud je v restricted hours → `wait_until_trading_allowed()` (sleep 30 minut, bez analýz)
-   - Pokud je trading trigger v restricted hours → zahodí signál a čeká do 23:30
+- **Kontroluje swap block window**
+   - Pokud broker MT5 historie vrátí použitelný rollover čas → blokuje se broker-derived okno
+   - Pokud ne → použije ruční fallback interval z `.env` (`SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`)
+   - Pokud je trigger uvnitř okna → zahodí signál a čeká do konce vypočteného okna
 - Běží v nekonečné smyčce (while True)
 - Každý cyklus: spouští account_monitor v background threadu
 - Čeká na signál překročení 20% marže
@@ -295,8 +299,8 @@ Hlavní skript, který koordinuje **nekonečný obchodní cyklus** se zásadou F
 - Ukončení: Ctrl+C
 
 **Klíčové funkce:**
-- `is_in_restricted_trading_hours()` - kontroluje, zda je čas v 23:00-23:30 CET/CEST
-- `wait_until_trading_allowed()` - počká do 23:30 bez jakýchkoli akcí (spí v 10-sec intervalech)
+- `is_in_restricted_trading_hours()` - kontroluje, zda je čas uvnitř broker-derived nebo fallback swap block window
+- `wait_until_trading_allowed()` - počká do konce aktuálního swap block window bez jakýchkoli akcí (spí v 10-sec intervalech)
 - `find_predictions_folder_for_current_hour()` - hledá existující predikce z aktuální hodiny
 - `process_existing_predictions()` - aplikuje filtrování na existující predikce
 - `main()` - hlavní orchestrační nekonečný cyklus
@@ -319,7 +323,7 @@ Monitoruje stav účtu v background threadu:
 Volitelná bezpečnostní strategie pro jednorázové denní odlehčení starých ztrátových pozic:
 - Čte runtime konfiguraci přímo z `.env`, takže ji lze za běhu zapnout, vypnout nebo přepnout mezi dry-run a live režimem
 - Vyhodnocuje se nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE`
-- Počítá `Z` z realizovaného výsledku za předchozí uzavřený pražský den, záporného aktuálního open P/L a 1 % bufferu z aktuální bilance
+- Počítá `Z` z realizovaného výsledku za předchozí uzavřený pražský den, záporného aktuálního open P/L a bufferu `LOSS_CLEANUP_BALANCE_BUFFER_PERCENT` % z aktuální bilance (default `2`)
 - Předchozí realizovaný výsledek bere ze všech dealů referenčního dne včetně `profit`, `swap`, `commission` a `actual deal.fee`
 - Pro diagnostiku dál počítá i `daily_clean_profit` z uzavřených pozic referenčního dne identifikovaných přes `position_id`
 - Prochází otevřené pozice starší než 7 dní a vybírá největší ztrátu menší než `Z`
@@ -389,9 +393,11 @@ Relevantní parametry pro risk management:
 - `TRADING_ACCOUNT_BALANCE_CAP=5000` určuje maximální balance, se kterou strategie počítá lot sizing a margin check
 - `PROFIT_CLEANUP_STRATEGY_ENABLED=true` zapíná minutovou profit cleanup strategii
 - `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání profitních pozic
+- `SWAP_BLOCK_START_HOUR=22`, `SWAP_BLOCK_START_MINUTE=30`, `SWAP_BLOCK_END_HOUR=23`, `SWAP_BLOCK_END_MINUTE=30` definují ruční fallback swap blok okna, pokud MT5 historie neposkytne použitelný rollover čas
 - `LOSS_CLEANUP_STRATEGY_ENABLED=true` zapíná denní cleanup strategii
 - `LOSS_CLEANUP_STRATEGY_HOUR=12` určuje hodinu pražského času, po které se má cleanup vyhodnotit
 - `LOSS_CLEANUP_STRATEGY_MINUTE=45` určuje minutu pražského času, po které se má cleanup vyhodnotit
+- `LOSS_CLEANUP_BALANCE_BUFFER_PERCENT=2` určuje procento aktuální raw bilance, které má loss cleanup nechat jako rezervu před zavřením ztrátové pozice
 - `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání pozic
 - Pokud je skutečný balance nižší než strop, žádná rezerva se neuplatní
 

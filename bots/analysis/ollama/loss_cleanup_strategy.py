@@ -21,7 +21,7 @@ DEFAULT_ENABLED = True
 DEFAULT_RUN_HOUR = 12
 DEFAULT_RUN_MINUTE = 45
 DEFAULT_DRY_RUN = True
-ACCOUNT_BALANCE_BUFFER_RATIO = 0.01
+DEFAULT_BALANCE_BUFFER_PERCENT = 2.0
 MIN_POSITION_AGE = timedelta(days=7)
 FEE_PER_001_LOT = 0.10
 LOSS_CLEANUP_STATE_FILE = "loss_cleanup_state.json"
@@ -139,6 +139,29 @@ def _get_strategy_run_minute() -> int:
 		f"pouzivam {DEFAULT_RUN_MINUTE}"
 	)
 	return DEFAULT_RUN_MINUTE
+
+
+def _get_balance_buffer_percent() -> float:
+	raw_value = _load_dotenv_value("LOSS_CLEANUP_BALANCE_BUFFER_PERCENT")
+	if raw_value is None:
+		return DEFAULT_BALANCE_BUFFER_PERCENT
+
+	try:
+		percent = float(raw_value)
+		if percent >= 0:
+			return percent
+	except ValueError:
+		pass
+
+	print(
+		f"⚠️  Nevalidni LOSS_CLEANUP_BALANCE_BUFFER_PERCENT='{raw_value}', "
+		f"pouzivam {DEFAULT_BALANCE_BUFFER_PERCENT:g}"
+	)
+	return DEFAULT_BALANCE_BUFFER_PERCENT
+
+
+def _get_balance_buffer_ratio() -> float:
+	return _get_balance_buffer_percent() / 100.0
 
 
 def _get_service_folder() -> Optional[Path]:
@@ -664,7 +687,8 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 		daily_realized_profit = round(_calculate_daily_realized_profit(deals), 2)
 		current_open_profit = _calculate_current_open_profit(raw_balance, equity)
 		effective_profit_budget = _calculate_effective_profit_budget(daily_realized_profit, current_open_profit)
-		balance_buffer = round(raw_balance * ACCOUNT_BALANCE_BUFFER_RATIO, 2)
+		balance_buffer_percent = _get_balance_buffer_percent()
+		balance_buffer = round(raw_balance * _get_balance_buffer_ratio(), 2)
 		z_limit = round(effective_profit_budget - balance_buffer, 2)
 		closing_deals_count = sum(
 			1
@@ -703,7 +727,7 @@ def run_loss_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = No
 				"   Reference-day snapshot includes closing deals up to "
 				f"{latest_counted_deal_time.astimezone(PRAGUE_TZ).strftime('%Y-%m-%d %H:%M:%S')} Prague time"
 			)
-		print(f"   Balance buffer (1%): {balance_buffer:.2f}")
+		print(f"   Balance buffer ({balance_buffer_percent:g}%): {balance_buffer:.2f}")
 		print(f"   Z limit (after open P/L and buffer): {z_limit:.2f}")
 
 		if z_limit <= 0:

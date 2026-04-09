@@ -37,8 +37,10 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Přepínač `PROFIT_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
 9. **Swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`):
   - Běží v account monitoru každou minutu, ale pouze uvnitř swap blokovacího okna
-  - Swap blokovací okno se odvozuje z broker server time podle detekovaného času swap rolloveru z MT5 historie
-  - Okno je symetrické: 30 minut před rolloverem a 30 minut po rolloveru
+  - Swap blokovací okno se nejdřív pokouší odvodit z broker času podle MT5 historie dealů
+  - Detekce umí použít i closing dealy, na kterých broker zapisuje nenulový `swap`, i když neposílá samostatný rollover deal
+  - Pokud broker historie použitelný rollover čas nedá, použije se ruční fallback interval z `.env` přes `SWAP_BLOCK_START_*` a `SWAP_BLOCK_END_*`
+  - Aktuální fallback je `22:30-23:30` UTC a používá se stejně pro lock i rollover cleanup
   - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
   - Spočítá čistý zisk `ZISK = profit + swap - fee`, kde `fee = 0.10 USD` za každých `0.01` lotu
   - Pokud je čistý zisk alespoň `0.10 USD`, pozice je vhodná k uzavření kvůli vyhnutí se swapu
@@ -50,7 +52,7 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Tento údaj není totéž jako aktuální floating P/L otevřených pozic v panelu Obchodování
   - Modelový poplatek `0.10 USD` za každých `0.01` lotu se nepoužívá pro `daily_realized_profit`; používá se jen při hodnocení ztráty kandidátní otevřené pozice
   - K realizovanému výsledku z předchozího dne přičte jen záporný aktuální open P/L (`equity - raw_balance`), aby nezavíral další ztrátu v momentě, kdy jsou otevřené pozice už celkově v mínusu
-  - Od takto upraveného bezpečného rozpočtu odečte 1 % z aktuální bilance účtu a získá limit `Z`
+  - Od takto upraveného bezpečného rozpočtu odečte `LOSS_CLEANUP_BALANCE_BUFFER_PERCENT` % z aktuální bilance účtu a získá limit `Z` (default `2`)
   - Z otevřených pozic starších než 7 dní najde největší ztrátovou pozici, jejíž ztráta včetně swapu a poplatku `0.10 USD` za každých `0.01` lotu je stále menší než `Z`
   - Zároveň kandidáta odmítne, pokud by po jeho uzavření klesl tento bezpečný rozpočet pod `0.00`
   - Pokud mají dva bezpeční kandidáti stejnou ztrátu, ponechá první nalezenou pozici
@@ -63,10 +65,10 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
 13. **Vrátí se na krok 3** (restart monitoring)
 
 **Automatické pozastavení v swap blokovacím okně:**
-- Blokace se řídí broker server time, ne lokálním časem počítače ani fixně Prague `23:00-23:30`
-  - Systém se zastaví 30 minut před detekovaným swap rolloverem a obnoví se 30 minut po něm
+- Blokace se řídí broker-derived časem z MT5 historie; když broker rollover čas neposkytne, použije se ruční fallback okno z `.env`
+  - Systém se zastaví v brokerem odvozeném okně, nebo ve fallback intervalu `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`
   - Jakákoli připravená rozhodnutí se v tomto okně zahodí
-  - Pokud MT5 historie rollover čas neposkytne, lze použít ruční fallback přes `.env`
+  - Aktuální fallback konfigurace je `22:30-23:30` UTC
 
 **Ukončení:** Ctrl+C
 
@@ -150,13 +152,17 @@ PROFIT_CLEANUP_STRATEGY_DRY_RUN=true
 SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED=true
 SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN=true
 
-# Optionalni fallback pro detekci swap rolloveru
-# SWAP_ROLLOVER_HOUR=23
-# SWAP_ROLLOVER_MINUTE=0
+# Manualni fallback block window, kdyz MT5 historie neposkytne pouzitelny rollover cas
+SWAP_BLOCK_START_HOUR=22
+SWAP_BLOCK_START_MINUTE=30
+SWAP_BLOCK_END_HOUR=23
+SWAP_BLOCK_END_MINUTE=30
 # SWAP_ROLLOVER_LOOKBACK_DAYS=14
 # SWAP_BLOCK_HALF_WINDOW_MINUTES=30
 LOSS_CLEANUP_STRATEGY_ENABLED=true
+LOSS_CLEANUP_STRATEGY_HOUR=12
 LOSS_CLEANUP_STRATEGY_MINUTE=45
+LOSS_CLEANUP_BALANCE_BUFFER_PERCENT=2
 LOSS_CLEANUP_STRATEGY_DRY_RUN=true
 
 # Ollama service konfigurace (nezávislé predikce)
@@ -164,6 +170,8 @@ OLLAMA_ENABLED=true
 OLLAMA_URL=http://localhost:11434/api/generate
 OLLAMA_MODEL=deepseek-coder-v2
 ```
+
+Rucni fallback okno `SWAP_BLOCK_START_*` az `SWAP_BLOCK_END_*` je interpretovano v UTC, stejne jako casy vypisovane v runtime logu trading locku a rollover cleanupu.
 
 **LOOKBACK_PERIODS** - Počet posledních period, které se mají stahovat pro každý timeframe. Výchozí 30.
 
@@ -263,6 +271,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup_daily_deals.csv` - Diagnostický snapshot všech dealů, které MT5 API při cleanup běhu skutečně vrátilo, včetně `actual_fee`, `modeled_fee` a `realized_component`
 - Dokud testujete, nechte `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
 - Dokud testujete, nechte `LOSS_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
+- `LOSS_CLEANUP_BALANCE_BUFFER_PERCENT=2` určuje, jak velkou část aktuální raw bilance má loss cleanup ponechat jako bezpečnostní rezervu před zavřením ztrátové pozice
 
 ## Poznamky
 

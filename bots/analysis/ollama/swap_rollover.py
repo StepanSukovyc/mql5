@@ -12,6 +12,10 @@ import MetaTrader5 as mt5
 
 DEFAULT_ROLLOVER_HOUR = 23
 DEFAULT_ROLLOVER_MINUTE = 0
+DEFAULT_MANUAL_BLOCK_START_HOUR = 22
+DEFAULT_MANUAL_BLOCK_START_MINUTE = 30
+DEFAULT_MANUAL_BLOCK_END_HOUR = 23
+DEFAULT_MANUAL_BLOCK_END_MINUTE = 30
 DEFAULT_LOOKBACK_DAYS = 14
 DEFAULT_BLOCK_MINUTES = 30
 CACHE_TTL_MINUTES = 15
@@ -82,6 +86,70 @@ def _get_rollover_override() -> Optional[SwapRolloverTime]:
 	)
 
 
+def _get_manual_block_time_component(name: str, default: int) -> int:
+	value = _get_env_int(name, default)
+	return max(0, min(59 if "MINUTE" in name else 23, value))
+
+
+def _get_manual_block_window(now_utc: datetime) -> SwapBlockWindow:
+	start_hour = _get_manual_block_time_component("SWAP_BLOCK_START_HOUR", DEFAULT_MANUAL_BLOCK_START_HOUR)
+	start_minute = _get_manual_block_time_component("SWAP_BLOCK_START_MINUTE", DEFAULT_MANUAL_BLOCK_START_MINUTE)
+	end_hour = _get_manual_block_time_component("SWAP_BLOCK_END_HOUR", DEFAULT_MANUAL_BLOCK_END_HOUR)
+	end_minute = _get_manual_block_time_component("SWAP_BLOCK_END_MINUTE", DEFAULT_MANUAL_BLOCK_END_MINUTE)
+
+	base_date = now_utc.date()
+	candidate_windows: list[SwapBlockWindow] = []
+	for day_offset in (-1, 0, 1):
+		candidate_date = base_date + timedelta(days=day_offset)
+		start_utc = datetime(
+			candidate_date.year,
+			candidate_date.month,
+			candidate_date.day,
+			start_hour,
+			start_minute,
+			tzinfo=timezone.utc,
+		)
+		end_utc = datetime(
+			candidate_date.year,
+			candidate_date.month,
+			candidate_date.day,
+			end_hour,
+			end_minute,
+			tzinfo=timezone.utc,
+		)
+		if end_utc <= start_utc:
+			end_utc += timedelta(days=1)
+
+		rollover_at_utc = start_utc + ((end_utc - start_utc) / 2)
+		candidate_windows.append(
+			SwapBlockWindow(
+				rollover_time=SwapRolloverTime(
+					hour=rollover_at_utc.hour,
+					minute=rollover_at_utc.minute,
+					source="env_manual_window",
+					sample_size=0,
+					observed_at_utc=None,
+				),
+				rollover_at_utc=rollover_at_utc,
+				start_utc=start_utc,
+				end_utc=end_utc,
+			)
+		)
+
+	for window in candidate_windows:
+		if window.contains(now_utc):
+			return window
+
+	return min(
+		candidate_windows,
+		key=lambda window: min(
+			abs((window.start_utc - now_utc).total_seconds()),
+			abs((window.end_utc - now_utc).total_seconds()),
+			abs((window.rollover_at_utc - now_utc).total_seconds()),
+		),
+	)
+
+
 def _get_deal_timestamp_utc(deal: Any) -> Optional[datetime]:
 	time_msc = int(getattr(deal, "time_msc", 0) or 0)
 	if time_msc > 0:
@@ -108,7 +176,15 @@ def _is_rollover_deal(deal: Any) -> bool:
 		getattr(mt5, "DEAL_TYPE_INTEREST", -1002),
 		getattr(mt5, "DEAL_TYPE_BALANCE", -1003),
 	}
-	return abs(float(getattr(deal, "swap", 0.0) or 0.0)) > 0 and deal_type in charge_like_types
+	deal_entry = int(getattr(deal, "entry", -1) or -1)
+	closing_entries = {
+		getattr(mt5, "DEAL_ENTRY_OUT", -1004),
+		getattr(mt5, "DEAL_ENTRY_OUT_BY", -1005),
+		getattr(mt5, "DEAL_ENTRY_INOUT", -1006),
+	}
+	if abs(float(getattr(deal, "swap", 0.0) or 0.0)) <= 0:
+		return False
+	return deal_type in charge_like_types or deal_entry in closing_entries
 
 
 def detect_swap_rollover_time_from_deals(deals: Iterable[Any]) -> Optional[SwapRolloverTime]:
@@ -192,6 +268,8 @@ def get_swap_block_window(
 ) -> SwapBlockWindow:
 	resolved_now = _normalize_now(now_utc)
 	resolved_rollover_time = rollover_time or detect_swap_rollover_time(now_utc=resolved_now)
+	if rollover_time is None and resolved_rollover_time.source != "mt5_rollover_history":
+		return _get_manual_block_window(resolved_now)
 	resolved_block_minutes = block_minutes or _get_env_int("SWAP_BLOCK_HALF_WINDOW_MINUTES", DEFAULT_BLOCK_MINUTES)
 
 	base_date = resolved_now.date()

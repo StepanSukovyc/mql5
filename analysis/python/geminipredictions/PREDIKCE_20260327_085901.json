@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 85.50,
-  "reasoning": "USOIL_ecn vykazuje smíšené signály. Týdenní RSI je překoupené (79.58), což naznačuje potenciální pullback. Nicméně denní RSI (64.49) indikuje pokračující býčí momentum. Aktuální cena je nad denním a 4H MA, což indikuje pozitivní trend. Poslední denní svíčka je býčí. Zohledňuji současnou volatilitu a protichůdné signály napříč různými časovými rámci. Preferuji BUY, protože cena ropy má tendenci růst s ohledem na konflikt na Blízkém východě. Stanovuji take_profit na 85.50 USD, což se mi jeví jako reálný cíl vzhledem k současné situaci a dlouhodobému uptrendu. Transakční poplatek za 0.02 lotu je 0.20 USD, což je zanedbatelné. Navíc, USOIL_ecn nemám aktuálně v otevřených pozicích, což zajišťuje diverzifikaci. Můj účet neutrpí takovou ztrátu, pokud tato pozice půjde proti mě."
-}

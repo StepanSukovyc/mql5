@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSGD_ecn",
-  "action": "BUY",
-  "lot_size": 0.05,
-  "take_profit": 1.45,
-  "reasoning": "Obchod #57 je řízený Gemini, takže používám lot_size a take_profit. EURSGD_ecn má nejlepší BUY predikci (60%). Základní analýza indikuje potenciál růstu. Měnový pár nemám v portfoliu a diverzifikace je důležitá. Při lot_size 0.05 je poplatek 0.50 USD. Realistický take_profit je 1.45. Riziko je nízké vzhledem k nastavenému lot_size."
-}

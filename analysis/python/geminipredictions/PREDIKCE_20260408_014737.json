@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "US100_ecn",
-  "action": "BUY",
-  "lot_size": 0.05,
-  "take_profit": 25200.0,
-  "reasoning": "US100 má na denní bázi rostoucí trend, i když na krátkodobých timeframech je překoupený. Poslední hodinová svíčka ukazuje velký skok. Na účtu nemáme žádnou otevřenou pozici na US100_ecn. Zvažujeme BUY s take_profit 25200.0. Lot size je nastaven na 0.05, abychom minimalizovali riziko vzhledem k aktuálnímu stavu účtu."
-}

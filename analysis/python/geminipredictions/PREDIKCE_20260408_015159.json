@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XAGUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 77.45,
-  "reasoning": "Pořadí obchodu je #94, což znamená, že se jedná o plně řízený obchod Gemini. Proto je důležité navrhnout take_profit. XAGUSD_ecn vykazuje silný uptrend na dlouhodobých časových rámcích, i když je krátkodobě překoupený (RSI 1h = 72.45). Poslední hodinová svíčka ukazuje na silný nákupní tlak.  Diverzifikace je zajištěna, protože XAGUSD_ecn není v současnosti otevřené pozici. Potenciální zisk je 100 USD minus transakční poplatek 0.1 USD (celkem 99.9 USD). Marže je dostatečná."
-}

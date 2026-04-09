@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XCUUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 7.5,
-  "reasoning": "Based on the available predictions, XCUUSD_ecn is a strong SELL candidate with 100% probability. This indicates a potentially significant downward trend. Although I do not have open position on this pair, based on risk management, the lot_size should be 0.01. It makes sense economically."
-}

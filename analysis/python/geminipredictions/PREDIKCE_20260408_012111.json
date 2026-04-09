@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "GBPJPY_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 188.00,
-  "reasoning": "GBPJPY má predikci 100% SELL. Aktuálně nemám otevřenou pozici v GBPJPY, takže diverzifikuji portfolio. I když můj účet má dostatečnou marži, volím konzervativní lot size 0.01 kvůli celkové expozici a transakčním nákladům. Realistický take profit je 188.00 s ohledem na volatilitu GBPJPY a denní zisky."
-}

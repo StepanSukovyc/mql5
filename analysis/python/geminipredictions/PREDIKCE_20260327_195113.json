@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSGD_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 1.465,
-  "reasoning": "EURSGD_ecn má podle predikce silný potenciál pro růst. BUY má 60% pravděpodobnost. Aktuálně nemám otevřenou pozici v EURSGD_ecn, což přispívá k diverzifikaci portfolia. Lot size 0.02 je navržen tak, aby byl v souladu s risk managementem a dostupnou marží. Transakční poplatek bude 0.20 USD. Take profit 1.465 je rozumný cíl s ohledem na analýzu a zohledňuje transakční náklady, přičemž stále ponechává prostor pro zisk."
-}

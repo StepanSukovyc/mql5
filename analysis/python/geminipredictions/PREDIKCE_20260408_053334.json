@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDMXN_ecn",
-  "action": "BUY",
-  "lot_size": 0.12,
-  "take_profit": 17.65,
-  "reasoning": "USDMXN_ecn has a strong BUY signal (60%). Current price is 17.4969, and the 1H and 4H RSI are deeply oversold, signaling a likely upward correction. Daily and weekly RSI are neutral, but monthly is just below 50. While the current price is below the MA on most timeframes, these oversold conditions suggest a likely bounce. I'm recommending a lot size of 0.12 and a take profit at 17.65. This aligns with my swing trading style and diversifies the portfolio as I don't currently have a USDMXN_ecn position open."
-}

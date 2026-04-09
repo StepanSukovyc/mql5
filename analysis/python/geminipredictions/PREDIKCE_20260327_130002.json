@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "CHFZAR_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 22.50,
-  "reasoning": "Analýza aktuálních otevřených pozic ukazuje, že CHFZAR_ecn je ztrátová pozice. Doporučuji otevřít další BUY pozici s cílem snížit průměrnou cenu, pokud by trh šel proti nám, a potenciálně ziskovat z možného odrazu. Dle dostupných predikcí, CHFZAR_ecn má BUY >= 35%. Vzhledem k tomu, že účet má dostatečnou marži, je možné otevřít další pozici. Navrhovaný take_profit je 22.50, což je realistický cíl a zohledňuje transakční náklady. Preference symbolů, které ještě nemám v otevřených pozicích, byla ignorována, neboť se jedná o plnění pokynu ke snížení průměrné ceny v případě ztrátové pozice. Důvodem k opětovnému vstupu do CHFZAR_ecn je fakt, že aktuální ztráta z této pozice je -33.91 USD. Hodnota aktuálního účtu je 2774.03 USD. Tedy ztráta této pozice je přibližně 1,22 % hodnoty účtu. To není více než 15 %, tudíž doporučuji otevřít tuto pozici a snížit tak průměrnou cenu."
-}

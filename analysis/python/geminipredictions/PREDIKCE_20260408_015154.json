@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XAGUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.06,
-  "take_profit": 78.50,
-  "reasoning": "Jelikož se jedná o 94. obchod v pořadí, bude plně řízen Gemini. To znamená, že nastavujeme lot_size a take_profit. Aktuální otevřené pozice nezahrnují XAGUSD_ecn, čímž splňujeme požadavek na diverzifikaci. Podle predikcí má XAGUSD_ecn 60% šanci na BUY. I když je RSI na 1H v překoupené zóně, vyšší timeframe ukazují potenciál pro pokračování růstu. Poslední hodinová svíčka naznačuje silný nákupní tlak. Nastavujeme lot_size na 0.06, abychom neriskovali příliš velkou částku účtu (margin_free = 822.01). Transakční poplatek činí 0.60 USD. Take profit na 78.50 je realistický cíl s ohledem na uptrend."
-}

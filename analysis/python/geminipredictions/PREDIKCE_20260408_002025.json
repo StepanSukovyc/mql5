@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "BTCUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 70000.0,
-  "reasoning": "Obchod #77 je plně řízen Gemini. BTCUSD prolomil denn\u00ed MA a 4H RSI roste, co\u017e nazna\u010duje b\u00fd\u010d\u00ed momentum. Vybraný symbol nemám aktuálně v portfoliu. Navrhovaný take_profit je realistický vzhledem k aktuální volatilitě BTCUSD a cílí na swingový zisk. Volba BUY je silnější než SELL (55% vs. 25%)."
-}

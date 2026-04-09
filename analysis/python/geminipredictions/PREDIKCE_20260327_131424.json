@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDNOK_ecn",
-  "action": "SELL",
-  "lot_size": 0.07,
-  "take_profit": 10.45,
-  "reasoning": "Analýza páru USDNOK_ecn ukazuje silný signál k prodeji. Model predikuje 100% pravděpodobnost SELL. Aktuálně nemám otevřenou pozici v USDNOK_ecn. Zvolený lot size 0.07 je konzervativní a minimalizuje riziko vzhledem k celkovému stavu účtu. Take profit 10.45 je realistický s ohledem na aktuální cenové pohyby a zajistí, že i po započtení poplatků (0.70 USD) bude obchod ziskový."
-}

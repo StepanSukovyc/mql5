@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XAGUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 77.45,
-  "reasoning": "Vybrán symbol XAGUSD_ecn. Důvodem je vysoká pravděpodobnost BUY (60%). Symbol aktuálně nemám v portfoliu, což přispívá k diverzifikaci. I když je RSI na 1H timeframe v p\u0159ekoupen\u00e9 z\u00f3n\u011b, vy\u0161\u0161\u00ed timeframe nazna\u010duj\u00ed pokra\u010duj\u00edc\u00ed b\u00fd\u010d\u00ed trend. Stanovení lot_size na 0.01 minimalizuje riziko s ohledem na volnou marži. Take profit 77.45 zohledňuje transakční náklady."
-}

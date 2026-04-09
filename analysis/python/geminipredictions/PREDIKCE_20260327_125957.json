@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "GBPCHF_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 1.1145,
-  "reasoning": "Aktuální stav účtu vykazuje equity 2773.97 USD a margin_free 1233.73 USD. Otevřené pozice vykazují ztráty, přičemž největší ztráty jsou na páru NGAS_ecn. Diverzifikace je klíčová, proto se vyhneme otevírání dalších pozic na již obchodovaných symbolech, pokud to není nezbytné (ztráta větší než 15 % equity). Z dostupných predikcí vybírám GBPCHF_ecn s doporučením SELL (60%). Technická analýza popisuje vysoké hodnoty RSI a MA, což implikuje potenciál růstu, ale zhoršené fundamentální podmínky a klesající ceny měnového páru vedou k SELL. Volume 0.01 s take_profit 1.1145, bere v úvahu, aby po odečtení poplatků (0.10 USD) dával obchod ekonomický smysl s ohledem na swing styl obchodování (držení pozice několik dní). Take profit jsem nastavil konzervativně, aby se maximalizovala šance na jeho dosažení, a tím se generovaly zisky na denní bázi. Současně, konzervativní nastavení lot size je bráno v úvahu k minimalizaci rizika vzhledem ke ztrátovým pozicím."
-}

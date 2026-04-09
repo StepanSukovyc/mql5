@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "UKOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 88.50,
-  "reasoning": "Nemám žádné otevřené pozice na UKOIL_ecn. Predikce indikuje 55% šanci na BUY. Cena UKOIL roste, indikátory RSI signalizují překoupenost, ale MA ukazují rostoucí trend. Nastavuji BUY s malým lot_size (0.02), abych minimalizoval riziko vzhledem k překoupeným podmínkám. Take_profit 88.50 je realistický cíl s ohledem na současný trend. Po odečtení transakčních nákladů (0.20 USD) bude zisk stále ekonomicky zajímavý. Beru ohled na transakční náklady. Dává ekonomický smysl průběžně generovat zisky na denní bázi, i když jsem swing obchodník."
-}

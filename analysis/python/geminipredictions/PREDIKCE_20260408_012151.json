@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURAUD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 1.63,
-  "reasoning": "EURAUD_ecn má podle predikce 65% šanci na SELL. Vzhledem k riziku a snaze o diverzifikaci volím lot_size 0.01. Aktuálně nemám otevřenou pozici na EURAUD_ecn. Take profit nastavuji realisticky, s ohledem na transakční poplatek 0.10 USD, a s ohledem na swing styl obchodování. Dle predikce směřuje trh dolů."
-}

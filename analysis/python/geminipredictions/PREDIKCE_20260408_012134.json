@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "NZDUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.06,
-  "take_profit": 0.618,
-  "reasoning": "Pořadí obchodu #82 je sudé, tudíž obchod bude plně řízen Gemini (lot + take_profit). Symbol NZDUSD_ecn má predikci BUY s 60% pravděpodobností. Hodinový graf vykazuje překoupenost (RSI 80.07), ale poslední hodinová svíčka ukazuje na silný nárůst ceny. Denní timeframe je neutrální (RSI 46.34).  MA na 1H je pod aktuální cenou. Beru v úvahu potenciální pullback vzhledem k překoupenosti na 1H, ale věřím v pokračování uptrendu. Preferuji tento symbol, protože nemám otevřenou pozici na NZDUSD_ecn. Dále zvažuji diverzifikaci portfolia a vyhýbám se otevírání nových pozic na symbolech, kde již mám otevřené pozice a ztráta nepřesahuje 15 % equity účtu.  Lot size 0.06 je zvolen s ohledem na margin free (1561.18) a přijatelnou úroveň rizika. Take profit 0.618 je realistický cíl s ohledem na aktuální volatilnost a potenciální zisk po odečtení poplatků."
-}

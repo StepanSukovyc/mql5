@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "SELL",
-  "lot_size": 0.05,
-  "take_profit": 100.0,
-  "reasoning": "Účet je v zisku. Dávám přednost symboům které nemám v otevřených pozicích (diverzifikace portfolia). USOIL je vhodný kandidát s ohledem na SELL predikci (45%). RSI na t\u00fddenn\u00ed b\u00e1zi je ve stavu p\u0159ekoupenosti, což podporuje SELL. Aktuální cena se pohybuje kolem 105.619, take_profit nastavuji realisticky na úroveň 100 USD s ohledem na transakční náklady (5 * 0.10 = 0.50 USD) a potenciální zisk v dlouhodobějším horizontu. Lot size 0.05 odpovídá mému risk managementu a stavu účtu. Podmínky jsou vhodné pro spekulativní swing obchod."
-}

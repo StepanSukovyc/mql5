@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 85.50,
-  "reasoning": "Aktuální stav účtu umožňuje otevření pozice s menším rizikem. V otevřených pozicích nemám USOIL_ecn. Predikce naznačuje, že USOIL_ecn má potenciál k růstu (BUY: 50%). Weekly RSI je sice overbought, ale daily RSI je 64.49, což indikuje continued bullish momentum. Current price is above daily and 4H MA, which indicates positive trend. I když je Weekly RSI overbought (79.58), což naznačuje potenciální pullback, beru v úvahu i short supply from middle east. Take profit je nastaven na 85.50, což je realistický cíl pro swingový obchod."
-}

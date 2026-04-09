@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDSEK_ecn",
-  "action": "BUY",
-  "lot_size": 0.05,
-  "take_profit": 10.8,
-  "reasoning": "Účet má otevřené pozice s poměrně velkými ztrátami. Preferuji diverzifikaci, a proto vybírám měnový pár, který aktuálně v otevřených pozicích nemám. USDSEK_ecn vykazuje silné signály k nákupu (BUY: 55 %). Cena je v uptrendu na krátkodobých timeframech, týdenní a měsíční data naznačují možný prostor pro další růst. RSI je blízko překoupené oblasti, ale ne v ní, takže očekávám pokračování růstu. S ohledem na swing obchod, realistický take_profit a transakční náklady (0.5 USD), navrhuji take_profit na úrovni 10.8. Současná cena je kolem 10.65, což dává potenciál pro rozumný zisk."
-}

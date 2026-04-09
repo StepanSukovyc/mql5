@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSGD_ecn",
-  "action": "SELL",
-  "lot_size": 0.06,
-  "take_profit": 1.4420,
-  "reasoning": "EURSGD_ecn has a strong SELL signal (65%) based on fundamental factors and RSI micro-formations, indicating weakness in price movement. MA indicators also signal a potential downward move. No existing positions for this symbol. Given margin free of 895.44 USD, I recommend selling lot size of 0.06. Adjusted take profit to make the trade economic sense based on transaction costs, target price is 1.4420."
-}

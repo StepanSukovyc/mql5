@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.04,
-  "take_profit": 85.50,
-  "reasoning": "Obchod #45 je řízen Gemini, takže je třeba lot i TP. USOIL_ecn má BUY 50%, což je nejvyšší ze všech kandidátů. Zároveň, ačkoli týdenní RSI je překoupené, denní RSI naznačuje pokračující růstový trend. Aktuální cena je nad denním i 4H MA, což indikuje pozitivní trend. S ohledem na aktuální volnou marži (660.58 USD) a poplatek 0.1 USD za 0.01 lot, je doporučená velikost lotu 0.04, protože se zdá rozumná z hlediska risk managementu. Realistický Take Profit je nastaven na 85.50, což by mělo přinést dostatečný zisk s ohledem na transakční náklady. Diverzifikace je zde podpořena, protože USOIL_ecn není v aktuálních otevřených pozicích."
-}

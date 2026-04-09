@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDCAD_ecn",
-  "action": "BUY",
-  "lot_size": 0.08,
-  "take_profit": 1.365,
-  "reasoning": "Obchod #57 není plně řízen Gemini. USD je v uptrendu vůči CAD. Predikce USDCAD_ecn má BUY s 60% pravděpodobností. Cena je nad MA na 1h, 4h a day timeframe. i když je RSI v překoupené zóně na 4h a day timeframe, celkově se zdá trend rostoucí. Preferuji BUY s ohledem na uptrend. Navrhuji lot_size 0.08 s TP 1.365, který zohledňuje poplatek 0.80 USD (0.08 lot * 10 USD/lot) a potenciální zisk, který dává smysl pro swingový obchod s aktuálním stavem účtu. Na symbolu nemáme otevřenou pozici."
-}

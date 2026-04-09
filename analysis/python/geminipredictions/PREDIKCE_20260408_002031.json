@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XAUUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 2385.00,
-  "reasoning": "Analýza pro XAUUSD (zlato) ukazuje na převahu nákupních signálů v krátkodobém horizontu, přičemž RSI na 4H grafu směřuje vzhůru, ale blíží se překoupené zóně. Denní RSI je neutrální. Měsíční RSI je vysoké, což naznačuje potenciál pro korekci. Cena je výrazně nad měsíčním MA, což indikuje dlouhodobý uptrend, ale i možnost pullbacku. Nedávný nárůst ceny ukazuje na nákupní tlak, ale opatrnost je na místě kvůli překoupenosti na měsíční bázi. Aktuální stav účtu umožňuje otevřít pozici o velikosti 0.02 lot s realistickým take_profit na úrovni 2385.00 USD, který zohledňuje transakční náklady (0.20 USD) a potenciální zisk. Preferuji XAUUSD, protože ho nemám v otevřených pozicích, což přispívá k diverzifikaci portfolia."
-}

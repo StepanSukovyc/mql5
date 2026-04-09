@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSGD_ecn",
-  "action": "BUY",
-  "lot_size": 0.06,
-  "take_profit": 1.458,
-  "reasoning": "Obchod #57 je plně řízený obchod (každý 3.). EURSGD_ecn má predikci BUY 60% a zdůvodnění indikuje potenciál pro růst ceny dle svíčkových formací a RSI indikátoru, historické hodnoty MA také podporují tento pohyb. Vzhledem k balanci účtu a marži, lot size 0.06 je rozumná hodnota pro řízení rizika. Aktuálně nemám žádnou otevřenou pozici v EURSGD_ecn, takže je dodržena diverzifikace portfolia. Take_profit byl nastaven realisticky vzhledem k predikcím a historickým datům."
-}

@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "SELL",
-  "lot_size": 0.05,
-  "take_profit": 94.00,
-  "reasoning": "Momentálně mám otevřenou SELL pozici na USOIL_ecn, ale ta je zisková.  Analýza predikcí na USOIL_ecn indikuje silný prodejní signál (SELL: 65%). Cena se pohybuje pod klíčovými klouzavými průměry na různých časových rámcích a RSI naznačuje další pokles.  Ziskovost stávající pozice snižuje riziko zdvojení pozice na stejném instrumentu. Lot_size 0.05 je konzervativní přístup, který umožní částečné navýšení expozice na USOIL_ecn, avšak s ohledem na celkový stav účtu a diverzifikaci portfolia."
-}

@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XAGUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.05,
-  "take_profit": 77.50,
-  "reasoning": "Analýza ukazuje na silný býčí trend u XAGUSD_ecn. Měsíční graf signalizuje dlouhodobý uptrend. Hodinový RSI je sice v překoupené zóně, ale vyšší časové rámce naznačují, že býčí momentum by mohlo pokračovat. Poslední hodinová svíčka má velké tělo a uzavírá vysoko, což potvrzuje silný nákupní tlak. Symbol XAGUSD_ecn aktuálně nemáme otevřený v portfoliu. Nastavuji lot_size na 0.05 s TP na 77.50, což dává realistickou šanci na zisk s ohledem na transakční poplatky."
-}

@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "CADJPY_ecn",
-  "action": "SELL",
-  "lot_size": 0.02,
-  "take_profit": 106.50,
-  "reasoning": "Účet má otevřených 13 pozic, z toho 3 jsou na NGAS_ecn. Vzhledem k ziskovosti a diverzifikaci je preferován symbol, který dosud není v portfoliu. CADJPY_ecn vykazuje dle predikce převahu SELL (70%). Aktuální Equity je 2778.49 USD. Riziko 15% z Equity je 416.77 USD. Nejztrátovější pozice je NGAS_ecn s PnL -246.5 USD, což je pod 15 % Equity. CADJPY doporučuje SELL, cena je pod MA na hourly grafu a 4H grafu. Take profit nastaven s ohledem na minimalizaci rizika a pokrytí nákladů. Poplatek za 0.02 lot bude 0.20 USD. CADJPY v současnosti není v otevřených pozicích a predikce naznačuje klesající trend."
-}

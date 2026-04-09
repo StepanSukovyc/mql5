@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XCUUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 3.0,
-  "reasoning": "XCUUSD_ecn má 100% pravděpodobnost SELL. Nemám otevřenou pozici na tomto symbolu. Aktuální stav účtu umožňuje otevření pozice. Riziko je minimalizované vzhledem k nízkému lot_size. Take profit je nastaven konzervativně s ohledem na volatilita trhu. Z predikce plyne, že cena je přehnaně nákladná.  Diverzifikace portfolia: minimalizuju expozici vůči již drženým aktivům."
-}

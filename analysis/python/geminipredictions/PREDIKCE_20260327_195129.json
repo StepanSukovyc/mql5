@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDCAD_ecn",
-  "action": "BUY",
-  "lot_size": 0.05,
-  "take_profit": 1.37,
-  "reasoning": "Pořadí obchodu #57 je dělitelné 3 (57 mod 3 = 0), tudíž se jedná o plně řízený obchod s lot a take_profit.  USDCAD má vysokou pravděpodobnost BUY (60%). Cena je nad MA na 1h, 4h a denním timeframe. RSI je v překoupené zóně na 4h a denním timeframe, což naznačuje možnou korekci, ale celkový trend se zdá být rostoucí. Diverzifikace: nemám žádnou otevřenou pozici na USDCAD_ecn. Poplatek za 0.05 lot je 0.50 USD (5*0.10 USD). Take profit je nastaven na realistickou hodnotu a po odečtení poplatků dává obchod smysl."
-}

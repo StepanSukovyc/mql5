@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 85.50,
-  "reasoning": "Current account balance is $4008.08. There are currently 13 open positions and the equity is $2741.29. Margin is $1920.99 with $820.30 margin free. Considering risk management and available margin, opening a small position is reasonable. USOIL_ecn has a strong 'BUY' rating (60%) based on technical analysis. Since the current open positions do not contain USOIL_ecn, it provides portfolio diversification. The reasoning suggests a strong positive trend based on RSI and MA values. A small lot size of 0.01 will allow for a cautious approach. A take profit of 85.50 provides a realistic price target considering the current price action, and allows for gains to offset the commission fee."
-}

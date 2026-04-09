@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "NZDUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 0.585,
-  "reasoning": "Účet má otevřené pozice na mnoha párech. Podívám se, které páry nemáme otevřené a mají silný SELL signál.  NZDUSD_ecn nemá otevřenou pozici, a predikce udává SELL s 55% pravděpodobností. Cena je pod MA na všech timeframech. RSI je oversold na 1h, 4h a day, dává tedy potenciální krátkodobý odraz, ale dlouhodobý trend je klesající. Navrhuji SELL 0.01 lot. Aktuální cena je zhruba 0.59. Poplatek za transakci je 0.1 USD. Take profit je 0.585, což je realistický cíl a zisk bude po odečtení poplatků ekonomický smysluplný. "
-}

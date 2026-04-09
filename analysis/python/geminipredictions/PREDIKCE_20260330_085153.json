@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "BTCUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.01,
-  "take_profit": 75000.0,
-  "reasoning": "Obchod #63 je plně řízen Gemini, takže beru v potaz lot i take_profit. Aktuální portfolio neobsahuje BTCUSD_ecn, takže diverzifikace je zajištěna. Predikce udává 60 % pro BUY. Vzhledem k balance účtu se držím menší lot size. Take profit je nastavený konzervativně s ohledem na historické maximum a denní volatilitu BTC."
-}

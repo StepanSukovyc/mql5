@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSGD_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 1.455,
-  "reasoning": "EURSGD_ecn má nejvyšší BUY pravděpodobnost (60 %) mezi dostupnými predikcemi a není aktuálně v otevřených pozicích, což podporuje diverzifikaci. Dle indicií svíčkových formací a RSI indikátoru vykazuje graf EURSGD potenciál pro růst, což historicky podporuje MA indikátor. S lot_size 0.02 a take_profit 1.455 je zde potenciál pro zisk, který zohledňuje transakční náklady a je realistický."
-}

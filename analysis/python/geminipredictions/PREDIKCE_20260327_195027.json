@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSEK_ecn",
-  "action": "SELL",
-  "lot_size": 0.06,
-  "take_profit": 11.45,
-  "reasoning": "Obchod #57 je řízen Gemini. EURSEK_ecn je doporučován jako SELL s pravděpodobností 65%. Aktuálně nemám otevřenou pozici v EURSEK_ecn. RSI a MA indikují klesající trend. Realistický take profit zohledňuje transakční poplatky (0.60 USD).  Účet má dostatečnou marži pro otevření pozice 0.06 lotů."
-}

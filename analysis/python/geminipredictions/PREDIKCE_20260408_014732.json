@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "ZARJPY_ecn",
-  "action": "BUY",
-  "lot_size": 0.08,
-  "take_profit": 9.750,
-  "reasoning": "Nemám otevřenou pozici v ZARJPY_ecn. Predikce naznačuje BUY (55%). RSI na denní, týdenní a měsíční bázi je v neutrální zóně, což naznačuje pokračující uptrend. Take profit je nastaven realisticky, aby po odečtení poplatků (0.80 USD) obchod dával ekonomický smysl. Marže je dostatečná a margin_free je 904.31. Lot size 0.08 je rozumný s ohledem na balance účtu a potenciální riziko."
-}

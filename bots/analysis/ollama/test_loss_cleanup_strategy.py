@@ -9,6 +9,8 @@ from unittest.mock import patch
 
 from loss_cleanup_strategy import (
 	_calculate_effective_profit_budget,
+	_get_balance_buffer_percent,
+	_get_balance_buffer_ratio,
 	_get_previous_prague_day_bounds_utc,
 	_is_after_daily_run_time,
 	_find_cleanup_candidate,
@@ -26,6 +28,16 @@ class LossCleanupStrategyTests(unittest.TestCase):
 	def test_effective_profit_budget_includes_negative_open_profit_only(self) -> None:
 		self.assertEqual(_calculate_effective_profit_budget(90.67, -129.26), -38.59)
 		self.assertEqual(_calculate_effective_profit_budget(90.67, 25.00), 90.67)
+
+	@patch("loss_cleanup_strategy._load_dotenv_value", return_value=None)
+	def test_balance_buffer_percent_defaults_to_two_percent(self, _mock_load_dotenv_value) -> None:
+		self.assertEqual(_get_balance_buffer_percent(), 2.0)
+		self.assertEqual(_get_balance_buffer_ratio(), 0.02)
+
+	@patch("loss_cleanup_strategy._load_dotenv_value", return_value="2.5")
+	def test_balance_buffer_percent_reads_env_value(self, _mock_load_dotenv_value) -> None:
+		self.assertEqual(_get_balance_buffer_percent(), 2.5)
+		self.assertEqual(_get_balance_buffer_ratio(), 0.025)
 
 	def test_previous_prague_day_bounds_respect_timezone(self) -> None:
 		now_utc = datetime(2026, 4, 8, 10, 45, tzinfo=timezone.utc)

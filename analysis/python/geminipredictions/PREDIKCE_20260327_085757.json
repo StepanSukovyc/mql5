@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 82.50,
-  "reasoning": "USOIL_ecn hasn't any open positions and it has a BUY signal with 50% probability. Weekly RSI is overbought (79.58), suggesting a potential pullback. However, the daily RSI (64.49) indicates continued bullish momentum. Current price is above daily and 4H MA, which indicates positive trend. Last daily candle is bullish. Risk Management: The lot size is adjusted to control the risk. Transaction cost for 0.02 lot will be $0.2. Expected profit is calculated after deducting the transaction cost and is economically sound, setting take_profit to 82.50."
-}

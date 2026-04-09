@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "UKOIL_ecn",
-  "action": "SELL",
-  "lot_size": 0.05,
-  "take_profit": 90.0,
-  "reasoning": "Analýza UKOIL_ecn indikuje silný klesající trend. Krátkodobé indikátory (1H a 4H RSI) jsou v oblasti přeprodanosti, ale cena prudce klesla. Denní RSI je pod 50 a cena je výrazně pod denním MA, což signalizuje silný prodejní tlak. Dlouhodobější grafy sice ukazují býčí trendy, ale výrazný krátkodobý pokles naznačuje, že prodej je nejpravděpodobnější scénář. Diverzifikace: Nemáme otevřenou pozici na UKOIL_ecn. Take Profit: Nastaven na 90.0 USD s ohledem na současný downtrend a s rezervou pro transakční poplatky."
-}

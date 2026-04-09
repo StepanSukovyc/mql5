@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XAUUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.05,
-  "take_profit": 2420.00,
-  "reasoning": "Obchod #77 je plně řízen Gemini. Provedl jsem diverzifikační analýzu a XAUUSD_ecn nemám otevřenou pozici.  Technická analýza naznačuje býčí momentum na kratších časových rámcích (1H, 4H). Denní RSI je neutrální. Měsíční RSI je sice vysoké, což naznačuje potenciál pro korekci, ale cena je výrazně nad měsíčním MA, což naznačuje dlouhodobý vzestupný trend. Nedávný nárůst naznačuje nákupní tlak, ale doporučuji opatrnost kvůli překoupeným měsíčním hodnotám RSI. Nastavuji take profit na hladinu 2420, aby zohlednil potenciál růstu a současně aby zisk pokryl transakční náklady. Zohledňuji swing obchodování."
-}

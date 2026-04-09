@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 84.50,
-  "reasoning": "Pořadí obchodu #45 je dělitelné 3, proto dodržuji pravidla pro plně řízený obchod. USOIL_ecn nebyl dosud obchodován a tím je diverzifikuji portfolio. Podle predikce má USOIL_ecn největší šanci na BUY (50%), s tím, že denní RSI indikuje rostoucí trend. Weekly RSI je sice překoupené, ale celkově vidím v nákupu USOIL_ecn větší potenciál. Velikost lotu 0.02 zohledňuje omezenou volnou marži a riziko, i nutnost nastavit realistický TP s ohledem na poplatky. TP je nastaven na hodnotu, kde věřím, že se cena v řádu dnů dostane."
-}

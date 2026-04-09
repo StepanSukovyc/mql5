@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "SELL",
-  "lot_size": 0.1,
-  "take_profit": 90.000,
-  "reasoning": "Pořadí obchodu #76 spadá do plně řízených Gemini. USOIL_ecn vykazuje silný medvědí trend s RSI indikující překoupenost na kratších časových rámcích, ale celkově klesající. Cena je pod klouzavými průměry na většině časových rámců. I když je na 4H patrné silné přeprodání a teoreticky se dá očekávat korekce, dáváme přednost prodejní pozici na základě analýzy a větší pravděpodobnosti poklesu, a to především z důvodu fundamentálních dat a výhledu snížení poptávky po ropě v následujících měsících. Take profit je nastaven realisticky s ohledem na transakční náklady a očekávaný pokles ceny. Lot size je volen konzervativně s ohledem na equity a stávající otevřené pozice. Důležitá je i diverzifikace portfolia – USOIL_ecn v portfoliu aktuálně není."
-}

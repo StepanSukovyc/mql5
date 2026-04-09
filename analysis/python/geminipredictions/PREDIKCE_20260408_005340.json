@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XAUUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 2300.0,
-  "reasoning": "Symbol XAUUSD_ecn nemá otevřenou pozici. Podle predikcí má XAUUSD_ecn doporučení BUY s 55 %. I když má denní graf neutrální RSI, měsíční RSI je vysoké, což naznačuje potenciál pro korekci. Cena je výrazně nad měsíčním MA, což naznačuje dlouhodobý uptrend, ale potenciál pro pullback. Navrhuji BUY s lot_size 0.02 a take_profit na 2300. Poplatek za 0.02 lot je 0.2 USD."
-}

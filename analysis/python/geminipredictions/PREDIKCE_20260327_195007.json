@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSGD_ecn",
-  "action": "BUY",
-  "lot_size": 0.07,
-  "take_profit": 1.475,
-  "reasoning": "EURSGD_ecn is recommended for a BUY position. According to the trading prediction, 'Podle sv\u00ed\u010dkov\u00fdch formac\u00ed a RSI indik\u00e1toru ukazuj\u00ed cenov\u00fd graf potenci\u00e1l pro r\u016fst. Historick\u00e9 hodnoty MA podporuj\u00ed tento pohyb.' This indicates a bullish sentiment. Since this symbol is not present in current open positions, it satisfies diversification criteria. The lot size is chosen to be 0.07 to keep the risk in check given the account balance and margin availability. Setting a take profit at 1.475 allows for a reasonable profit target considering the volatility, and covers the commission fees."
-}

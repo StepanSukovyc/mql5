@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "EURSGD_ecn",
-  "action": "BUY",
-  "lot_size": 0.03,
-  "take_profit": 1.455,
-  "reasoning": "Obchoduji v režimu, kdy každý třetí obchod je řízený, tento je 57. v pořadí, takže není plně řízený. EURSGD_ecn má dle predikce vysokou pravděpodobnost BUY (60 %). V současné době nemám otevřenou pozici v EURSGD_ecn, což podporuje diverzifikaci portfolia. Lot size 0.03 je zvolen s ohledem na margin free (1255.79 USD) a transakční náklady (0.30 USD za vstup a 0.30 USD za výstup). Take profit 1.455 je nastaven realisticky s ohledem na analýzu a ziskovost."
-}

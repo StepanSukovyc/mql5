@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USDCAD_ecn",
-  "action": "BUY",
-  "lot_size": 0.05,
-  "take_profit": 1.37,
-  "reasoning": "USDCAD má dle predikce vysokou pravděpodobnost BUY (60%). Cena je nad MA na 1h, 4h a denním timeframe. RSI je v překoupené zóně na 4h a denním timeframe, což naznačuje možnou korekci, ale celkový trend se zdá být rostoucí. Vzhledem k tomu, že nemáme otevřenou pozici na USDCAD, diverzifikujeme portfolio. Zohledňuji transakční náklady (0.50 USD za 0.05 lot). Take_profit je nastaven realisticky nad aktuální cenu. Lot size je nastaven s ohledem na aktuální marži a balance účtu."
-}

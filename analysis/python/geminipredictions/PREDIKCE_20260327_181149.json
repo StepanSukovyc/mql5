@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "USOIL_ecn",
-  "action": "BUY",
-  "lot_size": 0.05,
-  "take_profit": 85.50,
-  "reasoning": "Na základě dostupných predikcí má USOIL_ecn silný signál k nákupu (60 % BUY). Dále, nemám aktuálně otevřenou pozici v tomto symbolu, což zajišťuje diverzifikaci. Aktuální stav účtu umožňuje otevření pozice o velikosti 0.05 lotu. Predikce uvádí zvýšení RSI a MA hodnot, což signalizuje silnou pozici. Take profit byl nastaven na 85.50 s ohledem na poplatky, volatilitu trhu a potenciál swingového obchodu. Transakční náklady budou 0.5 USD (0.05 lot * 10 centů). Aktuálně se USOIL obchoduje kolem hodnoty 83 USD, takže TP je nastaven poměrně konzervativně s ohledem na možné denní zisky při mém obchodním stylu."
-}

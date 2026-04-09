@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XPDUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 700,
-  "reasoning": "Analýza XPDUSD_ecn naznačuje silný prodejní tlak. Dle predikce má tento pár 75% pravděpodobnost poklesu. Vzhledem k tomu, že tento symbol nemáme otevřený v portfoliu, je to dobrá diverzifikace. I když je balance free jen 696.7 USD, pozice 0.01 lot s TP 700 je relativně konzervativní a transakční náklady 0.1 USD minimalizuje. Vzhledem ke swingové strategii zafixujeme TP na ceně 700 USD."
-}

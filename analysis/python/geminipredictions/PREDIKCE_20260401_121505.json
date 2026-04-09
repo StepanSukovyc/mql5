@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "XCUUSD_ecn",
-  "action": "SELL",
-  "lot_size": 0.01,
-  "take_profit": 4.1,
-  "reasoning": "XCUUSD_ecn má dle predikce 100% šanci na SELL. Momentálně nemám otevřenou pozici v tomto symbolu, což zajišťuje diverzifikaci. Účet má margin free 686.83 USD, s lot size 0.01 a poplatkem 0.10 USD za 0.01 lot je obchod ekonomicky udržitelný. Predikce uvádí 'Vysoké hodnoty RSI a MA ukazují na přehnaně nákladný pohyb cen.', což podporuje SELL."
-}

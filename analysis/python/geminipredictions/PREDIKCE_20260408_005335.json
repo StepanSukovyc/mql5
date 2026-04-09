@@ -1,7 +1,0 @@
-{
-  "recommended_symbol": "ETHUSD_ecn",
-  "action": "BUY",
-  "lot_size": 0.02,
-  "take_profit": 3700.0,
-  "reasoning": "Symbol ETHUSD se jeví jako vhodná volba. Podle predikce má 55% pravděpodobnost růstu (BUY).  Cena ETHUSD prorazila výše a aktuálně se pohybuje nad MA na 1H, 4H a denním grafu. RSI na 1H je 60, což naznačuje sílu trendu.  Doporučená velikost lotu je 0.02, což odpovídá transakčnímu poplatku 0.20 USD, což je zohledněno v take_profit. Take profit je nastaven na 3700.0, což je dosažitelná hodnota v průběhu několika dnů, dle historických dat. Důvodem pro výběr ETHUSD je kombinace technické analýzy (prolomení MA, RSI) a sentimentu (55% BUY). Preferuji tento symbol, protože jej nemám v aktuálně otevřených pozicích, čímž diverzifikuji portfolio."
-}
