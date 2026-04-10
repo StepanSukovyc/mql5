@@ -111,6 +111,16 @@ def _get_service_folder() -> Optional[Path]:
 	return Path(raw_value)
 
 
+def _get_balance_from_account_info(account_info: Optional[dict[str, Any]]) -> float:
+	if account_info is None:
+		account = mt5.account_info()
+		if account is None:
+			raise RuntimeError(f"Failed to get account info: {mt5.last_error()}")
+		return float(account.balance)
+
+	return float(account_info.get("raw_balance", account_info.get("balance", 0.0)))
+
+
 def _get_position_fee(volume: float) -> float:
 	return round((float(volume) / 0.01) * FEE_PER_001_LOT, 2)
 
@@ -241,18 +251,34 @@ def run_swap_rollover_cleanup_strategy_if_due(account_info: Optional[dict[str, A
 	try:
 		window = get_swap_block_window(now_utc=now_utc)
 		if not window.contains(now_utc):
+			_log_cleanup_action(
+				service_folder=service_folder,
+				now_utc=now_utc,
+				balance=float(account_info.get("raw_balance", account_info.get("balance", 0.0))) if account_info else 0.0,
+				rollover_source=window.rollover_time.source,
+				window_start_utc=window.start_utc,
+				window_end_utc=window.end_utc,
+				candidate=None,
+				closed=False,
+				message="Skipped: outside fixed swap block window",
+			)
 			return
 
-		if account_info is None:
-			account = mt5.account_info()
-			if account is None:
-				raise RuntimeError(f"Failed to get account info: {mt5.last_error()}")
-			balance = float(account.balance)
-		else:
-			balance = float(account_info.get("raw_balance", account_info.get("balance", 0.0)))
+		balance = _get_balance_from_account_info(account_info)
 
 		candidates = _find_candidates(balance)
 		if not candidates:
+			_log_cleanup_action(
+				service_folder=service_folder,
+				now_utc=now_utc,
+				balance=balance,
+				rollover_source=window.rollover_time.source,
+				window_start_utc=window.start_utc,
+				window_end_utc=window.end_utc,
+				candidate=None,
+				closed=False,
+				message="No eligible profitable positions found in fixed swap block window",
+			)
 			return
 
 		print("\n💰 Swap rollover cleanup strategy")

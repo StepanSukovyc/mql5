@@ -1,0 +1,2 @@
+timestamp,dry_run,balance,rollover_source,window_start_utc,window_end_utc,symbol,ticket,position_volume,profit,swap,fee,net_profit,target_profit,closed,message
+2026-04-10T00:53:32.007505+00:00,False,4084.90,mt5_rollover_history,2026-04-10T00:53:00+00:00,2026-04-10T01:53:00+00:00,EURSGD_ecn,27207938,0.05,4.48,-0.35,0.50,3.63,0.10,True,Position closed

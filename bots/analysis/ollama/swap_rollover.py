@@ -267,9 +267,10 @@ def get_swap_block_window(
 	rollover_time: Optional[SwapRolloverTime] = None,
 ) -> SwapBlockWindow:
 	resolved_now = _normalize_now(now_utc)
-	resolved_rollover_time = rollover_time or detect_swap_rollover_time(now_utc=resolved_now)
-	if rollover_time is None and resolved_rollover_time.source != "mt5_rollover_history":
+	if rollover_time is None:
 		return _get_manual_block_window(resolved_now)
+
+	resolved_rollover_time = rollover_time or detect_swap_rollover_time(now_utc=resolved_now)
 	resolved_block_minutes = block_minutes or _get_env_int("SWAP_BLOCK_HALF_WINDOW_MINUTES", DEFAULT_BLOCK_MINUTES)
 
 	base_date = resolved_now.date()

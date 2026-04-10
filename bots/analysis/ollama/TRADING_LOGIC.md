@@ -33,13 +33,13 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
 9. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za minutu, ale pouze uvnitř swap blok okna
-   - Swap blok okno se bere primárně z broker timestampů v MT5 historii; pokud broker neposílá použitelný rollover deal, použije se ruční fallback interval z `.env`
-   - Detekce uznává i closing dealy s nenulovým `swap`, takže funguje i u brokerů, kteří swap zapisují až na uzavírací deal
-   - Aktuální fallback konfigurace je `22:30-23:30` UTC
+   - Swap blok okno se bere vždy z pevného ručního intervalu z `.env`
+   - Aktuální konfigurace je `22:30-23:30` UTC
    - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
    - Pro každou spočítá čistý zisk `ZISK = profit + swap - fee`
    - Syntetický `fee` je `0.10 USD` za každých `0.01` lotu
    - Pokud `ZISK >= 0.10 USD`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
+   - Audit log zapisuje i skip/no-candidate průchody, takže je zpětně vidět, jestli strategie byla mimo okno nebo jen nic nenašla
    - Pokud je `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
 10. **Vyhodnotí denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
@@ -60,7 +60,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
 ### Swap Block Window
 
 Forex trh se v rollover okně chová nepředvídatelně. Systém tedy:
-- **Zastavuje se** (lock) v brokerem odvozeném rollover okně, nebo ve fallback intervalu z `.env`
+- **Zastavuje se** (lock) v pevném intervalu z `.env`
 - **Vypíná analýzu** - žádné stahování dat, žádné Gemini AI dotazy
 - **Blokuje obchody** - jakékoli signály jsou zahozeny
 - **Automaticky obnovuje** na konci vypočteného okna bez zásahu
@@ -69,7 +69,7 @@ Dvojitá kontrola zajišťuje bezpečnost:
 1. Na začátku cyklu: Pokud je swap block window aktivní → čeká do konce okna
 2. Před obchodováním: Pokud trading trigger dorazí uvnitř swap block window → zahodí signál a čeká
 
-Stejné vypočtené okno platí i pro cleanup strategie, takže v tomto čase neběží běžné obchodování ani loss cleanup. Pokud broker rollover čas nedokáže poskytnout, použije se fallback `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`.
+Stejné vypočtené okno platí i pro cleanup strategie, takže v tomto čase neběží běžné obchodování ani loss cleanup. Aktivní interval se vždy bere z `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`.
 
 ## Ollama Service (Paralelní Proces)
 

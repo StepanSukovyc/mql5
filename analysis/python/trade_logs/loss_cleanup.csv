@@ -73,3 +73,4 @@ timestamp,dry_run,daily_clean_profit,current_open_profit,effective_profit_budget
 2026-04-08T04:45:17.693326+00:00,False,285.21,32.77,57.90,9,2026-04-08T04:23:04+00:00,2026-04-08T06:23:04+02:00,CHFZAR_ecn,26864451,0.01,-45.66,-3.12,0.10,48.88,True,Position closed,90.67,,
 2026-04-08T10:45:21.787210+00:00,False,0.00,-217.52,-142.83,37.34,-180.17,0,,,,,,,,,,False,"Z <= 0 after current open P/L and buffer, no position can be closed safely",74.69
 2026-04-09T10:45:45.710725+00:00,True,412.30,-885.11,-254.37,80.08,-334.45,32,2026-04-08T17:53:58+00:00,2026-04-08T19:53:58+02:00,,,,,,,,False,"Z <= 0 after current open P/L and buffer, no position can be closed safely",630.74
+2026-04-10T10:45:55.663816+00:00,True,55.88,-819.99,-767.87,82.65,-850.52,11,2026-04-09T20:35:46+00:00,2026-04-09T22:35:46+02:00,,,,,,,,False,"Z <= 0 after current open P/L and buffer, no position can be closed safely",52.12

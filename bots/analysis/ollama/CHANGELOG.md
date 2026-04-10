@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-04-10 (Fixed Swap Window + Rollover Audit Visibility)
+
+- **Forced Swap Block Window To Always Use The Configured Manual Interval**
+  - `swap_rollover.py` now always builds the active trading lock and rollover cleanup window from `.env` via `SWAP_BLOCK_START_*` and `SWAP_BLOCK_END_*`
+  - Broker-derived rollover timestamps are no longer used for production window selection, preventing the cleanup from shifting away from the expected `22:30-23:30` UTC interval
+
+- **Added Audit Rows For Skip And No-Candidate Rollover Passes**
+  - `swap_rollover_cleanup_strategy.py` now writes an audit row even when the strategy is outside the fixed window or when no eligible profitable position is found inside the window
+  - This makes it possible to distinguish between “strategy did not run in the active window” and “strategy ran but found nothing to close” directly from `trade_logs/swap_rollover_cleanup.csv`
+
 ## 2026-04-09 (Broker Rollover Detection Fallback)
 
 - **Added Manual Block-Window Fallback When Broker Rollover Detection Is Unavailable**

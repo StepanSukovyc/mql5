@@ -117,6 +117,36 @@ class SwapRolloverTests(unittest.TestCase):
 		self.assertEqual(window.rollover_time.source, "env_manual_window")
 		self.assertTrue(window.contains(now_utc))
 
+	@patch.dict(
+		os.environ,
+		{
+			"SWAP_BLOCK_START_HOUR": "22",
+			"SWAP_BLOCK_START_MINUTE": "30",
+			"SWAP_BLOCK_END_HOUR": "23",
+			"SWAP_BLOCK_END_MINUTE": "30",
+		},
+		clear=False,
+	)
+	@patch("swap_rollover.detect_swap_rollover_time")
+	def test_manual_env_window_is_used_even_when_broker_detection_finds_rollover(self, mock_detect_swap_rollover_time) -> None:
+		from swap_rollover import SwapRolloverTime
+
+		mock_detect_swap_rollover_time.return_value = SwapRolloverTime(
+			hour=0,
+			minute=53,
+			source="mt5_rollover_history",
+			sample_size=3,
+			observed_at_utc=datetime(2026, 4, 9, 0, 53, tzinfo=timezone.utc),
+		)
+
+		now_utc = datetime(2026, 4, 8, 22, 45, tzinfo=timezone.utc)
+		window = get_swap_block_window(now_utc=now_utc)
+
+		self.assertEqual(window.start_utc, datetime(2026, 4, 8, 22, 30, tzinfo=timezone.utc))
+		self.assertEqual(window.end_utc, datetime(2026, 4, 8, 23, 30, tzinfo=timezone.utc))
+		self.assertEqual(window.rollover_time.source, "env_manual_window")
+		self.assertTrue(window.contains(now_utc))
+
 
 if __name__ == "__main__":
 	unittest.main()

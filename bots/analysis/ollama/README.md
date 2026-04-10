@@ -37,13 +37,12 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Přepínač `PROFIT_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
 9. **Swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`):
   - Běží v account monitoru každou minutu, ale pouze uvnitř swap blokovacího okna
-  - Swap blokovací okno se nejdřív pokouší odvodit z broker času podle MT5 historie dealů
-  - Detekce umí použít i closing dealy, na kterých broker zapisuje nenulový `swap`, i když neposílá samostatný rollover deal
-  - Pokud broker historie použitelný rollover čas nedá, použije se ruční fallback interval z `.env` přes `SWAP_BLOCK_START_*` a `SWAP_BLOCK_END_*`
-  - Aktuální fallback je `22:30-23:30` UTC a používá se stejně pro lock i rollover cleanup
+  - Swap blokovací okno se nyní bere vždy z pevného ručního intervalu z `.env` přes `SWAP_BLOCK_START_*` a `SWAP_BLOCK_END_*`
+  - Aktuální interval je `22:30-23:30` UTC a používá se stejně pro lock i rollover cleanup
   - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
   - Spočítá čistý zisk `ZISK = profit + swap - fee`, kde `fee = 0.10 USD` za každých `0.01` lotu
   - Pokud je čistý zisk alespoň `0.10 USD`, pozice je vhodná k uzavření kvůli vyhnutí se swapu
+  - Audit log zapisuje i skip/no-candidate průchody, takže je vidět, zda strategie byla mimo okno nebo uvnitř okna nic nenašla
   - Přepínač `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
 10. **Denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
   - Spustí se nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
@@ -65,10 +64,10 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
 13. **Vrátí se na krok 3** (restart monitoring)
 
 **Automatické pozastavení v swap blokovacím okně:**
-- Blokace se řídí broker-derived časem z MT5 historie; když broker rollover čas neposkytne, použije se ruční fallback okno z `.env`
-  - Systém se zastaví v brokerem odvozeném okně, nebo ve fallback intervalu `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`
+- Blokace se řídí pevným ručním intervalem z `.env`
+  - Systém se zastaví v intervalu `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`
   - Jakákoli připravená rozhodnutí se v tomto okně zahodí
-  - Aktuální fallback konfigurace je `22:30-23:30` UTC
+  - Aktuální konfigurace je `22:30-23:30` UTC
 
 **Ukončení:** Ctrl+C
 

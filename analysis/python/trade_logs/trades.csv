@@ -575,3 +575,34 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-08T13:12:43.500204+00:00,NGAS_ecn,BUY,0.05,gemini_prediction,0.0,True,
 2026-04-08T13:12:48.170132+00:00,XPTUSD_ecn,BUY,0.01,gemini_prediction,0.0,True,
 2026-04-08T13:16:53.812119+00:00,USOIL_ecn,SELL,0.08,gemini_prediction,0.0,True,
+2026-04-09T16:14:57.426500+00:00,XPTUSD_ecn,BUY,0.01,gemini_prediction,2111.98,False,Invalid take_profit for BUY: TP (1050.0) must be > market price (2111.98)
+2026-04-09T16:15:02.306922+00:00,NZDCHF_ecn,BUY,0.05,gemini_prediction,0.0,True,
+2026-04-09T17:14:34.046705+00:00,NZDSGD_ecn,SELL,0.01,gemini_prediction,0.74664,False,Invalid take_profit for SELL: TP (0.81) must be < market price (0.74664)
+2026-04-09T17:14:38.501538+00:00,NZDSGD_ecn,SELL,0.08,gemini_prediction,0.74662,False,Invalid take_profit for SELL: TP (0.81) must be < market price (0.74662)
+2026-04-09T17:14:43.448958+00:00,EURSGD_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-04-09T17:36:49.250321+00:00,NZDSGD_ecn,SELL,0.03,gemini_prediction,0.74644,False,Invalid take_profit for SELL: TP (0.815) must be < market price (0.74644)
+2026-04-09T17:36:53.914326+00:00,NZDSGD_ecn,SELL,0.05,gemini_prediction,0.7464,False,Invalid take_profit for SELL: TP (0.81) must be < market price (0.7464)
+2026-04-09T17:37:58.672684+00:00,NZDSGD_ecn,SELL,0.01,gemini_prediction,0.74639,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.74639)
+2026-04-09T17:39:03.476100+00:00,NZDSGD_ecn,SELL,0.05,gemini_prediction,0.74649,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.74649)
+2026-04-09T17:39:07.804299+00:00,NZDSGD_ecn,SELL,0.01,gemini_prediction,0.74649,False,Invalid take_profit for SELL: TP (0.81) must be < market price (0.74649)
+2026-04-09T17:39:12.084758+00:00,NZDSGD_ecn,SELL,0.05,gemini_prediction,0.74648,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.74648)
+2026-04-09T17:39:16.542460+00:00,NZDSGD_ecn,SELL,0.05,gemini_prediction,0.74647,False,Invalid take_profit for SELL: TP (0.81) must be < market price (0.74647)
+2026-04-09T17:39:21.365964+00:00,NZDSGD_ecn,SELL,0.05,gemini_prediction,0.74649,False,Invalid take_profit for SELL: TP (0.81) must be < market price (0.74649)
+2026-04-09T17:39:25.531344+00:00,NZDSGD_ecn,SELL,0.06,gemini_prediction,0.74649,False,Invalid take_profit for SELL: TP (0.815) must be < market price (0.74649)
+2026-04-09T17:39:30.587881+00:00,NZDSGD_ecn,SELL,0.03,gemini_prediction,0.7465,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.7465)
+2026-04-09T17:39:35.351803+00:00,NZDSGD_ecn,SELL,0.01,gemini_prediction,0.74651,False,Invalid take_profit for SELL: TP (0.812) must be < market price (0.74651)
+2026-04-09T17:39:40.445353+00:00,NZDSGD_ecn,SELL,0.05,gemini_prediction,0.74646,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.74646)
+2026-04-09T17:39:45.130711+00:00,NZDSGD_ecn,SELL,0.06,gemini_prediction,0.74648,False,Invalid take_profit for SELL: TP (0.81) must be < market price (0.74648)
+2026-04-09T17:39:50.273966+00:00,NZDSGD_ecn,SELL,0.01,gemini_prediction,0.74646,False,Invalid take_profit for SELL: TP (0.81) must be < market price (0.74646)
+2026-04-09T17:39:54.999290+00:00,NZDSGD_ecn,SELL,0.05,gemini_prediction,0.74645,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.74645)
+2026-04-09T17:40:00.305901+00:00,NZDSGD_ecn,SELL,0.06,gemini_prediction,0.74645,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.74645)
+2026-04-09T17:40:05.661515+00:00,NZDSGD_ecn,SELL,0.01,gemini_prediction,0.74643,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.74643)
+2026-04-09T17:40:10.315662+00:00,NZDSGD_ecn,SELL,0.08,gemini_prediction,0.74643,False,Invalid take_profit for SELL: TP (0.82) must be < market price (0.74643)
+2026-04-09T17:40:15.007965+00:00,USDILS_ecn,SELL,0.08,gemini_prediction,0.0,True,
+2026-04-10T03:52:39.485002+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-04-10T10:59:16.078680+00:00,NZDSEK_ecn,SELL,0.06,gemini_prediction,5.41078,False,Invalid take_profit for SELL: TP (6.45) must be < market price (5.41078)
+2026-04-10T10:59:21.910714+00:00,US30_ecn,BUY,0.01,gemini_prediction,48184.32,False,Invalid take_profit for BUY: TP (39850.0) must be > market price (48184.32)
+2026-04-10T10:59:26.699934+00:00,NZDSEK_ecn,SELL,0.07,gemini_prediction,5.4112,False,Invalid take_profit for SELL: TP (6.45) must be < market price (5.4112)
+2026-04-10T10:59:31.205494+00:00,SGDJPY_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-04-10T11:32:57.932112+00:00,XPTUSD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-10T13:18:34.303162+00:00,GBPJPY_ecn,SELL,0.01,gemini_prediction,0.0,True,
