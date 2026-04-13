@@ -18,9 +18,11 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Při tvorbě predikce pro každý symbol nejdřív zkontroluje `SERVICE_DEST_FOLDER/ollama/predikce/{symbol}.json`
   - Pokud je `timestamp` v souboru čerstvý (max 1 hodina), reuse-ne Ollama predikci místo volání Gemini
   - Pokud Ollama predikce neexistuje / je nevalidní / je starší než 1h, pak:
-    - při `OLLAMA_FALLBACK_TO_GEMINI=true` použije fallback `ask_gemini_prediction`
+    - při `OLLAMA_FALLBACK_TO_GEMINI=true` použije fallback `ask_gemini_prediction`, ale jen pro prvních `OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS` instrumentů v daném cyklu
     - při `OLLAMA_FALLBACK_TO_GEMINI=false` instrument ignoruje
-  - Pokud při `OLLAMA_FALLBACK_TO_GEMINI=false` nezůstane žádný instrument s čerstvou Ollama predikcí, celý cyklus se přeskočí bez nákupu
+  - Gemini fallback dotazy mohou běžet paralelně, omezené přes `GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS`
+  - Po vyčerpání limitu Gemini fallbacku se další instrumenty bez čerstvé Ollama predikce přeskočí
+  - Pokud po tomto filtrování nezůstane žádný instrument s použitelnou predikcí, celý cyklus se přeskočí bez nákupu
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
@@ -184,9 +186,15 @@ OLLAMA_URL=http://localhost:11434/api/generate
 OLLAMA_MODEL=deepseek-coder-v2
 OLLAMA_PREDICTION_MAX_AGE_MINUTES=120
 OLLAMA_FALLBACK_TO_GEMINI=false
+OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS=60
+GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS=3
 ```
 
 `OLLAMA_FALLBACK_TO_GEMINI=false` znamená, že hlavní trading logika bere pro analýzu pouze instrumenty s čerstvou Ollama predikcí. Instrument bez použitelné Ollama predikce se v daném běhu přeskočí a když takto odpadnou všechny symboly, finální decision fáze se nespustí.
+
+`OLLAMA_FALLBACK_TO_GEMINI=true` znamená, že hlavní trading logika může použít Gemini jako náhradní zdroj predikce, ale pouze do limitu `OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS` instrumentů za jeden cyklus. Další symboly bez čerstvé Ollama predikce se už v tom běhu přeskočí.
+
+`GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS` omezuje, kolik Gemini fallback dotazů může běžet současně. Vyšší hodnota může zrychlit cyklus, ale zvyšuje riziko quota limitů nebo špičkové latence.
 
 Rucni blokovaci okno `SWAP_BLOCK_START_*` az `SWAP_BLOCK_END_*` je interpretovano v case `Europe/Prague`. Audit a trade logy zustavaji ulozene v UTC.
 
@@ -227,7 +235,8 @@ Skript běží jako **nekonečný obchodní automat**:
    - Zkontroluje existující predikce z aktuální hodiny
   - Používá je, nebo stáhne nová data a získá nové predikce
   - Pro každý symbol preferuje čerstvou Ollama predikci (<= `OLLAMA_PREDICTION_MAX_AGE_MINUTES`)
-  - Když čerstvá Ollama predikce chybí, buď volá Gemini (`OLLAMA_FALLBACK_TO_GEMINI=true`), nebo symbol přeskočí (`OLLAMA_FALLBACK_TO_GEMINI=false`)
+  - Když čerstvá Ollama predikce chybí, buď volá Gemini (`OLLAMA_FALLBACK_TO_GEMINI=true`) do limitu `OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS`, nebo symbol přeskočí
+  - Gemini fallback větev může posílat více dotazů paralelně, ale maximálně `GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS` současně
    - Filtruje slabé signály
    - Provede obchod
 4. **Restart cyklu** (vrací se na krok 2)

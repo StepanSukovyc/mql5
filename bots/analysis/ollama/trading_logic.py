@@ -6,6 +6,7 @@ After getting predictions, it organizes files into timestamped folders.
 
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import os
 import shutil
@@ -209,6 +210,64 @@ def is_gemini_fallback_after_stale_ollama_enabled() -> bool:
 	return configured_value.strip().lower() in {"1", "true", "yes", "y", "on"}
 
 
+def get_ollama_gemini_fallback_limit() -> int:
+	"""Return maximum number of symbols per cycle that may fall back to Gemini."""
+	default_limit = 60
+	configured_value = _load_dotenv_value("OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS")
+	if configured_value is None:
+		return default_limit
+
+	try:
+		limit = int(configured_value)
+		if limit < 0:
+			raise ValueError
+		return limit
+	except ValueError:
+		print(
+			f"⚠️  Nevalidni OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS='{configured_value}', "
+			f"pouzivam {default_limit}"
+		)
+		return default_limit
+
+
+def get_gemini_fallback_parallelism() -> int:
+	"""Return maximum number of concurrent Gemini fallback requests."""
+	default_parallelism = 3
+	configured_value = _load_dotenv_value("GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS")
+	if configured_value is None:
+		return default_parallelism
+
+	try:
+		parallelism = int(configured_value)
+		if parallelism <= 0:
+			raise ValueError
+		return parallelism
+	except ValueError:
+		print(
+			f"⚠️  Nevalidni GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS='{configured_value}', "
+			f"pouzivam {default_parallelism}"
+		)
+		return default_parallelism
+
+
+def _request_gemini_prediction_with_retries(symbol: str, market_data: Dict, api_key: str, api_url: str) -> Optional[str]:
+	"""Request Gemini prediction with the existing retry policy."""
+	max_retries = 2
+	prediction_text = None
+
+	for attempt in range(max_retries):
+		prediction_text = ask_gemini_prediction(symbol, market_data, api_key, api_url)
+		if prediction_text:
+			return prediction_text
+
+		if attempt < max_retries - 1:
+			print(f"  🔄 Retry {attempt + 1}/{max_retries - 1} for {symbol}...")
+		else:
+			print(f"  ❌ Max retries reached for {symbol}, skipping")
+
+	return None
+
+
 def load_recent_ollama_prediction(
 	ollama_predictions_folder: Path,
 	symbol: str,
@@ -366,6 +425,10 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	gemini_count = 0
 	ignored_count = 0
 	gemini_fallback_enabled = is_gemini_fallback_after_stale_ollama_enabled()
+	gemini_fallback_limit = get_ollama_gemini_fallback_limit()
+	gemini_parallelism = get_gemini_fallback_parallelism()
+	gemini_fallback_used = 0
+	gemini_fallback_tasks: List[tuple[str, Path, Dict]] = []
 
 	if ollama_predictions_folder.exists():
 		print(f"🤝 Ollama fallback aktivní: {ollama_predictions_folder}")
@@ -376,6 +439,9 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 		"🔀 Režim fallbacku po staré/chybějící Ollama predikci: "
 		+ ("Gemini povoleno" if gemini_fallback_enabled else "Gemini zakázáno, beru jen čerstvé Ollama predikce")
 	)
+	if gemini_fallback_enabled:
+		print(f"🔢 Limit fallbacku do Gemini za cyklus: {gemini_fallback_limit}")
+		print(f"🧵 Paralelni Gemini fallback dotazy: max {gemini_parallelism}")
 	
 	for json_file in json_files:
 		symbol = json_file.stem  # filename without .json
@@ -426,57 +492,78 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 				ignored_count += 1
 				continue
 
+			if gemini_fallback_used >= gemini_fallback_limit:
+				print(
+					f"  ⏭️  Ignoruji {symbol}: dosažen limit Gemini fallbacku "
+					f"{gemini_fallback_used}/{gemini_fallback_limit}"
+				)
+				archive_file = source_archive_folder / json_file.name
+				shutil.move(str(json_file), str(archive_file))
+				print(f"  📦 Source moved to archive: {archive_file.name}")
+				processed_symbols.add(symbol)
+				ignored_count += 1
+				continue
+
 			print(f"  🤖 Fallback na Gemini pro {symbol}: {ollama_reason}")
+			gemini_fallback_used += 1
+			print(f"  🔢 Gemini fallback zařazen {gemini_fallback_used}/{gemini_fallback_limit}")
 
 			# Load market data only when Ollama prediction is not usable.
 			with open(json_file, "r", encoding="utf-8") as f:
 				market_data = json.load(f)
-			
-			# Get prediction from Gemini (with retry logic)
-			max_retries = 2
-			prediction_text = None
-			
-			for attempt in range(max_retries):
-				prediction_text = ask_gemini_prediction(symbol, market_data, api_key, api_url)
-				
-				if prediction_text:
-					break
-				else:
-					if attempt < max_retries - 1:
-						print(f"  🔄 Retry {attempt + 1}/{max_retries - 1} for {symbol}...")
-					else:
-						print(f"  ❌ Max retries reached for {symbol}, skipping")
-			
-			if prediction_text:
-				# Save prediction
-				prediction_file = predictions_folder / f"{symbol}.json"
-				prediction_file.write_text(prediction_text, encoding="utf-8")
-				print(f"  💾 Prediction saved: {prediction_file.name}")
-				print(f"  🤖 Zdroj predikce: Gemini")
-				
-				# Move source file to archive
-				archive_file = source_archive_folder / json_file.name
-				shutil.move(str(json_file), str(archive_file))
-				print(f"  📦 Source moved to archive: {archive_file.name}")
-				
-				# Mark as processed
-				processed_symbols.add(symbol)
-				success_count += 1
-				gemini_count += 1
-			else:
-				print(f"  ⚠️  No prediction received for {symbol} after retries, skipping")
-				error_count += 1
+			gemini_fallback_tasks.append((symbol, json_file, market_data))
 				
 		except Exception as exc:
 			print(f"  ❌ Error processing {symbol}: {exc}")
 			error_count += 1
+
+	if gemini_fallback_tasks:
+		print(f"\n🤖 Spoustim paralelni Gemini fallback pro {len(gemini_fallback_tasks)} instrumentu...")
+		with ThreadPoolExecutor(max_workers=gemini_parallelism) as executor:
+			future_to_task = {
+				executor.submit(
+					_request_gemini_prediction_with_retries,
+					symbol,
+					market_data,
+					api_key,
+					api_url,
+				): (symbol, json_file)
+				for symbol, json_file, market_data in gemini_fallback_tasks
+			}
+
+			for future in as_completed(future_to_task):
+				symbol, json_file = future_to_task[future]
+				try:
+					prediction_text = future.result()
+				except Exception as exc:
+					print(f"  ❌ Gemini fallback worker failed for {symbol}: {exc}")
+					error_count += 1
+					continue
+
+				if prediction_text:
+					prediction_file = predictions_folder / f"{symbol}.json"
+					prediction_file.write_text(prediction_text, encoding="utf-8")
+					print(f"  💾 Prediction saved: {prediction_file.name}")
+					print(f"  🤖 Zdroj predikce: Gemini")
+
+					archive_file = source_archive_folder / json_file.name
+					shutil.move(str(json_file), str(archive_file))
+					print(f"  📦 Source moved to archive: {archive_file.name}")
+
+					processed_symbols.add(symbol)
+					success_count += 1
+					gemini_count += 1
+				else:
+					print(f"  ⚠️  No prediction received for {symbol} after retries, skipping")
+					error_count += 1
 	
 	print("\n" + "="*60)
 	print(f"✅ Trading Logic Completed")
 	print(f"   Success: {success_count}")
 	print(f"   Reused from Ollama (<=1h): {ollama_reuse_count}")
 	print(f"   Generated by Gemini: {gemini_count}")
-	print(f"   Ignored without Gemini fallback: {ignored_count}")
+	print(f"   Gemini fallback used: {gemini_fallback_used}/{gemini_fallback_limit}")
+	print(f"   Ignored without usable fallback: {ignored_count}")
 	print(f"   Errors: {error_count}")
 	print(f"   Total processed: {len(processed_symbols)}")
 	print(f"📁 Results saved in: {source_folder / timestamp}")

@@ -8,6 +8,16 @@
   - If no instrument has a fresh Ollama prediction, the trading cycle now completes without creating predictions and without opening a trade
   - Updated README and TRADING_LOGIC documentation to describe the new behavior
 
+- **Limited Gemini Fallback To A Configurable Number Of Instruments Per Cycle**
+  - Added `OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS` to `.env` and `.env.example` with default `60`
+  - When `OLLAMA_FALLBACK_TO_GEMINI=true`, the main trading flow now uses Gemini fallback only for the first configured number of instruments without a fresh Ollama prediction
+  - Remaining instruments without a usable Ollama prediction are skipped for the current cycle instead of being sent to Gemini
+
+- **Parallelized Gemini Fallback With A Configurable Concurrency Limit**
+  - Added `GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS` to `.env` and `.env.example` with default `3`
+  - Gemini fallback requests can now run concurrently instead of strictly one-by-one
+  - The parallelism is bounded so the cycle speeds up without removing control over API pressure
+
 ## 2026-04-13 (Final Decision Retry After Failed Trade)
 
 - **Retried Final Decision With Symbol Exclusion After Trade Failure**
