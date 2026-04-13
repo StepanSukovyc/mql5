@@ -1783,3 +1783,5 @@ timestamp,dry_run,balance,rollover_source,window_start_utc,window_end_utc,symbol
 2026-04-13T16:47:25.188683+00:00,False,4280.60,env_manual_window,2026-04-13T20:30:00+00:00,2026-04-13T21:30:00+00:00,,,,,,,,,False,Skipped: outside fixed swap block window
 2026-04-13T16:48:25.217913+00:00,False,4280.60,env_manual_window,2026-04-13T20:30:00+00:00,2026-04-13T21:30:00+00:00,,,,,,,,,False,Skipped: outside fixed swap block window
 2026-04-13T16:49:25.259942+00:00,False,4280.60,env_manual_window,2026-04-13T20:30:00+00:00,2026-04-13T21:30:00+00:00,,,,,,,,,False,Skipped: outside fixed swap block window
+2026-04-13T16:55:54.324601+00:00,False,4280.60,env_manual_window,2026-04-13T20:30:00+00:00,2026-04-13T21:30:00+00:00,,,,,,,,,False,Skipped: outside fixed swap block window
+2026-04-13T16:56:54.383624+00:00,False,4280.60,env_manual_window,2026-04-13T20:30:00+00:00,2026-04-13T21:30:00+00:00,,,,,,,,,False,Skipped: outside fixed swap block window

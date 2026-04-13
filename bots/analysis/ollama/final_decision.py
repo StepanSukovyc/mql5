@@ -104,11 +104,14 @@ def _parse_decision(decision_text: str) -> Optional[Tuple[str, str, object, obje
 	return symbol, action, decision.get("lot_size"), decision.get("take_profit")
 
 
-def _handle_invalid_symbol(symbol: str, error_msg: str, predictions: List[Dict], excluded_symbols: List[str]) -> bool:
-	"""Update exclusions after a symbol validation failure."""
-	print(f"⚠️  Symbol validation failed: {error_msg}")
-	print(f"   Adding {symbol} to exclusion list and retrying...")
-	excluded_symbols.append(symbol)
+def _exclude_symbol_and_retry(symbol: str, reason: str, predictions: List[Dict], excluded_symbols: List[str]) -> bool:
+	"""Exclude the current symbol and continue with a different prediction when possible."""
+	print(f"⚠️  {reason}")
+	if symbol not in excluded_symbols:
+		print(f"   Adding {symbol} to exclusion list and retrying...")
+		excluded_symbols.append(symbol)
+	else:
+		print(f"   {symbol} is already excluded, retrying without it...")
 
 	remaining = len([p for p in predictions if p.get("symbol") not in excluded_symbols])
 	if remaining == 0:
@@ -219,7 +222,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 			symbol, action, gemini_lot_size, gemini_take_profit = parsed
 			is_valid, error_msg = validate_symbol(symbol)
 			if not is_valid:
-				if not _handle_invalid_symbol(symbol, error_msg, predictions, excluded_symbols):
+				if not _exclude_symbol_and_retry(symbol, f"Symbol validation failed: {error_msg}", predictions, excluded_symbols):
 					return False
 				continue
 
@@ -232,12 +235,15 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				action=action,
 			)
 			if resolved is None:
-				return False
+				if not _exclude_symbol_and_retry(symbol, f"Trade parameters invalid for {symbol}", predictions, excluded_symbols):
+					return False
+				continue
 
 			lot_size, take_profit = resolved
 			if lot_size <= 0:
-				print(f"⚠️  Final lot size is {lot_size}, skipping trade execution")
-				return False
+				if not _exclude_symbol_and_retry(symbol, f"Final lot size is {lot_size} for {symbol}", predictions, excluded_symbols):
+					return False
+				continue
 
 			if execute_trade(symbol, action, lot_size, service_folder, take_profit, lot_source="gemini_prediction"):
 				print("\n🎉 Trade executed successfully!")
@@ -246,8 +252,8 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				print("=" * 60)
 				return True
 
-			print("\n⚠️  Trade execution failed")
-			return False
+			if not _exclude_symbol_and_retry(symbol, f"Trade execution failed for {symbol}", predictions, excluded_symbols):
+				return False
 
 		print(f"❌ Exhausted all {max_retries} retry attempts")
 		return False

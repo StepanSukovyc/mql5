@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-04-13 (Final Decision Retry After Failed Trade)
+
+- **Retried Final Decision With Symbol Exclusion After Trade Failure**
+  - `final_decision.py` now excludes the current symbol and retries Gemini final selection when symbol validation fails, trade parameters are invalid, or MT5 trade execution fails
+  - This prevents the whole decision phase from stopping on a single bad symbol such as an invalid Gemini `take_profit`
+  - Added `test_final_decision.py` to verify that a failed first trade leads to a retry with a different prediction
+
 ## 2026-04-10 (Fixed Swap Window + Rollover Audit Visibility)
 
 - **Interpreted Fixed Swap Window In Prague Time Instead Of UTC**

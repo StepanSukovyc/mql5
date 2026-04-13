@@ -5,7 +5,7 @@
 Komplexní event-driven trading systém monitoruje volnou marži a dělá inteligentní obchodní rozhodnutí. **Nově** běží paralelně nezávislý **Ollama Service** pro kontinuální generování predikcí pomocí lokálního AI modelu.
 
 **Hlavní proces (Gemini AI - nekonečný cyklus):**
-1. **Kontroluje swap blok okno** - nejdřív se pokusí odvodit rollover z broker MT5 historie; pokud to nejde, použije ruční `.env` interval `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*` a počká do konce okna (bez analýz)
+1. **Kontroluje swap blok okno** - používá pevný `.env` interval `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`, interpretovaný v čase `Europe/Prague`, a v aktivním okně čeká do konce blokace (bez analýz)
 2. **Monitoruje volnou marži** - kontroluje stav účtu
 3. **Rozhoduje se pružně**:
    - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
@@ -268,6 +268,8 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
        - Každý N-tý obchod: použije i Gemini take_profit
        - Ostatní obchody: obchoduje bez take_profit
    - Provede obchod na MT5 (BUY nebo SELL)
+   - Pokud selže symbol validation, výpočet trade parametrů nebo samotná exekuce, aktuální symbol se přidá do exclusion listu a Gemini dostane další pokus s jiným kandidátem
+   - Pokud už po vyloučení nezbývá žádný vhodný symbol, finální decision fáze skončí bez obchodu
    - Uloží rozhodnutí do: `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json`
    - Proces se poté ukončí
 
@@ -537,13 +539,13 @@ pip install -r requirements.txt
 ### Trade Logging
 - **CSV záznam všech obchodů** do `SERVICE_DEST_FOLDER/trade_logs/trades.csv`
 - Loguje úspěchy i selhání včetně error zpráv
-- Formát: timestamp, symbol, action, lot_size, price, success, error_msg
+- Formát: timestamp, symbol, action, lot_size, lot_source, price, success, error_msg
 - Automatické vytvoření hlaviček při prvním použití
 
 ### Error Recovery
 - Oddělené zachycení network errors (`httpx.HTTPError`) vs obecné výjimky
 - Detailní error zprávy v logu i CSV
-- Retry mechanismus pro failed symbol validation (max 3 pokusy)
+- Retry mechanismus pro finální decision fázi (max 3 pokusy) s vylučováním symbolu po failed symbol validation, invalid trade parametrech nebo failed trade execution
 - Graceful handling při selhání kterékoliv validační fáze
 
 ## Poznámky
