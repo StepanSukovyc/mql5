@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Iterable, Optional
 
 import MetaTrader5 as mt5
+import pytz
 
 
 DEFAULT_ROLLOVER_HOUR = 23
@@ -19,6 +20,7 @@ DEFAULT_MANUAL_BLOCK_END_MINUTE = 30
 DEFAULT_LOOKBACK_DAYS = 14
 DEFAULT_BLOCK_MINUTES = 30
 CACHE_TTL_MINUTES = 15
+PRAGUE_TZ = pytz.timezone("Europe/Prague")
 
 _CACHED_BUCKET_KEY: Optional[str] = None
 _CACHED_ROLLOVER_TIME: Optional["SwapRolloverTime"] = None
@@ -97,28 +99,30 @@ def _get_manual_block_window(now_utc: datetime) -> SwapBlockWindow:
 	end_hour = _get_manual_block_time_component("SWAP_BLOCK_END_HOUR", DEFAULT_MANUAL_BLOCK_END_HOUR)
 	end_minute = _get_manual_block_time_component("SWAP_BLOCK_END_MINUTE", DEFAULT_MANUAL_BLOCK_END_MINUTE)
 
-	base_date = now_utc.date()
+	now_prague = now_utc.astimezone(PRAGUE_TZ)
+	base_date = now_prague.date()
 	candidate_windows: list[SwapBlockWindow] = []
 	for day_offset in (-1, 0, 1):
 		candidate_date = base_date + timedelta(days=day_offset)
-		start_utc = datetime(
+		start_prague = PRAGUE_TZ.localize(datetime(
 			candidate_date.year,
 			candidate_date.month,
 			candidate_date.day,
 			start_hour,
 			start_minute,
-			tzinfo=timezone.utc,
-		)
-		end_utc = datetime(
+		))
+		end_prague = PRAGUE_TZ.localize(datetime(
 			candidate_date.year,
 			candidate_date.month,
 			candidate_date.day,
 			end_hour,
 			end_minute,
-			tzinfo=timezone.utc,
-		)
-		if end_utc <= start_utc:
-			end_utc += timedelta(days=1)
+		))
+		if end_prague <= start_prague:
+			end_prague += timedelta(days=1)
+
+		start_utc = start_prague.astimezone(timezone.utc)
+		end_utc = end_prague.astimezone(timezone.utc)
 
 		rollover_at_utc = start_utc + ((end_utc - start_utc) / 2)
 		candidate_windows.append(

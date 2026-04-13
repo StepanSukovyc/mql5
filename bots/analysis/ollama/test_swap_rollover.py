@@ -109,11 +109,11 @@ class SwapRolloverTests(unittest.TestCase):
 			observed_at_utc=None,
 		)
 
-		now_utc = datetime(2026, 4, 8, 22, 45, tzinfo=timezone.utc)
+		now_utc = datetime(2026, 4, 8, 20, 45, tzinfo=timezone.utc)
 		window = get_swap_block_window(now_utc=now_utc)
 
-		self.assertEqual(window.start_utc, datetime(2026, 4, 8, 22, 30, tzinfo=timezone.utc))
-		self.assertEqual(window.end_utc, datetime(2026, 4, 8, 23, 30, tzinfo=timezone.utc))
+		self.assertEqual(window.start_utc, datetime(2026, 4, 8, 20, 30, tzinfo=timezone.utc))
+		self.assertEqual(window.end_utc, datetime(2026, 4, 8, 21, 30, tzinfo=timezone.utc))
 		self.assertEqual(window.rollover_time.source, "env_manual_window")
 		self.assertTrue(window.contains(now_utc))
 
@@ -139,13 +139,35 @@ class SwapRolloverTests(unittest.TestCase):
 			observed_at_utc=datetime(2026, 4, 9, 0, 53, tzinfo=timezone.utc),
 		)
 
-		now_utc = datetime(2026, 4, 8, 22, 45, tzinfo=timezone.utc)
+		now_utc = datetime(2026, 4, 8, 20, 45, tzinfo=timezone.utc)
 		window = get_swap_block_window(now_utc=now_utc)
 
-		self.assertEqual(window.start_utc, datetime(2026, 4, 8, 22, 30, tzinfo=timezone.utc))
-		self.assertEqual(window.end_utc, datetime(2026, 4, 8, 23, 30, tzinfo=timezone.utc))
+		self.assertEqual(window.start_utc, datetime(2026, 4, 8, 20, 30, tzinfo=timezone.utc))
+		self.assertEqual(window.end_utc, datetime(2026, 4, 8, 21, 30, tzinfo=timezone.utc))
 		self.assertEqual(window.rollover_time.source, "env_manual_window")
 		self.assertTrue(window.contains(now_utc))
+
+	@patch.dict(
+		os.environ,
+		{
+			"SWAP_BLOCK_START_HOUR": "22",
+			"SWAP_BLOCK_START_MINUTE": "30",
+			"SWAP_BLOCK_END_HOUR": "23",
+			"SWAP_BLOCK_END_MINUTE": "30",
+		},
+		clear=False,
+	)
+	def test_manual_env_window_uses_prague_local_time(self) -> None:
+		inside_window_utc = datetime(2026, 4, 12, 21, 15, tzinfo=timezone.utc)
+		outside_window_utc = datetime(2026, 4, 12, 22, 15, tzinfo=timezone.utc)
+
+		inside_window = get_swap_block_window(now_utc=inside_window_utc)
+		outside_window = get_swap_block_window(now_utc=outside_window_utc)
+
+		self.assertTrue(inside_window.contains(inside_window_utc))
+		self.assertFalse(outside_window.contains(outside_window_utc))
+		self.assertEqual(inside_window.start_utc, datetime(2026, 4, 12, 20, 30, tzinfo=timezone.utc))
+		self.assertEqual(inside_window.end_utc, datetime(2026, 4, 12, 21, 30, tzinfo=timezone.utc))
 
 
 if __name__ == "__main__":

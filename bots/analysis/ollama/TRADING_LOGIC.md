@@ -34,7 +34,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
 9. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za minutu, ale pouze uvnitř swap blok okna
    - Swap blok okno se bere vždy z pevného ručního intervalu z `.env`
-   - Aktuální konfigurace je `22:30-23:30` UTC
+   - Aktuální konfigurace je `22:30-23:30` v čase `Europe/Prague`
    - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
    - Pro každou spočítá čistý zisk `ZISK = profit + swap - fee`
    - Syntetický `fee` je `0.10 USD` za každých `0.01` lotu
@@ -60,7 +60,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
 ### Swap Block Window
 
 Forex trh se v rollover okně chová nepředvídatelně. Systém tedy:
-- **Zastavuje se** (lock) v pevném intervalu z `.env`
+- **Zastavuje se** (lock) v pevném intervalu z `.env`, interpretovaném v čase `Europe/Prague`
 - **Vypíná analýzu** - žádné stahování dat, žádné Gemini AI dotazy
 - **Blokuje obchody** - jakékoli signály jsou zahozeny
 - **Automaticky obnovuje** na konci vypočteného okna bez zásahu

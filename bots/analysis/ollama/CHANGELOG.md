@@ -2,9 +2,13 @@
 
 ## 2026-04-10 (Fixed Swap Window + Rollover Audit Visibility)
 
+- **Interpreted Fixed Swap Window In Prague Time Instead Of UTC**
+  - The manual swap block interval from `.env` is now evaluated in `Europe/Prague`, so `22:30-23:30` matches Prague local time instead of UTC
+  - This aligns the trading lock and rollover cleanup with the intended market blackout window and prevents trades from slipping through two hours late during DST
+
 - **Forced Swap Block Window To Always Use The Configured Manual Interval**
   - `swap_rollover.py` now always builds the active trading lock and rollover cleanup window from `.env` via `SWAP_BLOCK_START_*` and `SWAP_BLOCK_END_*`
-  - Broker-derived rollover timestamps are no longer used for production window selection, preventing the cleanup from shifting away from the expected `22:30-23:30` UTC interval
+  - Broker-derived rollover timestamps are no longer used for production window selection, preventing the cleanup from shifting away from the expected `22:30-23:30` Prague-time interval
 
 - **Added Audit Rows For Skip And No-Candidate Rollover Passes**
   - `swap_rollover_cleanup_strategy.py` now writes an audit row even when the strategy is outside the fixed window or when no eligible profitable position is found inside the window

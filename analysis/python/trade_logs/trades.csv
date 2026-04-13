@@ -658,3 +658,4 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-12T21:25:49.047854+00:00,XCUUSD_ecn,BUY,0.02,gemini_prediction,0.0,False,"Insufficient margin: required 2571.81, available 924.58"
 2026-04-12T21:25:53.933044+00:00,XPTUSD_ecn,SELL,0.03,gemini_prediction,2043.85,False,Order failed with retcode: 10018 - Market closed
 2026-04-12T21:25:58.675165+00:00,USDILS_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-04-13T16:47:23.184624+00:00,JP225_ecn,BUY,0.01,gemini_prediction,57217.05,False,Invalid take_profit for BUY: TP (39700.0) must be > market price (57217.05)
