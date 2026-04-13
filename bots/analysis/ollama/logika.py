@@ -53,10 +53,17 @@ def _to_bool(value: str, default: bool = False) -> bool:
 	return normalized in {"1", "true", "yes", "y", "on"}
 
 
+def _parse_csv(value: Optional[str]) -> List[str]:
+	if not value:
+		return []
+	return [item.strip() for item in value.split(",") if item.strip()]
+
+
 @dataclass
 class Config:
 	service_dest_folder: Path
 	symbol_suffix: str
+	symbol_blacklist: List[str]
 	lookback_periods: int
 	run_interval_seconds: int
 	rsi_period: int
@@ -82,7 +89,8 @@ class Config:
 
 		return cls(
 			service_dest_folder=Path(dest),
-			symbol_suffix=os.getenv("MT5_SYMBOL_SUFFIX", "_ecn"),
+			symbol_suffix=os.getenv("MT5_SYMBOL_SUFFIX", "_ecn").strip(),
+			symbol_blacklist=_parse_csv(os.getenv("MT5_SYMBOL_BLACKLIST")),
 			lookback_periods=int(os.getenv("LOOKBACK_PERIODS", "30")),
 			run_interval_seconds=int(os.getenv("RUN_INTERVAL_SECONDS", "3600")),
 			rsi_period=int(os.getenv("RSI_PERIOD", "14")),
@@ -102,12 +110,15 @@ def write_symbol_file(dest_folder: Path, symbol: str, payload: Dict[str, object]
 	else:
 		out_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 def run_cycle(cfg: Config) -> None:
-	symbols = get_symbols(cfg.symbol_suffix)
+	symbols = get_symbols(cfg.symbol_suffix, blacklist=cfg.symbol_blacklist)
+	scope_label = f"suffix '{cfg.symbol_suffix}'" if cfg.symbol_suffix else "all MT5 symbols"
+	if cfg.symbol_blacklist:
+		scope_label += f" with blacklist ({', '.join(cfg.symbol_blacklist)})"
 	if not symbols:
-		print(f"No symbols found for suffix '{cfg.symbol_suffix}'.")
+		print(f"No symbols found for {scope_label}.")
 		return
 
-	print(f"Found {len(symbols)} symbols. Starting export to {cfg.service_dest_folder}")
+	print(f"Found {len(symbols)} symbols for {scope_label}. Starting export to {cfg.service_dest_folder}")
 
 	ok_count = 0
 	err_count = 0

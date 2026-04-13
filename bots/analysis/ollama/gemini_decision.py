@@ -9,6 +9,12 @@ from typing import Dict, List, Optional
 
 import httpx
 
+from instrument_utils import (
+	get_base_prediction_threshold,
+	get_crypto_prediction_threshold,
+	is_crypto_symbol,
+)
+
 
 _gemini_suspended_until: Optional[datetime] = None
 
@@ -31,6 +37,8 @@ def clean_gemini_response(text: str) -> str:
 def load_predictions(predictions_folder: Path) -> List[Dict]:
 	"""Load remaining prediction files and keep only strong BUY/SELL candidates."""
 	predictions = []
+	base_threshold = get_base_prediction_threshold()
+	crypto_threshold = get_crypto_prediction_threshold()
 
 	for pred_file in predictions_folder.glob("*.json"):
 		try:
@@ -40,8 +48,10 @@ def load_predictions(predictions_folder: Path) -> List[Dict]:
 			prediction = json.loads(clean_gemini_response(content))
 			buy_pct = prediction.get("BUY", 0)
 			sell_pct = prediction.get("SELL", 0)
+			symbol = str(prediction.get("symbol", ""))
+			required_threshold = crypto_threshold if is_crypto_symbol(symbol) else base_threshold
 
-			if buy_pct >= 35 or sell_pct >= 35:
+			if buy_pct >= required_threshold or sell_pct >= required_threshold:
 				predictions.append(prediction)
 		except Exception as exc:
 			print(f"  ⚠️  Error loading {pred_file.name}: {exc}")
@@ -100,6 +110,17 @@ def ask_gemini_final_decision(
 			f"- U ne-plně řízených obchodů se take_profit ve finální exekuci ignoruje."
 		)
 
+	crypto_symbols = [str(p.get("symbol")) for p in predictions if is_crypto_symbol(str(p.get("symbol", "")))]
+	crypto_note = ""
+	if crypto_symbols:
+		crypto_note = (
+			"\n\nPRAVIDLA PRO CRYPTO INSTRUMENTY:\n"
+			f"- Crypto kandidáti v tomto výběru: {', '.join(crypto_symbols)}\n"
+			"- Crypto je povoleno, ale pouze při výrazně přesvědčivém signálu.\n"
+			"- Pokud je rozdíl mezi BUY a SELL malý nebo je reasoning nejasný, preferuj raději ne-crypto instrument nebo HOLD.\n"
+			"- U crypto preferuj menší lot a konzervativnější risk management."
+		)
+
 	prompt = f"""Jsi expert obchodní poradce. Musíš na základě analýzy učinit finální obchodní rozhodnutí.
 
 DOSTUPNÉ INFORMACE:
@@ -111,12 +132,12 @@ DOSTUPNÉ INFORMACE:
 {json.dumps(open_positions, indent=2)}
 
 3. Dostupné obchodní predikce (filtrované - pouze ty s BUY/SELL >= 35%):
-{json.dumps(predictions, indent=2)}{excluded_note}{mode_text}
+{json.dumps(predictions, indent=2)}{excluded_note}{mode_text}{crypto_note}
 
 ÚKOL:
 Na základě všech dostupných informací (predikce, otevřené pozice, stav účtu):
 
-1. Vyber PRÁVĚ JEDEN měnový pár z dostupných predikcí
+		1. Vyber PRÁVĚ JEDEN instrument z dostupných predikcí
 2. Rozhodni se pro BUY nebo SELL
 3. Doporuč velikost lotu (berouc v úvahu aktuální marži a risk management)
 4. Navrhni take_profit cenu pro swing obchod (pozice může být otevřená několik dní)
@@ -132,7 +153,7 @@ DŮLEŽITÉ OBCHODNÍ NASTAVENÍ:
 Odpověď prosím formátuj POUZE jako JSON bez dalšího textu, v tomto formátu:
 
 {{
-  "recommended_symbol": "EURUSD_ecn",
+	"recommended_symbol": "SYMBOL_NAME",
   "action": "BUY",
   "lot_size": 0.5,
 	"take_profit": 1.105,

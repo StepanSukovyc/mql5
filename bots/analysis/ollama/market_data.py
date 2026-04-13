@@ -7,6 +7,7 @@ market data from MetaTrader 5, including technical indicators (RSI, MA).
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+from fnmatch import fnmatch
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
@@ -122,15 +123,30 @@ def indicator_rows(
     return {"rsi": rsi_series, "ma": ma_series}
 
 
-def get_symbols(suffix: str) -> List[str]:
-    """Get all MT5 symbols ending with specified suffix."""
+def get_symbols(suffix: str, blacklist: Optional[Iterable[str]] = None) -> List[str]:
+    """Get MT5 symbols filtered by suffix and blacklist patterns."""
     symbols = mt5.symbols_get()
     if symbols is None:
         err = mt5.last_error()
         raise RuntimeError(f"mt5.symbols_get failed: {err}")
 
-    suffix_lower = suffix.lower()
-    return sorted([s.name for s in symbols if s.name.lower().endswith(suffix_lower)])
+    normalized_suffix = (suffix or "").strip().lower()
+    blacklist_patterns = [item.strip().lower() for item in (blacklist or []) if item and item.strip()]
+
+    filtered_symbols: List[str] = []
+    for symbol in symbols:
+        symbol_name = symbol.name
+        symbol_lower = symbol_name.lower()
+
+        if normalized_suffix and not symbol_lower.endswith(normalized_suffix):
+            continue
+
+        if any(fnmatch(symbol_lower, pattern) for pattern in blacklist_patterns):
+            continue
+
+        filtered_symbols.append(symbol_name)
+
+    return sorted(filtered_symbols)
 
 
 def copy_rates(symbol: str, timeframe: int, date_from: datetime, date_to: datetime):

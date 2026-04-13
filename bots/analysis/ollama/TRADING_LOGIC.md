@@ -22,6 +22,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - lot_size se vždy použije z finální Gemini predikce
    - Každý N-tý obchod: použije se i take_profit z Gemini
    - Ostatní obchody: take_profit se nepoužije
+   - **Crypto safeguardy**: pro symboly odpovídající `MT5_CRYPTO_SYMBOL_PATTERNS` se používá přísnější minimální síla signálu, menší lot přes `MT5_CRYPTO_LOT_MULTIPLIER`, limit současně otevřených crypto pozic přes `MT5_CRYPTO_MAX_OPEN_POSITIONS` a konzervativní TP omezené na maximální vzdálenost `MT5_CRYPTO_TP_DISTANCE_PERCENT` od aktuální tržní ceny
 8. **Vyhodnotí minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru při každém ticku monitoru, nejvýše jednou za minutu
    - Běží pouze mimo swap blok okno
@@ -267,6 +268,10 @@ Po filtrování zbývajících predikcí (BUY/SELL >= 35%):
        - lot_size použije vždy z Gemini
        - Každý N-tý obchod: použije i Gemini take_profit
        - Ostatní obchody: obchoduje bez take_profit
+   - Pokud je vybraný symbol crypto, systém před exekucí zkontroluje aktuální bid/ask cenu a `take_profit` z Gemini případně zkrátí na konzervativní maximum:
+      - BUY: TP nesmí být dál než `MT5_CRYPTO_TP_DISTANCE_PERCENT` % nad aktuální ask cenou
+      - SELL: TP nesmí být dál než `MT5_CRYPTO_TP_DISTANCE_PERCENT` % pod aktuální bid cenou
+      - Když Gemini vrátí neplatný nebo chybějící TP, použije se fallback přesně na tuto konzervativní hranici
    - Provede obchod na MT5 (BUY nebo SELL)
    - Pokud selže symbol validation, výpočet trade parametrů nebo samotná exekuce, aktuální symbol se přidá do exclusion listu a Gemini dostane další pokus s jiným kandidátem
    - Pokud už po vyloučení nezbývá žádný vhodný symbol, finální decision fáze skončí bez obchodu
@@ -281,6 +286,8 @@ Lot size se nyní bere vždy z finální Gemini predikce a před exekucí se už
 - Balance 6200 při `TRADING_ACCOUNT_BALANCE_CAP=5000` → výpočet běží jako pro balance 5000 → **0.11**
 
 Každý N-tý obchod (N = `GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá lot_size a take_profit přímo z Gemini odpovědi.
+
+Pro crypto instrumenty se take_profit nepřebírá bez omezení. Výsledný TP je vždy zvalidovaný proti aktuální trhu a omezený přes `MT5_CRYPTO_TP_DISTANCE_PERCENT`, aby systém neotevíral crypto obchody s nepřiměřeně vzdáleným targetem.
 
 ## Module Description
 
@@ -470,6 +477,12 @@ Každá predikce obsahuje:
 
 ### final_decision.py
 - `GEMINI_FULL_CONTROL_EVERY_N_TRADES` - každý N-tý obchod je plně svěřen Gemini (lot_size + take_profit)
+- `MT5_CRYPTO_SYMBOL_PATTERNS` - wildcard masky symbolů, které mají používat crypto risk profil
+- `MT5_CRYPTO_MIN_SIGNAL_PERCENT` - přísnější minimální BUY/SELL confidence pro crypto
+- `MT5_CRYPTO_LOT_MULTIPLIER` - násobek Gemini lot size pro crypto exekuci
+- `MT5_CRYPTO_MAX_OPEN_POSITIONS` - maximální počet současně otevřených crypto pozic
+- `MT5_CRYPTO_TP_DISTANCE_PERCENT` - maximální vzdálenost crypto take-profitu od aktuální tržní ceny
+- `MT5_CRYPTO_ALLOW_FULL_TP_MODE` - povoluje použití Gemini TP režimu; u crypto je TP i tak konzervativně omezený na nakonfigurovanou vzdálenost
 - Fee kontext v promptu: `0.10 USD` za `0.01` lotu
 - Swing kontext v promptu: pozice mohou být otevřené i několik dní, ale cílem je denní ziskovost
 

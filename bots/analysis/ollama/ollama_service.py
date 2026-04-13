@@ -19,6 +19,7 @@ import re
 import MetaTrader5 as mt5
 
 from account_state import get_account_login
+from instrument_utils import get_symbol_prompt_guidance
 from mt5_connection import initialize_mt5, shutdown_mt5
 from market_data import (
     collect_symbol_payload,
@@ -104,13 +105,14 @@ def was_processed_this_hour(symbol: str, predictions_folder: Path) -> bool:
         return False
 
 
-def collect_market_data_from_mt5(ollama_source_folder: Path, suffix: str, lookback_periods: int, rsi_period: int, ma_period: int, pretty_json: bool) -> int:
+def collect_market_data_from_mt5(ollama_source_folder: Path, suffix: str, symbol_blacklist: List[str], lookback_periods: int, rsi_period: int, ma_period: int, pretty_json: bool) -> int:
     """
     Collect market data directly from MT5 and save to ollama/source folder.
     
     Args:
         ollama_source_folder: Target ollama/source folder
-        suffix: Symbol suffix (e.g., "_ecn")
+        suffix: Symbol suffix (e.g., "_ecn"); empty string means all MT5 symbols
+        symbol_blacklist: Symbols or wildcard patterns to skip, e.g. ["BTCUSD", "X*"]
         lookback_periods: Number of periods to fetch
         rsi_period: RSI calculation period
         ma_period: MA calculation period
@@ -128,16 +130,20 @@ def collect_market_data_from_mt5(ollama_source_folder: Path, suffix: str, lookba
     
     # Get symbols from MT5
     try:
-        symbols = get_symbols(suffix)
+        symbols = get_symbols(suffix, blacklist=symbol_blacklist)
     except Exception as e:
         print(f"❌ Chyba při získávání symbolů z MT5: {e}")
         return 0
+
+    scope_label = f"s příponou '{suffix}'" if suffix else "bez filtru přípony"
+    if symbol_blacklist:
+        scope_label += f" a blacklistem ({', '.join(symbol_blacklist)})"
     
     if not symbols:
-        print(f"⚠️  Žádné symboly s příponou '{suffix}' nenalezeny")
+        print(f"⚠️  Žádné symboly {scope_label} nenalezeny")
         return 0
     
-    print(f"📊 Nalezeno {len(symbols)} symbolů s příponou '{suffix}'")
+    print(f"📊 Nalezeno {len(symbols)} symbolů {scope_label}")
     
     # Process each symbol
     ok_count = 0
@@ -238,11 +244,12 @@ def ask_ollama_prediction(symbol: str, data: Dict, ollama_url: str, ollama_model
             }
     
     current_price = data.get("current_price")
+    prompt_guidance = get_symbol_prompt_guidance(symbol)
     
     # Create prompt similar to Gemini
-    prompt = f"""Jsi finanční poradce a expert na technickou analýzu forex trhů.
+    prompt = f"""Jsi finanční poradce a expert na technickou analýzu finančních instrumentů.
 
-Posílám ti kompletní data pro měnový pár: {symbol}
+Posílám ti kompletní data pro instrument: {symbol}
 
 Aktuální cena: {current_price}
 
@@ -261,6 +268,8 @@ Na základě fundamentální analýzy, svíčkových formací, RSI a MA hodnot p
 - BUY (pravděpodobnost růstu)
 - SELL (pravděpodobnost poklesu)
 - HOLD (nejistota, doporučení držet)
+
+{prompt_guidance}
 
 Hodnocení je procentuální (0-100%), součet musí být 100%.
 
@@ -442,7 +451,8 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
     mt5_login = int(mt5_login_raw) if mt5_login_raw else None
     mt5_password = os.getenv("MT5_PASSWORD")
     mt5_server = os.getenv("MT5_SERVER")
-    symbol_suffix = os.getenv("MT5_SYMBOL_SUFFIX", "_ecn")
+    symbol_suffix = os.getenv("MT5_SYMBOL_SUFFIX", "_ecn").strip()
+    symbol_blacklist = [item.strip() for item in os.getenv("MT5_SYMBOL_BLACKLIST", "").split(",") if item.strip()]
     lookback_periods = int(os.getenv("LOOKBACK_PERIODS", "30"))
     rsi_period = int(os.getenv("RSI_PERIOD", "14"))
     ma_period = int(os.getenv("MA_PERIOD", "20"))
@@ -497,6 +507,7 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             symbols_collected = collect_market_data_from_mt5(
                 ollama_source,
                 symbol_suffix,
+                symbol_blacklist,
                 lookback_periods,
                 rsi_period,
                 ma_period,

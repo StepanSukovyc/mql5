@@ -19,6 +19,7 @@ import httpx
 from account_state import get_account_balance_cap
 from gemini_config import load_gemini_api_config
 from gemini_decision import clean_gemini_response
+from instrument_utils import get_symbol_prompt_guidance
 
 
 def ask_gemini_prediction(symbol: str, data: Dict, api_key: str, api_url: str) -> Optional[str]:
@@ -26,7 +27,7 @@ def ask_gemini_prediction(symbol: str, data: Dict, api_key: str, api_url: str) -
 	Ask Gemini AI for trading prediction based on market data.
 	
 	Args:
-		symbol: Trading symbol (e.g., EURUSD_ecn)
+		symbol: Trading symbol (e.g., EURUSD_ecn or XAUUSD)
 		data: Market data including candles, oscillators (RSI, MA)
 		api_key: Gemini API key
 		api_url: Gemini API URL
@@ -57,10 +58,11 @@ def ask_gemini_prediction(symbol: str, data: Dict, api_key: str, api_url: str) -
 			}
 	
 	current_price = data.get("current_price")
+	prompt_guidance = get_symbol_prompt_guidance(symbol)
 	
-	prompt = f"""Jsi finanční poradce a expert na technickou analýzu forex trhů.
+	prompt = f"""Jsi finanční poradce a expert na technickou analýzu finančních instrumentů.
 
-Posílám ti kompletní data pro měnový pár: {symbol}
+Posílám ti kompletní data pro instrument: {symbol}
 
 Aktuální cena: {current_price}
 
@@ -78,6 +80,8 @@ Na základě fundamentální analýzy, svíčkových formací, RSI, MA a širš�
 - BUY
 - SELL  
 - HOLD
+
+{prompt_guidance}
 
 Součet musí dát 100%.
 

@@ -21,7 +21,7 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
-  - Gemini AI vybere **1 měnový pár**, rozhodne **BUY/SELL**, navrhne `lot_size` a `take_profit`
+  - Gemini AI vybere **1 instrument**, rozhodne **BUY/SELL**, navrhne `lot_size` a `take_profit`
   - V promptu zohledňuje swing styl (nejde o intraday), denní cíl ziskovosti a poplatek `0.10 USD` za každých `0.01` lotu
 7. **Režim exekuce dle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3):
   - `lot_size` se vždy použije z finální Gemini predikce
@@ -129,6 +129,17 @@ SERVICE_DEST_FOLDER=C:/path/to/output/folder
 
 # Optionalni (defaulty jsou uvedene v zavorce)
 MT5_SYMBOL_SUFFIX=_ecn
+# Prazdna hodnota vypne suffix filtr a zpracuje vsechny MT5 symboly:
+# MT5_SYMBOL_SUFFIX=
+MT5_SYMBOL_BLACKLIST=
+# Carkou oddelene symboly nebo masky, ktere se maji preskocit, napr. BTCUSD,ETHUSD,X*_ecn
+MT5_CRYPTO_SYMBOL_PATTERNS=BTCUSD*,ETHUSD*,LTCUSD*,BCHUSD*
+MT5_MIN_SIGNAL_PERCENT=35
+MT5_CRYPTO_MIN_SIGNAL_PERCENT=65
+MT5_CRYPTO_LOT_MULTIPLIER=0.25
+MT5_CRYPTO_MAX_OPEN_POSITIONS=1
+MT5_CRYPTO_ALLOW_FULL_TP_MODE=true
+MT5_CRYPTO_TP_DISTANCE_PERCENT=2.0
 LOOKBACK_PERIODS=30
 RUN_INTERVAL_SECONDS=3600
 RSI_PERIOD=14

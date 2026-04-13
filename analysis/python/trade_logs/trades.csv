@@ -659,3 +659,9 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-12T21:25:53.933044+00:00,XPTUSD_ecn,SELL,0.03,gemini_prediction,2043.85,False,Order failed with retcode: 10018 - Market closed
 2026-04-12T21:25:58.675165+00:00,USDILS_ecn,SELL,0.05,gemini_prediction,0.0,True,
 2026-04-13T16:47:23.184624+00:00,JP225_ecn,BUY,0.01,gemini_prediction,57217.05,False,Invalid take_profit for BUY: TP (39700.0) must be > market price (57217.05)
+2026-04-13T16:56:57.337999+00:00,NZDJPY_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-13T17:12:00.756578+00:00,US100_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-13T18:42:06.442039+00:00,USDHUF_ecn,SELL,0.06,gemini_prediction,308.713,False,Invalid take_profit for SELL: TP (360.0) must be < market price (308.713)
+2026-04-13T18:42:09.922908+00:00,CADCHF_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-04-13T18:55:16.311127+00:00,CHFHUF_ecn,SELL,0.06,gemini_prediction,393.543,False,Invalid take_profit for SELL: TP (394.0) must be < market price (393.543)
+2026-04-13T18:55:19.979969+00:00,EURNZD_ecn,SELL,0.01,gemini_prediction,0.0,True,
