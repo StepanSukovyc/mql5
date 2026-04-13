@@ -6,13 +6,14 @@ using Ollama AI (deepseek-coder-v2) based on market data.
 
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import os
 import shutil
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Optional, Set
+from typing import Dict, List, Optional, Set
 
 import httpx
 import re
@@ -62,6 +63,98 @@ def is_ollama_enabled() -> bool:
     if value is None:
         return False
     return value.lower() in {"true", "1", "yes", "y", "on"}
+
+
+def _parse_int_env_value(key: str, default: int, minimum: int = 0) -> int:
+    """Read integer config from .env with validation."""
+    value = _load_dotenv_value(key)
+    if value is None:
+        return default
+
+    try:
+        parsed = int(value)
+        if parsed < minimum:
+            raise ValueError
+        return parsed
+    except ValueError:
+        print(f"⚠️  Nevalidni {key}='{value}', pouzivam {default}")
+        return default
+
+
+def _parse_float_env_value(key: str, default: float, minimum: float = 0.0) -> float:
+    """Read float config from .env with validation."""
+    value = _load_dotenv_value(key)
+    if value is None:
+        return default
+
+    try:
+        parsed = float(value)
+        if parsed < minimum:
+            raise ValueError
+        return parsed
+    except ValueError:
+        print(f"⚠️  Nevalidni {key}='{value}', pouzivam {default}")
+        return default
+
+
+def get_ollama_max_parallel_requests() -> int:
+    """Return maximum number of concurrent Ollama requests."""
+    return _parse_int_env_value("OLLAMA_MAX_PARALLEL_REQUESTS", default=2, minimum=1)
+
+
+def get_ollama_request_delay_seconds() -> float:
+    """Return optional delay between submitted Ollama requests."""
+    return _parse_float_env_value("OLLAMA_REQUEST_DELAY_SECONDS", default=0.0, minimum=0.0)
+
+
+def is_ollama_compact_prompt_enabled() -> bool:
+    """Return whether Ollama should use a compact prompt payload."""
+    value = _load_dotenv_value("OLLAMA_COMPACT_PROMPT")
+    if value is None:
+        return False
+    return value.lower() in {"true", "1", "yes", "y", "on"}
+
+
+def _build_compact_market_data_summary(data: Dict) -> Dict:
+    """Build a reduced but information-dense summary for Ollama prompts."""
+    summary = {
+        "current_price": data.get("current_price"),
+        "candles": {},
+        "oscillators": {},
+    }
+
+    for timeframe in ["1h", "4h", "day", "week", "month"]:
+        candles = data.get("candles", {}).get(timeframe, [])
+        oscillators = data.get("oscillators", {}).get(timeframe, {})
+        latest_rsi = oscillators.get("rsi", [])[-1]["value"] if oscillators.get("rsi") else None
+        latest_ma = oscillators.get("ma", [])[-1]["value"] if oscillators.get("ma") else None
+
+        summary["oscillators"][timeframe] = {
+            "rsi": latest_rsi,
+            "ma": latest_ma,
+        }
+
+        if not candles:
+            summary["candles"][timeframe] = {"count": 0, "recent": []}
+            continue
+
+        recent_candles = candles[-5:]
+        first_close = recent_candles[0].get("close")
+        last_close = recent_candles[-1].get("close")
+        price_change_pct = None
+        if first_close not in (None, 0) and last_close is not None:
+            try:
+                price_change_pct = ((float(last_close) - float(first_close)) / float(first_close)) * 100.0
+            except (TypeError, ValueError, ZeroDivisionError):
+                price_change_pct = None
+
+        summary["candles"][timeframe] = {
+            "count": len(candles),
+            "recent": recent_candles,
+            "recent_change_pct": price_change_pct,
+        }
+
+    return summary
 
 
 def get_current_hour() -> int:
@@ -245,6 +338,14 @@ def ask_ollama_prediction(symbol: str, data: Dict, ollama_url: str, ollama_model
     
     current_price = data.get("current_price")
     prompt_guidance = get_symbol_prompt_guidance(symbol)
+    compact_prompt_enabled = is_ollama_compact_prompt_enabled()
+    prompt_payload = _build_compact_market_data_summary(data) if compact_prompt_enabled else data
+    prompt_payload_label = "Kompaktní data" if compact_prompt_enabled else "Kompletní data"
+    compact_prompt_note = (
+        "Používáš kompaktní shrnutí dat: posledních 5 svíček na timeframe, počty svíček, aktuální RSI/MA a krátkou změnu ceny."
+        if compact_prompt_enabled
+        else "Používáš kompletní raw data v plném rozsahu."
+    )
     
     # Create prompt similar to Gemini
     prompt = f"""Jsi finanční poradce a expert na technickou analýzu finančních instrumentů.
@@ -258,10 +359,13 @@ Dostupná data:
 - Pro každý timeframe máš: svíčkové formace, RSI, MA
 - RSI hodnoty za jednotlivé timeframes: {json.dumps(oscillators_summary, indent=2)}
 
-Kompletní data:
+{prompt_payload_label}:
 ```json
-{json.dumps(data, indent=2, ensure_ascii=False)}
+{json.dumps(prompt_payload, indent=2, ensure_ascii=False)}
 ```
+
+Režim vstupu:
+{compact_prompt_note}
 
 Úkol:
 Na základě fundamentální analýzy, svíčkových formací, RSI a MA hodnot proveď rizikové hodnocení:
@@ -426,6 +530,18 @@ def process_symbol_with_ollama(
         return False
 
 
+def _sleep_interruptibly(stop_event, seconds: float) -> bool:
+    """Sleep in small intervals and return False if shutdown was requested."""
+    remaining = max(0.0, seconds)
+    while remaining > 0:
+        if stop_event.is_set():
+            return False
+        step = min(0.2, remaining)
+        time.sleep(step)
+        remaining -= step
+    return not stop_event.is_set()
+
+
 def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
     """
     Main Ollama service loop - runs independently from main logic.
@@ -438,7 +554,6 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
     print("🤖 Ollama Service Loop spuštěn")
     print("="*60)
     print("Funkcionalita: Nezávislé predikce pomocí Ollama AI")
-    print("Model: deepseek-coder-v2")
     print("Ovládání: Změňte OLLAMA_ENABLED v .env za běhu")
     print("="*60 + "\n")
     
@@ -493,6 +608,12 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             print(f"\n{'='*60}")
             print(f"▶️  Ollama Cyklus #{cycle_count}")
             print(f"{'='*60}")
+
+            ollama_parallelism = get_ollama_max_parallel_requests()
+            ollama_request_delay = get_ollama_request_delay_seconds()
+            print(f"⚙️  Ollama model: {ollama_model}")
+            print(f"⚙️  Paralelni Ollama requesty: max {ollama_parallelism}")
+            print(f"⚙️  Zpozdeni mezi odeslanim requestu: {ollama_request_delay:.2f}s")
             
             # Create ollama folders
             ollama_base = service_dest_folder / "ollama"
@@ -535,26 +656,64 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             # Process each symbol
             processed_count = 0
             skipped_count = 0
-            
-            for symbol_file in ollama_source.glob("*.json"):
-                if stop_event.is_set():
-                    print("\n🛑 Zastavuji Ollama service...")
-                    return
-                
-                success = process_symbol_with_ollama(
-                    symbol_file,
-                    ollama_predictions,
-                    ollama_url,
-                    ollama_model
-                )
-                
-                if success:
-                    processed_count += 1
-                else:
-                    skipped_count += 1
-                
-                # Small delay between requests
-                time.sleep(2)
+
+            symbol_files = list(ollama_source.glob("*.json"))
+
+            if ollama_parallelism <= 1:
+                for symbol_file in symbol_files:
+                    if stop_event.is_set():
+                        print("\n🛑 Zastavuji Ollama service...")
+                        return
+
+                    success = process_symbol_with_ollama(
+                        symbol_file,
+                        ollama_predictions,
+                        ollama_url,
+                        ollama_model
+                    )
+
+                    if success:
+                        processed_count += 1
+                    else:
+                        skipped_count += 1
+
+                    if ollama_request_delay > 0 and not _sleep_interruptibly(stop_event, ollama_request_delay):
+                        print("\n🛑 Zastavuji Ollama service...")
+                        return
+            else:
+                with ThreadPoolExecutor(max_workers=ollama_parallelism) as executor:
+                    future_to_symbol = {}
+
+                    for symbol_file in symbol_files:
+                        if stop_event.is_set():
+                            print("\n🛑 Zastavuji Ollama service...")
+                            return
+
+                        future = executor.submit(
+                            process_symbol_with_ollama,
+                            symbol_file,
+                            ollama_predictions,
+                            ollama_url,
+                            ollama_model,
+                        )
+                        future_to_symbol[future] = symbol_file.name
+
+                        if ollama_request_delay > 0 and not _sleep_interruptibly(stop_event, ollama_request_delay):
+                            print("\n🛑 Zastavuji Ollama service...")
+                            return
+
+                    for future in as_completed(future_to_symbol):
+                        symbol_name = future_to_symbol[future]
+                        try:
+                            success = future.result()
+                        except Exception as exc:
+                            print(f"❌ Chyba ve workeru pro {symbol_name}: {exc}")
+                            success = False
+
+                        if success:
+                            processed_count += 1
+                        else:
+                            skipped_count += 1
             
             # End timestamp for predictions
             end_time = datetime.now(tz=timezone.utc)

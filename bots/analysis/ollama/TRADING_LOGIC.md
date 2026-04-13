@@ -89,6 +89,9 @@ Stejné vypočtené okno platí i pro cleanup strategie, takže v tomto čase ne
      - Zkontroluje, zda predikce z aktuální hodiny už existuje (podle `mtime` souboru)
      - Pokud ano → přeskočí (data jsou platná celou hodinu)
      - Pokud ne → pošle data na Ollama API (model: deepseek-coder-v2)
+   - Requesty na Ollama mohou běžet paralelně, omezené přes `OLLAMA_MAX_PARALLEL_REQUESTS`
+   - Volitelný throttle mezi spuštěním requestů řídí `OLLAMA_REQUEST_DELAY_SECONDS`
+    - Přepínač `OLLAMA_COMPACT_PROMPT` určuje, zda Ollama dostane plný raw payload nebo kompaktní shrnutí dat
      - Parsuje JSON odpověď a extrahuje `BUY`, `SELL`, `HOLD`, `reasoning`
      - Uloží do `ollama/predikce/{symbol}.json` s metadaty (`timestamp`, `model`)
    - Tyto soubory pak hlavní trading flow reuse-ne, pokud jsou čerstvé (<= 1h)

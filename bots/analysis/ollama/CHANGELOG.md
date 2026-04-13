@@ -18,6 +18,16 @@
   - Gemini fallback requests can now run concurrently instead of strictly one-by-one
   - The parallelism is bounded so the cycle speeds up without removing control over API pressure
 
+- **Parallelized Ollama Prediction Requests With Configurable Throttling**
+  - Added `OLLAMA_MAX_PARALLEL_REQUESTS` and `OLLAMA_REQUEST_DELAY_SECONDS` to `.env` and `.env.example`
+  - The Ollama service can now submit multiple symbol prediction requests concurrently instead of processing every instrument strictly one-by-one
+  - Concurrency stays bounded and the optional delay allows smoothing request bursts when needed
+
+- **Added Configurable Compact Ollama Prompt Mode**
+  - Added `OLLAMA_COMPACT_PROMPT` to `.env` and `.env.example` with default `false`
+  - When enabled, Ollama receives a reduced summary payload instead of the full raw market-data JSON
+  - When disabled, the existing full-prompt behavior remains unchanged
+
 ## 2026-04-13 (Final Decision Retry After Failed Trade)
 
 - **Retried Final Decision With Symbol Exclusion After Trade Failure**

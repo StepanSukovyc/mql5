@@ -188,6 +188,9 @@ OLLAMA_PREDICTION_MAX_AGE_MINUTES=120
 OLLAMA_FALLBACK_TO_GEMINI=false
 OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS=60
 GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS=3
+OLLAMA_MAX_PARALLEL_REQUESTS=2
+OLLAMA_REQUEST_DELAY_SECONDS=0.0
+OLLAMA_COMPACT_PROMPT=false
 ```
 
 `OLLAMA_FALLBACK_TO_GEMINI=false` znamená, že hlavní trading logika bere pro analýzu pouze instrumenty s čerstvou Ollama predikcí. Instrument bez použitelné Ollama predikce se v daném běhu přeskočí a když takto odpadnou všechny symboly, finální decision fáze se nespustí.
@@ -195,6 +198,10 @@ GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS=3
 `OLLAMA_FALLBACK_TO_GEMINI=true` znamená, že hlavní trading logika může použít Gemini jako náhradní zdroj predikce, ale pouze do limitu `OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS` instrumentů za jeden cyklus. Další symboly bez čerstvé Ollama predikce se už v tom běhu přeskočí.
 
 `GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS` omezuje, kolik Gemini fallback dotazů může běžet současně. Vyšší hodnota může zrychlit cyklus, ale zvyšuje riziko quota limitů nebo špičkové latence.
+
+`OLLAMA_MAX_PARALLEL_REQUESTS` omezuje, kolik Ollama requestů může běžet současně během nezávislého Ollama cyklu. `OLLAMA_REQUEST_DELAY_SECONDS` pak umožňuje jemně rozložit start jednotlivých requestů, pokud by při plně paralelním startu docházelo ke špičkám nebo nestabilitě.
+
+`OLLAMA_COMPACT_PROMPT` řídí velikost promptu pro Ollamu. Při `false` se zachová dnešní plný prompt s kompletními daty. Při `true` se použije kompaktní shrnutí, které zmenší payload omezováním raw candle historie na posledních několik svíček a ponechá klíčové indikátory.
 
 Rucni blokovaci okno `SWAP_BLOCK_START_*` az `SWAP_BLOCK_END_*` je interpretovano v case `Europe/Prague`. Audit a trade logy zustavaji ulozene v UTC.
 
