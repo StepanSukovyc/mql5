@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-04-13 (Configurable Ollama-Only Prediction Mode)
+
+- **Added Env Switch For Gemini Fallback After Stale Ollama Predictions**
+  - Added `OLLAMA_FALLBACK_TO_GEMINI` to `.env` and `.env.example` with default `false`
+  - When `OLLAMA_FALLBACK_TO_GEMINI=false`, instruments without a fresh Ollama prediction are ignored instead of falling back to `ask_gemini_prediction`
+  - If no instrument has a fresh Ollama prediction, the trading cycle now completes without creating predictions and without opening a trade
+  - Updated README and TRADING_LOGIC documentation to describe the new behavior
+
 ## 2026-04-13 (Final Decision Retry After Failed Trade)
 
 - **Retried Final Decision With Symbol Exclusion After Trade Failure**

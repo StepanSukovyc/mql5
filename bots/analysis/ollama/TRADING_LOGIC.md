@@ -12,7 +12,10 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Pokud ne → stáhne data z MT5 + získá nové predikce od Gemini AI
    - Pro každý symbol se před dotazem na Gemini kontroluje `SERVICE_DEST_FOLDER/ollama/predikce/{symbol}.json`
    - Pokud je `timestamp` validní a soubor není starší než limit `OLLAMA_PREDICTION_MAX_AGE_MINUTES` z `.env` (default 120 minut), použije se Ollama predikce
-   - Pokud Ollama predikce chybí / je nevalidní / je starší než nastavený limit, provede se fallback na `ask_gemini_prediction`
+    - Pokud Ollama predikce chybí / je nevalidní / je starší než nastavený limit:
+       - při `OLLAMA_FALLBACK_TO_GEMINI=true` proběhne fallback na `ask_gemini_prediction`
+       - při `OLLAMA_FALLBACK_TO_GEMINI=false` se instrument v tomto běhu ignoruje
+    - Pokud při `OLLAMA_FALLBACK_TO_GEMINI=false` nezůstane žádný instrument s čerstvou Ollama predikcí, cyklus skončí bez vytvoření predikcí a bez nákupu
 4. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
 5. **Kontroluje swap blok okno (znovu)** - pokud trading signal přijde v rollover okně, zahodí ho a čeká
 6. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
@@ -477,6 +480,8 @@ Každá predikce obsahuje:
 
 ### final_decision.py
 - `GEMINI_FULL_CONTROL_EVERY_N_TRADES` - každý N-tý obchod je plně svěřen Gemini (lot_size + take_profit)
+- `OLLAMA_PREDICTION_MAX_AGE_MINUTES` - maximální stáří Ollama predikce, které se ještě považuje za čerstvé
+- `OLLAMA_FALLBACK_TO_GEMINI` - při `true` se stará nebo chybějící Ollama predikce nahradí dotazem na Gemini, při `false` se takový instrument ignoruje
 - `MT5_CRYPTO_SYMBOL_PATTERNS` - wildcard masky symbolů, které mají používat crypto risk profil
 - `MT5_CRYPTO_MIN_SIGNAL_PERCENT` - přísnější minimální BUY/SELL confidence pro crypto
 - `MT5_CRYPTO_LOT_MULTIPLIER` - násobek Gemini lot size pro crypto exekuci

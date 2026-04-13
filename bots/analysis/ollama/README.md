@@ -17,7 +17,10 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
    - **Pokud ne**: stáhne data a získá nové předpovědi od Gemini AI
   - Při tvorbě predikce pro každý symbol nejdřív zkontroluje `SERVICE_DEST_FOLDER/ollama/predikce/{symbol}.json`
   - Pokud je `timestamp` v souboru čerstvý (max 1 hodina), reuse-ne Ollama predikci místo volání Gemini
-  - Pokud Ollama predikce neexistuje / je nevalidní / je starší než 1h, použije fallback `ask_gemini_prediction`
+  - Pokud Ollama predikce neexistuje / je nevalidní / je starší než 1h, pak:
+    - při `OLLAMA_FALLBACK_TO_GEMINI=true` použije fallback `ask_gemini_prediction`
+    - při `OLLAMA_FALLBACK_TO_GEMINI=false` instrument ignoruje
+  - Pokud při `OLLAMA_FALLBACK_TO_GEMINI=false` nezůstane žádný instrument s čerstvou Ollama predikcí, celý cyklus se přeskočí bez nákupu
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
@@ -179,7 +182,11 @@ LOSS_CLEANUP_STRATEGY_DRY_RUN=true
 OLLAMA_ENABLED=true
 OLLAMA_URL=http://localhost:11434/api/generate
 OLLAMA_MODEL=deepseek-coder-v2
+OLLAMA_PREDICTION_MAX_AGE_MINUTES=120
+OLLAMA_FALLBACK_TO_GEMINI=false
 ```
+
+`OLLAMA_FALLBACK_TO_GEMINI=false` znamená, že hlavní trading logika bere pro analýzu pouze instrumenty s čerstvou Ollama predikcí. Instrument bez použitelné Ollama predikce se v daném běhu přeskočí a když takto odpadnou všechny symboly, finální decision fáze se nespustí.
 
 Rucni blokovaci okno `SWAP_BLOCK_START_*` az `SWAP_BLOCK_END_*` je interpretovano v case `Europe/Prague`. Audit a trade logy zustavaji ulozene v UTC.
 
@@ -219,7 +226,8 @@ Skript běží jako **nekonečný obchodní automat**:
 3. Když marže > 20%:
    - Zkontroluje existující predikce z aktuální hodiny
   - Používá je, nebo stáhne nová data a získá nové predikce
-  - Pro každý symbol preferuje čerstvou Ollama predikci (<= 1h), jinak volá Gemini
+  - Pro každý symbol preferuje čerstvou Ollama predikci (<= `OLLAMA_PREDICTION_MAX_AGE_MINUTES`)
+  - Když čerstvá Ollama predikce chybí, buď volá Gemini (`OLLAMA_FALLBACK_TO_GEMINI=true`), nebo symbol přeskočí (`OLLAMA_FALLBACK_TO_GEMINI=false`)
    - Filtruje slabé signály
    - Provede obchod
 4. **Restart cyklu** (vrací se na krok 2)
