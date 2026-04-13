@@ -606,3 +606,55 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-10T10:59:31.205494+00:00,SGDJPY_ecn,SELL,0.05,gemini_prediction,0.0,True,
 2026-04-10T11:32:57.932112+00:00,XPTUSD_ecn,SELL,0.01,gemini_prediction,0.0,True,
 2026-04-10T13:18:34.303162+00:00,GBPJPY_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-10T17:11:52.471526+00:00,USDCAD_ecn,SELL,0.08,gemini_prediction,0.0,True,
+2026-04-12T21:21:51.361264+00:00,UKOIL_ecn,SELL,0.06,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:21:56.390719+00:00,UKOIL_ecn,SELL,0.08,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:22:01.375609+00:00,XCUUSD_ecn,BUY,0.01,gemini_prediction,0.0,False,"Insufficient margin: required 1285.91, available 882.80"
+2026-04-12T21:22:06.843390+00:00,UKOIL_ecn,SELL,0.03,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:22:11.780198+00:00,XALUSD_ecn,BUY,0.01,gemini_prediction,3508.8,False,Invalid take_profit for BUY: TP (3400.0) must be > market price (3508.8)
+2026-04-12T21:22:16.806008+00:00,XPDUSD_ecn,SELL,0.01,gemini_prediction,1523.45,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:22:21.802279+00:00,UKOIL_ecn,SELL,0.04,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:22:26.254839+00:00,ETHUSD_ecn,SELL,0.01,gemini_prediction,2211.55,False,Invalid take_profit for SELL: TP (3400.0) must be < market price (2211.55)
+2026-04-12T21:22:31.543172+00:00,UKOIL_ecn,SELL,0.06,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:22:35.974894+00:00,USDCZK_ecn,SELL,0.06,gemini_prediction,20.8623,False,Invalid take_profit for SELL: TP (22.75) must be < market price (20.8623)
+2026-04-12T21:22:41.096548+00:00,XALUSD_ecn,BUY,0.01,gemini_prediction,3508.8,False,Invalid take_profit for BUY: TP (3430.0) must be > market price (3508.8)
+2026-04-12T21:22:46.284862+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:22:51.247770+00:00,XALUSD_ecn,BUY,0.02,gemini_prediction,3508.8,False,Invalid take_profit for BUY: TP (3450.0) must be > market price (3508.8)
+2026-04-12T21:22:55.987773+00:00,XAUUSD_ecn,SELL,0.04,gemini_prediction,0.0,False,"Insufficient margin: required 949.72, available 881.15"
+2026-04-12T21:23:01.929286+00:00,NZDCHF_ecn,SELL,0.02,gemini_prediction,0.0,True,
+2026-04-12T21:23:06.787215+00:00,XZNUSD_ecn,BUY,0.01,gemini_prediction,3338.56,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:23:11.544293+00:00,USDCZK_ecn,SELL,0.06,gemini_prediction,20.864,False,Invalid take_profit for SELL: TP (23.05) must be < market price (20.864)
+2026-04-12T21:23:16.825360+00:00,UKOIL_ecn,SELL,0.08,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:23:21.644874+00:00,XAUUSD_ecn,SELL,0.01,gemini_prediction,4748.62,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:23:26.535725+00:00,XCUUSD_ecn,BUY,0.01,gemini_prediction,0.0,False,"Insufficient margin: required 1285.91, available 935.09"
+2026-04-12T21:23:32.285011+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:23:37.043333+00:00,XCUUSD_ecn,BUY,0.01,gemini_prediction,0.0,False,"Insufficient margin: required 1285.91, available 935.00"
+2026-04-12T21:23:42.505068+00:00,UKOIL_ecn,SELL,0.08,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:23:47.206651+00:00,XAUUSD_ecn,SELL,0.02,gemini_prediction,4748.62,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:23:52.260890+00:00,ETHUSD_ecn,SELL,0.01,gemini_prediction,2211.0,False,Invalid take_profit for SELL: TP (3300.0) must be < market price (2211.0)
+2026-04-12T21:23:57.249189+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:24:02.327730+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:24:06.966856+00:00,XZNUSD_ecn,BUY,0.01,gemini_prediction,3338.56,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:24:11.947178+00:00,UKOIL_ecn,SELL,0.08,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:24:16.694935+00:00,XPTUSD_ecn,SELL,0.02,gemini_prediction,2043.85,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:24:21.403873+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:24:26.488704+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:24:31.109568+00:00,XCUUSD_ecn,BUY,0.02,gemini_prediction,0.0,False,"Insufficient margin: required 2571.81, available 939.96"
+2026-04-12T21:24:35.985283+00:00,XALUSD_ecn,BUY,0.01,gemini_prediction,3508.8,False,Invalid take_profit for BUY: TP (3420.0) must be > market price (3508.8)
+2026-04-12T21:24:40.596844+00:00,XALUSD_ecn,BUY,0.01,gemini_prediction,3508.8,False,Invalid take_profit for BUY: TP (3500.0) must be > market price (3508.8)
+2026-04-12T21:24:45.658223+00:00,UKOIL_ecn,SELL,0.08,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:24:50.222594+00:00,XALUSD_ecn,BUY,0.03,gemini_prediction,0.0,False,"Insufficient margin: required 1052.64, available 937.81"
+2026-04-12T21:24:54.860592+00:00,USDCZK_ecn,SELL,0.07,gemini_prediction,20.8604,False,Invalid take_profit for SELL: TP (23.0) must be < market price (20.8604)
+2026-04-12T21:24:59.490009+00:00,XZNUSD_ecn,BUY,0.02,gemini_prediction,3338.56,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:25:04.749995+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:25:09.914411+00:00,UKOIL_ecn,SELL,0.05,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:25:14.391516+00:00,XZNUSD_ecn,BUY,0.01,gemini_prediction,3338.56,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:25:19.770753+00:00,UKOIL_ecn,SELL,0.03,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:25:24.285688+00:00,CHINAH_ecn,SELL,0.06,gemini_prediction,8672.45,False,Invalid take_profit for SELL: TP (9750.0) must be < market price (8672.45)
+2026-04-12T21:25:29.341030+00:00,XCUUSD_ecn,BUY,0.01,gemini_prediction,0.0,False,"Insufficient margin: required 1285.91, available 942.98"
+2026-04-12T21:25:34.178371+00:00,ZARJPY_ecn,BUY,0.05,gemini_prediction,0.0,True,
+2026-04-12T21:25:38.972928+00:00,UKOIL_ecn,SELL,0.06,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:25:43.964068+00:00,UKOIL_ecn,SELL,0.08,gemini_prediction,96.931,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:25:49.047854+00:00,XCUUSD_ecn,BUY,0.02,gemini_prediction,0.0,False,"Insufficient margin: required 2571.81, available 924.58"
+2026-04-12T21:25:53.933044+00:00,XPTUSD_ecn,SELL,0.03,gemini_prediction,2043.85,False,Order failed with retcode: 10018 - Market closed
+2026-04-12T21:25:58.675165+00:00,USDILS_ecn,SELL,0.05,gemini_prediction,0.0,True,
