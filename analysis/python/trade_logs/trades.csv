@@ -665,3 +665,10 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-13T18:42:09.922908+00:00,CADCHF_ecn,SELL,0.05,gemini_prediction,0.0,True,
 2026-04-13T18:55:16.311127+00:00,CHFHUF_ecn,SELL,0.06,gemini_prediction,393.543,False,Invalid take_profit for SELL: TP (394.0) must be < market price (393.543)
 2026-04-13T18:55:19.979969+00:00,EURNZD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-14T00:36:35.027635+00:00,EU50_ecn,BUY,0.01,gemini_prediction,5948.05,False,Invalid take_profit for BUY: TP (5150.0) must be > market price (5948.05)
+2026-04-14T00:36:38.292392+00:00,CHFHUF_ecn,SELL,0.04,gemini_prediction,393.593,False,Invalid take_profit for SELL: TP (408.0) must be < market price (393.593)
+2026-04-14T00:56:46.358495+00:00,EU50_ecn,BUY,0.01,gemini_prediction,5944.05,False,Invalid take_profit for BUY: TP (5050.0) must be > market price (5944.05)
+2026-04-14T00:56:48.925039+00:00,EURUSD_ecn,BUY,0.01,gemini_prediction,1.17654,False,Invalid take_profit for BUY: TP (1.09) must be > market price (1.17654)
+2026-04-14T00:56:55.635275+00:00,EU50_ecn,BUY,0.04,gemini_prediction,5945.05,False,Invalid take_profit for BUY: TP (5050.0) must be > market price (5945.05)
+2026-04-14T00:56:58.949477+00:00,CHFHUF_ecn,SELL,0.03,gemini_prediction,0.0,True,
+2026-04-14T13:42:11.564551+00:00,XPBUSD_ecn,SELL,0.01,gemini_prediction,0.0,True,

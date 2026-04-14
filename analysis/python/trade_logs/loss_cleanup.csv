@@ -76,3 +76,4 @@ timestamp,dry_run,daily_clean_profit,current_open_profit,effective_profit_budget
 2026-04-10T10:45:55.663816+00:00,True,55.88,-819.99,-767.87,82.65,-850.52,11,2026-04-09T20:35:46+00:00,2026-04-09T22:35:46+02:00,,,,,,,,False,"Z <= 0 after current open P/L and buffer, no position can be closed safely",52.12
 2026-04-12T20:27:58.174091+00:00,True,0.00,-739.79,-739.79,84.60,-824.39,0,,,,,,,,,,False,"Z <= 0 after current open P/L and buffer, no position can be closed safely",0.00
 2026-04-13T10:45:04.818989+00:00,True,0.00,-1367.26,-1367.26,84.77,-1452.03,0,,,,,,,,,,False,"Z <= 0 after current open P/L and buffer, no position can be closed safely",0.00
+2026-04-14T10:45:59.160573+00:00,True,64.17,-980.47,-919.00,86.86,-1005.86,9,2026-04-13T21:23:49+00:00,2026-04-13T23:23:49+02:00,,,,,,,,False,"Z <= 0 after current open P/L and buffer, no position can be closed safely",61.47

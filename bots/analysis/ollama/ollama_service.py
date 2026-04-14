@@ -731,8 +731,8 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             print(f"{'='*60}")
             print("\n⏳ Čekám 10 minut před dalším cyklem...")
             
-            # Wait 10 minutes before next cycle
-            for _ in range(600):  # 10 minutes = 600 seconds
+            # Wait 1 minutes before next cycle
+            for _ in range(60):  # 1 minutes = 60 seconds
                 if stop_event.is_set():
                     return
                 time.sleep(1)
