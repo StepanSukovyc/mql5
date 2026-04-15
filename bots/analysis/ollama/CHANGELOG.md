@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-04-15 (ECN Suffix Override For CFD Detection)
+
+- **Made `_ecn` Symbols Always Valid Even With CFD Blacklist Enabled**
+  - `instrument_utils.py` now treats symbols ending with `_ecn` as always valid before any CFD classification is applied
+  - This prevents forex pairs such as `EURUSD_ecn` from being filtered out by the `__CFD__` blacklist token even when MT5 metadata resembles CFD instruments
+  - Added `MT5_ALWAYS_VALID_SYMBOL_SUFFIXES` with default `_ecn` for future overrides
+  - Added unit tests to verify that `_ecn` symbols stay allowed while non-`_ecn` CFD symbols can still be blocked
+
+## 2026-04-15 (CFD Blacklist Token)
+
+- **Added A Dedicated Blacklist Token For All CFD Instruments**
+  - `market_data.py` now recognizes `__CFD__` inside `MT5_SYMBOL_BLACKLIST`
+  - When present, all symbols classified as CFD are filtered out before prediction generation and final trade selection
+  - Updated `.env`, `.env.example`, and `README.md` to document the new blacklist option
+  - Local `.env` now enables `MT5_SYMBOL_BLACKLIST=__CFD__`, so CFD instruments are currently excluded from the trading universe
+
 ## 2026-04-14 (Fee-Aware CFD Take-Profit Safeguards)
 
 - **Protected CFD Trades From Uneconomic Gemini Take-Profit Targets**

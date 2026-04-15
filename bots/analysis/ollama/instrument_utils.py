@@ -60,6 +60,14 @@ def get_crypto_symbol_patterns() -> List[str]:
 	return ["BTCUSD*", "ETHUSD*", "LTCUSD*", "BCHUSD*"]
 
 
+def get_always_valid_symbol_suffixes() -> List[str]:
+	"""Return symbol suffixes that should never be treated as CFD."""
+	configured = _parse_csv(os.getenv("MT5_ALWAYS_VALID_SYMBOL_SUFFIXES"))
+	if configured:
+		return configured
+	return ["_ecn"]
+
+
 def symbol_matches_patterns(symbol: str, patterns: Optional[Iterable[str]] = None) -> bool:
 	"""Return True when symbol matches at least one wildcard pattern."""
 	if not symbol:
@@ -85,7 +93,14 @@ def get_cfd_symbol_patterns() -> List[str]:
 
 def is_cfd_symbol(symbol: str, patterns: Optional[Iterable[str]] = None) -> bool:
 	"""Return True when symbol should use the CFD trading profile."""
-	if not symbol or is_crypto_symbol(symbol):
+	if not symbol:
+		return False
+
+	symbol_lower = symbol.lower()
+	if any(symbol_lower.endswith(suffix.lower()) for suffix in get_always_valid_symbol_suffixes() if suffix):
+		return False
+
+	if is_crypto_symbol(symbol):
 		return False
 
 	if symbol_matches_patterns(symbol, patterns or get_cfd_symbol_patterns()):

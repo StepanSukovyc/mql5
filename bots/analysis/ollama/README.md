@@ -137,7 +137,7 @@ MT5_SYMBOL_SUFFIX=_ecn
 # Prazdna hodnota vypne suffix filtr a zpracuje vsechny MT5 symboly:
 # MT5_SYMBOL_SUFFIX=
 MT5_SYMBOL_BLACKLIST=
-# Carkou oddelene symboly nebo masky, ktere se maji preskocit, napr. BTCUSD,ETHUSD,X*_ecn
+# Carkou oddelene symboly nebo masky, ktere se maji preskocit, napr. BTCUSD,ETHUSD,X*_ecn,__CFD__
 MT5_CRYPTO_SYMBOL_PATTERNS=BTCUSD*,ETHUSD*,LTCUSD*,BCHUSD*
 MT5_MIN_SIGNAL_PERCENT=35
 MT5_CRYPTO_MIN_SIGNAL_PERCENT=65
@@ -166,6 +166,8 @@ PROFIT_CLEANUP_STRATEGY_ENABLED=true
 PROFIT_CLEANUP_STRATEGY_DRY_RUN=true
 SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED=true
 SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN=true
+
+Speciální hodnota `__CFD__` v `MT5_SYMBOL_BLACKLIST` vyřadí všechny instrumenty rozpoznané jako CFD.
 
 # Manualni fallback block window, kdyz MT5 historie neposkytne pouzitelny rollover cas
 SWAP_BLOCK_START_HOUR=22

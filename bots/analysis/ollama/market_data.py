@@ -12,7 +12,11 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 import MetaTrader5 as mt5
+from instrument_utils import is_cfd_symbol
 from mt5_symbols import get_current_price
+
+
+CFD_BLACKLIST_TOKEN = "__cfd__"
 
 
 def simple_moving_average(values: List[float], period: int) -> List[Optional[float]]:
@@ -132,6 +136,9 @@ def get_symbols(suffix: str, blacklist: Optional[Iterable[str]] = None) -> List[
 
     normalized_suffix = (suffix or "").strip().lower()
     blacklist_patterns = [item.strip().lower() for item in (blacklist or []) if item and item.strip()]
+    blacklist_cfd = CFD_BLACKLIST_TOKEN in blacklist_patterns
+    if blacklist_cfd:
+        blacklist_patterns = [pattern for pattern in blacklist_patterns if pattern != CFD_BLACKLIST_TOKEN]
 
     filtered_symbols: List[str] = []
     for symbol in symbols:
@@ -139,6 +146,9 @@ def get_symbols(suffix: str, blacklist: Optional[Iterable[str]] = None) -> List[
         symbol_lower = symbol_name.lower()
 
         if normalized_suffix and not symbol_lower.endswith(normalized_suffix):
+            continue
+
+        if blacklist_cfd and is_cfd_symbol(symbol_name):
             continue
 
         if any(fnmatch(symbol_lower, pattern) for pattern in blacklist_patterns):
