@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-04-14 (Fee-Aware CFD Take-Profit Safeguards)
+
+- **Protected CFD Trades From Uneconomic Gemini Take-Profit Targets**
+  - `final_decision.py` now detects CFD instruments separately from crypto and standard symbols
+  - In full Gemini TP mode, CFD `take_profit` is no longer accepted blindly; the target is checked with MT5 profit estimation against modeled per-trade fees
+  - If Gemini `take_profit` is too close to cover fees and the minimum net-profit target, the system now moves `TP` to the nearest fee-safe level instead of opening a likely uneconomic trade
+  - If no fee-safe `TP` can be found within the configured distance, the trade is executed without `take_profit` instead of keeping a loss-making target
+
+- **Added CFD Runtime Configuration**
+  - Added `MT5_CFD_SYMBOL_PATTERNS` for optional explicit CFD symbol classification
+  - Added `MT5_CFD_TP_MAX_DISTANCE_PERCENT` with default `3.0`
+  - Added `MT5_CFD_MIN_NET_PROFIT_USD` with default `0.10`
+  - Added `MT5_CFD_ALLOW_FULL_TP_MODE` with default `true`
+
+- **Added MT5 Profit-Based CFD TP Validation Tests**
+  - `test_final_decision.py` now verifies that a CFD `take_profit` is either raised to a fee-safe level or disabled when no safe target exists
+  - Added `estimate_order_profit()` helper to `mt5_symbols.py` for MT5-native TP profitability checks
+
 ## 2026-04-13 (Configurable Ollama-Only Prediction Mode)
 
 - **Added Env Switch For Gemini Fallback After Stale Ollama Predictions**

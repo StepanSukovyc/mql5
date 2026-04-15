@@ -8,10 +8,68 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from final_decision import make_final_trading_decision
+from final_decision import _resolve_trade_parameters, make_final_trading_decision
 
 
 class FinalDecisionRetryTests(unittest.TestCase):
+	@patch("final_decision.estimate_order_profit")
+	@patch("final_decision.get_symbol_info")
+	@patch("final_decision.get_current_price")
+	def test_cfd_tp_is_adjusted_to_cover_modeled_fee(
+		self,
+		mock_get_current_price,
+		mock_get_symbol_info,
+		mock_estimate_order_profit,
+	) -> None:
+		mock_get_current_price.return_value = 100.0
+		mock_get_symbol_info.return_value = type("SymbolInfo", (), {"digits": 2})()
+
+		def _estimate_profit(symbol, action, volume, open_price, close_price):
+			return close_price - open_price
+
+		mock_estimate_order_profit.side_effect = _estimate_profit
+
+		lot_size, take_profit = _resolve_trade_parameters(
+			gemini_full_control_mode=True,
+			gemini_lot_size=0.01,
+			gemini_take_profit=100.05,
+			account_state={},
+			symbol="JP225_ecn",
+			action="BUY",
+			symbol_is_crypto=False,
+			symbol_is_cfd=True,
+		)
+
+		self.assertEqual(lot_size, 0.01)
+		self.assertEqual(take_profit, 100.2)
+
+	@patch("final_decision.estimate_order_profit")
+	@patch("final_decision.get_symbol_info")
+	@patch("final_decision.get_current_price")
+	def test_cfd_tp_is_disabled_when_no_safe_target_exists(
+		self,
+		mock_get_current_price,
+		mock_get_symbol_info,
+		mock_estimate_order_profit,
+	) -> None:
+		mock_get_current_price.return_value = 100.0
+		mock_get_symbol_info.return_value = type("SymbolInfo", (), {"digits": 2})()
+		mock_estimate_order_profit.return_value = 0.05
+
+		lot_size, take_profit = _resolve_trade_parameters(
+			gemini_full_control_mode=True,
+			gemini_lot_size=0.01,
+			gemini_take_profit=100.05,
+			account_state={},
+			symbol="JP225_ecn",
+			action="BUY",
+			symbol_is_crypto=False,
+			symbol_is_cfd=True,
+		)
+
+		self.assertEqual(lot_size, 0.01)
+		self.assertIsNone(take_profit)
+
 	@patch("final_decision.execute_trade")
 	@patch("final_decision.validate_symbol")
 	@patch("final_decision.ask_gemini_final_decision")

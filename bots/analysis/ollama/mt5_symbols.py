@@ -32,3 +32,25 @@ def get_current_price(
 		return float(tick.ask)
 
 	return float(tick.bid)
+
+
+def estimate_order_profit(
+	symbol: str,
+	action: str,
+	volume: float,
+	open_price: float,
+	close_price: float,
+) -> Optional[float]:
+	"""Estimate MT5 order profit for a hypothetical exit price."""
+	if action == "BUY":
+		order_type = mt5.ORDER_TYPE_BUY
+	elif action == "SELL":
+		order_type = mt5.ORDER_TYPE_SELL
+	else:
+		return None
+
+	profit = mt5.order_calc_profit(order_type, symbol, volume, open_price, close_price)
+	if profit is None:
+		return None
+
+	return float(profit)

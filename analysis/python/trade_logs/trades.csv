@@ -672,3 +672,151 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-14T00:56:55.635275+00:00,EU50_ecn,BUY,0.04,gemini_prediction,5945.05,False,Invalid take_profit for BUY: TP (5050.0) must be > market price (5945.05)
 2026-04-14T00:56:58.949477+00:00,CHFHUF_ecn,SELL,0.03,gemini_prediction,0.0,True,
 2026-04-14T13:42:11.564551+00:00,XPBUSD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-14T14:11:54.217496+00:00,DBKGn.,BUY,1.0,gemini_prediction,0.0,True,
+2026-04-14T14:15:01.784376+00:00,ADBE.,BUY,1.0,gemini_prediction,0.0,True,
+2026-04-14T15:57:18.163180+00:00,BYND.,BUY,1.0,gemini_prediction,0.0,True,
+2026-04-14T18:32:17.383833+00:00,HLT.,SELL,1.0,gemini_prediction,0.0,True,
+2026-04-14T18:32:22.296928+00:00,COCOA.,BUY,0.01,gemini_prediction,3508.25,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T18:32:25.066296+00:00,AMZN.,BUY,1.0,gemini_prediction,249.44,False,Invalid take_profit for BUY: TP (195.0) must be > market price (249.44)
+2026-04-14T18:32:28.828945+00:00,HLT.,SELL,1.0,gemini_prediction,0.0,True,
+2026-04-14T18:32:33.863269+00:00,COCOA.,BUY,0.01,gemini_prediction,3508.25,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T18:32:37.968560+00:00,C.,SELL,1.0,gemini_prediction,0.0,True,
+2026-04-14T18:32:43.349556+00:00,COCOA.,BUY,0.01,gemini_prediction,3508.25,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T18:32:46.137988+00:00,HLT.,SELL,1.0,gemini_prediction,0.0,True,
+2026-04-14T18:32:50.949079+00:00,COCOA.,BUY,0.01,gemini_prediction,3508.25,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T18:32:53.483887+00:00,AMZN.,BUY,1.0,gemini_prediction,249.41,False,Invalid take_profit for BUY: TP (195.0) must be > market price (249.41)
+2026-04-14T18:32:56.156809+00:00,BLK.,BUY,1.0,gemini_prediction,1056.82,False,Invalid take_profit for BUY: TP (1020.0) must be > market price (1056.82)
+2026-04-14T18:33:01.642181+00:00,HLT.,SELL,1.0,gemini_prediction,0.0,True,
+2026-04-14T18:33:07.381522+00:00,COCOA.,BUY,0.02,gemini_prediction,3508.25,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T18:33:10.440236+00:00,C.,SELL,1.0,gemini_prediction,0.0,True,
+2026-04-14T18:33:15.585061+00:00,HLT.,SELL,1.0,gemini_prediction,0.0,True,
+2026-04-14T23:37:32.003844+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:37:34.696148+00:00,EURHUF_ecn,SELL,0.1,gemini_prediction,363.333,False,Invalid take_profit for SELL: TP (390.0) must be < market price (363.333)
+2026-04-14T23:37:37.819866+00:00,BAC.,SELL,1.0,gemini_prediction,53.33,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:37:42.694646+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:37:45.919352+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.313,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.313)
+2026-04-14T23:37:54.984150+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:01.111810+00:00,EURHUF_ecn,SELL,0.07,gemini_prediction,363.383,False,Invalid take_profit for SELL: TP (391.5) must be < market price (363.383)
+2026-04-14T23:38:06.487156+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:09.895156+00:00,DAL.,BUY,1.0,gemini_prediction,71.78,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:13.247537+00:00,DXY_ecn,SELL,0.08,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:18.688445+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:21.495489+00:00,CADCHF_ecn,SELL,0.06,gemini_prediction,0.56708,False,Invalid take_profit for SELL: TP (0.652) must be < market price (0.56708)
+2026-04-14T23:38:24.636806+00:00,DXY_ecn,SELL,0.08,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:29.628686+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:37.260377+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:41.776004+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:44.608521+00:00,EURHUF_ecn,SELL,0.06,gemini_prediction,363.383,False,Invalid take_profit for SELL: TP (389.0) must be < market price (363.383)
+2026-04-14T23:38:48.058093+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:38:53.727414+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:00.016392+00:00,DXY_ecn,SELL,0.07,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:04.666944+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:10.036728+00:00,EURHUF_ecn,SELL,0.08,gemini_prediction,363.303,False,Invalid take_profit for SELL: TP (393.0) must be < market price (363.303)
+2026-04-14T23:39:14.927334+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:18.117751+00:00,AUDCAD_ecn,BUY,0.05,gemini_prediction,0.9818,False,Invalid take_profit for BUY: TP (0.909) must be > market price (0.9818)
+2026-04-14T23:39:21.606217+00:00,EURHUF_ecn,SELL,0.06,gemini_prediction,363.303,False,Invalid take_profit for SELL: TP (390.0) must be < market price (363.303)
+2026-04-14T23:39:26.895931+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:30.175241+00:00,AAL.,BUY,1.0,gemini_prediction,12.16,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:33.524781+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.303,False,Invalid take_profit for SELL: TP (394.0) must be < market price (363.303)
+2026-04-14T23:39:37.897700+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:40.838359+00:00,EURHUF_ecn,SELL,0.08,gemini_prediction,363.303,False,Invalid take_profit for SELL: TP (393.0) must be < market price (363.303)
+2026-04-14T23:39:43.907550+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:49.287680+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:52.423190+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:54.834671+00:00,BAC.,SELL,1.0,gemini_prediction,53.33,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:39:59.887595+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:02.937343+00:00,BAC.,SELL,1.0,gemini_prediction,53.33,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:05.696647+00:00,C.,SELL,1.0,gemini_prediction,129.54,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:11.019292+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:13.747698+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:17.337336+00:00,BAC.,SELL,1.0,gemini_prediction,53.33,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:22.367683+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:25.740855+00:00,EURHUF_ecn,SELL,0.06,gemini_prediction,363.293,False,Invalid take_profit for SELL: TP (387.0) must be < market price (363.293)
+2026-04-14T23:40:29.218188+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:34.765399+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:37.981201+00:00,DXY_ecn,SELL,0.07,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:46.306795+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:51.539232+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:40:54.979626+00:00,BAC.,SELL,1.0,gemini_prediction,53.33,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:00.448492+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:03.626228+00:00,BAC.,SELL,1.0,gemini_prediction,53.33,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:06.990417+00:00,AUDSGD_ecn,BUY,0.02,gemini_prediction,0.0,True,
+2026-04-14T23:41:12.096671+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:15.566042+00:00,EURHUF_ecn,SELL,0.06,gemini_prediction,363.293,False,Invalid take_profit for SELL: TP (390.0) must be < market price (363.293)
+2026-04-14T23:41:18.979985+00:00,BAC.,SELL,1.0,gemini_prediction,53.33,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:24.326040+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:27.312124+00:00,EURHUF_ecn,SELL,0.03,gemini_prediction,363.293,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.293)
+2026-04-14T23:41:30.737954+00:00,DXY_ecn,SELL,0.02,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:35.288872+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:38.274578+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.293,False,Invalid take_profit for SELL: TP (392.5) must be < market price (363.293)
+2026-04-14T23:41:41.354426+00:00,DXY_ecn,SELL,0.08,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:46.038456+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:49.380177+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:41:52.605821+00:00,EURHUF_ecn,SELL,0.06,gemini_prediction,363.293,False,Invalid take_profit for SELL: TP (393.0) must be < market price (363.293)
+2026-04-14T23:41:57.590562+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:00.327985+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.273,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.273)
+2026-04-14T23:42:03.859083+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:08.726062+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:11.302382+00:00,EURHUF_ecn,SELL,0.06,gemini_prediction,363.273,False,Invalid take_profit for SELL: TP (391.0) must be < market price (363.273)
+2026-04-14T23:42:13.618880+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:18.928164+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:21.706220+00:00,EURHUF_ecn,SELL,0.02,gemini_prediction,363.273,False,Invalid take_profit for SELL: TP (392.5) must be < market price (363.273)
+2026-04-14T23:42:25.137481+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:30.100817+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:32.912747+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.273,False,Invalid take_profit for SELL: TP (391.0) must be < market price (363.273)
+2026-04-14T23:42:36.624769+00:00,DXY_ecn,SELL,0.08,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:41.606893+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:45.340744+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:42:48.381125+00:00,EURHUF_ecn,SELL,0.1,gemini_prediction,363.273,False,Invalid take_profit for SELL: TP (390.0) must be < market price (363.273)
+2026-04-14T23:42:53.650094+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:00.845088+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.263,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.263)
+2026-04-14T23:43:04.378326+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:09.327863+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:13.099711+00:00,DXY_ecn,SELL,0.15,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:16.061123+00:00,BAC.,SELL,1.0,gemini_prediction,53.33,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:21.420968+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:24.581390+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:28.800074+00:00,EURHUF_ecn,SELL,0.1,gemini_prediction,363.213,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.213)
+2026-04-14T23:43:33.608774+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:36.638732+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.223,False,Invalid take_profit for SELL: TP (390.0) must be < market price (363.223)
+2026-04-14T23:43:40.659685+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:45.370051+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:48.202122+00:00,DXY_ecn,SELL,0.06,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:50.730604+00:00,EURHUF_ecn,SELL,0.04,gemini_prediction,363.273,False,Invalid take_profit for SELL: TP (391.0) must be < market price (363.273)
+2026-04-14T23:43:55.849131+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:43:59.302542+00:00,DXY_ecn,SELL,0.03,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:02.661285+00:00,EURHUF_ecn,SELL,0.06,gemini_prediction,363.233,False,Invalid take_profit for SELL: TP (395.0) must be < market price (363.233)
+2026-04-14T23:44:08.368449+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:11.635607+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.243,False,Invalid take_profit for SELL: TP (390.0) must be < market price (363.243)
+2026-04-14T23:44:15.124718+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:20.291063+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:23.261096+00:00,DXY_ecn,SELL,0.04,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:26.862997+00:00,EURHUF_ecn,SELL,0.01,gemini_prediction,363.243,False,Invalid take_profit for SELL: TP (390.0) must be < market price (363.243)
+2026-04-14T23:44:31.651104+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:35.061257+00:00,DXY_ecn,SELL,0.04,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:42.529174+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:46.047873+00:00,EURHUF_ecn,SELL,0.07,gemini_prediction,363.243,False,Invalid take_profit for SELL: TP (394.5) must be < market price (363.243)
+2026-04-14T23:44:48.880302+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:53.512017+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:44:56.363974+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.243,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.243)
+2026-04-14T23:45:00.025326+00:00,DXY_ecn,SELL,0.02,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:05.010879+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:08.195928+00:00,EURHUF_ecn,SELL,0.05,gemini_prediction,363.243,False,Invalid take_profit for SELL: TP (393.0) must be < market price (363.243)
+2026-04-14T23:45:14.179604+00:00,DXY_ecn,SELL,0.1,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:19.291378+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:22.463865+00:00,DXY_ecn,SELL,0.03,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:25.947701+00:00,EURHUF_ecn,SELL,0.08,gemini_prediction,363.243,False,Invalid take_profit for SELL: TP (391.0) must be < market price (363.243)
+2026-04-14T23:45:31.089874+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:34.650001+00:00,EURHUF_ecn,SELL,0.07,gemini_prediction,363.243,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.243)
+2026-04-14T23:45:37.945002+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:42.900570+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:46.062718+00:00,DXY_ecn,SELL,0.05,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:48.755942+00:00,DJCJPC.,SELL,0.1,gemini_prediction,0.0,True,
+2026-04-14T23:45:54.449076+00:00,BOECVX.,BUY,0.1,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:45:58.262330+00:00,EURHUF_ecn,SELL,0.06,gemini_prediction,363.253,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.253)
+2026-04-14T23:46:03.368975+00:00,DXY_ecn,SELL,0.03,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:46:08.712717+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:46:11.963233+00:00,DXY_ecn,SELL,0.06,gemini_prediction,98.08,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:46:15.180157+00:00,EURHUF_ecn,SELL,0.01,gemini_prediction,363.253,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.253)
+2026-04-14T23:46:20.572543+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
+2026-04-14T23:46:24.283013+00:00,EURNZD_ecn,SELL,0.01,gemini_prediction,0.0,True,

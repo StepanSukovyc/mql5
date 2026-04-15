@@ -13,14 +13,18 @@ from gemini_config import load_gemini_api_config
 from gemini_decision import ask_gemini_final_decision, load_predictions
 from instrument_utils import (
 	get_base_prediction_threshold,
+	get_cfd_min_net_profit_usd,
+	get_cfd_tp_max_distance_percent,
 	get_crypto_lot_multiplier,
 	get_crypto_max_open_positions,
 	get_crypto_prediction_threshold,
 	get_crypto_tp_distance_percent,
+	is_cfd_full_tp_mode_allowed,
+	is_cfd_symbol,
 	is_crypto_full_tp_mode_allowed,
 	is_crypto_symbol,
 )
-from mt5_symbols import get_current_price
+from mt5_symbols import estimate_order_profit, get_current_price, get_symbol_info
 from mt5_positions import get_open_positions
 from trade_execution import execute_trade
 from trade_history import count_successful_trades
@@ -78,6 +82,10 @@ def _print_trade_mode(successful_trades: int, next_trade_number: int, full_contr
 		f"TP distance {get_crypto_tp_distance_percent():.2f}%"
 	)
 	print(
+		f"   CFD safeguards: min net ${get_cfd_min_net_profit_usd():.2f} after modeled fee, "
+		f"TP max distance {get_cfd_tp_max_distance_percent():.2f}%"
+	)
+	print(
 		"   Mode: "
 		+ (
 			"FULL GEMINI TP MODE (lot_size + take_profit from Gemini)"
@@ -90,6 +98,20 @@ def _print_trade_mode(successful_trades: int, next_trade_number: int, full_contr
 def _count_open_crypto_positions(open_positions: List[Dict]) -> int:
 	"""Count open positions belonging to the crypto instrument group."""
 	return len([pos for pos in open_positions if is_crypto_symbol(str(pos.get("symbol", "")))])
+
+
+def _get_modeled_trade_fee(lot_size: float) -> float:
+	"""Model per-trade fee using the same convention as the cleanup strategies."""
+	return round((float(lot_size) / 0.01) * 0.10, 2)
+
+
+def _round_price_for_symbol(symbol: str, price: float) -> float:
+	"""Round a price to the symbol precision when available."""
+	symbol_info = get_symbol_info(symbol)
+	digits = getattr(symbol_info, "digits", None) if symbol_info is not None else None
+	if isinstance(digits, int) and digits >= 0:
+		return round(price, digits)
+	return price
 
 
 def _resolve_crypto_take_profit(symbol: str, action: str, gemini_take_profit: object) -> Optional[float]:
@@ -123,6 +145,88 @@ def _resolve_crypto_take_profit(symbol: str, action: str, gemini_take_profit: ob
 	print(
 		f"   Crypto TP resolved from current price {current_price:.6f} "
 		f"with max distance {tp_distance_percent:.2f}% -> {resolved_tp:.6f}"
+	)
+	return resolved_tp
+
+
+def _resolve_cfd_take_profit(symbol: str, action: str, lot_size: float, gemini_take_profit: object) -> Optional[float]:
+	"""Resolve a fee-aware CFD take-profit or disable it when no safe target exists."""
+	current_price = get_current_price(symbol, action=action)
+	if current_price is None:
+		print(f"⚠️  Cannot resolve current price for CFD TP on {symbol}")
+		return None
+
+	direction = 1.0 if action == "BUY" else -1.0
+	max_distance_percent = get_cfd_tp_max_distance_percent()
+	max_distance_ratio = max_distance_percent / 100.0
+	modeled_fee = _get_modeled_trade_fee(lot_size)
+	required_profit = modeled_fee + get_cfd_min_net_profit_usd()
+
+	def _candidate_profit(candidate_tp: float) -> Optional[float]:
+		return estimate_order_profit(symbol, action, lot_size, current_price, candidate_tp)
+
+	def _is_directionally_valid(candidate_tp: float) -> bool:
+		if action == "BUY":
+			return candidate_tp > current_price
+		return candidate_tp < current_price
+
+	def _price_from_ratio(distance_ratio: float) -> float:
+		return current_price * (1.0 + (direction * distance_ratio))
+
+	try:
+		requested_tp = float(gemini_take_profit)
+	except (TypeError, ValueError):
+		requested_tp = None
+
+	max_tp = _price_from_ratio(max_distance_ratio)
+	max_profit = _candidate_profit(max_tp)
+	if max_profit is None:
+		print(f"⚠️  Failed to estimate CFD TP profit for {symbol}")
+		return None
+
+	if requested_tp is not None and _is_directionally_valid(requested_tp):
+		requested_profit = _candidate_profit(requested_tp)
+		if requested_profit is not None and requested_profit >= required_profit:
+			requested_distance_ratio = abs((requested_tp - current_price) / current_price)
+			if requested_distance_ratio <= max_distance_ratio:
+				print(
+					f"   Gemini TP for CFD already covers modeled fee {modeled_fee:.2f} and min net target -> {requested_tp}"
+				)
+				return _round_price_for_symbol(symbol, requested_tp)
+			print(
+				f"   CFD TP from Gemini is too far for {symbol}; using closer fee-safe target within {max_distance_percent:.2f}%"
+			)
+
+	if max_profit < required_profit:
+		print(
+			f"⚠️  Safe CFD TP for {symbol} not found within {max_distance_percent:.2f}% distance; TP disabled "
+			f"(max gross profit {max_profit:.2f}, required {required_profit:.2f})"
+		)
+		return None
+
+	low_ratio = 0.0
+	high_ratio = max_distance_ratio
+	for _ in range(32):
+		mid_ratio = (low_ratio + high_ratio) / 2.0
+		candidate_tp = _price_from_ratio(mid_ratio)
+		candidate_profit = _candidate_profit(candidate_tp)
+		if candidate_profit is None:
+			print(f"⚠️  Failed to estimate CFD TP profit while resolving {symbol}")
+			return None
+		if candidate_profit >= required_profit:
+			high_ratio = mid_ratio
+		else:
+			low_ratio = mid_ratio
+
+	resolved_tp = _round_price_for_symbol(symbol, _price_from_ratio(high_ratio))
+	resolved_profit = _candidate_profit(resolved_tp)
+	if resolved_profit is None:
+		print(f"⚠️  Failed to validate resolved CFD TP for {symbol}")
+		return None
+
+	print(
+		f"   CFD TP resolved from current price {current_price:.6f} with max distance {max_distance_percent:.2f}% "
+		f"and required gross profit {required_profit:.2f} -> {resolved_tp:.6f} (estimated gross {resolved_profit:.2f})"
 	)
 	return resolved_tp
 
@@ -185,6 +289,7 @@ def _resolve_trade_parameters(
 	symbol: str,
 	action: str,
 	symbol_is_crypto: bool,
+	symbol_is_cfd: bool,
 ) -> Optional[Tuple[float, Optional[float]]]:
 	"""Resolve final lot size and take profit for the selected trading mode."""
 	try:
@@ -210,6 +315,15 @@ def _resolve_trade_parameters(
 			return None
 
 		print(f"   Using conservative crypto take_profit: {take_profit}")
+		return lot_size, take_profit
+
+	if symbol_is_cfd and gemini_full_control_mode:
+		take_profit = _resolve_cfd_take_profit(symbol, action, lot_size, gemini_take_profit)
+		if take_profit is None:
+			print("   CFD symbol selected: take_profit disabled because no fee-safe target was found")
+			return lot_size, None
+
+		print(f"   Using fee-aware CFD take_profit: {take_profit}")
 		return lot_size, take_profit
 
 	if gemini_full_control_mode:
@@ -295,6 +409,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 
 			symbol, action, gemini_lot_size, gemini_take_profit = parsed
 			symbol_is_crypto = is_crypto_symbol(symbol)
+			symbol_is_cfd = is_cfd_symbol(symbol)
 			if symbol_is_crypto and open_crypto_positions >= get_crypto_max_open_positions():
 				if not _exclude_symbol_and_retry(
 					symbol,
@@ -315,6 +430,9 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 			if symbol_is_crypto and gemini_full_control_mode and not is_crypto_full_tp_mode_allowed():
 				symbol_full_control_mode = False
 				print("   Crypto symbol selected: full Gemini TP mode disabled for this trade")
+			if symbol_is_cfd and gemini_full_control_mode and not is_cfd_full_tp_mode_allowed():
+				symbol_full_control_mode = False
+				print("   CFD symbol selected: TP mode disabled by configuration for this trade")
 
 			resolved = _resolve_trade_parameters(
 				gemini_full_control_mode=symbol_full_control_mode,
@@ -324,6 +442,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				symbol=symbol,
 				action=action,
 				symbol_is_crypto=symbol_is_crypto,
+				symbol_is_cfd=symbol_is_cfd,
 			)
 			if resolved is None:
 				if not _exclude_symbol_and_retry(symbol, f"Trade parameters invalid for {symbol}", predictions, excluded_symbols):
