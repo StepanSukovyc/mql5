@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-04-21 (Ollama Context And Latency Stabilization)
+
+- **Made Ollama Context Window Configurable Per Request**
+  - `ollama_service.py` now sends `options.num_ctx` with each Ollama API request instead of relying on the server default context size
+  - Added `OLLAMA_NUM_CTX` to `.env` and `.env.example` so larger prompts can be enabled without editing code
+  - Prompt-size fallback now compares the full prompt against a budget derived from the configured context window before switching to compact mode
+
+- **Added Configurable Ollama Request Timeout**
+  - Added `OLLAMA_TIMEOUT_SECONDS` to `.env` and `.env.example`
+  - `ollama_service.py` no longer uses a hard-coded 180 second HTTP timeout and can wait longer for larger CPU-bound requests
+
+- **Adjusted Default Runtime Settings For Better CPU Stability**
+  - Active Ollama configuration now uses `OLLAMA_NUM_CTX=16384`, `OLLAMA_TIMEOUT_SECONDS=600`, and `OLLAMA_COMPACT_PROMPT=true`
+  - This reduces KV-cache pressure and shortens inference time while still allowing larger prompts than the previous 4096-token default
+  - Recent Ollama server logs now show successful `/api/generate` responses after these runtime adjustments
+
 ## 2026-04-15 (ECN Suffix Override For CFD Detection)
 
 - **Made `_ecn` Symbols Always Valid Even With CFD Blacklist Enabled**

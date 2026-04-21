@@ -28,6 +28,10 @@ from market_data import (
 )
 
 
+DEFAULT_OLLAMA_NUM_CTX = 32768
+OLLAMA_PROMPT_CHARS_PER_TOKEN_ESTIMATE = 3.0
+
+
 def _load_dotenv_value(key: str) -> Optional[str]:
     """
     Load a specific value from .env file.
@@ -107,6 +111,22 @@ def get_ollama_request_delay_seconds() -> float:
     return _parse_float_env_value("OLLAMA_REQUEST_DELAY_SECONDS", default=0.0, minimum=0.0)
 
 
+def get_ollama_timeout_seconds() -> float:
+    """Return HTTP timeout for Ollama requests."""
+    return _parse_float_env_value("OLLAMA_TIMEOUT_SECONDS", default=600.0, minimum=1.0)
+
+
+def get_ollama_num_ctx() -> int:
+    """Return Ollama context window requested per API call."""
+    return _parse_int_env_value("OLLAMA_NUM_CTX", default=DEFAULT_OLLAMA_NUM_CTX, minimum=1024)
+
+
+def get_ollama_prompt_char_budget(num_ctx: int) -> int:
+    """Estimate safe character budget for prompt text from requested context size."""
+    estimated_budget = int(num_ctx * OLLAMA_PROMPT_CHARS_PER_TOKEN_ESTIMATE)
+    return max(estimated_budget, 4096)
+
+
 def is_ollama_compact_prompt_enabled() -> bool:
     """Return whether Ollama should use a compact prompt payload."""
     value = _load_dotenv_value("OLLAMA_COMPACT_PROMPT")
@@ -155,6 +175,65 @@ def _build_compact_market_data_summary(data: Dict) -> Dict:
         }
 
     return summary
+
+
+def _serialize_prompt_json(payload: Dict, compact: bool) -> str:
+    """Serialize prompt payload with minimal formatting overhead."""
+    if compact:
+        return json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    return json.dumps(payload, ensure_ascii=False, indent=2)
+
+
+def _build_ollama_prompt(
+    symbol: str,
+    current_price,
+    oscillators_summary: Dict,
+    prompt_payload: Dict,
+    prompt_guidance: str,
+    compact_prompt_enabled: bool,
+) -> str:
+    """Build Ollama prompt text for one symbol."""
+    payload_label = "Kompaktni data" if compact_prompt_enabled else "Kompletni data"
+    prompt_mode_note = (
+        "Pouzivas komprimovane shrnuti: poslednich 5 svicek na timeframe, aktualni RSI/MA a kratkou zmenu ceny."
+        if compact_prompt_enabled
+        else "Pouzivas plna raw data v rozsahu, ktery se stale vejde do promptu."
+    )
+    oscillators_json = _serialize_prompt_json(oscillators_summary, compact=True)
+    payload_json = _serialize_prompt_json(prompt_payload, compact=compact_prompt_enabled)
+
+    return f"""Jsi financni poradce a expert na technickou analyzu financnich instrumentu.
+
+Analyzuj instrument: {symbol}
+Aktualni cena: {current_price}
+RSI a MA podle timeframe: {oscillators_json}
+
+{payload_label}:
+{payload_json}
+
+Rezim vstupu: {prompt_mode_note}
+
+Ukol:
+Na zaklade dat proved rizikove hodnoceni:
+- BUY (pravdepodobnost rustu)
+- SELL (pravdepodobnost poklesu)
+- HOLD (nejistota, doporuceni drzet)
+
+{prompt_guidance}
+
+Hodnoceni je procentualni (0-100), soucet musi byt 100.
+
+Odpoved ve formatu JSON:
+{{
+    "{symbol}": {{
+        "BUY": <cislo 0-100>,
+        "SELL": <cislo 0-100>,
+        "HOLD": <cislo 0-100>,
+        "reasoning": "<kratke zduvodneni>"
+    }}
+}}
+
+Odpovez pouze JSON, bez dalsiho textu."""
 
 
 def get_current_hour() -> int:
@@ -338,56 +417,35 @@ def ask_ollama_prediction(symbol: str, data: Dict, ollama_url: str, ollama_model
     
     current_price = data.get("current_price")
     prompt_guidance = get_symbol_prompt_guidance(symbol)
+    ollama_num_ctx = get_ollama_num_ctx()
+    ollama_timeout_seconds = get_ollama_timeout_seconds()
+    prompt_char_budget = get_ollama_prompt_char_budget(ollama_num_ctx)
     compact_prompt_enabled = is_ollama_compact_prompt_enabled()
     prompt_payload = _build_compact_market_data_summary(data) if compact_prompt_enabled else data
-    prompt_payload_label = "Kompaktní data" if compact_prompt_enabled else "Kompletní data"
-    compact_prompt_note = (
-        "Používáš kompaktní shrnutí dat: posledních 5 svíček na timeframe, počty svíček, aktuální RSI/MA a krátkou změnu ceny."
-        if compact_prompt_enabled
-        else "Používáš kompletní raw data v plném rozsahu."
+    prompt = _build_ollama_prompt(
+        symbol,
+        current_price,
+        oscillators_summary,
+        prompt_payload,
+        prompt_guidance,
+        compact_prompt_enabled,
     )
-    
-    # Create prompt similar to Gemini
-    prompt = f"""Jsi finanční poradce a expert na technickou analýzu finančních instrumentů.
 
-Posílám ti kompletní data pro instrument: {symbol}
-
-Aktuální cena: {current_price}
-
-Dostupná data:
-- Časové rámce: 1h, 4h, day, week, month
-- Pro každý timeframe máš: svíčkové formace, RSI, MA
-- RSI hodnoty za jednotlivé timeframes: {json.dumps(oscillators_summary, indent=2)}
-
-{prompt_payload_label}:
-```json
-{json.dumps(prompt_payload, indent=2, ensure_ascii=False)}
-```
-
-Režim vstupu:
-{compact_prompt_note}
-
-Úkol:
-Na základě fundamentální analýzy, svíčkových formací, RSI a MA hodnot proveď rizikové hodnocení:
-- BUY (pravděpodobnost růstu)
-- SELL (pravděpodobnost poklesu)
-- HOLD (nejistota, doporučení držet)
-
-{prompt_guidance}
-
-Hodnocení je procentuální (0-100%), součet musí být 100%.
-
-Odpověď ve formátu JSON:
-{{
-    "{symbol}": {{
-        "BUY": <číslo 0-100>,
-        "SELL": <číslo 0-100>,
-        "HOLD": <číslo 0-100>,
-        "reasoning": "<krátké zdůvodnění>"
-    }}
-}}
-
-Odpověz pouze JSON, bez dalšího textu."""
+    if not compact_prompt_enabled and len(prompt) > prompt_char_budget:
+        compact_prompt_enabled = True
+        prompt_payload = _build_compact_market_data_summary(data)
+        prompt = _build_ollama_prompt(
+            symbol,
+            current_price,
+            oscillators_summary,
+            prompt_payload,
+            prompt_guidance,
+            compact_prompt_enabled,
+        )
+        print(
+            f"⚠️  Prompt pro {symbol} presahl odhadovany limit pro num_ctx={ollama_num_ctx} "
+            f"({prompt_char_budget} znaku), prepinam na kompakti rezim."
+        )
 
     try:
         call_time = datetime.now(tz=timezone.utc).strftime("%H:%M:%S")
@@ -398,12 +456,13 @@ Odpověz pouze JSON, bez dalšího textu."""
             "prompt": prompt,
             "stream": False,
             "options": {
+                "num_ctx": ollama_num_ctx,
                 "temperature": 0.7,
                 "top_p": 0.9
             }
         }
         
-        with httpx.Client(timeout=180.0) as client:
+        with httpx.Client(timeout=ollama_timeout_seconds) as client:
             response = client.post(ollama_url, json=request_data)
             response.raise_for_status()
             

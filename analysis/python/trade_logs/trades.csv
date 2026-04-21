@@ -820,3 +820,18 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-04-14T23:46:15.180157+00:00,EURHUF_ecn,SELL,0.01,gemini_prediction,363.253,False,Invalid take_profit for SELL: TP (392.0) must be < market price (363.253)
 2026-04-14T23:46:20.572543+00:00,BOECVX.,BUY,1.0,gemini_prediction,1.199,False,Order failed with retcode: 10018 - Market closed
 2026-04-14T23:46:24.283013+00:00,EURNZD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-04-15T14:03:30.075862+00:00,USDPLN_ecn,SELL,0.08,gemini_prediction,3.59292,False,Invalid take_profit for SELL: TP (4.15) must be < market price (3.59292)
+2026-04-15T14:03:32.481465+00:00,USDILS_ecn,SELL,0.03,gemini_prediction,0.0,True,
+2026-04-15T18:21:07.999557+00:00,NZDCHF_ecn,BUY,0.06,gemini_prediction,0.0,True,
+2026-04-15T21:33:17.796816+00:00,NZDCAD_ecn,BUY,0.05,gemini_prediction,0.0,True,
+2026-04-15T21:33:24.508588+00:00,NZDCAD_ecn,BUY,0.05,gemini_prediction,0.0,True,
+2026-04-16T00:12:27.911749+00:00,FANG_ecn,BUY,0.01,gemini_prediction,15937.45,False,Order failed with retcode: 10018 - Market closed
+2026-04-16T00:12:31.870194+00:00,CHFHUF_ecn,SELL,0.04,gemini_prediction,0.0,True,
+2026-04-16T03:08:30.003344+00:00,XNIUSD_ecn,BUY,0.01,gemini_prediction,0.0,False,"Insufficient margin: required 1834.80, available 1009.05"
+2026-04-16T03:08:32.792660+00:00,XCUUSD_ecn,BUY,0.01,gemini_prediction,0.0,False,"Insufficient margin: required 1333.02, available 1008.85"
+2026-04-16T03:08:35.182127+00:00,GBPUSD_ecn,BUY,0.01,gemini_prediction,1.35945,False,Invalid take_profit for BUY: TP (1.258) must be > market price (1.35945)
+2026-04-16T03:08:39.826074+00:00,XNIUSD_ecn,BUY,0.01,gemini_prediction,0.0,False,"Insufficient margin: required 1834.80, available 1008.56"
+2026-04-16T03:08:42.605622+00:00,GBPUSD_ecn,BUY,0.05,gemini_prediction,1.3593899999999999,False,Invalid take_profit for BUY: TP (1.27) must be > market price (1.3593899999999999)
+2026-04-16T03:08:44.896792+00:00,USDCZK_ecn,SELL,0.03,gemini_prediction,0.0,True,
+2026-04-17T09:42:23.871295+00:00,USDSGD_ecn,BUY,0.09,gemini_prediction,0.0,True,
+2026-04-17T12:57:15.869665+00:00,CHFHUF_ecn,SELL,0.05,gemini_prediction,0.0,True,

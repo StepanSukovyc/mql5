@@ -191,8 +191,10 @@ OLLAMA_FALLBACK_TO_GEMINI=false
 OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS=60
 GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS=3
 OLLAMA_MAX_PARALLEL_REQUESTS=2
+OLLAMA_NUM_CTX=16384
+OLLAMA_TIMEOUT_SECONDS=600
 OLLAMA_REQUEST_DELAY_SECONDS=0.0
-OLLAMA_COMPACT_PROMPT=false
+OLLAMA_COMPACT_PROMPT=true
 ```
 
 `OLLAMA_FALLBACK_TO_GEMINI=false` znamená, že hlavní trading logika bere pro analýzu pouze instrumenty s čerstvou Ollama predikcí. Instrument bez použitelné Ollama predikce se v daném běhu přeskočí a když takto odpadnou všechny symboly, finální decision fáze se nespustí.
@@ -203,7 +205,11 @@ OLLAMA_COMPACT_PROMPT=false
 
 `OLLAMA_MAX_PARALLEL_REQUESTS` omezuje, kolik Ollama requestů může běžet současně během nezávislého Ollama cyklu. `OLLAMA_REQUEST_DELAY_SECONDS` pak umožňuje jemně rozložit start jednotlivých requestů, pokud by při plně paralelním startu docházelo ke špičkám nebo nestabilitě.
 
-`OLLAMA_COMPACT_PROMPT` řídí velikost promptu pro Ollamu. Při `false` se zachová dnešní plný prompt s kompletními daty. Při `true` se použije kompaktní shrnutí, které zmenší payload omezováním raw candle historie na posledních několik svíček a ponechá klíčové indikátory.
+`OLLAMA_NUM_CTX` nastavuje velikost context window posílanou v každém requestu do Ollamy přes `options.num_ctx`. Hodnota `16384` je rozumnější provozní kompromis pro CPU běh, když chcete držet latenci pod kontrolou a přitom posílat víc dat než do výchozích 4096 tokenů. Vyšší hodnota obvykle znamená vyšší spotřebu RAM/VRAM a delší inferenci.
+
+`OLLAMA_TIMEOUT_SECONDS` určuje, jak dlouho Python klient čeká na odpověď z Ollamy. Po navýšení `OLLAMA_NUM_CTX` a při běhu na CPU je často potřeba jít výrazně nad původní 3 minuty; `600` sekund je bezpečnější výchozí hodnota.
+
+`OLLAMA_COMPACT_PROMPT` řídí velikost promptu pro Ollamu. Při `true` se použije kompaktní shrnutí vždy, což je vhodnější volba pro CPU běh nebo při problémech s latencí. Při `false` se služba pokusí použít plný prompt a porovná jeho velikost s odhadovaným rozpočtem odvozeným z `OLLAMA_NUM_CTX`; pokud by byl stále příliš velký, automaticky spadne zpět do kompaktního režimu.
 
 Rucni blokovaci okno `SWAP_BLOCK_START_*` az `SWAP_BLOCK_END_*` je interpretovano v case `Europe/Prague`. Audit a trade logy zustavaji ulozene v UTC.
 
