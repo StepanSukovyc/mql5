@@ -15,23 +15,21 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 
-import httpx
-
 from account_state import get_account_balance_cap
 from gemini_config import load_gemini_api_config
 from gemini_decision import clean_gemini_response
+from gemini_vertex import request_prediction_json
 from instrument_utils import get_symbol_prompt_guidance
 
 
-def ask_gemini_prediction(symbol: str, data: Dict, api_key: str, api_url: str) -> Optional[str]:
+def ask_gemini_prediction(symbol: str, data: Dict, gemini_config) -> Optional[str]:
 	"""
-	Ask Gemini AI for trading prediction based on market data.
+	Ask Gemini on Vertex AI for trading prediction based on market data.
 	
 	Args:
 		symbol: Trading symbol (e.g., EURUSD_ecn or XAUUSD)
 		data: Market data including candles, oscillators (RSI, MA)
-		api_key: Gemini API key
-		api_url: Gemini API URL
+		gemini_config: Vertex AI Gemini runtime configuration
 	
 	Returns:
 		Gemini's prediction text or None if failed
@@ -85,57 +83,15 @@ Na základě fundamentální analýzy, svíčkových formací, RSI, MA a širš�
 {prompt_guidance}
 
 Součet musí dát 100%.
-
-Odpověď pošli POUZE v JSON formátu:
-{{
-  "symbol": "{symbol}",
-  "BUY": <procenta>,
-  "SELL": <procenta>,
-  "HOLD": <procenta>,
-  "reasoning": "<krátké zdůvodnění>"
-}}
+Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdownu, bez code fence, bez doprovodného textu.
 """
-	
-	request_data = {
-		"contents": [
-			{
-				"parts": [
-					{"text": prompt}
-				]
-			}
-		]
-	}
 	
 	try:
 		print(f"  📡 Dotazuji Gemini pro {symbol}...")
-		
-		with httpx.Client(timeout=60.0) as client:
-			response = client.post(
-				api_url,
-				json=request_data,
-				headers={
-					"Content-Type": "application/json",
-					"X-goog-api-key": api_key
-				}
-			)
-		
-		if response.status_code == 429:
-			print(f"  ⚠️  Quota překročena pro {symbol}, čekám 60 sekund...")
-			time.sleep(60)
-			return None
-		
-		response.raise_for_status()
-		
-		response_data = response.json()
-		text_response = response_data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
-		
+		text_response = request_prediction_json(gemini_config, symbol, prompt)
 		if text_response:
-			# Clean markdown formatting from response
-			cleaned_response = clean_gemini_response(text_response)
 			print(f"  ✅ Predikce získána pro {symbol}")
-			# Delay to respect API limits
-			time.sleep(5)
-			return cleaned_response
+			return text_response
 		else:
 			print(f"  ⚠️  Prázdná odpověď pro {symbol}")
 			return None
@@ -250,13 +206,13 @@ def get_gemini_fallback_parallelism() -> int:
 		return default_parallelism
 
 
-def _request_gemini_prediction_with_retries(symbol: str, market_data: Dict, api_key: str, api_url: str) -> Optional[str]:
+def _request_gemini_prediction_with_retries(symbol: str, market_data: Dict, gemini_config) -> Optional[str]:
 	"""Request Gemini prediction with the existing retry policy."""
 	max_retries = 2
 	prediction_text = None
 
 	for attempt in range(max_retries):
-		prediction_text = ask_gemini_prediction(symbol, market_data, api_key, api_url)
+		prediction_text = ask_gemini_prediction(symbol, market_data, gemini_config)
 		if prediction_text:
 			return prediction_text
 
@@ -384,9 +340,12 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	
 	# Load Gemini configuration
 	try:
-		api_key, api_url = load_gemini_api_config()
+		gemini_config = load_gemini_api_config()
 		
 		print(f"✅ Gemini config loaded")
+		print(f"   Project: {gemini_config.project}")
+		print(f"   Region: {gemini_config.region}")
+		print(f"   Model chain: {', '.join(gemini_config.fallback_models)}")
 		print(f"🛡️  Strategy balance cap: {get_account_balance_cap():.2f}")
 	except Exception as exc:
 		print(f"❌ Failed to load Gemini config: {exc}")
@@ -525,8 +484,7 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 					_request_gemini_prediction_with_retries,
 					symbol,
 					market_data,
-					api_key,
-					api_url,
+					gemini_config,
 				): (symbol, json_file)
 				for symbol, json_file, market_data in gemini_fallback_tasks
 			}

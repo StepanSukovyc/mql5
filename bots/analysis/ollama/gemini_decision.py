@@ -7,8 +7,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
-import httpx
-
+from gemini_vertex import GeminiVertexRequestError, request_final_decision_json
 from instrument_utils import (
 	get_base_prediction_threshold,
 	get_crypto_prediction_threshold,
@@ -63,8 +62,7 @@ def ask_gemini_final_decision(
 	predictions: List[Dict],
 	open_positions: List[Dict],
 	account_state: Dict,
-	api_key: str,
-	api_url: str,
+	gemini_config,
 	excluded_symbols: List[str] = None,
 	trade_number: Optional[int] = None,
 	full_control_every_n: Optional[int] = None,
@@ -160,24 +158,18 @@ Odpověď prosím formátuj POUZE jako JSON bez dalšího textu, v tomto formát
   "reasoning": "..."
 }}
 
-Kde lot_size je doporučená velikost pozice, take_profit je cílová cena TP a reasoning obsahuje stručné vysvětlení"""
+Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdownu, bez code fence, bez dalšího textu.
 
-	request_data = {"contents": [{"parts": [{"text": prompt}]}]}
+Kde lot_size je doporučená velikost pozice, take_profit je cílová cena TP a reasoning obsahuje stručné vysvětlení"""
 
 	try:
 		print("  📡 Dotazuji Gemini na finální rozhodnutí...")
+		decision_json = request_final_decision_json(gemini_config, prompt)
+		print("  ✅ Finální rozhodnutí získáno")
+		return decision_json
 
-		with httpx.Client(timeout=60.0) as client:
-			response = client.post(
-				api_url,
-				json=request_data,
-				headers={
-					"Content-Type": "application/json",
-					"X-goog-api-key": api_key,
-				},
-			)
-
-		if response.status_code == 429:
+	except GeminiVertexRequestError as exc:
+		if exc.status_code == 429:
 			now = datetime.now(tz=timezone.utc)
 			tomorrow = now + timedelta(days=1)
 			midnight_tomorrow = tomorrow.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -188,20 +180,6 @@ Kde lot_size je doporučená velikost pozice, take_profit je cílová cena TP a 
 			print(f"  ⏸️  Gemini suspended until {midnight_tomorrow.isoformat()}")
 			print(f"     Suspension duration: {hours_until:.1f} hours")
 			return None
-
-		response.raise_for_status()
-
-		response_data = response.json()
-		text_response = response_data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
-
-		if text_response:
-			print("  ✅ Finální rozhodnutí získáno")
-			return clean_gemini_response(text_response)
-
-		print("  ⚠️  Prázdná odpověď od Gemini")
-		return None
-
-	except httpx.HTTPError as exc:
 		print(f"  ❌ HTTP chyba při dotazu na Gemini: {exc}")
 		return None
 	except Exception as exc:

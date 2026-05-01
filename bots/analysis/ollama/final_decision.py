@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from account_state import get_account_state
-from gemini_config import load_gemini_api_config
+from gemini_config import GeminiVertexConfig, load_gemini_api_config
 from gemini_decision import ask_gemini_final_decision, load_predictions
 from instrument_utils import (
 	get_base_prediction_threshold,
@@ -29,6 +30,13 @@ from mt5_positions import get_open_positions
 from trade_execution import execute_trade
 from trade_history import count_successful_trades
 from trading_validation import check_margin_requirements, validate_symbol
+
+
+if hasattr(sys.stdout, "reconfigure"):
+	try:
+		sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+	except Exception:
+		pass
 
 
 def _get_gemini_full_control_every_n_trades() -> int:
@@ -65,8 +73,8 @@ def _print_open_positions(open_positions: List[Dict]) -> None:
 		print(f"     - {pos['symbol']}: {pos['type']} {pos['volume']} (PnL: {pos['pnl']:.2f})")
 
 
-def _load_gemini_api_config() -> Tuple[str, str]:
-	"""Load Gemini API config from environment."""
+def _load_gemini_api_config() -> GeminiVertexConfig:
+	"""Load Gemini Vertex AI config from environment."""
 	return load_gemini_api_config()
 
 
@@ -372,7 +380,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		open_crypto_positions = _count_open_crypto_positions(open_positions)
 		print(f"   Open crypto positions: {open_crypto_positions}/{get_crypto_max_open_positions()}")
 
-		api_key, api_url = _load_gemini_api_config()
+		gemini_config = _load_gemini_api_config()
 
 		max_retries = 3
 		excluded_symbols: List[str] = []
@@ -389,8 +397,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				predictions,
 				open_positions,
 				account_state,
-				api_key,
-				api_url,
+				gemini_config,
 				excluded_symbols if excluded_symbols else None,
 				trade_number=next_trade_number,
 				full_control_every_n=full_control_every_n,

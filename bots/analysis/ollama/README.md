@@ -1,6 +1,6 @@
 # MT5 Hourly Collector (Python)
 
-Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekonečný automat**: kontroluje marži, stahuje data, filtruje signály, vytváří finální obchodní doporučení pomocí Gemini AI, **automaticky provádí obchody** a **opakuje celý cyklus**.
+Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekonečný automat**: kontroluje marži, stahuje data, filtruje signály, vytváří finální obchodní doporučení pomocí Gemini na **Vertex AI v Google Cloud**, **automaticky provádí obchody** a **opakuje celý cyklus**.
 
 **Nově přidáno**: Paralelní **Ollama Service** - nezávislá smyčka generující predikce pomocí lokálního AI modelu.
 
@@ -26,7 +26,7 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
-  - Gemini AI vybere **1 instrument**, rozhodne **BUY/SELL**, navrhne `lot_size` a `take_profit`
+  - Gemini na Vertex AI vybere **1 instrument**, rozhodne **BUY/SELL**, navrhne `lot_size` a `take_profit`
   - V promptu zohledňuje swing styl (nejde o intraday), denní cíl ziskovosti a poplatek `0.10 USD` za každých `0.01` lotu
 7. **Režim exekuce dle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3):
   - `lot_size` se vždy použije z finální Gemini predikce
@@ -156,9 +156,12 @@ PRETTY_JSON=true
 # MT5_PASSWORD=your_password
 # MT5_SERVER=YourBroker-Server
 
-# Gemini AI konfigurace pro trading logic
-GEMINI_API_KEY=your_gemini_api_key_here
-GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent
+# Gemini Vertex AI konfigurace pro trading logic
+# Používej service account JSON z Google Cloud, ne API key flow.
+GOOGLE_APPLICATION_CREDENTIALS=C:/secure/google-cloud/service-account.json
+VERTEX_AI_PROJECT_ID=your-gcp-project-id
+VERTEX_AI_REGION=europe-west4
+VERTEX_AI_MODEL=gemini-2.5-flash
 
 # Každý N-tý obchod je plně řízen Gemini (lot_size + take_profit)
 GEMINI_FULL_CONTROL_EVERY_N_TRADES=3
@@ -196,6 +199,12 @@ OLLAMA_TIMEOUT_SECONDS=600
 OLLAMA_REQUEST_DELAY_SECONDS=0.0
 OLLAMA_COMPACT_PROMPT=true
 ```
+
+`GOOGLE_APPLICATION_CREDENTIALS` musí ukazovat na service-account JSON s oprávněním volat Vertex AI. Soubor drž mimo repository a neposílej ho do gitu.
+
+`VERTEX_AI_PROJECT_ID`, `VERTEX_AI_REGION` a `VERTEX_AI_MODEL` určují, do jakého Google Cloud projektu a regionu se bude volat. Výchozí model chain je postaven tak, aby při výpadku nebo nedostupnosti konkrétního flash modelu uměl přejít na rozumný fallback ve stejné třídě modelů.
+
+Gemini requesty teď běží přes Python SDK `google-genai` v režimu `vertexai=True`, používají stabilní API `v1`, mají vypnuté thinking, vynucený structured JSON response schema a logují token usage, response id, finish reason a fallback model.
 
 `OLLAMA_FALLBACK_TO_GEMINI=false` znamená, že hlavní trading logika bere pro analýzu pouze instrumenty s čerstvou Ollama predikcí. Instrument bez použitelné Ollama predikce se v daném běhu přeskočí a když takto odpadnou všechny symboly, finální decision fáze se nespustí.
 

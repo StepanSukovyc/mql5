@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
@@ -103,13 +104,19 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			"margin_percent": 19.62,
 		}
 		mock_get_open_positions.return_value = []
-		mock_load_gemini_api_config.return_value = ("key", "url")
+		mock_load_gemini_api_config.return_value = SimpleNamespace(
+			credentials_path="C:/vertex/service-account.json",
+			project="demo-project",
+			region="europe-west4",
+			model="gemini-2.5-flash",
+			fallback_models=("gemini-2.5-flash",),
+		)
 		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 123
 		mock_validate_symbol.return_value = (True, "")
 		mock_execute_trade.side_effect = [False, True]
 
-		def _decision_side_effect(predictions, open_positions, account_state, api_key, api_url, excluded_symbols=None, **kwargs):
+		def _decision_side_effect(predictions, open_positions, account_state, gemini_config, excluded_symbols=None, **kwargs):
 			if not excluded_symbols:
 				return json.dumps(
 					{
