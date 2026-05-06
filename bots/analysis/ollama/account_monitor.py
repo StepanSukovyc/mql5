@@ -33,12 +33,23 @@ def get_account_state_snapshot() -> dict:
 	return get_account_state(include_timestamp=True)
 
 
+def _get_trading_trigger_margin_ratio(account_info: dict) -> float:
+	"""Return the ratio used to decide when trading may start again."""
+	balance = float(account_info.get('balance', 0.0) or 0.0)
+	if balance <= 0:
+		return 0.0
+
+	# Trading re-entry should look at actual free margin against the capped strategy balance.
+	raw_margin_free = float(account_info.get('raw_margin_free', account_info.get('margin_free', 0.0)) or 0.0)
+	return raw_margin_free / balance
+
+
 def print_account_status(account_info: dict) -> None:
 	"""Print account status to console (single line)."""
 	timestamp = account_info["timestamp"]
 	
 	# Calculate free margin percentage
-	free_margin_percent = (account_info['margin_free'] / account_info['balance'] * 100) if account_info['balance'] > 0 else 0
+	free_margin_percent = _get_trading_trigger_margin_ratio(account_info) * 100
 	balance_text = f"{account_info['balance']:.2f}"
 	free_margin_text = f"{account_info['margin_free']:.2f}"
 	if account_info.get('balance_reserve', 0) > 0:
@@ -66,10 +77,10 @@ def check_stop_condition(account_info: dict) -> bool:
 	"""
 	Check if monitoring should stop.
 	
-	Stop condition: Stop if effective margin_free exceeds threshold % of effective balance.
+	Stop condition: Stop if actual free margin exceeds threshold % of capped strategy balance.
 	Threshold is loaded from TRADING_MARGIN_THRESHOLD env variable (default 20%).
 	"""
-	margin_ratio = account_info['margin_free'] / account_info['balance'] if account_info['balance'] > 0 else 0
+	margin_ratio = _get_trading_trigger_margin_ratio(account_info)
 	threshold = _get_margin_threshold()
 	threshold_percent = threshold * 100
 	

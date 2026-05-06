@@ -202,9 +202,17 @@ OLLAMA_COMPACT_PROMPT=true
 
 `GOOGLE_APPLICATION_CREDENTIALS` musí ukazovat na service-account JSON s oprávněním volat Vertex AI. Soubor drž mimo repository a neposílej ho do gitu.
 
-`VERTEX_AI_PROJECT_ID`, `VERTEX_AI_REGION` a `VERTEX_AI_MODEL` určují, do jakého Google Cloud projektu a regionu se bude volat. Výchozí model chain je postaven tak, aby při výpadku nebo nedostupnosti konkrétního flash modelu uměl přejít na rozumný fallback ve stejné třídě modelů.
+`VERTEX_AI_PROJECT_ID`, `VERTEX_AI_REGION` a `VERTEX_AI_MODEL` určují, do jakého Google Cloud projektu a regionu se bude volat. Výchozí model chain je postaven tak, aby při výpadku nebo nedostupnosti konkrétního flash modelu uměl přejít na rozumný fallback ve stejné třídě modelů, ale tento chain se používá jen tehdy, když není aktivní legacy API-key fallback.
 
-Gemini requesty teď běží přes Python SDK `google-genai` v režimu `vertexai=True`, používají stabilní API `v1`, mají vypnuté thinking, vynucený structured JSON response schema a logují token usage, response id, finish reason a fallback model.
+Gemini requesty teď běží primárně přes Python SDK `google-genai` v režimu `vertexai=True`, používají stabilní API `v1`, mají vypnuté thinking, vynucený structured JSON response schema a logují token usage, response id, finish reason a fallback model.
+
+Pokud běžíte v režimu pouze s Vertex konfigurací a Python SDK selže na transportní chybě bez HTTP statusu, typicky na `httpx.ReadTimeout` při čtení odpovědi z Vertex AI, helper automaticky zkusí stejný `generateContent` request přes přímý Vertex REST call s bearer tokenem získaným ze stejného service-account JSON. V logu se takový úspěšný bypass objeví jako `transport="vertex-rest-fallback"`.
+
+Pokud jsou v `.env` nastavené `GEMINI_API_KEY` a `GEMINI_URL`, chování je nově agresivnější: Vertex se zkusí pouze jednou jako primární volba a při první chybě se request okamžitě přepne na starší Gemini API flow přes Generative Language endpoint. V tomto režimu se už nespouští další Vertex retry, další Vertex fallback modely ani `vertex-rest-fallback`. V logu se přepnutí zapisuje jako `transport="legacy-gemini-api"`.
+
+Pokud `GEMINI_API_KEY` nebo `GEMINI_URL` nejsou nastavené, helper zůstává čistě ve Vertex režimu a použije původní Vertex retry/fallback logiku.
+
+Pro tento fallback je teď `google-auth` explicitní součástí `requirements.txt`; bot se už nespoléhá na to, že bude auth vrstva k dispozici jen nepřímo přes jinou knihovnu.
 
 `OLLAMA_FALLBACK_TO_GEMINI=false` znamená, že hlavní trading logika bere pro analýzu pouze instrumenty s čerstvou Ollama predikcí. Instrument bez použitelné Ollama predikce se v daném běhu přeskočí a když takto odpadnou všechny symboly, finální decision fáze se nespustí.
 

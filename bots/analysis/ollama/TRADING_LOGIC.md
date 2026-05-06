@@ -23,6 +23,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
 6. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
    - Gemini AI vybere **1 měnový pár**, rozhodne BUY/SELL, navrhne lot_size a take_profit
    - V promptu je explicitně swing styl (ne intraday), denní cíl zisků a poplatek 0.10 USD za 0.01 lotu
+   - Když jsou nastavené `GEMINI_API_KEY` a `GEMINI_URL`, je Vertex pouze jednorázový první pokus; při první chybě se request okamžitě přepne na `legacy-gemini-api`
 7. **Aplikuje režim exekuce podle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3)
    - lot_size se vždy použije z finální Gemini predikce
    - Každý N-tý obchod: použije se i take_profit z Gemini
@@ -247,8 +248,9 @@ Každá predikce je JSON soubor s názvem `SYMBOL.json`:
 ## Opakované Pokusy (Retry)
 
 Když Gemini API vrátí chybu pro nějaký symbol:
-- 1. pokus → chyba → 2. pokus
-- Pokud 2. pokus selže → symbol se přeskočí
+- Pokud není aktivní legacy API-key fallback: 1. pokus → chyba → 2. pokus
+- Pokud jsou nastavené `GEMINI_API_KEY` a `GEMINI_URL`: 1. Vertex pokus → chyba → okamžitý přechod na `legacy-gemini-api`
+- Pokud i legacy API selže → symbol se přeskočí
 
 Zaznamenáno v logeních.
 
@@ -397,6 +399,8 @@ Stahuje data a generuje predikce:
 Řídí finální workflow, ale většinu specializované logiky deleguje do sdílených helper modulů:
 - Načítá filtrované predikce, stav účtu a otevřené pozice
 - Spouští Gemini dotaz pro finální doporučení
+- Při transportním timeoutu Python SDK umí Gemini request zopakovat přes přímý Vertex REST call se stejným service accountem
+- Pokud všechny Vertex pokusy selžou, umí jako poslední fallback použít starší Gemini API flow přes `GEMINI_API_KEY` a `GEMINI_URL`
 - Aplikuje obchodní režim podle pořadí obchodu (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`)
 - Pracuje s efektivním balance/free margin podle `TRADING_ACCOUNT_BALANCE_CAP`
 - Ukládá finální JSON rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
@@ -433,8 +437,9 @@ Refaktor rozdělil původní monolit do menších odpovědností:
 - `mt5_positions.py` - serializace otevřených pozic
 
 **Gemini / decision vrstva:**
-- `gemini_config.py` - načtení `GEMINI_API_KEY` a `GEMINI_URL`
-- `gemini_decision.py` - čištění Gemini odpovědí, načtení predikcí, finální Gemini decision query
+- `gemini_config.py` - načtení Vertex AI konfigurace (`GOOGLE_APPLICATION_CREDENTIALS`, `VERTEX_AI_PROJECT_ID`, `VERTEX_AI_REGION`, `VERTEX_AI_MODEL`) a model fallback chainu
+- `gemini_vertex.py` - sdílený Gemini helper pro structured JSON requesty, Vertex SDK volání, Vertex REST fallback a finální fallback na starší API-key flow
+- `gemini_decision.py` - sestavení promptu, finální Gemini decision query a obsluha chyb z Vertex helper vrstvy
 
 **Trading / execution vrstva:**
 - `trading_validation.py` - validace symbolu, lot size a marže
@@ -497,6 +502,8 @@ Každá predikce obsahuje:
 - `MT5_CRYPTO_ALLOW_FULL_TP_MODE` - povoluje použití Gemini TP režimu; u crypto je TP i tak konzervativně omezený na nakonfigurovanou vzdálenost
 - Fee kontext v promptu: `0.10 USD` za `0.01` lotu
 - Swing kontext v promptu: pozice mohou být otevřené i několik dní, ale cílem je denní ziskovost
+- Vertex transport fallback: při chybě typu `httpx.ReadTimeout` bez HTTP statusu se helper pokusí stejný request provést přes přímé Vertex REST API a v logu zapíše `transport="vertex-rest-fallback"`, ale jen pokud není aktivní legacy API-key fallback
+- Legacy Gemini fallback: pokud jsou nastavené `GEMINI_API_KEY` a `GEMINI_URL`, helper po první Vertex chybě přeskočí další Vertex pokusy a přejde rovnou na `transport="legacy-gemini-api"`
 
 ## Použití
 
@@ -515,6 +522,7 @@ python trading_logic.py [cesta_ke_složce]
 
 ```
 MetaTrader5>=5.0.45
+google-auth>=2.38.0
 httpx>=0.27.0
 ```
 

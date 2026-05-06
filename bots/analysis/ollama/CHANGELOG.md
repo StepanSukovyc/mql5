@@ -1,5 +1,32 @@
 # Changelog
 
+## 2026-05-06 (Immediate Legacy Gemini Fallback After First Vertex Failure)
+
+- **Stopped Repeating Vertex Attempts When Legacy Gemini API Is Configured**
+  - `gemini_vertex.py` now treats Vertex as a single first-choice attempt when both `GEMINI_API_KEY` and `GEMINI_URL` are configured
+  - If that first Vertex request fails, the helper now skips additional Vertex retries, skips extra Vertex fallback models, and skips the direct Vertex REST fallback
+  - The request switches immediately to the older Generative Language API flow and logs that handoff as `transport="legacy-gemini-api"`
+
+- **Kept Original Vertex Retry Path Only For Vertex-Only Environments**
+  - When no legacy Gemini API configuration is available, the previous behavior remains in place: SDK attempt, optional Vertex REST fallback for transport-level failures, and configured Vertex model retries/fallbacks
+  - This keeps the Vertex-only runtime unchanged while reducing noise and latency in environments where the API-key fallback is intentionally enabled
+
+## 2026-05-06 (Vertex REST Fallback For Gemini Timeouts)
+
+- **Added Direct Vertex REST Fallback When Python SDK Transport Fails**
+  - `gemini_vertex.py` now first tries the existing `google-genai` SDK path and automatically falls back to a direct Vertex `generateContent` REST call when the SDK fails with transport-level timeout errors without an HTTP status
+  - The REST fallback authenticates with the configured service-account JSON and validates the same structured JSON schema as the SDK path, so final decision and prediction parsing stay unchanged
+  - Gemini logs now distinguish successful REST fallback responses with `transport="vertex-rest-fallback"`, making it visible when the SDK path timed out but the underlying Vertex API call still succeeded
+
+- **Restored Legacy Gemini API-Key Fallback After Vertex Exhaustion**
+  - When all configured Vertex model attempts fail, `gemini_vertex.py` now tries the older Generative Language API flow using `GEMINI_API_KEY` and `GEMINI_URL`
+  - The legacy fallback reuses the same prompt and the same structured JSON validation helpers, so predictions and final decisions remain compatible with the current pipeline
+  - Runtime logs now expose the final fallback transport as `transport="legacy-gemini-api"`
+
+- **Made Google Auth An Explicit Runtime Dependency**
+  - Added `google-auth` to `requirements.txt` so the REST fallback does not rely on a transitive dependency from another package
+  - This documents that the trading bot now supports two Vertex transports in the same runtime: Python SDK first, direct REST fallback second
+
 ## 2026-04-21 (Ollama Context And Latency Stabilization)
 
 - **Made Ollama Context Window Configurable Per Request**
