@@ -860,3 +860,6 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-05-06T10:47:56.148723+00:00,CHFHUF_ecn,SELL,0.05,gemini_prediction,390.639,False,Invalid take_profit for SELL: TP (395.0) must be < market price (390.639)
 2026-05-06T10:48:00.590127+00:00,EURAUD_ecn,SELL,0.05,gemini_prediction,0.0,True,
 2026-05-06T10:48:06.590578+00:00,CHFHUF_ecn,SELL,0.05,gemini_prediction,0.0,True,
+2026-05-07T09:47:51.988807+00:00,GBPSGD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-05-07T09:47:58.276521+00:00,EURNZD_ecn,SELL,0.04,gemini_prediction,0.0,True,
+2026-05-07T11:23:16.626577+00:00,XAUUSD_ecn,SELL,0.01,gemini_prediction,0.0,True,
