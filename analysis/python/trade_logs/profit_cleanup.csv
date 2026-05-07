@@ -78,3 +78,5 @@ timestamp,dry_run,balance,reference_volume,symbol,ticket,position_volume,profit,
 2026-05-07T09:45:04.889755+00:00,False,5288.64,0.11,CHFHUF_ecn,27807252,0.05,26.26,2.04,0.50,27.80,24.0393,True,Position closed
 2026-05-07T11:20:04.056346+00:00,False,5316.44,0.11,USOIL_ecn,27810065,0.01,6.80,-1.44,0.10,5.26,4.8331,True,Position closed
 2026-05-07T12:20:21.023547+00:00,False,5321.65,0.11,USOIL_ecn,27835713,0.01,5.60,0.00,0.10,5.50,4.8379,True,Position closed
+2026-05-07T16:01:47.187371+00:00,False,5334.75,0.11,XAUUSD_ecn,27835548,0.01,5.62,0.00,0.10,5.52,4.8498,True,Position closed
+2026-05-07T17:58:54.008240+00:00,False,5340.09,0.11,USOIL_ecn,27846910,0.01,5.43,0.00,0.10,5.33,4.8546,True,Position closed

@@ -158,6 +158,14 @@ def get_ollama_prediction_max_age() -> timedelta:
 		return timedelta(minutes=default_minutes)
 
 
+def is_economy_mode_enabled() -> bool:
+	"""Return whether economy mode disables prepared Ollama predictions."""
+	configured_value = _load_dotenv_value("ECONOMY_MODE_ENABLED")
+	if configured_value is None:
+		return True
+	return configured_value.strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
 def is_gemini_fallback_after_stale_ollama_enabled() -> bool:
 	"""Return whether stale/missing Ollama predictions may fall back to Gemini."""
 	configured_value = _load_dotenv_value("OLLAMA_FALLBACK_TO_GEMINI")
@@ -383,13 +391,16 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	ollama_reuse_count = 0
 	gemini_count = 0
 	ignored_count = 0
-	gemini_fallback_enabled = is_gemini_fallback_after_stale_ollama_enabled()
+	economy_mode_enabled = is_economy_mode_enabled()
+	gemini_fallback_enabled = economy_mode_enabled or is_gemini_fallback_after_stale_ollama_enabled()
 	gemini_fallback_limit = get_ollama_gemini_fallback_limit()
 	gemini_parallelism = get_gemini_fallback_parallelism()
 	gemini_fallback_used = 0
 	gemini_fallback_tasks: List[tuple[str, Path, Dict]] = []
 
-	if ollama_predictions_folder.exists():
+	if economy_mode_enabled:
+		print("🪫 Economy mode active - skipping prepared Ollama predictions and using Gemini at trade time")
+	elif ollama_predictions_folder.exists():
 		print(f"🤝 Ollama fallback aktivní: {ollama_predictions_folder}")
 	else:
 		print(f"ℹ️  Ollama predikce složka neexistuje, používám jen Gemini")
@@ -413,34 +424,36 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 		try:
 			print(f"\n📈 Processing {symbol}...")
 
-			# Prefer prepared Ollama prediction when not older than configured limit.
-			ollama_prediction_max_age = get_ollama_prediction_max_age()
-			ollama_prediction_max_age_minutes = int(ollama_prediction_max_age.total_seconds() // 60)
-			recent_ollama, ollama_reason = load_recent_ollama_prediction_with_reason(
-				ollama_predictions_folder,
-				symbol,
-				max_age=ollama_prediction_max_age,
-			)
-			if recent_ollama is not None:
-				prediction_file = predictions_folder / f"{symbol}.json"
-				prediction_file.write_text(
-					json.dumps(recent_ollama, ensure_ascii=False, indent=2),
-					encoding="utf-8",
+			ollama_reason = "economy mode aktivni - Ollama reuse vypnut"
+			if not economy_mode_enabled:
+				# Prefer prepared Ollama prediction when not older than configured limit.
+				ollama_prediction_max_age = get_ollama_prediction_max_age()
+				ollama_prediction_max_age_minutes = int(ollama_prediction_max_age.total_seconds() // 60)
+				recent_ollama, ollama_reason = load_recent_ollama_prediction_with_reason(
+					ollama_predictions_folder,
+					symbol,
+					max_age=ollama_prediction_max_age,
 				)
-				print(
-					f"  ♻️  Použita Ollama predikce (<= {ollama_prediction_max_age_minutes} min): "
-					f"{prediction_file.name}"
-				)
-				print(f"  ℹ️  Duvod: {ollama_reason}")
+				if recent_ollama is not None:
+					prediction_file = predictions_folder / f"{symbol}.json"
+					prediction_file.write_text(
+						json.dumps(recent_ollama, ensure_ascii=False, indent=2),
+						encoding="utf-8",
+					)
+					print(
+						f"  ♻️  Použita Ollama predikce (<= {ollama_prediction_max_age_minutes} min): "
+						f"{prediction_file.name}"
+					)
+					print(f"  ℹ️  Duvod: {ollama_reason}")
 
-				archive_file = source_archive_folder / json_file.name
-				shutil.move(str(json_file), str(archive_file))
-				print(f"  📦 Source moved to archive: {archive_file.name}")
+					archive_file = source_archive_folder / json_file.name
+					shutil.move(str(json_file), str(archive_file))
+					print(f"  📦 Source moved to archive: {archive_file.name}")
 
-				processed_symbols.add(symbol)
-				success_count += 1
-				ollama_reuse_count += 1
-				continue
+					processed_symbols.add(symbol)
+					success_count += 1
+					ollama_reuse_count += 1
+					continue
 
 			if not gemini_fallback_enabled:
 				print(f"  ⏭️  Ignoruji {symbol}: {ollama_reason}")

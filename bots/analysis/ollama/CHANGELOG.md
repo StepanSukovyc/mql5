@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-05-07 (Economy Mode For MT5 Data Refresh Without Ollama Precomputation)
+
+- **Added Default Economy Mode For The Main Trading Loop**
+  - `logika.py` now supports `ECONOMY_MODE_ENABLED` and `ECONOMY_MODE_INTERVAL_SECONDS`
+  - When economy mode is enabled, the main process keeps refreshing MT5 market data in the background every configured interval, default 300 seconds
+  - The parallel `Ollama Service` thread is no longer started in this mode, reducing local inference load while preserving fresh source data for trading
+
+- **Forced Trade-Time Gemini Analysis In Economy Mode**
+  - `trading_logic.py` now skips reuse of prepared Ollama predictions when `ECONOMY_MODE_ENABLED=true`
+  - At trade time, the bot goes directly to Gemini even if `OLLAMA_FALLBACK_TO_GEMINI` would otherwise be disabled
+  - This keeps all downstream trading behavior unchanged while replacing only the precomputation path
+
 ## 2026-05-06 (Immediate Legacy Gemini Fallback After First Vertex Failure)
 
 - **Stopped Repeating Vertex Attempts When Legacy Gemini API Is Configured**

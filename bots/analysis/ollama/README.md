@@ -146,6 +146,8 @@ MT5_CRYPTO_MAX_OPEN_POSITIONS=1
 MT5_CRYPTO_ALLOW_FULL_TP_MODE=true
 MT5_CRYPTO_TP_DISTANCE_PERCENT=2.0
 LOOKBACK_PERIODS=30
+ECONOMY_MODE_ENABLED=true
+ECONOMY_MODE_INTERVAL_SECONDS=300
 RUN_INTERVAL_SECONDS=3600
 RSI_PERIOD=14
 MA_PERIOD=20
@@ -218,6 +220,10 @@ Pro tento fallback je teď `google-auth` explicitní součástí `requirements.t
 
 `OLLAMA_FALLBACK_TO_GEMINI=true` znamená, že hlavní trading logika může použít Gemini jako náhradní zdroj predikce, ale pouze do limitu `OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS` instrumentů za jeden cyklus. Další symboly bez čerstvé Ollama predikce se už v tom běhu přeskočí.
 
+`ECONOMY_MODE_ENABLED=true` zapíná úsporný režim. V tomto režimu se nespouští průběžná Ollama předanalýza, ale bot si pouze v pozadí stahuje čerstvá tržní data z MT5 a při obchodním triggeru jde rovnou přes Gemini. Výchozí stav je zapnuto.
+
+`ECONOMY_MODE_INTERVAL_SECONDS` určuje, jak často se v úsporném režimu obnovují tržní data na pozadí. Výchozí hodnota `300` znamená refresh každých 5 minut.
+
 `GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS` omezuje, kolik Gemini fallback dotazů může běžet současně. Vyšší hodnota může zrychlit cyklus, ale zvyšuje riziko quota limitů nebo špičkové latence.
 
 `OLLAMA_MAX_PARALLEL_REQUESTS` omezuje, kolik Ollama requestů může běžet současně během nezávislého Ollama cyklu. `OLLAMA_REQUEST_DELAY_SECONDS` pak umožňuje jemně rozložit start jednotlivých requestů, pokud by při plně paralelním startu docházelo ke špičkám nebo nestabilitě.
@@ -234,7 +240,7 @@ Rucni blokovaci okno `SWAP_BLOCK_START_*` az `SWAP_BLOCK_END_*` je interpretovan
 
 ## Spusteni
 
-**Příprava (pokud chcete používat Ollama):**
+**Příprava (pokud chcete používat průběžnou Ollama předanalýzu):**
 ```bash
 # Ujistěte se, že Ollama server běží
 ollama serve
@@ -258,6 +264,8 @@ Automatické testy výpočtu spustíte takto:
 
 ```bash
 python -m unittest test_profit_cleanup_strategy.py
+
+Pokud ponecháte `ECONOMY_MODE_ENABLED=true`, Ollama není pro běžný provoz potřeba. Pokud chcete obnovit původní režim s průběžným lokálním předpočítáváním predikcí, nastavte `ECONOMY_MODE_ENABLED=false`.
 ```
 
 Skript běží jako **nekonečný obchodní automat**:

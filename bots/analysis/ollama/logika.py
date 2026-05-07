@@ -65,6 +65,8 @@ class Config:
 	symbol_suffix: str
 	symbol_blacklist: List[str]
 	lookback_periods: int
+	economy_mode_enabled: bool
+	economy_mode_interval_seconds: int
 	run_interval_seconds: int
 	rsi_period: int
 	ma_period: int
@@ -92,6 +94,8 @@ class Config:
 			symbol_suffix=os.getenv("MT5_SYMBOL_SUFFIX", "_ecn").strip(),
 			symbol_blacklist=_parse_csv(os.getenv("MT5_SYMBOL_BLACKLIST")),
 			lookback_periods=int(os.getenv("LOOKBACK_PERIODS", "30")),
+			economy_mode_enabled=_to_bool(os.getenv("ECONOMY_MODE_ENABLED", "true"), default=True),
+			economy_mode_interval_seconds=int(os.getenv("ECONOMY_MODE_INTERVAL_SECONDS", "300")),
 			run_interval_seconds=int(os.getenv("RUN_INTERVAL_SECONDS", "3600")),
 			rsi_period=int(os.getenv("RSI_PERIOD", "14")),
 			ma_period=int(os.getenv("MA_PERIOD", "20")),
@@ -137,6 +141,34 @@ def run_cycle(cfg: Config) -> None:
 			print(f"[{symbol}] ERROR: {exc}")
 
 	print(f"Cycle done. Success={ok_count}, Errors={err_count}, Total={len(symbols)}")
+
+
+def run_economy_data_collector(
+	cfg: Config,
+	stop_event: threading.Event,
+	trading_trigger_event: threading.Event,
+) -> None:
+	"""Refresh market data in the background until trading starts."""
+	interval_seconds = max(1, cfg.economy_mode_interval_seconds)
+	cycle_idx = 0
+
+	print("🪫 Economy mode active - background MT5 data refresh enabled")
+	print(f"   Refresh interval: {interval_seconds} seconds")
+
+	while not stop_event.is_set() and not trading_trigger_event.is_set():
+		cycle_idx += 1
+		cycle_started = datetime.now(tz=timezone.utc).isoformat()
+		print(f"\n=== Economy data refresh #{cycle_idx} started at {cycle_started} ===")
+
+		try:
+			run_cycle(cfg)
+		except Exception as exc:  # pylint: disable=broad-except
+			print(f"Economy data refresh failed: {exc}")
+
+		remaining = interval_seconds
+		while remaining > 0 and not stop_event.is_set() and not trading_trigger_event.is_set():
+			time.sleep(min(1.0, remaining))
+			remaining -= 1.0
 
 
 def run_scheduler(cfg: Config, trading_trigger_event: threading.Event) -> None:
@@ -326,19 +358,21 @@ def main() -> int:
 		print("Monitoring → Predictions → Final Decision → Trade → Repeat")
 		print("Ukončení: Ctrl+C")
 		print("="*60 + "\n")
-		
-		# Start Ollama service in a separate thread
-		def ollama_wrapper():
-			"""Wrapper to run Ollama service."""
-			ollama_service_loop(cfg.service_dest_folder, ollama_stop_event)
-		
-		ollama_thread = threading.Thread(
-			target=ollama_wrapper,
-			name="OllamaService",
-			daemon=False
-		)
-		ollama_thread.start()
-		print("🔮 Ollama Service thread spuštěn...\n")
+		if cfg.economy_mode_enabled:
+			print("🪫 Economy mode is ON - Ollama precomputation is disabled, Gemini will be used at trade time.\n")
+		else:
+			# Start Ollama service in a separate thread
+			def ollama_wrapper():
+				"""Wrapper to run Ollama service."""
+				ollama_service_loop(cfg.service_dest_folder, ollama_stop_event)
+			
+			ollama_thread = threading.Thread(
+				target=ollama_wrapper,
+				name="OllamaService",
+				daemon=False
+			)
+			ollama_thread.start()
+			print("🔮 Ollama Service thread spuštěn...\n")
 		
 		cycle_count = 0
 		
@@ -355,7 +389,9 @@ def main() -> int:
 			
 			# Thread-safe events for coordination
 			monitor_stop_event = threading.Event()
+			collector_stop_event = threading.Event()
 			trading_trigger_event = threading.Event()
+			collector_thread = None
 			
 			def monitor_wrapper():
 				"""Wrapper to run account monitor."""
@@ -372,9 +408,22 @@ def main() -> int:
 			)
 			monitor_thread.start()
 			print("📊 Account monitor started...")
+
+			if cfg.economy_mode_enabled:
+				collector_thread = threading.Thread(
+					target=run_economy_data_collector,
+					args=(cfg, collector_stop_event, trading_trigger_event),
+					name="EconomyDataCollector",
+					daemon=False,
+				)
+				collector_thread.start()
+				print("📥 Economy data collector started...")
 			
 			# Wait for monitor to complete (will signal trading_trigger_event if margin > threshold)
 			monitor_thread.join()
+			collector_stop_event.set()
+			if collector_thread and collector_thread.is_alive():
+				collector_thread.join(timeout=5)
 			
 			# Check if trading trigger was set by monitor
 			if trading_trigger_event.is_set():

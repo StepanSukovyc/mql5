@@ -2,34 +2,38 @@
 
 ## Přehled Systému
 
-Komplexní event-driven trading systém monitoruje volnou marži a dělá inteligentní obchodní rozhodnutí. **Nově** běží paralelně nezávislý **Ollama Service** pro kontinuální generování predikcí pomocí lokálního AI modelu.
+Komplexní event-driven trading systém monitoruje volnou marži a dělá inteligentní obchodní rozhodnutí. Standardně teď běží v **úsporném režimu**, ve kterém se průběžně obnovují MT5 data, ale předanalýza přes lokální Ollama se nespouští. Mimo úsporný režim může paralelně běžet nezávislý **Ollama Service** pro kontinuální generování predikcí pomocí lokálního AI modelu.
 
 **Hlavní proces (Gemini AI - nekonečný cyklus):**
 1. **Kontroluje swap blok okno** - používá pevný `.env` interval `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`, interpretovaný v čase `Europe/Prague`, a v aktivním okně čeká do konce blokace (bez analýz)
 2. **Monitoruje volnou marži** - kontroluje stav účtu
-3. **Rozhoduje se pružně**:
-   - Pokud existují predikce z **aktuální hodiny** → používá je (reuse)
+3. **V úsporném režimu průběžně obnovuje data** - každých `ECONOMY_MODE_INTERVAL_SECONDS` sekund stáhne z MT5 čerstvá tržní data do `SERVICE_DEST_FOLDER`, ale bez Ollama analýzy
+4. **Rozhoduje se pružně**:
+   - Pokud je `ECONOMY_MODE_ENABLED=true` → přeskočí reuse připravených Ollama predikcí a při obchodním triggeru jde rovnou přes Gemini
+   - Pokud je `ECONOMY_MODE_ENABLED=false` a existují predikce z **aktuální hodiny** → používá je (reuse)
    - Pokud ne → stáhne data z MT5 + získá nové predikce od Gemini AI
    - Pro každý symbol se před dotazem na Gemini kontroluje `SERVICE_DEST_FOLDER/ollama/predikce/{symbol}.json`
+   - V úsporném režimu se tato kontrola jen diagnosticky přeskočí, protože lokální předanalýza je vypnutá
    - Pokud je `timestamp` validní a soubor není starší než limit `OLLAMA_PREDICTION_MAX_AGE_MINUTES` z `.env` (default 120 minut), použije se Ollama predikce
     - Pokud Ollama predikce chybí / je nevalidní / je starší než nastavený limit:
+       - při `ECONOMY_MODE_ENABLED=true` se vždy použije Gemini
        - při `OLLAMA_FALLBACK_TO_GEMINI=true` proběhne fallback na `ask_gemini_prediction`, ale jen do limitu `OLLAMA_GEMINI_FALLBACK_MAX_INSTRUMENTS` instrumentů za cyklus
        - při `OLLAMA_FALLBACK_TO_GEMINI=false` se instrument v tomto běhu ignoruje
     - Gemini fallback větev může běžet paralelně, ale maximálně do `GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS` současných dotazů
     - Po vyčerpání limitu Gemini fallbacku se další instrumenty bez čerstvé Ollama predikce ignorují
     - Pokud po tomto filtrování nezůstane žádný instrument s použitelnou predikcí, cyklus skončí bez vytvoření predikcí a bez nákupu
-4. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
-5. **Kontroluje swap blok okno (znovu)** - pokud trading signal přijde v rollover okně, zahodí ho a čeká
-6. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
+5. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
+6. **Kontroluje swap blok okno (znovu)** - pokud trading signal přijde v rollover okně, zahodí ho a čeká
+7. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
    - Gemini AI vybere **1 měnový pár**, rozhodne BUY/SELL, navrhne lot_size a take_profit
    - V promptu je explicitně swing styl (ne intraday), denní cíl zisků a poplatek 0.10 USD za 0.01 lotu
    - Když jsou nastavené `GEMINI_API_KEY` a `GEMINI_URL`, je Vertex pouze jednorázový první pokus; při první chybě se request okamžitě přepne na `legacy-gemini-api`
-7. **Aplikuje režim exekuce podle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3)
+8. **Aplikuje režim exekuce podle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3)
    - lot_size se vždy použije z finální Gemini predikce
    - Každý N-tý obchod: použije se i take_profit z Gemini
    - Ostatní obchody: take_profit se nepoužije
    - **Crypto safeguardy**: pro symboly odpovídající `MT5_CRYPTO_SYMBOL_PATTERNS` se používá přísnější minimální síla signálu, menší lot přes `MT5_CRYPTO_LOT_MULTIPLIER`, limit současně otevřených crypto pozic přes `MT5_CRYPTO_MAX_OPEN_POSITIONS` a konzervativní TP omezené na maximální vzdálenost `MT5_CRYPTO_TP_DISTANCE_PERCENT` od aktuální tržní ceny
-8. **Vyhodnotí minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`)
+9. **Vyhodnotí minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru při každém ticku monitoru, nejvýše jednou za minutu
    - Běží pouze mimo swap blok okno
    - Vezme aktuální raw bilanci účtu `B` a spočítá referenční objem `VOLUME = ((int)(B / 500) + 1) * 0.01`
@@ -38,7 +42,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Cílový profit `PCZ = (0.01 * L / VOLUME) * B`, minimum `PCZ` je `0.005`
    - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
    - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
-9. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
+10. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za minutu, ale pouze uvnitř swap blok okna
    - Swap blok okno se bere vždy z pevného ručního intervalu z `.env`
    - Aktuální konfigurace je `22:30-23:30` v čase `Europe/Prague`
@@ -48,7 +52,7 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Pokud `ZISK >= 0.10 USD`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
    - Audit log zapisuje i skip/no-candidate průchody, takže je zpětně vidět, jestli strategie byla mimo okno nebo jen nic nenašla
    - Pokud je `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
-10. **Vyhodnotí denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
+11. **Vyhodnotí denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
    - Použije realizovaný výsledek za předchozí uzavřený pražský den z MT5 deal historie včetně `profit`, `swap`, `commission` a `actual deal.fee`
    - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z uzavřených pozic referenčního dne
@@ -60,9 +64,23 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Stavový soubor `trade_logs/loss_cleanup_state.json` brání opakovanému spuštění ve stejný pražský den i po restartu procesu
    - Pokud je `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáta jen zaloguje a nic nezavírá
    - V čase swap blok okna se cleanup nespouští
-9. **Provede obchod** - automaticky otevře pozici na MT5
-10. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
-11. **Ukončení** - Ctrl+C
+12. **Provede obchod** - automaticky otevře pozici na MT5
+13. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
+14. **Ukončení** - Ctrl+C
+
+## Úsporný Režim
+
+Úsporný režim se ovládá přes `.env`:
+
+- `ECONOMY_MODE_ENABLED=true` je výchozí nastavení
+- `ECONOMY_MODE_INTERVAL_SECONDS=300` znamená refresh dat každých 5 minut
+
+Když je úsporný režim aktivní:
+
+- hlavní proces nespouští samostatný `Ollama Service` thread
+- během čekání na obchodní trigger se na pozadí jen stahují čerstvá tržní data z MT5
+- při obchodním triggeru se nepoužije reuse Ollama predikcí a analýza jde rovnou přes Gemini
+- ostatní logika zůstává stejná: filtrace slabých predikcí, finální decision, cleanup strategie i exekuce obchodu
 
 ### Swap Block Window
 
@@ -79,6 +97,8 @@ Dvojitá kontrola zajišťuje bezpečnost:
 Stejné vypočtené okno platí i pro cleanup strategie, takže v tomto čase neběží běžné obchodování ani loss cleanup. Aktivní interval se vždy bere z `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`.
 
 ## Ollama Service (Paralelní Proces)
+
+Tato část se používá jen při `ECONOMY_MODE_ENABLED=false`.
 
 **Nezávislá smyčka běžící v samostatném threadu:**
 
@@ -139,19 +159,26 @@ Stejné vypočtené okno platí i pro cleanup strategie, takže v tomto čase ne
        │                       │
        NO                      YES
        │                       │
-       │                ┌──────▼────────────┐
-       │                │ Check for existing│
-       │                │ predictions from  │
-       │                │ current hour      │
-       │                └──┬────────────┬──┘
-       │                   │            │
-       │                FOUND        NOT FOUND
-       │                   │            │
-       │          ┌────────▼──┐  ┌──────▼──────────┐
-       │          │ Use        │  │ Download MT5    │
-       │          │ existing   │  │ data + Query    │
-       │          │ predictions│  │ Gemini AI       │
-       │          └────┬───────┘  └────┬───────────┘
+      │                ┌──────▼────────────┐
+      │                │ Economy mode?     │
+      │                └──┬────────────┬──┘
+      │                   │            │
+      │                 YES           NO
+      │                   │            │
+      │          ┌────────▼──┐  ┌──────▼────────────┐
+      │          │ Use        │  │ Check for existing│
+      │          │ Gemini on  │  │ predictions from  │
+      │          │ fresh MT5  │  │ current hour      │
+      │          │ data        │  └──┬────────────┬──┘
+      │          └────┬───────┘     │            │
+      │               │          FOUND        NOT FOUND
+      │               │             │            │
+      │               │     ┌──────▼──┐  ┌──────▼──────────┐
+      │               │     │ Use      │  │ Download MT5    │
+      │               │     │ existing │  │ data + Query    │
+      │               │     │ Ollama   │  │ Gemini AI       │
+      │               │     │ output   │  └────┬───────────┘
+      │               │     └────┬─────┘       │
        │               │               │
        │        ┌──────▼──────────────▼┐
        │        │ Filter predictions   │
