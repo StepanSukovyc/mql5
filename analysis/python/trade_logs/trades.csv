@@ -863,3 +863,21 @@ timestamp,symbol,action,lot_size,lot_source,price,success,error_msg
 2026-05-07T09:47:51.988807+00:00,GBPSGD_ecn,SELL,0.01,gemini_prediction,0.0,True,
 2026-05-07T09:47:58.276521+00:00,EURNZD_ecn,SELL,0.04,gemini_prediction,0.0,True,
 2026-05-07T11:23:16.626577+00:00,XAUUSD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-05-08T09:24:59.938198+00:00,GBPCAD_ecn,BUY,0.02,gemini_prediction,1.85881,False,Invalid take_profit for BUY: TP (1.72) must be > market price (1.85881)
+2026-05-08T09:25:10.175397+00:00,CHFHUF_ecn,SELL,0.08,gemini_prediction,0.0,True,
+2026-05-13T06:34:37.653980+00:00,EURHUF_ecn,SELL,0.07,gemini_prediction,357.465,False,Invalid take_profit for SELL: TP (393.0) must be < market price (357.465)
+2026-05-13T06:34:41.938829+00:00,GBPJPY_ecn,BUY,0.01,gemini_prediction,0.0,True,
+2026-05-13T06:34:47.787171+00:00,EURHUF_ecn,SELL,0.02,gemini_prediction,357.464,False,Invalid take_profit for SELL: TP (394.5) must be < market price (357.464)
+2026-05-13T06:34:51.517213+00:00,NOKSEK_ecn,SELL,0.06,gemini_prediction,0.0,True,
+2026-05-13T06:34:58.072754+00:00,EURHUF_ecn,SELL,0.04,gemini_prediction,357.469,False,Invalid take_profit for SELL: TP (395.0) must be < market price (357.469)
+2026-05-13T06:35:02.485678+00:00,EURAUD_ecn,SELL,0.07,gemini_prediction,0.0,True,
+2026-05-13T07:20:45.181308+00:00,EURPLN_ecn,BUY,0.02,gemini_prediction,0.0,True,
+2026-05-13T10:10:44.531747+00:00,EURHUF_ecn,BUY,0.02,gemini_prediction,0.0,True,
+2026-05-13T10:10:51.613321+00:00,EURHUF_ecn,BUY,0.01,gemini_prediction,0.0,True,
+2026-05-13T10:10:57.777840+00:00,EURHUF_ecn,BUY,0.01,gemini_prediction,0.0,True,
+2026-05-13T10:11:04.379748+00:00,EURHUF_ecn,BUY,0.02,gemini_prediction,0.0,True,
+2026-05-14T06:47:05.308547+00:00,NZDSEK_ecn,BUY,0.06,gemini_prediction,0.0,True,
+2026-05-18T12:47:56.553168+00:00,AUDZAR_ecn,SELL,0.04,gemini_prediction,0.0,True,
+2026-05-20T15:19:56.668475+00:00,EURAUD_ecn,SELL,0.01,gemini_prediction,0.0,True,
+2026-05-20T17:11:15.154340+00:00,GBPJPY_ecn,BUY,0.01,gemini_prediction,0.0,True,
+2026-05-20T17:18:22.629148+00:00,EURSGD_ecn,SELL,0.04,gemini_prediction,0.0,True,
