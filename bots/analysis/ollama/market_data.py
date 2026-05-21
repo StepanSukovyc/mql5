@@ -13,7 +13,7 @@ from typing import Dict, Iterable, List, Optional
 
 import MetaTrader5 as mt5
 from instrument_utils import is_cfd_symbol
-from mt5_symbols import get_current_price, get_symbol_info, get_symbol_tick
+from mt5_symbols import get_current_price
 
 
 CFD_BLACKLIST_TOKEN = "__cfd__"
@@ -80,60 +80,6 @@ def rsi_wilder(values: List[float], period: int) -> List[Optional[float]]:
     return out
 
 
-def atr_wilder(rows: List[object], period: int) -> List[Optional[float]]:
-    """Return ATR values by Wilder smoothing; non-computable positions are None."""
-    if period <= 0:
-        raise ValueError("ATR period must be > 0")
-
-    out: List[Optional[float]] = [None] * len(rows)
-    if len(rows) <= period:
-        return out
-
-    true_ranges: List[float] = [0.0]
-    for idx in range(1, len(rows)):
-        high = float(rows[idx]["high"])
-        low = float(rows[idx]["low"])
-        prev_close = float(rows[idx - 1]["close"])
-        tr = max(high - low, abs(high - prev_close), abs(low - prev_close))
-        true_ranges.append(tr)
-
-    atr = sum(true_ranges[1 : period + 1]) / period
-    out[period] = atr
-
-    for idx in range(period + 1, len(rows)):
-        atr = ((atr * (period - 1)) + true_ranges[idx]) / period
-        out[idx] = atr
-
-    return out
-
-
-def bollinger_bands(values: List[float], period: int, multiplier: float = 2.0) -> List[Optional[Dict[str, float]]]:
-    """Return Bollinger band values; non-computable positions are None."""
-    if period <= 0:
-        raise ValueError("Bollinger period must be > 0")
-
-    out: List[Optional[Dict[str, float]]] = [None] * len(values)
-    if len(values) < period:
-        return out
-
-    for idx in range(period - 1, len(values)):
-        window = values[idx - period + 1 : idx + 1]
-        middle = sum(window) / period
-        variance = sum((value - middle) ** 2 for value in window) / period
-        stddev = variance ** 0.5
-        upper = middle + (multiplier * stddev)
-        lower = middle - (multiplier * stddev)
-        bandwidth = ((upper - lower) / middle) if middle else 0.0
-        out[idx] = {
-            "middle": middle,
-            "upper": upper,
-            "lower": lower,
-            "bandwidth": bandwidth,
-        }
-
-    return out
-
-
 def to_iso_utc(unix_timestamp: int) -> str:
     """Convert Unix timestamp to ISO UTC string."""
     return datetime.fromtimestamp(int(unix_timestamp), tz=timezone.utc).isoformat()
@@ -168,65 +114,20 @@ def indicator_rows(
 
     ma_values = simple_moving_average(closes, period=ma_period)
     rsi_values = rsi_wilder(closes, period=rsi_period)
-    atr_values = atr_wilder(rows, period=rsi_period)
-    bollinger_values = bollinger_bands(closes, period=ma_period)
 
     ma_series: List[Dict[str, object]] = []
     rsi_series: List[Dict[str, object]] = []
-    atr_series: List[Dict[str, object]] = []
-    bollinger_series: List[Dict[str, object]] = []
 
-    for ts, ma_value, rsi_value, atr_value, bollinger_value in zip(
-        times,
-        ma_values,
-        rsi_values,
-        atr_values,
-        bollinger_values,
-    ):
+    for ts, ma_value, rsi_value in zip(times, ma_values, rsi_values):
         if ma_value is not None:
             ma_series.append({"time": ts, "value": round(ma_value, 6)})
         if rsi_value is not None:
             rsi_series.append({"time": ts, "value": round(rsi_value, 6)})
-        if atr_value is not None:
-            atr_series.append({"time": ts, "value": round(atr_value, 6)})
-        if bollinger_value is not None:
-            bollinger_series.append(
-                {
-                    "time": ts,
-                    "middle": round(bollinger_value["middle"], 6),
-                    "upper": round(bollinger_value["upper"], 6),
-                    "lower": round(bollinger_value["lower"], 6),
-                    "bandwidth": round(bollinger_value["bandwidth"], 6),
-                }
-            )
 
-    return {
-        "rsi": rsi_series,
-        "ma": ma_series,
-        "atr": atr_series,
-        "bollinger": bollinger_series,
-    }
+    return {"rsi": rsi_series, "ma": ma_series}
 
 
-def get_current_spread_points(symbol: str) -> Optional[float]:
-    """Return the current symbol spread in points when available."""
-    tick = get_symbol_tick(symbol)
-    symbol_info = get_symbol_info(symbol)
-    if tick is None or symbol_info is None:
-        return None
-
-    point = float(getattr(symbol_info, "point", 0.0) or 0.0)
-    if point <= 0:
-        return None
-
-    return round((float(tick.ask) - float(tick.bid)) / point, 2)
-
-
-def get_symbols(
-    suffix: str,
-    blacklist: Optional[Iterable[str]] = None,
-    whitelist: Optional[Iterable[str]] = None,
-) -> List[str]:
+def get_symbols(suffix: str, blacklist: Optional[Iterable[str]] = None) -> List[str]:
     """Get MT5 symbols filtered by suffix and blacklist patterns."""
     symbols = mt5.symbols_get()
     if symbols is None:
@@ -235,7 +136,6 @@ def get_symbols(
 
     normalized_suffix = (suffix or "").strip().lower()
     blacklist_patterns = [item.strip().lower() for item in (blacklist or []) if item and item.strip()]
-    whitelist_patterns = [item.strip().lower() for item in (whitelist or []) if item and item.strip()]
     blacklist_cfd = CFD_BLACKLIST_TOKEN in blacklist_patterns
     if blacklist_cfd:
         blacklist_patterns = [pattern for pattern in blacklist_patterns if pattern != CFD_BLACKLIST_TOKEN]
@@ -246,9 +146,6 @@ def get_symbols(
         symbol_lower = symbol_name.lower()
 
         if normalized_suffix and not symbol_lower.endswith(normalized_suffix):
-            continue
-
-        if whitelist_patterns and not any(fnmatch(symbol_lower, pattern) for pattern in whitelist_patterns):
             continue
 
         if blacklist_cfd and is_cfd_symbol(symbol_name):
@@ -307,14 +204,12 @@ def collect_symbol_payload(
         "generated_at": datetime.now(tz=timezone.utc).isoformat(),
         "lookback_periods": lookback_periods,
         "current_price": None,
-        "current_spread_points": None,
         "candles": {},
         "oscillators": {},
     }
     
     # Get current price
     payload["current_price"] = get_current_price(symbol)
-    payload["current_spread_points"] = get_current_spread_points(symbol)
     
     # Fetch data for each timeframe
     for tf_name, tf_value in timeframes.items():

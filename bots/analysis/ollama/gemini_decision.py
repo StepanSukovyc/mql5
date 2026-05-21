@@ -169,6 +169,7 @@ Kde lot_size je doporučená velikost pozice, take_profit je cílová cena TP a 
 		return decision_json
 
 	except GeminiVertexRequestError as exc:
+		print("  ℹ️  Finální decision request skončil chybou po všech fallback větvích")
 		if exc.status_code == 429:
 			now = datetime.now(tz=timezone.utc)
 			tomorrow = now + timedelta(days=1)

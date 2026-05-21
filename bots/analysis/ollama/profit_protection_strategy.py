@@ -10,8 +10,6 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
-from strategy_context import position_belongs_to_strategy
-from strategy_profile import get_active_strategy_profiles
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
 
@@ -22,6 +20,8 @@ DEFAULT_ACTIVATION_USD = 0.30
 DEFAULT_RETRACE_RATIO = 0.55
 DEFAULT_STALE_HOURS = 12
 DEFAULT_MAX_HOLD_DAYS = 5
+DEFAULT_STRATEGY_ID = "gemini_primary"
+DEFAULT_STRATEGY_MAGIC = 234000
 FEE_PER_001_LOT = 0.10
 STATE_FILE_NAME = "profit_protection_state.json"
 LOG_HEADERS = [
@@ -152,12 +152,15 @@ def _get_fee(volume: float) -> float:
 	return round((float(volume) / 0.01) * FEE_PER_001_LOT, 2)
 
 
-def _belongs_to_profile(position: Any, profile: Any) -> bool:
-	return position_belongs_to_strategy(
-		position,
-		strategy_id=profile.strategy_id,
-		magic=profile.magic,
-		allow_legacy=bool(getattr(profile, "manage_legacy_positions", False)),
+def _belongs_to_strategy(position: Any) -> bool:
+	position_magic = int(getattr(position, "magic", 0) or 0)
+	if position_magic == DEFAULT_STRATEGY_MAGIC:
+		return True
+
+	position_comment = str(getattr(position, "comment", "") or "").lower()
+	return any(
+		marker in position_comment
+		for marker in ("gemini ai", DEFAULT_STRATEGY_ID, f"ga:{DEFAULT_STRATEGY_ID}")
 	)
 
 
@@ -228,77 +231,74 @@ def run_profit_protection_strategy_if_due() -> None:
 	dry_run = _get_dry_run()
 	updated_state = dict(state)
 
-	for profile in get_active_strategy_profiles():
-		for position in positions:
-			if not _belongs_to_profile(position, profile):
-				continue
+	for position in positions:
+		if not _belongs_to_strategy(position):
+			continue
 
-			ticket = int(getattr(position, "ticket", 0) or 0)
-			if ticket <= 0:
-				continue
-			volume = float(getattr(position, "volume", 0.0) or 0.0)
-			if volume <= 0:
-				continue
+		ticket = int(getattr(position, "ticket", 0) or 0)
+		if ticket <= 0:
+			continue
+		volume = float(getattr(position, "volume", 0.0) or 0.0)
+		if volume <= 0:
+			continue
 
-			profit = float(getattr(position, "profit", 0.0) or 0.0)
-			swap = float(getattr(position, "swap", 0.0) or 0.0)
-			net_profit = round(profit + swap - _get_fee(volume), 2)
-			if net_profit <= 0:
-				continue
+		profit = float(getattr(position, "profit", 0.0) or 0.0)
+		swap = float(getattr(position, "swap", 0.0) or 0.0)
+		net_profit = round(profit + swap - _get_fee(volume), 2)
+		if net_profit <= 0:
+			continue
 
-			opened_at = datetime.fromtimestamp(int(getattr(position, "time", 0) or 0), tz=timezone.utc)
-			age_hours = max((now_utc - opened_at).total_seconds() / 3600.0, 0.0)
-			state_key = f"{profile.strategy_id}:{ticket}"
-			position_state = updated_state.get(state_key, {})
-			max_net_profit = max(float(position_state.get("max_net_profit", 0.0) or 0.0), net_profit)
-			updated_state[state_key] = {"max_net_profit": max_net_profit}
+		opened_at = datetime.fromtimestamp(int(getattr(position, "time", 0) or 0), tz=timezone.utc)
+		age_hours = max((now_utc - opened_at).total_seconds() / 3600.0, 0.0)
+		state_key = f"{DEFAULT_STRATEGY_ID}:{ticket}"
+		position_state = updated_state.get(state_key, {})
+		max_net_profit = max(float(position_state.get("max_net_profit", 0.0) or 0.0), net_profit)
+		updated_state[state_key] = {"max_net_profit": max_net_profit}
 
-			close_reason: Optional[str] = None
-			if max_net_profit >= activation_usd and net_profit <= max(max_net_profit * retrace_ratio, activation_usd):
-				close_reason = (
-					f"profit retracement detected: current {net_profit:.2f} <= "
-					f"locked {max(max_net_profit * retrace_ratio, activation_usd):.2f}"
-				)
-			elif age_hours >= stale_hours and net_profit > activation_usd:
-				close_reason = f"profitable stale position older than {stale_hours}h"
-			elif age_hours >= (24.0 * max_hold_days) and net_profit > 0:
-				close_reason = f"profitable position older than {max_hold_days} days"
-
-			if close_reason is None:
-				continue
-
-			print(
-				f"💰 Profit protection [{profile.strategy_id}] {getattr(position, 'symbol', '')} "
-				f"ticket={ticket} net={net_profit:.2f} max={max_net_profit:.2f} -> {close_reason}"
+		close_reason: Optional[str] = None
+		if max_net_profit >= activation_usd and net_profit <= max(max_net_profit * retrace_ratio, activation_usd):
+			close_reason = (
+				f"profit retracement detected: current {net_profit:.2f} <= "
+				f"locked {max(max_net_profit * retrace_ratio, activation_usd):.2f}"
 			)
-			if dry_run:
-				closed = False
-				message = f"DRY-RUN: {close_reason}"
-			else:
-				closed = close_position_by_ticket(
-					position_ticket=ticket,
-					symbol=str(getattr(position, "symbol", "")),
-					position_type=int(getattr(position, "type", 0)),
-					volume=volume,
-					comment=f"Profit protection [{profile.strategy_id}]",
-					strategy_id=profile.strategy_id,
-					magic=profile.magic,
-				)
-				message = close_reason if closed else f"close failed: {close_reason}"
+		elif age_hours >= stale_hours and net_profit > activation_usd:
+			close_reason = f"profitable stale position older than {stale_hours}h"
+		elif age_hours >= (24.0 * max_hold_days) and net_profit > 0:
+			close_reason = f"profitable position older than {max_hold_days} days"
 
-			_log_action(
-				service_folder=service_folder,
-				now_utc=now_utc,
-				strategy_id=profile.strategy_id,
+		if close_reason is None:
+			continue
+
+		print(
+			f"💰 Profit protection [{DEFAULT_STRATEGY_ID}] {getattr(position, 'symbol', '')} "
+			f"ticket={ticket} net={net_profit:.2f} max={max_net_profit:.2f} -> {close_reason}"
+		)
+		if dry_run:
+			closed = False
+			message = f"DRY-RUN: {close_reason}"
+		else:
+			closed = close_position_by_ticket(
+				position_ticket=ticket,
 				symbol=str(getattr(position, "symbol", "")),
-				ticket=ticket,
-				net_profit=net_profit,
-				max_net_profit=max_net_profit,
-				profit_age_hours=age_hours,
-				closed=closed,
-				message=message,
+				position_type=int(getattr(position, "type", 0)),
+				volume=volume,
+				comment=f"pp:{DEFAULT_STRATEGY_ID}",
 			)
-			if closed:
-				updated_state.pop(state_key, None)
+			message = close_reason if closed else f"close failed: {close_reason}"
+
+		_log_action(
+			service_folder=service_folder,
+			now_utc=now_utc,
+			strategy_id=DEFAULT_STRATEGY_ID,
+			symbol=str(getattr(position, "symbol", "")),
+			ticket=ticket,
+			net_profit=net_profit,
+			max_net_profit=max_net_profit,
+			profit_age_hours=age_hours,
+			closed=closed,
+			message=message,
+		)
+		if closed:
+			updated_state.pop(state_key, None)
 
 	_save_state(service_folder, updated_state)

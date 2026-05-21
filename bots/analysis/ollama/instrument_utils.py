@@ -52,23 +52,6 @@ def _parse_bool_env(name: str, default: bool) -> bool:
 	return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
 
 
-def _parse_symbol_currency_map() -> dict[str, List[str]]:
-	raw = os.getenv("NEWS_FILTER_SYMBOL_CURRENCIES")
-	if not raw:
-		return {}
-
-	mapping: dict[str, List[str]] = {}
-	for entry in raw.split(","):
-		item = entry.strip()
-		if not item or ":" not in item:
-			continue
-		symbol, currencies_raw = item.split(":", 1)
-		currencies = [currency.strip().upper() for currency in currencies_raw.replace("|", ",").split(",") if currency.strip()]
-		if symbol.strip() and currencies:
-			mapping[symbol.strip().upper()] = currencies
-	return mapping
-
-
 def get_crypto_symbol_patterns() -> List[str]:
 	"""Return wildcard patterns that identify crypto instruments."""
 	configured = _parse_csv(os.getenv("MT5_CRYPTO_SYMBOL_PATTERNS"))
@@ -198,20 +181,3 @@ def get_symbol_prompt_guidance(symbol: str) -> str:
 		"- Pokud signál není výrazně silný a konzistentní napříč timeframe, preferuj HOLD.\n"
 		"- Buď konzervativní při hodnocení BUY/SELL a počítej s vyšším spreadem a slippage."
 	)
-
-
-def get_symbol_news_currencies(symbol: str) -> List[str]:
-	"""Return currencies relevant for economic-news filtering of the symbol."""
-	if not symbol:
-		return []
-
-	mapping = _parse_symbol_currency_map()
-	normalized_symbol = symbol.strip().upper()
-	if normalized_symbol in mapping:
-		return mapping[normalized_symbol]
-
-	base_symbol = normalized_symbol.split("_", 1)[0]
-	if len(base_symbol) >= 6 and base_symbol[:6].isalpha():
-		return [base_symbol[:3], base_symbol[3:6]]
-
-	return []

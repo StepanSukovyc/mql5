@@ -667,6 +667,7 @@ def _request_structured_json(
 
 	if last_error is not None and legacy_api_config is not None:
 		legacy_started_at = time.perf_counter()
+		print(f"  ↪️  Vertex request failed, switching to legacy Gemini API (timeout {_LEGACY_GEMINI_TIMEOUT_SECONDS:.0f}s)...")
 		_log_event(
 			"fallback_attempt",
 			task=task_name,

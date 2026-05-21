@@ -21,7 +21,6 @@ def get_open_positions() -> List[Dict]:
 		current_price = get_current_price(pos.symbol, default=float(pos.price_open))
 		open_positions.append(
 			{
-				"ticket": int(pos.ticket),
 				"symbol": pos.symbol,
 				"type": "BUY" if pos.type == 0 else "SELL",
 				"open_time": datetime.fromtimestamp(pos.time, tz=timezone.utc).isoformat(),
@@ -30,8 +29,6 @@ def get_open_positions() -> List[Dict]:
 				"current_price": current_price,
 				"pnl": float(pos.profit),
 				"swap": float(pos.swap),
-				"magic": int(getattr(pos, "magic", 0) or 0),
-				"comment": str(getattr(pos, "comment", "") or ""),
 			}
 		)
 

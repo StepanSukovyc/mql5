@@ -75,6 +75,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.execute_trade")
 	@patch("final_decision.validate_symbol")
 	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
 	@patch("final_decision.count_successful_trades")
 	@patch("final_decision._get_gemini_full_control_every_n_trades")
 	@patch("final_decision._load_gemini_api_config")
@@ -89,6 +90,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_load_gemini_api_config,
 		mock_trade_mode,
 		mock_count_successful_trades,
+		mock_count_successful_trades_since,
 		mock_ask_gemini_final_decision,
 		mock_validate_symbol,
 		mock_execute_trade,
@@ -114,6 +116,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		)
 		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 123
+		mock_count_successful_trades_since.return_value = 0
 		mock_validate_symbol.return_value = (True, "")
 		mock_execute_trade.side_effect = [False, True]
 
@@ -169,6 +172,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.execute_trade")
 	@patch("final_decision.validate_symbol")
 	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
 	@patch("final_decision.count_successful_trades_today")
 	@patch("final_decision.count_successful_trades")
 	@patch("final_decision._get_gemini_full_control_every_n_trades")
@@ -185,6 +189,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_trade_mode,
 		mock_count_successful_trades,
 		mock_count_successful_trades_today,
+		mock_count_successful_trades_since,
 		mock_ask_gemini_final_decision,
 		mock_validate_symbol,
 		mock_execute_trade,
@@ -211,6 +216,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 123
 		mock_count_successful_trades_today.return_value = 99
+		mock_count_successful_trades_since.return_value = 0
 		mock_validate_symbol.return_value = (True, "")
 		mock_execute_trade.return_value = True
 		mock_ask_gemini_final_decision.return_value = json.dumps(
@@ -232,6 +238,93 @@ class FinalDecisionRetryTests(unittest.TestCase):
 
 		self.assertTrue(result)
 		self.assertEqual(mock_execute_trade.call_count, 1)
+
+	@patch.dict(
+		os.environ,
+		{
+			"SYMBOL_TRADE_COOLDOWN_MINUTES": "60",
+		},
+		clear=False,
+	)
+	@patch("final_decision.execute_trade")
+	@patch("final_decision.validate_symbol")
+	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
+	@patch("final_decision.count_successful_trades_today")
+	@patch("final_decision.count_successful_trades")
+	@patch("final_decision._get_gemini_full_control_every_n_trades")
+	@patch("final_decision._load_gemini_api_config")
+	@patch("final_decision.get_open_positions")
+	@patch("final_decision.get_account_state")
+	@patch("final_decision.load_predictions")
+	def test_symbol_cooldown_excludes_recent_symbol_and_uses_next_candidate(
+		self,
+		mock_load_predictions,
+		mock_get_account_state,
+		mock_get_open_positions,
+		mock_load_gemini_api_config,
+		mock_trade_mode,
+		mock_count_successful_trades,
+		mock_count_successful_trades_today,
+		mock_count_successful_trades_since,
+		mock_ask_gemini_final_decision,
+		mock_validate_symbol,
+		mock_execute_trade,
+	) -> None:
+		mock_load_predictions.return_value = [
+			{"symbol": "VIX_ecn", "BUY": 60, "SELL": 20},
+			{"symbol": "US30_ecn", "BUY": 55, "SELL": 25},
+		]
+		mock_get_account_state.return_value = {
+			"balance_cap": 5000.0,
+			"balance": 4280.60,
+			"equity": 3201.53,
+			"margin_free": 839.84,
+			"margin_percent": 19.62,
+		}
+		mock_get_open_positions.return_value = []
+		mock_load_gemini_api_config.return_value = SimpleNamespace(
+			credentials_path="C:/vertex/service-account.json",
+			project="demo-project",
+			region="europe-west4",
+			model="gemini-2.5-flash",
+			fallback_models=("gemini-2.5-flash",),
+		)
+		mock_trade_mode.return_value = 1
+		mock_count_successful_trades.return_value = 6
+		mock_count_successful_trades_today.return_value = 0
+		def _recent_trades_side_effect(service_folder, *, strategy_id=None, symbol=None, lookback=None, now_utc=None):
+			return 1 if symbol == "VIX_ecn" else 0
+
+		mock_count_successful_trades_since.side_effect = _recent_trades_side_effect
+		mock_validate_symbol.return_value = (True, "")
+		mock_execute_trade.return_value = True
+
+		def _decision_side_effect(predictions, open_positions, account_state, gemini_config, excluded_symbols=None, **kwargs):
+			self.assertEqual(excluded_symbols, ["VIX_ecn"])
+			return json.dumps(
+				{
+					"recommended_symbol": "US30_ecn",
+					"action": "SELL",
+					"lot_size": 0.01,
+					"take_profit": 35000.0,
+					"reasoning": "second",
+				}
+			)
+
+		mock_ask_gemini_final_decision.side_effect = _decision_side_effect
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "predikce"
+			service_folder = Path(temp_dir) / "service"
+			predictions_folder.mkdir(parents=True, exist_ok=True)
+
+			result = make_final_trading_decision(predictions_folder, service_folder)
+
+		self.assertTrue(result)
+		self.assertEqual(mock_ask_gemini_final_decision.call_count, 1)
+		self.assertEqual(mock_execute_trade.call_count, 1)
+		self.assertEqual(mock_execute_trade.call_args.args[0], "US30_ecn")
 
 
 if __name__ == "__main__":

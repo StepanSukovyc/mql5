@@ -10,8 +10,6 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
-from strategy_context import position_belongs_to_strategy
-from strategy_profile import get_active_strategy_profiles
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
 
@@ -34,7 +32,6 @@ PROFIT_CLEANUP_LOG_HEADERS = [
 	"fee",
 	"net_profit",
 	"target_profit",
-	"strategy_id",
 	"closed",
 	"message",
 ]
@@ -152,24 +149,13 @@ def calculate_profit_cleanup_metrics(balance: float, position_volume: float, pro
 	)
 
 
-def _belongs_to_profile(position: Any, profile: Any) -> bool:
-	return position_belongs_to_strategy(
-		position,
-		strategy_id=profile.strategy_id,
-		magic=profile.magic,
-		allow_legacy=bool(getattr(profile, "manage_legacy_positions", False)),
-	)
-
-
-def _find_candidates(balance: float, reference_volume: float, *, profile: Any) -> list[ProfitCleanupCandidate]:
+def _find_candidates(balance: float, reference_volume: float) -> list[ProfitCleanupCandidate]:
 	positions = mt5.positions_get()
 	if positions is None:
 		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
 
 	candidates: list[ProfitCleanupCandidate] = []
 	for position in positions:
-		if not _belongs_to_profile(position, profile):
-			continue
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
 		if volume <= 0:
 			continue
@@ -209,7 +195,6 @@ def _log_cleanup_action(
 	balance: float,
 	reference_volume: float,
 	candidate: Optional[ProfitCleanupCandidate],
-	strategy_id: str,
 	closed: bool,
 	message: str,
 ) -> None:
@@ -240,7 +225,6 @@ def _log_cleanup_action(
 				f"{candidate.fee:.2f}" if candidate else "",
 				f"{candidate.net_profit:.2f}" if candidate else "",
 				f"{candidate.target_profit:.4f}" if candidate else "",
-				strategy_id,
 				str(closed),
 				message,
 			]
@@ -277,52 +261,47 @@ def run_profit_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = 
 			balance = float(account_info.get("raw_balance", account_info.get("balance", 0.0)))
 
 		reference_volume = _get_reference_volume(balance)
-		for profile in get_active_strategy_profiles():
-			candidates = _find_candidates(balance, reference_volume, profile=profile)
-			if not candidates:
-				continue
+		candidates = _find_candidates(balance, reference_volume)
+		if not candidates:
+			return
 
-			print("\n💰 Minute profit cleanup strategy")
-			print(f"   Strategy: {profile.strategy_id}")
-			print(f"   Time (UTC): {now_utc.strftime('%Y-%m-%d %H:%M:%S')}")
-			print(f"   Dry run: {'ON' if dry_run else 'OFF'}")
-			print(f"   Balance B: {balance:.2f}")
-			print(f"   Reference volume: {reference_volume:.2f}")
-			print(f"   Eligible positions: {len(candidates)}")
+		print("\n💰 Minute profit cleanup strategy")
+		print(f"   Time (UTC): {now_utc.strftime('%Y-%m-%d %H:%M:%S')}")
+		print(f"   Dry run: {'ON' if dry_run else 'OFF'}")
+		print(f"   Balance B: {balance:.2f}")
+		print(f"   Reference volume: {reference_volume:.2f}")
+		print(f"   Eligible positions: {len(candidates)}")
 
-			for candidate in candidates:
-				print(
-					f"   Candidate: {candidate.symbol} ticket={candidate.ticket} "
-					f"net_profit={candidate.net_profit:.2f} "
-					f"target={candidate.target_profit:.4f} volume={candidate.volume:.2f}"
+		for candidate in candidates:
+			print(
+				f"   Candidate: {candidate.symbol} ticket={candidate.ticket} "
+				f"net_profit={candidate.net_profit:.2f} "
+				f"target={candidate.target_profit:.4f} volume={candidate.volume:.2f}"
+			)
+
+			if dry_run:
+				closed = False
+				message = "DRY-RUN: position matches profit cleanup rules and would be closed"
+			else:
+				closed = close_position_by_ticket(
+					position_ticket=candidate.ticket,
+					symbol=candidate.symbol,
+					position_type=candidate.position_type,
+					volume=candidate.volume,
+					comment="Profit cleanup strategy",
 				)
+				message = "Position closed" if closed else "Position close failed"
 
-				if dry_run:
-					closed = False
-					message = "DRY-RUN: position matches profit cleanup rules and would be closed"
-				else:
-					closed = close_position_by_ticket(
-						position_ticket=candidate.ticket,
-						symbol=candidate.symbol,
-						position_type=candidate.position_type,
-						volume=candidate.volume,
-						comment=f"Profit cleanup strategy [{profile.strategy_id}]",
-						strategy_id=profile.strategy_id,
-						magic=profile.magic,
-					)
-					message = "Position closed" if closed else "Position close failed"
-
-				print(f"   {message}")
-				_log_cleanup_action(
-					service_folder=service_folder,
-					now_utc=now_utc,
-					balance=balance,
-					reference_volume=reference_volume,
-					candidate=candidate,
-					strategy_id=profile.strategy_id,
-					closed=closed,
-					message=message,
-				)
+			print(f"   {message}")
+			_log_cleanup_action(
+				service_folder=service_folder,
+				now_utc=now_utc,
+				balance=balance,
+				reference_volume=reference_volume,
+				candidate=candidate,
+				closed=closed,
+				message=message,
+			)
 	except Exception as exc:  # pylint: disable=broad-except
 		print(f"⚠️  Minute profit cleanup strategy failed: {exc}")
 		_log_cleanup_action(

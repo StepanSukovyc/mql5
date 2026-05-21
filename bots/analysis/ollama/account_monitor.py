@@ -9,7 +9,6 @@ from typing import Optional
 from account_state import get_account_state
 from loss_cleanup_strategy import run_loss_cleanup_strategy_if_due
 from profit_protection_strategy import run_profit_protection_strategy_if_due
-from profit_cleanup_strategy import run_profit_cleanup_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
 from swap_rollover_cleanup_strategy import run_swap_rollover_cleanup_strategy_if_due
 
@@ -121,7 +120,6 @@ def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: 
 				account_info = get_account_state_snapshot()
 				print_account_status(account_info)
 				run_profit_protection_strategy_if_due()
-				run_profit_cleanup_strategy_if_due(account_info)
 				run_swap_rollover_cleanup_strategy_if_due(account_info)
 				run_loss_cleanup_strategy_if_due(account_info)
 				
