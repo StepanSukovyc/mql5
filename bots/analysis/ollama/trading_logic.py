@@ -25,6 +25,23 @@ from news_filter import should_block_symbol_for_news
 from strategy_profile import StrategyProfile, get_primary_strategy_profile, is_strategy_session_open
 
 
+def _get_or_create_current_hour_run_folder(source_folder: Path) -> tuple[str, Path]:
+	"""Reuse the latest run folder from the current UTC hour or create a new one."""
+	now_utc = datetime.now(tz=timezone.utc)
+	hour_pattern = now_utc.strftime("%Y%m%d_%H")
+	existing_runs = [
+		folder
+		for folder in source_folder.iterdir()
+		if folder.is_dir() and folder.name.startswith(hour_pattern) and len(folder.name) == 15 and folder.name[8] == "_"
+	]
+	if existing_runs:
+		latest_run = max(existing_runs, key=lambda folder: folder.name)
+		return latest_run.name, latest_run
+
+	timestamp = now_utc.strftime("%Y%m%d_%H%M%S")
+	return timestamp, source_folder / timestamp
+
+
 def ask_gemini_prediction(
 	symbol: str,
 	data: Dict,
@@ -444,17 +461,17 @@ def run_trading_logic(
 		print(f"❌ Failed to load Gemini config: {exc}")
 		return False, None
 	
-	# Create timestamp for this run
-	timestamp = datetime.now(tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
-	
+	# Reuse the current-hour run folder to avoid creating a new timestamp folder on every retry.
+	timestamp, run_folder = _get_or_create_current_hour_run_folder(source_folder)
+
 	# Create output directories
-	source_archive_folder = source_folder / timestamp / "source"
-	predictions_folder = source_folder / timestamp / "predikce"
+	source_archive_folder = run_folder / "source"
+	predictions_folder = run_folder / "predikce"
 	
 	source_archive_folder.mkdir(parents=True, exist_ok=True)
 	predictions_folder.mkdir(parents=True, exist_ok=True)
 	
-	print(f"📁 Output folders created:")
+	print(f"📁 Output folders ready:")
 	print(f"   Source: {source_archive_folder}")
 	print(f"   Predictions: {predictions_folder}")
 	
@@ -674,7 +691,7 @@ def run_trading_logic(
 	print(f"   Ignored without usable fallback: {ignored_count}")
 	print(f"   Errors: {error_count}")
 	print(f"   Total processed: {len(processed_symbols)}")
-	print(f"📁 Results saved in: {source_folder / timestamp}")
+	print(f"📁 Results saved in: {run_folder}")
 	print("="*60)
 	
 	# Filter out weak predictions (both BUY and SELL < 35%)

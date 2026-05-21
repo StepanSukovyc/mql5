@@ -265,6 +265,9 @@ def find_predictions_folder_for_current_hour(service_folder: Path) -> Optional[P
 	hour_pattern = f"{current_date_str}_{current_hour:02d}"
 	
 	print(f"🔍 Looking for predictions from current hour ({hour_pattern})...")
+	if not service_folder.exists():
+		print(f"⚠️  Service folder does not exist yet: {service_folder}")
+		return None
 
 	candidates: List[Path] = []
 	for folder in service_folder.iterdir():
@@ -365,6 +368,7 @@ def wait_until_trading_allowed() -> None:
 def run_strategy_branch(cfg: Config, profile) -> bool:
 	"""Execute one complete strategy branch from predictions to final trade."""
 	branch_folder = cfg.service_dest_folder if not profile.service_subdir else cfg.service_dest_folder / profile.service_subdir
+	branch_folder.mkdir(parents=True, exist_ok=True)
 	branch_cfg = with_symbol_scope(cfg, dest_folder=branch_folder, whitelist=list(profile.allowed_symbols))
 	print(f"\n🧭 Strategy branch: {profile.label} [{profile.strategy_id}]")
 	print(f"   Service folder: {branch_cfg.service_dest_folder}")
