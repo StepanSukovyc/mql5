@@ -10,6 +10,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
+from strategy_context import position_belongs_to_strategy
 from strategy_profile import get_active_strategy_profiles
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
@@ -149,21 +150,23 @@ def calculate_swap_rollover_cleanup_metrics(
 	)
 
 
-def _belongs_to_profile(position: Any, strategy_id: str, magic: int) -> bool:
-	if int(getattr(position, "magic", 0) or 0) == magic:
-		return True
-	comment = str(getattr(position, "comment", "") or "")
-	return strategy_id in comment
+def _belongs_to_profile(position: Any, profile: Any) -> bool:
+	return position_belongs_to_strategy(
+		position,
+		strategy_id=profile.strategy_id,
+		magic=profile.magic,
+		allow_legacy=bool(getattr(profile, "manage_legacy_positions", False)),
+	)
 
 
-def _find_candidates(balance: float, *, strategy_id: str, magic: int) -> list[SwapRolloverCleanupCandidate]:
+def _find_candidates(balance: float, *, profile: Any) -> list[SwapRolloverCleanupCandidate]:
 	positions = mt5.positions_get()
 	if positions is None:
 		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
 
 	candidates: list[SwapRolloverCleanupCandidate] = []
 	for position in positions:
-		if not _belongs_to_profile(position, strategy_id, magic):
+		if not _belongs_to_profile(position, profile):
 			continue
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
 		profit = float(getattr(position, "profit", 0.0) or 0.0)
@@ -281,7 +284,7 @@ def run_swap_rollover_cleanup_strategy_if_due(account_info: Optional[dict[str, A
 		balance = _get_balance_from_account_info(account_info)
 
 		for profile in get_active_strategy_profiles():
-			candidates = _find_candidates(balance, strategy_id=profile.strategy_id, magic=profile.magic)
+			candidates = _find_candidates(balance, profile=profile)
 			if not candidates:
 				_log_cleanup_action(
 					service_folder=service_folder,

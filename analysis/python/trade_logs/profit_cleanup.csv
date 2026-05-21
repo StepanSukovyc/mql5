@@ -117,3 +117,4 @@ timestamp,dry_run,balance,reference_volume,symbol,ticket,position_volume,profit,
 2026-05-20T15:16:14.863725+00:00,False,5227.55,0.11,USOIL_ecn,28121181,0.01,31.46,0.00,0.10,31.36,4.7523,True,Position closed
 2026-05-20T15:35:59.175970+00:00,False,5259.39,0.11,USOIL_ecn,28123495,0.02,10.56,0.00,0.20,10.36,9.5625,True,Position closed
 2026-05-20T16:41:01.393072+00:00,False,5269.95,0.11,USOIL_ecn,28126008,0.02,10.14,0.00,0.20,9.94,9.5817,True,Position closed
+2026-05-21T15:59:38.068565+00:00,False,5288.17,0.11,USOIL_ecn,28157235,0.01,10.96,0.00,0.10,10.86,4.8074,gemini_primary,False,Position close failed

@@ -511,6 +511,8 @@ Relevantní parametry pro risk management:
 - `PRIMARY_MAX_SPREAD_POINTS` a `INDEX_MAX_SPREAD_POINTS` určují maximální spread pro nový vstup
 - `PRIMARY_BALANCE_STEP_USD`, `PRIMARY_LOT_PER_BALANCE_STEP`, `PRIMARY_MAX_LOT_CAP` určují balance-based lot cap hlavní strategie
 - `INDEX_BALANCE_STEP_USD`, `INDEX_LOT_PER_BALANCE_STEP`, `INDEX_MAX_LOT_CAP` určují balance-based lot cap indexové strategie
+- `PRIMARY_MANAGE_LEGACY_POSITIONS=true` dovolí hlavní strategii převzít ruční nebo legacy pozice bez strategy commentu a s `magic=0`
+- `INDEX_MANAGE_LEGACY_POSITIONS=false` nechává indexovou strategii pracovat jen s jejími vlastně označenými pozicemi
 - `PRIMARY_MAX_OPEN_POSITIONS=0`, `PRIMARY_MAX_TRADES_PER_DAY=0`, `PRIMARY_MAX_TRADES_PER_SYMBOL_PER_DAY=0` vypínají tyto limity hlavní strategie úplně
 - `INDEX_MAX_OPEN_POSITIONS=0`, `INDEX_MAX_TRADES_PER_DAY=0`, `INDEX_MAX_TRADES_PER_SYMBOL_PER_DAY=0` vypínají tyto limity indexové strategie úplně
 - `NEWS_FILTER_ENABLED=true` zapíná externí ekonomický news filtr pro nové vstupy

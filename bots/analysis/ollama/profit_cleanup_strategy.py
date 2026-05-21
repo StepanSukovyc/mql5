@@ -10,6 +10,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
+from strategy_context import position_belongs_to_strategy
 from strategy_profile import get_active_strategy_profiles
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
@@ -151,21 +152,23 @@ def calculate_profit_cleanup_metrics(balance: float, position_volume: float, pro
 	)
 
 
-def _belongs_to_profile(position: Any, strategy_id: str, magic: int) -> bool:
-	if int(getattr(position, "magic", 0) or 0) == magic:
-		return True
-	comment = str(getattr(position, "comment", "") or "")
-	return strategy_id in comment
+def _belongs_to_profile(position: Any, profile: Any) -> bool:
+	return position_belongs_to_strategy(
+		position,
+		strategy_id=profile.strategy_id,
+		magic=profile.magic,
+		allow_legacy=bool(getattr(profile, "manage_legacy_positions", False)),
+	)
 
 
-def _find_candidates(balance: float, reference_volume: float, *, strategy_id: str, magic: int) -> list[ProfitCleanupCandidate]:
+def _find_candidates(balance: float, reference_volume: float, *, profile: Any) -> list[ProfitCleanupCandidate]:
 	positions = mt5.positions_get()
 	if positions is None:
 		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
 
 	candidates: list[ProfitCleanupCandidate] = []
 	for position in positions:
-		if not _belongs_to_profile(position, strategy_id, magic):
+		if not _belongs_to_profile(position, profile):
 			continue
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
 		if volume <= 0:
@@ -275,7 +278,7 @@ def run_profit_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = 
 
 		reference_volume = _get_reference_volume(balance)
 		for profile in get_active_strategy_profiles():
-			candidates = _find_candidates(balance, reference_volume, strategy_id=profile.strategy_id, magic=profile.magic)
+			candidates = _find_candidates(balance, reference_volume, profile=profile)
 			if not candidates:
 				continue
 

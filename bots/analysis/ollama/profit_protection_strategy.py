@@ -10,6 +10,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
+from strategy_context import position_belongs_to_strategy
 from strategy_profile import get_active_strategy_profiles
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
@@ -151,11 +152,13 @@ def _get_fee(volume: float) -> float:
 	return round((float(volume) / 0.01) * FEE_PER_001_LOT, 2)
 
 
-def _belongs_to_profile(position: Any, strategy_id: str, magic: int) -> bool:
-	if int(getattr(position, "magic", 0) or 0) == magic:
-		return True
-	comment = str(getattr(position, "comment", "") or "")
-	return strategy_id in comment
+def _belongs_to_profile(position: Any, profile: Any) -> bool:
+	return position_belongs_to_strategy(
+		position,
+		strategy_id=profile.strategy_id,
+		magic=profile.magic,
+		allow_legacy=bool(getattr(profile, "manage_legacy_positions", False)),
+	)
 
 
 def _log_action(
@@ -227,7 +230,7 @@ def run_profit_protection_strategy_if_due() -> None:
 
 	for profile in get_active_strategy_profiles():
 		for position in positions:
-			if not _belongs_to_profile(position, profile.strategy_id, profile.magic):
+			if not _belongs_to_profile(position, profile):
 				continue
 
 			ticket = int(getattr(position, "ticket", 0) or 0)

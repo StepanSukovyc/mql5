@@ -59,6 +59,7 @@ class StrategyProfile:
 	strategy_id: str
 	magic: int
 	label: str
+	manage_legacy_positions: bool
 	allowed_symbols: tuple[str, ...]
 	service_subdir: str
 	trading_session_start_hour_utc: int
@@ -94,6 +95,7 @@ def get_primary_strategy_profile() -> StrategyProfile:
 		strategy_id=os.getenv("PRIMARY_STRATEGY_ID", DEFAULT_PRIMARY_STRATEGY_ID),
 		magic=_parse_int("PRIMARY_STRATEGY_MAGIC", DEFAULT_PRIMARY_MAGIC, minimum=1),
 		label="Primary AI FX strategy",
+		manage_legacy_positions=_parse_bool("PRIMARY_MANAGE_LEGACY_POSITIONS", True),
 		allowed_symbols=tuple(_parse_csv(os.getenv("PRIMARY_STRATEGY_SYMBOL_WHITELIST"))),
 		service_subdir="",
 		trading_session_start_hour_utc=_parse_int("PRIMARY_SESSION_START_HOUR_UTC", 6, minimum=0),
@@ -127,6 +129,7 @@ def get_index_strategy_profile() -> StrategyProfile:
 		strategy_id=os.getenv("INDEX_STRATEGY_ID", DEFAULT_INDEX_STRATEGY_ID),
 		magic=_parse_int("INDEX_STRATEGY_MAGIC", DEFAULT_INDEX_MAGIC, minimum=1),
 		label="Parallel AI index strategy",
+		manage_legacy_positions=_parse_bool("INDEX_MANAGE_LEGACY_POSITIONS", False),
 		allowed_symbols=configured_symbols,
 		service_subdir=os.getenv("INDEX_STRATEGY_SERVICE_SUBDIR", "indices_strategy").strip() or "indices_strategy",
 		trading_session_start_hour_utc=_parse_int("INDEX_SESSION_START_HOUR_UTC", 7, minimum=0),

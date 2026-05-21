@@ -46,6 +46,8 @@ def _compact_mt5_comment(comment: str) -> str:
 	strategy_marker = _extract_strategy_marker(text)
 	if lower.startswith("profit protection") and strategy_marker:
 		return f"pp:{strategy_marker}"
+	if lower.startswith("profit cleanup strategy") and strategy_marker:
+		return f"pc:{strategy_marker}"
 	if lower.startswith("swap rollover cleanup") and strategy_marker:
 		return f"sr:{strategy_marker}"
 	if lower.startswith("gemini ai") and strategy_marker:

@@ -39,6 +39,7 @@ def position_belongs_to_strategy(
 	*,
 	strategy_id: Optional[str] = None,
 	magic: Optional[int] = None,
+	allow_legacy: bool = False,
 ) -> bool:
 	"""Return True when an MT5 position belongs to the requested strategy context."""
 	context = build_strategy_context(strategy_id=strategy_id, magic=magic)
@@ -50,4 +51,13 @@ def position_belongs_to_strategy(
 	if context.strategy_id and context.strategy_id in position_comment:
 		return True
 
-	return False
+	if not allow_legacy:
+		return False
+
+	if int(position_magic or 0) != 0:
+		return False
+
+	if DEFAULT_PRIMARY_STRATEGY_ID in position_comment or DEFAULT_INDEX_STRATEGY_ID in position_comment:
+		return False
+
+	return True
