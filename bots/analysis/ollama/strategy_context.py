@@ -30,7 +30,7 @@ def build_strategy_context(strategy_id: Optional[str] = None, magic: Optional[in
 	return StrategyContext(
 		strategy_id=resolved_strategy_id,
 		magic=resolved_magic,
-		order_comment=f"Gemini AI [{resolved_strategy_id}]",
+		order_comment=f"ga:{resolved_strategy_id}",
 	)
 
 

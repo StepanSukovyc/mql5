@@ -272,6 +272,7 @@ def run_swap_rollover_cleanup_strategy_if_due(account_info: Optional[dict[str, A
 				window_start_utc=window.start_utc,
 				window_end_utc=window.end_utc,
 				candidate=None,
+				strategy_id="system",
 				closed=False,
 				message="Skipped: outside fixed swap block window",
 			)
@@ -356,6 +357,7 @@ def run_swap_rollover_cleanup_strategy_if_due(account_info: Optional[dict[str, A
 			window_start_utc=window.start_utc,
 			window_end_utc=window.end_utc,
 			candidate=None,
+			strategy_id="system",
 			closed=False,
 			message=f"Strategy failed: {exc}",
 		)

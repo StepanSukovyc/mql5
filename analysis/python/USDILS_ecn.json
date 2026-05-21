@@ -1,9 +1,9 @@
 {
   "symbol": "USDILS_ecn",
-  "generated_at": "2026-05-21T15:22:19.848800+00:00",
+  "generated_at": "2026-05-21T15:53:03.427163+00:00",
   "lookback_periods": 30,
   "current_price": 2.9117100000000002,
-  "current_spread_points": 94.0,
+  "current_spread_points": 118.0,
   "candles": {
     "1h": [
       {
@@ -906,7 +906,7 @@
         "high": 2.91749,
         "low": 2.87121,
         "close": 2.9117100000000002,
-        "tick_volume": 52178,
+        "tick_volume": 54038,
         "spread": 18,
         "real_volume": 0
       }
@@ -1208,7 +1208,7 @@
         "high": 2.93382,
         "low": 2.87121,
         "close": 2.9117100000000002,
-        "tick_volume": 278975,
+        "tick_volume": 280835,
         "spread": 0,
         "real_volume": 0
       }
@@ -1450,7 +1450,7 @@
         "high": 2.9719100000000003,
         "low": 2.87121,
         "close": 2.9117100000000002,
-        "tick_volume": 880220,
+        "tick_volume": 882080,
         "spread": 0,
         "real_volume": 0
       }

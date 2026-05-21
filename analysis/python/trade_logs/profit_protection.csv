@@ -1,0 +1,202 @@
+timestamp,strategy_id,symbol,ticket,net_profit,max_net_profit,profit_age_hours,closed,message
+2026-05-21T11:15:01.759858+00:00,gemini_primary,GBPJPY_ecn,28127068,0.79,0.79,15.06,False,close failed: profitable stale position older than 12h
+2026-05-21T11:57:52.080078+00:00,gemini_primary,EURSGD_ecn,28127241,0.85,0.85,15.66,False,close failed: profitable stale position older than 12h
+2026-05-21T11:58:54.543846+00:00,gemini_primary,EURSGD_ecn,28127241,0.32,0.85,15.68,False,close failed: profit retracement detected: current 0.32 <= locked 0.47
+2026-05-21T11:59:57.072445+00:00,gemini_primary,EURSGD_ecn,28127241,0.04,0.85,15.69,False,close failed: profit retracement detected: current 0.04 <= locked 0.47
+2026-05-21T12:09:22.337871+00:00,gemini_primary,EURSGD_ecn,28127241,0.39,0.85,15.85,False,close failed: profit retracement detected: current 0.39 <= locked 0.47
+2026-05-21T12:10:24.911054+00:00,gemini_primary,EURSGD_ecn,28127241,0.51,0.85,15.87,False,close failed: profitable stale position older than 12h
+2026-05-21T12:11:27.335714+00:00,gemini_primary,EURSGD_ecn,28127241,0.39,0.85,15.88,False,close failed: profit retracement detected: current 0.39 <= locked 0.47
+2026-05-21T12:12:29.855961+00:00,gemini_primary,EURSGD_ecn,28127241,0.26,0.85,15.90,False,close failed: profit retracement detected: current 0.26 <= locked 0.47
+2026-05-21T12:13:32.296176+00:00,gemini_primary,EURSGD_ecn,28127241,0.85,0.85,15.92,False,close failed: profitable stale position older than 12h
+2026-05-21T12:14:34.770283+00:00,gemini_primary,EURSGD_ecn,28127241,0.82,0.85,15.94,False,close failed: profitable stale position older than 12h
+2026-05-21T12:15:37.244635+00:00,gemini_primary,EURSGD_ecn,28127241,0.60,0.85,15.95,False,close failed: profitable stale position older than 12h
+2026-05-21T12:16:39.707121+00:00,gemini_primary,EURSGD_ecn,28127241,0.51,0.85,15.97,False,close failed: profitable stale position older than 12h
+2026-05-21T12:17:42.163963+00:00,gemini_primary,EURSGD_ecn,28127241,1.10,1.10,15.99,False,close failed: profitable stale position older than 12h
+2026-05-21T12:18:44.643313+00:00,gemini_primary,EURSGD_ecn,28127241,0.98,1.10,16.01,False,close failed: profitable stale position older than 12h
+2026-05-21T12:19:47.118223+00:00,gemini_primary,EURSGD_ecn,28127241,0.45,1.10,16.02,False,close failed: profit retracement detected: current 0.45 <= locked 0.61
+2026-05-21T12:20:49.577655+00:00,gemini_primary,EURSGD_ecn,28127241,0.23,1.10,16.04,False,close failed: profit retracement detected: current 0.23 <= locked 0.61
+2026-05-21T12:21:52.043436+00:00,gemini_primary,EURSGD_ecn,28127241,0.01,1.10,16.06,False,close failed: profit retracement detected: current 0.01 <= locked 0.61
+2026-05-21T12:22:54.532743+00:00,gemini_primary,EURSGD_ecn,28127241,0.29,1.10,16.08,False,close failed: profit retracement detected: current 0.29 <= locked 0.61
+2026-05-21T12:23:56.978559+00:00,gemini_primary,EURSGD_ecn,28127241,0.45,1.10,16.09,False,close failed: profit retracement detected: current 0.45 <= locked 0.61
+2026-05-21T12:24:59.493584+00:00,gemini_primary,EURSGD_ecn,28127241,0.57,1.10,16.11,False,close failed: profit retracement detected: current 0.57 <= locked 0.61
+2026-05-21T12:25:01.906375+00:00,gemini_primary,EURSGD_ecn,28127241,0.51,1.10,16.11,False,close failed: profit retracement detected: current 0.51 <= locked 0.61
+2026-05-21T12:26:04.386434+00:00,gemini_primary,EURSGD_ecn,28127241,0.54,1.10,16.13,False,close failed: profit retracement detected: current 0.54 <= locked 0.61
+2026-05-21T12:27:06.843044+00:00,gemini_primary,EURSGD_ecn,28127241,0.64,1.10,16.15,False,close failed: profitable stale position older than 12h
+2026-05-21T12:28:09.290680+00:00,gemini_primary,EURSGD_ecn,28127241,0.32,1.10,16.16,False,close failed: profit retracement detected: current 0.32 <= locked 0.61
+2026-05-21T12:29:11.754995+00:00,gemini_primary,EURSGD_ecn,28127241,0.64,1.10,16.18,False,close failed: profitable stale position older than 12h
+2026-05-21T12:30:14.220658+00:00,gemini_primary,EURSGD_ecn,28127241,0.14,1.10,16.20,False,close failed: profit retracement detected: current 0.14 <= locked 0.61
+2026-05-21T12:31:16.625821+00:00,gemini_primary,EURSGD_ecn,28127241,0.04,1.10,16.22,False,close failed: profit retracement detected: current 0.04 <= locked 0.61
+2026-05-21T12:32:19.086586+00:00,gemini_primary,EURSGD_ecn,28127241,0.10,1.10,16.23,False,close failed: profit retracement detected: current 0.10 <= locked 0.61
+2026-05-21T12:57:20.807905+00:00,gemini_primary,EURSGD_ecn,28127241,0.20,1.10,16.65,False,close failed: profit retracement detected: current 0.20 <= locked 0.61
+2026-05-21T12:58:23.274297+00:00,gemini_primary,EURSGD_ecn,28127241,0.39,1.10,16.67,False,close failed: profit retracement detected: current 0.39 <= locked 0.61
+2026-05-21T12:59:25.740769+00:00,gemini_primary,EURSGD_ecn,28127241,0.76,1.10,16.68,False,close failed: profitable stale position older than 12h
+2026-05-21T13:00:28.194485+00:00,gemini_primary,EURSGD_ecn,28127241,0.57,1.10,16.70,False,close failed: profit retracement detected: current 0.57 <= locked 0.61
+2026-05-21T13:01:30.638203+00:00,gemini_primary,EURSGD_ecn,28127241,0.29,1.10,16.72,False,close failed: profit retracement detected: current 0.29 <= locked 0.61
+2026-05-21T13:02:33.099686+00:00,gemini_primary,EURSGD_ecn,28127241,0.85,1.10,16.74,False,close failed: profitable stale position older than 12h
+2026-05-21T13:03:35.544935+00:00,gemini_primary,EURSGD_ecn,28127241,0.73,1.10,16.75,False,close failed: profitable stale position older than 12h
+2026-05-21T13:04:37.991395+00:00,gemini_primary,EURSGD_ecn,28127241,0.73,1.10,16.77,False,close failed: profitable stale position older than 12h
+2026-05-21T13:05:40.424436+00:00,gemini_primary,EURSGD_ecn,28127241,0.67,1.10,16.79,False,close failed: profitable stale position older than 12h
+2026-05-21T13:06:42.877583+00:00,gemini_primary,EURSGD_ecn,28127241,0.57,1.10,16.81,False,close failed: profit retracement detected: current 0.57 <= locked 0.61
+2026-05-21T13:07:45.335275+00:00,gemini_primary,EURSGD_ecn,28127241,1.10,1.10,16.82,False,close failed: profitable stale position older than 12h
+2026-05-21T13:08:47.775837+00:00,gemini_primary,EURSGD_ecn,28127241,1.51,1.51,16.84,False,close failed: profitable stale position older than 12h
+2026-05-21T13:09:50.210828+00:00,gemini_primary,EURSGD_ecn,28127241,1.39,1.51,16.86,False,close failed: profitable stale position older than 12h
+2026-05-21T13:10:52.677563+00:00,gemini_primary,EURSGD_ecn,28127241,0.95,1.51,16.88,False,close failed: profitable stale position older than 12h
+2026-05-21T13:11:55.119858+00:00,gemini_primary,EURSGD_ecn,28127241,0.85,1.51,16.89,False,close failed: profitable stale position older than 12h
+2026-05-21T13:12:57.561388+00:00,gemini_primary,EURSGD_ecn,28127241,0.60,1.51,16.91,False,close failed: profit retracement detected: current 0.60 <= locked 0.83
+2026-05-21T13:14:00.020447+00:00,gemini_primary,EURSGD_ecn,28127241,0.70,1.51,16.93,False,close failed: profit retracement detected: current 0.70 <= locked 0.83
+2026-05-21T13:15:02.542280+00:00,gemini_primary,EURSGD_ecn,28127241,0.73,1.51,16.94,False,close failed: profit retracement detected: current 0.73 <= locked 0.83
+2026-05-21T13:16:04.983544+00:00,gemini_primary,EURSGD_ecn,28127241,0.79,1.51,16.96,False,close failed: profit retracement detected: current 0.79 <= locked 0.83
+2026-05-21T13:17:07.449749+00:00,gemini_primary,EURSGD_ecn,28127241,0.85,1.51,16.98,False,close failed: profitable stale position older than 12h
+2026-05-21T13:18:09.911286+00:00,gemini_primary,EURSGD_ecn,28127241,1.17,1.51,17.00,False,close failed: profitable stale position older than 12h
+2026-05-21T13:19:12.382999+00:00,gemini_primary,EURSGD_ecn,28127241,2.26,2.26,17.01,False,close failed: profitable stale position older than 12h
+2026-05-21T13:20:14.845592+00:00,gemini_primary,EURSGD_ecn,28127241,2.23,2.26,17.03,False,close failed: profitable stale position older than 12h
+2026-05-21T13:21:17.323227+00:00,gemini_primary,EURSGD_ecn,28127241,2.51,2.51,17.05,False,close failed: profitable stale position older than 12h
+2026-05-21T13:22:19.786693+00:00,gemini_primary,EURSGD_ecn,28127241,2.07,2.51,17.07,False,close failed: profitable stale position older than 12h
+2026-05-21T13:23:22.224130+00:00,gemini_primary,EURSGD_ecn,28127241,1.89,2.51,17.08,False,close failed: profitable stale position older than 12h
+2026-05-21T13:24:24.685695+00:00,gemini_primary,EURSGD_ecn,28127241,2.07,2.51,17.10,False,close failed: profitable stale position older than 12h
+2026-05-21T13:25:27.143671+00:00,gemini_primary,EURSGD_ecn,28127241,1.73,2.51,17.12,False,close failed: profitable stale position older than 12h
+2026-05-21T13:26:29.620796+00:00,gemini_primary,EURSGD_ecn,28127241,2.29,2.51,17.14,False,close failed: profitable stale position older than 12h
+2026-05-21T13:27:32.086764+00:00,gemini_primary,EURSGD_ecn,28127241,2.32,2.51,17.15,False,close failed: profitable stale position older than 12h
+2026-05-21T13:28:34.586666+00:00,gemini_primary,EURSGD_ecn,28127241,2.88,2.88,17.17,False,close failed: profitable stale position older than 12h
+2026-05-21T13:29:37.031871+00:00,gemini_primary,EURSGD_ecn,28127241,3.01,3.01,17.19,False,close failed: profitable stale position older than 12h
+2026-05-21T13:30:39.533510+00:00,gemini_primary,EURSGD_ecn,28127241,2.76,3.01,17.20,False,close failed: profitable stale position older than 12h
+2026-05-21T13:31:42.018161+00:00,gemini_primary,EURSGD_ecn,28127241,2.57,3.01,17.22,False,close failed: profitable stale position older than 12h
+2026-05-21T13:32:44.472629+00:00,gemini_primary,EURSGD_ecn,28127241,3.35,3.35,17.24,False,close failed: profitable stale position older than 12h
+2026-05-21T13:33:46.949678+00:00,gemini_primary,EURSGD_ecn,28127241,3.48,3.48,17.26,False,close failed: profitable stale position older than 12h
+2026-05-21T13:34:49.443594+00:00,gemini_primary,EURSGD_ecn,28127241,3.45,3.48,17.27,False,close failed: profitable stale position older than 12h
+2026-05-21T13:35:51.898403+00:00,gemini_primary,EURSGD_ecn,28127241,3.88,3.88,17.29,False,close failed: profitable stale position older than 12h
+2026-05-21T13:36:54.349500+00:00,gemini_primary,EURSGD_ecn,28127241,3.76,3.88,17.31,False,close failed: profitable stale position older than 12h
+2026-05-21T13:37:56.834156+00:00,gemini_primary,EURSGD_ecn,28127241,3.66,3.88,17.33,False,close failed: profitable stale position older than 12h
+2026-05-21T13:38:59.305122+00:00,gemini_primary,EURSGD_ecn,28127241,3.91,3.91,17.34,False,close failed: profitable stale position older than 12h
+2026-05-21T13:39:01.738507+00:00,gemini_primary,EURSGD_ecn,28127241,3.85,3.91,17.34,False,close failed: profitable stale position older than 12h
+2026-05-21T13:40:04.209255+00:00,gemini_primary,EURSGD_ecn,28127241,4.10,4.10,17.36,False,close failed: profitable stale position older than 12h
+2026-05-21T13:41:06.658842+00:00,gemini_primary,EURSGD_ecn,28127241,4.01,4.10,17.38,False,close failed: profitable stale position older than 12h
+2026-05-21T13:42:09.171651+00:00,gemini_primary,EURSGD_ecn,28127241,4.54,4.54,17.40,False,close failed: profitable stale position older than 12h
+2026-05-21T13:43:11.646278+00:00,gemini_primary,EURSGD_ecn,28127241,4.85,4.85,17.41,False,close failed: profitable stale position older than 12h
+2026-05-21T13:44:14.103161+00:00,gemini_primary,EURSGD_ecn,28127241,4.76,4.85,17.43,False,close failed: profitable stale position older than 12h
+2026-05-21T13:45:16.557126+00:00,gemini_primary,EURSGD_ecn,28127241,4.32,4.85,17.45,False,close failed: profitable stale position older than 12h
+2026-05-21T13:46:19.010200+00:00,gemini_primary,EURSGD_ecn,28127241,4.16,4.85,17.47,False,close failed: profitable stale position older than 12h
+2026-05-21T13:47:21.462907+00:00,gemini_primary,EURSGD_ecn,28127241,4.01,4.85,17.48,False,close failed: profitable stale position older than 12h
+2026-05-21T13:48:23.918306+00:00,gemini_primary,EURSGD_ecn,28127241,3.57,4.85,17.50,False,close failed: profitable stale position older than 12h
+2026-05-21T13:49:26.321851+00:00,gemini_primary,EURSGD_ecn,28127241,3.45,4.85,17.52,False,close failed: profitable stale position older than 12h
+2026-05-21T13:50:28.780783+00:00,gemini_primary,EURSGD_ecn,28127241,3.48,4.85,17.54,False,close failed: profitable stale position older than 12h
+2026-05-21T13:51:31.206907+00:00,gemini_primary,EURSGD_ecn,28127241,3.66,4.85,17.55,False,close failed: profitable stale position older than 12h
+2026-05-21T13:52:33.688934+00:00,gemini_primary,EURSGD_ecn,28127241,2.67,4.85,17.57,False,close failed: profitable stale position older than 12h
+2026-05-21T13:53:36.145707+00:00,gemini_primary,EURSGD_ecn,28127241,2.73,4.85,17.59,False,close failed: profitable stale position older than 12h
+2026-05-21T13:54:38.608796+00:00,gemini_primary,EURSGD_ecn,28127241,1.29,4.85,17.60,False,close failed: profit retracement detected: current 1.29 <= locked 2.67
+2026-05-21T13:55:41.058569+00:00,gemini_primary,EURSGD_ecn,28127241,1.23,4.85,17.62,False,close failed: profit retracement detected: current 1.23 <= locked 2.67
+2026-05-21T13:56:43.520105+00:00,gemini_primary,EURSGD_ecn,28127241,1.92,4.85,17.64,False,close failed: profit retracement detected: current 1.92 <= locked 2.67
+2026-05-21T13:57:45.973740+00:00,gemini_primary,EURSGD_ecn,28127241,2.76,4.85,17.66,False,close failed: profitable stale position older than 12h
+2026-05-21T13:58:48.440303+00:00,gemini_primary,EURSGD_ecn,28127241,2.79,4.85,17.67,False,close failed: profitable stale position older than 12h
+2026-05-21T13:59:50.917984+00:00,gemini_primary,EURSGD_ecn,28127241,2.85,4.85,17.69,False,close failed: profitable stale position older than 12h
+2026-05-21T14:00:53.373756+00:00,gemini_primary,EURSGD_ecn,28127241,3.17,4.85,17.71,False,close failed: profitable stale position older than 12h
+2026-05-21T14:01:55.836644+00:00,gemini_primary,EURSGD_ecn,28127241,2.64,4.85,17.73,False,close failed: profit retracement detected: current 2.64 <= locked 2.67
+2026-05-21T14:02:58.351332+00:00,gemini_primary,EURSGD_ecn,28127241,2.60,4.85,17.74,False,close failed: profit retracement detected: current 2.60 <= locked 2.67
+2026-05-21T14:03:00.751936+00:00,gemini_primary,EURSGD_ecn,28127241,2.60,4.85,17.74,False,close failed: profit retracement detected: current 2.60 <= locked 2.67
+2026-05-21T14:04:03.252281+00:00,gemini_primary,EURSGD_ecn,28127241,2.48,4.85,17.76,False,close failed: profit retracement detected: current 2.48 <= locked 2.67
+2026-05-21T14:05:05.704879+00:00,gemini_primary,EURSGD_ecn,28127241,2.35,4.85,17.78,False,close failed: profit retracement detected: current 2.35 <= locked 2.67
+2026-05-21T14:06:08.193834+00:00,gemini_primary,EURSGD_ecn,28127241,1.98,4.85,17.80,False,close failed: profit retracement detected: current 1.98 <= locked 2.67
+2026-05-21T14:07:10.681179+00:00,gemini_primary,EURSGD_ecn,28127241,2.23,4.85,17.81,False,close failed: profit retracement detected: current 2.23 <= locked 2.67
+2026-05-21T14:08:13.162730+00:00,gemini_primary,EURSGD_ecn,28127241,2.26,4.85,17.83,False,close failed: profit retracement detected: current 2.26 <= locked 2.67
+2026-05-21T14:09:15.622171+00:00,gemini_primary,EURSGD_ecn,28127241,2.29,4.85,17.85,False,close failed: profit retracement detected: current 2.29 <= locked 2.67
+2026-05-21T14:10:18.106229+00:00,gemini_primary,EURSGD_ecn,28127241,2.57,4.85,17.87,False,close failed: profit retracement detected: current 2.57 <= locked 2.67
+2026-05-21T14:11:20.757166+00:00,gemini_primary,EURSGD_ecn,28127241,2.64,4.85,17.88,False,close failed: profit retracement detected: current 2.64 <= locked 2.67
+2026-05-21T14:12:23.207630+00:00,gemini_primary,EURSGD_ecn,28127241,2.95,4.85,17.90,False,close failed: profitable stale position older than 12h
+2026-05-21T14:13:25.792449+00:00,gemini_primary,EURSGD_ecn,28127241,3.13,4.85,17.92,False,close failed: profitable stale position older than 12h
+2026-05-21T14:14:28.274983+00:00,gemini_primary,EURSGD_ecn,28127241,3.45,4.85,17.94,False,close failed: profitable stale position older than 12h
+2026-05-21T14:15:30.758886+00:00,gemini_primary,EURSGD_ecn,28127241,3.42,4.85,17.95,False,close failed: profitable stale position older than 12h
+2026-05-21T14:16:33.211751+00:00,gemini_primary,EURSGD_ecn,28127241,4.35,4.85,17.97,False,close failed: profitable stale position older than 12h
+2026-05-21T14:17:35.674183+00:00,gemini_primary,EURSGD_ecn,28127241,4.17,4.85,17.99,False,close failed: profitable stale position older than 12h
+2026-05-21T14:18:38.234687+00:00,gemini_primary,EURSGD_ecn,28127241,3.95,4.85,18.00,False,close failed: profitable stale position older than 12h
+2026-05-21T14:19:40.754178+00:00,gemini_primary,EURSGD_ecn,28127241,4.26,4.85,18.02,False,close failed: profitable stale position older than 12h
+2026-05-21T14:20:43.209753+00:00,gemini_primary,EURSGD_ecn,28127241,4.51,4.85,18.04,False,close failed: profitable stale position older than 12h
+2026-05-21T14:21:45.677528+00:00,gemini_primary,EURSGD_ecn,28127241,4.42,4.85,18.06,False,close failed: profitable stale position older than 12h
+2026-05-21T14:22:48.118306+00:00,gemini_primary,EURSGD_ecn,28127241,4.35,4.85,18.07,False,close failed: profitable stale position older than 12h
+2026-05-21T14:23:50.579693+00:00,gemini_primary,EURSGD_ecn,28127241,4.17,4.85,18.09,False,close failed: profitable stale position older than 12h
+2026-05-21T14:24:53.020939+00:00,gemini_primary,EURSGD_ecn,28127241,4.32,4.85,18.11,False,close failed: profitable stale position older than 12h
+2026-05-21T14:25:55.472908+00:00,gemini_primary,EURSGD_ecn,28127241,4.17,4.85,18.13,False,close failed: profitable stale position older than 12h
+2026-05-21T14:26:57.912226+00:00,gemini_primary,EURSGD_ecn,28127241,4.20,4.85,18.14,False,close failed: profitable stale position older than 12h
+2026-05-21T14:27:00.321578+00:00,gemini_primary,EURSGD_ecn,28127241,4.17,4.85,18.14,False,close failed: profitable stale position older than 12h
+2026-05-21T14:28:02.855372+00:00,gemini_primary,EURSGD_ecn,28127241,4.20,4.85,18.16,False,close failed: profitable stale position older than 12h
+2026-05-21T14:29:05.295814+00:00,gemini_primary,EURSGD_ecn,28127241,4.10,4.85,18.18,False,close failed: profitable stale position older than 12h
+2026-05-21T14:30:07.775377+00:00,gemini_primary,EURSGD_ecn,28127241,4.10,4.85,18.20,False,close failed: profitable stale position older than 12h
+2026-05-21T14:31:10.276541+00:00,gemini_primary,EURSGD_ecn,28127241,3.79,4.85,18.21,False,close failed: profitable stale position older than 12h
+2026-05-21T14:32:12.741001+00:00,gemini_primary,EURSGD_ecn,28127241,3.26,4.85,18.23,False,close failed: profitable stale position older than 12h
+2026-05-21T14:33:15.210367+00:00,gemini_primary,EURSGD_ecn,28127241,3.48,4.85,18.25,False,close failed: profitable stale position older than 12h
+2026-05-21T14:34:17.691456+00:00,gemini_primary,EURSGD_ecn,28127241,3.70,4.85,18.27,False,close failed: profitable stale position older than 12h
+2026-05-21T14:35:20.144948+00:00,gemini_primary,EURSGD_ecn,28127241,4.23,4.85,18.28,False,close failed: profitable stale position older than 12h
+2026-05-21T14:36:22.581157+00:00,gemini_primary,EURSGD_ecn,28127241,4.42,4.85,18.30,False,close failed: profitable stale position older than 12h
+2026-05-21T14:37:25.132552+00:00,gemini_primary,EURSGD_ecn,28127241,4.64,4.85,18.32,False,close failed: profitable stale position older than 12h
+2026-05-21T14:38:27.833872+00:00,gemini_primary,EURSGD_ecn,28127241,4.10,4.85,18.33,False,close failed: profitable stale position older than 12h
+2026-05-21T14:39:30.406513+00:00,gemini_primary,EURSGD_ecn,28127241,3.73,4.85,18.35,False,close failed: profitable stale position older than 12h
+2026-05-21T14:40:32.874507+00:00,gemini_primary,EURSGD_ecn,28127241,3.98,4.85,18.37,False,close failed: profitable stale position older than 12h
+2026-05-21T14:41:35.339675+00:00,gemini_primary,EURSGD_ecn,28127241,4.70,4.85,18.39,False,close failed: profitable stale position older than 12h
+2026-05-21T14:42:37.797002+00:00,gemini_primary,EURSGD_ecn,28127241,4.32,4.85,18.40,False,close failed: profitable stale position older than 12h
+2026-05-21T14:43:40.246813+00:00,gemini_primary,EURSGD_ecn,28127241,4.14,4.85,18.42,False,close failed: profitable stale position older than 12h
+2026-05-21T14:44:42.718829+00:00,gemini_primary,EURSGD_ecn,28127241,4.04,4.85,18.44,False,close failed: profitable stale position older than 12h
+2026-05-21T14:45:45.184635+00:00,gemini_primary,EURSGD_ecn,28127241,3.57,4.85,18.46,False,close failed: profitable stale position older than 12h
+2026-05-21T14:46:47.694992+00:00,gemini_primary,EURSGD_ecn,28127241,3.35,4.85,18.47,False,close failed: profitable stale position older than 12h
+2026-05-21T14:47:50.148119+00:00,gemini_primary,EURSGD_ecn,28127241,3.35,4.85,18.49,False,close failed: profitable stale position older than 12h
+2026-05-21T14:48:52.698012+00:00,gemini_primary,EURSGD_ecn,28127241,3.20,4.85,18.51,False,close failed: profitable stale position older than 12h
+2026-05-21T14:49:55.150957+00:00,gemini_primary,EURSGD_ecn,28127241,3.35,4.85,18.53,False,close failed: profitable stale position older than 12h
+2026-05-21T14:50:57.609957+00:00,gemini_primary,EURSGD_ecn,28127241,3.60,4.85,18.54,False,close failed: profitable stale position older than 12h
+2026-05-21T14:51:00.029344+00:00,gemini_primary,EURSGD_ecn,28127241,3.48,4.85,18.54,False,close failed: profitable stale position older than 12h
+2026-05-21T14:52:02.491754+00:00,gemini_primary,EURSGD_ecn,28127241,2.98,4.85,18.56,False,close failed: profitable stale position older than 12h
+2026-05-21T14:53:04.927303+00:00,gemini_primary,EURSGD_ecn,28127241,3.36,4.85,18.58,False,close failed: profitable stale position older than 12h
+2026-05-21T14:54:07.390383+00:00,gemini_primary,EURSGD_ecn,28127241,3.23,4.85,18.60,False,close failed: profitable stale position older than 12h
+2026-05-21T14:55:09.844700+00:00,gemini_primary,EURSGD_ecn,28127241,3.26,4.85,18.61,False,close failed: profitable stale position older than 12h
+2026-05-21T14:56:12.307386+00:00,gemini_primary,EURSGD_ecn,28127241,3.61,4.85,18.63,False,close failed: profitable stale position older than 12h
+2026-05-21T14:57:14.839065+00:00,gemini_primary,EURSGD_ecn,28127241,3.45,4.85,18.65,False,close failed: profitable stale position older than 12h
+2026-05-21T14:58:17.339382+00:00,gemini_primary,EURSGD_ecn,28127241,3.89,4.85,18.67,False,close failed: profitable stale position older than 12h
+2026-05-21T14:59:19.818135+00:00,gemini_primary,EURSGD_ecn,28127241,3.92,4.85,18.68,False,close failed: profitable stale position older than 12h
+2026-05-21T15:00:22.291161+00:00,gemini_primary,EURSGD_ecn,28127241,4.07,4.85,18.70,False,close failed: profitable stale position older than 12h
+2026-05-21T15:01:24.749184+00:00,gemini_primary,EURSGD_ecn,28127241,4.04,4.85,18.72,False,close failed: profitable stale position older than 12h
+2026-05-21T15:02:27.250200+00:00,gemini_primary,EURSGD_ecn,28127241,4.07,4.85,18.73,False,close failed: profitable stale position older than 12h
+2026-05-21T15:03:29.691986+00:00,gemini_primary,EURSGD_ecn,28127241,4.29,4.85,18.75,False,close failed: profitable stale position older than 12h
+2026-05-21T15:04:32.140092+00:00,gemini_primary,EURSGD_ecn,28127241,3.92,4.85,18.77,False,close failed: profitable stale position older than 12h
+2026-05-21T15:05:34.547551+00:00,gemini_primary,EURSGD_ecn,28127241,3.79,4.85,18.79,False,close failed: profitable stale position older than 12h
+2026-05-21T15:06:37.030915+00:00,gemini_primary,EURSGD_ecn,28127241,3.73,4.85,18.80,False,close failed: profitable stale position older than 12h
+2026-05-21T15:07:39.474508+00:00,gemini_primary,EURSGD_ecn,28127241,5.41,5.41,18.82,False,close failed: profitable stale position older than 12h
+2026-05-21T15:08:41.920034+00:00,gemini_primary,EURSGD_ecn,28127241,5.01,5.41,18.84,False,close failed: profitable stale position older than 12h
+2026-05-21T15:09:44.363318+00:00,gemini_primary,EURSGD_ecn,28127241,4.98,5.41,18.86,False,close failed: profitable stale position older than 12h
+2026-05-21T15:10:46.834226+00:00,gemini_primary,EURSGD_ecn,28127241,5.10,5.41,18.87,False,close failed: profitable stale position older than 12h
+2026-05-21T15:11:49.277828+00:00,gemini_primary,EURSGD_ecn,28127241,5.32,5.41,18.89,False,close failed: profitable stale position older than 12h
+2026-05-21T15:12:51.788278+00:00,gemini_primary,EURSGD_ecn,28127241,5.45,5.45,18.91,False,close failed: profitable stale position older than 12h
+2026-05-21T15:13:54.570184+00:00,gemini_primary,EURSGD_ecn,28127241,5.70,5.70,18.93,False,close failed: profitable stale position older than 12h
+2026-05-21T15:14:57.119529+00:00,gemini_primary,EURSGD_ecn,28127241,5.54,5.70,18.94,False,close failed: profitable stale position older than 12h
+2026-05-21T15:15:59.584291+00:00,gemini_primary,EURSGD_ecn,28127241,5.73,5.73,18.96,False,close failed: profitable stale position older than 12h
+2026-05-21T15:16:01.996430+00:00,gemini_primary,EURSGD_ecn,28127241,5.61,5.73,18.96,False,close failed: profitable stale position older than 12h
+2026-05-21T15:17:04.672959+00:00,gemini_primary,EURSGD_ecn,28127241,5.54,5.73,18.98,False,close failed: profitable stale position older than 12h
+2026-05-21T15:18:07.109325+00:00,gemini_primary,EURSGD_ecn,28127241,5.26,5.73,19.00,False,close failed: profitable stale position older than 12h
+2026-05-21T15:19:09.567010+00:00,gemini_primary,EURSGD_ecn,28127241,5.51,5.73,19.01,False,close failed: profitable stale position older than 12h
+2026-05-21T15:20:12.151611+00:00,gemini_primary,EURSGD_ecn,28127241,5.20,5.73,19.03,False,close failed: profitable stale position older than 12h
+2026-05-21T15:21:14.640710+00:00,gemini_primary,EURSGD_ecn,28127241,4.82,5.73,19.05,False,close failed: profitable stale position older than 12h
+2026-05-21T15:22:17.133469+00:00,gemini_primary,EURSGD_ecn,28127241,4.95,5.73,19.07,False,close failed: profitable stale position older than 12h
+2026-05-21T15:23:19.530330+00:00,gemini_primary,EURSGD_ecn,28127241,5.20,5.73,19.08,False,close failed: profitable stale position older than 12h
+2026-05-21T15:24:22.047116+00:00,gemini_primary,EURSGD_ecn,28127241,5.26,5.73,19.10,False,close failed: profitable stale position older than 12h
+2026-05-21T15:25:24.514839+00:00,gemini_primary,EURSGD_ecn,28127241,4.85,5.73,19.12,False,close failed: profitable stale position older than 12h
+2026-05-21T15:26:26.982197+00:00,gemini_primary,EURSGD_ecn,28127241,4.92,5.73,19.13,False,close failed: profitable stale position older than 12h
+2026-05-21T15:27:29.425363+00:00,gemini_primary,EURSGD_ecn,28127241,5.10,5.73,19.15,False,close failed: profitable stale position older than 12h
+2026-05-21T15:28:31.881364+00:00,gemini_primary,EURSGD_ecn,28127241,5.45,5.73,19.17,False,close failed: profitable stale position older than 12h
+2026-05-21T15:29:34.334265+00:00,gemini_primary,EURSGD_ecn,28127241,5.60,5.73,19.19,False,close failed: profitable stale position older than 12h
+2026-05-21T15:30:36.797164+00:00,gemini_primary,EURSGD_ecn,28127241,5.14,5.73,19.20,False,close failed: profitable stale position older than 12h
+2026-05-21T15:31:39.754583+00:00,gemini_primary,EURSGD_ecn,28127241,5.04,5.73,19.22,False,close failed: profitable stale position older than 12h
+2026-05-21T15:32:42.178608+00:00,gemini_primary,EURSGD_ecn,28127241,4.92,5.73,19.24,False,close failed: profitable stale position older than 12h
+2026-05-21T15:33:44.611035+00:00,gemini_primary,EURSGD_ecn,28127241,5.04,5.73,19.26,False,close failed: profitable stale position older than 12h
+2026-05-21T15:34:47.045443+00:00,gemini_primary,EURSGD_ecn,28127241,5.48,5.73,19.27,False,close failed: profitable stale position older than 12h
+2026-05-21T15:35:49.483607+00:00,gemini_primary,EURSGD_ecn,28127241,5.26,5.73,19.29,False,close failed: profitable stale position older than 12h
+2026-05-21T15:36:51.909712+00:00,gemini_primary,EURSGD_ecn,28127241,5.39,5.73,19.31,False,close failed: profitable stale position older than 12h
+2026-05-21T15:37:54.343771+00:00,gemini_primary,EURSGD_ecn,28127241,5.70,5.73,19.33,False,close failed: profitable stale position older than 12h
+2026-05-21T15:38:56.788614+00:00,gemini_primary,EURSGD_ecn,28127241,5.64,5.73,19.34,False,close failed: profitable stale position older than 12h
+2026-05-21T15:39:59.212076+00:00,gemini_primary,EURSGD_ecn,28127241,5.60,5.73,19.36,False,close failed: profitable stale position older than 12h
+2026-05-21T15:40:01.576407+00:00,gemini_primary,EURSGD_ecn,28127241,5.64,5.73,19.36,False,close failed: profitable stale position older than 12h
+2026-05-21T15:41:04.085578+00:00,gemini_primary,EURSGD_ecn,28127241,5.70,5.73,19.38,False,close failed: profitable stale position older than 12h
+2026-05-21T15:42:06.534721+00:00,gemini_primary,EURSGD_ecn,28127241,5.89,5.89,19.40,False,close failed: profitable stale position older than 12h
+2026-05-21T15:43:08.976938+00:00,gemini_primary,EURSGD_ecn,28127241,6.04,6.04,19.41,False,close failed: profitable stale position older than 12h
+2026-05-21T15:44:11.414751+00:00,gemini_primary,EURSGD_ecn,28127241,6.04,6.04,19.43,False,close failed: profitable stale position older than 12h
+2026-05-21T15:45:13.742417+00:00,gemini_primary,EURSGD_ecn,28127241,5.85,6.04,19.45,False,close failed: profitable stale position older than 12h
+2026-05-21T15:46:16.185525+00:00,gemini_primary,EURSGD_ecn,28127241,5.63,6.04,19.47,False,close failed: profitable stale position older than 12h
+2026-05-21T15:47:18.689808+00:00,gemini_primary,EURSGD_ecn,28127241,5.42,6.04,19.48,False,close failed: profitable stale position older than 12h
+2026-05-21T15:48:21.124727+00:00,gemini_primary,EURSGD_ecn,28127241,5.45,6.04,19.50,False,close failed: profitable stale position older than 12h
+2026-05-21T15:51:35.470712+00:00,gemini_primary,EURSGD_ecn,28127241,5.39,6.04,19.55,False,close failed: profitable stale position older than 12h
+2026-05-21T15:53:03.108679+00:00,gemini_primary,EURSGD_ecn,28127241,5.48,6.04,19.58,True,profitable stale position older than 12h

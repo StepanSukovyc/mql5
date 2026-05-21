@@ -27,6 +27,42 @@ TRADE_LOG_HEADERS = [
 	"error_msg",
 ]
 
+MAX_MT5_COMMENT_LENGTH = 31
+
+
+def _extract_strategy_marker(text: str) -> str:
+	start = text.find("[")
+	end = text.find("]", start + 1)
+	if start >= 0 and end > start + 1:
+		return text[start + 1 : end].strip()
+	if ":" in text:
+		return text.split(":", 1)[1].strip()
+	return ""
+
+
+def _compact_mt5_comment(comment: str) -> str:
+	text = str(comment or "").strip()
+	lower = text.lower()
+	strategy_marker = _extract_strategy_marker(text)
+	if lower.startswith("profit protection") and strategy_marker:
+		return f"pp:{strategy_marker}"
+	if lower.startswith("swap rollover cleanup") and strategy_marker:
+		return f"sr:{strategy_marker}"
+	if lower.startswith("gemini ai") and strategy_marker:
+		return f"ga:{strategy_marker}"
+	return text
+
+
+def _normalize_mt5_comment(comment: str | None, fallback: str) -> str:
+	"""Return an MT5-safe order comment with bounded length."""
+	primary = str(comment or "").strip()
+	secondary = str(fallback or "").strip() or "Gemini AI"
+	resolved = _compact_mt5_comment(primary or secondary)
+	resolved = "".join(ch for ch in resolved if ch.isascii() and ch.isprintable()).strip()
+	if not resolved:
+		resolved = "ga:gemini_primary"
+	return resolved[:MAX_MT5_COMMENT_LENGTH]
+
 
 def close_position_by_ticket(
 	position_ticket: int,
@@ -64,7 +100,7 @@ def close_position_by_ticket(
 		"price": price,
 		"deviation": 20,
 		"magic": strategy_context.magic,
-		"comment": comment or strategy_context.order_comment,
+		"comment": _normalize_mt5_comment(comment, strategy_context.order_comment),
 		"type_time": mt5.ORDER_TIME_GTC,
 		"type_filling": mt5.ORDER_FILLING_IOC,
 	}
@@ -306,7 +342,7 @@ def execute_trade(
 		"price": price,
 		"deviation": 20,
 		"magic": strategy_context.magic,
-		"comment": strategy_context.order_comment,
+		"comment": _normalize_mt5_comment(strategy_context.order_comment, strategy_context.order_comment),
 		"type_time": mt5.ORDER_TIME_GTC,
 		"type_filling": mt5.ORDER_FILLING_IOC,
 	}
