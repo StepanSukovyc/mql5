@@ -4,6 +4,16 @@
 
 Komplexní event-driven trading systém monitoruje volnou marži a dělá inteligentní obchodní rozhodnutí. Standardně teď běží v **úsporném režimu**, ve kterém se průběžně obnovují MT5 data, ale předanalýza přes lokální Ollama se nespouští. Mimo úsporný režim může paralelně běžet nezávislý **Ollama Service** pro kontinuální generování predikcí pomocí lokálního AI modelu.
 
+Nově jsou nad AI rozhodování přidané i **tvrdé programové guardraily**, ale AI zůstává hlavním rozhodovacím jádrem:
+
+- data už neobsahují jen `RSI` a `SMA`, ale i `ATR`, `Bollinger Bands` a aktuální `spread`
+- před dotazem na Gemini se pro každý symbol dopočítá **market regime**: `trend`, `range`, `disorder`, `unknown`
+- do AI se pouští jen kandidáti, kteří projdou session/spread filtrem a mají potvrzený trendový setup
+- finální `take_profit` se primárně počítá programově z `ATR_H1` a síly trendu; Gemini TP zůstává fallback
+- přibyla samostatná **profit protection** vrstva, která uzavírá jen ziskové pozice po retracementu nebo po dlouhém držení, nikdy ne ztrátové
+- systém nově umí spouštět dvě oddělené strategie: hlavní AI větev a paralelní indexovou AI větev
+- obě strategie si značkují obchody vlastním `strategy_id` a `magic`, takže následná správa umí sahat jen na jejich vlastní pozice
+
 **Hlavní proces (Gemini AI - nekonečný cyklus):**
 1. **Kontroluje swap blok okno** - používá pevný `.env` interval `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`, interpretovaný v čase `Europe/Prague`, a v aktivním okně čeká do konce blokace (bez analýz)
 2. **Monitoruje volnou marži** - kontroluje stav účtu
@@ -22,28 +32,41 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
     - Gemini fallback větev může běžet paralelně, ale maximálně do `GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS` současných dotazů
     - Po vyčerpání limitu Gemini fallbacku se další instrumenty bez čerstvé Ollama predikce ignorují
     - Pokud po tomto filtrování nezůstane žádný instrument s použitelnou predikcí, cyklus skončí bez vytvoření predikcí a bez nákupu
-5. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
-6. **Kontroluje swap blok okno (znovu)** - pokud trading signal přijde v rollover okně, zahodí ho a čeká
-7. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
-   - Gemini AI vybere **1 měnový pár**, rozhodne BUY/SELL, navrhne lot_size a take_profit
-   - V promptu je explicitně swing styl (ne intraday), denní cíl zisků a poplatek 0.10 USD za 0.01 lotu
+5. **Dopočítá režim trhu a programové vstupní guardraily**
+   - z `H1/H4/D1` dat se dopočítá `ATR`, `Bollinger bandwidth`, sklon `MA` a spread
+   - symbol je povolen do AI fáze jen pokud:
+     - je otevřené obchodní session dané strategie
+     - není pátek po cutoff hodině
+     - spread nepřekračuje profilový limit strategie
+     - režim trhu je `trend`
+     - a platí alespoň jeden potvrzený setup (`buy_setup` nebo `sell_setup`)
+   - `buy_setup` a `sell_setup` jsou pořád programově odvozené z kombinace `D1/H4/H1 + RSI + MA + ATR`; Gemini pak vybírá z už prověřených kandidátů
+6. **Filtruje slabé predikce** - odstraňuje soubory kde BUY < 35% AND SELL < 35%
+7. **Kontroluje swap blok okno (znovu)** - pokud trading signal přijde v rollover okně, zahodí ho a čeká
+8. **Dělá finální rozhodnutí** - kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
+   - Gemini AI stále vybírá **1 instrument**, rozhoduje BUY/SELL a navrhuje lot_size
+   - predikce už ale obsahují i embedded `market_context`, takže AI vidí, v jakém režimu je symbol nalezený a jestli šlo o `buy_setup` nebo `sell_setup`
+   - finální rozhodnutí je navíc omezené profilem strategie: whitelist symbolů, max open positions, max trades/day a max trades/symbol/day
    - Když jsou nastavené `GEMINI_API_KEY` a `GEMINI_URL`, je Vertex pouze jednorázový první pokus; při první chybě se request okamžitě přepne na `legacy-gemini-api`
-8. **Aplikuje režim exekuce podle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3)
-   - lot_size se vždy použije z finální Gemini predikce
-   - Každý N-tý obchod: použije se i take_profit z Gemini
-   - Ostatní obchody: take_profit se nepoužije
-   - **Crypto safeguardy**: pro symboly odpovídající `MT5_CRYPTO_SYMBOL_PATTERNS` se používá přísnější minimální síla signálu, menší lot přes `MT5_CRYPTO_LOT_MULTIPLIER`, limit současně otevřených crypto pozic přes `MT5_CRYPTO_MAX_OPEN_POSITIONS` a konzervativní TP omezené na maximální vzdálenost `MT5_CRYPTO_TP_DISTANCE_PERCENT` od aktuální tržní ceny
-9. **Vyhodnotí minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`)
+9. **Aplikuje exekuční guardraily**
+   - lot_size se dál bere z Gemini, ale nově dostává **balance-based cap**, protože strategie záměrně nepoužívá stop-loss a sizing tedy není risk-based
+   - primární `take_profit` se dopočítá programově z `ATR_H1`
+     - běžný trend: cca `2.2 * ATR_H1`
+     - silný trend: cca `2.8 * ATR_H1`
+   - u crypto a CFD se stále uplatňují existující safeguardy a limity vzdálenosti/fee-aware TP
+10. **Vyhodnotí minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru při každém ticku monitoru, nejvýše jednou za minutu
    - Běží pouze mimo swap blok okno
+   - Nově kandidáty hledá **po strategiích odděleně** podle `strategy_id` + `magic`
    - Vezme aktuální raw bilanci účtu `B` a spočítá referenční objem `VOLUME = ((int)(B / 500) + 1) * 0.01`
    - Pro každou otevřenou pozici vypočte čistý zisk `ZISK = profit + swap - fee`
    - Syntetický `fee` je `0.10 USD` za každých `0.01` lotu
    - Cílový profit `PCZ = (0.01 * L / VOLUME) * B`, minimum `PCZ` je `0.005`
    - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
    - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
-10. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
+11. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za minutu, ale pouze uvnitř swap blok okna
+   - Nově také běží odděleně po strategiích a sahá jen na pozice označené konkrétní strategií
    - Swap blok okno se bere vždy z pevného ručního intervalu z `.env`
    - Aktuální konfigurace je `22:30-23:30` v čase `Europe/Prague`
    - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
@@ -52,7 +75,15 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Pokud `ZISK >= 0.10 USD`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
    - Audit log zapisuje i skip/no-candidate průchody, takže je zpětně vidět, jestli strategie byla mimo okno nebo jen nic nenašla
    - Pokud je `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
-11. **Vyhodnotí denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
+12. **Vyhodnotí profit protection vrstvu** (`PROFIT_PROTECTION_STRATEGY_ENABLED`, default `true`)
+    - Běží mimo swap block window nejvýše jednou za minutu
+    - Pracuje jen s pozicemi, které otevřela některá aktivní strategie (`gemini_primary`, `gemini_indices`)
+    - Nikdy nezavírá ztrátovou pozici
+    - Sleduje lokální maximum `max_net_profit` po ticketu a při dostatečném retracementu uzavírá stále ziskovou pozici
+    - Umí i time-based profit exit:
+       - profitní pozice starší než `PROFIT_PROTECTION_STALE_HOURS`
+       - nebo profitní pozice starší než `PROFIT_PROTECTION_MAX_HOLD_DAYS`
+13. **Vyhodnotí denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
    - Použije realizovaný výsledek za předchozí uzavřený pražský den z MT5 deal historie včetně `profit`, `swap`, `commission` a `actual deal.fee`
    - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z uzavřených pozic referenčního dne
@@ -64,9 +95,31 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Stavový soubor `trade_logs/loss_cleanup_state.json` brání opakovanému spuštění ve stejný pražský den i po restartu procesu
    - Pokud je `LOSS_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáta jen zaloguje a nic nezavírá
    - V čase swap blok okna se cleanup nespouští
-12. **Provede obchod** - automaticky otevře pozici na MT5
-13. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
-14. **Ukončení** - Ctrl+C
+14. **Provede obchod** - automaticky otevře pozici na MT5 a označí ji `strategy_id` + `magic`
+15. **Restart cyklu** - po provedení obchodu se vrací na krok 1 (nekonečná smyčka)
+16. **Ukončení** - Ctrl+C
+
+## Dvě Strategie Nad Jedním Účtem
+
+Systém teď může provozovat dvě AI strategie nad jedním účtem současně:
+
+- `gemini_primary`
+   - hlavní strategie
+   - standardně používá hlavní `SERVICE_DEST_FOLDER`
+   - může obchodovat celý povolený univerzum nebo volitelný whitelist
+- `gemini_indices`
+   - paralelní indexová strategie
+   - standardně zapisuje do `SERVICE_DEST_FOLDER/indices_strategy`
+   - standardně používá whitelist doporučených indexů:
+      - `US100_ecn`, `US500_ecn`, `US30_ecn`, `GER40_ecn`, `FRA40_ecn`, `UK100_ecn`, `JP225_ecn`, `EU50_ecn`, `HKD50_ecn`, `FANG_ecn`
+
+Obě strategie sdílí stejný account trigger, ale:
+
+- mají oddělené složky s daty a predikcemi
+- mají vlastní `strategy_id`
+- mají vlastní `magic`
+- mají vlastní denní limity obchodů
+- jejich profit cleanup, rollover cleanup i profit protection už pracují jen nad jejich vlastními označenými pozicemi
 
 ## Úsporný Režim
 
@@ -231,6 +284,12 @@ Tato část se používá jen při `ECONOMY_MODE_ENABLED=false`.
   ├── <timestamp>/
   │   ├── source/          # Původní JSON soubory s tržními daty
   │   └── predikce/        # Gemini AI predikce (BUY/SELL >= 35%)
+   │
+   ├── indices_strategy/    # Paralelní indexová AI větev
+   │   ├── <timestamp>/
+   │   │   ├── source/
+   │   │   └── predikce/
+   │   └── geminipredictions/
   │
   ├── ollama/              # 🆕 Ollama Service výstupy
   │   ├── source/          # Kopie tržních dat pro Ollama
@@ -430,6 +489,8 @@ Stahuje data a generuje predikce:
 - Pokud všechny Vertex pokusy selžou, umí jako poslední fallback použít starší Gemini API flow přes `GEMINI_API_KEY` a `GEMINI_URL`
 - Aplikuje obchodní režim podle pořadí obchodu (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`)
 - Pracuje s efektivním balance/free margin podle `TRADING_ACCOUNT_BALANCE_CAP`
+- Využívá embedded `market_context` z predikcí pro ATR-based TP a profile guardraily
+- Respektuje session okno, páteční cutoff, max open positions a denní limity dané strategií
 - Ukládá finální JSON rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
 - Předává hotové parametry exekuční vrstvě
 
@@ -439,8 +500,33 @@ Relevantní parametry pro risk management:
 
 - `TRADING_MARGIN_THRESHOLD=20` určuje, při jakém poměru efektivní volné marže k efektivnímu balance se spustí trading flow
 - `TRADING_ACCOUNT_BALANCE_CAP=5000` určuje maximální balance, se kterou strategie počítá lot sizing a margin check
+- `PRIMARY_STRATEGY_ID`, `PRIMARY_STRATEGY_MAGIC` definují identitu hlavní strategie v MT5 objednávkách
+- `INDEX_STRATEGY_ENABLED=true` zapíná paralelní indexovou strategii
+- `INDEX_STRATEGY_ID`, `INDEX_STRATEGY_MAGIC` definují identitu indexové strategie
+- `INDEX_STRATEGY_SYMBOL_WHITELIST` určuje přesný whitelist indexů pro paralelní větev
+- `PRIMARY_MAX_TRADES_PER_DAY`, `PRIMARY_MAX_TRADES_PER_SYMBOL_PER_DAY`, `PRIMARY_MAX_OPEN_POSITIONS` určují limity hlavní strategie
+- `INDEX_MAX_TRADES_PER_DAY`, `INDEX_MAX_TRADES_PER_SYMBOL_PER_DAY`, `INDEX_MAX_OPEN_POSITIONS` určují limity indexové strategie
+- `PRIMARY_SESSION_START_HOUR_UTC`, `PRIMARY_SESSION_END_HOUR_UTC`, `PRIMARY_FRIDAY_CUTOFF_HOUR_UTC` určují časové obchodní okno hlavní strategie
+- `INDEX_SESSION_START_HOUR_UTC`, `INDEX_SESSION_END_HOUR_UTC`, `INDEX_FRIDAY_CUTOFF_HOUR_UTC` určují časové obchodní okno indexové strategie
+- `PRIMARY_MAX_SPREAD_POINTS` a `INDEX_MAX_SPREAD_POINTS` určují maximální spread pro nový vstup
+- `PRIMARY_BALANCE_STEP_USD`, `PRIMARY_LOT_PER_BALANCE_STEP`, `PRIMARY_MAX_LOT_CAP` určují balance-based lot cap hlavní strategie
+- `INDEX_BALANCE_STEP_USD`, `INDEX_LOT_PER_BALANCE_STEP`, `INDEX_MAX_LOT_CAP` určují balance-based lot cap indexové strategie
+- `PRIMARY_MAX_OPEN_POSITIONS=0`, `PRIMARY_MAX_TRADES_PER_DAY=0`, `PRIMARY_MAX_TRADES_PER_SYMBOL_PER_DAY=0` vypínají tyto limity hlavní strategie úplně
+- `INDEX_MAX_OPEN_POSITIONS=0`, `INDEX_MAX_TRADES_PER_DAY=0`, `INDEX_MAX_TRADES_PER_SYMBOL_PER_DAY=0` vypínají tyto limity indexové strategie úplně
+- `NEWS_FILTER_ENABLED=true` zapíná externí ekonomický news filtr pro nové vstupy
+- `NEWS_FILTER_API_URL` je URL ekonomického kalendáře; může používat placeholdery `{from_iso}`, `{to_iso}`, `{from_date}`, `{to_date}`, `{token}`
+- `NEWS_FILTER_API_TOKEN`, `NEWS_FILTER_API_TOKEN_HEADER`, `NEWS_FILTER_API_TOKEN_PREFIX` určují autentizaci vůči externímu news API
+- `NEWS_FILTER_LOOKBACK_MINUTES` a `NEWS_FILTER_LOOKAHEAD_MINUTES` určují blokované okno kolem zprávy
+- `NEWS_FILTER_IMPACTS=high` určuje, jaké síly zpráv blokují nový vstup
+- `NEWS_FILTER_SYMBOL_CURRENCIES` mapuje ne-FX symboly na měny pro vyhodnocení news událostí; pro indexy je explicitní mapování doporučené
 - `PROFIT_CLEANUP_STRATEGY_ENABLED=true` zapíná minutovou profit cleanup strategii
 - `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání profitních pozic
+- `PROFIT_PROTECTION_STRATEGY_ENABLED=true` zapíná profit-only trailing/time exit vrstvu
+- `PROFIT_PROTECTION_STRATEGY_DRY_RUN=true` zapíná testovací režim profit protection vrstvy
+- `PROFIT_PROTECTION_ACTIVATION_USD` určuje od jakého čistého zisku se začne zamykat profit
+- `PROFIT_PROTECTION_RETRACE_RATIO` určuje, jak velký retracement od maxima je ještě tolerovaný před uzavřením ziskové pozice
+- `PROFIT_PROTECTION_STALE_HOURS` určuje po kolika hodinách se smí zavřít stále zisková, ale příliš dlouho držená pozice
+- `PROFIT_PROTECTION_MAX_HOLD_DAYS` určuje maximální počet dní pro profitní pozici v profit protection vrstvě
 - `SWAP_BLOCK_START_HOUR=22`, `SWAP_BLOCK_START_MINUTE=30`, `SWAP_BLOCK_END_HOUR=23`, `SWAP_BLOCK_END_MINUTE=30` definují ruční fallback swap blok okna, pokud MT5 historie neposkytne použitelný rollover čas
 - `LOSS_CLEANUP_STRATEGY_ENABLED=true` zapíná denní cleanup strategii
 - `LOSS_CLEANUP_STRATEGY_HOUR=12` určuje hodinu pražského času, po které se má cleanup vyhodnotit
@@ -472,8 +558,66 @@ Refaktor rozdělil původní monolit do menších odpovědností:
 - `trading_validation.py` - validace symbolu, lot size a marže
 - `trade_execution.py` - logování a provedení obchodu na MT5
 - `trade_history.py` - čtení historie úspěšných obchodů z CSV
+- `strategy_context.py` - značení obchodů a pozic přes `strategy_id` + `magic`
+- `strategy_profile.py` - definice profilů hlavní a indexové strategie, session a denních limitů
+- `market_regime.py` - programový výpočet market regime a trendových setupů před AI vrstvou
+- `profit_protection_strategy.py` - profit-only správa otevřených pozic s retracement a stale-profit logikou
+- `news_filter.py` - externí ekonomický kalendář, cachování událostí a blokace nových vstupů kolem high-impact news
 
-Trade log nyní obsahuje i pole `lot_source`, takže je vidět, že lot pochází z finální predikce.
+Trade log nyní obsahuje i `strategy_id`, `magic` a `lot_source`, takže je zpětně vidět, která strategie obchod otevřela a z jakého zdroje pocházel lot.
+
+### Doporučený `.env` blok
+
+```env
+PRIMARY_STRATEGY_ID=gemini_primary
+PRIMARY_STRATEGY_MAGIC=234000
+PRIMARY_MAX_OPEN_POSITIONS=4
+PRIMARY_MAX_TRADES_PER_DAY=6
+PRIMARY_MAX_TRADES_PER_SYMBOL_PER_DAY=2
+PRIMARY_SESSION_START_HOUR_UTC=6
+PRIMARY_SESSION_END_HOUR_UTC=20
+PRIMARY_FRIDAY_CUTOFF_HOUR_UTC=16
+PRIMARY_MAX_SPREAD_POINTS=35
+PRIMARY_BALANCE_STEP_USD=1000
+PRIMARY_LOT_PER_BALANCE_STEP=0.01
+PRIMARY_MAX_LOT_CAP=0.10
+
+INDEX_STRATEGY_ENABLED=true
+INDEX_STRATEGY_ID=gemini_indices
+INDEX_STRATEGY_MAGIC=234100
+INDEX_STRATEGY_SERVICE_SUBDIR=indices_strategy
+INDEX_STRATEGY_SYMBOL_WHITELIST=US100_ecn,US500_ecn,US30_ecn,GER40_ecn,FRA40_ecn,UK100_ecn,JP225_ecn,EU50_ecn,HKD50_ecn,FANG_ecn
+INDEX_MAX_OPEN_POSITIONS=2
+INDEX_MAX_TRADES_PER_DAY=3
+INDEX_MAX_TRADES_PER_SYMBOL_PER_DAY=1
+INDEX_SESSION_START_HOUR_UTC=7
+INDEX_SESSION_END_HOUR_UTC=19
+INDEX_FRIDAY_CUTOFF_HOUR_UTC=15
+INDEX_MAX_SPREAD_POINTS=60
+INDEX_BALANCE_STEP_USD=1500
+INDEX_LOT_PER_BALANCE_STEP=0.01
+INDEX_MAX_LOT_CAP=0.10
+
+PROFIT_PROTECTION_STRATEGY_ENABLED=true
+PROFIT_PROTECTION_STRATEGY_DRY_RUN=true
+PROFIT_PROTECTION_ACTIVATION_USD=0.30
+PROFIT_PROTECTION_RETRACE_RATIO=0.55
+PROFIT_PROTECTION_STALE_HOURS=12
+PROFIT_PROTECTION_MAX_HOLD_DAYS=5
+
+NEWS_FILTER_ENABLED=false
+NEWS_FILTER_API_URL=https://financialmodelingprep.com/stable/economic-calendar?from={from_date}&to={to_date}&apikey={token}
+NEWS_FILTER_API_TOKEN=
+NEWS_FILTER_API_TOKEN_HEADER=Authorization
+NEWS_FILTER_API_TOKEN_PREFIX=Bearer 
+NEWS_FILTER_TIMEOUT_SECONDS=10
+NEWS_FILTER_LOOKBACK_MINUTES=15
+NEWS_FILTER_LOOKAHEAD_MINUTES=30
+NEWS_FILTER_IMPACTS=high
+NEWS_FILTER_SYMBOL_CURRENCIES=US100_ecn:USD,US500_ecn:USD,US30_ecn:USD,GER40_ecn:EUR,FRA40_ecn:EUR,UK100_ecn:GBP,JP225_ecn:JPY,EU50_ecn:EUR,HKD50_ecn:HKD,FANG_ecn:USD
+```
+
+Externí news filtr blokuje jen **nové vstupy**. Nezavírá stávající ztrátové pozice a nesahá do profit protection logiky. Pokud je filtrovaný symbol z novinek zablokovaný, AI se k němu vůbec nedostane v predikční fázi; při reuse starších predikcí se blok ještě jednou ověří těsně před finální exekucí.
 
 **Expected Gemini Response:**
 ```json

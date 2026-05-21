@@ -20,9 +20,19 @@ from gemini_config import load_gemini_api_config
 from gemini_decision import clean_gemini_response
 from gemini_vertex import request_prediction_json
 from instrument_utils import get_symbol_prompt_guidance
+from market_regime import MarketRegimeContext, classify_market_regime
+from news_filter import should_block_symbol_for_news
+from strategy_profile import StrategyProfile, get_primary_strategy_profile, is_strategy_session_open
 
 
-def ask_gemini_prediction(symbol: str, data: Dict, gemini_config) -> Optional[str]:
+def ask_gemini_prediction(
+	symbol: str,
+	data: Dict,
+	gemini_config,
+	*,
+	market_context: Optional[MarketRegimeContext] = None,
+	strategy_profile: Optional[StrategyProfile] = None,
+) -> Optional[str]:
 	"""
 	Ask Gemini on Vertex AI for trading prediction based on market data.
 	
@@ -58,6 +68,30 @@ def ask_gemini_prediction(symbol: str, data: Dict, gemini_config) -> Optional[st
 	
 	current_price = data.get("current_price")
 	prompt_guidance = get_symbol_prompt_guidance(symbol)
+	news_filter_note = ""
+	news_filter = data.get("news_filter")
+	if isinstance(news_filter, dict):
+		news_filter_note = (
+			"\nNews filter context:\n"
+			+ json.dumps(news_filter, indent=2)
+			+ "\nPokud je blocked=true, preferuj HOLD a nezakládej nový obchod."
+		)
+	market_context_note = ""
+	if market_context is not None:
+		market_context_note = (
+			"\nProgramovy market context a vstupni guardraily:\n"
+			+ json.dumps(market_context.to_dict(), indent=2)
+			+ "\nPokud entry_allowed=false, preferuj HOLD. Pokud buy_setup=true a sell_setup=false, "
+			+ "favorizuj BUY. Pokud sell_setup=true a buy_setup=false, favorizuj SELL. "
+			+ "Nevstupuj proti zadanemu rezimu trhu."
+		)
+
+	strategy_note = ""
+	if strategy_profile is not None:
+		strategy_note = (
+			f"\nProfil strategie: {strategy_profile.label}. "
+			f"Max spread pro novy vstup: {strategy_profile.max_spread_points:.2f} bodu."
+		)
 	
 	prompt = f"""Jsi finanční poradce a expert na technickou analýzu finančních instrumentů.
 
@@ -70,6 +104,12 @@ Dostupné timeframes a data:
 
 Aktuální technické indikátory:
 {json.dumps(oscillators_summary, indent=2)}
+
+{news_filter_note}
+
+{market_context_note}
+
+{strategy_note}
 
 Kompletní data včetně svíčkových formací, RSI a MA hodnot:
 {json.dumps(data, indent=2)}
@@ -98,6 +138,29 @@ Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdow
 			
 	except Exception as exc:
 		print(f"  ❌ Chyba při dotazu na Gemini pro {symbol}: {exc}")
+		return None
+
+
+def _serialize_prediction_payload(
+	*,
+	symbol: str,
+	prediction_payload: Dict[str, object],
+	market_context: MarketRegimeContext,
+	strategy_profile: StrategyProfile,
+) -> str:
+	"""Return normalized prediction JSON with embedded market context."""
+	payload = dict(prediction_payload)
+	payload["symbol"] = symbol
+	payload["market_context"] = market_context.to_dict()
+	payload["strategy_id"] = strategy_profile.strategy_id
+	payload["strategy_label"] = strategy_profile.label
+	return json.dumps(payload, ensure_ascii=False, indent=2)
+
+
+def _prediction_text_to_payload(prediction_text: str) -> Optional[Dict[str, object]]:
+	try:
+		return json.loads(clean_gemini_response(prediction_text))
+	except (TypeError, ValueError, json.JSONDecodeError):
 		return None
 
 
@@ -214,13 +277,26 @@ def get_gemini_fallback_parallelism() -> int:
 		return default_parallelism
 
 
-def _request_gemini_prediction_with_retries(symbol: str, market_data: Dict, gemini_config) -> Optional[str]:
+def _request_gemini_prediction_with_retries(
+	symbol: str,
+	market_data: Dict,
+	gemini_config,
+	*,
+	market_context: Optional[MarketRegimeContext] = None,
+	strategy_profile: Optional[StrategyProfile] = None,
+) -> Optional[str]:
 	"""Request Gemini prediction with the existing retry policy."""
 	max_retries = 2
 	prediction_text = None
 
 	for attempt in range(max_retries):
-		prediction_text = ask_gemini_prediction(symbol, market_data, gemini_config)
+		prediction_text = ask_gemini_prediction(
+			symbol,
+			market_data,
+			gemini_config,
+			market_context=market_context,
+			strategy_profile=strategy_profile,
+		)
 		if prediction_text:
 			return prediction_text
 
@@ -332,7 +408,11 @@ def filter_predictions(predictions_folder: Path) -> int:
 	return deleted_count
 
 
-def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
+def run_trading_logic(
+	source_folder: Path,
+	*,
+	strategy_profile: Optional[StrategyProfile] = None,
+) -> tuple[bool, Optional[Path]]:
 	"""
 	Main trading logic: process all market data files and get Gemini predictions.
 	
@@ -345,6 +425,11 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	print("\n" + "="*60)
 	print("🚀 Starting Trading Logic with Gemini AI")
 	print("="*60)
+	profile = strategy_profile or get_primary_strategy_profile()
+	print(f"🎯 Strategy profile: {profile.label} [{profile.strategy_id}]")
+	if not is_strategy_session_open(profile):
+		print("⏸️  Strategy session is closed for this profile, skipping prediction generation")
+		return False, None
 	
 	# Load Gemini configuration
 	try:
@@ -415,6 +500,8 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	
 	for json_file in json_files:
 		symbol = json_file.stem  # filename without .json
+		if not profile.allows_symbol(symbol):
+			continue
 		
 		# Skip if already processed in this cycle
 		if symbol in processed_symbols:
@@ -423,6 +510,37 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 		
 		try:
 			print(f"\n📈 Processing {symbol}...")
+
+			with open(json_file, "r", encoding="utf-8") as f:
+				market_data = json.load(f)
+
+			news_decision = should_block_symbol_for_news(symbol)
+			market_data["news_filter"] = news_decision.to_dict()
+			if news_decision.blocked:
+				print(
+					f"  ⏭️  Ignoruji {symbol}: news filter blokuje vstup "
+					f"({news_decision.reason})"
+				)
+				archive_file = source_archive_folder / json_file.name
+				shutil.move(str(json_file), str(archive_file))
+				print(f"  📦 Source moved to archive: {archive_file.name}")
+				processed_symbols.add(symbol)
+				ignored_count += 1
+				continue
+
+			market_context = classify_market_regime(market_data, max_spread_points=profile.max_spread_points)
+			market_data["market_context"] = market_context.to_dict()
+			if not market_context.entry_allowed:
+				print(
+					f"  ⏭️  Ignoruji {symbol}: market filter blokuje vstup "
+					f"({market_context.regime}, {market_context.reason})"
+				)
+				archive_file = source_archive_folder / json_file.name
+				shutil.move(str(json_file), str(archive_file))
+				print(f"  📦 Source moved to archive: {archive_file.name}")
+				processed_symbols.add(symbol)
+				ignored_count += 1
+				continue
 
 			ollama_reason = "economy mode aktivni - Ollama reuse vypnut"
 			if not economy_mode_enabled:
@@ -435,11 +553,14 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 					max_age=ollama_prediction_max_age,
 				)
 				if recent_ollama is not None:
-					prediction_file = predictions_folder / f"{symbol}.json"
-					prediction_file.write_text(
-						json.dumps(recent_ollama, ensure_ascii=False, indent=2),
-						encoding="utf-8",
+					prediction_text = _serialize_prediction_payload(
+						symbol=symbol,
+						prediction_payload=recent_ollama,
+						market_context=market_context,
+						strategy_profile=profile,
 					)
+					prediction_file = predictions_folder / f"{symbol}.json"
+					prediction_file.write_text(prediction_text, encoding="utf-8")
 					print(
 						f"  ♻️  Použita Ollama predikce (<= {ollama_prediction_max_age_minutes} min): "
 						f"{prediction_file.name}"
@@ -480,10 +601,7 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 			gemini_fallback_used += 1
 			print(f"  🔢 Gemini fallback zařazen {gemini_fallback_used}/{gemini_fallback_limit}")
 
-			# Load market data only when Ollama prediction is not usable.
-			with open(json_file, "r", encoding="utf-8") as f:
-				market_data = json.load(f)
-			gemini_fallback_tasks.append((symbol, json_file, market_data))
+			gemini_fallback_tasks.append((symbol, json_file, market_data, market_context))
 				
 		except Exception as exc:
 			print(f"  ❌ Error processing {symbol}: {exc}")
@@ -498,8 +616,10 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 					symbol,
 					market_data,
 					gemini_config,
+					market_context=market_context,
+					strategy_profile=profile,
 				): (symbol, json_file)
-				for symbol, json_file, market_data in gemini_fallback_tasks
+				for symbol, json_file, market_data, market_context in gemini_fallback_tasks
 			}
 
 			for future in as_completed(future_to_task):
@@ -512,6 +632,23 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 					continue
 
 				if prediction_text:
+					payload = _prediction_text_to_payload(prediction_text)
+					if payload is None:
+						print(f"  ⚠️  Prediction for {symbol} was not valid JSON after cleanup")
+						error_count += 1
+						continue
+
+					market_context = next(
+						context
+						for task_symbol, _task_file, _task_data, context in gemini_fallback_tasks
+						if task_symbol == symbol
+					)
+					prediction_text = _serialize_prediction_payload(
+						symbol=symbol,
+						prediction_payload=payload,
+						market_context=market_context,
+						strategy_profile=profile,
+					)
 					prediction_file = predictions_folder / f"{symbol}.json"
 					prediction_file.write_text(prediction_text, encoding="utf-8")
 					print(f"  💾 Prediction saved: {prediction_file.name}")

@@ -10,6 +10,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
+from strategy_profile import get_active_strategy_profiles
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
 
@@ -33,6 +34,7 @@ ROLLOVER_CLEANUP_LOG_HEADERS = [
 	"fee",
 	"net_profit",
 	"target_profit",
+	"strategy_id",
 	"closed",
 	"message",
 ]
@@ -147,13 +149,22 @@ def calculate_swap_rollover_cleanup_metrics(
 	)
 
 
-def _find_candidates(balance: float) -> list[SwapRolloverCleanupCandidate]:
+def _belongs_to_profile(position: Any, strategy_id: str, magic: int) -> bool:
+	if int(getattr(position, "magic", 0) or 0) == magic:
+		return True
+	comment = str(getattr(position, "comment", "") or "")
+	return strategy_id in comment
+
+
+def _find_candidates(balance: float, *, strategy_id: str, magic: int) -> list[SwapRolloverCleanupCandidate]:
 	positions = mt5.positions_get()
 	if positions is None:
 		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
 
 	candidates: list[SwapRolloverCleanupCandidate] = []
 	for position in positions:
+		if not _belongs_to_profile(position, strategy_id, magic):
+			continue
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
 		profit = float(getattr(position, "profit", 0.0) or 0.0)
 		if volume <= 0 or profit <= 0:
@@ -194,6 +205,7 @@ def _log_cleanup_action(
 	window_start_utc: datetime,
 	window_end_utc: datetime,
 	candidate: Optional[SwapRolloverCleanupCandidate],
+	strategy_id: str,
 	closed: bool,
 	message: str,
 ) -> None:
@@ -226,6 +238,7 @@ def _log_cleanup_action(
 				f"{candidate.fee:.2f}" if candidate else "",
 				f"{candidate.net_profit:.2f}" if candidate else "",
 				f"{candidate.target_profit:.2f}" if candidate else "",
+				strategy_id,
 				str(closed),
 				message,
 			]
@@ -266,66 +279,72 @@ def run_swap_rollover_cleanup_strategy_if_due(account_info: Optional[dict[str, A
 
 		balance = _get_balance_from_account_info(account_info)
 
-		candidates = _find_candidates(balance)
-		if not candidates:
-			_log_cleanup_action(
-				service_folder=service_folder,
-				now_utc=now_utc,
-				balance=balance,
-				rollover_source=window.rollover_time.source,
-				window_start_utc=window.start_utc,
-				window_end_utc=window.end_utc,
-				candidate=None,
-				closed=False,
-				message="No eligible profitable positions found in fixed swap block window",
-			)
-			return
-
-		print("\n💰 Swap rollover cleanup strategy")
-		print(f"   Time (UTC): {now_utc.strftime('%Y-%m-%d %H:%M:%S')}")
-		print(
-			"   Swap block window (UTC): "
-			f"{window.start_utc.strftime('%H:%M')} - {window.end_utc.strftime('%H:%M')} "
-			f"around rollover {window.rollover_at_utc.strftime('%H:%M')}"
-		)
-		print(f"   Rollover source: {window.rollover_time.source}")
-		print(f"   Dry run: {'ON' if dry_run else 'OFF'}")
-		print(f"   Balance B: {balance:.2f}")
-		print(f"   Minimum net profit: {MIN_NET_PROFIT_TO_CLOSE:.2f}")
-		print(f"   Eligible positions: {len(candidates)}")
-
-		for candidate in candidates:
-			print(
-				f"   Candidate: {candidate.symbol} ticket={candidate.ticket} "
-				f"net_profit={candidate.net_profit:.2f} "
-				f"threshold={candidate.target_profit:.2f} volume={candidate.volume:.2f}"
-			)
-
-			if dry_run:
-				closed = False
-				message = "DRY-RUN: profitable position would be closed before swap rollover"
-			else:
-				closed = close_position_by_ticket(
-					position_ticket=candidate.ticket,
-					symbol=candidate.symbol,
-					position_type=candidate.position_type,
-					volume=candidate.volume,
-					comment="Swap rollover cleanup",
+		for profile in get_active_strategy_profiles():
+			candidates = _find_candidates(balance, strategy_id=profile.strategy_id, magic=profile.magic)
+			if not candidates:
+				_log_cleanup_action(
+					service_folder=service_folder,
+					now_utc=now_utc,
+					balance=balance,
+					rollover_source=window.rollover_time.source,
+					window_start_utc=window.start_utc,
+					window_end_utc=window.end_utc,
+					candidate=None,
+					strategy_id=profile.strategy_id,
+					closed=False,
+					message="No eligible profitable positions found in fixed swap block window",
 				)
-				message = "Position closed" if closed else "Position close failed"
+				continue
 
-			print(f"   {message}")
-			_log_cleanup_action(
-				service_folder=service_folder,
-				now_utc=now_utc,
-				balance=balance,
-				rollover_source=window.rollover_time.source,
-				window_start_utc=window.start_utc,
-				window_end_utc=window.end_utc,
-				candidate=candidate,
-				closed=closed,
-				message=message,
+			print("\n💰 Swap rollover cleanup strategy")
+			print(f"   Strategy: {profile.strategy_id}")
+			print(f"   Time (UTC): {now_utc.strftime('%Y-%m-%d %H:%M:%S')}")
+			print(
+				"   Swap block window (UTC): "
+				f"{window.start_utc.strftime('%H:%M')} - {window.end_utc.strftime('%H:%M')} "
+				f"around rollover {window.rollover_at_utc.strftime('%H:%M')}"
 			)
+			print(f"   Rollover source: {window.rollover_time.source}")
+			print(f"   Dry run: {'ON' if dry_run else 'OFF'}")
+			print(f"   Balance B: {balance:.2f}")
+			print(f"   Minimum net profit: {MIN_NET_PROFIT_TO_CLOSE:.2f}")
+			print(f"   Eligible positions: {len(candidates)}")
+
+			for candidate in candidates:
+				print(
+					f"   Candidate: {candidate.symbol} ticket={candidate.ticket} "
+					f"net_profit={candidate.net_profit:.2f} "
+					f"threshold={candidate.target_profit:.2f} volume={candidate.volume:.2f}"
+				)
+
+				if dry_run:
+					closed = False
+					message = "DRY-RUN: profitable position would be closed before swap rollover"
+				else:
+					closed = close_position_by_ticket(
+						position_ticket=candidate.ticket,
+						symbol=candidate.symbol,
+						position_type=candidate.position_type,
+						volume=candidate.volume,
+						comment=f"Swap rollover cleanup [{profile.strategy_id}]",
+						strategy_id=profile.strategy_id,
+						magic=profile.magic,
+					)
+					message = "Position closed" if closed else "Position close failed"
+
+				print(f"   {message}")
+				_log_cleanup_action(
+					service_folder=service_folder,
+					now_utc=now_utc,
+					balance=balance,
+					rollover_source=window.rollover_time.source,
+					window_start_utc=window.start_utc,
+					window_end_utc=window.end_utc,
+					candidate=candidate,
+					strategy_id=profile.strategy_id,
+					closed=closed,
+					message=message,
+				)
 	except Exception as exc:  # pylint: disable=broad-except
 		print(f"⚠️  Swap rollover cleanup strategy failed: {exc}")
 		window = get_swap_block_window(now_utc=now_utc)

@@ -13,6 +13,7 @@ import sys
 import threading
 import time
 from dataclasses import dataclass
+from dataclasses import replace
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
@@ -23,6 +24,11 @@ from trading_logic import run_trading_logic
 from final_decision import make_final_trading_decision
 from mt5_connection import initialize_mt5, shutdown_mt5
 from ollama_service import ollama_service_loop
+from strategy_profile import (
+	get_index_strategy_profile,
+	get_primary_strategy_profile,
+	is_index_strategy_enabled,
+)
 from swap_rollover import get_swap_block_window
 from market_data import (
 	collect_symbol_payload,
@@ -64,6 +70,7 @@ class Config:
 	service_dest_folder: Path
 	symbol_suffix: str
 	symbol_blacklist: List[str]
+	symbol_whitelist: List[str]
 	lookback_periods: int
 	economy_mode_enabled: bool
 	economy_mode_interval_seconds: int
@@ -93,6 +100,7 @@ class Config:
 			service_dest_folder=Path(dest),
 			symbol_suffix=os.getenv("MT5_SYMBOL_SUFFIX", "_ecn").strip(),
 			symbol_blacklist=_parse_csv(os.getenv("MT5_SYMBOL_BLACKLIST")),
+			symbol_whitelist=_parse_csv(os.getenv("MT5_SYMBOL_WHITELIST")),
 			lookback_periods=int(os.getenv("LOOKBACK_PERIODS", "30")),
 			economy_mode_enabled=_to_bool(os.getenv("ECONOMY_MODE_ENABLED", "true"), default=True),
 			economy_mode_interval_seconds=int(os.getenv("ECONOMY_MODE_INTERVAL_SECONDS", "300")),
@@ -113,9 +121,26 @@ def write_symbol_file(dest_folder: Path, symbol: str, payload: Dict[str, object]
 		out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 	else:
 		out_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+
+
+def with_symbol_scope(cfg: Config, *, dest_folder: Path, whitelist: Optional[List[str]] = None) -> Config:
+	"""Return a Config clone with a different destination folder and symbol scope."""
+	return replace(
+		cfg,
+		service_dest_folder=dest_folder,
+		symbol_whitelist=list(whitelist or []),
+	)
+
+
 def run_cycle(cfg: Config) -> None:
-	symbols = get_symbols(cfg.symbol_suffix, blacklist=cfg.symbol_blacklist)
+	symbols = get_symbols(
+		cfg.symbol_suffix,
+		blacklist=cfg.symbol_blacklist,
+		whitelist=cfg.symbol_whitelist,
+	)
 	scope_label = f"suffix '{cfg.symbol_suffix}'" if cfg.symbol_suffix else "all MT5 symbols"
+	if cfg.symbol_whitelist:
+		scope_label += f" in whitelist ({', '.join(cfg.symbol_whitelist)})"
 	if cfg.symbol_blacklist:
 		scope_label += f" with blacklist ({', '.join(cfg.symbol_blacklist)})"
 	if not symbols:
@@ -337,6 +362,58 @@ def wait_until_trading_allowed() -> None:
 			time.sleep(1)
 
 
+def run_strategy_branch(cfg: Config, profile) -> bool:
+	"""Execute one complete strategy branch from predictions to final trade."""
+	branch_folder = cfg.service_dest_folder if not profile.service_subdir else cfg.service_dest_folder / profile.service_subdir
+	branch_cfg = with_symbol_scope(cfg, dest_folder=branch_folder, whitelist=list(profile.allowed_symbols))
+	print(f"\n🧭 Strategy branch: {profile.label} [{profile.strategy_id}]")
+	print(f"   Service folder: {branch_cfg.service_dest_folder}")
+	if branch_cfg.symbol_whitelist:
+		print(f"   Allowed symbols: {', '.join(branch_cfg.symbol_whitelist)}")
+
+	predictions_folder = None
+	existing_predictions = find_predictions_folder_for_current_hour(branch_cfg.service_dest_folder)
+	if existing_predictions:
+		print("💡 Using existing predictions from current hour")
+		has_predictions = process_existing_predictions(existing_predictions)
+		if has_predictions:
+			predictions_folder = existing_predictions
+		else:
+			print("⚠️  Existing predictions were filtered out, skipping this branch for now...")
+	else:
+		print("📥 Downloading market data for current hour...")
+		run_cycle(branch_cfg)
+
+		print("🤖 Getting predictions from Gemini AI...")
+		try:
+			success, pred_folder = run_trading_logic(branch_cfg.service_dest_folder, strategy_profile=profile)
+			predictions_folder = pred_folder
+			if success:
+				print("✅ Trading logic completed successfully")
+			else:
+				print("⚠️  Trading logic completed with warnings")
+		except Exception as trading_exc:
+			print(f"❌ Trading logic failed: {trading_exc}")
+			return False
+
+	if not predictions_folder:
+		print("⚠️  No predictions available for this branch")
+		return False
+
+	print("\n🎯 Making final trading decision...")
+	try:
+		make_final_trading_decision(
+			predictions_folder,
+			branch_cfg.service_dest_folder,
+			strategy_profile=profile,
+		)
+		print("✅ Branch completed")
+		return True
+	except Exception as decision_exc:
+		print(f"❌ Final decision failed: {decision_exc}")
+		return False
+
+
 def main() -> int:
 	try:
 		cfg = Config.from_env()
@@ -438,46 +515,15 @@ def main() -> int:
 					wait_until_trading_allowed()
 				else:
 					print("\n🚀 Stop condition met - proceeding with trading...")
-					
-					predictions_folder = None
-					
-					# Check if predictions from current hour already exist
-					existing_predictions = find_predictions_folder_for_current_hour(cfg.service_dest_folder)
-					
-					if existing_predictions:
-						# Use existing predictions from current hour
-						print("💡 Using existing predictions from current hour")
-						has_predictions = process_existing_predictions(existing_predictions)
-						if has_predictions:
-							predictions_folder = existing_predictions
-						else:
-							print("⚠️  Existing predictions were filtered out, restarting cycle...")
+					profiles = [get_primary_strategy_profile()]
+					if is_index_strategy_enabled():
+						profiles.append(get_index_strategy_profile())
+
+					branch_results = [run_strategy_branch(cfg, profile) for profile in profiles]
+					if any(branch_results):
+						print("\n✅ Cycle completed. Restarting monitoring...")
 					else:
-						# Need to download data and get new predictions
-						print("📥 Downloading market data for current hour...")
-						run_cycle(cfg)
-						
-						print("🤖 Getting predictions from Gemini AI...")
-						try:
-							success, pred_folder = run_trading_logic(cfg.service_dest_folder)
-							predictions_folder = pred_folder
-							if success:
-								print("✅ Trading logic completed successfully")
-							else:
-								print("⚠️  Trading logic completed with warnings")
-						except Exception as trading_exc:
-							print(f"❌ Trading logic failed: {trading_exc}")
-					
-					# Make final trading decision if we have predictions
-					if predictions_folder:
-						print("\n🎯 Making final trading decision...")
-						try:
-							make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
-							print("\n✅ Cycle completed. Restarting monitoring...")
-						except Exception as decision_exc:
-							print(f"❌ Final decision failed: {decision_exc}")
-					else:
-						print("\n⚠️  No predictions available, restarting cycle...")
+						print("\n⚠️  No strategy branch produced a tradeable decision, restarting cycle...")
 			else:
 				print("\n⏸️  Stop condition not met - restarting monitoring...")
 			

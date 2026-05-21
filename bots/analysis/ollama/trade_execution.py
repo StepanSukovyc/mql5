@@ -9,11 +9,23 @@ from typing import List, Optional
 
 import MetaTrader5 as mt5
 
+from strategy_context import build_strategy_context
 from mt5_symbols import get_symbol_tick
 from trading_validation import check_margin_requirements, validate_lot_size, validate_symbol
 
 
-TRADE_LOG_HEADERS = ["timestamp", "symbol", "action", "lot_size", "lot_source", "price", "success", "error_msg"]
+TRADE_LOG_HEADERS = [
+	"timestamp",
+	"strategy_id",
+	"magic",
+	"symbol",
+	"action",
+	"lot_size",
+	"lot_source",
+	"price",
+	"success",
+	"error_msg",
+]
 
 
 def close_position_by_ticket(
@@ -23,8 +35,11 @@ def close_position_by_ticket(
 	volume: float,
 	*,
 	comment: str = "Close position",
+	strategy_id: str | None = None,
+	magic: int | None = None,
 ) -> bool:
 	"""Close an existing MT5 position by sending the opposite market order."""
+	strategy_context = build_strategy_context(strategy_id=strategy_id, magic=magic)
 	tick = get_symbol_tick(symbol)
 	if tick is None:
 		print(f"❌ Failed to get tick for closing {symbol}: {mt5.last_error()}")
@@ -48,8 +63,8 @@ def close_position_by_ticket(
 		"position": position_ticket,
 		"price": price,
 		"deviation": 20,
-		"magic": 234000,
-		"comment": comment,
+		"magic": strategy_context.magic,
+		"comment": comment or strategy_context.order_comment,
 		"type_time": mt5.ORDER_TIME_GTC,
 		"type_filling": mt5.ORDER_FILLING_IOC,
 	}
@@ -94,15 +109,35 @@ def _ensure_trade_log_schema(log_file: Path) -> None:
 		if not row:
 			continue
 
-		if len(headers) == 7:
+		if headers == ["timestamp", "symbol", "action", "lot_size", "price", "success", "error_msg"]:
 			mapped = dict(zip(headers, row))
 			data_rows.append(
 				[
 					mapped.get("timestamp", ""),
+					"legacy_primary",
+					"234000",
 					mapped.get("symbol", ""),
 					mapped.get("action", ""),
 					mapped.get("lot_size", ""),
 					"legacy_unknown",
+					mapped.get("price", ""),
+					mapped.get("success", ""),
+					mapped.get("error_msg", ""),
+				]
+			)
+			continue
+
+		if headers == ["timestamp", "symbol", "action", "lot_size", "lot_source", "price", "success", "error_msg"]:
+			mapped = dict(zip(headers, row))
+			data_rows.append(
+				[
+					mapped.get("timestamp", ""),
+					"legacy_primary",
+					"234000",
+					mapped.get("symbol", ""),
+					mapped.get("action", ""),
+					mapped.get("lot_size", ""),
+					mapped.get("lot_source", "legacy_unknown"),
 					mapped.get("price", ""),
 					mapped.get("success", ""),
 					mapped.get("error_msg", ""),
@@ -128,10 +163,14 @@ def log_trade(
 	success: bool,
 	error_msg: str = "",
 	service_folder: Path = None,
+	strategy_id: str | None = None,
+	magic: int | None = None,
 ) -> None:
 	"""Log trade execution to the service trade log CSV."""
 	if service_folder is None:
 		return
+
+	strategy_context = build_strategy_context(strategy_id=strategy_id, magic=magic)
 
 	logs_folder = service_folder / "trade_logs"
 	logs_folder.mkdir(parents=True, exist_ok=True)
@@ -149,6 +188,8 @@ def log_trade(
 		writer.writerow(
 			[
 				datetime.now(tz=timezone.utc).isoformat(),
+				strategy_context.strategy_id,
+				strategy_context.magic,
 				symbol,
 				action,
 				lot_size,
@@ -169,24 +210,28 @@ def execute_trade(
 	service_folder: Path = None,
 	take_profit: Optional[float] = None,
 	lot_source: str = "unknown",
+	strategy_id: str | None = None,
+	magic: int | None = None,
 ) -> bool:
 	"""Execute a trade on MT5 with validation and logging."""
+	strategy_context = build_strategy_context(strategy_id=strategy_id, magic=magic)
 	print(f"\n🔄 Executing trade...")
 	print(f"   Symbol: {symbol}")
 	print(f"   Action: {action}")
 	print(f"   Requested Lot Size: {lot_size}")
 	print(f"   Take Profit: {take_profit if take_profit is not None else 'None'}")
+	print(f"   Strategy: {strategy_context.strategy_id} (magic={strategy_context.magic})")
 
 	is_valid, error_msg = validate_symbol(symbol)
 	if not is_valid:
 		print(f"❌ Symbol validation failed: {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 		return False
 
 	adjusted_lot, lot_msg = validate_lot_size(symbol, lot_size)
 	if adjusted_lot == 0.0:
 		print(f"❌ Lot size validation failed: {lot_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, lot_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, lot_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 		return False
 
 	if lot_msg:
@@ -199,14 +244,14 @@ def execute_trade(
 	has_margin, margin_msg = check_margin_requirements(symbol, action, lot_size)
 	if not has_margin:
 		print(f"❌ Margin check failed: {margin_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, margin_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, margin_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 		return False
 
 	tick = get_symbol_tick(symbol)
 	if tick is None:
 		error_msg = f"Failed to get tick for {symbol}: {mt5.last_error()}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 		return False
 
 	if action == "BUY":
@@ -218,7 +263,7 @@ def execute_trade(
 	else:
 		error_msg = f"Invalid action: {action} (must be BUY or SELL)"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 		return False
 
 	print(f"   Price: {price}")
@@ -230,25 +275,25 @@ def execute_trade(
 		except (TypeError, ValueError):
 			error_msg = f"Invalid take_profit value: {take_profit}"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 			return False
 
 		if validated_tp <= 0:
 			error_msg = f"Invalid take_profit <= 0: {validated_tp}"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 			return False
 
 		if action == "BUY" and validated_tp <= price:
 			error_msg = f"Invalid take_profit for BUY: TP ({validated_tp}) must be > market price ({price})"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 			return False
 
 		if action == "SELL" and validated_tp >= price:
 			error_msg = f"Invalid take_profit for SELL: TP ({validated_tp}) must be < market price ({price})"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 			return False
 
 		print(f"   Validated TP: {validated_tp}")
@@ -260,8 +305,8 @@ def execute_trade(
 		"type": order_type,
 		"price": price,
 		"deviation": 20,
-		"magic": 234000,
-		"comment": "Gemini AI decision",
+		"magic": strategy_context.magic,
+		"comment": strategy_context.order_comment,
 		"type_time": mt5.ORDER_TIME_GTC,
 		"type_filling": mt5.ORDER_FILLING_IOC,
 	}
@@ -273,13 +318,13 @@ def execute_trade(
 	if result is None:
 		error_msg = f"Order send failed: {mt5.last_error()}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 		return False
 
 	if result.retcode != mt5.TRADE_RETCODE_DONE:
 		error_msg = f"Order failed with retcode: {result.retcode} - {result.comment}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+		log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 		return False
 
 	print(f"✅ Trade executed successfully!")
@@ -287,5 +332,5 @@ def execute_trade(
 	print(f"   Volume: {result.volume}")
 	print(f"   Price: {result.price}")
 
-	log_trade(symbol, action, lot_size, lot_source, result.price, True, "", service_folder)
+	log_trade(symbol, action, lot_size, lot_source, result.price, True, "", service_folder, strategy_id=strategy_context.strategy_id, magic=strategy_context.magic)
 	return True

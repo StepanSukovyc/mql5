@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-from instrument_utils import is_cfd_symbol
+from instrument_utils import get_symbol_news_currencies, is_cfd_symbol
 
 
 class InstrumentUtilsTests(unittest.TestCase):
@@ -38,6 +38,13 @@ class InstrumentUtilsTests(unittest.TestCase):
 		)()
 
 		self.assertTrue(is_cfd_symbol("US30"))
+
+	def test_fx_symbol_news_currencies_are_inferred_from_symbol(self) -> None:
+		self.assertEqual(get_symbol_news_currencies("EURUSD_ecn"), ["EUR", "USD"])
+
+	@patch.dict("os.environ", {"NEWS_FILTER_SYMBOL_CURRENCIES": "US100_ecn:USD,GER40_ecn:EUR"}, clear=False)
+	def test_explicit_news_currency_mapping_overrides_inference(self) -> None:
+		self.assertEqual(get_symbol_news_currencies("US100_ecn"), ["USD"])
 
 
 if __name__ == "__main__":
