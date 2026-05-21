@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-05-21 (Restore Original Trading Flow + Keep Profit Protection)
+
+- **Reverted The Same-Day Strategy Refactor Back To The Original Single-Flow Trading Logic**
+  - `logika.py`, `trading_logic.py`, `final_decision.py`, `trade_execution.py` and related helper modules were restored to the pre-refactor behavior
+  - The temporary parallel strategy/profile/news-filter architecture was removed from the active trading path
+  - Current runtime is again the original single Gemini trading flow with account-monitor-driven management layers
+
+- **Kept Profit Protection As The Active Profit-Exit Layer**
+  - `account_monitor.py` now runs `profit_protection_strategy.py` instead of the older minute `profit_cleanup_strategy.py`
+  - Profit protection tracks `max_net_profit` per open position in `trade_logs/profit_protection_state.json` using keys like `gemini_primary:<ticket>`
+  - A profitable position is closed only after retracement from its tracked peak or after configured stale/maximum-hold limits, so the old direct profit cleanup no longer drives active profit exits
+
+- **Ignored Generated Python Analysis Output In Git**
+  - Root `.gitignore` now ignores the full `analysis/python/` tree
+  - Generated runtime files such as `analysis/python/trade_logs/profit_protection_state.json` no longer appear as repository changes
+
 ## 2026-05-07 (Economy Mode For MT5 Data Refresh Without Ollama Precomputation)
 
 - **Added Default Economy Mode For The Main Trading Loop**

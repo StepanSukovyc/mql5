@@ -33,15 +33,15 @@ Komplexní event-driven trading systém monitoruje volnou marži a dělá inteli
    - Každý N-tý obchod: použije se i take_profit z Gemini
    - Ostatní obchody: take_profit se nepoužije
    - **Crypto safeguardy**: pro symboly odpovídající `MT5_CRYPTO_SYMBOL_PATTERNS` se používá přísnější minimální síla signálu, menší lot přes `MT5_CRYPTO_LOT_MULTIPLIER`, limit současně otevřených crypto pozic přes `MT5_CRYPTO_MAX_OPEN_POSITIONS` a konzervativní TP omezené na maximální vzdálenost `MT5_CRYPTO_TP_DISTANCE_PERCENT` od aktuální tržní ceny
-9. **Vyhodnotí minutový profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`)
+9. **Vyhodnotí profit protection** (`PROFIT_PROTECTION_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru při každém ticku monitoru, nejvýše jednou za minutu
    - Běží pouze mimo swap blok okno
-   - Vezme aktuální raw bilanci účtu `B` a spočítá referenční objem `VOLUME = ((int)(B / 500) + 1) * 0.01`
-   - Pro každou otevřenou pozici vypočte čistý zisk `ZISK = profit + swap - fee`
-   - Syntetický `fee` je `0.10 USD` za každých `0.01` lotu
-   - Cílový profit `PCZ = (0.01 * L / VOLUME) * B`, minimum `PCZ` je `0.005`
-   - Pokud `ZISK > PCZ`, pozice je vhodná k uzavření; v jednom běhu se uzavřou všechny takové pozice
-   - Pokud je `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zalogují
+   - Sleduje jen otevřené profitní pozice patřící hlavní Gemini strategii (`magic=234000` nebo komentář s markerem `gemini_primary`)
+   - Pro každý ticket udržuje lokální maximum `max_net_profit` ve stavovém souboru `trade_logs/profit_protection_state.json`
+   - Stavový klíč má tvar `gemini_primary:<ticket>`
+   - Čistý zisk počítá jako `net_profit = profit + swap - fee`, kde syntetický `fee` je `0.10 USD` za každých `0.01` lotu
+   - Pozici zavře jen pokud je stále v plusu a nastane buď retracement od lokálního maxima, nebo překročí `PROFIT_PROTECTION_STALE_HOURS`, nebo `PROFIT_PROTECTION_MAX_HOLD_DAYS`
+   - Pokud je `PROFIT_PROTECTION_STRATEGY_DRY_RUN=true` (default), kandidáti se jen vypíšou a zapíšou do `trade_logs/profit_protection.csv`
 10. **Vyhodnotí swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`)
    - Běží během minutového account monitoru nejvýše jednou za minutu, ale pouze uvnitř swap blok okna
    - Swap blok okno se bere vždy z pevného ručního intervalu z `.env`
@@ -333,9 +333,8 @@ Hlavní skript, který koordinuje **nekonečný obchodní cyklus** se zásadou F
 - Inicializuje MT5 připojení a konfiguraci
 - Běží v nekonečné smyčce (while True)
 - **Kontroluje swap block window**
-   - Pokud broker MT5 historie vrátí použitelný rollover čas → blokuje se broker-derived okno
-   - Pokud ne → použije ruční fallback interval z `.env` (`SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`)
-   - Pokud je trigger uvnitř okna → zahodí signál a čeká do konce vypočteného okna
+   - Použije pevný ruční interval z `.env` (`SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`) interpretovaný v čase `Europe/Prague`
+   - Pokud je trigger uvnitř okna → zahodí signál a čeká do konce blokace
 - Běží v nekonečné smyčce (while True)
 - Každý cyklus: spouští account_monitor v background threadu
 - Čeká na signál překročení 20% marže
@@ -345,7 +344,7 @@ Hlavní skript, který koordinuje **nekonečný obchodní cyklus** se zásadou F
 - Ukončení: Ctrl+C
 
 **Klíčové funkce:**
-- `is_in_restricted_trading_hours()` - kontroluje, zda je čas uvnitř broker-derived nebo fallback swap block window
+- `is_in_restricted_trading_hours()` - kontroluje, zda je čas uvnitř pevného swap block window z `.env`
 - `wait_until_trading_allowed()` - počká do konce aktuálního swap block window bez jakýchkoli akcí (spí v 10-sec intervalech)
 - `find_predictions_folder_for_current_hour()` - hledá existující predikce z aktuální hodiny
 - `process_existing_predictions()` - aplikuje filtrování na existující predikce
@@ -356,7 +355,7 @@ Monitoruje stav účtu v background threadu:
 - Pravidelně kontroluje **efektivní volnou marži** v procentech vůči efektivnímu balance
 - Signalizuje překročení **20% prahu** (konfigurovatelné v .env) pomocí threading.Event
 - Zobrazuje info o účtu (zůstatek, equity, marže)
-- Spouští minutovou profit cleanup strategii a denní loss cleanup strategii, pokud jsou povolené
+- Spouští profit protection, swap rollover cleanup a denní loss cleanup strategie, pokud jsou povolené
 - Běží bez blokování hlavního vlákna
 
 **Klíčové funkce:**
@@ -382,26 +381,32 @@ Volitelná bezpečnostní strategie pro jednorázové denní odlehčení starýc
 - Pro diagnostiku rozdílů proti mobilní aplikaci zapisuje i raw snapshot dealů z `history_deals_get()` do `trade_logs/loss_cleanup_daily_deals.csv`
 - Zapisuje i stavový soubor `trade_logs/loss_cleanup_state.json`, který zabraňuje opakovanému spuštění ve stejný pražský den
 
-### 2b. profit_cleanup_strategy.py - Minute Profit Cleanup
-Volitelná strategie pro průběžné uzavírání otevřených profitních pozic podle objemu a velikosti účtu:
+### 2b. profit_protection_strategy.py - Profit Protection
+Aktivní strategie pro průběžné uzavírání už ziskových pozic po retracementu nebo po dlouhém držení:
 - Čte runtime konfiguraci přímo z `.env`, takže ji lze za běhu zapnout, vypnout nebo přepnout mezi dry-run a live režimem
 - Vyhodnocuje se nejvýše jednou za minutu během account monitoru
-- Počítá `VOLUME = ((int)(B / 500) + 1) * 0.01` z aktuální raw bilance účtu `B`
-- Pro každou otevřenou pozici počítá `ZISK = profit + swap - fee`, kde `fee = 0.10 USD / 0.01 lotu`
-- Cílový profit `PCZ` počítá jako `(0.01 * L / VOLUME) * B`, kde `L` je objem pozice; minimum `PCZ` je `0.005`
-- V jednom běhu uzavírá všechny pozice, kde platí `ZISK > PCZ`
-- V `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` pouze vypíše kandidáty a zapíše audit do CSV
+- Pracuje jen nad profitními pozicemi hlavní Gemini strategie identifikovanými přes `magic=234000` nebo komentáře s markery `gemini_primary` / `ga:gemini_primary`
+- Pro každou otevřenou pozici počítá `net_profit = profit + swap - fee`, kde `fee = 0.10 USD / 0.01 lotu`
+- Průběžně si ukládá dosažené maximum `max_net_profit` do `trade_logs/profit_protection_state.json`
+- Pozici uzavře, pokud po aktivaci ochrany zisku dojde k retracementu pod `max(max_net_profit * PROFIT_PROTECTION_RETRACE_RATIO, PROFIT_PROTECTION_ACTIVATION_USD)`
+- Alternativně uzavírá i stále ziskové pozice starší než `PROFIT_PROTECTION_STALE_HOURS` nebo `PROFIT_PROTECTION_MAX_HOLD_DAYS`
+- V `PROFIT_PROTECTION_STRATEGY_DRY_RUN=true` pouze vypíše kandidáty a zapíše audit do CSV
 - V ostrém režimu používá `close_position_by_ticket()` ze sdílené exekuční vrstvy
-- Zapisuje audit do `trade_logs/profit_cleanup.csv`
+- Zapisuje audit do `trade_logs/profit_protection.csv`
 
-### 2c. verify_profit_cleanup_strategy.py - Validation Script
-Pomocný lokální skript pro ověření výpočtu profit cleanup strategie bez připojení k MT5:
+### 2c. profit_cleanup_strategy.py - Legacy Minute Profit Cleanup
+Původní helper pro minutový profit cleanup zůstal v repozitáři kvůli výpočtům a pomocným skriptům, ale aktuální obchodní flow ho nespouští:
+- Nadále obsahuje původní výpočet `VOLUME`, `ZISK` a `PCZ`
+- Slouží jako referenční implementace pro lokální ověření a historické srovnání
+
+### 2d. verify_profit_cleanup_strategy.py - Validation Script
+Pomocný lokální skript pro ověření historického výpočtu profit cleanup strategie bez připojení k MT5:
 - Používá stejnou helper funkci jako runtime strategie, takže nekopíruje výpočty bokem
 - Umí vypsat předdefinované scénáře i scénáře z CLI argumentů ve formátu `balance volume profit swap`
 - Vypisuje `VOLUME`, `fee`, `ZISK`, `PCZ` a boolean `eligible`
 
-### 2d. test_profit_cleanup_strategy.py - Unit Tests
-Lehká automatická kontrola správnosti výpočtu profit cleanup strategie:
+### 2e. test_profit_cleanup_strategy.py - Unit Tests
+Lehká automatická kontrola správnosti historického výpočtu profit cleanup strategie:
 - Používá standardní `unittest`, takže nepotřebuje nové dependency
 - Ověřuje uživatelský příklad, pozitivní scénář, minimum `PCZ` i vliv swapu a fee
 - Dá se spustit přes `python -m unittest test_profit_cleanup_strategy.py`
@@ -439,8 +444,12 @@ Relevantní parametry pro risk management:
 
 - `TRADING_MARGIN_THRESHOLD=20` určuje, při jakém poměru efektivní volné marže k efektivnímu balance se spustí trading flow
 - `TRADING_ACCOUNT_BALANCE_CAP=5000` určuje maximální balance, se kterou strategie počítá lot sizing a margin check
-- `PROFIT_CLEANUP_STRATEGY_ENABLED=true` zapíná minutovou profit cleanup strategii
-- `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání profitních pozic
+- `PROFIT_PROTECTION_STRATEGY_ENABLED=true` zapíná profit protection vrstvu nad ziskovými pozicemi
+- `PROFIT_PROTECTION_STRATEGY_DRY_RUN=true` zapíná bezpečný testovací režim bez skutečného zavírání profitních pozic
+- `PROFIT_PROTECTION_ACTIVATION_USD=0.30` určuje minimální čistý profit, od kterého se začne chránit dosažené maximum
+- `PROFIT_PROTECTION_RETRACE_RATIO=0.55` určuje, jak velká část dosaženého maxima musí po retracementu zůstat, aby se pozice zavřela
+- `PROFIT_PROTECTION_STALE_HOURS=12` určuje hranici pro zavření stále ziskové stale pozice
+- `PROFIT_PROTECTION_MAX_HOLD_DAYS=5` určuje maximální držení stále ziskové pozice
 - `SWAP_BLOCK_START_HOUR=22`, `SWAP_BLOCK_START_MINUTE=30`, `SWAP_BLOCK_END_HOUR=23`, `SWAP_BLOCK_END_MINUTE=30` definují ruční fallback swap blok okna, pokud MT5 historie neposkytne použitelný rollover čas
 - `LOSS_CLEANUP_STRATEGY_ENABLED=true` zapíná denní cleanup strategii
 - `LOSS_CLEANUP_STRATEGY_HOUR=12` určuje hodinu pražského času, po které se má cleanup vyhodnotit
