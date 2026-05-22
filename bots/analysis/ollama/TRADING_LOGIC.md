@@ -120,6 +120,39 @@ Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví 
 
 Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
+## Správa ztrátových pozic
+
+Runtime obsahuje dvě vzájemně doplňující se vrstvy pro čištění starých ztrátových pozic.
+
+### Denní loss-cleanup strategie (`loss_cleanup_strategy.py`)
+
+- Spouští se jednou denně v nakonfigurovaný čas (výchozí 12:45 Prague time)
+- Budget = realizovaný zisk **předchozího dne** z MT5 deal history (profit + swap + commission + fee)
+- Po odečtení buffer rezervy (výchozí 2 % balance) hledá jednu ztrátovou pozici starší než 7 dní, která se do budgetu vejde
+- Může pozici **skutečně uzavřít** (pokud `LOSS_CLEANUP_STRATEGY_DRY_RUN=false`)
+
+### Měsíční rolling advisory strategie (`monthly_loss_cleanup_strategy.py`)
+
+- Spouští se jednou denně (výchozí 13:00 Prague time)
+- Budget je počítán přes **plovoucí okno 30 kalendářních dní**
+- `target = effective_active_days × 50 USD`, kde `effective_active_days = max(aktivní_obchodní_dny, MIN_ACTIVE_DAYS)`
+- Aktivní obchodní dny = počet unikátních dat v okně s aspoň jedním uzavřeným obchodem (automaticky pokrývá svátky, víkendy i výpadky bota)
+- `surplus = realized_profit_30d − target`
+- Pokud surplus > 0: greedy výběr ztrátových pozic starších než 30 dní od největší ztráty dolů
+- **Nikdy nezavírá pozice** — pouze zapíše doporučení do `trade_logs/monthly_loss_cleanup_recommendations.json`
+- Slouží jako podklad pro ruční rozhodnutí operátora
+
+### Konfigurace monthly advisory
+
+| Klíč | Výchozí | Popis |
+|---|---|---|
+| `MONTHLY_LOSS_CLEANUP_ENABLED` | `true` | Zapnutí/vypnutí |
+| `MONTHLY_LOSS_CLEANUP_HOUR` | `13` | Hodina spuštění (Prague) |
+| `MONTHLY_LOSS_CLEANUP_MINUTE` | `0` | Minuta spuštění |
+| `MONTHLY_LOSS_CLEANUP_DAILY_TARGET_USD` | `50.0` | Denní cíl v USD |
+| `MONTHLY_LOSS_CLEANUP_MIN_ACTIVE_DAYS` | `15` | Floor pro výpočet targetu |
+| `MONTHLY_LOSS_CLEANUP_MIN_POSITION_AGE_DAYS` | `30` | Minimální věk pozice |
+
 ## Logy a stavové soubory
 
 Runtime zapisuje více specializovaných logů:
@@ -131,6 +164,8 @@ Runtime zapisuje více specializovaných logů:
 - `trade_logs/gemini_advisory_state.json`
 - `trade_logs/trade_decision_audit.csv`
 - `trade_logs/trade_decision_snapshot.csv`
+- `trade_logs/monthly_loss_cleanup_recommendations.json`
+- `trade_logs/monthly_loss_cleanup_state.json`
 
 Význam nových CSV souborů:
 

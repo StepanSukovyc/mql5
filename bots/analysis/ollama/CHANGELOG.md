@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-05-22 (Rolling 30-Day Loss Cleanup Advisory Strategy)
+
+- **Added `monthly_loss_cleanup_strategy.py` — advisory-only, never closes positions**
+  - Computes realized profit over a rolling 30-calendar-day window from MT5 deal history
+  - Active trading days = unique UTC calendar dates with at least one closing deal in the window; a configurable floor (`MONTHLY_LOSS_CLEANUP_MIN_ACTIVE_DAYS`, default `15`) prevents the target from being too low during bot downtime
+  - `target = effective_active_days × MONTHLY_LOSS_CLEANUP_DAILY_TARGET_USD` (default `50 USD/day`)
+  - `surplus = realized_profit_30d − target`; if surplus ≤ 0 no recommendations are generated
+  - When surplus > 0 the strategy finds all open positions older than `MONTHLY_LOSS_CLEANUP_MIN_POSITION_AGE_DAYS` (default `30`) that are currently losing and performs a greedy selection from largest to smallest loss until the surplus is consumed
+  - All candidates and the recommended subset are written to `trade_logs/monthly_loss_cleanup_recommendations.json`; the file is overwritten on every daily run
+  - Runs once per Prague day after a configurable trigger time (`MONTHLY_LOSS_CLEANUP_HOUR` / `MONTHLY_LOSS_CLEANUP_MINUTE`, default `13:00`); last-run day key is persisted in `trade_logs/monthly_loss_cleanup_state.json`
+  - Skipped during the swap rollover block window
+  - Wired into `account_monitor.py` → `run_position_management_monitor` alongside the existing daily loss-cleanup strategy
+
 ## 2026-05-22 (Gemini Candidate Cap + Explicit Local Fallback Audit)
 
 - **Added Configurable Gemini Advisory Candidate Cap**
