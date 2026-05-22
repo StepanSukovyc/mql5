@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import unittest
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from gemini_vertex import (
 	GeminiVertexRequestError,
@@ -15,10 +16,31 @@ from gemini_vertex import (
 
 
 class GeminiVertexParsingTests(unittest.TestCase):
+	@patch("gemini_decision.request_final_decision_json")
+	def test_final_decision_prompt_construction_accepts_ranked_candidates_example(self, mock_request_final_decision_json) -> None:
+		from gemini_decision import ask_gemini_final_decision
+
+		mock_request_final_decision_json.return_value = (
+			'{"recommended_symbol":"EURUSD_ecn","action":"BUY","reasoning":"ok"}'
+		)
+
+		decision = ask_gemini_final_decision(
+			predictions=[{"symbol": "EURUSD_ecn", "BUY": 60, "SELL": 20}],
+			open_positions=[],
+			account_state={"balance": 5000},
+			gemini_config=SimpleNamespace(),
+		)
+
+		self.assertIsNotNone(decision)
+		self.assertEqual(mock_request_final_decision_json.call_count, 1)
+		prompt = mock_request_final_decision_json.call_args.args[1]
+		self.assertIn('"candidates": [', prompt)
+		self.assertIn('"recommended_symbol": "SYMBOL_NAME"', prompt)
+
 	def test_parses_json_wrapped_in_code_fence(self) -> None:
 		response = SimpleNamespace(
 			parsed=None,
-			text="```json\n{\n  \"recommended_symbol\": \"EURUSD_ecn\",\n  \"action\": \"BUY\",\n  \"lot_size\": 0.01,\n  \"take_profit\": 1.1,\n  \"reasoning\": \"ok\"\n}\n```",
+			text="```json\n{\n  \"recommended_symbol\": \"EURUSD_ecn\",\n  \"action\": \"BUY\",\n  \"reasoning\": \"ok\"\n}\n```",
 		)
 
 		parsed = _parse_structured_json_response(response)
@@ -38,7 +60,7 @@ class GeminiVertexParsingTests(unittest.TestCase):
 								text=(
 									"Tady je výsledek:\n"
 									"{\"recommended_symbol\":\"EURUSD_ecn\",\"action\":\"BUY\","
-									"\"lot_size\":0.01,\"take_profit\":1.1,\"reasoning\":\"ok\"}\n"
+									"\"reasoning\":\"ok\"}\n"
 									"Děkuji."
 								)
 							)
@@ -51,7 +73,7 @@ class GeminiVertexParsingTests(unittest.TestCase):
 		parsed = _parse_structured_json_response(response)
 
 		self.assertEqual(parsed["recommended_symbol"], "EURUSD_ecn")
-		self.assertEqual(parsed["take_profit"], 1.1)
+		self.assertEqual(parsed["reasoning"], "ok")
 
 	def test_rest_fallback_is_enabled_for_invalid_json_sdk_response(self) -> None:
 		exc = GeminiVertexRequestError(
@@ -84,6 +106,41 @@ class GeminiVertexParsingTests(unittest.TestCase):
 		self.assertIn('"symbol": "text"', prompt)
 		self.assertIn('"BUY": 0', prompt)
 		self.assertIn('"reasoning": "text"', prompt)
+
+	def test_final_decision_validation_accepts_advisory_only_fields(self) -> None:
+		from gemini_vertex import _validate_final_decision_payload
+
+		payload = _validate_final_decision_payload(
+			{
+				"recommended_symbol": "EURUSD_ecn",
+				"action": "BUY",
+				"reasoning": "strong setup",
+			}
+		)
+
+		self.assertEqual(payload["recommended_symbol"], "EURUSD_ecn")
+		self.assertEqual(payload["action"], "BUY")
+		self.assertEqual(payload["reasoning"], "strong setup")
+
+	def test_final_decision_validation_normalizes_ranked_candidates(self) -> None:
+		from gemini_vertex import _validate_final_decision_payload
+
+		payload = _validate_final_decision_payload(
+			{
+				"recommended_symbol": "EURUSD_ecn",
+				"action": "BUY",
+				"reasoning": "strong setup",
+				"candidates": [
+					{"symbol": "EURUSD_ecn", "action": "BUY", "reasoning": "top"},
+					{"symbol": "USDJPY_ecn", "action": "SELL", "reasoning": "alt"},
+					{"symbol": "USDJPY_ecn", "action": "SELL", "reasoning": "duplicate"},
+				],
+			}
+		)
+
+		self.assertEqual(payload["recommended_symbol"], "EURUSD_ecn")
+		self.assertEqual(len(payload["candidates"]), 2)
+		self.assertEqual(payload["candidates"][1]["symbol"], "USDJPY_ecn")
 
 	def test_model_not_found_404_skips_remaining_vertex_models(self) -> None:
 		self.assertTrue(

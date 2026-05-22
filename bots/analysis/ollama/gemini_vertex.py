@@ -8,7 +8,7 @@ import time
 import urllib.error
 import urllib.request
 from types import SimpleNamespace
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 import httpx
 
@@ -37,13 +37,23 @@ _PREDICTION_RESPONSE_SCHEMA = {
 
 _FINAL_DECISION_RESPONSE_SCHEMA = {
 	"type": "OBJECT",
-	"required": ["recommended_symbol", "action", "lot_size", "take_profit", "reasoning"],
+	"required": ["recommended_symbol", "action", "reasoning"],
 	"properties": {
 		"recommended_symbol": {"type": "STRING"},
 		"action": {"type": "STRING", "enum": ["BUY", "SELL"]},
-		"lot_size": {"type": "NUMBER"},
-		"take_profit": {"type": "NUMBER"},
 		"reasoning": {"type": "STRING"},
+		"candidates": {
+			"type": "ARRAY",
+			"items": {
+				"type": "OBJECT",
+				"required": ["symbol", "action", "reasoning"],
+				"properties": {
+					"symbol": {"type": "STRING"},
+					"action": {"type": "STRING", "enum": ["BUY", "SELL"]},
+					"reasoning": {"type": "STRING"},
+				},
+			},
+		},
 	},
 }
 
@@ -271,6 +281,43 @@ def _validate_prediction_payload(expected_symbol: str, payload: Dict[str, Any]) 
 	}
 
 
+def _normalize_final_decision_candidates(payload: Dict[str, Any]) -> List[Dict[str, str]]:
+	raw_candidates = payload.get("candidates")
+	if raw_candidates is None:
+		return []
+	if not isinstance(raw_candidates, list):
+		raise GeminiVertexRequestError("Field 'candidates' must be an array when provided")
+
+	normalized: List[Dict[str, str]] = []
+	seen: set[tuple[str, str]] = set()
+	for index, candidate in enumerate(raw_candidates, start=1):
+		if not isinstance(candidate, dict):
+			raise GeminiVertexRequestError(f"Field 'candidates[{index}]' must be an object")
+		symbol = candidate.get("symbol")
+		action = candidate.get("action")
+		reasoning = candidate.get("reasoning")
+		if not isinstance(symbol, str) or not symbol.strip():
+			raise GeminiVertexRequestError(f"Field 'candidates[{index}].symbol' is missing or empty")
+		if action not in {"BUY", "SELL"}:
+			raise GeminiVertexRequestError(f"Field 'candidates[{index}].action' must be BUY or SELL")
+		if not isinstance(reasoning, str) or not reasoning.strip():
+			raise GeminiVertexRequestError(f"Field 'candidates[{index}].reasoning' is missing or empty")
+
+		key = (symbol.strip(), action)
+		if key in seen:
+			continue
+		seen.add(key)
+		normalized.append(
+			{
+				"symbol": symbol.strip(),
+				"action": action,
+				"reasoning": reasoning.strip(),
+			}
+		)
+
+	return normalized
+
+
 def _validate_final_decision_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
 	recommended_symbol = payload.get("recommended_symbol")
 	action = payload.get("action")
@@ -281,19 +328,17 @@ def _validate_final_decision_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
 		raise GeminiVertexRequestError("Field 'action' must be BUY or SELL")
 	if not isinstance(reasoning, str) or not reasoning.strip():
 		raise GeminiVertexRequestError("Field 'reasoning' is missing or empty")
+	candidates = _normalize_final_decision_candidates(payload)
 
-	lot_size = _ensure_float(payload.get("lot_size"), "lot_size")
-	take_profit = _ensure_float(payload.get("take_profit"), "take_profit")
-	if lot_size <= 0:
-		raise GeminiVertexRequestError("Field 'lot_size' must be greater than 0")
-
-	return {
+	normalized_payload = {
 		"recommended_symbol": recommended_symbol.strip(),
 		"action": action,
-		"lot_size": lot_size,
-		"take_profit": take_profit,
 		"reasoning": reasoning.strip(),
 	}
+	if candidates:
+		normalized_payload["candidates"] = candidates
+
+	return normalized_payload
 
 
 def _sleep_before_retry(attempt: int) -> None:

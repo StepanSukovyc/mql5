@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-05-22 (Gemini Candidate Cap + Explicit Local Fallback Audit)
+
+- **Added Configurable Gemini Advisory Candidate Cap**
+  - `final_decision.py` now limits advisory candidates with `GEMINI_ADVISORY_MAX_CANDIDATES`
+  - The default cap is `3`, so the runtime tries at most three Gemini symbol/action candidates before continuing with the local deterministic ranking queue
+  - The active sample and local runtime configuration now document `GEMINI_ADVISORY_MAX_CANDIDATES=3`
+
+- **Made Gemini-To-Local Fallback Visible In Audit Logs**
+  - `trade_decision_audit.csv` now records an explicit `queue_transition` row with reason `gemini_candidates_exhausted_local_fallback`
+  - The transition row includes how many Gemini candidates were exhausted before the local queue took over
+  - Existing audit and snapshot rows still keep `candidate_queue` and `candidate_rank`, so the exact order remains readable alongside the transition marker
+
 ## 2026-05-22 (Deterministic Strategy Layers + Session-Gated Parallel Fallback)
 
 - **Replaced Gemini-Centric Execution With Local Strategy Layers**

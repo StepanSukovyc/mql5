@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from unittest.mock import patch
 
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
+from profit_protection_strategy import calculate_profit_protection_activation_usd, calculate_profit_protection_target_profit_usd
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
 from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
@@ -135,6 +136,36 @@ class StrategyOwnershipTests(unittest.TestCase):
 		self.assertTrue(allowed)
 		self.assertFalse(blocked_after_cutoff)
 		self.assertFalse(blocked_before_session)
+
+
+class ProfitProtectionTests(unittest.TestCase):
+	@patch.dict(
+		os.environ,
+		{
+			"PROFIT_PROTECTION_ACTIVATION_USD": "0.30",
+			"PROFIT_PROTECTION_TARGET_BALANCE_DIVISOR": "10",
+			"PROFIT_PROTECTION_ACTIVATION_TARGET_RATIO": "0.50",
+		},
+		clear=False,
+	)
+	def test_profit_protection_scales_with_balance_and_volume(self) -> None:
+		self.assertEqual(calculate_profit_protection_target_profit_usd(5000.0, 0.01), 5.0)
+		self.assertEqual(calculate_profit_protection_activation_usd(5000.0, 0.01), 2.5)
+		self.assertEqual(calculate_profit_protection_target_profit_usd(5000.0, 0.02), 10.0)
+		self.assertEqual(calculate_profit_protection_activation_usd(5000.0, 0.02), 5.0)
+
+	@patch.dict(
+		os.environ,
+		{
+			"PROFIT_PROTECTION_ACTIVATION_USD": "0.30",
+			"PROFIT_PROTECTION_TARGET_BALANCE_DIVISOR": "10",
+			"PROFIT_PROTECTION_ACTIVATION_TARGET_RATIO": "0.50",
+		},
+		clear=False,
+	)
+	def test_profit_protection_keeps_static_floor_for_small_positions(self) -> None:
+		self.assertEqual(calculate_profit_protection_target_profit_usd(100.0, 0.01), 0.1)
+		self.assertEqual(calculate_profit_protection_activation_usd(100.0, 0.01), 0.3)
 
 
 if __name__ == "__main__":

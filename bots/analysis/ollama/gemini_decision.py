@@ -103,9 +103,9 @@ def ask_gemini_final_decision(
 		mode_text = (
 			f"\n\nREŽIM AKTUÁLNÍHO OBCHODU:\n"
 			f"- Pořadí obchodu: #{trade_number}\n"
-			f"- Každý {full_control_every_n}. obchod je plně řízen Gemini (lot + take_profit): {mode_label}\n"
-			f"- lot_size se ve finální exekuci vždy použije z této odpovědi.\n"
-			f"- U ne-plně řízených obchodů se take_profit ve finální exekuci ignoruje."
+			f"- Každý {full_control_every_n}. obchod je plně řízen Gemini (legacy informace): {mode_label}\n"
+			f"- V aktualnim advisory rezimu Gemini vybira pouze instrument a smer.\n"
+			f"- lot_size a take_profit se ve finalni exekuci pocitaji lokalne."
 		)
 
 	crypto_symbols = [str(p.get("symbol")) for p in predictions if is_crypto_symbol(str(p.get("symbol", "")))]
@@ -118,6 +118,28 @@ def ask_gemini_final_decision(
 			"- Pokud je rozdíl mezi BUY a SELL malý nebo je reasoning nejasný, preferuj raději ne-crypto instrument nebo HOLD.\n"
 			"- U crypto preferuj menší lot a konzervativnější risk management."
 		)
+
+	response_example = json.dumps(
+		{
+			"recommended_symbol": "SYMBOL_NAME",
+			"action": "BUY",
+			"reasoning": "...",
+			"candidates": [
+				{
+					"symbol": "SYMBOL_NAME",
+					"action": "BUY",
+					"reasoning": "...",
+				},
+				{
+					"symbol": "ALTERNATIVE_SYMBOL",
+					"action": "SELL",
+					"reasoning": "...",
+				},
+			],
+		},
+		indent=2,
+		ensure_ascii=False,
+	)
 
 	prompt = f"""Jsi expert obchodní poradce. Musíš na základě analýzy učinit finální obchodní rozhodnutí.
 
@@ -135,9 +157,10 @@ DOSTUPNÉ INFORMACE:
 ÚKOL:
 Na základě všech dostupných informací (predikce, otevřené pozice, stav účtu):
 
-		1. Vyber PRÁVĚ JEDEN instrument z dostupných predikcí
+		1. Vyber hlavního kandidáta z dostupných predikcí
 2. Rozhodni se pro BUY nebo SELL
-3. Stručně zdůvodni rozhodnutí
+		3. Stručně zdůvodni rozhodnutí
+4. Pokud dávají smysl alternativy, vrať i 2 až 3 seřazené kandidáty pro fallback validaci
 4. DIVERZIFIKACE: Preferuj symboly, které ještě nemáš v otevřených pozicích. Pokud již existují otevřené pozice, posuzuj tu s open_price nejblíže aktuální tržní ceně a novou pozici na stejném symbolu otevři POUZE tehdy, když tato nejbližší pozice prodělává více než 15 % aktuální hodnoty účtu; jinak POVINNĚ vyber raději jiný kandidát z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
 
 DŮLEŽITÉ OBCHODNÍ NASTAVENÍ:
@@ -148,11 +171,7 @@ DŮLEŽITÉ OBCHODNÍ NASTAVENÍ:
 
 Odpověď prosím formátuj POUZE jako JSON bez dalšího textu, v tomto formátu:
 
-{{
-	"recommended_symbol": "SYMBOL_NAME",
-  "action": "BUY",
-  "reasoning": "..."
-}}
+{response_example}
 
 Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdownu, bez code fence, bez dalšího textu."""
 

@@ -111,6 +111,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			"balance": 4280.60,
 			"equity": 3201.53,
 			"margin_free": 839.84,
+			"raw_margin_free": 1000.00,
 			"margin_percent": 19.62,
 		}
 		mock_get_open_positions.return_value = []
@@ -210,6 +211,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			"balance": 4280.60,
 			"equity": 3201.53,
 			"margin_free": 839.84,
+			"raw_margin_free": 1000.00,
 			"margin_percent": 19.62,
 		}
 		mock_get_open_positions.return_value = []
@@ -302,6 +304,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			"balance": 4280.60,
 			"equity": 3201.53,
 			"margin_free": 839.84,
+			"raw_margin_free": 1000.00,
 			"margin_percent": 19.62,
 		}
 		mock_get_open_positions.return_value = []
@@ -359,6 +362,337 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.execute_trade")
 	@patch("final_decision.validate_symbol")
 	@patch("final_decision.calculate_synthetic_risk_plan")
+	@patch("final_decision.validate_trend_following_signal")
+	@patch("final_decision._load_market_data_for_symbol")
+	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
+	@patch("final_decision.count_successful_trades_today")
+	@patch("final_decision.count_successful_trades")
+	@patch("final_decision._get_gemini_full_control_every_n_trades")
+	@patch("final_decision._load_gemini_api_config")
+	@patch("final_decision.get_open_positions")
+	@patch("final_decision.get_account_state")
+	@patch("final_decision.load_predictions")
+	def test_multiple_gemini_candidates_are_tried_before_local_ranking(
+		self,
+		mock_load_predictions,
+		mock_get_account_state,
+		mock_get_open_positions,
+		mock_load_gemini_api_config,
+		mock_trade_mode,
+		mock_count_successful_trades,
+		mock_count_successful_trades_today,
+		mock_count_successful_trades_since,
+		mock_ask_gemini_final_decision,
+		mock_load_market_data_for_symbol,
+		mock_validate_trend_following_signal,
+		mock_calculate_synthetic_risk_plan,
+		mock_validate_symbol,
+		mock_execute_trade,
+	) -> None:
+		mock_load_predictions.return_value = [
+			{"symbol": "GBPUSD_ecn", "BUY": 65, "SELL": 20},
+			{"symbol": "EURUSD_ecn", "BUY": 60, "SELL": 20},
+			{"symbol": "USDJPY_ecn", "BUY": 25, "SELL": 58},
+		]
+		mock_get_account_state.return_value = {
+			"balance_cap": 5000.0,
+			"balance": 4280.60,
+			"equity": 3201.53,
+			"margin_free": 1200.00,
+			"raw_margin_free": 1200.00,
+			"margin_percent": 24.0,
+		}
+		mock_get_open_positions.return_value = []
+		mock_load_gemini_api_config.return_value = SimpleNamespace(
+			credentials_path="C:/vertex/service-account.json",
+			project="demo-project",
+			region="europe-west4",
+			model="gemini-2.5-flash",
+			fallback_models=("gemini-2.5-flash",),
+		)
+		mock_trade_mode.return_value = 1
+		mock_count_successful_trades.return_value = 10
+		mock_count_successful_trades_today.return_value = 0
+		mock_count_successful_trades_since.return_value = 0
+		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
+
+		def _validation_side_effect(symbol, action, market_data):
+			if symbol == "EURUSD_ecn":
+				return SimpleNamespace(allowed=False, reason_codes=["spread_above_limit"], regime_state="trend", metrics={})
+			return SimpleNamespace(allowed=True, reason_codes=[], regime_state="trend", metrics={})
+
+		mock_validate_trend_following_signal.side_effect = _validation_side_effect
+		mock_calculate_synthetic_risk_plan.return_value = SimpleNamespace(
+			risk_usd=25.0,
+			synthetic_stop_price=99.0,
+			synthetic_stop_distance=1.0,
+			take_profit_price=1.11,
+			lot_size=0.01,
+		)
+		mock_validate_symbol.return_value = (True, "")
+		mock_execute_trade.return_value = True
+		mock_ask_gemini_final_decision.return_value = json.dumps(
+			{
+				"recommended_symbol": "EURUSD_ecn",
+				"action": "BUY",
+				"reasoning": "first choice",
+				"candidates": [
+					{"symbol": "EURUSD_ecn", "action": "BUY", "reasoning": "top"},
+					{"symbol": "USDJPY_ecn", "action": "SELL", "reasoning": "fallback"},
+				],
+			}
+		)
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "predikce"
+			service_folder = Path(temp_dir) / "service"
+			predictions_folder.mkdir(parents=True, exist_ok=True)
+
+			result = make_final_trading_decision(predictions_folder, service_folder)
+			audit_file = service_folder / "trade_logs" / "trade_decision_audit.csv"
+			with open(audit_file, "r", encoding="utf-8", newline="") as handle:
+				audit_rows = list(csv.DictReader(handle))
+
+		self.assertTrue(result)
+		self.assertEqual(mock_execute_trade.call_count, 1)
+		self.assertEqual(mock_execute_trade.call_args.args[0], "USDJPY_ecn")
+		self.assertTrue(any(row["symbol"] == "EURUSD_ecn" and row["candidate_queue"] == "gemini_live" and row["candidate_rank"] == "1" for row in audit_rows))
+		self.assertTrue(any(row["symbol"] == "USDJPY_ecn" and row["candidate_queue"] == "gemini_live" and row["candidate_rank"] == "2" for row in audit_rows))
+
+	@patch("final_decision.execute_trade")
+	@patch("final_decision.validate_symbol")
+	@patch("final_decision.calculate_synthetic_risk_plan")
+	@patch("final_decision.validate_trend_following_signal")
+	@patch("final_decision._load_market_data_for_symbol")
+	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
+	@patch("final_decision.count_successful_trades_today")
+	@patch("final_decision.count_successful_trades")
+	@patch("final_decision._get_gemini_full_control_every_n_trades")
+	@patch("final_decision._load_gemini_api_config")
+	@patch("final_decision.get_open_positions")
+	@patch("final_decision.get_account_state")
+	@patch("final_decision.load_predictions")
+	def test_local_ranking_runs_after_all_gemini_candidates_fail_validation(
+		self,
+		mock_load_predictions,
+		mock_get_account_state,
+		mock_get_open_positions,
+		mock_load_gemini_api_config,
+		mock_trade_mode,
+		mock_count_successful_trades,
+		mock_count_successful_trades_today,
+		mock_count_successful_trades_since,
+		mock_ask_gemini_final_decision,
+		mock_load_market_data_for_symbol,
+		mock_validate_trend_following_signal,
+		mock_calculate_synthetic_risk_plan,
+		mock_validate_symbol,
+		mock_execute_trade,
+	) -> None:
+		mock_load_predictions.return_value = [
+			{"symbol": "GBPUSD_ecn", "BUY": 70, "SELL": 15},
+			{"symbol": "EURUSD_ecn", "BUY": 60, "SELL": 20},
+			{"symbol": "USDJPY_ecn", "BUY": 25, "SELL": 58},
+		]
+		mock_get_account_state.return_value = {
+			"balance_cap": 5000.0,
+			"balance": 4280.60,
+			"equity": 3201.53,
+			"margin_free": 1200.00,
+			"raw_margin_free": 1200.00,
+			"margin_percent": 24.0,
+		}
+		mock_get_open_positions.return_value = []
+		mock_load_gemini_api_config.return_value = SimpleNamespace(
+			credentials_path="C:/vertex/service-account.json",
+			project="demo-project",
+			region="europe-west4",
+			model="gemini-2.5-flash",
+			fallback_models=("gemini-2.5-flash",),
+		)
+		mock_trade_mode.return_value = 1
+		mock_count_successful_trades.return_value = 10
+		mock_count_successful_trades_today.return_value = 0
+		mock_count_successful_trades_since.return_value = 0
+		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
+
+		def _validation_side_effect(symbol, action, market_data):
+			if symbol in {"EURUSD_ecn", "USDJPY_ecn"}:
+				return SimpleNamespace(allowed=False, reason_codes=["spread_above_limit"], regime_state="trend", metrics={})
+			return SimpleNamespace(allowed=True, reason_codes=[], regime_state="trend", metrics={})
+
+		mock_validate_trend_following_signal.side_effect = _validation_side_effect
+		mock_calculate_synthetic_risk_plan.return_value = SimpleNamespace(
+			risk_usd=25.0,
+			synthetic_stop_price=99.0,
+			synthetic_stop_distance=1.0,
+			take_profit_price=1.11,
+			lot_size=0.01,
+		)
+		mock_validate_symbol.return_value = (True, "")
+		mock_execute_trade.return_value = True
+		mock_ask_gemini_final_decision.return_value = json.dumps(
+			{
+				"recommended_symbol": "EURUSD_ecn",
+				"action": "BUY",
+				"reasoning": "first choice",
+				"candidates": [
+					{"symbol": "EURUSD_ecn", "action": "BUY", "reasoning": "top"},
+					{"symbol": "USDJPY_ecn", "action": "SELL", "reasoning": "fallback"},
+				],
+			}
+		)
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "predikce"
+			service_folder = Path(temp_dir) / "service"
+			predictions_folder.mkdir(parents=True, exist_ok=True)
+
+			result = make_final_trading_decision(predictions_folder, service_folder)
+			audit_file = service_folder / "trade_logs" / "trade_decision_audit.csv"
+			with open(audit_file, "r", encoding="utf-8", newline="") as handle:
+				audit_rows = list(csv.DictReader(handle))
+
+		self.assertTrue(result)
+		self.assertEqual(mock_execute_trade.call_count, 1)
+		self.assertEqual(mock_execute_trade.call_args.args[0], "GBPUSD_ecn")
+		self.assertTrue(any(row["symbol"] == "GBPUSD_ecn" and row["candidate_queue"] == "local" for row in audit_rows))
+
+	@patch.dict(
+		os.environ,
+		{
+			"GEMINI_ADVISORY_MAX_CANDIDATES": "3",
+		},
+		clear=False,
+	)
+	@patch("final_decision.execute_trade")
+	@patch("final_decision.validate_symbol")
+	@patch("final_decision.calculate_synthetic_risk_plan")
+	@patch("final_decision.validate_trend_following_signal")
+	@patch("final_decision._load_market_data_for_symbol")
+	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
+	@patch("final_decision.count_successful_trades_today")
+	@patch("final_decision.count_successful_trades")
+	@patch("final_decision._get_gemini_full_control_every_n_trades")
+	@patch("final_decision._load_gemini_api_config")
+	@patch("final_decision.get_open_positions")
+	@patch("final_decision.get_account_state")
+	@patch("final_decision.load_predictions")
+	def test_gemini_candidate_limit_falls_back_to_local_after_three_attempts(
+		self,
+		mock_load_predictions,
+		mock_get_account_state,
+		mock_get_open_positions,
+		mock_load_gemini_api_config,
+		mock_trade_mode,
+		mock_count_successful_trades,
+		mock_count_successful_trades_today,
+		mock_count_successful_trades_since,
+		mock_ask_gemini_final_decision,
+		mock_load_market_data_for_symbol,
+		mock_validate_trend_following_signal,
+		mock_calculate_synthetic_risk_plan,
+		mock_validate_symbol,
+		mock_execute_trade,
+	) -> None:
+		mock_load_predictions.return_value = [
+			{"symbol": "GBPUSD_ecn", "BUY": 72, "SELL": 10},
+			{"symbol": "EURUSD_ecn", "BUY": 60, "SELL": 20},
+			{"symbol": "USDJPY_ecn", "BUY": 25, "SELL": 58},
+			{"symbol": "AUDUSD_ecn", "BUY": 58, "SELL": 25},
+			{"symbol": "NZDUSD_ecn", "BUY": 57, "SELL": 22},
+		]
+		mock_get_account_state.return_value = {
+			"balance_cap": 5000.0,
+			"balance": 4280.60,
+			"equity": 3201.53,
+			"margin_free": 1200.00,
+			"raw_margin_free": 1200.00,
+			"margin_percent": 24.0,
+		}
+		mock_get_open_positions.return_value = []
+		mock_load_gemini_api_config.return_value = SimpleNamespace(
+			credentials_path="C:/vertex/service-account.json",
+			project="demo-project",
+			region="europe-west4",
+			model="gemini-2.5-flash",
+			fallback_models=("gemini-2.5-flash",),
+		)
+		mock_trade_mode.return_value = 1
+		mock_count_successful_trades.return_value = 10
+		mock_count_successful_trades_today.return_value = 0
+		mock_count_successful_trades_since.return_value = 0
+		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
+
+		def _validation_side_effect(symbol, action, market_data):
+			if symbol in {"EURUSD_ecn", "USDJPY_ecn", "AUDUSD_ecn"}:
+				return SimpleNamespace(allowed=False, reason_codes=["spread_above_limit"], regime_state="trend", metrics={})
+			return SimpleNamespace(allowed=True, reason_codes=[], regime_state="trend", metrics={})
+
+		mock_validate_trend_following_signal.side_effect = _validation_side_effect
+		mock_calculate_synthetic_risk_plan.return_value = SimpleNamespace(
+			risk_usd=25.0,
+			synthetic_stop_price=99.0,
+			synthetic_stop_distance=1.0,
+			take_profit_price=1.11,
+			lot_size=0.01,
+		)
+		mock_validate_symbol.return_value = (True, "")
+		mock_execute_trade.return_value = True
+		mock_ask_gemini_final_decision.return_value = json.dumps(
+			{
+				"recommended_symbol": "EURUSD_ecn",
+				"action": "BUY",
+				"reasoning": "first choice",
+				"candidates": [
+					{"symbol": "EURUSD_ecn", "action": "BUY", "reasoning": "top"},
+					{"symbol": "USDJPY_ecn", "action": "SELL", "reasoning": "fallback 2"},
+					{"symbol": "AUDUSD_ecn", "action": "BUY", "reasoning": "fallback 3"},
+					{"symbol": "NZDUSD_ecn", "action": "BUY", "reasoning": "fallback 4 should be ignored"},
+				],
+			}
+		)
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "predikce"
+			service_folder = Path(temp_dir) / "service"
+			predictions_folder.mkdir(parents=True, exist_ok=True)
+
+			result = make_final_trading_decision(predictions_folder, service_folder)
+			audit_file = service_folder / "trade_logs" / "trade_decision_audit.csv"
+			snapshot_file = service_folder / "trade_logs" / "trade_decision_snapshot.csv"
+			with open(audit_file, "r", encoding="utf-8", newline="") as handle:
+				audit_rows = list(csv.DictReader(handle))
+			with open(snapshot_file, "r", encoding="utf-8", newline="") as handle:
+				snapshot_rows = list(csv.DictReader(handle))
+			snapshot_by_label = {row["strategy_label"]: row for row in snapshot_rows}
+
+		self.assertTrue(result)
+		self.assertEqual(mock_execute_trade.call_count, 1)
+		self.assertEqual(mock_execute_trade.call_args.args[0], "GBPUSD_ecn")
+		self.assertFalse(any(row["symbol"] == "NZDUSD_ecn" and row["candidate_queue"].startswith("gemini") for row in audit_rows))
+		self.assertTrue(any(row["symbol"] == "GBPUSD_ecn" and row["candidate_queue"] == "local" for row in audit_rows))
+		self.assertTrue(
+			any(
+				row["reason"] == "gemini_candidates_exhausted_local_fallback"
+				and row["stage"] == "queue_transition"
+				for row in audit_rows
+			)
+		)
+		self.assertEqual(snapshot_by_label["primary"]["transition_stage"], "queue_transition")
+		self.assertEqual(snapshot_by_label["primary"]["transition_reason"], "gemini_candidates_exhausted_local_fallback")
+		self.assertEqual(
+			snapshot_by_label["primary"]["transition_reason_cs"],
+			"Gemini kandidati byli vycerpani a strategie presla na lokalni fallback.",
+		)
+		self.assertIn("Gemini kandidati byli vycerpani", snapshot_by_label["primary"]["transition_summary_cs"])
+
+	@patch("final_decision.execute_trade")
+	@patch("final_decision.validate_symbol")
+	@patch("final_decision.calculate_synthetic_risk_plan")
 	@patch("final_decision.validate_mean_reversion_signal")
 	@patch("final_decision.validate_trend_following_signal")
 	@patch("final_decision.can_activate_parallel_strategy")
@@ -395,6 +729,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			"balance": 4280.60,
 			"equity": 3201.53,
 			"margin_free": 839.84,
+			"raw_margin_free": 1000.00,
 			"margin_percent": 19.62,
 		}
 		mock_get_open_positions.return_value = []
@@ -481,6 +816,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			"balance": 4280.60,
 			"equity": 3201.53,
 			"margin_free": 839.84,
+			"raw_margin_free": 1000.00,
 			"margin_percent": 19.62,
 		}
 		mock_get_open_positions.return_value = []
@@ -533,10 +869,16 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			result = make_final_trading_decision(predictions_folder, service_folder)
 			audit_file = service_folder / "trade_logs" / "trade_decision_audit.csv"
 			snapshot_file = service_folder / "trade_logs" / "trade_decision_snapshot.csv"
+			parallel_status_file = service_folder / "trade_logs" / "parallel_strategy_status.csv"
+			decision_log_file = service_folder / "trade_logs" / "decision_log.jsonl"
 			with open(audit_file, "r", encoding="utf-8", newline="") as handle:
 				audit_rows = list(csv.DictReader(handle))
 			with open(snapshot_file, "r", encoding="utf-8", newline="") as handle:
 				snapshot_rows = list(csv.DictReader(handle))
+			with open(parallel_status_file, "r", encoding="utf-8", newline="") as handle:
+				parallel_status_rows = list(csv.DictReader(handle))
+			with open(decision_log_file, "r", encoding="utf-8") as handle:
+				decision_log_rows = [json.loads(line) for line in handle if line.strip()]
 			snapshot_by_label = {row["strategy_label"]: row for row in snapshot_rows}
 
 		self.assertTrue(result)
@@ -544,10 +886,124 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		self.assertEqual(mock_execute_trade.call_count, 1)
 		self.assertEqual(mock_execute_trade.call_args.kwargs["strategy_id"], "parallel_mean_reversion")
 		self.assertTrue(audit_rows)
+		self.assertTrue(parallel_status_rows)
 		self.assertTrue(any(row["strategy_id"] == "gemini_primary" and row["reason"] == "signal_rejected" for row in audit_rows))
 		self.assertTrue(any(row["strategy_id"] == "parallel_mean_reversion" and row["trade_executed"] == "True" for row in audit_rows))
 		self.assertEqual(snapshot_by_label["primary"]["reason"], "signal_rejected")
 		self.assertEqual(snapshot_by_label["parallel"]["trade_executed"], "True")
+		self.assertIn("candidate_queue", parallel_status_rows[0])
+		self.assertIn("candidate_rank", parallel_status_rows[0])
+		self.assertTrue(any(row.get("event") == "candidate_queue_built" for row in decision_log_rows))
+
+	@patch.dict(
+		os.environ,
+		{
+			"PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT": "20",
+			"PARALLEL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT": "5",
+		},
+		clear=False,
+	)
+	@patch("final_decision.execute_trade")
+	@patch("final_decision.validate_symbol")
+	@patch("final_decision.calculate_synthetic_risk_plan")
+	@patch("final_decision.validate_mean_reversion_signal")
+	@patch("final_decision.validate_trend_following_signal")
+	@patch("final_decision.can_activate_parallel_strategy")
+	@patch("final_decision._load_market_data_for_symbol")
+	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
+	@patch("final_decision.count_successful_trades_today")
+	@patch("final_decision.count_successful_trades")
+	@patch("final_decision._load_gemini_api_config")
+	@patch("final_decision.get_open_positions")
+	@patch("final_decision.get_account_state")
+	@patch("final_decision.load_predictions")
+	def test_primary_is_skipped_below_20_percent_while_parallel_can_trade(
+		self,
+		mock_load_predictions,
+		mock_get_account_state,
+		mock_get_open_positions,
+		mock_load_gemini_api_config,
+		mock_count_successful_trades,
+		mock_count_successful_trades_today,
+		mock_count_successful_trades_since,
+		mock_ask_gemini_final_decision,
+		mock_load_market_data_for_symbol,
+		mock_can_activate_parallel_strategy,
+		mock_validate_trend_following_signal,
+		mock_validate_mean_reversion_signal,
+		mock_calculate_synthetic_risk_plan,
+		mock_validate_symbol,
+		mock_execute_trade,
+	) -> None:
+		mock_load_predictions.return_value = [{"symbol": "EURUSD_ecn", "BUY": 60, "SELL": 20}]
+		mock_get_account_state.return_value = {
+			"balance_cap": 5000.0,
+			"balance": 5000.0,
+			"equity": 3510.64,
+			"margin_free": 316.09,
+			"raw_margin_free": 845.95,
+			"margin_percent": 6.32,
+		}
+		mock_get_open_positions.return_value = []
+		mock_load_gemini_api_config.return_value = SimpleNamespace(
+			credentials_path="C:/vertex/service-account.json",
+			project="demo-project",
+			region="europe-west4",
+			model="gemini-2.5-flash",
+			fallback_models=("gemini-2.5-flash",),
+		)
+		mock_count_successful_trades.return_value = 5
+		mock_count_successful_trades_today.return_value = 0
+		mock_count_successful_trades_since.return_value = 0
+		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
+		mock_can_activate_parallel_strategy.return_value = True
+		mock_validate_trend_following_signal.return_value = SimpleNamespace(
+			allowed=True,
+			reason_codes=[],
+			regime_state="trend",
+			metrics={},
+		)
+		mock_validate_mean_reversion_signal.return_value = SimpleNamespace(
+			allowed=True,
+			reason_codes=[],
+			regime_state="range",
+			metrics={},
+		)
+		mock_calculate_synthetic_risk_plan.return_value = SimpleNamespace(
+			risk_usd=17.5,
+			synthetic_stop_price=99.0,
+			synthetic_stop_distance=1.0,
+			take_profit_price=101.5,
+			lot_size=0.01,
+		)
+		mock_validate_symbol.return_value = (True, "")
+		mock_execute_trade.return_value = True
+		mock_ask_gemini_final_decision.return_value = json.dumps(
+			{
+				"recommended_symbol": "EURUSD_ecn",
+				"action": "BUY",
+				"reasoning": "fallback",
+			}
+		)
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "predikce"
+			service_folder = Path(temp_dir) / "service"
+			predictions_folder.mkdir(parents=True, exist_ok=True)
+
+			result = make_final_trading_decision(predictions_folder, service_folder)
+			audit_file = service_folder / "trade_logs" / "trade_decision_audit.csv"
+			with open(audit_file, "r", encoding="utf-8", newline="") as handle:
+				audit_rows = list(csv.DictReader(handle))
+
+		self.assertTrue(result)
+		self.assertEqual(mock_ask_gemini_final_decision.call_count, 0)
+		self.assertEqual(mock_execute_trade.call_count, 1)
+		self.assertEqual(mock_execute_trade.call_args.kwargs["strategy_id"], "parallel_mean_reversion")
+		self.assertEqual(mock_validate_trend_following_signal.call_count, 0)
+		self.assertEqual(mock_validate_mean_reversion_signal.call_count, 1)
+		self.assertTrue(any(row["strategy_id"] == "gemini_primary" and row["reason"] == "activation_margin_below_threshold" for row in audit_rows))
 
 
 if __name__ == "__main__":

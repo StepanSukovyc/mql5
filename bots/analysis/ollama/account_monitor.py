@@ -1,8 +1,10 @@
 """Account status monitor - checks balance, equity, margin every minute."""
 
+import json
 import os
 import threading
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -10,6 +12,7 @@ from account_state import get_account_state
 from loss_cleanup_strategy import run_loss_cleanup_strategy_if_due
 from profit_protection_strategy import run_profit_protection_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
+from strategy_context import get_parallel_strategy_context, get_primary_strategy_context
 from swap_rollover_cleanup_strategy import run_swap_rollover_cleanup_strategy_if_due
 
 
@@ -27,6 +30,28 @@ def _load_dotenv(dotenv_path: Path) -> None:
 		value = value.strip().strip('"').strip("'")
 		if key and key not in os.environ:
 			os.environ[key] = value
+
+
+def _get_trade_logs_dir() -> Optional[Path]:
+	service_dest_folder = os.environ.get("SERVICE_DEST_FOLDER", "").strip()
+	if not service_dest_folder:
+		return None
+	log_dir = Path(service_dest_folder) / "trade_logs"
+	log_dir.mkdir(parents=True, exist_ok=True)
+	return log_dir
+
+
+def _log_position_management_event(event: str, **payload: object) -> None:
+	log_dir = _get_trade_logs_dir()
+	if log_dir is None:
+		return
+	entry = {
+		"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+		"event": event,
+		**payload,
+	}
+	with open(log_dir / "position_management_monitor.jsonl", "a", encoding="utf-8") as handle:
+		handle.write(json.dumps(entry, ensure_ascii=False, sort_keys=True, default=str) + "\n")
 
 def get_account_state_snapshot() -> dict:
 	"""Get current account status: balance, equity, margin, available margin."""
@@ -62,23 +87,30 @@ def print_account_status(account_info: dict) -> None:
 
 def _get_margin_threshold() -> float:
 	"""
-	Get the margin threshold percentage from .env (default 20%).
-	Value is expected as integer (20), will be converted to decimal (0.20).
+	Get the account-monitor trigger threshold as a ratio.
+
+	If TRADING_TRIGGER_MARGIN_THRESHOLD is set, it wins.
+	Otherwise the monitor should wake up when at least one strategy can trade,
+	so the default is the minimum activation threshold across active profiles.
 	"""
-	threshold_str = os.environ.get('TRADING_MARGIN_THRESHOLD', '20')
+	default_threshold_percent = min(
+		get_primary_strategy_context().activation_margin_percent,
+		get_parallel_strategy_context().activation_margin_percent,
+	)
+	threshold_str = os.environ.get('TRADING_TRIGGER_MARGIN_THRESHOLD', str(default_threshold_percent))
 	try:
 		threshold_percent = float(threshold_str)
 		return threshold_percent / 100  # Convert percentage to decimal
 	except ValueError:
-		return 0.20  # Default to 20%
+		return default_threshold_percent / 100
 
 
 def check_stop_condition(account_info: dict) -> bool:
 	"""
 	Check if monitoring should stop.
 	
-	Stop condition: Stop if actual free margin exceeds threshold % of capped strategy balance.
-	Threshold is loaded from TRADING_MARGIN_THRESHOLD env variable (default 20%).
+	Stop condition: Stop if actual free margin exceeds the decision trigger
+	threshold % of capped strategy balance.
 	"""
 	margin_ratio = _get_trading_trigger_margin_ratio(account_info)
 	threshold = _get_margin_threshold()
@@ -92,7 +124,68 @@ def check_stop_condition(account_info: dict) -> bool:
 	return False
 
 
-def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: Optional[int] = None, stop_event: Optional[threading.Event] = None, trading_trigger_event: Optional[threading.Event] = None) -> None:
+def run_position_management_monitor(check_interval_seconds: int = 60, stop_event: Optional[threading.Event] = None) -> None:
+	"""Continuously run profit/cleanup management independently of entry monitoring."""
+	print(f"\n🛡️  Position management monitor started. Checking every {check_interval_seconds} seconds...")
+	_log_position_management_event(
+		"position_management_monitor_started",
+		check_interval_seconds=check_interval_seconds,
+	)
+
+	cycle_count = 0
+	try:
+		while True:
+			if stop_event and stop_event.is_set():
+				_log_position_management_event(
+					"position_management_monitor_stopped",
+					cycle_count=cycle_count,
+				)
+				print(f"✅ Position management monitor stopped after {cycle_count} checks.")
+				break
+
+			cycle_count += 1
+			try:
+				account_info = get_account_state_snapshot()
+				_log_position_management_event(
+					"position_management_monitor_tick",
+					cycle_count=cycle_count,
+					check_interval_seconds=check_interval_seconds,
+					account_timestamp=account_info.get("timestamp"),
+					balance=account_info.get("balance"),
+					equity=account_info.get("equity"),
+					margin_free=account_info.get("margin_free"),
+					raw_margin_free=account_info.get("raw_margin_free"),
+				)
+				run_profit_protection_strategy_if_due()
+				run_swap_rollover_cleanup_strategy_if_due(account_info)
+				run_loss_cleanup_strategy_if_due(account_info)
+			except Exception as exc:
+				_log_position_management_event(
+					"position_management_monitor_error",
+					cycle_count=cycle_count,
+					error=str(exc),
+				)
+				print(f"❌ Error during position management check: {exc}")
+				break
+
+			for _ in range(check_interval_seconds):
+				if stop_event and stop_event.is_set():
+					_log_position_management_event(
+						"position_management_monitor_stopped",
+						cycle_count=cycle_count,
+					)
+					print(f"✅ Position management monitor stopped after {cycle_count} checks.")
+					return
+				time.sleep(1)
+	except KeyboardInterrupt:
+		_log_position_management_event(
+			"position_management_monitor_interrupted",
+			cycle_count=cycle_count,
+		)
+		print(f"\n✅ Position management monitor interrupted after {cycle_count} checks.")
+
+
+def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: Optional[int] = None, stop_event: Optional[threading.Event] = None, trading_trigger_event: Optional[threading.Event] = None, run_management_tasks: bool = True) -> None:
 	"""
 	Monitor account status every N seconds until stop condition is met.
 	
@@ -101,6 +194,7 @@ def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: 
 		max_duration_seconds: Maximum duration in seconds (None = no limit)
 		stop_event: Threading event to signal shutdown (None = no external stop signal)
 		trading_trigger_event: Threading event to signal when to start trading logic (None = this feature disabled)
+		run_management_tasks: Whether to run profit/cleanup management on each monitor check
 	"""
 	print(f"\n🔍 Account Monitor started. Checking every {check_interval_seconds} seconds...")
 	
@@ -119,9 +213,10 @@ def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: 
 			try:
 				account_info = get_account_state_snapshot()
 				print_account_status(account_info)
-				run_profit_protection_strategy_if_due()
-				run_swap_rollover_cleanup_strategy_if_due(account_info)
-				run_loss_cleanup_strategy_if_due(account_info)
+				if run_management_tasks:
+					run_profit_protection_strategy_if_due()
+					run_swap_rollover_cleanup_strategy_if_due(account_info)
+					run_loss_cleanup_strategy_if_due(account_info)
 				
 				# Check if we should trigger trading logic
 				if check_stop_condition(account_info):

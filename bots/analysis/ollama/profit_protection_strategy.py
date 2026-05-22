@@ -18,6 +18,8 @@ from trade_execution import close_position_by_ticket
 DEFAULT_ENABLED = True
 DEFAULT_DRY_RUN = True
 DEFAULT_ACTIVATION_USD = 0.30
+DEFAULT_TARGET_BALANCE_DIVISOR = 10.0
+DEFAULT_ACTIVATION_TARGET_RATIO = 0.50
 DEFAULT_RETRACE_RATIO = 0.55
 DEFAULT_STALE_HOURS = 12
 DEFAULT_MAX_HOLD_DAYS = 5
@@ -105,6 +107,22 @@ def _get_activation_usd() -> float:
 	return _to_float(_load_dotenv_value("PROFIT_PROTECTION_ACTIVATION_USD"), default=DEFAULT_ACTIVATION_USD, minimum=0.0)
 
 
+def _get_target_balance_divisor() -> float:
+	return _to_float(
+		_load_dotenv_value("PROFIT_PROTECTION_TARGET_BALANCE_DIVISOR"),
+		default=DEFAULT_TARGET_BALANCE_DIVISOR,
+		minimum=0.000001,
+	)
+
+
+def _get_activation_target_ratio() -> float:
+	return _to_float(
+		_load_dotenv_value("PROFIT_PROTECTION_ACTIVATION_TARGET_RATIO"),
+		default=DEFAULT_ACTIVATION_TARGET_RATIO,
+		minimum=0.0,
+	)
+
+
 def _get_retrace_ratio() -> float:
 	return _to_float(_load_dotenv_value("PROFIT_PROTECTION_RETRACE_RATIO"), default=DEFAULT_RETRACE_RATIO, minimum=0.0)
 
@@ -151,6 +169,19 @@ def _save_state(service_folder: Optional[Path], state: dict[str, dict[str, float
 
 def _get_fee(volume: float) -> float:
 	return round((float(volume) / 0.01) * FEE_PER_001_LOT, 2)
+
+
+def calculate_profit_protection_target_profit_usd(balance: float, volume: float) -> float:
+	if balance <= 0 or volume <= 0:
+		return 0.0
+	return round((float(balance) * float(volume)) / _get_target_balance_divisor(), 2)
+
+
+def calculate_profit_protection_activation_usd(balance: float, volume: float) -> float:
+	base_activation_usd = _get_activation_usd()
+	target_profit_usd = calculate_profit_protection_target_profit_usd(balance, volume)
+	derived_activation_usd = round(target_profit_usd * _get_activation_target_ratio(), 2)
+	return max(base_activation_usd, derived_activation_usd)
 
 
 def _belongs_to_strategy(position: Any) -> bool:
@@ -214,11 +245,14 @@ def run_profit_protection_strategy_if_due() -> None:
 	positions = mt5.positions_get()
 	if positions is None:
 		return
+	account_info = mt5.account_info()
+	if account_info is None:
+		return
+	balance = float(getattr(account_info, "balance", 0.0) or 0.0)
 
 	service_folder = _get_service_folder()
 	strategy_context = get_primary_strategy_context()
 	state = _load_state(service_folder)
-	activation_usd = _get_activation_usd()
 	retrace_ratio = _get_retrace_ratio()
 	stale_hours = _get_stale_hours()
 	max_hold_days = _get_max_hold_days()
@@ -241,6 +275,7 @@ def run_profit_protection_strategy_if_due() -> None:
 		net_profit = round(profit + swap - _get_fee(volume), 2)
 		if net_profit <= 0:
 			continue
+		activation_usd = calculate_profit_protection_activation_usd(balance, volume)
 
 		opened_at = datetime.fromtimestamp(int(getattr(position, "time", 0) or 0), tz=timezone.utc)
 		age_hours = max((now_utc - opened_at).total_seconds() / 3600.0, 0.0)
@@ -251,9 +286,10 @@ def run_profit_protection_strategy_if_due() -> None:
 
 		close_reason: Optional[str] = None
 		if max_net_profit >= activation_usd and net_profit <= max(max_net_profit * retrace_ratio, activation_usd):
+			locked_profit_usd = max(max_net_profit * retrace_ratio, activation_usd)
 			close_reason = (
 				f"profit retracement detected: current {net_profit:.2f} <= "
-				f"locked {max(max_net_profit * retrace_ratio, activation_usd):.2f}"
+				f"locked {locked_profit_usd:.2f} (activation {activation_usd:.2f})"
 			)
 		elif age_hours >= stale_hours and net_profit > activation_usd:
 			close_reason = f"profitable stale position older than {stale_hours}h"

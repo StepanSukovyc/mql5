@@ -60,6 +60,8 @@ TRADE_DECISION_AUDIT_HEADERS = [
 	"symbol",
 	"action",
 	"candidate_source",
+	"candidate_queue",
+	"candidate_rank",
 	"stage",
 	"trade_executed",
 	"reason",
@@ -73,11 +75,188 @@ TRADE_DECISION_SNAPSHOT_HEADERS = [
 	"symbol",
 	"action",
 	"candidate_source",
+	"candidate_queue",
+	"candidate_rank",
 	"stage",
 	"trade_executed",
 	"reason",
+	"reason_cs",
+	"summary_cs",
+	"transition_stage",
+	"transition_reason",
+	"transition_reason_cs",
+	"transition_summary_cs",
+	"transition_details",
 	"details",
 ]
+
+PARALLEL_STRATEGY_STATUS_HEADERS = [
+	"timestamp",
+	"strategy_id",
+	"strategy_label",
+	"symbol",
+	"action",
+	"candidate_source",
+	"candidate_queue",
+	"candidate_rank",
+	"stage",
+	"trade_executed",
+	"reason",
+	"reason_cs",
+	"root_rejection_reason",
+	"root_rejection_reason_cs",
+	"rule_failures",
+	"rule_failures_cs",
+	"cooldown_expires_at",
+	"summary_cs",
+	"details",
+]
+
+REASON_TEXT_CS = {
+	"activation_margin_below_threshold": "Volna marze je pod aktivacnim prahem strategie.",
+	"outside_session_window": "Strategie je mimo povolene obchodni hodiny.",
+	"max_open_positions_reached": "Strategie uz ma maximalni pocet otevrenych pozic.",
+	"daily_trade_limit_reached": "Byl dosazen denni limit obchodu pro strategii.",
+	"rejection_cooldown_active": "Bezi cooldown po predchozim zamitnuti kandidata.",
+	"open_position_exists": "Na tomto symbolu uz existuje otevrena pozice.",
+	"recent_symbol_trade": "Na tomto symbolu probehl obchod prilis nedavno.",
+	"per_symbol_daily_limit": "Byl dosazen denni limit obchodu pro tento symbol.",
+	"market_data_missing": "Pro symbol chybi market data potrebna pro vyhodnoceni.",
+	"signal_rejected": "Signal alternativni strategie nesplnil vstupni pravidla.",
+	"crypto_position_limit": "Byl dosazen limit otevrenych crypto pozic.",
+	"symbol_validation_failed": "Symbol neprosel validaci pro exekuci.",
+	"trade_parameters_invalid": "Nepodarilo se pripravit platne parametry obchodu.",
+	"trade_execution_failed": "Exekuce obchodu na brokerovi selhala.",
+	"trade_opened": "Obchod byl uspesne otevren.",
+	"activation_gate_not_satisfied": "Aktivacni podminky paralelni strategie nejsou splnene.",
+	"gemini_candidates_exhausted_local_fallback": "Gemini kandidati byli vycerpani a strategie presla na lokalni fallback.",
+	"no_executable_trade": "V tomto cyklu nebyl nalezen zadny obchod k exekuci.",
+	"no_predictions": "Nejsou k dispozici zadne pouzitelne predikce.",
+	"exception": "Behem rozhodovaci faze doslo k vyjimce.",
+}
+
+RULE_REASON_TEXT_CS = {
+	"symbol_not_in_parallel_whitelist": "Symbol neni na whitelistu paralelni strategie.",
+	"adx_above_range_threshold": "ADX je prilis vysoky, trh je moc trendovy pro mean reversion.",
+	"spread_above_limit": "Spread je vyssi nez povoleny limit strategie.",
+	"vwap_distance_below_threshold": "Cena neni dostatecne vzdalena od VWAP vzhledem k ATR.",
+	"news_blocked": "Symbol je blokovany kvuli zpravodajskemu filtru.",
+	"close_not_below_lower_band": "Pro BUY neni close pod dolnim Bollinger bandem.",
+	"rsi2_not_extreme_long": "RSI2 neni dostatecne preprodane pro long vstup.",
+	"close_not_above_upper_band": "Pro SELL neni close nad hornim Bollinger bandem.",
+	"rsi2_not_extreme_short": "RSI2 neni dostatecne prekoupene pro short vstup.",
+	"missing_indicator_data": "Chybi indikatorova data potrebna pro vyhodnoceni.",
+	"open_position_exists": "Na tomto symbolu uz existuje otevrena pozice.",
+	"recent_symbol_trade": "Na tomto symbolu uz probehl nedavny obchod.",
+	"per_symbol_daily_limit": "Byl dosazen denni limit obchodu pro symbol.",
+	"market_data_missing": "Chybi market data pro vyhodnoceni kandidata.",
+	"trade_parameters_invalid": "Vypoctene parametry obchodu nejsou platne.",
+	"trade_execution_failed": "Broker odmitl nebo nedokoncil exekuci obchodu.",
+	"symbol_validation_failed": "Symbol neprosel kontrolou pred exekuci.",
+}
+
+
+def _translate_reason_cs(code: str) -> str:
+	return REASON_TEXT_CS.get(code, code)
+
+
+def _translate_rule_reason_cs(code: str) -> str:
+	return RULE_REASON_TEXT_CS.get(code, code)
+
+
+def _describe_candidate_source(candidate_source: str) -> Tuple[str, str]:
+	normalized = str(candidate_source or "").strip()
+	if not normalized:
+		return "", ""
+	if normalized.startswith("gemini_cached_advisory_candidate_"):
+		return "gemini_cached", normalized.rsplit("_", 1)[-1]
+	if normalized.startswith("gemini_live_advisory_candidate_"):
+		return "gemini_live", normalized.rsplit("_", 1)[-1]
+	if normalized == "gemini_cached_advisory":
+		return "gemini_cached", "1"
+	if normalized == "gemini_live_advisory":
+		return "gemini_live", "1"
+	if normalized == "local_prediction_ranking":
+		return "local", ""
+	return normalized, ""
+
+
+def _extract_root_rejection_reason(details: Optional[Dict[str, object]]) -> str:
+	if not isinstance(details, dict):
+		return ""
+	reason_value = str(details.get("reason", "") or "").strip()
+	if not reason_value:
+		return ""
+	if ":" in reason_value:
+		return reason_value.split(":", 1)[0].strip()
+	return reason_value
+
+
+def _extract_rule_failures(reason: str, details: Optional[Dict[str, object]]) -> List[str]:
+	if not isinstance(details, dict):
+		return []
+	if reason == "signal_rejected":
+		raw_codes = details.get("reason_codes")
+		if isinstance(raw_codes, list):
+			return [str(code).strip() for code in raw_codes if str(code).strip()]
+	reason_value = str(details.get("reason", "") or "").strip()
+	if reason_value.startswith("signal_rejected:"):
+		raw_codes = reason_value.split(":", 1)[1]
+		return [code.strip() for code in raw_codes.split(",") if code.strip()]
+	return []
+
+
+def _build_reason_summary(reason: str, details: Optional[Dict[str, object]]) -> str:
+	root_rejection_reason = _extract_root_rejection_reason(details)
+	rule_failures = _extract_rule_failures(reason, details)
+	cooldown_expires_at = ""
+	if isinstance(details, dict):
+		cooldown_expires_at = str(details.get("expires_at", "") or "")
+
+	summary_parts = [
+		_translate_reason_cs(reason),
+	]
+	if root_rejection_reason:
+		summary_parts.append(f"Puvodni duvod: {_translate_reason_cs(root_rejection_reason)}")
+	if rule_failures:
+		summary_parts.append(
+			"Filtry ktere neprosly: " + "; ".join(_translate_rule_reason_cs(code) for code in rule_failures)
+		)
+	if cooldown_expires_at:
+		summary_parts.append(f"Cooldown plati do {cooldown_expires_at}.")
+
+	return " ".join(part for part in summary_parts if part)
+
+
+def _build_parallel_status_row(base_row: Dict[str, str], details: Optional[Dict[str, object]]) -> Dict[str, str]:
+	reason = base_row.get("reason", "")
+	root_rejection_reason = _extract_root_rejection_reason(details)
+	rule_failures = _extract_rule_failures(reason, details)
+	cooldown_expires_at = ""
+	if isinstance(details, dict):
+		cooldown_expires_at = str(details.get("expires_at", "") or "")
+
+	return {
+		"timestamp": base_row.get("timestamp", ""),
+		"strategy_id": base_row.get("strategy_id", ""),
+		"strategy_label": base_row.get("strategy_label", ""),
+		"symbol": base_row.get("symbol", ""),
+		"action": base_row.get("action", ""),
+		"candidate_source": base_row.get("candidate_source", ""),
+		"candidate_queue": base_row.get("candidate_queue", ""),
+		"candidate_rank": base_row.get("candidate_rank", ""),
+		"stage": base_row.get("stage", ""),
+		"trade_executed": base_row.get("trade_executed", ""),
+		"reason": reason,
+		"reason_cs": _translate_reason_cs(reason),
+		"root_rejection_reason": root_rejection_reason,
+		"root_rejection_reason_cs": _translate_reason_cs(root_rejection_reason) if root_rejection_reason else "",
+		"rule_failures": ",".join(rule_failures),
+		"rule_failures_cs": " | ".join(_translate_rule_reason_cs(code) for code in rule_failures),
+		"cooldown_expires_at": cooldown_expires_at,
+		"summary_cs": _build_reason_summary(reason, details),
+		"details": base_row.get("details", ""),
+	}
 
 
 def _get_gemini_full_control_every_n_trades() -> int:
@@ -191,6 +370,9 @@ def _update_trade_decision_snapshot(
 	log_dir = service_folder / "trade_logs"
 	log_dir.mkdir(parents=True, exist_ok=True)
 	log_file = log_dir / "trade_decision_snapshot.csv"
+	candidate_queue, candidate_rank = _describe_candidate_source(candidate_source)
+	reason_cs = _translate_reason_cs(reason)
+	summary_cs = _build_reason_summary(reason, details)
 	rows_by_label: Dict[str, Dict[str, str]] = {}
 	if log_file.exists():
 		with open(log_file, "r", newline="", encoding="utf-8") as handle:
@@ -199,6 +381,19 @@ def _update_trade_decision_snapshot(
 				if label:
 					rows_by_label[label] = row
 
+	existing_row = rows_by_label.get(strategy_label, {})
+	transition_stage = str(existing_row.get("transition_stage", "") or "")
+	transition_reason = str(existing_row.get("transition_reason", "") or "")
+	transition_reason_cs = str(existing_row.get("transition_reason_cs", "") or "")
+	transition_summary_cs = str(existing_row.get("transition_summary_cs", "") or "")
+	transition_details = str(existing_row.get("transition_details", "") or "")
+	if stage == "queue_transition":
+		transition_stage = stage
+		transition_reason = reason
+		transition_reason_cs = reason_cs
+		transition_summary_cs = summary_cs
+		transition_details = json.dumps(details or {}, ensure_ascii=False, sort_keys=True)
+
 	rows_by_label[strategy_label] = {
 		"timestamp": datetime.now(tz=timezone.utc).isoformat(),
 		"strategy_id": strategy_id,
@@ -206,9 +401,18 @@ def _update_trade_decision_snapshot(
 		"symbol": symbol,
 		"action": action,
 		"candidate_source": candidate_source,
+		"candidate_queue": candidate_queue,
+		"candidate_rank": candidate_rank,
 		"stage": stage,
 		"trade_executed": str(trade_executed),
 		"reason": reason,
+		"reason_cs": reason_cs,
+		"summary_cs": summary_cs,
+		"transition_stage": transition_stage,
+		"transition_reason": transition_reason,
+		"transition_reason_cs": transition_reason_cs,
+		"transition_summary_cs": transition_summary_cs,
+		"transition_details": transition_details,
 		"details": json.dumps(details or {}, ensure_ascii=False, sort_keys=True),
 	}
 
@@ -217,6 +421,13 @@ def _update_trade_decision_snapshot(
 		writer.writeheader()
 		for label in sorted(rows_by_label):
 			writer.writerow(rows_by_label[label])
+
+		if strategy_label == "parallel":
+			parallel_status_file = log_dir / "parallel_strategy_status.csv"
+			with open(parallel_status_file, "w", newline="", encoding="utf-8") as handle:
+				writer = csv.DictWriter(handle, fieldnames=PARALLEL_STRATEGY_STATUS_HEADERS)
+				writer.writeheader()
+				writer.writerow(_build_parallel_status_row(rows_by_label[strategy_label], details))
 
 
 def _log_trade_decision_audit(
@@ -235,6 +446,7 @@ def _log_trade_decision_audit(
 	log_dir = service_folder / "trade_logs"
 	log_dir.mkdir(parents=True, exist_ok=True)
 	log_file = log_dir / "trade_decision_audit.csv"
+	candidate_queue, candidate_rank = _describe_candidate_source(candidate_source)
 	file_exists = log_file.exists()
 	with open(log_file, "a", newline="", encoding="utf-8") as handle:
 		writer = csv.writer(handle)
@@ -248,6 +460,8 @@ def _log_trade_decision_audit(
 				symbol,
 				action,
 				candidate_source,
+				candidate_queue,
+				candidate_rank,
 				stage,
 				str(trade_executed),
 				reason,
@@ -282,6 +496,14 @@ def _get_primary_max_trades_per_symbol_per_day() -> int:
 
 def _get_symbol_trade_cooldown_minutes() -> int:
 	return _get_int_env("SYMBOL_TRADE_COOLDOWN_MINUTES", 15, minimum=0)
+
+
+def _get_strategy_activation_margin_percent(account_state: Dict) -> float:
+	balance = float(account_state.get("balance", 0.0) or 0.0)
+	if balance <= 0:
+		return 0.0
+	raw_free_margin = float(account_state.get("raw_margin_free", account_state.get("margin_free", 0.0)) or 0.0)
+	return (raw_free_margin / balance) * 100.0
 
 
 def _has_open_position_on_symbol(open_positions: List[Dict], symbol: str) -> bool:
@@ -492,8 +714,48 @@ def _get_gemini_rejection_cooldown_minutes() -> int:
 	return _get_int_env("GEMINI_REJECTION_COOLDOWN_MINUTES", 30, minimum=0)
 
 
+def _get_gemini_advisory_max_candidates() -> int:
+	return _get_int_env("GEMINI_ADVISORY_MAX_CANDIDATES", 3, minimum=0)
+
+
 def _candidate_key(symbol: str, action: str) -> Tuple[str, str]:
 	return symbol.strip(), action.strip().upper()
+
+
+def _extract_ranked_candidates_from_decision_payload(payload: Dict[str, object], source: str) -> List[RankedCandidate]:
+	candidates: List[RankedCandidate] = []
+	seen: set[Tuple[str, str]] = set()
+
+	top_symbol = str(payload.get("recommended_symbol", "") or "").strip()
+	top_action = str(payload.get("action", "") or "").strip().upper()
+	if top_symbol and top_action:
+		key = _candidate_key(top_symbol, top_action)
+		seen.add(key)
+		candidates.append(RankedCandidate(symbol=top_symbol, action=top_action, source=source, score=10_000_000.0))
+
+	raw_candidates = payload.get("candidates")
+	if isinstance(raw_candidates, list):
+		for index, candidate in enumerate(raw_candidates, start=1):
+			if not isinstance(candidate, dict):
+				continue
+			symbol = str(candidate.get("symbol", "") or candidate.get("recommended_symbol", "") or "").strip()
+			action = str(candidate.get("action", "") or "").strip().upper()
+			if not symbol or not action:
+				continue
+			key = _candidate_key(symbol, action)
+			if key in seen:
+				continue
+			seen.add(key)
+			candidates.append(
+				RankedCandidate(
+					symbol=symbol,
+					action=action,
+					source=f"{source}_candidate_{index}",
+					score=10_000_000.0 - float(index),
+				)
+			)
+
+	return candidates
 
 
 def _build_local_candidates(predictions: List[Dict]) -> List[RankedCandidate]:
@@ -519,12 +781,14 @@ def _build_local_candidates(predictions: List[Dict]) -> List[RankedCandidate]:
 	return sorted(candidates, key=lambda item: item.score, reverse=True)
 
 
-def _build_candidate_queue(predictions: List[Dict], advisory_candidate: Optional[RankedCandidate]) -> List[RankedCandidate]:
+def _build_candidate_queue(predictions: List[Dict], advisory_candidates: Optional[List[RankedCandidate]]) -> List[RankedCandidate]:
 	ordered: List[RankedCandidate] = []
 	seen: set[Tuple[str, str]] = set()
 
-	if advisory_candidate is not None:
+	for advisory_candidate in advisory_candidates or []:
 		key = _candidate_key(advisory_candidate.symbol, advisory_candidate.action)
+		if key in seen:
+			continue
 		ordered.append(advisory_candidate)
 		seen.add(key)
 
@@ -538,19 +802,52 @@ def _build_candidate_queue(predictions: List[Dict], advisory_candidate: Optional
 	return ordered
 
 
-def _resolve_gemini_advisory_candidate(
+def _log_candidate_queue(service_folder: Path, candidates: List[RankedCandidate]) -> None:
+	queue_rows: List[Dict[str, object]] = []
+	for index, candidate in enumerate(candidates, start=1):
+		candidate_queue, candidate_rank = _describe_candidate_source(candidate.source)
+		queue_rows.append(
+			{
+				"queue_index": index,
+				"symbol": candidate.symbol,
+				"action": candidate.action,
+				"candidate_source": candidate.source,
+				"candidate_queue": candidate_queue,
+				"candidate_rank": candidate_rank,
+				"score": candidate.score,
+			}
+		)
+
+	_log_jsonl(
+		service_folder,
+		"decision_log.jsonl",
+		{
+			"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+			"event": "candidate_queue_built",
+			"candidate_count": len(queue_rows),
+			"candidates": queue_rows,
+		},
+	)
+
+
+def _resolve_gemini_advisory_candidates(
 	*,
 	predictions: List[Dict],
 	open_positions: List[Dict],
 	account_state: Dict,
 	service_folder: Path,
-) -> Optional[RankedCandidate]:
+) -> List[RankedCandidate]:
+	max_candidates = _get_gemini_advisory_max_candidates()
+	if max_candidates == 0:
+		print("ℹ️  Gemini advisory candidate limit is 0, using local candidate ranking only")
+		return []
+
 	cache_signature = build_decision_signature(account_state, open_positions, predictions)
 	cached_decision = get_cached_decision(service_folder, cache_signature, _get_gemini_decision_cache_minutes())
 	if isinstance(cached_decision, dict):
-		symbol = str(cached_decision.get("recommended_symbol", "") or "").strip()
-		action = str(cached_decision.get("action", "") or "").strip().upper()
-		if symbol and action:
+		cached_candidates = _extract_ranked_candidates_from_decision_payload(cached_decision, "gemini_cached_advisory")
+		if cached_candidates:
+			limited_cached_candidates = cached_candidates[:max_candidates]
 			_log_jsonl(
 				service_folder,
 				"ai_log.jsonl",
@@ -558,11 +855,13 @@ def _resolve_gemini_advisory_candidate(
 					"timestamp": datetime.now(tz=timezone.utc).isoformat(),
 					"source": "gemini_cached_advisory",
 					"signature": cache_signature,
-					"recommended_symbol": symbol,
-					"action": action,
+					"recommended_symbol": limited_cached_candidates[0].symbol,
+					"action": limited_cached_candidates[0].action,
+					"candidate_count": len(limited_cached_candidates),
+					"candidate_limit": max_candidates,
 				},
 			)
-			return RankedCandidate(symbol=symbol, action=action, source="gemini_cached_advisory", score=10_000_000.0)
+			return limited_cached_candidates
 
 	gemini_config = _load_gemini_api_config()
 	decision_text = ask_gemini_final_decision(
@@ -575,19 +874,19 @@ def _resolve_gemini_advisory_candidate(
 		gemini_full_control_mode=False,
 	)
 	if not decision_text:
-		return None
+		return []
 
 	_save_decision_text(service_folder, decision_text)
 	try:
 		decision_payload = json.loads(decision_text)
 	except json.JSONDecodeError:
-		return None
+		return []
 	store_cached_decision(service_folder, cache_signature, decision_payload)
 
-	symbol = str(decision_payload.get("recommended_symbol", "") or "").strip()
-	action = str(decision_payload.get("action", "") or "").strip().upper()
-	if not symbol or not action:
-		return None
+	live_candidates = _extract_ranked_candidates_from_decision_payload(decision_payload, "gemini_live_advisory")
+	if not live_candidates:
+		return []
+	limited_live_candidates = live_candidates[:max_candidates]
 
 	_log_jsonl(
 		service_folder,
@@ -596,11 +895,13 @@ def _resolve_gemini_advisory_candidate(
 			"timestamp": datetime.now(tz=timezone.utc).isoformat(),
 			"source": "gemini_live_advisory",
 			"signature": cache_signature,
-			"recommended_symbol": symbol,
-			"action": action,
+			"recommended_symbol": limited_live_candidates[0].symbol,
+			"action": limited_live_candidates[0].action,
+			"candidate_count": len(limited_live_candidates),
+			"candidate_limit": max_candidates,
 		},
 	)
-	return RankedCandidate(symbol=symbol, action=action, source="gemini_live_advisory", score=10_000_000.0)
+	return limited_live_candidates
 
 
 def _get_strategy_limit(env_name: str, default: int) -> int:
@@ -633,6 +934,25 @@ def _attempt_strategy_trade(
 	open_crypto_positions: int,
 ) -> bool:
 	open_strategy_positions = count_open_positions_for_strategy(open_positions, profile.context)
+	activation_margin_percent = _get_strategy_activation_margin_percent(account_state)
+	if activation_margin_percent < profile.context.activation_margin_percent:
+		print(
+			f"⚠️  {profile.label} strategy activation threshold not met "
+			f"({activation_margin_percent:.2f}% < {profile.context.activation_margin_percent:.2f}%), skipping"
+		)
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=profile.context.strategy_id,
+			strategy_label=profile.label,
+			stage="strategy_blocked",
+			trade_executed=False,
+			reason="activation_margin_below_threshold",
+			details={
+				"activation_margin_percent": round(activation_margin_percent, 2),
+				"required_margin_percent": profile.context.activation_margin_percent,
+			},
+		)
+		return False
 	if not is_strategy_trade_window_open(profile.context):
 		print(f"⚠️  {profile.label} strategy is outside its configured session window, skipping")
 		_log_trade_decision_audit(
@@ -674,10 +994,32 @@ def _attempt_strategy_trade(
 		profile.max_trades_per_symbol_per_day_env,
 		profile.default_max_trades_per_symbol_per_day,
 	)
+	gemini_attempts = 0
+	local_fallback_logged = False
 
 	for candidate in candidates:
 		symbol = candidate.symbol
 		action = candidate.action
+		candidate_queue, candidate_rank = _describe_candidate_source(candidate.source)
+		if candidate_queue.startswith("gemini"):
+			gemini_attempts += 1
+		elif candidate_queue == "local" and gemini_attempts > 0 and not local_fallback_logged:
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="queue_transition",
+				trade_executed=False,
+				reason="gemini_candidates_exhausted_local_fallback",
+				details={
+					"failed_gemini_candidates": gemini_attempts,
+					"local_candidate_rank": candidate_rank,
+				},
+			)
+			local_fallback_logged = True
 		active_rejection = _is_candidate_rejected(service_folder, profile.context.strategy_id, symbol, action)
 		if active_rejection is not None:
 			print(f"⚠️  {profile.label} rejection cooldown active for {symbol} {action}")
@@ -1111,14 +1453,6 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 
 		_print_trade_mode(successful_trades, next_trade_number, full_control_every_n, gemini_full_control_mode)
 
-		advisory_candidate = _resolve_gemini_advisory_candidate(
-			predictions=predictions,
-			open_positions=open_positions,
-			account_state=account_state,
-			service_folder=service_folder,
-		)
-		candidate_queue = _build_candidate_queue(predictions, advisory_candidate)
-
 		primary_profile = StrategyExecutionProfile(
 			label="primary",
 			context=get_primary_strategy_context(),
@@ -1131,6 +1465,23 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 			trade_cooldown_env="SYMBOL_TRADE_COOLDOWN_MINUTES",
 			default_trade_cooldown_minutes=_get_symbol_trade_cooldown_minutes(),
 		)
+		activation_margin_percent = _get_strategy_activation_margin_percent(account_state)
+		primary_activation_met = activation_margin_percent >= primary_profile.context.activation_margin_percent
+		parallel_activation_met = can_activate_parallel_strategy(account_state, open_positions)
+
+		advisory_candidates: List[RankedCandidate] = []
+		if primary_activation_met:
+			advisory_candidates = _resolve_gemini_advisory_candidates(
+				predictions=predictions,
+				open_positions=open_positions,
+				account_state=account_state,
+				service_folder=service_folder,
+			)
+		else:
+			print("ℹ️  Primary activation threshold not met, skipping Gemini advisory and using local candidate ranking only")
+		candidate_queue = _build_candidate_queue(predictions, advisory_candidates)
+		_log_candidate_queue(service_folder, candidate_queue)
+
 		if _attempt_strategy_trade(
 			profile=primary_profile,
 			candidates=candidate_queue,
@@ -1145,7 +1496,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 			print("=" * 60)
 			return True
 
-		if can_activate_parallel_strategy(account_state, open_positions):
+		if parallel_activation_met:
 			parallel_profile = StrategyExecutionProfile(
 				label="parallel",
 				context=get_parallel_strategy_context(),
