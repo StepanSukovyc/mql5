@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
@@ -13,7 +14,20 @@ from mt5_symbols import get_symbol_tick
 from trading_validation import check_margin_requirements, validate_lot_size, validate_symbol
 
 
-TRADE_LOG_HEADERS = ["timestamp", "symbol", "action", "lot_size", "lot_source", "price", "success", "error_msg"]
+TRADE_LOG_HEADERS = [
+	"timestamp",
+	"strategy_id",
+	"magic",
+	"comment",
+	"symbol",
+	"action",
+	"lot_size",
+	"lot_source",
+	"price",
+	"take_profit",
+	"success",
+	"error_msg",
+]
 
 
 def close_position_by_ticket(
@@ -23,6 +37,7 @@ def close_position_by_ticket(
 	volume: float,
 	*,
 	comment: str = "Close position",
+	magic: int = 234000,
 ) -> bool:
 	"""Close an existing MT5 position by sending the opposite market order."""
 	tick = get_symbol_tick(symbol)
@@ -48,7 +63,7 @@ def close_position_by_ticket(
 		"position": position_ticket,
 		"price": price,
 		"deviation": 20,
-		"magic": 234000,
+		"magic": magic,
 		"comment": comment,
 		"type_time": mt5.ORDER_TIME_GTC,
 		"type_filling": mt5.ORDER_FILLING_IOC,
@@ -120,11 +135,15 @@ def _ensure_trade_log_schema(log_file: Path) -> None:
 
 
 def log_trade(
+	strategy_id: str,
+	magic: int,
+	comment: str,
 	symbol: str,
 	action: str,
 	lot_size: float,
 	lot_source: str,
 	price: float,
+	take_profit: Optional[float],
 	success: bool,
 	error_msg: str = "",
 	service_folder: Path = None,
@@ -149,11 +168,15 @@ def log_trade(
 		writer.writerow(
 			[
 				datetime.now(tz=timezone.utc).isoformat(),
+				strategy_id,
+				magic,
+				comment,
 				symbol,
 				action,
 				lot_size,
 				lot_source,
 				price,
+				take_profit if take_profit is not None else "",
 				success,
 				error_msg,
 			]
@@ -169,6 +192,10 @@ def execute_trade(
 	service_folder: Path = None,
 	take_profit: Optional[float] = None,
 	lot_source: str = "unknown",
+	strategy_id: str = "gemini_primary",
+	magic: int = 234000,
+	comment: Optional[str] = None,
+	extra_log_data: Optional[dict] = None,
 ) -> bool:
 	"""Execute a trade on MT5 with validation and logging."""
 	print(f"\n🔄 Executing trade...")
@@ -180,13 +207,13 @@ def execute_trade(
 	is_valid, error_msg = validate_symbol(symbol)
 	if not is_valid:
 		print(f"❌ Symbol validation failed: {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
+		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, 0.0, take_profit, False, error_msg, service_folder)
 		return False
 
 	adjusted_lot, lot_msg = validate_lot_size(symbol, lot_size)
 	if adjusted_lot == 0.0:
 		print(f"❌ Lot size validation failed: {lot_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, lot_msg, service_folder)
+		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, 0.0, take_profit, False, lot_msg, service_folder)
 		return False
 
 	if lot_msg:
@@ -199,14 +226,14 @@ def execute_trade(
 	has_margin, margin_msg = check_margin_requirements(symbol, action, lot_size)
 	if not has_margin:
 		print(f"❌ Margin check failed: {margin_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, margin_msg, service_folder)
+		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, 0.0, take_profit, False, margin_msg, service_folder)
 		return False
 
 	tick = get_symbol_tick(symbol)
 	if tick is None:
 		error_msg = f"Failed to get tick for {symbol}: {mt5.last_error()}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
+		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, 0.0, take_profit, False, error_msg, service_folder)
 		return False
 
 	if action == "BUY":
@@ -218,7 +245,7 @@ def execute_trade(
 	else:
 		error_msg = f"Invalid action: {action} (must be BUY or SELL)"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, 0.0, False, error_msg, service_folder)
+		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, 0.0, take_profit, False, error_msg, service_folder)
 		return False
 
 	print(f"   Price: {price}")
@@ -230,25 +257,25 @@ def execute_trade(
 		except (TypeError, ValueError):
 			error_msg = f"Invalid take_profit value: {take_profit}"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
 			return False
 
 		if validated_tp <= 0:
 			error_msg = f"Invalid take_profit <= 0: {validated_tp}"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
 			return False
 
 		if action == "BUY" and validated_tp <= price:
 			error_msg = f"Invalid take_profit for BUY: TP ({validated_tp}) must be > market price ({price})"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
 			return False
 
 		if action == "SELL" and validated_tp >= price:
 			error_msg = f"Invalid take_profit for SELL: TP ({validated_tp}) must be < market price ({price})"
 			print(f"❌ {error_msg}")
-			log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
 			return False
 
 		print(f"   Validated TP: {validated_tp}")
@@ -260,8 +287,8 @@ def execute_trade(
 		"type": order_type,
 		"price": price,
 		"deviation": 20,
-		"magic": 234000,
-		"comment": "Gemini AI decision",
+		"magic": magic,
+		"comment": comment or f"ga:{strategy_id}",
 		"type_time": mt5.ORDER_TIME_GTC,
 		"type_filling": mt5.ORDER_FILLING_IOC,
 	}
@@ -273,13 +300,13 @@ def execute_trade(
 	if result is None:
 		error_msg = f"Order send failed: {mt5.last_error()}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
 		return False
 
 	if result.retcode != mt5.TRADE_RETCODE_DONE:
 		error_msg = f"Order failed with retcode: {result.retcode} - {result.comment}"
 		print(f"❌ {error_msg}")
-		log_trade(symbol, action, lot_size, lot_source, price, False, error_msg, service_folder)
+		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
 		return False
 
 	print(f"✅ Trade executed successfully!")
@@ -287,5 +314,23 @@ def execute_trade(
 	print(f"   Volume: {result.volume}")
 	print(f"   Price: {result.price}")
 
-	log_trade(symbol, action, lot_size, lot_source, result.price, True, "", service_folder)
+	log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, result.price, take_profit, True, "", service_folder)
+	if service_folder is not None and extra_log_data:
+		log_path = service_folder / "trade_logs" / "execution_log.jsonl"
+		log_path.parent.mkdir(parents=True, exist_ok=True)
+		payload = {
+			"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+			"strategy_id": strategy_id,
+			"magic": magic,
+			"symbol": symbol,
+			"action": action,
+			"lot_size": lot_size,
+			"take_profit": take_profit,
+			"result_order": getattr(result, "order", None),
+			"result_price": getattr(result, "price", None),
+			"result_volume": getattr(result, "volume", None),
+			**extra_log_data,
+		}
+		with open(log_path, "a", encoding="utf-8") as handle:
+			handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
 	return True

@@ -10,6 +10,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
+from strategy_context import get_primary_strategy_context, position_belongs_to_strategy
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
 
@@ -153,15 +154,7 @@ def _get_fee(volume: float) -> float:
 
 
 def _belongs_to_strategy(position: Any) -> bool:
-	position_magic = int(getattr(position, "magic", 0) or 0)
-	if position_magic == DEFAULT_STRATEGY_MAGIC:
-		return True
-
-	position_comment = str(getattr(position, "comment", "") or "").lower()
-	return any(
-		marker in position_comment
-		for marker in ("gemini ai", DEFAULT_STRATEGY_ID, f"ga:{DEFAULT_STRATEGY_ID}")
-	)
+	return position_belongs_to_strategy(position, get_primary_strategy_context())
 
 
 def _log_action(
@@ -223,6 +216,7 @@ def run_profit_protection_strategy_if_due() -> None:
 		return
 
 	service_folder = _get_service_folder()
+	strategy_context = get_primary_strategy_context()
 	state = _load_state(service_folder)
 	activation_usd = _get_activation_usd()
 	retrace_ratio = _get_retrace_ratio()
@@ -250,7 +244,7 @@ def run_profit_protection_strategy_if_due() -> None:
 
 		opened_at = datetime.fromtimestamp(int(getattr(position, "time", 0) or 0), tz=timezone.utc)
 		age_hours = max((now_utc - opened_at).total_seconds() / 3600.0, 0.0)
-		state_key = f"{DEFAULT_STRATEGY_ID}:{ticket}"
+		state_key = f"{strategy_context.strategy_id}:{ticket}"
 		position_state = updated_state.get(state_key, {})
 		max_net_profit = max(float(position_state.get("max_net_profit", 0.0) or 0.0), net_profit)
 		updated_state[state_key] = {"max_net_profit": max_net_profit}
@@ -270,7 +264,7 @@ def run_profit_protection_strategy_if_due() -> None:
 			continue
 
 		print(
-			f"💰 Profit protection [{DEFAULT_STRATEGY_ID}] {getattr(position, 'symbol', '')} "
+			f"💰 Profit protection [{strategy_context.strategy_id}] {getattr(position, 'symbol', '')} "
 			f"ticket={ticket} net={net_profit:.2f} max={max_net_profit:.2f} -> {close_reason}"
 		)
 		if dry_run:
@@ -282,14 +276,15 @@ def run_profit_protection_strategy_if_due() -> None:
 				symbol=str(getattr(position, "symbol", "")),
 				position_type=int(getattr(position, "type", 0)),
 				volume=volume,
-				comment=f"pp:{DEFAULT_STRATEGY_ID}",
+				comment=f"pp:{strategy_context.strategy_id}",
+				magic=strategy_context.magic,
 			)
 			message = close_reason if closed else f"close failed: {close_reason}"
 
 		_log_action(
 			service_folder=service_folder,
 			now_utc=now_utc,
-			strategy_id=DEFAULT_STRATEGY_ID,
+			strategy_id=strategy_context.strategy_id,
 			symbol=str(getattr(position, "symbol", "")),
 			ticket=ticket,
 			net_profit=net_profit,

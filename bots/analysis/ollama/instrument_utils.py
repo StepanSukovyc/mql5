@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from datetime import datetime, timedelta, timezone
 from fnmatch import fnmatch
 from typing import Iterable, List, Optional
 
@@ -181,3 +182,25 @@ def get_symbol_prompt_guidance(symbol: str) -> str:
 		"- Pokud signál není výrazně silný a konzistentní napříč timeframe, preferuj HOLD.\n"
 		"- Buď konzervativní při hodnocení BUY/SELL a počítej s vyšším spreadem a slippage."
 	)
+
+
+def get_symbol_news_currencies(symbol: str) -> List[str]:
+	"""Infer currencies used by the optional economic-news filter for a symbol."""
+	mapping_raw = os.getenv("NEWS_FILTER_SYMBOL_CURRENCIES", "")
+	if mapping_raw:
+		for pair in mapping_raw.split(","):
+			chunk = pair.strip()
+			if not chunk or ":" not in chunk:
+				continue
+			mapped_symbol, currencies_raw = chunk.split(":", 1)
+			if mapped_symbol.strip().lower() != symbol.strip().lower():
+				continue
+			currencies = [item.strip().upper() for item in currencies_raw.replace("|", ",").split(",") if item.strip()]
+			if currencies:
+				return currencies
+
+	base_symbol = symbol.split("_", 1)[0].upper()
+	if len(base_symbol) >= 6 and base_symbol[:6].isalpha():
+		return [base_symbol[:3], base_symbol[3:6]]
+
+	return []

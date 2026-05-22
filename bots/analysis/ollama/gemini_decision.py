@@ -137,30 +137,24 @@ Na základě všech dostupných informací (predikce, otevřené pozice, stav ú
 
 		1. Vyber PRÁVĚ JEDEN instrument z dostupných predikcí
 2. Rozhodni se pro BUY nebo SELL
-3. Doporuč velikost lotu (berouc v úvahu aktuální marži a risk management)
-4. Navrhni take_profit cenu pro swing obchod (pozice může být otevřená několik dní)
-5. Zdůvodni rozhodnutí
-6. DIVERZIFIKACE: Preferuj symboly, které ještě nemáš v otevřených pozicích. Pokud již existují otevřené pozice, posuzuj tu s open_price nejblíže aktuální tržní ceně a novou pozici na stejném symbolu otevři POUZE tehdy, když tato nejbližší pozice prodělává více než 15 % aktuální hodnoty účtu; jinak POVINNĚ vyber raději jiný kandidát z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
+3. Stručně zdůvodni rozhodnutí
+4. DIVERZIFIKACE: Preferuj symboly, které ještě nemáš v otevřených pozicích. Pokud již existují otevřené pozice, posuzuj tu s open_price nejblíže aktuální tržní ceně a novou pozici na stejném symbolu otevři POUZE tehdy, když tato nejbližší pozice prodělává více než 15 % aktuální hodnoty účtu; jinak POVINNĚ vyber raději jiný kandidát z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
 
 DŮLEŽITÉ OBCHODNÍ NASTAVENÍ:
 - Nejsem intradenní obchodník. Pozice držím často více dní (swing styl).
 - Chci ale průběžně generovat zisky na denní bázi.
 - Zohledni transakční náklad: za každých 0.01 lot je poplatek 0.10 USD.
-- take_profit nastav realisticky tak, aby po odečtení poplatků dával obchod ekonomický smysl.
+- Velikost lotu a take_profit už neřídíš ty; ty vybíráš jen instrument a směr.
 
 Odpověď prosím formátuj POUZE jako JSON bez dalšího textu, v tomto formátu:
 
 {{
 	"recommended_symbol": "SYMBOL_NAME",
   "action": "BUY",
-  "lot_size": 0.5,
-	"take_profit": 1.105,
   "reasoning": "..."
 }}
 
-Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdownu, bez code fence, bez dalšího textu.
-
-Kde lot_size je doporučená velikost pozice, take_profit je cílová cena TP a reasoning obsahuje stručné vysvětlení"""
+Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdownu, bez code fence, bez dalšího textu."""
 
 	try:
 		print("  📡 Dotazuji Gemini na finální rozhodnutí...")

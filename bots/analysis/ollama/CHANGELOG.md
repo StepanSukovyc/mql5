@@ -1,5 +1,34 @@
 # Changelog
 
+## 2026-05-22 (Deterministic Strategy Layers + Session-Gated Parallel Fallback)
+
+- **Replaced Gemini-Centric Execution With Local Strategy Layers**
+  - `final_decision.py` now uses Gemini only as an advisory ranking input for symbol and direction selection
+  - Final `lot_size` and `take_profit` are now resolved locally through `risk_engine.py` using an internal synthetic stop and configurable `R` multiple
+  - `signal_rules.py` became the deterministic primary trend-following gate, so a trade is opened only when local market structure confirms the candidate
+
+- **Added Persistent AI Advisory Cache And Local Retry Control**
+  - New module `ai_advisory_state.py` stores a decision signature, a 15-minute Gemini decision cache, and a 30-minute rejection cooldown in `trade_logs/gemini_advisory_state.json`
+  - Repeated retries no longer re-query Gemini for the same materially unchanged state; the runtime now retries locally against the remaining candidate queue
+
+- **Activated Parallel Mean-Reversion Runtime Fallback**
+  - `parallel_strategy_mean_reversion.py` now validates a real parallel setup using Bollinger Bands, RSI2, VWAP distance, ADX regime filter, spread limits, and symbol whitelist
+  - `final_decision.py` now falls back to the parallel strategy only after the primary strategy has no executable candidate and only when the parallel profile is allowed to activate
+
+- **Added Explicit Session Guards For Strategy Profiles**
+  - `strategy_context.py` now carries per-strategy UTC session start, session end, and Friday cutoff configuration
+  - Primary strategy uses `PRIMARY_SESSION_*` and `PRIMARY_FRIDAY_CUTOFF_HOUR_UTC`
+  - Parallel strategy uses `PARALLEL_SESSION_*` and `PARALLEL_FRIDAY_CUTOFF_HOUR_UTC`
+  - `final_decision.py` skips strategy execution outside the configured window instead of letting the profile trade all day
+
+- **Expanded Market Data For The Parallel Strategy**
+  - `market_data.py` now exposes `rsi2`, Bollinger Bands, VWAP, EMA20/50/200, ATR14, and ADX14 in the normalized payload
+  - Longer historical seed loading remains in place so long-window indicators such as EMA200 are stable
+
+- **Moved Tests Into A Dedicated Tests Folder And Updated Coverage**
+  - All Python tests for the Ollama/Gemini trading stack now live under `bots/analysis/ollama/tests/`
+  - Coverage now includes the strategy layers, local synthetic risk resolution, advisory cache reuse, local candidate fallback, and parallel session windows
+
 ## 2026-05-21 (Restore Original Trading Flow + Keep Profit Protection)
 
 - **Reverted The Same-Day Strategy Refactor Back To The Original Single-Flow Trading Logic**
