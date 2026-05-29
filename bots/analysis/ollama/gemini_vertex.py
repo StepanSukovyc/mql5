@@ -17,6 +17,7 @@ from gemini_config import GeminiVertexConfig
 
 _DEFAULT_MAX_ATTEMPTS_PER_MODEL = 2
 _DEFAULT_TIMEOUT_SECONDS = 120.0
+_DEFAULT_TIMEOUT_MS = int(_DEFAULT_TIMEOUT_SECONDS * 1000)  # HttpOptions.timeout is in milliseconds
 _DEFAULT_BACKOFF_SECONDS = 2.0
 _GOOGLE_CLOUD_PLATFORM_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
 _LEGACY_GEMINI_TIMEOUT_SECONDS = 60.0
@@ -569,7 +570,7 @@ def _request_structured_json(
 					location=config.region,
 					http_options=types.HttpOptions(
 						api_version="v1",
-						timeout=_DEFAULT_TIMEOUT_SECONDS,
+						timeout=_DEFAULT_TIMEOUT_MS,
 					),
 				) as client:
 					response = client.models.generate_content(
