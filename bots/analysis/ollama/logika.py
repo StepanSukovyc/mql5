@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 import MetaTrader5 as mt5
-from account_monitor import run_account_monitor
+from account_monitor import run_account_monitor, run_position_management_monitor
 from trading_logic import run_trading_logic
 from final_decision import make_final_trading_decision
 from mt5_connection import initialize_mt5, shutdown_mt5
@@ -67,6 +67,7 @@ class Config:
 	lookback_periods: int
 	economy_mode_enabled: bool
 	economy_mode_interval_seconds: int
+	no_trade_retry_seconds: int
 	run_interval_seconds: int
 	rsi_period: int
 	ma_period: int
@@ -96,6 +97,7 @@ class Config:
 			lookback_periods=int(os.getenv("LOOKBACK_PERIODS", "30")),
 			economy_mode_enabled=_to_bool(os.getenv("ECONOMY_MODE_ENABLED", "true"), default=True),
 			economy_mode_interval_seconds=int(os.getenv("ECONOMY_MODE_INTERVAL_SECONDS", "300")),
+			no_trade_retry_seconds=int(os.getenv("NO_TRADE_RETRY_SECONDS", "300")),
 			run_interval_seconds=int(os.getenv("RUN_INTERVAL_SECONDS", "3600")),
 			rsi_period=int(os.getenv("RSI_PERIOD", "14")),
 			ma_period=int(os.getenv("MA_PERIOD", "20")),
@@ -351,6 +353,15 @@ def main() -> int:
 	try:
 		initialize_mt5(login=cfg.mt5_login, password=cfg.mt5_password, server=cfg.mt5_server)
 		print("Connected to MetaTrader 5.")
+		management_stop_event = threading.Event()
+		management_thread = threading.Thread(
+			target=run_position_management_monitor,
+			kwargs={"check_interval_seconds": 60, "stop_event": management_stop_event},
+			name="PositionManagementMonitor",
+			daemon=False,
+		)
+		management_thread.start()
+		print("🛡️  Position management monitor started...")
 		
 		print("\n" + "="*60)
 		print("🤖 Obchodní Automat - Nekonečný cyklus")
@@ -398,7 +409,8 @@ def main() -> int:
 				run_account_monitor(
 					check_interval_seconds=60, 
 					stop_event=monitor_stop_event,
-					trading_trigger_event=trading_trigger_event
+					trading_trigger_event=trading_trigger_event,
+					run_management_tasks=False,
 				)
 			
 			# Start account monitor in a background thread
@@ -472,8 +484,16 @@ def main() -> int:
 					if predictions_folder:
 						print("\n🎯 Making final trading decision...")
 						try:
-							make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
-							print("\n✅ Cycle completed. Restarting monitoring...")
+							trade_executed = make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
+							if trade_executed:
+								print("\n✅ Cycle completed. Restarting monitoring...")
+							else:
+								retry_seconds = max(1, cfg.no_trade_retry_seconds)
+								print(
+									"\n⏳ No executable trade in this cycle. "
+									f"Waiting {retry_seconds} seconds before restarting monitoring..."
+								)
+								time.sleep(retry_seconds)
 						except Exception as decision_exc:
 							print(f"❌ Final decision failed: {decision_exc}")
 					else:
@@ -487,6 +507,9 @@ def main() -> int:
 	except KeyboardInterrupt:
 		print("\n\n🛑 Stopping trading automat (Ctrl+C detected)...")
 		print("🛑 Zastavuji Ollama Service...")
+		management_stop_event.set()
+		if management_thread.is_alive():
+			management_thread.join(timeout=5)
 		ollama_stop_event.set()
 		if ollama_thread and ollama_thread.is_alive():
 			ollama_thread.join(timeout=5)
@@ -496,6 +519,10 @@ def main() -> int:
 		return 1
 	finally:
 		# Ensure Ollama service is stopped
+		management_stop_event.set()
+		if management_thread.is_alive():
+			print("🛑 Cekam na ukonceni position management monitoru...")
+			management_thread.join(timeout=10)
 		ollama_stop_event.set()
 		if ollama_thread and ollama_thread.is_alive():
 			print("🛑 Čekám na ukončení Ollama Service...")

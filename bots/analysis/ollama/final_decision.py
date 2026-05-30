@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
+import csv
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
 from account_state import get_account_state
+from ai_advisory_state import build_decision_signature, get_active_rejection, get_cached_decision, record_rejection, store_cached_decision
 from gemini_config import GeminiVertexConfig, load_gemini_api_config
 from gemini_decision import ask_gemini_final_decision, load_predictions
 from instrument_utils import (
@@ -27,8 +30,19 @@ from instrument_utils import (
 )
 from mt5_symbols import estimate_order_profit, get_current_price, get_symbol_info
 from mt5_positions import get_open_positions
+from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
+from risk_engine import calculate_synthetic_risk_plan
+from signal_rules import validate_trend_following_signal
+from strategy_context import (
+	StrategyContext,
+	build_strategy_comment,
+	count_open_positions_for_strategy,
+	get_parallel_strategy_context,
+	get_primary_strategy_context,
+	is_strategy_trade_window_open,
+)
 from trade_execution import execute_trade
-from trade_history import count_successful_trades
+from trade_history import count_successful_trades, count_successful_trades_since, count_successful_trades_today
 from trading_validation import check_margin_requirements, validate_symbol
 
 
@@ -37,6 +51,212 @@ if hasattr(sys.stdout, "reconfigure"):
 		sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 	except Exception:
 		pass
+
+
+TRADE_DECISION_AUDIT_HEADERS = [
+	"timestamp",
+	"strategy_id",
+	"strategy_label",
+	"symbol",
+	"action",
+	"candidate_source",
+	"candidate_queue",
+	"candidate_rank",
+	"stage",
+	"trade_executed",
+	"reason",
+	"details",
+]
+
+TRADE_DECISION_SNAPSHOT_HEADERS = [
+	"timestamp",
+	"strategy_id",
+	"strategy_label",
+	"symbol",
+	"action",
+	"candidate_source",
+	"candidate_queue",
+	"candidate_rank",
+	"stage",
+	"trade_executed",
+	"reason",
+	"reason_cs",
+	"summary_cs",
+	"transition_stage",
+	"transition_reason",
+	"transition_reason_cs",
+	"transition_summary_cs",
+	"transition_details",
+	"details",
+]
+
+PARALLEL_STRATEGY_STATUS_HEADERS = [
+	"timestamp",
+	"strategy_id",
+	"strategy_label",
+	"symbol",
+	"action",
+	"candidate_source",
+	"candidate_queue",
+	"candidate_rank",
+	"stage",
+	"trade_executed",
+	"reason",
+	"reason_cs",
+	"root_rejection_reason",
+	"root_rejection_reason_cs",
+	"rule_failures",
+	"rule_failures_cs",
+	"cooldown_expires_at",
+	"summary_cs",
+	"details",
+]
+
+REASON_TEXT_CS = {
+	"activation_margin_below_threshold": "Volna marze je pod aktivacnim prahem strategie.",
+	"outside_session_window": "Strategie je mimo povolene obchodni hodiny.",
+	"max_open_positions_reached": "Strategie uz ma maximalni pocet otevrenych pozic.",
+	"daily_trade_limit_reached": "Byl dosazen denni limit obchodu pro strategii.",
+	"rejection_cooldown_active": "Bezi cooldown po predchozim zamitnuti kandidata.",
+	"open_position_exists": "Na tomto symbolu uz existuje otevrena pozice.",
+	"recent_symbol_trade": "Na tomto symbolu probehl obchod prilis nedavno.",
+	"per_symbol_daily_limit": "Byl dosazen denni limit obchodu pro tento symbol.",
+	"market_data_missing": "Pro symbol chybi market data potrebna pro vyhodnoceni.",
+	"signal_rejected": "Signal alternativni strategie nesplnil vstupni pravidla.",
+	"crypto_position_limit": "Byl dosazen limit otevrenych crypto pozic.",
+	"symbol_validation_failed": "Symbol neprosel validaci pro exekuci.",
+	"trade_parameters_invalid": "Nepodarilo se pripravit platne parametry obchodu.",
+	"trade_execution_failed": "Exekuce obchodu na brokerovi selhala.",
+	"trade_opened": "Obchod byl uspesne otevren.",
+	"activation_gate_not_satisfied": "Aktivacni podminky paralelni strategie nejsou splnene.",
+	"gemini_candidates_exhausted_local_fallback": "Gemini kandidati byli vycerpani a strategie presla na lokalni fallback.",
+	"no_executable_trade": "V tomto cyklu nebyl nalezen zadny obchod k exekuci.",
+	"no_predictions": "Nejsou k dispozici zadne pouzitelne predikce.",
+	"exception": "Behem rozhodovaci faze doslo k vyjimce.",
+}
+
+RULE_REASON_TEXT_CS = {
+	"symbol_not_in_parallel_whitelist": "Symbol neni na whitelistu paralelni strategie.",
+	"adx_above_range_threshold": "ADX je prilis vysoky, trh je moc trendovy pro mean reversion.",
+	"spread_above_limit": "Spread je vyssi nez povoleny limit strategie.",
+	"vwap_distance_below_threshold": "Cena neni dostatecne vzdalena od VWAP vzhledem k ATR.",
+	"news_blocked": "Symbol je blokovany kvuli zpravodajskemu filtru.",
+	"close_not_below_lower_band": "Pro BUY neni close pod dolnim Bollinger bandem.",
+	"rsi2_not_extreme_long": "RSI2 neni dostatecne preprodane pro long vstup.",
+	"close_not_above_upper_band": "Pro SELL neni close nad hornim Bollinger bandem.",
+	"rsi2_not_extreme_short": "RSI2 neni dostatecne prekoupene pro short vstup.",
+	"missing_indicator_data": "Chybi indikatorova data potrebna pro vyhodnoceni.",
+	"open_position_exists": "Na tomto symbolu uz existuje otevrena pozice.",
+	"recent_symbol_trade": "Na tomto symbolu uz probehl nedavny obchod.",
+	"per_symbol_daily_limit": "Byl dosazen denni limit obchodu pro symbol.",
+	"market_data_missing": "Chybi market data pro vyhodnoceni kandidata.",
+	"trade_parameters_invalid": "Vypoctene parametry obchodu nejsou platne.",
+	"trade_execution_failed": "Broker odmitl nebo nedokoncil exekuci obchodu.",
+	"symbol_validation_failed": "Symbol neprosel kontrolou pred exekuci.",
+}
+
+
+def _translate_reason_cs(code: str) -> str:
+	return REASON_TEXT_CS.get(code, code)
+
+
+def _translate_rule_reason_cs(code: str) -> str:
+	return RULE_REASON_TEXT_CS.get(code, code)
+
+
+def _describe_candidate_source(candidate_source: str) -> Tuple[str, str]:
+	normalized = str(candidate_source or "").strip()
+	if not normalized:
+		return "", ""
+	if normalized.startswith("gemini_cached_advisory_candidate_"):
+		return "gemini_cached", normalized.rsplit("_", 1)[-1]
+	if normalized.startswith("gemini_live_advisory_candidate_"):
+		return "gemini_live", normalized.rsplit("_", 1)[-1]
+	if normalized == "gemini_cached_advisory":
+		return "gemini_cached", "1"
+	if normalized == "gemini_live_advisory":
+		return "gemini_live", "1"
+	if normalized == "local_prediction_ranking":
+		return "local", ""
+	return normalized, ""
+
+
+def _extract_root_rejection_reason(details: Optional[Dict[str, object]]) -> str:
+	if not isinstance(details, dict):
+		return ""
+	reason_value = str(details.get("reason", "") or "").strip()
+	if not reason_value:
+		return ""
+	if ":" in reason_value:
+		return reason_value.split(":", 1)[0].strip()
+	return reason_value
+
+
+def _extract_rule_failures(reason: str, details: Optional[Dict[str, object]]) -> List[str]:
+	if not isinstance(details, dict):
+		return []
+	if reason == "signal_rejected":
+		raw_codes = details.get("reason_codes")
+		if isinstance(raw_codes, list):
+			return [str(code).strip() for code in raw_codes if str(code).strip()]
+	reason_value = str(details.get("reason", "") or "").strip()
+	if reason_value.startswith("signal_rejected:"):
+		raw_codes = reason_value.split(":", 1)[1]
+		return [code.strip() for code in raw_codes.split(",") if code.strip()]
+	return []
+
+
+def _build_reason_summary(reason: str, details: Optional[Dict[str, object]]) -> str:
+	root_rejection_reason = _extract_root_rejection_reason(details)
+	rule_failures = _extract_rule_failures(reason, details)
+	cooldown_expires_at = ""
+	if isinstance(details, dict):
+		cooldown_expires_at = str(details.get("expires_at", "") or "")
+
+	summary_parts = [
+		_translate_reason_cs(reason),
+	]
+	if root_rejection_reason:
+		summary_parts.append(f"Puvodni duvod: {_translate_reason_cs(root_rejection_reason)}")
+	if rule_failures:
+		summary_parts.append(
+			"Filtry ktere neprosly: " + "; ".join(_translate_rule_reason_cs(code) for code in rule_failures)
+		)
+	if cooldown_expires_at:
+		summary_parts.append(f"Cooldown plati do {cooldown_expires_at}.")
+
+	return " ".join(part for part in summary_parts if part)
+
+
+def _build_parallel_status_row(base_row: Dict[str, str], details: Optional[Dict[str, object]]) -> Dict[str, str]:
+	reason = base_row.get("reason", "")
+	root_rejection_reason = _extract_root_rejection_reason(details)
+	rule_failures = _extract_rule_failures(reason, details)
+	cooldown_expires_at = ""
+	if isinstance(details, dict):
+		cooldown_expires_at = str(details.get("expires_at", "") or "")
+
+	return {
+		"timestamp": base_row.get("timestamp", ""),
+		"strategy_id": base_row.get("strategy_id", ""),
+		"strategy_label": base_row.get("strategy_label", ""),
+		"symbol": base_row.get("symbol", ""),
+		"action": base_row.get("action", ""),
+		"candidate_source": base_row.get("candidate_source", ""),
+		"candidate_queue": base_row.get("candidate_queue", ""),
+		"candidate_rank": base_row.get("candidate_rank", ""),
+		"stage": base_row.get("stage", ""),
+		"trade_executed": base_row.get("trade_executed", ""),
+		"reason": reason,
+		"reason_cs": _translate_reason_cs(reason),
+		"root_rejection_reason": root_rejection_reason,
+		"root_rejection_reason_cs": _translate_reason_cs(root_rejection_reason) if root_rejection_reason else "",
+		"rule_failures": ",".join(rule_failures),
+		"rule_failures_cs": " | ".join(_translate_rule_reason_cs(code) for code in rule_failures),
+		"cooldown_expires_at": cooldown_expires_at,
+		"summary_cs": _build_reason_summary(reason, details),
+		"details": base_row.get("details", ""),
+	}
 
 
 def _get_gemini_full_control_every_n_trades() -> int:
@@ -83,7 +303,7 @@ def _print_trade_mode(successful_trades: int, next_trade_number: int, full_contr
 	print("\n🧭 Trade Execution Mode")
 	print(f"   Successful trades so far: {successful_trades}")
 	print(f"   Current trade number: #{next_trade_number}")
-	print(f"   Gemini take_profit control every N trades: N={full_control_every_n}")
+	print(f"   Legacy Gemini full-control cadence (ignored for lot/TP): N={full_control_every_n}")
 	print(
 		f"   Crypto safeguards: min signal {get_crypto_prediction_threshold():.0f}%, "
 		f"lot x{get_crypto_lot_multiplier():.2f}, max open positions {get_crypto_max_open_positions()}, "
@@ -96,11 +316,198 @@ def _print_trade_mode(successful_trades: int, next_trade_number: int, full_contr
 	print(
 		"   Mode: "
 		+ (
-			"FULL GEMINI TP MODE (lot_size + take_profit from Gemini)"
+			"ADVISORY GEMINI MODE (Gemini may rank symbol/action only)"
 			if gemini_full_control_mode
-			else "PREDICTION LOT MODE (lot_size from Gemini, no take_profit)"
+			else "LOCAL SIGNAL/RISK MODE (lot_size + take_profit from local logic)"
 		)
 	)
+
+
+def _get_int_env(name: str, default: int, *, minimum: int = 0) -> int:
+	raw = os.getenv(name)
+	if raw is None:
+		return default
+	try:
+		value = int(raw)
+		if value < minimum:
+			raise ValueError
+		return value
+	except (TypeError, ValueError):
+		return default
+
+
+def _load_market_data_for_symbol(predictions_folder: Path, symbol: str) -> Optional[Dict]:
+	source_folder = predictions_folder.parent / "source"
+	market_data_file = source_folder / f"{symbol}.json"
+	if not market_data_file.exists():
+		return None
+	try:
+		return json.loads(market_data_file.read_text(encoding="utf-8"))
+	except (OSError, json.JSONDecodeError):
+		return None
+
+
+def _log_jsonl(service_folder: Path, file_name: str, payload: Dict) -> None:
+	log_dir = service_folder / "trade_logs"
+	log_dir.mkdir(parents=True, exist_ok=True)
+	with open(log_dir / file_name, "a", encoding="utf-8") as handle:
+		handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
+def _update_trade_decision_snapshot(
+	service_folder: Path,
+	*,
+	strategy_id: str,
+	strategy_label: str,
+	symbol: str,
+	action: str,
+	candidate_source: str,
+	stage: str,
+	trade_executed: bool,
+	reason: str,
+	details: Optional[Dict[str, object]],
+) -> None:
+	log_dir = service_folder / "trade_logs"
+	log_dir.mkdir(parents=True, exist_ok=True)
+	log_file = log_dir / "trade_decision_snapshot.csv"
+	candidate_queue, candidate_rank = _describe_candidate_source(candidate_source)
+	reason_cs = _translate_reason_cs(reason)
+	summary_cs = _build_reason_summary(reason, details)
+	rows_by_label: Dict[str, Dict[str, str]] = {}
+	if log_file.exists():
+		with open(log_file, "r", newline="", encoding="utf-8") as handle:
+			for row in csv.DictReader(handle):
+				label = str(row.get("strategy_label", "") or "").strip()
+				if label:
+					rows_by_label[label] = row
+
+	existing_row = rows_by_label.get(strategy_label, {})
+	transition_stage = str(existing_row.get("transition_stage", "") or "")
+	transition_reason = str(existing_row.get("transition_reason", "") or "")
+	transition_reason_cs = str(existing_row.get("transition_reason_cs", "") or "")
+	transition_summary_cs = str(existing_row.get("transition_summary_cs", "") or "")
+	transition_details = str(existing_row.get("transition_details", "") or "")
+	if stage == "queue_transition":
+		transition_stage = stage
+		transition_reason = reason
+		transition_reason_cs = reason_cs
+		transition_summary_cs = summary_cs
+		transition_details = json.dumps(details or {}, ensure_ascii=False, sort_keys=True)
+
+	rows_by_label[strategy_label] = {
+		"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+		"strategy_id": strategy_id,
+		"strategy_label": strategy_label,
+		"symbol": symbol,
+		"action": action,
+		"candidate_source": candidate_source,
+		"candidate_queue": candidate_queue,
+		"candidate_rank": candidate_rank,
+		"stage": stage,
+		"trade_executed": str(trade_executed),
+		"reason": reason,
+		"reason_cs": reason_cs,
+		"summary_cs": summary_cs,
+		"transition_stage": transition_stage,
+		"transition_reason": transition_reason,
+		"transition_reason_cs": transition_reason_cs,
+		"transition_summary_cs": transition_summary_cs,
+		"transition_details": transition_details,
+		"details": json.dumps(details or {}, ensure_ascii=False, sort_keys=True),
+	}
+
+	with open(log_file, "w", newline="", encoding="utf-8") as handle:
+		writer = csv.DictWriter(handle, fieldnames=TRADE_DECISION_SNAPSHOT_HEADERS)
+		writer.writeheader()
+		for label in sorted(rows_by_label):
+			writer.writerow(rows_by_label[label])
+
+		if strategy_label == "parallel":
+			parallel_status_file = log_dir / "parallel_strategy_status.csv"
+			with open(parallel_status_file, "w", newline="", encoding="utf-8") as handle:
+				writer = csv.DictWriter(handle, fieldnames=PARALLEL_STRATEGY_STATUS_HEADERS)
+				writer.writeheader()
+				writer.writerow(_build_parallel_status_row(rows_by_label[strategy_label], details))
+
+
+def _log_trade_decision_audit(
+	service_folder: Path,
+	*,
+	strategy_id: str,
+	strategy_label: str,
+	symbol: str = "",
+	action: str = "",
+	candidate_source: str = "",
+	stage: str,
+	trade_executed: bool,
+	reason: str = "",
+	details: Optional[Dict[str, object]] = None,
+) -> None:
+	log_dir = service_folder / "trade_logs"
+	log_dir.mkdir(parents=True, exist_ok=True)
+	log_file = log_dir / "trade_decision_audit.csv"
+	candidate_queue, candidate_rank = _describe_candidate_source(candidate_source)
+	file_exists = log_file.exists()
+	with open(log_file, "a", newline="", encoding="utf-8") as handle:
+		writer = csv.writer(handle)
+		if not file_exists:
+			writer.writerow(TRADE_DECISION_AUDIT_HEADERS)
+		writer.writerow(
+			[
+				datetime.now(tz=timezone.utc).isoformat(),
+				strategy_id,
+				strategy_label,
+				symbol,
+				action,
+				candidate_source,
+				candidate_queue,
+				candidate_rank,
+				stage,
+				str(trade_executed),
+				reason,
+				json.dumps(details or {}, ensure_ascii=False, sort_keys=True),
+			]
+		)
+	_update_trade_decision_snapshot(
+		service_folder,
+		strategy_id=strategy_id,
+		strategy_label=strategy_label,
+		symbol=symbol,
+		action=action,
+		candidate_source=candidate_source,
+		stage=stage,
+		trade_executed=trade_executed,
+		reason=reason,
+		details=details,
+	)
+
+
+def _get_primary_max_open_positions() -> int:
+	return _get_int_env("PRIMARY_MAX_OPEN_POSITIONS", 0, minimum=0)
+
+
+def _get_primary_max_trades_per_day() -> int:
+	return _get_int_env("PRIMARY_MAX_TRADES_PER_DAY", 0, minimum=0)
+
+
+def _get_primary_max_trades_per_symbol_per_day() -> int:
+	return _get_int_env("PRIMARY_MAX_TRADES_PER_SYMBOL_PER_DAY", 0, minimum=0)
+
+
+def _get_symbol_trade_cooldown_minutes() -> int:
+	return _get_int_env("SYMBOL_TRADE_COOLDOWN_MINUTES", 15, minimum=0)
+
+
+def _get_strategy_activation_margin_percent(account_state: Dict) -> float:
+	balance = float(account_state.get("balance", 0.0) or 0.0)
+	if balance <= 0:
+		return 0.0
+	raw_free_margin = float(account_state.get("raw_margin_free", account_state.get("margin_free", 0.0)) or 0.0)
+	return (raw_free_margin / balance) * 100.0
+
+
+def _has_open_position_on_symbol(open_positions: List[Dict], symbol: str) -> bool:
+	return any(str(position.get("symbol", "")) == symbol for position in open_positions)
 
 
 def _count_open_crypto_positions(open_positions: List[Dict]) -> int:
@@ -254,6 +661,30 @@ def _save_decision_text(service_folder: Path, decision_text: str) -> None:
 	print(decision_text)
 
 
+@dataclass(frozen=True)
+class RankedCandidate:
+	symbol: str
+	action: str
+	source: str
+	score: float
+
+
+@dataclass(frozen=True)
+class StrategyExecutionProfile:
+	label: str
+	context: StrategyContext
+	signal_validator: Callable[[str, str, Dict], object]
+	risk_percent_env: str
+	stop_atr_multiplier_env: str
+	tp_r_multiple_env: str
+	max_trades_per_day_env: str
+	max_trades_per_symbol_per_day_env: str
+	trade_cooldown_env: str
+	default_trade_cooldown_minutes: int
+	default_max_trades_per_day: int = 0
+	default_max_trades_per_symbol_per_day: int = 0
+
+
 def _parse_decision(decision_text: str) -> Optional[Tuple[str, str, object, object]]:
 	"""Parse Gemini decision JSON and return required fields."""
 	try:
@@ -269,6 +700,599 @@ def _parse_decision(decision_text: str) -> Optional[Tuple[str, str, object, obje
 		return None
 
 	return symbol, action, decision.get("lot_size"), decision.get("take_profit")
+
+
+def _get_gemini_decision_cache_minutes() -> int:
+	return _get_int_env(
+		"GEMINI_DECISION_CACHE_MINUTES",
+		_get_int_env("GEMINI_QUERY_COOLDOWN_MINUTES", 15, minimum=0),
+		minimum=0,
+	)
+
+
+def _get_gemini_rejection_cooldown_minutes() -> int:
+	return _get_int_env("GEMINI_REJECTION_COOLDOWN_MINUTES", 30, minimum=0)
+
+
+def _get_gemini_advisory_max_candidates() -> int:
+	return _get_int_env("GEMINI_ADVISORY_MAX_CANDIDATES", 3, minimum=0)
+
+
+def _candidate_key(symbol: str, action: str) -> Tuple[str, str]:
+	return symbol.strip(), action.strip().upper()
+
+
+def _extract_ranked_candidates_from_decision_payload(payload: Dict[str, object], source: str) -> List[RankedCandidate]:
+	candidates: List[RankedCandidate] = []
+	seen: set[Tuple[str, str]] = set()
+
+	top_symbol = str(payload.get("recommended_symbol", "") or "").strip()
+	top_action = str(payload.get("action", "") or "").strip().upper()
+	if top_symbol and top_action:
+		key = _candidate_key(top_symbol, top_action)
+		seen.add(key)
+		candidates.append(RankedCandidate(symbol=top_symbol, action=top_action, source=source, score=10_000_000.0))
+
+	raw_candidates = payload.get("candidates")
+	if isinstance(raw_candidates, list):
+		for index, candidate in enumerate(raw_candidates, start=1):
+			if not isinstance(candidate, dict):
+				continue
+			symbol = str(candidate.get("symbol", "") or candidate.get("recommended_symbol", "") or "").strip()
+			action = str(candidate.get("action", "") or "").strip().upper()
+			if not symbol or not action:
+				continue
+			key = _candidate_key(symbol, action)
+			if key in seen:
+				continue
+			seen.add(key)
+			candidates.append(
+				RankedCandidate(
+					symbol=symbol,
+					action=action,
+					source=f"{source}_candidate_{index}",
+					score=10_000_000.0 - float(index),
+				)
+			)
+
+	return candidates
+
+
+def _build_local_candidates(predictions: List[Dict]) -> List[RankedCandidate]:
+	candidates: List[RankedCandidate] = []
+	for prediction in predictions:
+		symbol = str(prediction.get("symbol", "") or "").strip()
+		if not symbol:
+			continue
+		buy_score = float(prediction.get("BUY", 0.0) or 0.0)
+		sell_score = float(prediction.get("SELL", 0.0) or 0.0)
+		action = "BUY" if buy_score >= sell_score else "SELL"
+		confidence = max(buy_score, sell_score)
+		separation = abs(buy_score - sell_score)
+		candidates.append(
+			RankedCandidate(
+				symbol=symbol,
+				action=action,
+				source="local_prediction_ranking",
+				score=(confidence * 1000.0) + separation,
+			)
+		)
+
+	return sorted(candidates, key=lambda item: item.score, reverse=True)
+
+
+def _build_candidate_queue(predictions: List[Dict], advisory_candidates: Optional[List[RankedCandidate]]) -> List[RankedCandidate]:
+	ordered: List[RankedCandidate] = []
+	seen: set[Tuple[str, str]] = set()
+
+	for advisory_candidate in advisory_candidates or []:
+		key = _candidate_key(advisory_candidate.symbol, advisory_candidate.action)
+		if key in seen:
+			continue
+		ordered.append(advisory_candidate)
+		seen.add(key)
+
+	for candidate in _build_local_candidates(predictions):
+		key = _candidate_key(candidate.symbol, candidate.action)
+		if key in seen:
+			continue
+		ordered.append(candidate)
+		seen.add(key)
+
+	return ordered
+
+
+def _log_candidate_queue(service_folder: Path, candidates: List[RankedCandidate]) -> None:
+	queue_rows: List[Dict[str, object]] = []
+	for index, candidate in enumerate(candidates, start=1):
+		candidate_queue, candidate_rank = _describe_candidate_source(candidate.source)
+		queue_rows.append(
+			{
+				"queue_index": index,
+				"symbol": candidate.symbol,
+				"action": candidate.action,
+				"candidate_source": candidate.source,
+				"candidate_queue": candidate_queue,
+				"candidate_rank": candidate_rank,
+				"score": candidate.score,
+			}
+		)
+
+	_log_jsonl(
+		service_folder,
+		"decision_log.jsonl",
+		{
+			"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+			"event": "candidate_queue_built",
+			"candidate_count": len(queue_rows),
+			"candidates": queue_rows,
+		},
+	)
+
+
+def _resolve_gemini_advisory_candidates(
+	*,
+	predictions: List[Dict],
+	open_positions: List[Dict],
+	account_state: Dict,
+	service_folder: Path,
+) -> List[RankedCandidate]:
+	max_candidates = _get_gemini_advisory_max_candidates()
+	if max_candidates == 0:
+		print("ℹ️  Gemini advisory candidate limit is 0, using local candidate ranking only")
+		return []
+
+	cache_signature = build_decision_signature(account_state, open_positions, predictions)
+	cached_decision = get_cached_decision(service_folder, cache_signature, _get_gemini_decision_cache_minutes())
+	if isinstance(cached_decision, dict):
+		cached_candidates = _extract_ranked_candidates_from_decision_payload(cached_decision, "gemini_cached_advisory")
+		if cached_candidates:
+			limited_cached_candidates = cached_candidates[:max_candidates]
+			_log_jsonl(
+				service_folder,
+				"ai_log.jsonl",
+				{
+					"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+					"source": "gemini_cached_advisory",
+					"signature": cache_signature,
+					"recommended_symbol": limited_cached_candidates[0].symbol,
+					"action": limited_cached_candidates[0].action,
+					"candidate_count": len(limited_cached_candidates),
+					"candidate_limit": max_candidates,
+				},
+			)
+			return limited_cached_candidates
+
+	gemini_config = _load_gemini_api_config()
+	decision_text = ask_gemini_final_decision(
+		predictions,
+		open_positions,
+		account_state,
+		gemini_config,
+		trade_number=count_successful_trades(service_folder) + 1,
+		full_control_every_n=_get_gemini_full_control_every_n_trades(),
+		gemini_full_control_mode=False,
+	)
+	if not decision_text:
+		return []
+
+	_save_decision_text(service_folder, decision_text)
+	try:
+		decision_payload = json.loads(decision_text)
+	except json.JSONDecodeError:
+		return []
+	store_cached_decision(service_folder, cache_signature, decision_payload)
+
+	live_candidates = _extract_ranked_candidates_from_decision_payload(decision_payload, "gemini_live_advisory")
+	if not live_candidates:
+		return []
+	limited_live_candidates = live_candidates[:max_candidates]
+
+	_log_jsonl(
+		service_folder,
+		"ai_log.jsonl",
+		{
+			"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+			"source": "gemini_live_advisory",
+			"signature": cache_signature,
+			"recommended_symbol": limited_live_candidates[0].symbol,
+			"action": limited_live_candidates[0].action,
+			"candidate_count": len(limited_live_candidates),
+			"candidate_limit": max_candidates,
+		},
+	)
+	return limited_live_candidates
+
+
+def _get_strategy_limit(env_name: str, default: int) -> int:
+	return _get_int_env(env_name, default, minimum=0)
+
+
+def _is_candidate_rejected(service_folder: Path, strategy_id: str, symbol: str, action: str) -> Optional[Dict[str, object]]:
+	return get_active_rejection(service_folder, strategy_id=strategy_id, symbol=symbol, action=action)
+
+
+def _record_candidate_rejection(service_folder: Path, strategy_id: str, symbol: str, action: str, reason: str) -> None:
+	record_rejection(
+		service_folder,
+		strategy_id=strategy_id,
+		symbol=symbol,
+		action=action,
+		reason=reason,
+		cooldown_minutes=_get_gemini_rejection_cooldown_minutes(),
+	)
+
+
+def _attempt_strategy_trade(
+	*,
+	profile: StrategyExecutionProfile,
+	candidates: List[RankedCandidate],
+	predictions_folder: Path,
+	service_folder: Path,
+	account_state: Dict,
+	open_positions: List[Dict],
+	open_crypto_positions: int,
+) -> bool:
+	open_strategy_positions = count_open_positions_for_strategy(open_positions, profile.context)
+	activation_margin_percent = _get_strategy_activation_margin_percent(account_state)
+	if activation_margin_percent < profile.context.activation_margin_percent:
+		print(
+			f"⚠️  {profile.label} strategy activation threshold not met "
+			f"({activation_margin_percent:.2f}% < {profile.context.activation_margin_percent:.2f}%), skipping"
+		)
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=profile.context.strategy_id,
+			strategy_label=profile.label,
+			stage="strategy_blocked",
+			trade_executed=False,
+			reason="activation_margin_below_threshold",
+			details={
+				"activation_margin_percent": round(activation_margin_percent, 2),
+				"required_margin_percent": profile.context.activation_margin_percent,
+			},
+		)
+		return False
+	if not is_strategy_trade_window_open(profile.context):
+		print(f"⚠️  {profile.label} strategy is outside its configured session window, skipping")
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=profile.context.strategy_id,
+			strategy_label=profile.label,
+			stage="strategy_blocked",
+			trade_executed=False,
+			reason="outside_session_window",
+		)
+		return False
+	max_trades_per_day = _get_strategy_limit(profile.max_trades_per_day_env, profile.default_max_trades_per_day)
+	if profile.context.max_open_positions > 0 and open_strategy_positions >= profile.context.max_open_positions:
+		print(f"⚠️  {profile.label} strategy max open positions reached, skipping")
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=profile.context.strategy_id,
+			strategy_label=profile.label,
+			stage="strategy_blocked",
+			trade_executed=False,
+			reason="max_open_positions_reached",
+			details={"open_strategy_positions": open_strategy_positions},
+		)
+		return False
+	if max_trades_per_day > 0 and count_successful_trades_today(service_folder, strategy_id=profile.context.strategy_id) >= max_trades_per_day:
+		print(f"⚠️  {profile.label} strategy daily trade limit reached, skipping")
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=profile.context.strategy_id,
+			strategy_label=profile.label,
+			stage="strategy_blocked",
+			trade_executed=False,
+			reason="daily_trade_limit_reached",
+		)
+		return False
+
+	trade_cooldown_minutes = _get_strategy_limit(profile.trade_cooldown_env, profile.default_trade_cooldown_minutes)
+	per_symbol_daily_limit = _get_strategy_limit(
+		profile.max_trades_per_symbol_per_day_env,
+		profile.default_max_trades_per_symbol_per_day,
+	)
+	gemini_attempts = 0
+	local_fallback_logged = False
+
+	for candidate in candidates:
+		symbol = candidate.symbol
+		action = candidate.action
+		candidate_queue, candidate_rank = _describe_candidate_source(candidate.source)
+		if candidate_queue.startswith("gemini"):
+			gemini_attempts += 1
+		elif candidate_queue == "local" and gemini_attempts > 0 and not local_fallback_logged:
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="queue_transition",
+				trade_executed=False,
+				reason="gemini_candidates_exhausted_local_fallback",
+				details={
+					"failed_gemini_candidates": gemini_attempts,
+					"local_candidate_rank": candidate_rank,
+				},
+			)
+			local_fallback_logged = True
+		active_rejection = _is_candidate_rejected(service_folder, profile.context.strategy_id, symbol, action)
+		if active_rejection is not None:
+			print(f"⚠️  {profile.label} rejection cooldown active for {symbol} {action}")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_skipped",
+				trade_executed=False,
+				reason="rejection_cooldown_active",
+				details=active_rejection,
+			)
+			continue
+		if _has_open_position_on_symbol(open_positions, symbol):
+			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "open_position_exists")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_skipped",
+				trade_executed=False,
+				reason="open_position_exists",
+			)
+			continue
+		if trade_cooldown_minutes > 0 and count_successful_trades_since(
+			service_folder,
+			strategy_id=profile.context.strategy_id,
+			symbol=symbol,
+			lookback=timedelta(minutes=trade_cooldown_minutes),
+		) > 0:
+			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "recent_symbol_trade")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_skipped",
+				trade_executed=False,
+				reason="recent_symbol_trade",
+				details={"cooldown_minutes": trade_cooldown_minutes},
+			)
+			continue
+		if per_symbol_daily_limit > 0 and count_successful_trades_since(
+			service_folder,
+			strategy_id=profile.context.strategy_id,
+			symbol=symbol,
+			lookback=timedelta(hours=24),
+		) >= per_symbol_daily_limit:
+			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "per_symbol_daily_limit")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_skipped",
+				trade_executed=False,
+				reason="per_symbol_daily_limit",
+				details={"per_symbol_daily_limit": per_symbol_daily_limit},
+			)
+			continue
+
+		market_data = _load_market_data_for_symbol(predictions_folder, symbol)
+		if market_data is None:
+			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "market_data_missing")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_skipped",
+				trade_executed=False,
+				reason="market_data_missing",
+			)
+			continue
+
+		signal_validation = profile.signal_validator(symbol, action, market_data)
+		if not signal_validation.allowed:
+			_log_jsonl(
+				service_folder,
+				"decision_log.jsonl",
+				{
+					"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+					"strategy_id": profile.context.strategy_id,
+					"symbol": symbol,
+					"action": action,
+					"decision_source": candidate.source,
+					"allowed": False,
+					"reason_codes": signal_validation.reason_codes,
+					"regime_state": signal_validation.regime_state,
+					"metrics": signal_validation.metrics,
+				},
+			)
+			_record_candidate_rejection(
+				service_folder,
+				profile.context.strategy_id,
+				symbol,
+				action,
+				"signal_rejected:" + ",".join(signal_validation.reason_codes),
+			)
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_rejected",
+				trade_executed=False,
+				reason="signal_rejected",
+				details={
+					"reason_codes": signal_validation.reason_codes,
+					"regime_state": signal_validation.regime_state,
+				},
+			)
+			continue
+
+		symbol_is_crypto = is_crypto_symbol(symbol)
+		if profile.label == "primary" and symbol_is_crypto and open_crypto_positions >= get_crypto_max_open_positions():
+			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "crypto_position_limit")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_skipped",
+				trade_executed=False,
+				reason="crypto_position_limit",
+			)
+			continue
+
+		symbol_is_cfd = is_cfd_symbol(symbol)
+		is_valid, error_msg = validate_symbol(symbol)
+		if not is_valid:
+			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, f"symbol_validation_failed:{error_msg}")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_rejected",
+				trade_executed=False,
+				reason="symbol_validation_failed",
+				details={"error_msg": error_msg},
+			)
+			continue
+
+		resolved = _resolve_trade_parameters(
+			gemini_full_control_mode=False,
+			gemini_lot_size=None,
+			gemini_take_profit=None,
+			account_state=account_state,
+			symbol=symbol,
+			action=action,
+			symbol_is_crypto=symbol_is_crypto,
+			symbol_is_cfd=symbol_is_cfd,
+			market_data=market_data,
+			risk_percent_env=profile.risk_percent_env,
+			stop_atr_multiplier_env=profile.stop_atr_multiplier_env,
+			tp_r_multiple_env=profile.tp_r_multiple_env,
+		)
+		if resolved is None:
+			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "trade_parameters_invalid")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="candidate_rejected",
+				trade_executed=False,
+				reason="trade_parameters_invalid",
+			)
+			continue
+
+		lot_size, take_profit = resolved
+		risk_plan = calculate_synthetic_risk_plan(
+			symbol=symbol,
+			action=action,
+			account_state=account_state,
+			market_data=market_data,
+			risk_percent_env=profile.risk_percent_env,
+			stop_atr_multiplier_env=profile.stop_atr_multiplier_env,
+			tp_r_multiple_env=profile.tp_r_multiple_env,
+		)
+		extra_log_data = {
+			"decision_source": candidate.source,
+			"reason_codes": signal_validation.reason_codes,
+			"regime_state": signal_validation.regime_state,
+			"metrics": signal_validation.metrics,
+		}
+		if risk_plan is not None:
+			extra_log_data.update(
+				{
+					"risk_usd": risk_plan.risk_usd,
+					"synthetic_stop_price": risk_plan.synthetic_stop_price,
+					"synthetic_stop_distance": risk_plan.synthetic_stop_distance,
+					"take_profit_price": risk_plan.take_profit_price,
+				}
+			)
+
+		if execute_trade(
+			symbol,
+			action,
+			lot_size,
+			service_folder,
+			take_profit,
+			lot_source="synthetic_risk",
+			strategy_id=profile.context.strategy_id,
+			magic=profile.context.magic,
+			comment=build_strategy_comment(profile.context.strategy_id),
+			extra_log_data=extra_log_data,
+		):
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
+				symbol=symbol,
+				action=action,
+				candidate_source=candidate.source,
+				stage="trade_executed",
+				trade_executed=True,
+				reason="trade_opened",
+				details={"lot_size": lot_size, "take_profit": take_profit},
+			)
+			_log_jsonl(
+				service_folder,
+				"risk_log.jsonl",
+				{
+					"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+					"strategy_id": profile.context.strategy_id,
+					"entry_owner_strategy_id": profile.context.strategy_id,
+					"management_owner_strategy_id": profile.context.strategy_id,
+					"symbol": symbol,
+					"action": action,
+					"lot_size": lot_size,
+					"take_profit": take_profit,
+					**extra_log_data,
+				},
+			)
+			print(f"\n🎉 {profile.label.capitalize()} trade executed successfully!")
+			return True
+
+		_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "trade_execution_failed")
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=profile.context.strategy_id,
+			strategy_label=profile.label,
+			symbol=symbol,
+			action=action,
+			candidate_source=candidate.source,
+			stage="candidate_rejected",
+			trade_executed=False,
+			reason="trade_execution_failed",
+		)
+
+	return False
 
 
 def _exclude_symbol_and_retry(symbol: str, reason: str, predictions: List[Dict], excluded_symbols: List[str]) -> bool:
@@ -298,8 +1322,43 @@ def _resolve_trade_parameters(
 	action: str,
 	symbol_is_crypto: bool,
 	symbol_is_cfd: bool,
+	market_data: Optional[Dict] = None,
+	risk_percent_env: str = "PRIMARY_RISK_PER_TRADE_PERCENT",
+	stop_atr_multiplier_env: str = "PRIMARY_SYNTHETIC_STOP_ATR_MULTIPLIER",
+	tp_r_multiple_env: str = "PRIMARY_TAKE_PROFIT_R_MULTIPLIER",
 ) -> Optional[Tuple[float, Optional[float]]]:
-	"""Resolve final lot size and take profit for the selected trading mode."""
+	"""Resolve final lot size and take profit.
+
+	When market_data is available, lot sizing and TP use the local synthetic-risk model.
+	Legacy Gemini lot/TP behavior remains as a fallback for older call sites and tests.
+	"""
+	if market_data is not None:
+		risk_plan = calculate_synthetic_risk_plan(
+			symbol=symbol,
+			action=action,
+			account_state=account_state,
+			market_data=market_data,
+			risk_percent_env=risk_percent_env,
+			stop_atr_multiplier_env=stop_atr_multiplier_env,
+			tp_r_multiple_env=tp_r_multiple_env,
+		)
+		if risk_plan is None:
+			print(f"⚠️  Synthetic risk plan could not be resolved for {symbol}")
+			return None
+
+		lot_size = risk_plan.lot_size
+		print(f"   Local synthetic-risk lot_size: {lot_size}")
+		base_take_profit = risk_plan.take_profit_price
+		if symbol_is_crypto:
+			take_profit = _resolve_crypto_take_profit(symbol, action, base_take_profit)
+			if take_profit is None:
+				return None
+			return lot_size, take_profit
+		if symbol_is_cfd:
+			take_profit = _resolve_cfd_take_profit(symbol, action, lot_size, base_take_profit)
+			return lot_size, take_profit
+		return lot_size, base_take_profit
+
 	try:
 		lot_size = float(gemini_lot_size)
 	except (TypeError, ValueError):
@@ -370,6 +1429,14 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		)
 		if not predictions:
 			print("⚠️  No strong predictions available, skipping final decision")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id="runtime",
+				strategy_label="cycle",
+				stage="cycle_skipped",
+				trade_executed=False,
+				reason="no_predictions",
+			)
 			return False
 
 		account_state = get_account_state(include_margin_percent=True)
@@ -379,11 +1446,6 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		_print_open_positions(open_positions)
 		open_crypto_positions = _count_open_crypto_positions(open_positions)
 		print(f"   Open crypto positions: {open_crypto_positions}/{get_crypto_max_open_positions()}")
-
-		gemini_config = _load_gemini_api_config()
-
-		max_retries = 3
-		excluded_symbols: List[str] = []
 		full_control_every_n = _get_gemini_full_control_every_n_trades()
 		successful_trades = count_successful_trades(service_folder)
 		next_trade_number = successful_trades + 1
@@ -391,92 +1453,109 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 
 		_print_trade_mode(successful_trades, next_trade_number, full_control_every_n, gemini_full_control_mode)
 
-		for attempt in range(max_retries):
-			print(f"\n🔄 Decision attempt {attempt + 1}/{max_retries}")
-			decision_text = ask_gemini_final_decision(
-				predictions,
-				open_positions,
-				account_state,
-				gemini_config,
-				excluded_symbols if excluded_symbols else None,
-				trade_number=next_trade_number,
-				full_control_every_n=full_control_every_n,
-				gemini_full_control_mode=gemini_full_control_mode,
-			)
+		primary_profile = StrategyExecutionProfile(
+			label="primary",
+			context=get_primary_strategy_context(),
+			signal_validator=validate_trend_following_signal,
+			risk_percent_env="PRIMARY_RISK_PER_TRADE_PERCENT",
+			stop_atr_multiplier_env="PRIMARY_SYNTHETIC_STOP_ATR_MULTIPLIER",
+			tp_r_multiple_env="PRIMARY_TAKE_PROFIT_R_MULTIPLIER",
+			max_trades_per_day_env="PRIMARY_MAX_TRADES_PER_DAY",
+			max_trades_per_symbol_per_day_env="PRIMARY_MAX_TRADES_PER_SYMBOL_PER_DAY",
+			trade_cooldown_env="SYMBOL_TRADE_COOLDOWN_MINUTES",
+			default_trade_cooldown_minutes=_get_symbol_trade_cooldown_minutes(),
+		)
+		activation_margin_percent = _get_strategy_activation_margin_percent(account_state)
+		primary_activation_met = activation_margin_percent >= primary_profile.context.activation_margin_percent
+		parallel_activation_met = can_activate_parallel_strategy(account_state, open_positions)
 
-			if not decision_text:
-				print("❌ Failed to get decision from Gemini")
-				return False
-
-			_save_decision_text(service_folder, decision_text)
-
-			parsed = _parse_decision(decision_text)
-			if parsed is None:
-				return False
-
-			symbol, action, gemini_lot_size, gemini_take_profit = parsed
-			symbol_is_crypto = is_crypto_symbol(symbol)
-			symbol_is_cfd = is_cfd_symbol(symbol)
-			if symbol_is_crypto and open_crypto_positions >= get_crypto_max_open_positions():
-				if not _exclude_symbol_and_retry(
-					symbol,
-					f"Crypto position limit reached for {symbol} ({open_crypto_positions}/{get_crypto_max_open_positions()})",
-					predictions,
-					excluded_symbols,
-				):
-					return False
-				continue
-
-			is_valid, error_msg = validate_symbol(symbol)
-			if not is_valid:
-				if not _exclude_symbol_and_retry(symbol, f"Symbol validation failed: {error_msg}", predictions, excluded_symbols):
-					return False
-				continue
-
-			symbol_full_control_mode = gemini_full_control_mode
-			if symbol_is_crypto and gemini_full_control_mode and not is_crypto_full_tp_mode_allowed():
-				symbol_full_control_mode = False
-				print("   Crypto symbol selected: full Gemini TP mode disabled for this trade")
-			if symbol_is_cfd and gemini_full_control_mode and not is_cfd_full_tp_mode_allowed():
-				symbol_full_control_mode = False
-				print("   CFD symbol selected: TP mode disabled by configuration for this trade")
-
-			resolved = _resolve_trade_parameters(
-				gemini_full_control_mode=symbol_full_control_mode,
-				gemini_lot_size=gemini_lot_size,
-				gemini_take_profit=gemini_take_profit,
+		advisory_candidates: List[RankedCandidate] = []
+		if primary_activation_met:
+			advisory_candidates = _resolve_gemini_advisory_candidates(
+				predictions=predictions,
+				open_positions=open_positions,
 				account_state=account_state,
-				symbol=symbol,
-				action=action,
-				symbol_is_crypto=symbol_is_crypto,
-				symbol_is_cfd=symbol_is_cfd,
+				service_folder=service_folder,
 			)
-			if resolved is None:
-				if not _exclude_symbol_and_retry(symbol, f"Trade parameters invalid for {symbol}", predictions, excluded_symbols):
-					return False
-				continue
+		else:
+			print("ℹ️  Primary activation threshold not met, skipping Gemini advisory and using local candidate ranking only")
+		candidate_queue = _build_candidate_queue(predictions, advisory_candidates)
+		_log_candidate_queue(service_folder, candidate_queue)
 
-			lot_size, take_profit = resolved
-			if lot_size <= 0:
-				if not _exclude_symbol_and_retry(symbol, f"Final lot size is {lot_size} for {symbol}", predictions, excluded_symbols):
-					return False
-				continue
+		if _attempt_strategy_trade(
+			profile=primary_profile,
+			candidates=candidate_queue,
+			predictions_folder=predictions_folder,
+			service_folder=service_folder,
+			account_state=account_state,
+			open_positions=open_positions,
+			open_crypto_positions=open_crypto_positions,
+		):
+			print("\n" + "=" * 60)
+			print("✅ Final Trading Decision Completed")
+			print("=" * 60)
+			return True
 
-			if execute_trade(symbol, action, lot_size, service_folder, take_profit, lot_source="gemini_prediction"):
-				print("\n🎉 Trade executed successfully!")
+		if parallel_activation_met:
+			parallel_profile = StrategyExecutionProfile(
+				label="parallel",
+				context=get_parallel_strategy_context(),
+				signal_validator=validate_mean_reversion_signal,
+				risk_percent_env="PARALLEL_RISK_PER_TRADE_PERCENT",
+				stop_atr_multiplier_env="PARALLEL_SYNTHETIC_STOP_ATR_MULTIPLIER",
+				tp_r_multiple_env="PARALLEL_TAKE_PROFIT_R_MULTIPLIER",
+				max_trades_per_day_env="PARALLEL_MAX_TRADES_PER_DAY",
+				max_trades_per_symbol_per_day_env="PARALLEL_MAX_TRADES_PER_SYMBOL_PER_DAY",
+				trade_cooldown_env="PARALLEL_SYMBOL_TRADE_COOLDOWN_MINUTES",
+				default_trade_cooldown_minutes=30,
+				default_max_trades_per_symbol_per_day=1,
+			)
+			if _attempt_strategy_trade(
+				profile=parallel_profile,
+				candidates=candidate_queue,
+				predictions_folder=predictions_folder,
+				service_folder=service_folder,
+				account_state=account_state,
+				open_positions=open_positions,
+				open_crypto_positions=open_crypto_positions,
+			):
 				print("\n" + "=" * 60)
 				print("✅ Final Trading Decision Completed")
 				print("=" * 60)
 				return True
+		else:
+			print("⚠️  Parallel strategy activation gate not satisfied")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=get_parallel_strategy_context().strategy_id,
+				strategy_label="parallel",
+				stage="strategy_blocked",
+				trade_executed=False,
+				reason="activation_gate_not_satisfied",
+			)
 
-			if not _exclude_symbol_and_retry(symbol, f"Trade execution failed for {symbol}", predictions, excluded_symbols):
-				return False
-
-		print(f"❌ Exhausted all {max_retries} retry attempts")
+		print("❌ No strategy found an executable trade in this cycle")
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id="runtime",
+			strategy_label="cycle",
+			stage="cycle_completed",
+			trade_executed=False,
+			reason="no_executable_trade",
+		)
 		return False
 
 	except Exception as exc:
 		print(f"❌ Error in final decision phase: {exc}")
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id="runtime",
+			strategy_label="cycle",
+			stage="cycle_error",
+			trade_executed=False,
+			reason="exception",
+			details={"error": str(exc)},
+		)
 		import traceback
 
 		traceback.print_exc()

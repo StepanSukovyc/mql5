@@ -1,5 +1,59 @@
 # Changelog
 
+## 2026-05-22 (Rolling 30-Day Loss Cleanup Advisory Strategy)
+
+- **Added `monthly_loss_cleanup_strategy.py` — advisory-only, never closes positions**
+  - Computes realized profit over a rolling 30-calendar-day window from MT5 deal history
+  - Active trading days = unique UTC calendar dates with at least one closing deal in the window; a configurable floor (`MONTHLY_LOSS_CLEANUP_MIN_ACTIVE_DAYS`, default `15`) prevents the target from being too low during bot downtime
+  - `target = effective_active_days × MONTHLY_LOSS_CLEANUP_DAILY_TARGET_USD` (default `50 USD/day`)
+  - `surplus = realized_profit_30d − target`; if surplus ≤ 0 no recommendations are generated
+  - When surplus > 0 the strategy finds all open positions older than `MONTHLY_LOSS_CLEANUP_MIN_POSITION_AGE_DAYS` (default `30`) that are currently losing and performs a greedy selection from largest to smallest loss until the surplus is consumed
+  - All candidates and the recommended subset are written to `trade_logs/monthly_loss_cleanup_recommendations.json`; the file is overwritten on every daily run
+  - Runs once per Prague day after a configurable trigger time (`MONTHLY_LOSS_CLEANUP_HOUR` / `MONTHLY_LOSS_CLEANUP_MINUTE`, default `13:00`); last-run day key is persisted in `trade_logs/monthly_loss_cleanup_state.json`
+  - Skipped during the swap rollover block window
+  - Wired into `account_monitor.py` → `run_position_management_monitor` alongside the existing daily loss-cleanup strategy
+
+## 2026-05-22 (Gemini Candidate Cap + Explicit Local Fallback Audit)
+
+- **Added Configurable Gemini Advisory Candidate Cap**
+  - `final_decision.py` now limits advisory candidates with `GEMINI_ADVISORY_MAX_CANDIDATES`
+  - The default cap is `3`, so the runtime tries at most three Gemini symbol/action candidates before continuing with the local deterministic ranking queue
+  - The active sample and local runtime configuration now document `GEMINI_ADVISORY_MAX_CANDIDATES=3`
+
+- **Made Gemini-To-Local Fallback Visible In Audit Logs**
+  - `trade_decision_audit.csv` now records an explicit `queue_transition` row with reason `gemini_candidates_exhausted_local_fallback`
+  - The transition row includes how many Gemini candidates were exhausted before the local queue took over
+  - Existing audit and snapshot rows still keep `candidate_queue` and `candidate_rank`, so the exact order remains readable alongside the transition marker
+
+## 2026-05-22 (Deterministic Strategy Layers + Session-Gated Parallel Fallback)
+
+- **Replaced Gemini-Centric Execution With Local Strategy Layers**
+  - `final_decision.py` now uses Gemini only as an advisory ranking input for symbol and direction selection
+  - Final `lot_size` and `take_profit` are now resolved locally through `risk_engine.py` using an internal synthetic stop and configurable `R` multiple
+  - `signal_rules.py` became the deterministic primary trend-following gate, so a trade is opened only when local market structure confirms the candidate
+
+- **Added Persistent AI Advisory Cache And Local Retry Control**
+  - New module `ai_advisory_state.py` stores a decision signature, a 15-minute Gemini decision cache, and a 30-minute rejection cooldown in `trade_logs/gemini_advisory_state.json`
+  - Repeated retries no longer re-query Gemini for the same materially unchanged state; the runtime now retries locally against the remaining candidate queue
+
+- **Activated Parallel Mean-Reversion Runtime Fallback**
+  - `parallel_strategy_mean_reversion.py` now validates a real parallel setup using Bollinger Bands, RSI2, VWAP distance, ADX regime filter, spread limits, and symbol whitelist
+  - `final_decision.py` now falls back to the parallel strategy only after the primary strategy has no executable candidate and only when the parallel profile is allowed to activate
+
+- **Added Explicit Session Guards For Strategy Profiles**
+  - `strategy_context.py` now carries per-strategy UTC session start, session end, and Friday cutoff configuration
+  - Primary strategy uses `PRIMARY_SESSION_*` and `PRIMARY_FRIDAY_CUTOFF_HOUR_UTC`
+  - Parallel strategy uses `PARALLEL_SESSION_*` and `PARALLEL_FRIDAY_CUTOFF_HOUR_UTC`
+  - `final_decision.py` skips strategy execution outside the configured window instead of letting the profile trade all day
+
+- **Expanded Market Data For The Parallel Strategy**
+  - `market_data.py` now exposes `rsi2`, Bollinger Bands, VWAP, EMA20/50/200, ATR14, and ADX14 in the normalized payload
+  - Longer historical seed loading remains in place so long-window indicators such as EMA200 are stable
+
+- **Moved Tests Into A Dedicated Tests Folder And Updated Coverage**
+  - All Python tests for the Ollama/Gemini trading stack now live under `bots/analysis/ollama/tests/`
+  - Coverage now includes the strategy layers, local synthetic risk resolution, advisory cache reuse, local candidate fallback, and parallel session windows
+
 ## 2026-05-21 (Restore Original Trading Flow + Keep Profit Protection)
 
 - **Reverted The Same-Day Strategy Refactor Back To The Original Single-Flow Trading Logic**

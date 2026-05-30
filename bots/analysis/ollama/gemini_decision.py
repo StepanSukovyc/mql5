@@ -103,9 +103,9 @@ def ask_gemini_final_decision(
 		mode_text = (
 			f"\n\nREŽIM AKTUÁLNÍHO OBCHODU:\n"
 			f"- Pořadí obchodu: #{trade_number}\n"
-			f"- Každý {full_control_every_n}. obchod je plně řízen Gemini (lot + take_profit): {mode_label}\n"
-			f"- lot_size se ve finální exekuci vždy použije z této odpovědi.\n"
-			f"- U ne-plně řízených obchodů se take_profit ve finální exekuci ignoruje."
+			f"- Každý {full_control_every_n}. obchod je plně řízen Gemini (legacy informace): {mode_label}\n"
+			f"- V aktualnim advisory rezimu Gemini vybira pouze instrument a smer.\n"
+			f"- lot_size a take_profit se ve finalni exekuci pocitaji lokalne."
 		)
 
 	crypto_symbols = [str(p.get("symbol")) for p in predictions if is_crypto_symbol(str(p.get("symbol", "")))]
@@ -118,6 +118,28 @@ def ask_gemini_final_decision(
 			"- Pokud je rozdíl mezi BUY a SELL malý nebo je reasoning nejasný, preferuj raději ne-crypto instrument nebo HOLD.\n"
 			"- U crypto preferuj menší lot a konzervativnější risk management."
 		)
+
+	response_example = json.dumps(
+		{
+			"recommended_symbol": "SYMBOL_NAME",
+			"action": "BUY",
+			"reasoning": "...",
+			"candidates": [
+				{
+					"symbol": "SYMBOL_NAME",
+					"action": "BUY",
+					"reasoning": "...",
+				},
+				{
+					"symbol": "ALTERNATIVE_SYMBOL",
+					"action": "SELL",
+					"reasoning": "...",
+				},
+			],
+		},
+		indent=2,
+		ensure_ascii=False,
+	)
 
 	prompt = f"""Jsi expert obchodní poradce. Musíš na základě analýzy učinit finální obchodní rozhodnutí.
 
@@ -135,32 +157,23 @@ DOSTUPNÉ INFORMACE:
 ÚKOL:
 Na základě všech dostupných informací (predikce, otevřené pozice, stav účtu):
 
-		1. Vyber PRÁVĚ JEDEN instrument z dostupných predikcí
+		1. Vyber hlavního kandidáta z dostupných predikcí
 2. Rozhodni se pro BUY nebo SELL
-3. Doporuč velikost lotu (berouc v úvahu aktuální marži a risk management)
-4. Navrhni take_profit cenu pro swing obchod (pozice může být otevřená několik dní)
-5. Zdůvodni rozhodnutí
-6. DIVERZIFIKACE: Preferuj symboly, které ještě nemáš v otevřených pozicích. Pokud již existují otevřené pozice, posuzuj tu s open_price nejblíže aktuální tržní ceně a novou pozici na stejném symbolu otevři POUZE tehdy, když tato nejbližší pozice prodělává více než 15 % aktuální hodnoty účtu; jinak POVINNĚ vyber raději jiný kandidát z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
+		3. Stručně zdůvodni rozhodnutí
+4. Pokud dávají smysl alternativy, vrať i 2 až 3 seřazené kandidáty pro fallback validaci
+4. DIVERZIFIKACE: Preferuj symboly, které ještě nemáš v otevřených pozicích. Pokud již existují otevřené pozice, posuzuj tu s open_price nejblíže aktuální tržní ceně a novou pozici na stejném symbolu otevři POUZE tehdy, když tato nejbližší pozice prodělává více než 15 % aktuální hodnoty účtu; jinak POVINNĚ vyber raději jiný kandidát z dostupných predikcí pro bezpečnou diverzifikaci portfolia.
 
 DŮLEŽITÉ OBCHODNÍ NASTAVENÍ:
 - Nejsem intradenní obchodník. Pozice držím často více dní (swing styl).
 - Chci ale průběžně generovat zisky na denní bázi.
 - Zohledni transakční náklad: za každých 0.01 lot je poplatek 0.10 USD.
-- take_profit nastav realisticky tak, aby po odečtení poplatků dával obchod ekonomický smysl.
+- Velikost lotu a take_profit už neřídíš ty; ty vybíráš jen instrument a směr.
 
 Odpověď prosím formátuj POUZE jako JSON bez dalšího textu, v tomto formátu:
 
-{{
-	"recommended_symbol": "SYMBOL_NAME",
-  "action": "BUY",
-  "lot_size": 0.5,
-	"take_profit": 1.105,
-  "reasoning": "..."
-}}
+{response_example}
 
-Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdownu, bez code fence, bez dalšího textu.
-
-Kde lot_size je doporučená velikost pozice, take_profit je cílová cena TP a reasoning obsahuje stručné vysvětlení"""
+Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdownu, bez code fence, bez dalšího textu."""
 
 	try:
 		print("  📡 Dotazuji Gemini na finální rozhodnutí...")
