@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 import json
 import os
+from pathlib import Path
 import time
 import urllib.error
 import urllib.request
@@ -96,6 +98,59 @@ def _import_google_auth():
 def _log_event(event: str, **payload: Any) -> None:
 	message = {"event": event, **payload}
 	print(f"  🧠 Gemini Vertex: {json.dumps(message, ensure_ascii=False, sort_keys=True, default=str)}")
+
+
+def _get_trade_logs_dir() -> Path:
+	service_dest_folder = (os.getenv("SERVICE_DEST_FOLDER") or "").strip()
+	if service_dest_folder:
+		return Path(service_dest_folder) / "trade_logs"
+	return Path(__file__).resolve().parent / "trade_logs"
+
+
+def _log_invalid_json_response(
+	*,
+	task: str,
+	project: str,
+	region: str,
+	model: str,
+	transport: str,
+	fallback_model: bool,
+	fallback_position: int,
+	attempt: int,
+	error_message: str,
+	response_text: str,
+) -> None:
+	if not response_text:
+		return
+
+	payload = {
+		"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+		"task": task,
+		"project": project,
+		"region": region,
+		"model": model,
+		"transport": transport,
+		"fallback_model": fallback_model,
+		"fallback_position": fallback_position,
+		"attempt": attempt,
+		"error": error_message,
+		"response_snippet": _extract_text_snippet(response_text, limit=320),
+		"raw_response": response_text,
+	}
+
+	try:
+		log_dir = _get_trade_logs_dir()
+		log_dir.mkdir(parents=True, exist_ok=True)
+		with open(log_dir / "gemini_invalid_json.jsonl", "a", encoding="utf-8") as handle:
+			handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
+	except OSError as exc:
+		_log_event(
+			"invalid_json_log_write_failed",
+			task=task,
+			model=model,
+			transport=transport,
+			error_snippet=_extract_text_snippet(str(exc)),
+		)
 
 
 def _extract_response_text(response: Any) -> str:
@@ -668,6 +723,19 @@ def _request_structured_json(
 						)
 						return validated_payload
 					except GeminiVertexRequestError as rest_exc:
+						if "returned invalid json" in str(rest_exc).lower():
+							_log_invalid_json_response(
+								task=task_name,
+								project=config.project,
+								region=config.region,
+								model=model_name,
+								transport="vertex-rest-fallback",
+								fallback_model=(model_name != config.model),
+								fallback_position=model_index,
+								attempt=attempt,
+								error_message=str(rest_exc),
+								response_text=json.dumps(rest_response, ensure_ascii=False),
+							)
 						_log_event(
 							"error",
 							task=task_name,
@@ -687,6 +755,19 @@ def _request_structured_json(
 
 				last_error = GeminiVertexRequestError(message, status_code=status_code)
 				duration_ms = round((time.perf_counter() - started_at) * 1000, 2)
+				if "returned invalid json" in message.lower() and response_text:
+					_log_invalid_json_response(
+						task=task_name,
+						project=config.project,
+						region=config.region,
+						model=model_name,
+						transport="google-genai-sdk",
+						fallback_model=(model_name != config.model),
+						fallback_position=model_index,
+						attempt=attempt,
+						error_message=message,
+						response_text=response_text,
+					)
 				_log_event(
 					"error",
 					task=task_name,
