@@ -10,7 +10,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
-from strategy_context import get_primary_strategy_context, position_belongs_to_strategy
+from strategy_context import StrategyContext, get_index_strategy_context, get_primary_strategy_context, position_belongs_to_strategy
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
 
@@ -99,6 +99,10 @@ def _get_enabled() -> bool:
 	return _to_bool(_load_dotenv_value("PROFIT_PROTECTION_STRATEGY_ENABLED"), default=DEFAULT_ENABLED)
 
 
+def _get_index_strategy_enabled() -> bool:
+	return _to_bool(_load_dotenv_value("INDEX_STRATEGY_ENABLED"), default=False)
+
+
 def _get_dry_run() -> bool:
 	return _to_bool(_load_dotenv_value("PROFIT_PROTECTION_STRATEGY_DRY_RUN"), default=DEFAULT_DRY_RUN)
 
@@ -184,8 +188,24 @@ def calculate_profit_protection_activation_usd(balance: float, volume: float) ->
 	return max(base_activation_usd, derived_activation_usd)
 
 
-def _belongs_to_strategy(position: Any) -> bool:
-	return position_belongs_to_strategy(position, get_primary_strategy_context())
+def get_profit_protection_contexts() -> list[StrategyContext]:
+	contexts = [get_primary_strategy_context()]
+	if _get_index_strategy_enabled():
+		contexts.append(get_index_strategy_context())
+	return contexts
+
+
+def get_profit_protection_context_for_position(position: Any) -> Optional[StrategyContext]:
+	for context in get_profit_protection_contexts():
+		if position_belongs_to_strategy(position, context):
+			return context
+	return None
+
+
+def is_position_under_profit_protection(position: Any) -> bool:
+	if not _get_enabled():
+		return False
+	return get_profit_protection_context_for_position(position) is not None
 
 
 def _log_action(
@@ -251,7 +271,6 @@ def run_profit_protection_strategy_if_due() -> None:
 	balance = float(getattr(account_info, "balance", 0.0) or 0.0)
 
 	service_folder = _get_service_folder()
-	strategy_context = get_primary_strategy_context()
 	state = _load_state(service_folder)
 	retrace_ratio = _get_retrace_ratio()
 	stale_hours = _get_stale_hours()
@@ -260,7 +279,8 @@ def run_profit_protection_strategy_if_due() -> None:
 	updated_state = dict(state)
 
 	for position in positions:
-		if not _belongs_to_strategy(position):
+		strategy_context = get_profit_protection_context_for_position(position)
+		if strategy_context is None:
 			continue
 
 		ticket = int(getattr(position, "ticket", 0) or 0)

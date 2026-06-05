@@ -6,11 +6,16 @@ from datetime import datetime, timezone
 from unittest.mock import patch
 
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
-from profit_protection_strategy import calculate_profit_protection_activation_usd, calculate_profit_protection_target_profit_usd
+from profit_protection_strategy import (
+	calculate_profit_protection_activation_usd,
+	calculate_profit_protection_target_profit_usd,
+	get_profit_protection_context_for_position,
+	is_position_under_profit_protection,
+)
 from reversal_pattern_strategy import can_activate_reversal_strategy, validate_reversal_pattern_signal
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
-from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
+from strategy_context import get_index_strategy_context, get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
 
 
 def _build_market_data(
@@ -182,6 +187,13 @@ class StrategyOwnershipTests(unittest.TestCase):
 
 		self.assertTrue(position_belongs_to_strategy(manual_position, primary))
 
+	@patch.dict(os.environ, {"INDEX_STRATEGY_ENABLED": "true"}, clear=False)
+	def test_index_strategy_position_is_recognized(self) -> None:
+		index_context = get_index_strategy_context()
+		index_position = {"magic": index_context.magic, "comment": f"ga:{index_context.strategy_id}"}
+
+		self.assertTrue(position_belongs_to_strategy(index_position, index_context))
+
 	def test_parallel_activation_uses_derived_margin_threshold_and_position_cap(self) -> None:
 		account_state = {"balance": 5000.0, "raw_margin_free": 900.0}
 		parallel = get_parallel_strategy_context()
@@ -246,6 +258,18 @@ class ProfitProtectionTests(unittest.TestCase):
 	def test_profit_protection_keeps_static_floor_for_small_positions(self) -> None:
 		self.assertEqual(calculate_profit_protection_target_profit_usd(100.0, 0.01), 0.1)
 		self.assertEqual(calculate_profit_protection_activation_usd(100.0, 0.01), 0.3)
+
+	@patch.dict(os.environ, {"INDEX_STRATEGY_ENABLED": "true", "PROFIT_PROTECTION_STRATEGY_ENABLED": "true"}, clear=False)
+	def test_profit_protection_can_manage_index_positions(self) -> None:
+		index_context = get_index_strategy_context()
+		index_position = {"magic": index_context.magic, "comment": f"ga:{index_context.strategy_id}"}
+
+		resolved_context = get_profit_protection_context_for_position(index_position)
+
+		self.assertIsNotNone(resolved_context)
+		assert resolved_context is not None
+		self.assertEqual(resolved_context.strategy_id, index_context.strategy_id)
+		self.assertTrue(is_position_under_profit_protection(index_position))
 
 
 if __name__ == "__main__":
