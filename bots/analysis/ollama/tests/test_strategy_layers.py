@@ -7,9 +7,10 @@ from unittest.mock import patch
 
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
 from profit_protection_strategy import calculate_profit_protection_activation_usd, calculate_profit_protection_target_profit_usd
+from reversal_pattern_strategy import can_activate_reversal_strategy, validate_reversal_pattern_signal
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
-from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
+from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
 
 
 def _build_market_data(
@@ -17,6 +18,14 @@ def _build_market_data(
 	spread_points: float = 10.0,
 	adx_h4: float = 25.0,
 	close_h1: float = 100.0,
+	open_h1: float = 99.2,
+	high_h1: float = 100.4,
+	low_h1: float = 98.8,
+	prev_open_h1: float = 100.4,
+	prev_high_h1: float = 100.7,
+	prev_low_h1: float = 99.0,
+	prev_close_h1: float = 99.1,
+	rsi_h1: float = 60.0,
 	rsi2_h1: float = 4.0,
 	bb_upper_h1: float = 103.0,
 	bb_lower_h1: float = 101.0,
@@ -28,12 +37,27 @@ def _build_market_data(
 	return {
 		"spread_snapshot": {"spread_points": spread_points},
 		"candles": {
-			"1h": [{"time": "2026-01-02T00:00:00+00:00", "close": close_h1}],
+			"1h": [
+				{
+					"time": "2026-01-01T23:00:00+00:00",
+					"open": prev_open_h1,
+					"high": prev_high_h1,
+					"low": prev_low_h1,
+					"close": prev_close_h1,
+				},
+				{
+					"time": "2026-01-02T00:00:00+00:00",
+					"open": open_h1,
+					"high": high_h1,
+					"low": low_h1,
+					"close": close_h1,
+				},
+			],
 		},
 		"oscillators": {
 			"1h": {
 				"ema20": _series(95.0),
-				"rsi": [{"time": "2026-01-02T00:00:00+00:00", "value": 60.0}],
+				"rsi": [{"time": "2026-01-02T00:00:00+00:00", "value": rsi_h1}],
 				"rsi2": [{"time": "2026-01-02T00:00:00+00:00", "value": rsi2_h1}],
 				"atr14": [{"time": "2026-01-02T00:00:00+00:00", "value": 1.0}],
 				"bb_middle20": [{"time": "2026-01-02T00:00:00+00:00", "value": 101.0}],
@@ -79,6 +103,54 @@ class SignalRuleTests(unittest.TestCase):
 		self.assertFalse(result.allowed)
 		self.assertIn("symbol_not_in_parallel_whitelist", result.reason_codes)
 
+	def test_reversal_pattern_rules_allow_valid_long(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"EURUSD_ecn",
+			"BUY",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=100.5,
+				open_h1=98.9,
+				high_h1=100.8,
+				low_h1=98.7,
+				prev_open_h1=100.3,
+				prev_high_h1=100.4,
+				prev_low_h1=98.8,
+				prev_close_h1=99.0,
+				rsi_h1=41.0,
+				rsi2_h1=18.0,
+				bb_lower_h1=99.0,
+				vwap_h4=101.4,
+			),
+		)
+
+		self.assertTrue(result.allowed)
+		self.assertEqual(result.regime_state, "reversal")
+
+	def test_reversal_pattern_rules_require_confirmed_pattern(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"EURUSD_ecn",
+			"BUY",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=99.4,
+				open_h1=99.6,
+				high_h1=99.8,
+				low_h1=98.9,
+				prev_open_h1=100.0,
+				prev_high_h1=100.3,
+				prev_low_h1=99.0,
+				prev_close_h1=99.5,
+				rsi_h1=42.0,
+				rsi2_h1=20.0,
+				bb_lower_h1=99.0,
+				vwap_h4=101.4,
+			),
+		)
+
+		self.assertFalse(result.allowed)
+		self.assertIn("bullish_reversal_pattern_missing", result.reason_codes)
+
 
 class RiskEngineTests(unittest.TestCase):
 	@patch("risk_engine.get_current_price", return_value=100.0)
@@ -116,6 +188,14 @@ class StrategyOwnershipTests(unittest.TestCase):
 		open_positions = [{"magic": parallel.magic, "comment": f"ga:{parallel.strategy_id}"} for _ in range(parallel.max_open_positions)]
 
 		self.assertFalse(can_activate_parallel_strategy(account_state, open_positions))
+
+	@patch.dict(os.environ, {"REVERSAL_STRATEGY_ENABLED": "true"}, clear=False)
+	def test_reversal_activation_uses_enable_flag_and_position_cap(self) -> None:
+		account_state = {"balance": 5000.0, "raw_margin_free": 900.0}
+		reversal = get_reversal_strategy_context()
+		open_positions = [{"magic": reversal.magic, "comment": f"ga:{reversal.strategy_id}"} for _ in range(reversal.max_open_positions)]
+
+		self.assertFalse(can_activate_reversal_strategy(account_state, open_positions))
 
 	@patch.dict(
 		os.environ,

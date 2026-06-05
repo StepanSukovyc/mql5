@@ -780,6 +780,9 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.execute_trade")
 	@patch("final_decision.validate_symbol")
 	@patch("final_decision.calculate_synthetic_risk_plan")
+	@patch("final_decision.validate_reversal_pattern_signal")
+	@patch("final_decision.can_activate_reversal_strategy")
+	@patch("final_decision.is_reversal_strategy_enabled")
 	@patch("final_decision.validate_mean_reversion_signal")
 	@patch("final_decision.validate_trend_following_signal")
 	@patch("final_decision.can_activate_parallel_strategy")
@@ -806,6 +809,9 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_can_activate_parallel_strategy,
 		mock_validate_trend_following_signal,
 		mock_validate_mean_reversion_signal,
+		mock_is_reversal_strategy_enabled,
+		mock_can_activate_reversal_strategy,
+		mock_validate_reversal_pattern_signal,
 		mock_calculate_synthetic_risk_plan,
 		mock_validate_symbol,
 		mock_execute_trade,
@@ -832,6 +838,8 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_count_successful_trades_since.return_value = 0
 		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
 		mock_can_activate_parallel_strategy.return_value = True
+		mock_is_reversal_strategy_enabled.return_value = False
+		mock_can_activate_reversal_strategy.return_value = False
 		mock_validate_trend_following_signal.return_value = SimpleNamespace(
 			allowed=False,
 			reason_codes=["adx_below_threshold"],
@@ -842,6 +850,12 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			allowed=True,
 			reason_codes=[],
 			regime_state="range",
+			metrics={},
+		)
+		mock_validate_reversal_pattern_signal.return_value = SimpleNamespace(
+			allowed=False,
+			reason_codes=["unused"],
+			regime_state="reversal",
 			metrics={},
 		)
 		mock_calculate_synthetic_risk_plan.return_value = SimpleNamespace(
@@ -906,6 +920,9 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.execute_trade")
 	@patch("final_decision.validate_symbol")
 	@patch("final_decision.calculate_synthetic_risk_plan")
+	@patch("final_decision.validate_reversal_pattern_signal")
+	@patch("final_decision.can_activate_reversal_strategy")
+	@patch("final_decision.is_reversal_strategy_enabled")
 	@patch("final_decision.validate_mean_reversion_signal")
 	@patch("final_decision.validate_trend_following_signal")
 	@patch("final_decision.can_activate_parallel_strategy")
@@ -932,6 +949,9 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_can_activate_parallel_strategy,
 		mock_validate_trend_following_signal,
 		mock_validate_mean_reversion_signal,
+		mock_is_reversal_strategy_enabled,
+		mock_can_activate_reversal_strategy,
+		mock_validate_reversal_pattern_signal,
 		mock_calculate_synthetic_risk_plan,
 		mock_validate_symbol,
 		mock_execute_trade,
@@ -958,6 +978,8 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_count_successful_trades_since.return_value = 0
 		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
 		mock_can_activate_parallel_strategy.return_value = True
+		mock_is_reversal_strategy_enabled.return_value = False
+		mock_can_activate_reversal_strategy.return_value = False
 		mock_validate_trend_following_signal.return_value = SimpleNamespace(
 			allowed=True,
 			reason_codes=[],
@@ -968,6 +990,12 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			allowed=True,
 			reason_codes=[],
 			regime_state="range",
+			metrics={},
+		)
+		mock_validate_reversal_pattern_signal.return_value = SimpleNamespace(
+			allowed=False,
+			reason_codes=["unused"],
+			regime_state="reversal",
 			metrics={},
 		)
 		mock_calculate_synthetic_risk_plan.return_value = SimpleNamespace(
@@ -1004,6 +1032,125 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		self.assertEqual(mock_validate_trend_following_signal.call_count, 0)
 		self.assertEqual(mock_validate_mean_reversion_signal.call_count, 1)
 		self.assertTrue(any(row["strategy_id"] == "gemini_primary" and row["reason"] == "activation_margin_below_threshold" for row in audit_rows))
+
+	@patch.dict(os.environ, {"REVERSAL_STRATEGY_ENABLED": "true"}, clear=False)
+	@patch("final_decision.execute_trade")
+	@patch("final_decision.validate_symbol")
+	@patch("final_decision.calculate_synthetic_risk_plan")
+	@patch("final_decision.validate_reversal_pattern_signal")
+	@patch("final_decision.can_activate_reversal_strategy")
+	@patch("final_decision.is_reversal_strategy_enabled")
+	@patch("final_decision.validate_mean_reversion_signal")
+	@patch("final_decision.validate_trend_following_signal")
+	@patch("final_decision.can_activate_parallel_strategy")
+	@patch("final_decision._load_market_data_for_symbol")
+	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
+	@patch("final_decision.count_successful_trades_today")
+	@patch("final_decision.count_successful_trades")
+	@patch("final_decision._load_gemini_api_config")
+	@patch("final_decision.get_open_positions")
+	@patch("final_decision.get_account_state")
+	@patch("final_decision.load_predictions")
+	def test_reversal_strategy_executes_when_primary_and_parallel_reject(
+		self,
+		mock_load_predictions,
+		mock_get_account_state,
+		mock_get_open_positions,
+		mock_load_gemini_api_config,
+		mock_count_successful_trades,
+		mock_count_successful_trades_today,
+		mock_count_successful_trades_since,
+		mock_ask_gemini_final_decision,
+		mock_load_market_data_for_symbol,
+		mock_can_activate_parallel_strategy,
+		mock_validate_trend_following_signal,
+		mock_validate_mean_reversion_signal,
+		mock_is_reversal_strategy_enabled,
+		mock_can_activate_reversal_strategy,
+		mock_validate_reversal_pattern_signal,
+		mock_calculate_synthetic_risk_plan,
+		mock_validate_symbol,
+		mock_execute_trade,
+	) -> None:
+		mock_load_predictions.return_value = [{"symbol": "EURUSD_ecn", "BUY": 60, "SELL": 20}]
+		mock_get_account_state.return_value = {
+			"balance_cap": 5000.0,
+			"balance": 4280.60,
+			"equity": 3201.53,
+			"margin_free": 839.84,
+			"raw_margin_free": 1000.00,
+			"margin_percent": 19.62,
+		}
+		mock_get_open_positions.return_value = []
+		mock_load_gemini_api_config.return_value = SimpleNamespace(
+			credentials_path="C:/vertex/service-account.json",
+			project="demo-project",
+			region="europe-west4",
+			model="gemini-2.5-flash",
+			fallback_models=("gemini-2.5-flash",),
+		)
+		mock_count_successful_trades.return_value = 5
+		mock_count_successful_trades_today.return_value = 0
+		mock_count_successful_trades_since.return_value = 0
+		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
+		mock_can_activate_parallel_strategy.return_value = True
+		mock_validate_trend_following_signal.return_value = SimpleNamespace(
+			allowed=False,
+			reason_codes=["adx_below_threshold"],
+			regime_state="range",
+			metrics={},
+		)
+		mock_validate_mean_reversion_signal.return_value = SimpleNamespace(
+			allowed=False,
+			reason_codes=["close_not_below_lower_band"],
+			regime_state="range",
+			metrics={},
+		)
+		mock_is_reversal_strategy_enabled.return_value = True
+		mock_can_activate_reversal_strategy.return_value = True
+		mock_validate_reversal_pattern_signal.return_value = SimpleNamespace(
+			allowed=True,
+			reason_codes=[],
+			regime_state="reversal",
+			metrics={},
+		)
+		mock_calculate_synthetic_risk_plan.return_value = SimpleNamespace(
+			risk_usd=17.5,
+			synthetic_stop_price=99.0,
+			synthetic_stop_distance=1.0,
+			take_profit_price=101.5,
+			lot_size=0.01,
+		)
+		mock_validate_symbol.return_value = (True, "")
+		mock_execute_trade.return_value = True
+		mock_ask_gemini_final_decision.return_value = json.dumps(
+			{
+				"recommended_symbol": "EURUSD_ecn",
+				"action": "BUY",
+				"reasoning": "fallback",
+			}
+		)
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "predikce"
+			service_folder = Path(temp_dir) / "service"
+			predictions_folder.mkdir(parents=True, exist_ok=True)
+
+			result = make_final_trading_decision(predictions_folder, service_folder)
+			audit_file = service_folder / "trade_logs" / "trade_decision_audit.csv"
+			reversal_status_file = service_folder / "trade_logs" / "reversal_strategy_status.csv"
+			with open(audit_file, "r", encoding="utf-8", newline="") as handle:
+				audit_rows = list(csv.DictReader(handle))
+			with open(reversal_status_file, "r", encoding="utf-8", newline="") as handle:
+				reversal_status_rows = list(csv.DictReader(handle))
+
+		self.assertTrue(result)
+		self.assertEqual(mock_execute_trade.call_count, 1)
+		self.assertEqual(mock_execute_trade.call_args.kwargs["strategy_id"], "reversal_pattern")
+		self.assertTrue(reversal_status_rows)
+		self.assertTrue(any(row["strategy_id"] == "parallel_mean_reversion" and row["reason"] == "signal_rejected" for row in audit_rows))
+		self.assertTrue(any(row["strategy_id"] == "reversal_pattern" and row["trade_executed"] == "True" for row in audit_rows))
 
 
 if __name__ == "__main__":

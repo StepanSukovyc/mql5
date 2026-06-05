@@ -31,6 +31,11 @@ from instrument_utils import (
 from mt5_symbols import estimate_order_profit, get_current_price, get_symbol_info
 from mt5_positions import get_open_positions
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
+from reversal_pattern_strategy import (
+	can_activate_reversal_strategy,
+	is_reversal_strategy_enabled,
+	validate_reversal_pattern_signal,
+)
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
 from strategy_context import (
@@ -39,6 +44,7 @@ from strategy_context import (
 	count_open_positions_for_strategy,
 	get_parallel_strategy_context,
 	get_primary_strategy_context,
+	get_reversal_strategy_context,
 	is_strategy_trade_window_open,
 )
 from trade_execution import execute_trade
@@ -145,6 +151,18 @@ RULE_REASON_TEXT_CS = {
 	"rsi2_not_extreme_long": "RSI2 neni dostatecne preprodane pro long vstup.",
 	"close_not_above_upper_band": "Pro SELL neni close nad hornim Bollinger bandem.",
 	"rsi2_not_extreme_short": "RSI2 neni dostatecne prekoupene pro short vstup.",
+	"symbol_not_in_reversal_whitelist": "Symbol neni na whitelistu reverzni strategie.",
+	"adx_above_reversal_threshold": "ADX je prilis vysoky pro reverzni vstup proti pohybu.",
+	"pattern_range_below_threshold": "Reverzni pattern je vzhledem k ATR prilis maly.",
+	"pattern_not_at_lower_extreme": "Bullish reverzni pattern nevznikl dostatecne nizko u extremu.",
+	"pattern_not_at_upper_extreme": "Bearish reverzni pattern nevznikl dostatecne vysoko u extremu.",
+	"close_not_below_vwap": "Pro long reverzni setup je close uz nad VWAP, vstup je pozde.",
+	"close_not_above_vwap": "Pro short reverzni setup je close uz pod VWAP, vstup je pozde.",
+	"rsi_not_supportive_long": "RSI nepotvrzuje preprodany long reverzni setup.",
+	"rsi_not_supportive_short": "RSI nepotvrzuje prekoupene short reverzni setup.",
+	"bullish_reversal_pattern_missing": "Na long chybi bullish reverzni svickovy pattern.",
+	"bearish_reversal_pattern_missing": "Na short chybi bearish reverzni svickovy pattern.",
+	"confirmation_close_too_weak": "Zaviraci cena nepotvrdila reverzni pattern dostatecne silne.",
 	"missing_indicator_data": "Chybi indikatorova data potrebna pro vyhodnoceni.",
 	"open_position_exists": "Na tomto symbolu uz existuje otevrena pozice.",
 	"recent_symbol_trade": "Na tomto symbolu uz probehl nedavny obchod.",
@@ -228,7 +246,7 @@ def _build_reason_summary(reason: str, details: Optional[Dict[str, object]]) -> 
 	return " ".join(part for part in summary_parts if part)
 
 
-def _build_parallel_status_row(base_row: Dict[str, str], details: Optional[Dict[str, object]]) -> Dict[str, str]:
+def _build_strategy_status_row(base_row: Dict[str, str], details: Optional[Dict[str, object]]) -> Dict[str, str]:
 	reason = base_row.get("reason", "")
 	root_rejection_reason = _extract_root_rejection_reason(details)
 	rule_failures = _extract_rule_failures(reason, details)
@@ -257,6 +275,12 @@ def _build_parallel_status_row(base_row: Dict[str, str], details: Optional[Dict[
 		"summary_cs": _build_reason_summary(reason, details),
 		"details": base_row.get("details", ""),
 	}
+
+
+def _strategy_status_file_name(strategy_label: str) -> Optional[str]:
+	if strategy_label in {"parallel", "reversal"}:
+		return f"{strategy_label}_strategy_status.csv"
+	return None
 
 
 def _get_gemini_full_control_every_n_trades() -> int:
@@ -422,12 +446,13 @@ def _update_trade_decision_snapshot(
 		for label in sorted(rows_by_label):
 			writer.writerow(rows_by_label[label])
 
-		if strategy_label == "parallel":
-			parallel_status_file = log_dir / "parallel_strategy_status.csv"
-			with open(parallel_status_file, "w", newline="", encoding="utf-8") as handle:
+		status_file_name = _strategy_status_file_name(strategy_label)
+		if status_file_name:
+			strategy_status_file = log_dir / status_file_name
+			with open(strategy_status_file, "w", newline="", encoding="utf-8") as handle:
 				writer = csv.DictWriter(handle, fieldnames=PARALLEL_STRATEGY_STATUS_HEADERS)
 				writer.writeheader()
-				writer.writerow(_build_parallel_status_row(rows_by_label[strategy_label], details))
+				writer.writerow(_build_strategy_status_row(rows_by_label[strategy_label], details))
 
 
 def _log_trade_decision_audit(
@@ -1496,39 +1521,66 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 			print("=" * 60)
 			return True
 
-		if parallel_activation_met:
-			parallel_profile = StrategyExecutionProfile(
-				label="parallel",
-				context=get_parallel_strategy_context(),
-				signal_validator=validate_mean_reversion_signal,
-				risk_percent_env="PARALLEL_RISK_PER_TRADE_PERCENT",
-				stop_atr_multiplier_env="PARALLEL_SYNTHETIC_STOP_ATR_MULTIPLIER",
-				tp_r_multiple_env="PARALLEL_TAKE_PROFIT_R_MULTIPLIER",
-				max_trades_per_day_env="PARALLEL_MAX_TRADES_PER_DAY",
-				max_trades_per_symbol_per_day_env="PARALLEL_MAX_TRADES_PER_SYMBOL_PER_DAY",
-				trade_cooldown_env="PARALLEL_SYMBOL_TRADE_COOLDOWN_MINUTES",
-				default_trade_cooldown_minutes=30,
-				default_max_trades_per_symbol_per_day=1,
+		secondary_profiles: List[Tuple[bool, StrategyExecutionProfile]] = [
+			(
+				parallel_activation_met,
+				StrategyExecutionProfile(
+					label="parallel",
+					context=get_parallel_strategy_context(),
+					signal_validator=validate_mean_reversion_signal,
+					risk_percent_env="PARALLEL_RISK_PER_TRADE_PERCENT",
+					stop_atr_multiplier_env="PARALLEL_SYNTHETIC_STOP_ATR_MULTIPLIER",
+					tp_r_multiple_env="PARALLEL_TAKE_PROFIT_R_MULTIPLIER",
+					max_trades_per_day_env="PARALLEL_MAX_TRADES_PER_DAY",
+					max_trades_per_symbol_per_day_env="PARALLEL_MAX_TRADES_PER_SYMBOL_PER_DAY",
+					trade_cooldown_env="PARALLEL_SYMBOL_TRADE_COOLDOWN_MINUTES",
+					default_trade_cooldown_minutes=30,
+					default_max_trades_per_symbol_per_day=1,
+				),
+			),
+		]
+		if is_reversal_strategy_enabled():
+			secondary_profiles.append(
+				(
+					can_activate_reversal_strategy(account_state, open_positions),
+					StrategyExecutionProfile(
+						label="reversal",
+						context=get_reversal_strategy_context(),
+						signal_validator=validate_reversal_pattern_signal,
+						risk_percent_env="REVERSAL_RISK_PER_TRADE_PERCENT",
+						stop_atr_multiplier_env="REVERSAL_SYNTHETIC_STOP_ATR_MULTIPLIER",
+						tp_r_multiple_env="REVERSAL_TAKE_PROFIT_R_MULTIPLIER",
+						max_trades_per_day_env="REVERSAL_MAX_TRADES_PER_DAY",
+						max_trades_per_symbol_per_day_env="REVERSAL_MAX_TRADES_PER_SYMBOL_PER_DAY",
+						trade_cooldown_env="REVERSAL_SYMBOL_TRADE_COOLDOWN_MINUTES",
+						default_trade_cooldown_minutes=60,
+						default_max_trades_per_symbol_per_day=1,
+					),
+				)
 			)
-			if _attempt_strategy_trade(
-				profile=parallel_profile,
-				candidates=candidate_queue,
-				predictions_folder=predictions_folder,
-				service_folder=service_folder,
-				account_state=account_state,
-				open_positions=open_positions,
-				open_crypto_positions=open_crypto_positions,
-			):
-				print("\n" + "=" * 60)
-				print("✅ Final Trading Decision Completed")
-				print("=" * 60)
-				return True
-		else:
-			print("⚠️  Parallel strategy activation gate not satisfied")
+
+		for activation_met, profile in secondary_profiles:
+			if activation_met:
+				if _attempt_strategy_trade(
+					profile=profile,
+					candidates=candidate_queue,
+					predictions_folder=predictions_folder,
+					service_folder=service_folder,
+					account_state=account_state,
+					open_positions=open_positions,
+					open_crypto_positions=open_crypto_positions,
+				):
+					print("\n" + "=" * 60)
+					print("✅ Final Trading Decision Completed")
+					print("=" * 60)
+					return True
+				continue
+
+			print(f"⚠️  {profile.label.capitalize()} strategy activation gate not satisfied")
 			_log_trade_decision_audit(
 				service_folder,
-				strategy_id=get_parallel_strategy_context().strategy_id,
-				strategy_label="parallel",
+				strategy_id=profile.context.strategy_id,
+				strategy_label=profile.label,
 				stage="strategy_blocked",
 				trade_executed=False,
 				reason="activation_gate_not_satisfied",

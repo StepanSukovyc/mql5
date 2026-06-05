@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-06-05 (Third Reversal-Pattern Fallback Strategy)
+
+- **Added A Third Entry Strategy Based On Reversal Price Formations**
+  - New module `reversal_pattern_strategy.py` validates bullish and bearish reversal setups from live candle structure instead of relying only on oscillators
+  - The strategy looks for engulfing or pin-bar style rejection at Bollinger extremes, adds VWAP location checks, and filters the setup with ADX, spread, RSI, and ATR-size constraints
+  - The strategy is opt-in through `REVERSAL_STRATEGY_ENABLED` and keeps its own `strategy_id`, `magic`, session window, margin gate, position cap, cooldown, and risk profile
+
+- **Extended Final Decision Orchestration To Run A Third Fallback Layer**
+  - `final_decision.py` now executes strategies in the order `primary -> parallel -> reversal` using the same local risk, cooldown, audit, and execution pipeline
+  - Secondary strategy status logging is now generic, so the runtime writes both `parallel_strategy_status.csv` and `reversal_strategy_status.csv`
+  - `strategy_context.py` and `account_monitor.py` now include the reversal profile when resolving known strategy ownership and the default wake-up margin threshold
+
+- **Documented And Enabled Runtime Configuration For Reversal Strategy**
+  - `.env.example` now contains the full `REVERSAL_*` configuration namespace and a short operator description of the setup
+  - Local `.env` now enables the strategy with a conservative FX-major whitelist and explicit thresholds for ADX, ATR range, confirmation close, and pin-bar shape
+  - `TRADING_LOGIC.md` now describes when the reversal profile runs, which filters it uses, and where to look for its audit/status output
+
 ## 2026-05-22 (Rolling 30-Day Loss Cleanup Advisory Strategy)
 
 - **Added `monthly_loss_cleanup_strategy.py` — advisory-only, never closes positions**

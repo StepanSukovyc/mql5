@@ -87,6 +87,30 @@ def get_parallel_strategy_context() -> StrategyContext:
 	)
 
 
+def get_reversal_strategy_context() -> StrategyContext:
+	primary_activation = get_primary_strategy_context().activation_margin_percent
+	delta = _get_env_float("REVERSAL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT", 5.0)
+	return StrategyContext(
+		strategy_id=os.getenv("REVERSAL_STRATEGY_ID", "reversal_pattern"),
+		magic=_get_env_int("REVERSAL_STRATEGY_MAGIC", 234300),
+		manage_legacy_positions=_get_env_bool("REVERSAL_MANAGE_LEGACY_POSITIONS", False),
+		activation_margin_percent=max(primary_activation - delta, 0.0),
+		max_open_positions=_get_env_int("REVERSAL_STRATEGY_MAX_OPEN_POSITIONS", 3),
+		session_start_hour_utc=_get_env_int(
+			"REVERSAL_SESSION_START_HOUR_UTC",
+			get_parallel_strategy_context().session_start_hour_utc,
+		),
+		session_end_hour_utc=_get_env_int(
+			"REVERSAL_SESSION_END_HOUR_UTC",
+			get_parallel_strategy_context().session_end_hour_utc,
+		),
+		friday_cutoff_hour_utc=_get_env_int(
+			"REVERSAL_FRIDAY_CUTOFF_HOUR_UTC",
+			get_parallel_strategy_context().friday_cutoff_hour_utc,
+		),
+	)
+
+
 def is_strategy_trade_window_open(context: StrategyContext, now_utc: Optional[datetime] = None) -> bool:
 	now = now_utc or datetime.now(tz=timezone.utc)
 	current_hour = now.hour
@@ -140,7 +164,7 @@ def position_belongs_to_strategy(position: Any, context: StrategyContext) -> boo
 	if not context.manage_legacy_positions:
 		return False
 
-	known_contexts = [get_primary_strategy_context(), get_parallel_strategy_context()]
+	known_contexts = [get_primary_strategy_context(), get_parallel_strategy_context(), get_reversal_strategy_context()]
 	if _is_known_strategy_position(position, known_contexts):
 		return False
 	return magic == 0
