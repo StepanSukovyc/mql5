@@ -25,6 +25,12 @@ _GOOGLE_CLOUD_PLATFORM_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
 _LEGACY_GEMINI_TIMEOUT_SECONDS = 60.0
 _PREDICTION_MAX_OUTPUT_TOKENS = 512
 _FINAL_DECISION_MAX_OUTPUT_TOKENS = 768
+_LEGACY_GEMINI_MODEL_REWRITES = {
+	"/models/gemini-2.0-flash:generateContent": "/models/gemini-2.5-flash:generateContent",
+	"/models/gemini-2.0-flash-001:generateContent": "/models/gemini-2.5-flash:generateContent",
+	"/models/gemini-2.0-flash-lite:generateContent": "/models/gemini-2.5-flash-lite:generateContent",
+	"/models/gemini-2.0-flash-lite-001:generateContent": "/models/gemini-2.5-flash-lite:generateContent",
+}
 
 _PREDICTION_RESPONSE_SCHEMA = {
 	"type": "OBJECT",
@@ -455,13 +461,20 @@ def _get_service_account_access_token(credentials_path: str) -> str:
 
 def _load_legacy_gemini_api_config() -> Optional[Dict[str, str]]:
 	api_key = (os.getenv("GEMINI_API_KEY") or "").strip()
-	api_url = (os.getenv("GEMINI_URL") or "").strip()
+	api_url = _normalize_legacy_gemini_api_url((os.getenv("GEMINI_URL") or "").strip())
 	if not api_key or not api_url:
 		return None
 	return {
 		"api_key": api_key,
 		"api_url": api_url,
 	}
+
+
+def _normalize_legacy_gemini_api_url(api_url: str) -> str:
+	for deprecated_path, replacement_path in _LEGACY_GEMINI_MODEL_REWRITES.items():
+		if deprecated_path in api_url:
+			return api_url.replace(deprecated_path, replacement_path)
+	return api_url
 
 
 def _get_legacy_prompt_with_schema(prompt: str, response_schema: Dict[str, Any]) -> str:

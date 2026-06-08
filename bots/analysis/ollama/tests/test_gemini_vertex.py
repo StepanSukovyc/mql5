@@ -9,6 +9,7 @@ from unittest.mock import patch
 from gemini_vertex import (
 	GeminiVertexRequestError,
 	_get_legacy_prompt_with_schema,
+	_normalize_legacy_gemini_api_url,
 	_parse_structured_json_response,
 	_should_skip_remaining_vertex_models,
 	_should_try_rest_fallback,
@@ -148,6 +149,14 @@ class GeminiVertexParsingTests(unittest.TestCase):
 				404,
 				"Publisher Model `projects/test/locations/europe-west1/publishers/google/models/gemini-2.0-flash` was not found or your project does not have access to it.",
 			)
+		)
+
+	def test_legacy_api_url_rewrites_removed_flash_model_to_supported_endpoint(self) -> None:
+		self.assertEqual(
+			_normalize_legacy_gemini_api_url(
+				"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+			),
+			"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
 		)
 
 
