@@ -188,6 +188,12 @@ def calculate_profit_protection_activation_usd(balance: float, volume: float) ->
 	return max(base_activation_usd, derived_activation_usd)
 
 
+def calculate_profit_protection_locked_profit_usd(max_net_profit: float, activation_usd: float) -> float:
+	if max_net_profit <= 0:
+		return 0.0
+	return round(max(max_net_profit * _get_retrace_ratio(), activation_usd), 2)
+
+
 def get_profit_protection_contexts() -> list[StrategyContext]:
 	contexts = [get_primary_strategy_context()]
 	if _get_index_strategy_enabled():
@@ -302,11 +308,16 @@ def run_profit_protection_strategy_if_due() -> None:
 		state_key = f"{strategy_context.strategy_id}:{ticket}"
 		position_state = updated_state.get(state_key, {})
 		max_net_profit = max(float(position_state.get("max_net_profit", 0.0) or 0.0), net_profit)
-		updated_state[state_key] = {"max_net_profit": max_net_profit}
+		locked_net_profit = calculate_profit_protection_locked_profit_usd(max_net_profit, activation_usd)
+		updated_state[state_key] = {
+			"max_net_profit": max_net_profit,
+			"current_net_profit": net_profit,
+			"locked_net_profit": locked_net_profit,
+		}
 
 		close_reason: Optional[str] = None
-		if max_net_profit >= activation_usd and net_profit <= max(max_net_profit * retrace_ratio, activation_usd):
-			locked_profit_usd = max(max_net_profit * retrace_ratio, activation_usd)
+		if max_net_profit >= activation_usd and net_profit <= locked_net_profit:
+			locked_profit_usd = locked_net_profit
 			close_reason = (
 				f"profit retracement detected: current {net_profit:.2f} <= "
 				f"locked {locked_profit_usd:.2f} (activation {activation_usd:.2f})"

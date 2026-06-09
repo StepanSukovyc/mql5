@@ -8,6 +8,7 @@ from unittest.mock import patch
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
 from profit_protection_strategy import (
 	calculate_profit_protection_activation_usd,
+	calculate_profit_protection_locked_profit_usd,
 	calculate_profit_protection_target_profit_usd,
 	get_profit_protection_context_for_position,
 	is_position_under_profit_protection,
@@ -231,33 +232,39 @@ class StrategyOwnershipTests(unittest.TestCase):
 
 
 class ProfitProtectionTests(unittest.TestCase):
-	@patch.dict(
-		os.environ,
-		{
+	@patch("profit_protection_strategy._load_dotenv_value")
+	def test_profit_protection_scales_with_balance_and_volume(self, mock_load_dotenv_value) -> None:
+		mock_load_dotenv_value.side_effect = lambda key: {
 			"PROFIT_PROTECTION_ACTIVATION_USD": "0.30",
 			"PROFIT_PROTECTION_TARGET_BALANCE_DIVISOR": "10",
 			"PROFIT_PROTECTION_ACTIVATION_TARGET_RATIO": "0.50",
-		},
-		clear=False,
-	)
-	def test_profit_protection_scales_with_balance_and_volume(self) -> None:
+		}.get(key)
+
 		self.assertEqual(calculate_profit_protection_target_profit_usd(5000.0, 0.01), 5.0)
 		self.assertEqual(calculate_profit_protection_activation_usd(5000.0, 0.01), 2.5)
 		self.assertEqual(calculate_profit_protection_target_profit_usd(5000.0, 0.02), 10.0)
 		self.assertEqual(calculate_profit_protection_activation_usd(5000.0, 0.02), 5.0)
 
-	@patch.dict(
-		os.environ,
-		{
+	@patch("profit_protection_strategy._load_dotenv_value")
+	def test_profit_protection_keeps_static_floor_for_small_positions(self, mock_load_dotenv_value) -> None:
+		mock_load_dotenv_value.side_effect = lambda key: {
 			"PROFIT_PROTECTION_ACTIVATION_USD": "0.30",
 			"PROFIT_PROTECTION_TARGET_BALANCE_DIVISOR": "10",
 			"PROFIT_PROTECTION_ACTIVATION_TARGET_RATIO": "0.50",
-		},
-		clear=False,
-	)
-	def test_profit_protection_keeps_static_floor_for_small_positions(self) -> None:
+		}.get(key)
+
 		self.assertEqual(calculate_profit_protection_target_profit_usd(100.0, 0.01), 0.1)
 		self.assertEqual(calculate_profit_protection_activation_usd(100.0, 0.01), 0.3)
+		self.assertEqual(calculate_profit_protection_locked_profit_usd(0.2, 0.3), 0.3)
+
+	@patch("profit_protection_strategy._load_dotenv_value")
+	def test_profit_protection_exposes_locked_profit_from_peak(self, mock_load_dotenv_value) -> None:
+		mock_load_dotenv_value.side_effect = lambda key: {
+			"PROFIT_PROTECTION_RETRACE_RATIO": "0.55",
+		}.get(key)
+
+		self.assertEqual(calculate_profit_protection_locked_profit_usd(10.0, 2.5), 5.5)
+		self.assertEqual(calculate_profit_protection_locked_profit_usd(4.0, 2.5), 2.5)
 
 	@patch.dict(os.environ, {"INDEX_STRATEGY_ENABLED": "true", "PROFIT_PROTECTION_STRATEGY_ENABLED": "true"}, clear=False)
 	def test_profit_protection_can_manage_index_positions(self) -> None:
