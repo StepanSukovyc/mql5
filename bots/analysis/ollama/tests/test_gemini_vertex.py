@@ -37,6 +37,7 @@ class GeminiVertexParsingTests(unittest.TestCase):
 		prompt = mock_request_final_decision_json.call_args.args[1]
 		self.assertIn('"candidates": [', prompt)
 		self.assertIn('"recommended_symbol": "SYMBOL_NAME"', prompt)
+		self.assertIn("Pole reasoning musí být krátké", prompt)
 
 	def test_parses_json_wrapped_in_code_fence(self) -> None:
 		response = SimpleNamespace(

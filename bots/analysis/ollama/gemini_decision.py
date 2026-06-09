@@ -123,17 +123,17 @@ def ask_gemini_final_decision(
 		{
 			"recommended_symbol": "SYMBOL_NAME",
 			"action": "BUY",
-			"reasoning": "...",
+			"reasoning": "Silny trend a cisty BUY bias bez kolize s otevrenymi pozicemi.",
 			"candidates": [
 				{
 					"symbol": "SYMBOL_NAME",
 					"action": "BUY",
-					"reasoning": "...",
+					"reasoning": "Nejsilnejsi trendovy kandidat.",
 				},
 				{
 					"symbol": "ALTERNATIVE_SYMBOL",
 					"action": "SELL",
-					"reasoning": "...",
+					"reasoning": "Slabsi alternativa pro fallback.",
 				},
 			],
 		},
@@ -168,6 +168,8 @@ DŮLEŽITÉ OBCHODNÍ NASTAVENÍ:
 - Chci ale průběžně generovat zisky na denní bázi.
 - Zohledni transakční náklad: za každých 0.01 lot je poplatek 0.10 USD.
 - Velikost lotu a take_profit už neřídíš ty; ty vybíráš jen instrument a směr.
+- Pole reasoning musí být krátké: maximálně 1 až 2 krátké věty a přibližně do 180 znaků.
+- U položek v candidates drž reasoning ještě stručnější, ideálně jedna krátká věta.
 
 Odpověď prosím formátuj POUZE jako JSON bez dalšího textu, v tomto formátu:
 
