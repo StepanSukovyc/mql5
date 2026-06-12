@@ -110,8 +110,14 @@ class SignalRuleTests(unittest.TestCase):
 		self.assertIn("symbol_not_in_parallel_whitelist", result.reason_codes)
 
 	@patch.dict(os.environ, {"PARALLEL_SYMBOL_WHITELIST": ""}, clear=False)
-	@patch("parallel_strategy_mean_reversion.is_index_symbol", return_value=True)
-	def test_mean_reversion_rules_allow_index_when_whitelist_empty(self, _mock_is_index_symbol) -> None:
+	def test_mean_reversion_rules_allow_forex_when_whitelist_empty(self) -> None:
+		result = validate_mean_reversion_signal("AUDJPY_ecn", "BUY", _build_market_data(adx_h4=16.0))
+
+		self.assertTrue(result.allowed)
+		self.assertNotIn("symbol_not_in_parallel_whitelist", result.reason_codes)
+
+	@patch.dict(os.environ, {"PARALLEL_SYMBOL_WHITELIST": ""}, clear=False)
+	def test_mean_reversion_rules_allow_index_when_whitelist_empty(self) -> None:
 		result = validate_mean_reversion_signal("US100_ecn", "BUY", _build_market_data(adx_h4=16.0))
 
 		self.assertTrue(result.allowed)
@@ -166,8 +172,32 @@ class SignalRuleTests(unittest.TestCase):
 		self.assertIn("bullish_reversal_pattern_missing", result.reason_codes)
 
 	@patch.dict(os.environ, {"REVERSAL_SYMBOL_WHITELIST": ""}, clear=False)
-	@patch("reversal_pattern_strategy.is_index_symbol", return_value=True)
-	def test_reversal_pattern_rules_allow_index_when_whitelist_empty(self, _mock_is_index_symbol) -> None:
+	def test_reversal_pattern_rules_allow_forex_when_whitelist_empty(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"AUDJPY_ecn",
+			"BUY",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=100.5,
+				open_h1=98.9,
+				high_h1=100.8,
+				low_h1=98.7,
+				prev_open_h1=100.3,
+				prev_high_h1=100.4,
+				prev_low_h1=98.8,
+				prev_close_h1=99.0,
+				rsi_h1=41.0,
+				rsi2_h1=18.0,
+				bb_lower_h1=99.0,
+				vwap_h4=101.4,
+			),
+		)
+
+		self.assertTrue(result.allowed)
+		self.assertNotIn("symbol_not_in_reversal_whitelist", result.reason_codes)
+
+	@patch.dict(os.environ, {"REVERSAL_SYMBOL_WHITELIST": ""}, clear=False)
+	def test_reversal_pattern_rules_allow_index_when_whitelist_empty(self) -> None:
 		result = validate_reversal_pattern_signal(
 			"US100_ecn",
 			"BUY",

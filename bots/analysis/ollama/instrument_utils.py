@@ -145,6 +145,19 @@ def is_index_symbol(symbol: str) -> bool:
 	return symbol_matches_patterns(symbol, configured)
 
 
+def is_secondary_strategy_symbol_allowed(symbol: str, whitelist_patterns: Optional[Iterable[str]] = None) -> bool:
+	"""Return whether parallel/reversal strategies may consider the symbol.
+
+	When a whitelist is configured, only whitelist matches are allowed.
+	When the whitelist is empty, the secondary strategies may trade the full
+	non-crypto universe: Forex, indices, and other allowed CFD instruments.
+	"""
+	patterns = [item.strip() for item in (whitelist_patterns or []) if str(item).strip()]
+	if patterns:
+		return symbol_matches_patterns(symbol, patterns)
+	return not is_crypto_symbol(symbol)
+
+
 def get_base_prediction_threshold() -> float:
 	"""Return the minimum BUY/SELL confidence for standard instruments."""
 	return _parse_float_env("MT5_MIN_SIGNAL_PERCENT", 35.0, minimum=0.0)

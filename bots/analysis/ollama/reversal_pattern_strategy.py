@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from typing import Dict, List, Optional
 
-from instrument_utils import is_index_symbol, symbol_matches_patterns
+from instrument_utils import is_secondary_strategy_symbol_allowed
 from signal_rules import SignalValidationResult, _is_news_blocked
 from strategy_context import count_open_positions_for_strategy, get_reversal_strategy_context
 
@@ -196,10 +196,7 @@ def validate_reversal_pattern_signal(symbol: str, action: str, market_data: Dict
 		}
 	)
 
-	if whitelist:
-		if not symbol_matches_patterns(symbol, whitelist):
-			reasons.append("symbol_not_in_reversal_whitelist")
-	elif not is_index_symbol(symbol):
+	if not is_secondary_strategy_symbol_allowed(symbol, whitelist):
 		reasons.append("symbol_not_in_reversal_whitelist")
 
 	max_adx = _get_float_env("REVERSAL_MAX_ADX_H4", 22.0)

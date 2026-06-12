@@ -77,7 +77,12 @@ Aktivuje se jen když:
 - primární strategie neotevřela obchod
 - účet splňuje vlastní maržový práh aktivace
 - paralelní profil nepřekročil svůj limit otevřených pozic
-- kandidát spadá do whitelistu a projde mean-reversion pravidly
+- kandidát spadá do povoleného sekundárního universe a projde mean-reversion pravidly
+
+Pravidla pro symbol universe:
+
+- pokud je `PARALLEL_SYMBOL_WHITELIST` vyplněný, parallel strategie smí obchodovat jen symboly z whitelistu
+- pokud je `PARALLEL_SYMBOL_WHITELIST` prázdný, parallel strategie smí obchodovat celý non-crypto universe, tedy Forex, indexy a další povolené CFD
 
 Používané filtry:
 
@@ -100,7 +105,12 @@ Aktivuje se jen když:
 - primary ani parallel strategie neotevřely obchod
 - účet splňuje vlastní maržový práh aktivace
 - reversal profil nepřekročil limit otevřených pozic
-- kandidát spadá do whitelistu a projde reverzní pattern validací
+- kandidát spadá do povoleného sekundárního universe a projde reverzní pattern validací
+
+Pravidla pro symbol universe:
+
+- pokud je `REVERSAL_SYMBOL_WHITELIST` vyplněný, reversal strategie smí obchodovat jen symboly z whitelistu
+- pokud je `REVERSAL_SYMBOL_WHITELIST` prázdný, reversal strategie smí obchodovat celý non-crypto universe, tedy Forex, indexy a další povolené CFD
 
 Používané filtry:
 

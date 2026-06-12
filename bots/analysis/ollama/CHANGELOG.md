@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-06-12 (Secondary Strategies Use Full Non-Crypto Universe When Whitelist Is Empty)
+
+- **Changed Empty Secondary Whitelists To Mean Full Non-Crypto Coverage**
+  - `parallel_strategy_mean_reversion.py` and `reversal_pattern_strategy.py` no longer interpret an empty whitelist as index-only coverage
+  - When `PARALLEL_SYMBOL_WHITELIST` or `REVERSAL_SYMBOL_WHITELIST` is empty, the strategy may now evaluate the full non-crypto universe: Forex, indices, and other allowed CFD instruments
+  - When a whitelist is explicitly configured, the previous restrictive behavior remains unchanged and only whitelist matches are eligible
+
+- **Centralized Secondary Symbol Eligibility Logic**
+  - `instrument_utils.py` now exposes a shared helper that decides whether a symbol belongs to the allowed secondary-strategy universe
+  - The helper keeps crypto excluded from parallel and reversal fallback when no explicit whitelist is provided
+
+- **Updated Tests And Operator Documentation**
+  - Added focused tests for Forex, index, CFD, and crypto behavior of the empty-whitelist secondary universe
+  - `TRADING_LOGIC.md` now documents the exact meaning of empty vs explicit secondary whitelists
+
 ## 2026-06-05 (Third Reversal-Pattern Fallback Strategy)
 
 - **Added A Third Entry Strategy Based On Reversal Price Formations**
