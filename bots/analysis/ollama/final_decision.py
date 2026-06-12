@@ -31,6 +31,7 @@ from instrument_utils import (
 from mt5_symbols import estimate_order_profit, get_current_price, get_symbol_info
 from mt5_positions import get_open_positions
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
+from quant_math_strategy import build_quant_candidates, can_activate_quant_strategy, is_quant_strategy_enabled, validate_quant_signal
 from reversal_pattern_strategy import (
 	can_activate_reversal_strategy,
 	is_reversal_strategy_enabled,
@@ -44,6 +45,7 @@ from strategy_context import (
 	count_open_positions_for_strategy,
 	get_parallel_strategy_context,
 	get_primary_strategy_context,
+	get_quant_strategy_context,
 	get_reversal_strategy_context,
 	is_strategy_trade_window_open,
 )
@@ -135,6 +137,7 @@ REASON_TEXT_CS = {
 	"trade_execution_failed": "Exekuce obchodu na brokerovi selhala.",
 	"trade_opened": "Obchod byl uspesne otevren.",
 	"activation_gate_not_satisfied": "Aktivacni podminky paralelni strategie nejsou splnene.",
+	"no_quant_candidates": "Kvantitativni strategie nenasla zadne kandidaty bez AI.",
 	"gemini_candidates_exhausted_local_fallback": "Gemini kandidati byli vycerpani a strategie presla na lokalni fallback.",
 	"no_executable_trade": "V tomto cyklu nebyl nalezen zadny obchod k exekuci.",
 	"no_predictions": "Nejsou k dispozici zadne pouzitelne predikce.",
@@ -163,6 +166,13 @@ RULE_REASON_TEXT_CS = {
 	"bullish_reversal_pattern_missing": "Na long chybi bullish reverzni svickovy pattern.",
 	"bearish_reversal_pattern_missing": "Na short chybi bearish reverzni svickovy pattern.",
 	"confirmation_close_too_weak": "Zaviraci cena nepotvrdila reverzni pattern dostatecne silne.",
+	"symbol_not_in_quant_whitelist": "Symbol neni na whitelistu kvantitativni strategie.",
+	"quant_score_below_threshold": "Matematicke score kandidata je pod minimem.",
+	"adx_below_quant_threshold": "ADX je pod minimem pro kvantitativni vstup.",
+	"quant_direction_conflict": "Smer obchodu neodpovida matematickemu score.",
+	"quant_distance_too_small": "Cena je prilis blizko EMA20 a impuls neni dost silny.",
+	"quant_rsi_not_supportive_long": "RSI nepotvrzuje long kvantitativni setup.",
+	"quant_rsi_not_supportive_short": "RSI nepotvrzuje short kvantitativni setup.",
 	"missing_indicator_data": "Chybi indikatorova data potrebna pro vyhodnoceni.",
 	"open_position_exists": "Na tomto symbolu uz existuje otevrena pozice.",
 	"recent_symbol_trade": "Na tomto symbolu uz probehl nedavny obchod.",
@@ -196,6 +206,10 @@ def _describe_candidate_source(candidate_source: str) -> Tuple[str, str]:
 		return "gemini_live", "1"
 	if normalized == "local_prediction_ranking":
 		return "local", ""
+	if normalized.startswith("quant_signal_ranking_candidate_"):
+		return "quant", normalized.rsplit("_", 1)[-1]
+	if normalized == "quant_signal_ranking":
+		return "quant", "1"
 	return normalized, ""
 
 
@@ -278,7 +292,7 @@ def _build_strategy_status_row(base_row: Dict[str, str], details: Optional[Dict[
 
 
 def _strategy_status_file_name(strategy_label: str) -> Optional[str]:
-	if strategy_label in {"parallel", "reversal"}:
+	if strategy_label in {"parallel", "reversal", "quant"}:
 		return f"{strategy_label}_strategy_status.csv"
 	return None
 
@@ -708,6 +722,38 @@ class StrategyExecutionProfile:
 	default_trade_cooldown_minutes: int
 	default_max_trades_per_day: int = 0
 	default_max_trades_per_symbol_per_day: int = 0
+
+
+def _build_quant_ranked_candidates(predictions_folder: Path) -> List[RankedCandidate]:
+	source_folder = predictions_folder.parent / "source"
+	quant_candidates = build_quant_candidates(source_folder)
+	ranked: List[RankedCandidate] = []
+	for index, candidate in enumerate(quant_candidates, start=1):
+		ranked.append(
+			RankedCandidate(
+				symbol=candidate.symbol,
+				action=candidate.action,
+				source=f"quant_signal_ranking_candidate_{index}",
+				score=float(candidate.score),
+			)
+		)
+
+	service_folder = predictions_folder.parent
+	for index, candidate in enumerate(quant_candidates, start=1):
+		_log_jsonl(
+			service_folder,
+			"quant_candidate_audit.jsonl",
+			{
+				"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+				"strategy_id": get_quant_strategy_context().strategy_id,
+				"candidate_rank": index,
+				"symbol": candidate.symbol,
+				"action": candidate.action,
+				"score": candidate.score,
+				"metrics": candidate.metrics,
+			},
+		)
+	return ranked
 
 
 def _parse_decision(decision_text: str) -> Optional[Tuple[str, str, object, object]]:
@@ -1448,12 +1494,15 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 	try:
 		print("\n📊 Loading remaining predictions...")
 		predictions = load_predictions(predictions_folder)
+		quant_candidates = _build_quant_ranked_candidates(predictions_folder) if is_quant_strategy_enabled() else []
 		print(
 			f"   Found {len(predictions)} filtered predictions "
 			f"(standard >= {get_base_prediction_threshold():.0f}%, crypto >= {get_crypto_prediction_threshold():.0f}%)"
 		)
-		if not predictions:
-			print("⚠️  No strong predictions available, skipping final decision")
+		if quant_candidates:
+			print(f"   Found {len(quant_candidates)} quant candidates from raw market data")
+		if not predictions and not quant_candidates:
+			print("⚠️  No strong predictions available and quant strategy found no candidates")
 			_log_trade_decision_audit(
 				service_folder,
 				strategy_id="runtime",
@@ -1495,19 +1544,21 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		parallel_activation_met = can_activate_parallel_strategy(account_state, open_positions)
 
 		advisory_candidates: List[RankedCandidate] = []
-		if primary_activation_met:
+		if primary_activation_met and predictions:
 			advisory_candidates = _resolve_gemini_advisory_candidates(
 				predictions=predictions,
 				open_positions=open_positions,
 				account_state=account_state,
 				service_folder=service_folder,
 			)
+		elif primary_activation_met:
+			print("ℹ️  No AI predictions available for Gemini advisory, keeping primary queue empty")
 		else:
 			print("ℹ️  Primary activation threshold not met, skipping Gemini advisory and using local candidate ranking only")
 		candidate_queue = _build_candidate_queue(predictions, advisory_candidates)
 		_log_candidate_queue(service_folder, candidate_queue)
 
-		if _attempt_strategy_trade(
+		if candidate_queue and _attempt_strategy_trade(
 			profile=primary_profile,
 			candidates=candidate_queue,
 			predictions_folder=predictions_folder,
@@ -1561,7 +1612,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 
 		for activation_met, profile in secondary_profiles:
 			if activation_met:
-				if _attempt_strategy_trade(
+				if candidate_queue and _attempt_strategy_trade(
 					profile=profile,
 					candidates=candidate_queue,
 					predictions_folder=predictions_folder,
@@ -1584,6 +1635,44 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				stage="strategy_blocked",
 				trade_executed=False,
 				reason="activation_gate_not_satisfied",
+			)
+
+		quant_profile = StrategyExecutionProfile(
+			label="quant",
+			context=get_quant_strategy_context(),
+			signal_validator=validate_quant_signal,
+			risk_percent_env="QUANT_RISK_PER_TRADE_PERCENT",
+			stop_atr_multiplier_env="QUANT_SYNTHETIC_STOP_ATR_MULTIPLIER",
+			tp_r_multiple_env="QUANT_TAKE_PROFIT_R_MULTIPLIER",
+			max_trades_per_day_env="QUANT_MAX_TRADES_PER_DAY",
+			max_trades_per_symbol_per_day_env="QUANT_MAX_TRADES_PER_SYMBOL_PER_DAY",
+			trade_cooldown_env="QUANT_SYMBOL_TRADE_COOLDOWN_MINUTES",
+			default_trade_cooldown_minutes=10,
+			default_max_trades_per_day=8,
+			default_max_trades_per_symbol_per_day=2,
+		)
+		if is_quant_strategy_enabled() and can_activate_quant_strategy(account_state, open_positions):
+			if _attempt_strategy_trade(
+				profile=quant_profile,
+				candidates=quant_candidates,
+				predictions_folder=predictions_folder,
+				service_folder=service_folder,
+				account_state=account_state,
+				open_positions=open_positions,
+				open_crypto_positions=open_crypto_positions,
+			):
+				print("\n" + "=" * 60)
+				print("✅ Final Trading Decision Completed")
+				print("=" * 60)
+				return True
+		elif is_quant_strategy_enabled() and not quant_candidates:
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=get_quant_strategy_context().strategy_id,
+				strategy_label="quant",
+				stage="strategy_blocked",
+				trade_executed=False,
+				reason="no_quant_candidates",
 			)
 
 		print("❌ No strategy found an executable trade in this cycle")

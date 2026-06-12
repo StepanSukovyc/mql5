@@ -13,10 +13,11 @@ from profit_protection_strategy import (
 	get_profit_protection_context_for_position,
 	is_position_under_profit_protection,
 )
+from quant_math_strategy import validate_quant_signal
 from reversal_pattern_strategy import can_activate_reversal_strategy, validate_reversal_pattern_signal
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
-from strategy_context import get_index_strategy_context, get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
+from strategy_context import get_index_strategy_context, get_parallel_strategy_context, get_primary_strategy_context, get_quant_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
 
 
 def _build_market_data(
@@ -221,6 +222,79 @@ class SignalRuleTests(unittest.TestCase):
 		self.assertTrue(result.allowed)
 		self.assertNotIn("symbol_not_in_reversal_whitelist", result.reason_codes)
 
+	def test_quant_rules_allow_valid_long(self) -> None:
+		market_data = _build_market_data(
+			adx_h4=24.0,
+			close_h1=103.0,
+			open_h1=102.4,
+			prev_close_h1=101.0,
+			prev_open_h1=100.2,
+			rsi_h1=63.0,
+			vwap_h4=100.5,
+		)
+		market_data["candles"]["1h"].insert(
+			0,
+			{
+				"time": "2026-01-01T21:00:00+00:00",
+				"open": 99.4,
+				"high": 99.9,
+				"low": 99.1,
+				"close": 99.7,
+			},
+		)
+		market_data["candles"]["1h"].insert(
+			1,
+			{
+				"time": "2026-01-01T22:00:00+00:00",
+				"open": 99.8,
+				"high": 100.2,
+				"low": 99.5,
+				"close": 100.0,
+			},
+		)
+
+		result = validate_quant_signal("EURUSD_ecn", "BUY", market_data)
+
+		self.assertTrue(result.allowed)
+		self.assertEqual(result.regime_state, "quant")
+
+	@patch.dict(os.environ, {"QUANT_SYMBOL_WHITELIST": ""}, clear=False)
+	def test_quant_rules_allow_index_when_whitelist_empty(self) -> None:
+		market_data = _build_market_data(
+			adx_h4=24.0,
+			close_h1=103.0,
+			open_h1=102.4,
+			prev_close_h1=101.0,
+			prev_open_h1=100.2,
+			rsi_h1=63.0,
+			vwap_h4=100.5,
+		)
+		market_data["candles"]["1h"].insert(
+			0,
+			{
+				"time": "2026-01-01T21:00:00+00:00",
+				"open": 99.4,
+				"high": 99.9,
+				"low": 99.1,
+				"close": 99.7,
+			},
+		)
+		market_data["candles"]["1h"].insert(
+			1,
+			{
+				"time": "2026-01-01T22:00:00+00:00",
+				"open": 99.8,
+				"high": 100.2,
+				"low": 99.5,
+				"close": 100.0,
+			},
+		)
+
+		result = validate_quant_signal("US100_ecn", "BUY", market_data)
+
+		self.assertTrue(result.allowed)
+		self.assertNotIn("symbol_not_in_quant_whitelist", result.reason_codes)
+
 
 class RiskEngineTests(unittest.TestCase):
 	@patch("risk_engine.get_current_price", return_value=100.0)
@@ -258,6 +332,13 @@ class StrategyOwnershipTests(unittest.TestCase):
 		index_position = {"magic": index_context.magic, "comment": f"ga:{index_context.strategy_id}"}
 
 		self.assertTrue(position_belongs_to_strategy(index_position, index_context))
+
+	@patch.dict(os.environ, {"QUANT_STRATEGY_ENABLED": "true"}, clear=False)
+	def test_quant_strategy_position_is_recognized(self) -> None:
+		quant_context = get_quant_strategy_context()
+		quant_position = {"magic": quant_context.magic, "comment": f"ga:{quant_context.strategy_id}"}
+
+		self.assertTrue(position_belongs_to_strategy(quant_position, quant_context))
 
 	def test_parallel_activation_uses_derived_margin_threshold_and_position_cap(self) -> None:
 		account_state = {"balance": 5000.0, "raw_margin_free": 900.0}

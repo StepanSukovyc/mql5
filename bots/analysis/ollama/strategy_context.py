@@ -111,6 +111,30 @@ def get_reversal_strategy_context() -> StrategyContext:
 	)
 
 
+def get_quant_strategy_context() -> StrategyContext:
+	primary_activation = get_primary_strategy_context().activation_margin_percent
+	delta = _get_env_float("QUANT_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT", 8.0)
+	return StrategyContext(
+		strategy_id=os.getenv("QUANT_STRATEGY_ID", "quant_math"),
+		magic=_get_env_int("QUANT_STRATEGY_MAGIC", 234400),
+		manage_legacy_positions=_get_env_bool("QUANT_MANAGE_LEGACY_POSITIONS", False),
+		activation_margin_percent=max(primary_activation - delta, 0.0),
+		max_open_positions=_get_env_int("QUANT_STRATEGY_MAX_OPEN_POSITIONS", 8),
+		session_start_hour_utc=_get_env_int(
+			"QUANT_SESSION_START_HOUR_UTC",
+			get_parallel_strategy_context().session_start_hour_utc,
+		),
+		session_end_hour_utc=_get_env_int(
+			"QUANT_SESSION_END_HOUR_UTC",
+			get_parallel_strategy_context().session_end_hour_utc,
+		),
+		friday_cutoff_hour_utc=_get_env_int(
+			"QUANT_FRIDAY_CUTOFF_HOUR_UTC",
+			get_parallel_strategy_context().friday_cutoff_hour_utc,
+		),
+	)
+
+
 def get_index_strategy_context() -> StrategyContext:
 	primary_activation = get_primary_strategy_context().activation_margin_percent
 	return StrategyContext(
@@ -191,6 +215,7 @@ def position_belongs_to_strategy(position: Any, context: StrategyContext) -> boo
 		get_primary_strategy_context(),
 		get_parallel_strategy_context(),
 		get_reversal_strategy_context(),
+		get_quant_strategy_context(),
 		get_index_strategy_context(),
 	]
 	if _is_known_strategy_position(position, known_contexts):

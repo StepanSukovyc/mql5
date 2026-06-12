@@ -11,7 +11,7 @@ from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
-from final_decision import _resolve_trade_parameters, make_final_trading_decision
+from final_decision import RankedCandidate, _resolve_trade_parameters, make_final_trading_decision
 
 
 class FinalDecisionRetryTests(unittest.TestCase):
@@ -1151,6 +1151,108 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		self.assertTrue(reversal_status_rows)
 		self.assertTrue(any(row["strategy_id"] == "parallel_mean_reversion" and row["reason"] == "signal_rejected" for row in audit_rows))
 		self.assertTrue(any(row["strategy_id"] == "reversal_pattern" and row["trade_executed"] == "True" for row in audit_rows))
+
+	@patch("final_decision.execute_trade")
+	@patch("final_decision.validate_symbol")
+	@patch("final_decision.calculate_synthetic_risk_plan")
+	@patch("final_decision.validate_quant_signal")
+	@patch("final_decision.can_activate_quant_strategy")
+	@patch("final_decision.is_quant_strategy_enabled")
+	@patch("final_decision._build_quant_ranked_candidates")
+	@patch("final_decision.validate_reversal_pattern_signal")
+	@patch("final_decision.can_activate_reversal_strategy")
+	@patch("final_decision.is_reversal_strategy_enabled")
+	@patch("final_decision.validate_mean_reversion_signal")
+	@patch("final_decision.validate_trend_following_signal")
+	@patch("final_decision.can_activate_parallel_strategy")
+	@patch("final_decision._load_market_data_for_symbol")
+	@patch("final_decision.ask_gemini_final_decision")
+	@patch("final_decision.count_successful_trades_since")
+	@patch("final_decision.count_successful_trades_today")
+	@patch("final_decision.count_successful_trades")
+	@patch("final_decision._load_gemini_api_config")
+	@patch("final_decision.get_open_positions")
+	@patch("final_decision.get_account_state")
+	@patch("final_decision.load_predictions")
+	def test_quant_strategy_can_trade_without_ai_predictions(
+		self,
+		mock_load_predictions,
+		mock_get_account_state,
+		mock_get_open_positions,
+		mock_load_gemini_api_config,
+		mock_count_successful_trades,
+		mock_count_successful_trades_today,
+		mock_count_successful_trades_since,
+		mock_ask_gemini_final_decision,
+		mock_load_market_data_for_symbol,
+		mock_can_activate_parallel_strategy,
+		mock_validate_trend_following_signal,
+		mock_validate_mean_reversion_signal,
+		mock_is_reversal_strategy_enabled,
+		mock_can_activate_reversal_strategy,
+		mock_validate_reversal_pattern_signal,
+		mock_build_quant_ranked_candidates,
+		mock_is_quant_strategy_enabled,
+		mock_can_activate_quant_strategy,
+		mock_validate_quant_signal,
+		mock_calculate_synthetic_risk_plan,
+		mock_validate_symbol,
+		mock_execute_trade,
+	) -> None:
+		mock_load_predictions.return_value = []
+		mock_get_account_state.return_value = {
+			"balance_cap": 5000.0,
+			"balance": 5000.0,
+			"equity": 4200.0,
+			"margin_free": 1400.0,
+			"raw_margin_free": 1400.0,
+			"margin_percent": 28.0,
+		}
+		mock_get_open_positions.return_value = []
+		mock_load_gemini_api_config.return_value = SimpleNamespace(
+			credentials_path="C:/vertex/service-account.json",
+			project="demo-project",
+			region="europe-west4",
+			model="gemini-2.5-flash",
+			fallback_models=("gemini-2.5-flash",),
+		)
+		mock_count_successful_trades.return_value = 0
+		mock_count_successful_trades_today.return_value = 0
+		mock_count_successful_trades_since.return_value = 0
+		mock_can_activate_parallel_strategy.return_value = False
+		mock_validate_trend_following_signal.return_value = SimpleNamespace(allowed=False, reason_codes=["unused"], regime_state="trend", metrics={})
+		mock_validate_mean_reversion_signal.return_value = SimpleNamespace(allowed=False, reason_codes=["unused"], regime_state="range", metrics={})
+		mock_is_reversal_strategy_enabled.return_value = False
+		mock_can_activate_reversal_strategy.return_value = False
+		mock_validate_reversal_pattern_signal.return_value = SimpleNamespace(allowed=False, reason_codes=["unused"], regime_state="reversal", metrics={})
+		mock_build_quant_ranked_candidates.return_value = [
+			RankedCandidate(symbol="EURUSD_ecn", action="BUY", source="quant_signal_ranking_candidate_1", score=4.8)
+		]
+		mock_is_quant_strategy_enabled.return_value = True
+		mock_can_activate_quant_strategy.return_value = True
+		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
+		mock_validate_quant_signal.return_value = SimpleNamespace(allowed=True, reason_codes=[], regime_state="quant", metrics={})
+		mock_calculate_synthetic_risk_plan.return_value = SimpleNamespace(
+			risk_usd=12.0,
+			synthetic_stop_price=99.0,
+			synthetic_stop_distance=1.0,
+			take_profit_price=101.4,
+			lot_size=0.01,
+		)
+		mock_validate_symbol.return_value = (True, "")
+		mock_execute_trade.return_value = True
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "predikce"
+			service_folder = Path(temp_dir) / "service"
+			predictions_folder.mkdir(parents=True, exist_ok=True)
+
+			result = make_final_trading_decision(predictions_folder, service_folder)
+
+		self.assertTrue(result)
+		self.assertEqual(mock_ask_gemini_final_decision.call_count, 0)
+		self.assertEqual(mock_execute_trade.call_count, 1)
+		self.assertEqual(mock_execute_trade.call_args.kwargs["strategy_id"], "quant_math")
 
 
 if __name__ == "__main__":
