@@ -125,6 +125,26 @@ def is_cfd_symbol(symbol: str, patterns: Optional[Iterable[str]] = None) -> bool
 	return "cfd" in path or "cfd" in description
 
 
+def is_index_symbol(symbol: str) -> bool:
+	"""Return True when symbol looks like an index/CFD index instrument."""
+	if not symbol:
+		return False
+
+	symbol_info = get_symbol_info(symbol)
+	if symbol_info is not None:
+		trade_calc_mode = getattr(symbol_info, "trade_calc_mode", None)
+		if trade_calc_mode == getattr(mt5, "SYMBOL_CALC_MODE_CFDINDEX", None):
+			return True
+
+		path = str(getattr(symbol_info, "path", "") or "").lower()
+		description = str(getattr(symbol_info, "description", "") or "").lower()
+		if "index" in path or "indices" in path or "index" in description:
+			return True
+
+	configured = _parse_csv(os.getenv("INDEX_STRATEGY_SYMBOL_WHITELIST"))
+	return symbol_matches_patterns(symbol, configured)
+
+
 def get_base_prediction_threshold() -> float:
 	"""Return the minimum BUY/SELL confidence for standard instruments."""
 	return _parse_float_env("MT5_MIN_SIGNAL_PERCENT", 35.0, minimum=0.0)
