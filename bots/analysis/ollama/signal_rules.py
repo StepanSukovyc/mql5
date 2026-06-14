@@ -8,6 +8,7 @@ from typing import Dict, List, Optional
 from urllib.error import URLError
 from urllib.request import Request, urlopen
 
+from env_utils import get_bool_env, get_float_env, get_int_env
 from instrument_utils import get_symbol_news_currencies
 
 
@@ -17,35 +18,6 @@ class SignalValidationResult:
 	reason_codes: List[str]
 	regime_state: str
 	metrics: Dict[str, float]
-
-
-def _get_float_env(name: str, default: float) -> float:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	try:
-		return float(raw)
-	except (TypeError, ValueError):
-		return default
-
-
-def _get_int_env(name: str, default: int) -> int:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	try:
-		return int(raw)
-	except (TypeError, ValueError):
-		return default
-
-
-def _get_bool_env(name: str, default: bool) -> bool:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
-
-
 def _latest_value(market_data: Dict, timeframe: str, indicator: str) -> Optional[float]:
 	series = market_data.get("oscillators", {}).get(timeframe, {}).get(indicator, [])
 	if not series:
@@ -77,7 +49,7 @@ def _latest_close(market_data: Dict, timeframe: str) -> Optional[float]:
 
 
 def _is_news_blocked(symbol: str) -> bool:
-	if not _get_bool_env("NEWS_FILTER_ENABLED", False):
+	if not get_bool_env("NEWS_FILTER_ENABLED", False):
 		return False
 
 	url_template = os.getenv("NEWS_FILTER_API_URL", "").strip()
@@ -85,8 +57,8 @@ def _is_news_blocked(symbol: str) -> bool:
 		return False
 
 	now = datetime.now(tz=timezone.utc)
-	from_date = (now - timedelta(minutes=_get_int_env("NEWS_FILTER_LOOKBACK_MINUTES", 15))).date().isoformat()
-	to_date = (now + timedelta(minutes=_get_int_env("NEWS_FILTER_LOOKAHEAD_MINUTES", 30))).date().isoformat()
+	from_date = (now - timedelta(minutes=get_int_env("NEWS_FILTER_LOOKBACK_MINUTES", 15))).date().isoformat()
+	to_date = (now + timedelta(minutes=get_int_env("NEWS_FILTER_LOOKAHEAD_MINUTES", 30))).date().isoformat()
 	url = url_template.format(from_date=from_date, to_date=to_date, token=os.getenv("NEWS_FILTER_API_TOKEN", ""))
 	headers = {}
 	token = os.getenv("NEWS_FILTER_API_TOKEN", "").strip()
@@ -97,7 +69,7 @@ def _is_news_blocked(symbol: str) -> bool:
 
 	request = Request(url, headers=headers)
 	try:
-		with urlopen(request, timeout=_get_int_env("NEWS_FILTER_TIMEOUT_SECONDS", 10)) as response:
+		with urlopen(request, timeout=get_int_env("NEWS_FILTER_TIMEOUT_SECONDS", 10)) as response:
 			payload = json.loads(response.read().decode("utf-8"))
 	except (OSError, URLError, ValueError):
 		return False
@@ -110,8 +82,8 @@ def _is_news_blocked(symbol: str) -> bool:
 		for item in os.getenv("NEWS_FILTER_IMPACTS", "high").split(",")
 		if item.strip()
 	}
-	lookback_minutes = _get_int_env("NEWS_FILTER_LOOKBACK_MINUTES", 15)
-	lookahead_minutes = _get_int_env("NEWS_FILTER_LOOKAHEAD_MINUTES", 30)
+	lookback_minutes = get_int_env("NEWS_FILTER_LOOKBACK_MINUTES", 15)
+	lookahead_minutes = get_int_env("NEWS_FILTER_LOOKAHEAD_MINUTES", 30)
 	window_start = now - timedelta(minutes=lookback_minutes)
 	window_end = now + timedelta(minutes=lookahead_minutes)
 
@@ -164,9 +136,9 @@ def validate_trend_following_signal(symbol: str, action: str, market_data: Dict)
 		}
 	)
 
-	min_adx = _get_float_env("PRIMARY_MIN_ADX_H4", 20.0)
-	min_atr_ratio = _get_float_env("PRIMARY_MIN_ATR_RATIO_PERCENT", 0.25)
-	max_spread_points = _get_float_env("PRIMARY_MAX_SPREAD_POINTS", 35.0)
+	min_adx = get_float_env("PRIMARY_MIN_ADX_H4", 20.0)
+	min_atr_ratio = get_float_env("PRIMARY_MIN_ATR_RATIO_PERCENT", 0.25)
+	max_spread_points = get_float_env("PRIMARY_MAX_SPREAD_POINTS", 35.0)
 
 	if adx_h4 < min_adx:
 		reasons.append("adx_below_threshold")
@@ -184,7 +156,7 @@ def validate_trend_following_signal(symbol: str, action: str, market_data: Dict)
 			reasons.append("h4_trend_not_bullish")
 		if close_h1 <= ema20_h1:
 			reasons.append("h1_close_below_ema20")
-		if not (_get_float_env("PRIMARY_LONG_RSI_MIN", 52.0) <= rsi_h1 <= _get_float_env("PRIMARY_LONG_RSI_MAX", 68.0)):
+		if not (get_float_env("PRIMARY_LONG_RSI_MIN", 52.0) <= rsi_h1 <= get_float_env("PRIMARY_LONG_RSI_MAX", 68.0)):
 			reasons.append("rsi_outside_long_band")
 	else:
 		if ema200_d1 >= ema200_d1_prev:
@@ -193,7 +165,7 @@ def validate_trend_following_signal(symbol: str, action: str, market_data: Dict)
 			reasons.append("h4_trend_not_bearish")
 		if close_h1 >= ema20_h1:
 			reasons.append("h1_close_above_ema20")
-		if not (_get_float_env("PRIMARY_SHORT_RSI_MIN", 32.0) <= rsi_h1 <= _get_float_env("PRIMARY_SHORT_RSI_MAX", 48.0)):
+		if not (get_float_env("PRIMARY_SHORT_RSI_MIN", 32.0) <= rsi_h1 <= get_float_env("PRIMARY_SHORT_RSI_MAX", 48.0)):
 			reasons.append("rsi_outside_short_band")
 
 	regime_state = "trend" if adx_h4 >= min_adx else "range"

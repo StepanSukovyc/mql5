@@ -1,5 +1,37 @@
 # Changelog
 
+## 2026-06-12 (Secondary Strategies Use Full Non-Crypto Universe When Whitelist Is Empty)
+
+- **Changed Empty Secondary Whitelists To Mean Full Non-Crypto Coverage**
+  - `parallel_strategy_mean_reversion.py` and `reversal_pattern_strategy.py` no longer interpret an empty whitelist as index-only coverage
+  - When `PARALLEL_SYMBOL_WHITELIST` or `REVERSAL_SYMBOL_WHITELIST` is empty, the strategy may now evaluate the full non-crypto universe: Forex, indices, and other allowed CFD instruments
+  - When a whitelist is explicitly configured, the previous restrictive behavior remains unchanged and only whitelist matches are eligible
+
+- **Centralized Secondary Symbol Eligibility Logic**
+  - `instrument_utils.py` now exposes a shared helper that decides whether a symbol belongs to the allowed secondary-strategy universe
+  - The helper keeps crypto excluded from parallel and reversal fallback when no explicit whitelist is provided
+
+- **Updated Tests And Operator Documentation**
+  - Added focused tests for Forex, index, CFD, and crypto behavior of the empty-whitelist secondary universe
+  - `TRADING_LOGIC.md` now documents the exact meaning of empty vs explicit secondary whitelists
+
+## 2026-06-05 (Third Reversal-Pattern Fallback Strategy)
+
+- **Added A Third Entry Strategy Based On Reversal Price Formations**
+  - New module `reversal_pattern_strategy.py` validates bullish and bearish reversal setups from live candle structure instead of relying only on oscillators
+  - The strategy looks for engulfing or pin-bar style rejection at Bollinger extremes, adds VWAP location checks, and filters the setup with ADX, spread, RSI, and ATR-size constraints
+  - The strategy is opt-in through `REVERSAL_STRATEGY_ENABLED` and keeps its own `strategy_id`, `magic`, session window, margin gate, position cap, cooldown, and risk profile
+
+- **Extended Final Decision Orchestration To Run A Third Fallback Layer**
+  - `final_decision.py` now executes strategies in the order `primary -> parallel -> reversal` using the same local risk, cooldown, audit, and execution pipeline
+  - Secondary strategy status logging is now generic, so the runtime writes both `parallel_strategy_status.csv` and `reversal_strategy_status.csv`
+  - `strategy_context.py` and `account_monitor.py` now include the reversal profile when resolving known strategy ownership and the default wake-up margin threshold
+
+- **Documented And Enabled Runtime Configuration For Reversal Strategy**
+  - `.env.example` now contains the full `REVERSAL_*` configuration namespace and a short operator description of the setup
+  - Local `.env` now enables the strategy with a conservative FX-major whitelist and explicit thresholds for ADX, ATR range, confirmation close, and pin-bar shape
+  - `TRADING_LOGIC.md` now describes when the reversal profile runs, which filters it uses, and where to look for its audit/status output
+
 ## 2026-05-22 (Rolling 30-Day Loss Cleanup Advisory Strategy)
 
 - **Added `monthly_loss_cleanup_strategy.py` — advisory-only, never closes positions**

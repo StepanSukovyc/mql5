@@ -10,6 +10,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
+from profit_protection_strategy import is_position_under_profit_protection
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
 
@@ -154,6 +155,8 @@ def _find_candidates(balance: float) -> list[SwapRolloverCleanupCandidate]:
 
 	candidates: list[SwapRolloverCleanupCandidate] = []
 	for position in positions:
+		if is_position_under_profit_protection(position):
+			continue
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
 		profit = float(getattr(position, "profit", 0.0) or 0.0)
 		if volume <= 0 or profit <= 0:

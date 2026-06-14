@@ -9,6 +9,7 @@ from typing import Iterable, List, Optional
 
 import MetaTrader5 as mt5
 
+from env_utils import get_bool_env, get_float_env, get_int_env
 from mt5_symbols import get_symbol_info
 
 
@@ -16,43 +17,6 @@ def _parse_csv(value: Optional[str]) -> List[str]:
 	if not value:
 		return []
 	return [item.strip() for item in value.split(",") if item.strip()]
-
-
-def _parse_float_env(name: str, default: float, *, minimum: float) -> float:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-
-	try:
-		value = float(raw)
-		if value < minimum:
-			raise ValueError
-		return value
-	except (TypeError, ValueError):
-		return default
-
-
-def _parse_int_env(name: str, default: int, *, minimum: int) -> int:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-
-	try:
-		value = int(raw)
-		if value < minimum:
-			raise ValueError
-		return value
-	except (TypeError, ValueError):
-		return default
-
-
-def _parse_bool_env(name: str, default: bool) -> bool:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
-
-
 def get_crypto_symbol_patterns() -> List[str]:
 	"""Return wildcard patterns that identify crypto instruments."""
 	configured = _parse_csv(os.getenv("MT5_CRYPTO_SYMBOL_PATTERNS"))
@@ -125,50 +89,83 @@ def is_cfd_symbol(symbol: str, patterns: Optional[Iterable[str]] = None) -> bool
 	return "cfd" in path or "cfd" in description
 
 
+def is_index_symbol(symbol: str) -> bool:
+	"""Return True when symbol looks like an index/CFD index instrument."""
+	if not symbol:
+		return False
+
+	symbol_info = get_symbol_info(symbol)
+	if symbol_info is not None:
+		trade_calc_mode = getattr(symbol_info, "trade_calc_mode", None)
+		if trade_calc_mode == getattr(mt5, "SYMBOL_CALC_MODE_CFDINDEX", None):
+			return True
+
+		path = str(getattr(symbol_info, "path", "") or "").lower()
+		description = str(getattr(symbol_info, "description", "") or "").lower()
+		if "index" in path or "indices" in path or "index" in description:
+			return True
+
+	configured = _parse_csv(os.getenv("INDEX_STRATEGY_SYMBOL_WHITELIST"))
+	return symbol_matches_patterns(symbol, configured)
+
+
+def is_secondary_strategy_symbol_allowed(symbol: str, whitelist_patterns: Optional[Iterable[str]] = None) -> bool:
+	"""Return whether parallel/reversal strategies may consider the symbol.
+
+	When a whitelist is configured, only whitelist matches are allowed.
+	When the whitelist is empty, the secondary strategies may trade the full
+	non-crypto universe: Forex, indices, and other allowed CFD instruments.
+	"""
+	patterns = [item.strip() for item in (whitelist_patterns or []) if str(item).strip()]
+	if patterns:
+		return symbol_matches_patterns(symbol, patterns)
+	return not is_crypto_symbol(symbol)
+
+
 def get_base_prediction_threshold() -> float:
 	"""Return the minimum BUY/SELL confidence for standard instruments."""
-	return _parse_float_env("MT5_MIN_SIGNAL_PERCENT", 35.0, minimum=0.0)
+	return get_float_env("MT5_MIN_SIGNAL_PERCENT", 35.0, minimum=0.0)
 
 
 def get_crypto_prediction_threshold() -> float:
 	"""Return the stricter minimum BUY/SELL confidence for crypto instruments."""
 	default_value = max(get_base_prediction_threshold(), 65.0)
-	return _parse_float_env("MT5_CRYPTO_MIN_SIGNAL_PERCENT", default_value, minimum=0.0)
+	return get_float_env("MT5_CRYPTO_MIN_SIGNAL_PERCENT", default_value, minimum=0.0)
 
 
 def get_crypto_lot_multiplier() -> float:
 	"""Return multiplier applied to Gemini lot sizes for crypto trades."""
-	return _parse_float_env("MT5_CRYPTO_LOT_MULTIPLIER", 0.25, minimum=0.01)
+	return get_float_env("MT5_CRYPTO_LOT_MULTIPLIER", 0.25, minimum=0.01)
 
 
 def get_crypto_tp_distance_percent() -> float:
 	"""Return the maximum conservative TP distance used for crypto trades."""
-	return _parse_float_env("MT5_CRYPTO_TP_DISTANCE_PERCENT", 2.0, minimum=0.01)
+	return get_float_env("MT5_CRYPTO_TP_DISTANCE_PERCENT", 2.0, minimum=0.01)
 
 
 def get_cfd_tp_max_distance_percent() -> float:
 	"""Return the maximum fee-aware TP distance allowed for CFD trades."""
-	return _parse_float_env("MT5_CFD_TP_MAX_DISTANCE_PERCENT", 3.0, minimum=0.01)
+	return get_float_env("MT5_CFD_TP_MAX_DISTANCE_PERCENT", 3.0, minimum=0.01)
 
 
 def get_cfd_min_net_profit_usd() -> float:
 	"""Return minimum target net profit after modeled fees for CFD trades."""
-	return _parse_float_env("MT5_CFD_MIN_NET_PROFIT_USD", 0.10, minimum=0.0)
+	return get_float_env("MT5_CFD_MIN_NET_PROFIT_USD", 0.10, minimum=0.0)
 
 
 def get_crypto_max_open_positions() -> int:
 	"""Return maximum number of concurrent crypto positions allowed."""
-	return _parse_int_env("MT5_CRYPTO_MAX_OPEN_POSITIONS", 1, minimum=0)
+	return get_int_env("MT5_CRYPTO_MAX_OPEN_POSITIONS", 1, minimum=0)
 
 
 def is_crypto_full_tp_mode_allowed() -> bool:
 	"""Return whether crypto may use full Gemini TP mode."""
-	return _parse_bool_env("MT5_CRYPTO_ALLOW_FULL_TP_MODE", False)
+	return get_bool_env("MT5_CRYPTO_ALLOW_FULL_TP_MODE", False)
 
 
 def is_cfd_full_tp_mode_allowed() -> bool:
 	"""Return whether CFD instruments may use fee-aware TP in full Gemini mode."""
-	return _parse_bool_env("MT5_CFD_ALLOW_FULL_TP_MODE", True)
+	return get_bool_env("MT5_CFD_ALLOW_FULL_TP_MODE", True)
 
 
 def get_symbol_prompt_guidance(symbol: str) -> str:

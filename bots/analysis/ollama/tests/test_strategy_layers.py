@@ -6,10 +6,18 @@ from datetime import datetime, timezone
 from unittest.mock import patch
 
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
-from profit_protection_strategy import calculate_profit_protection_activation_usd, calculate_profit_protection_target_profit_usd
+from profit_protection_strategy import (
+	calculate_profit_protection_activation_usd,
+	calculate_profit_protection_locked_profit_usd,
+	calculate_profit_protection_target_profit_usd,
+	get_profit_protection_context_for_position,
+	is_position_under_profit_protection,
+)
+from quant_math_strategy import validate_quant_signal
+from reversal_pattern_strategy import can_activate_reversal_strategy, validate_reversal_pattern_signal
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
-from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
+from strategy_context import get_index_strategy_context, get_parallel_strategy_context, get_primary_strategy_context, get_quant_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
 
 
 def _build_market_data(
@@ -17,6 +25,14 @@ def _build_market_data(
 	spread_points: float = 10.0,
 	adx_h4: float = 25.0,
 	close_h1: float = 100.0,
+	open_h1: float = 99.2,
+	high_h1: float = 100.4,
+	low_h1: float = 98.8,
+	prev_open_h1: float = 100.4,
+	prev_high_h1: float = 100.7,
+	prev_low_h1: float = 99.0,
+	prev_close_h1: float = 99.1,
+	rsi_h1: float = 60.0,
 	rsi2_h1: float = 4.0,
 	bb_upper_h1: float = 103.0,
 	bb_lower_h1: float = 101.0,
@@ -28,12 +44,27 @@ def _build_market_data(
 	return {
 		"spread_snapshot": {"spread_points": spread_points},
 		"candles": {
-			"1h": [{"time": "2026-01-02T00:00:00+00:00", "close": close_h1}],
+			"1h": [
+				{
+					"time": "2026-01-01T23:00:00+00:00",
+					"open": prev_open_h1,
+					"high": prev_high_h1,
+					"low": prev_low_h1,
+					"close": prev_close_h1,
+				},
+				{
+					"time": "2026-01-02T00:00:00+00:00",
+					"open": open_h1,
+					"high": high_h1,
+					"low": low_h1,
+					"close": close_h1,
+				},
+			],
 		},
 		"oscillators": {
 			"1h": {
 				"ema20": _series(95.0),
-				"rsi": [{"time": "2026-01-02T00:00:00+00:00", "value": 60.0}],
+				"rsi": [{"time": "2026-01-02T00:00:00+00:00", "value": rsi_h1}],
 				"rsi2": [{"time": "2026-01-02T00:00:00+00:00", "value": rsi2_h1}],
 				"atr14": [{"time": "2026-01-02T00:00:00+00:00", "value": 1.0}],
 				"bb_middle20": [{"time": "2026-01-02T00:00:00+00:00", "value": 101.0}],
@@ -51,6 +82,77 @@ def _build_market_data(
 			},
 		},
 	}
+
+
+def _build_quant_long_market_data(*, adx_h4: float = 24.0, rsi_h1: float = 63.0) -> dict:
+	market_data = _build_market_data(
+		adx_h4=adx_h4,
+		close_h1=103.0,
+		open_h1=102.4,
+		prev_close_h1=101.0,
+		prev_open_h1=100.2,
+		rsi_h1=rsi_h1,
+		vwap_h4=100.5,
+	)
+	market_data["candles"]["1h"].insert(
+		0,
+		{
+			"time": "2026-01-01T21:00:00+00:00",
+			"open": 99.4,
+			"high": 99.9,
+			"low": 99.1,
+			"close": 99.7,
+		},
+	)
+	market_data["candles"]["1h"].insert(
+		1,
+		{
+			"time": "2026-01-01T22:00:00+00:00",
+			"open": 99.8,
+			"high": 100.2,
+			"low": 99.5,
+			"close": 100.0,
+		},
+	)
+	return market_data
+
+
+def _build_quant_short_market_data(*, adx_h4: float = 24.0, rsi_h1: float = 37.0) -> dict:
+	market_data = _build_market_data(
+		adx_h4=adx_h4,
+		close_h1=94.0,
+		open_h1=94.8,
+		high_h1=95.0,
+		low_h1=93.8,
+		prev_close_h1=99.0,
+		prev_open_h1=99.8,
+		prev_high_h1=100.1,
+		prev_low_h1=98.8,
+		rsi_h1=rsi_h1,
+		vwap_h4=99.5,
+	)
+	market_data["oscillators"]["1h"]["ema20"] = [{"time": "2026-01-02T00:00:00+00:00", "value": 97.0}]
+	market_data["candles"]["1h"].insert(
+		0,
+		{
+			"time": "2026-01-01T21:00:00+00:00",
+			"open": 101.4,
+			"high": 101.7,
+			"low": 100.9,
+			"close": 101.1,
+		},
+	)
+	market_data["candles"]["1h"].insert(
+		1,
+		{
+			"time": "2026-01-01T22:00:00+00:00",
+			"open": 100.6,
+			"high": 100.8,
+			"low": 99.8,
+			"close": 100.0,
+		},
+	)
+	return market_data
 
 
 class SignalRuleTests(unittest.TestCase):
@@ -78,6 +180,211 @@ class SignalRuleTests(unittest.TestCase):
 
 		self.assertFalse(result.allowed)
 		self.assertIn("symbol_not_in_parallel_whitelist", result.reason_codes)
+
+	@patch.dict(os.environ, {"PARALLEL_SYMBOL_WHITELIST": ""}, clear=False)
+	def test_mean_reversion_rules_allow_forex_when_whitelist_empty(self) -> None:
+		result = validate_mean_reversion_signal("AUDJPY_ecn", "BUY", _build_market_data(adx_h4=16.0))
+
+		self.assertTrue(result.allowed)
+		self.assertNotIn("symbol_not_in_parallel_whitelist", result.reason_codes)
+
+	@patch.dict(os.environ, {"PARALLEL_SYMBOL_WHITELIST": ""}, clear=False)
+	def test_mean_reversion_rules_allow_index_when_whitelist_empty(self) -> None:
+		result = validate_mean_reversion_signal("US100_ecn", "BUY", _build_market_data(adx_h4=16.0))
+
+		self.assertTrue(result.allowed)
+		self.assertNotIn("symbol_not_in_parallel_whitelist", result.reason_codes)
+
+	def test_reversal_pattern_rules_allow_valid_long(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"EURUSD_ecn",
+			"BUY",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=100.5,
+				open_h1=98.9,
+				high_h1=100.8,
+				low_h1=98.7,
+				prev_open_h1=100.3,
+				prev_high_h1=100.4,
+				prev_low_h1=98.8,
+				prev_close_h1=99.0,
+				rsi_h1=41.0,
+				rsi2_h1=18.0,
+				bb_lower_h1=99.0,
+				vwap_h4=101.4,
+			),
+		)
+
+		self.assertTrue(result.allowed)
+		self.assertEqual(result.regime_state, "reversal")
+
+	def test_reversal_pattern_rules_allow_valid_short(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"EURUSD_ecn",
+			"SELL",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=100.9,
+				open_h1=103.0,
+				high_h1=103.2,
+				low_h1=100.7,
+				prev_open_h1=101.0,
+				prev_high_h1=101.0,
+				prev_low_h1=99.8,
+				prev_close_h1=101.2,
+				rsi_h1=59.0,
+				rsi2_h1=82.0,
+				bb_upper_h1=101.4,
+				vwap_h4=100.6,
+			),
+		)
+
+		self.assertTrue(result.allowed)
+		self.assertEqual(result.regime_state, "reversal")
+
+	def test_reversal_pattern_rules_require_close_above_vwap_for_short(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"EURUSD_ecn",
+			"SELL",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=101.5,
+				open_h1=103.0,
+				high_h1=103.2,
+				low_h1=101.3,
+				prev_open_h1=100.8,
+				prev_high_h1=101.0,
+				prev_low_h1=99.8,
+				prev_close_h1=101.2,
+				rsi_h1=59.0,
+				rsi2_h1=82.0,
+				bb_upper_h1=101.4,
+				vwap_h4=102.0,
+			),
+		)
+
+		self.assertFalse(result.allowed)
+		self.assertIn("close_not_above_vwap", result.reason_codes)
+
+	def test_reversal_pattern_rules_require_confirmed_pattern(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"EURUSD_ecn",
+			"BUY",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=99.4,
+				open_h1=99.6,
+				high_h1=99.8,
+				low_h1=98.9,
+				prev_open_h1=100.0,
+				prev_high_h1=100.3,
+				prev_low_h1=99.0,
+				prev_close_h1=99.5,
+				rsi_h1=42.0,
+				rsi2_h1=20.0,
+				bb_lower_h1=99.0,
+				vwap_h4=101.4,
+			),
+		)
+
+		self.assertFalse(result.allowed)
+		self.assertIn("bullish_reversal_pattern_missing", result.reason_codes)
+
+	@patch.dict(os.environ, {"REVERSAL_SYMBOL_WHITELIST": ""}, clear=False)
+	def test_reversal_pattern_rules_allow_forex_when_whitelist_empty(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"AUDJPY_ecn",
+			"BUY",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=100.5,
+				open_h1=98.9,
+				high_h1=100.8,
+				low_h1=98.7,
+				prev_open_h1=100.3,
+				prev_high_h1=100.4,
+				prev_low_h1=98.8,
+				prev_close_h1=99.0,
+				rsi_h1=41.0,
+				rsi2_h1=18.0,
+				bb_lower_h1=99.0,
+				vwap_h4=101.4,
+			),
+		)
+
+		self.assertTrue(result.allowed)
+		self.assertNotIn("symbol_not_in_reversal_whitelist", result.reason_codes)
+
+	@patch.dict(os.environ, {"REVERSAL_SYMBOL_WHITELIST": ""}, clear=False)
+	def test_reversal_pattern_rules_allow_index_when_whitelist_empty(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"US100_ecn",
+			"BUY",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=100.5,
+				open_h1=98.9,
+				high_h1=100.8,
+				low_h1=98.7,
+				prev_open_h1=100.3,
+				prev_high_h1=100.4,
+				prev_low_h1=98.8,
+				prev_close_h1=99.0,
+				rsi_h1=41.0,
+				rsi2_h1=18.0,
+				bb_lower_h1=99.0,
+				vwap_h4=101.4,
+			),
+		)
+
+		self.assertTrue(result.allowed)
+		self.assertNotIn("symbol_not_in_reversal_whitelist", result.reason_codes)
+
+	def test_quant_rules_allow_valid_long(self) -> None:
+		market_data = _build_quant_long_market_data()
+
+		result = validate_quant_signal("EURUSD_ecn", "BUY", market_data)
+
+		self.assertTrue(result.allowed)
+		self.assertEqual(result.regime_state, "quant")
+
+	def test_quant_rules_allow_valid_short(self) -> None:
+		result = validate_quant_signal("EURUSD_ecn", "SELL", _build_quant_short_market_data())
+
+		self.assertTrue(result.allowed)
+		self.assertEqual(result.regime_state, "quant")
+
+	def test_quant_rules_block_low_adx(self) -> None:
+		result = validate_quant_signal("EURUSD_ecn", "BUY", _build_quant_long_market_data(adx_h4=12.0))
+
+		self.assertFalse(result.allowed)
+		self.assertIn("adx_below_quant_threshold", result.reason_codes)
+
+	def test_quant_rules_block_direction_conflict(self) -> None:
+		result = validate_quant_signal("EURUSD_ecn", "SELL", _build_quant_long_market_data())
+
+		self.assertFalse(result.allowed)
+		self.assertIn("quant_direction_conflict", result.reason_codes)
+
+	def test_quant_rules_ignore_missing_recent_extreme_values(self) -> None:
+		market_data = _build_quant_long_market_data()
+		for index in (0, 1, 2):
+			market_data["candles"]["1h"][index]["high"] = None
+
+		result = validate_quant_signal("EURUSD_ecn", "BUY", market_data)
+
+		self.assertFalse(result.allowed)
+		self.assertIn("quant_score_below_threshold", result.reason_codes)
+
+	@patch.dict(os.environ, {"QUANT_SYMBOL_WHITELIST": ""}, clear=False)
+	def test_quant_rules_allow_index_when_whitelist_empty(self) -> None:
+		market_data = _build_quant_long_market_data()
+
+		result = validate_quant_signal("US100_ecn", "BUY", market_data)
+
+		self.assertTrue(result.allowed)
+		self.assertNotIn("symbol_not_in_quant_whitelist", result.reason_codes)
 
 
 class RiskEngineTests(unittest.TestCase):
@@ -110,12 +417,34 @@ class StrategyOwnershipTests(unittest.TestCase):
 
 		self.assertTrue(position_belongs_to_strategy(manual_position, primary))
 
+	@patch.dict(os.environ, {"INDEX_STRATEGY_ENABLED": "true"}, clear=False)
+	def test_index_strategy_position_is_recognized(self) -> None:
+		index_context = get_index_strategy_context()
+		index_position = {"magic": index_context.magic, "comment": f"ga:{index_context.strategy_id}"}
+
+		self.assertTrue(position_belongs_to_strategy(index_position, index_context))
+
+	@patch.dict(os.environ, {"QUANT_STRATEGY_ENABLED": "true"}, clear=False)
+	def test_quant_strategy_position_is_recognized(self) -> None:
+		quant_context = get_quant_strategy_context()
+		quant_position = {"magic": quant_context.magic, "comment": f"ga:{quant_context.strategy_id}"}
+
+		self.assertTrue(position_belongs_to_strategy(quant_position, quant_context))
+
 	def test_parallel_activation_uses_derived_margin_threshold_and_position_cap(self) -> None:
 		account_state = {"balance": 5000.0, "raw_margin_free": 900.0}
 		parallel = get_parallel_strategy_context()
 		open_positions = [{"magic": parallel.magic, "comment": f"ga:{parallel.strategy_id}"} for _ in range(parallel.max_open_positions)]
 
 		self.assertFalse(can_activate_parallel_strategy(account_state, open_positions))
+
+	@patch.dict(os.environ, {"REVERSAL_STRATEGY_ENABLED": "true"}, clear=False)
+	def test_reversal_activation_uses_enable_flag_and_position_cap(self) -> None:
+		account_state = {"balance": 5000.0, "raw_margin_free": 900.0}
+		reversal = get_reversal_strategy_context()
+		open_positions = [{"magic": reversal.magic, "comment": f"ga:{reversal.strategy_id}"} for _ in range(reversal.max_open_positions)]
+
+		self.assertFalse(can_activate_reversal_strategy(account_state, open_positions))
 
 	@patch.dict(
 		os.environ,
@@ -139,33 +468,51 @@ class StrategyOwnershipTests(unittest.TestCase):
 
 
 class ProfitProtectionTests(unittest.TestCase):
-	@patch.dict(
-		os.environ,
-		{
+	@patch("profit_protection_strategy._load_dotenv_value")
+	def test_profit_protection_scales_with_balance_and_volume(self, mock_load_dotenv_value) -> None:
+		mock_load_dotenv_value.side_effect = lambda key: {
 			"PROFIT_PROTECTION_ACTIVATION_USD": "0.30",
 			"PROFIT_PROTECTION_TARGET_BALANCE_DIVISOR": "10",
 			"PROFIT_PROTECTION_ACTIVATION_TARGET_RATIO": "0.50",
-		},
-		clear=False,
-	)
-	def test_profit_protection_scales_with_balance_and_volume(self) -> None:
+		}.get(key)
+
 		self.assertEqual(calculate_profit_protection_target_profit_usd(5000.0, 0.01), 5.0)
 		self.assertEqual(calculate_profit_protection_activation_usd(5000.0, 0.01), 2.5)
 		self.assertEqual(calculate_profit_protection_target_profit_usd(5000.0, 0.02), 10.0)
 		self.assertEqual(calculate_profit_protection_activation_usd(5000.0, 0.02), 5.0)
 
-	@patch.dict(
-		os.environ,
-		{
+	@patch("profit_protection_strategy._load_dotenv_value")
+	def test_profit_protection_keeps_static_floor_for_small_positions(self, mock_load_dotenv_value) -> None:
+		mock_load_dotenv_value.side_effect = lambda key: {
 			"PROFIT_PROTECTION_ACTIVATION_USD": "0.30",
 			"PROFIT_PROTECTION_TARGET_BALANCE_DIVISOR": "10",
 			"PROFIT_PROTECTION_ACTIVATION_TARGET_RATIO": "0.50",
-		},
-		clear=False,
-	)
-	def test_profit_protection_keeps_static_floor_for_small_positions(self) -> None:
+		}.get(key)
+
 		self.assertEqual(calculate_profit_protection_target_profit_usd(100.0, 0.01), 0.1)
 		self.assertEqual(calculate_profit_protection_activation_usd(100.0, 0.01), 0.3)
+		self.assertEqual(calculate_profit_protection_locked_profit_usd(0.2, 0.3), 0.3)
+
+	@patch("profit_protection_strategy._load_dotenv_value")
+	def test_profit_protection_exposes_locked_profit_from_peak(self, mock_load_dotenv_value) -> None:
+		mock_load_dotenv_value.side_effect = lambda key: {
+			"PROFIT_PROTECTION_RETRACE_RATIO": "0.55",
+		}.get(key)
+
+		self.assertEqual(calculate_profit_protection_locked_profit_usd(10.0, 2.5), 5.5)
+		self.assertEqual(calculate_profit_protection_locked_profit_usd(4.0, 2.5), 2.5)
+
+	@patch.dict(os.environ, {"INDEX_STRATEGY_ENABLED": "true", "PROFIT_PROTECTION_STRATEGY_ENABLED": "true"}, clear=False)
+	def test_profit_protection_can_manage_index_positions(self) -> None:
+		index_context = get_index_strategy_context()
+		index_position = {"magic": index_context.magic, "comment": f"ga:{index_context.strategy_id}"}
+
+		resolved_context = get_profit_protection_context_for_position(index_position)
+
+		self.assertIsNotNone(resolved_context)
+		assert resolved_context is not None
+		self.assertEqual(resolved_context.strategy_id, index_context.strategy_id)
+		self.assertTrue(is_position_under_profit_protection(index_position))
 
 
 if __name__ == "__main__":

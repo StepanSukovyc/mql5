@@ -9,6 +9,7 @@ from unittest.mock import patch
 from gemini_vertex import (
 	GeminiVertexRequestError,
 	_get_legacy_prompt_with_schema,
+	_normalize_legacy_gemini_api_url,
 	_parse_structured_json_response,
 	_should_skip_remaining_vertex_models,
 	_should_try_rest_fallback,
@@ -36,6 +37,7 @@ class GeminiVertexParsingTests(unittest.TestCase):
 		prompt = mock_request_final_decision_json.call_args.args[1]
 		self.assertIn('"candidates": [', prompt)
 		self.assertIn('"recommended_symbol": "SYMBOL_NAME"', prompt)
+		self.assertIn("Pole reasoning musí být krátké", prompt)
 
 	def test_parses_json_wrapped_in_code_fence(self) -> None:
 		response = SimpleNamespace(
@@ -149,6 +151,23 @@ class GeminiVertexParsingTests(unittest.TestCase):
 				"Publisher Model `projects/test/locations/europe-west1/publishers/google/models/gemini-2.0-flash` was not found or your project does not have access to it.",
 			)
 		)
+
+	def test_legacy_api_url_rewrites_removed_flash_model_to_supported_endpoint(self) -> None:
+		cases = {
+			"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+			"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+			"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent",
+			"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite-001:generateContent": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent",
+		}
+
+		for legacy_url, expected_url in cases.items():
+			with self.subTest(legacy_url=legacy_url):
+				self.assertEqual(_normalize_legacy_gemini_api_url(legacy_url), expected_url)
+
+	def test_legacy_api_url_keeps_supported_models_unchanged(self) -> None:
+		api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+
+		self.assertEqual(_normalize_legacy_gemini_api_url(api_url), api_url)
 
 
 if __name__ == "__main__":

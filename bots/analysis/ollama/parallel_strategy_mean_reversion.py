@@ -1,26 +1,11 @@
 from __future__ import annotations
 
-import os
 from typing import Dict, List, Optional
 
-from instrument_utils import symbol_matches_patterns
+from env_utils import get_float_env, parse_csv_env
+from instrument_utils import is_secondary_strategy_symbol_allowed
 from signal_rules import SignalValidationResult, _is_news_blocked
 from strategy_context import count_open_positions_for_strategy, get_parallel_strategy_context
-
-
-def _get_float_env(name: str, default: float) -> float:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	try:
-		return float(raw)
-	except (TypeError, ValueError):
-		return default
-
-
-def _parse_csv_env(name: str, default: str) -> List[str]:
-	raw = os.getenv(name, default)
-	return [item.strip() for item in raw.split(",") if item.strip()]
 
 
 def _latest_indicator_value(market_data: Dict, timeframe: str, indicator: str) -> Optional[float]:
@@ -44,7 +29,7 @@ def _latest_close(market_data: Dict, timeframe: str) -> Optional[float]:
 
 
 def get_parallel_symbol_whitelist() -> List[str]:
-	return _parse_csv_env(
+	return parse_csv_env(
 		"PARALLEL_SYMBOL_WHITELIST",
 		"EURUSD*,GBPUSD*,USDJPY*,AUDUSD*,USDCHF*",
 	)
@@ -53,6 +38,7 @@ def get_parallel_symbol_whitelist() -> List[str]:
 def validate_mean_reversion_signal(symbol: str, action: str, market_data: Dict) -> SignalValidationResult:
 	reasons: List[str] = []
 	metrics: Dict[str, float] = {}
+	whitelist = get_parallel_symbol_whitelist()
 
 	close_h1 = _latest_close(market_data, "1h")
 	rsi2_h1 = _latest_indicator_value(market_data, "1h", "rsi2")
@@ -82,12 +68,12 @@ def validate_mean_reversion_signal(symbol: str, action: str, market_data: Dict) 
 		}
 	)
 
-	if not symbol_matches_patterns(symbol, get_parallel_symbol_whitelist()):
+	if not is_secondary_strategy_symbol_allowed(symbol, whitelist):
 		reasons.append("symbol_not_in_parallel_whitelist")
 
-	max_adx = _get_float_env("PARALLEL_MAX_ADX_H4", 18.0)
-	max_spread_points = _get_float_env("PARALLEL_MAX_SPREAD_POINTS", 35.0)
-	vwap_distance_multiplier = _get_float_env("PARALLEL_VWAP_ATR_DISTANCE_MULTIPLIER", 1.2)
+	max_adx = get_float_env("PARALLEL_MAX_ADX_H4", 18.0)
+	max_spread_points = get_float_env("PARALLEL_MAX_SPREAD_POINTS", 35.0)
+	vwap_distance_multiplier = get_float_env("PARALLEL_VWAP_ATR_DISTANCE_MULTIPLIER", 1.2)
 
 	if adx_h4 >= max_adx:
 		reasons.append("adx_above_range_threshold")
@@ -101,12 +87,12 @@ def validate_mean_reversion_signal(symbol: str, action: str, market_data: Dict) 
 	if action == "BUY":
 		if close_h1 >= bb_lower_h1:
 			reasons.append("close_not_below_lower_band")
-		if rsi2_h1 > _get_float_env("PARALLEL_LONG_RSI2_MAX", 5.0):
+		if rsi2_h1 > get_float_env("PARALLEL_LONG_RSI2_MAX", 5.0):
 			reasons.append("rsi2_not_extreme_long")
 	else:
 		if close_h1 <= bb_upper_h1:
 			reasons.append("close_not_above_upper_band")
-		if rsi2_h1 < _get_float_env("PARALLEL_SHORT_RSI2_MIN", 95.0):
+		if rsi2_h1 < get_float_env("PARALLEL_SHORT_RSI2_MIN", 95.0):
 			reasons.append("rsi2_not_extreme_short")
 
 	return SignalValidationResult(not reasons, reasons, "range", metrics)
