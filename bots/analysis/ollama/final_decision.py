@@ -171,6 +171,7 @@ RULE_REASON_TEXT_CS = {
 	"adx_below_quant_threshold": "ADX je pod minimem pro kvantitativni vstup.",
 	"quant_direction_conflict": "Smer obchodu neodpovida matematickemu score.",
 	"quant_distance_too_small": "Cena je prilis blizko EMA20 a impuls neni dost silny.",
+	"quant_body_too_small": "Cena je prilis blizko EMA20 a impuls neni dost silny.",
 	"quant_rsi_not_supportive_long": "RSI nepotvrzuje long kvantitativni setup.",
 	"quant_rsi_not_supportive_short": "RSI nepotvrzuje short kvantitativni setup.",
 	"missing_indicator_data": "Chybi indikatorova data potrebna pro vyhodnoceni.",
@@ -1651,7 +1652,9 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 			default_max_trades_per_day=8,
 			default_max_trades_per_symbol_per_day=2,
 		)
-		if is_quant_strategy_enabled() and can_activate_quant_strategy(account_state, open_positions):
+		quant_enabled = is_quant_strategy_enabled()
+		quant_activation_met = quant_enabled and can_activate_quant_strategy(account_state, open_positions)
+		if quant_activation_met and quant_candidates:
 			if _attempt_strategy_trade(
 				profile=quant_profile,
 				candidates=quant_candidates,
@@ -1665,14 +1668,15 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				print("✅ Final Trading Decision Completed")
 				print("=" * 60)
 				return True
-		elif is_quant_strategy_enabled() and not quant_candidates:
+		elif quant_enabled:
+			reason = "no_quant_candidates" if quant_activation_met and not quant_candidates else "activation_gate_not_satisfied"
 			_log_trade_decision_audit(
 				service_folder,
-				strategy_id=get_quant_strategy_context().strategy_id,
-				strategy_label="quant",
+				strategy_id=quant_profile.context.strategy_id,
+				strategy_label=quant_profile.label,
 				stage="strategy_blocked",
 				trade_executed=False,
-				reason="no_quant_candidates",
+				reason=reason,
 			)
 
 		print("❌ No strategy found an executable trade in this cycle")

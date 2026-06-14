@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import os
 from dataclasses import dataclass
 from typing import Dict, Optional
 
+from env_utils import get_float_env
 from instrument_utils import get_crypto_lot_multiplier, is_crypto_symbol
 from mt5_symbols import estimate_order_profit, get_current_price, get_symbol_info
 
@@ -17,21 +17,6 @@ class SyntheticRiskPlan:
 	synthetic_stop_price: float
 	take_profit_distance: float
 	take_profit_price: float
-
-
-def _get_float_env(name: str, default: float, *, minimum: float = 0.0) -> float:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	try:
-		value = float(raw)
-		if value < minimum:
-			raise ValueError
-		return value
-	except (TypeError, ValueError):
-		return default
-
-
 def _get_latest_indicator_value(market_data: Dict, timeframe: str, indicator: str) -> Optional[float]:
 	series = market_data.get("oscillators", {}).get(timeframe, {}).get(indicator, [])
 	if not series:
@@ -72,9 +57,9 @@ def calculate_synthetic_risk_plan(
 	if balance <= 0:
 		return None
 
-	risk_percent = _get_float_env(risk_percent_env, 0.50, minimum=0.01)
-	stop_atr_multiplier = _get_float_env(stop_atr_multiplier_env, 1.5, minimum=0.01)
-	tp_r_multiple = _get_float_env(tp_r_multiple_env, 2.2, minimum=0.1)
+	risk_percent = get_float_env(risk_percent_env, 0.50, minimum=0.01)
+	stop_atr_multiplier = get_float_env(stop_atr_multiplier_env, 1.5, minimum=0.01)
+	tp_r_multiple = get_float_env(tp_r_multiple_env, 2.2, minimum=0.1)
 	risk_usd = balance * (risk_percent / 100.0)
 	synthetic_stop_distance = atr_value * stop_atr_multiplier
 	if synthetic_stop_distance <= 0:

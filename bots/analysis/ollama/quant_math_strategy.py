@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import json
-import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
+from env_utils import get_bool_env, get_float_env, get_int_env, parse_csv_env
 from instrument_utils import is_secondary_strategy_symbol_allowed
 from signal_rules import SignalValidationResult, _is_news_blocked
 from strategy_context import count_open_positions_for_strategy, get_quant_strategy_context
@@ -17,38 +17,6 @@ class QuantCandidate:
 	action: str
 	score: float
 	metrics: Dict[str, float]
-
-
-def _get_float_env(name: str, default: float) -> float:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	try:
-		return float(raw)
-	except (TypeError, ValueError):
-		return default
-
-
-def _get_bool_env(name: str, default: bool) -> bool:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
-
-
-def _get_int_env(name: str, default: int) -> int:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	try:
-		return int(raw)
-	except (TypeError, ValueError):
-		return default
-
-
-def _parse_csv_env(name: str, default: str) -> List[str]:
-	raw = os.getenv(name, default)
-	return [item.strip() for item in raw.split(",") if item.strip()]
 
 
 def _latest_indicator_value(market_data: Dict, timeframe: str, indicator: str) -> Optional[float]:
@@ -83,11 +51,11 @@ def _load_market_data_file(path: Path) -> Optional[Dict]:
 
 
 def is_quant_strategy_enabled() -> bool:
-	return _get_bool_env("QUANT_STRATEGY_ENABLED", True)
+	return get_bool_env("QUANT_STRATEGY_ENABLED", True)
 
 
 def get_quant_symbol_whitelist() -> List[str]:
-	return _parse_csv_env(
+	return parse_csv_env(
 		"QUANT_SYMBOL_WHITELIST",
 		"",
 	)
@@ -116,8 +84,10 @@ def _build_quant_signal(symbol: str, market_data: Dict) -> Optional[QuantCandida
 	rsi_h1 = _latest_indicator_value(market_data, "1h", "rsi")
 	adx_h4 = _latest_indicator_value(market_data, "4h", "adx14")
 	spread_points = market_data.get("spread_snapshot", {}).get("spread_points")
-	recent_high = max((_candle_value(candle, "high") for candle in prior_window), default=None)
-	recent_low = min((_candle_value(candle, "low") for candle in prior_window), default=None)
+	recent_high_values = [value for value in (_candle_value(candle, "high") for candle in prior_window) if value is not None]
+	recent_low_values = [value for value in (_candle_value(candle, "low") for candle in prior_window) if value is not None]
+	recent_high = max(recent_high_values, default=None)
+	recent_low = min(recent_low_values, default=None)
 
 	if None in {
 		close_now,
@@ -156,13 +126,13 @@ def _build_quant_signal(symbol: str, market_data: Dict) -> Optional[QuantCandida
 			direction_streak -= 1.0
 	rsi_centered = (rsi_h1 - 50.0) / 10.0
 	adx_component = max(min((adx_h4 - 18.0) / 10.0, 2.0), -2.0)
-	spread_penalty = float(spread_points or 0.0) / max(_get_float_env("QUANT_MAX_SPREAD_POINTS", 30.0), 1.0)
+	spread_penalty = float(spread_points or 0.0) / max(get_float_env("QUANT_MAX_SPREAD_POINTS", 30.0), 1.0)
 
-	acceleration_weight = _get_float_env("QUANT_ACCELERATION_WEIGHT", 1.35)
-	breakout_weight = _get_float_env("QUANT_BREAKOUT_WEIGHT", 1.10)
-	body_weight = _get_float_env("QUANT_BODY_IMPULSE_WEIGHT", 0.90)
-	streak_weight = _get_float_env("QUANT_DIRECTION_STREAK_WEIGHT", 0.40)
-	curvature_weight = _get_float_env("QUANT_CURVATURE_WEIGHT", 0.70)
+	acceleration_weight = get_float_env("QUANT_ACCELERATION_WEIGHT", 1.35)
+	breakout_weight = get_float_env("QUANT_BREAKOUT_WEIGHT", 1.10)
+	body_weight = get_float_env("QUANT_BODY_IMPULSE_WEIGHT", 0.90)
+	streak_weight = get_float_env("QUANT_DIRECTION_STREAK_WEIGHT", 0.40)
+	curvature_weight = get_float_env("QUANT_CURVATURE_WEIGHT", 0.70)
 
 	buy_score = (
 		momentum
@@ -193,7 +163,7 @@ def _build_quant_signal(symbol: str, market_data: Dict) -> Optional[QuantCandida
 
 	action = "BUY" if buy_score >= sell_score else "SELL"
 	score = max(buy_score, sell_score)
-	if score < _get_float_env("QUANT_MIN_SIGNAL_SCORE", 2.4):
+	if score < get_float_env("QUANT_MIN_SIGNAL_SCORE", 2.4):
 		return None
 
 	return QuantCandidate(
@@ -219,10 +189,10 @@ def _build_quant_signal(symbol: str, market_data: Dict) -> Optional[QuantCandida
 
 
 def build_quant_candidates(source_folder: Path) -> List[QuantCandidate]:
-	if not is_quant_strategy_enabled() or not source_folder.exists():
+	if not source_folder.exists():
 		return []
 
-	max_candidates = max(_get_int_env("QUANT_MAX_CANDIDATES", 12), 0)
+	max_candidates = max(get_int_env("QUANT_MAX_CANDIDATES", 12), 0)
 	candidates: List[QuantCandidate] = []
 	for market_data_file in source_folder.glob("*.json"):
 		symbol = market_data_file.stem
@@ -252,13 +222,13 @@ def validate_quant_signal(symbol: str, action: str, market_data: Dict) -> Signal
 		return SignalValidationResult(False, ["quant_score_below_threshold"], "quant", metrics)
 
 	metrics.update(candidate.metrics)
-	max_spread_points = _get_float_env("QUANT_MAX_SPREAD_POINTS", 30.0)
-	min_adx = _get_float_env("QUANT_MIN_ADX_H4", 16.0)
-	min_distance = _get_float_env("QUANT_MIN_EMA_DISTANCE_ATR", 0.15)
-	rsi_long_min = _get_float_env("QUANT_LONG_RSI_MIN", 54.0)
-	rsi_short_max = _get_float_env("QUANT_SHORT_RSI_MAX", 46.0)
-	min_breakout_bias = _get_float_env("QUANT_MIN_BREAKOUT_BIAS_ATR", -0.05)
-	min_body_impulse = _get_float_env("QUANT_MIN_BODY_IMPULSE_ATR", 0.05)
+	max_spread_points = get_float_env("QUANT_MAX_SPREAD_POINTS", 30.0)
+	min_adx = get_float_env("QUANT_MIN_ADX_H4", 16.0)
+	min_distance = get_float_env("QUANT_MIN_EMA_DISTANCE_ATR", 0.15)
+	rsi_long_min = get_float_env("QUANT_LONG_RSI_MIN", 54.0)
+	rsi_short_max = get_float_env("QUANT_SHORT_RSI_MAX", 46.0)
+	min_breakout_bias = get_float_env("QUANT_MIN_BREAKOUT_BIAS_ATR", -0.05)
+	min_body_impulse = get_float_env("QUANT_MIN_BODY_IMPULSE_ATR", 0.05)
 
 	adx_h4 = float(candidate.metrics.get("adx_h4", 0.0))
 	spread_points = float(candidate.metrics.get("spread_points", 0.0))
@@ -281,7 +251,7 @@ def validate_quant_signal(symbol: str, action: str, market_data: Dict) -> Signal
 		if distance_from_ema < min_distance:
 			reasons.append("quant_distance_too_small")
 		if body_impulse < min_body_impulse:
-			reasons.append("quant_distance_too_small")
+			reasons.append("quant_body_too_small")
 		if breakout_bias < min_breakout_bias:
 			reasons.append("quant_score_below_threshold")
 		if rsi_h1 < rsi_long_min:
@@ -292,7 +262,7 @@ def validate_quant_signal(symbol: str, action: str, market_data: Dict) -> Signal
 		if distance_from_ema > -min_distance:
 			reasons.append("quant_distance_too_small")
 		if body_impulse > -min_body_impulse:
-			reasons.append("quant_distance_too_small")
+			reasons.append("quant_body_too_small")
 		if breakout_bias > -min_breakout_bias:
 			reasons.append("quant_score_below_threshold")
 		if rsi_h1 > rsi_short_max:

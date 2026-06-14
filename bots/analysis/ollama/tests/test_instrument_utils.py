@@ -65,6 +65,16 @@ class InstrumentUtilsTests(unittest.TestCase):
 	def test_secondary_strategy_allows_forex_when_whitelist_empty(self) -> None:
 		self.assertTrue(is_secondary_strategy_symbol_allowed("AUDJPY_ecn", []))
 
+	def test_secondary_strategy_allows_symbol_in_non_empty_whitelist(self) -> None:
+		whitelist = ["AUDJPY_ecn", "GBPCAD_ecn"]
+
+		self.assertTrue(is_secondary_strategy_symbol_allowed("AUDJPY_ecn", whitelist))
+
+	def test_secondary_strategy_blocks_symbol_not_in_non_empty_whitelist(self) -> None:
+		whitelist = ["AUDJPY_ecn", "GBPCAD_ecn"]
+
+		self.assertFalse(is_secondary_strategy_symbol_allowed("EURUSD_ecn", whitelist))
+
 	@patch("instrument_utils.get_symbol_info")
 	@patch("instrument_utils.mt5")
 	def test_secondary_strategy_allows_cfd_when_whitelist_empty(self, mock_mt5, mock_get_symbol_info) -> None:

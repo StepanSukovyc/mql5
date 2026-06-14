@@ -1,33 +1,11 @@
 from __future__ import annotations
 
-import os
 from typing import Dict, List, Optional
 
+from env_utils import get_bool_env, get_float_env, parse_csv_env
 from instrument_utils import is_secondary_strategy_symbol_allowed
 from signal_rules import SignalValidationResult, _is_news_blocked
 from strategy_context import count_open_positions_for_strategy, get_reversal_strategy_context
-
-
-def _get_float_env(name: str, default: float) -> float:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	try:
-		return float(raw)
-	except (TypeError, ValueError):
-		return default
-
-
-def _get_bool_env(name: str, default: bool) -> bool:
-	raw = os.getenv(name)
-	if raw is None:
-		return default
-	return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
-
-
-def _parse_csv_env(name: str, default: str) -> List[str]:
-	raw = os.getenv(name, default)
-	return [item.strip() for item in raw.split(",") if item.strip()]
 
 
 def _latest_indicator_value(market_data: Dict, timeframe: str, indicator: str) -> Optional[float]:
@@ -125,8 +103,8 @@ def _is_hammer_like(candle: Dict, bullish: bool) -> bool:
 		return False
 	upper_wick = high_price - max(open_price, close_price)
 	lower_wick = min(open_price, close_price) - low_price
-	min_wick_ratio = _get_float_env("REVERSAL_PINBAR_MIN_WICK_TO_BODY_RATIO", 2.0)
-	max_opposite_wick_ratio = _get_float_env("REVERSAL_PINBAR_MAX_OPPOSITE_WICK_TO_BODY_RATIO", 0.8)
+	min_wick_ratio = get_float_env("REVERSAL_PINBAR_MIN_WICK_TO_BODY_RATIO", 2.0)
+	max_opposite_wick_ratio = get_float_env("REVERSAL_PINBAR_MAX_OPPOSITE_WICK_TO_BODY_RATIO", 0.8)
 	body_for_ratio = max(body, price_range * 0.05)
 	if bullish:
 		return close_price >= open_price and lower_wick >= body_for_ratio * min_wick_ratio and upper_wick <= body_for_ratio * max_opposite_wick_ratio
@@ -134,11 +112,11 @@ def _is_hammer_like(candle: Dict, bullish: bool) -> bool:
 
 
 def is_reversal_strategy_enabled() -> bool:
-	return _get_bool_env("REVERSAL_STRATEGY_ENABLED", False)
+	return get_bool_env("REVERSAL_STRATEGY_ENABLED", False)
 
 
 def get_reversal_symbol_whitelist() -> List[str]:
-	return _parse_csv_env(
+	return parse_csv_env(
 		"REVERSAL_SYMBOL_WHITELIST",
 		"EURUSD*,GBPUSD*,USDJPY*,AUDUSD*,USDCHF*",
 	)
@@ -199,11 +177,11 @@ def validate_reversal_pattern_signal(symbol: str, action: str, market_data: Dict
 	if not is_secondary_strategy_symbol_allowed(symbol, whitelist):
 		reasons.append("symbol_not_in_reversal_whitelist")
 
-	max_adx = _get_float_env("REVERSAL_MAX_ADX_H4", 22.0)
-	max_spread_points = _get_float_env("REVERSAL_MAX_SPREAD_POINTS", 35.0)
-	min_pattern_range_ratio = _get_float_env("REVERSAL_MIN_PATTERN_RANGE_ATR_RATIO", 0.8)
-	touch_tolerance_ratio = _get_float_env("REVERSAL_EXTREME_TOUCH_ATR_RATIO", 0.20)
-	confirmation_ratio = _get_float_env("REVERSAL_MIN_CONFIRMATION_CLOSE_RATIO", 0.55)
+	max_adx = get_float_env("REVERSAL_MAX_ADX_H4", 22.0)
+	max_spread_points = get_float_env("REVERSAL_MAX_SPREAD_POINTS", 35.0)
+	min_pattern_range_ratio = get_float_env("REVERSAL_MIN_PATTERN_RANGE_ATR_RATIO", 0.8)
+	touch_tolerance_ratio = get_float_env("REVERSAL_EXTREME_TOUCH_ATR_RATIO", 0.20)
+	confirmation_ratio = get_float_env("REVERSAL_MIN_CONFIRMATION_CLOSE_RATIO", 0.55)
 
 	if adx_h4 >= max_adx:
 		reasons.append("adx_above_reversal_threshold")
@@ -220,7 +198,7 @@ def validate_reversal_pattern_signal(symbol: str, action: str, market_data: Dict
 			reasons.append("pattern_not_at_lower_extreme")
 		if current_close >= vwap_h4:
 			reasons.append("close_not_below_vwap")
-		if rsi_h1 > _get_float_env("REVERSAL_LONG_RSI_MAX", 45.0) and rsi2_h1 > _get_float_env("REVERSAL_LONG_RSI2_MAX", 25.0):
+		if rsi_h1 > get_float_env("REVERSAL_LONG_RSI_MAX", 45.0) and rsi2_h1 > get_float_env("REVERSAL_LONG_RSI2_MAX", 25.0):
 			reasons.append("rsi_not_supportive_long")
 		if not (_is_bullish_engulfing(previous_candle, current_candle) or _is_hammer_like(current_candle, bullish=True)):
 			reasons.append("bullish_reversal_pattern_missing")
@@ -231,7 +209,7 @@ def validate_reversal_pattern_signal(symbol: str, action: str, market_data: Dict
 			reasons.append("pattern_not_at_upper_extreme")
 		if current_close <= vwap_h4:
 			reasons.append("close_not_above_vwap")
-		if rsi_h1 < _get_float_env("REVERSAL_SHORT_RSI_MIN", 55.0) and rsi2_h1 < _get_float_env("REVERSAL_SHORT_RSI2_MIN", 75.0):
+		if rsi_h1 < get_float_env("REVERSAL_SHORT_RSI_MIN", 55.0) and rsi2_h1 < get_float_env("REVERSAL_SHORT_RSI2_MIN", 75.0):
 			reasons.append("rsi_not_supportive_short")
 		if not (_is_bearish_engulfing(previous_candle, current_candle) or _is_hammer_like(current_candle, bullish=False)):
 			reasons.append("bearish_reversal_pattern_missing")

@@ -84,6 +84,77 @@ def _build_market_data(
 	}
 
 
+def _build_quant_long_market_data(*, adx_h4: float = 24.0, rsi_h1: float = 63.0) -> dict:
+	market_data = _build_market_data(
+		adx_h4=adx_h4,
+		close_h1=103.0,
+		open_h1=102.4,
+		prev_close_h1=101.0,
+		prev_open_h1=100.2,
+		rsi_h1=rsi_h1,
+		vwap_h4=100.5,
+	)
+	market_data["candles"]["1h"].insert(
+		0,
+		{
+			"time": "2026-01-01T21:00:00+00:00",
+			"open": 99.4,
+			"high": 99.9,
+			"low": 99.1,
+			"close": 99.7,
+		},
+	)
+	market_data["candles"]["1h"].insert(
+		1,
+		{
+			"time": "2026-01-01T22:00:00+00:00",
+			"open": 99.8,
+			"high": 100.2,
+			"low": 99.5,
+			"close": 100.0,
+		},
+	)
+	return market_data
+
+
+def _build_quant_short_market_data(*, adx_h4: float = 24.0, rsi_h1: float = 37.0) -> dict:
+	market_data = _build_market_data(
+		adx_h4=adx_h4,
+		close_h1=94.0,
+		open_h1=94.8,
+		high_h1=95.0,
+		low_h1=93.8,
+		prev_close_h1=99.0,
+		prev_open_h1=99.8,
+		prev_high_h1=100.1,
+		prev_low_h1=98.8,
+		rsi_h1=rsi_h1,
+		vwap_h4=99.5,
+	)
+	market_data["oscillators"]["1h"]["ema20"] = [{"time": "2026-01-02T00:00:00+00:00", "value": 97.0}]
+	market_data["candles"]["1h"].insert(
+		0,
+		{
+			"time": "2026-01-01T21:00:00+00:00",
+			"open": 101.4,
+			"high": 101.7,
+			"low": 100.9,
+			"close": 101.1,
+		},
+	)
+	market_data["candles"]["1h"].insert(
+		1,
+		{
+			"time": "2026-01-01T22:00:00+00:00",
+			"open": 100.6,
+			"high": 100.8,
+			"low": 99.8,
+			"close": 100.0,
+		},
+	)
+	return market_data
+
+
 class SignalRuleTests(unittest.TestCase):
 	def test_trend_following_rules_allow_valid_long(self) -> None:
 		result = validate_trend_following_signal("EURUSD_ecn", "BUY", _build_market_data())
@@ -147,6 +218,54 @@ class SignalRuleTests(unittest.TestCase):
 
 		self.assertTrue(result.allowed)
 		self.assertEqual(result.regime_state, "reversal")
+
+	def test_reversal_pattern_rules_allow_valid_short(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"EURUSD_ecn",
+			"SELL",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=100.9,
+				open_h1=103.0,
+				high_h1=103.2,
+				low_h1=100.7,
+				prev_open_h1=101.0,
+				prev_high_h1=101.0,
+				prev_low_h1=99.8,
+				prev_close_h1=101.2,
+				rsi_h1=59.0,
+				rsi2_h1=82.0,
+				bb_upper_h1=101.4,
+				vwap_h4=100.6,
+			),
+		)
+
+		self.assertTrue(result.allowed)
+		self.assertEqual(result.regime_state, "reversal")
+
+	def test_reversal_pattern_rules_require_close_above_vwap_for_short(self) -> None:
+		result = validate_reversal_pattern_signal(
+			"EURUSD_ecn",
+			"SELL",
+			_build_market_data(
+				adx_h4=18.0,
+				close_h1=101.5,
+				open_h1=103.0,
+				high_h1=103.2,
+				low_h1=101.3,
+				prev_open_h1=100.8,
+				prev_high_h1=101.0,
+				prev_low_h1=99.8,
+				prev_close_h1=101.2,
+				rsi_h1=59.0,
+				rsi2_h1=82.0,
+				bb_upper_h1=101.4,
+				vwap_h4=102.0,
+			),
+		)
+
+		self.assertFalse(result.allowed)
+		self.assertIn("close_not_above_vwap", result.reason_codes)
 
 	def test_reversal_pattern_rules_require_confirmed_pattern(self) -> None:
 		result = validate_reversal_pattern_signal(
@@ -223,72 +342,44 @@ class SignalRuleTests(unittest.TestCase):
 		self.assertNotIn("symbol_not_in_reversal_whitelist", result.reason_codes)
 
 	def test_quant_rules_allow_valid_long(self) -> None:
-		market_data = _build_market_data(
-			adx_h4=24.0,
-			close_h1=103.0,
-			open_h1=102.4,
-			prev_close_h1=101.0,
-			prev_open_h1=100.2,
-			rsi_h1=63.0,
-			vwap_h4=100.5,
-		)
-		market_data["candles"]["1h"].insert(
-			0,
-			{
-				"time": "2026-01-01T21:00:00+00:00",
-				"open": 99.4,
-				"high": 99.9,
-				"low": 99.1,
-				"close": 99.7,
-			},
-		)
-		market_data["candles"]["1h"].insert(
-			1,
-			{
-				"time": "2026-01-01T22:00:00+00:00",
-				"open": 99.8,
-				"high": 100.2,
-				"low": 99.5,
-				"close": 100.0,
-			},
-		)
+		market_data = _build_quant_long_market_data()
 
 		result = validate_quant_signal("EURUSD_ecn", "BUY", market_data)
 
 		self.assertTrue(result.allowed)
 		self.assertEqual(result.regime_state, "quant")
 
+	def test_quant_rules_allow_valid_short(self) -> None:
+		result = validate_quant_signal("EURUSD_ecn", "SELL", _build_quant_short_market_data())
+
+		self.assertTrue(result.allowed)
+		self.assertEqual(result.regime_state, "quant")
+
+	def test_quant_rules_block_low_adx(self) -> None:
+		result = validate_quant_signal("EURUSD_ecn", "BUY", _build_quant_long_market_data(adx_h4=12.0))
+
+		self.assertFalse(result.allowed)
+		self.assertIn("adx_below_quant_threshold", result.reason_codes)
+
+	def test_quant_rules_block_direction_conflict(self) -> None:
+		result = validate_quant_signal("EURUSD_ecn", "SELL", _build_quant_long_market_data())
+
+		self.assertFalse(result.allowed)
+		self.assertIn("quant_direction_conflict", result.reason_codes)
+
+	def test_quant_rules_ignore_missing_recent_extreme_values(self) -> None:
+		market_data = _build_quant_long_market_data()
+		for index in (0, 1, 2):
+			market_data["candles"]["1h"][index]["high"] = None
+
+		result = validate_quant_signal("EURUSD_ecn", "BUY", market_data)
+
+		self.assertFalse(result.allowed)
+		self.assertIn("quant_score_below_threshold", result.reason_codes)
+
 	@patch.dict(os.environ, {"QUANT_SYMBOL_WHITELIST": ""}, clear=False)
 	def test_quant_rules_allow_index_when_whitelist_empty(self) -> None:
-		market_data = _build_market_data(
-			adx_h4=24.0,
-			close_h1=103.0,
-			open_h1=102.4,
-			prev_close_h1=101.0,
-			prev_open_h1=100.2,
-			rsi_h1=63.0,
-			vwap_h4=100.5,
-		)
-		market_data["candles"]["1h"].insert(
-			0,
-			{
-				"time": "2026-01-01T21:00:00+00:00",
-				"open": 99.4,
-				"high": 99.9,
-				"low": 99.1,
-				"close": 99.7,
-			},
-		)
-		market_data["candles"]["1h"].insert(
-			1,
-			{
-				"time": "2026-01-01T22:00:00+00:00",
-				"open": 99.8,
-				"high": 100.2,
-				"low": 99.5,
-				"close": 100.0,
-			},
-		)
+		market_data = _build_quant_long_market_data()
 
 		result = validate_quant_signal("US100_ecn", "BUY", market_data)
 
