@@ -15,6 +15,7 @@ from account_state import get_account_state
 from ai_advisory_state import build_decision_signature, get_active_rejection, get_cached_decision, record_rejection, store_cached_decision
 from gemini_config import GeminiVertexConfig, load_gemini_api_config
 from gemini_decision import ask_gemini_final_decision, load_predictions
+from ollama_service import is_ollama_cloud_enabled
 from instrument_utils import (
 	get_base_prediction_threshold,
 	get_cfd_min_net_profit_usd,
@@ -43,6 +44,7 @@ from strategy_context import (
 	StrategyContext,
 	build_strategy_comment,
 	count_open_positions_for_strategy,
+	get_ollama_cloud_strategy_context,
 	get_parallel_strategy_context,
 	get_primary_strategy_context,
 	get_quant_strategy_context,
@@ -375,8 +377,12 @@ def _get_int_env(name: str, default: int, *, minimum: int = 0) -> int:
 		return default
 
 
-def _load_market_data_for_symbol(predictions_folder: Path, symbol: str) -> Optional[Dict]:
-	source_folder = predictions_folder.parent / "source"
+def _load_market_data_for_symbol(
+	predictions_folder: Path,
+	symbol: str,
+	source_folder_override: Optional[Path] = None,
+) -> Optional[Dict]:
+	source_folder = source_folder_override if source_folder_override is not None else predictions_folder.parent / "source"
 	market_data_file = source_folder / f"{symbol}.json"
 	if not market_data_file.exists():
 		return None
@@ -723,6 +729,7 @@ class StrategyExecutionProfile:
 	default_trade_cooldown_minutes: int
 	default_max_trades_per_day: int = 0
 	default_max_trades_per_symbol_per_day: int = 0
+	source_folder: Optional[Path] = None
 
 
 def _build_quant_ranked_candidates(predictions_folder: Path) -> List[RankedCandidate]:
@@ -900,6 +907,49 @@ def _log_candidate_queue(service_folder: Path, candidates: List[RankedCandidate]
 			"candidates": queue_rows,
 		},
 	)
+
+
+def _resolve_ollama_cloud_advisory_candidates(
+	*,
+	predictions: List[Dict],
+	open_positions: List[Dict],
+	account_state: Dict,
+	service_folder: Path,
+) -> List[RankedCandidate]:
+	"""Ask cloud Ollama for candidate ranking (analogous to _resolve_gemini_advisory_candidates)."""
+	if not predictions:
+		return []
+
+	from ollama_advisory import ask_ollama_final_decision as _ask_cloud
+
+	max_candidates = _get_gemini_advisory_max_candidates()
+	cache_signature = build_decision_signature(account_state, open_positions, predictions)
+	cached_decision = get_cached_decision(service_folder, cache_signature, _get_gemini_decision_cache_minutes())
+	if isinstance(cached_decision, dict):
+		cached_source = cached_decision.get("_source", "")
+		if str(cached_source) == "ollama_cloud":
+			cached_candidates = _extract_ranked_candidates_from_decision_payload(
+				cached_decision, "ollama_cloud_cached_advisory"
+			)
+			if cached_candidates:
+				return cached_candidates[:max_candidates]
+
+	decision_text = _ask_cloud(predictions, open_positions, account_state)
+	if not decision_text:
+		return []
+
+	try:
+		decision_payload = json.loads(decision_text)
+	except json.JSONDecodeError:
+		return []
+
+	decision_payload["_source"] = "ollama_cloud"
+	store_cached_decision(service_folder, cache_signature, decision_payload)
+
+	live_candidates = _extract_ranked_candidates_from_decision_payload(
+		decision_payload, "ollama_cloud_live_advisory"
+	)
+	return live_candidates[:max_candidates] if live_candidates else []
 
 
 def _resolve_gemini_advisory_candidates(
@@ -1163,7 +1213,9 @@ def _attempt_strategy_trade(
 			)
 			continue
 
-		market_data = _load_market_data_for_symbol(predictions_folder, symbol)
+		market_data = _load_market_data_for_symbol(
+			predictions_folder, symbol, source_folder_override=profile.source_folder
+		)
 		if market_data is None:
 			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "market_data_missing")
 			_log_trade_decision_audit(
@@ -1527,6 +1579,51 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		gemini_full_control_mode = (next_trade_number % full_control_every_n) == 0
 
 		_print_trade_mode(successful_trades, next_trade_number, full_control_every_n, gemini_full_control_mode)
+
+		# ── Cloud Ollama strategy (runs first when enabled) ──────────────────────
+		if is_ollama_cloud_enabled():
+			cloud_predictions_folder = service_folder / "ollama_cloud" / "predikce"
+			cloud_source_folder = service_folder / "ollama" / "source"
+			cloud_predictions = load_predictions(cloud_predictions_folder) if cloud_predictions_folder.exists() else []
+			print(f"\n☁️  Cloud Ollama: {len(cloud_predictions)} predikcí k dispozici")
+			if cloud_predictions:
+				cloud_advisory = _resolve_ollama_cloud_advisory_candidates(
+					predictions=cloud_predictions,
+					open_positions=open_positions,
+					account_state=account_state,
+					service_folder=service_folder,
+				)
+				cloud_queue = _build_candidate_queue(cloud_predictions, cloud_advisory)
+				_log_candidate_queue(service_folder, cloud_queue)
+				cloud_profile = StrategyExecutionProfile(
+					label="ollama_cloud",
+					context=get_ollama_cloud_strategy_context(),
+					signal_validator=validate_trend_following_signal,
+					risk_percent_env="OLLAMA_CLOUD_RISK_PER_TRADE_PERCENT",
+					stop_atr_multiplier_env="OLLAMA_CLOUD_SYNTHETIC_STOP_ATR_MULTIPLIER",
+					tp_r_multiple_env="OLLAMA_CLOUD_TAKE_PROFIT_R_MULTIPLIER",
+					max_trades_per_day_env="OLLAMA_CLOUD_MAX_TRADES_PER_DAY",
+					max_trades_per_symbol_per_day_env="OLLAMA_CLOUD_MAX_TRADES_PER_SYMBOL_PER_DAY",
+					trade_cooldown_env="OLLAMA_CLOUD_SYMBOL_TRADE_COOLDOWN_MINUTES",
+					default_trade_cooldown_minutes=15,
+					source_folder=cloud_source_folder,
+				)
+				if cloud_queue and _attempt_strategy_trade(
+					profile=cloud_profile,
+					candidates=cloud_queue,
+					predictions_folder=cloud_predictions_folder,
+					service_folder=service_folder,
+					account_state=account_state,
+					open_positions=open_positions,
+					open_crypto_positions=open_crypto_positions,
+				):
+					print("\n" + "=" * 60)
+					print("✅ Final Trading Decision Completed (Cloud Ollama)")
+					print("=" * 60)
+					return True
+			else:
+				print("ℹ️  Cloud Ollama: žádné predikce, cloud slot přeskočen")
+		# ── End cloud Ollama slot ─────────────────────────────────────────────────
 
 		primary_profile = StrategyExecutionProfile(
 			label="primary",

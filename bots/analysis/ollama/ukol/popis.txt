@@ -1,0 +1,16 @@
+v projektu se pro práci s lokální ollamou používá nastavení
+OLLAMA_ENABLED
+OLLAMA_URL
+OLLAMA_MODEL
+...
+
+potřeboval bych obchodní systém rozšířit o další strategii - tak že bych napojil i cloud ollama
+
+parametr OLLAMA_CLOUD_ENABLED
+poud je povolen tak proběhne výpočet dle strategii ollama cloud - v podstatě dotazy stejné jako u ollama locale ale doptává se cloud verze
+prosím analyzuj kódy a navrhní řešení
+mělo by být zpetně kompatibilní, to znamehá, že není vyloučené, že by běžely obě strategie vedle sebe (dle nastavení) - jak lokální tak cloud 
+nicméně, pořadí vykonávání má býz takové:
+pokud je zapnut cloud - proběhne ověření podmínek nákupu dle startegii založené POUZE na ollama, tj. i finální dotaz by byl na ollama (nikoliv geminy)
+následně bude se kontrolvat podmínky lokální strategie (ollama - geminy)
+pokud obchod neproběhne, tak další v pořadí jak je tomu dnes...

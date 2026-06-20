@@ -69,6 +69,45 @@ def is_ollama_enabled() -> bool:
     return value.lower() in {"true", "1", "yes", "y", "on"}
 
 
+def is_ollama_cloud_enabled() -> bool:
+    """Check if cloud Ollama strategy is enabled (reads from .env for runtime changes)."""
+    value = _load_dotenv_value("OLLAMA_CLOUD_ENABLED")
+    if value is None:
+        return False
+    return value.lower() in {"true", "1", "yes", "y", "on"}
+
+
+def get_ollama_cloud_url() -> str:
+    """Return cloud Ollama API endpoint URL."""
+    return _load_dotenv_value("OLLAMA_CLOUD_URL") or "https://ollama.com/api/generate"
+
+
+def get_ollama_cloud_model() -> str:
+    """Return cloud Ollama model name."""
+    return _load_dotenv_value("OLLAMA_CLOUD_MODEL") or "gpt-oss:120b"
+
+
+def get_ollama_cloud_api_key() -> Optional[str]:
+    """Return cloud Ollama API key, or None when not configured."""
+    value = _load_dotenv_value("OLLAMA_CLOUD_API_KEY")
+    return value if value else None
+
+
+def get_ollama_cloud_timeout_seconds() -> float:
+    """Return HTTP timeout for cloud Ollama requests."""
+    return _parse_float_env_value("OLLAMA_CLOUD_TIMEOUT_SECONDS", default=120.0, minimum=1.0)
+
+
+def get_ollama_cloud_num_ctx() -> int:
+    """Return context window size for cloud Ollama requests."""
+    return _parse_int_env_value("OLLAMA_CLOUD_NUM_CTX", default=DEFAULT_OLLAMA_NUM_CTX, minimum=1024)
+
+
+def get_ollama_cloud_max_parallel_requests() -> int:
+    """Return maximum concurrent cloud Ollama requests."""
+    return _parse_int_env_value("OLLAMA_CLOUD_MAX_PARALLEL_REQUESTS", default=1, minimum=1)
+
+
 def _parse_int_env_value(key: str, default: int, minimum: int = 0) -> int:
     """Read integer config from .env with validation."""
     value = _load_dotenv_value(key)
@@ -380,7 +419,15 @@ def _extract_json_from_text(text: str) -> Optional[Dict]:
     return None
 
 
-def ask_ollama_prediction(symbol: str, data: Dict, ollama_url: str, ollama_model: str) -> Optional[Dict]:
+def ask_ollama_prediction(
+    symbol: str,
+    data: Dict,
+    ollama_url: str,
+    ollama_model: str,
+    api_key: Optional[str] = None,
+    num_ctx: Optional[int] = None,
+    timeout_seconds: Optional[float] = None,
+) -> Optional[Dict]:
     """
     Ask Ollama AI for trading prediction.
     
@@ -417,9 +464,12 @@ def ask_ollama_prediction(symbol: str, data: Dict, ollama_url: str, ollama_model
     
     current_price = data.get("current_price")
     prompt_guidance = get_symbol_prompt_guidance(symbol)
-    ollama_num_ctx = get_ollama_num_ctx()
-    ollama_timeout_seconds = get_ollama_timeout_seconds()
+    ollama_num_ctx = num_ctx if num_ctx is not None else get_ollama_num_ctx()
+    ollama_timeout_seconds = timeout_seconds if timeout_seconds is not None else get_ollama_timeout_seconds()
     prompt_char_budget = get_ollama_prompt_char_budget(ollama_num_ctx)
+    _request_headers: Dict[str, str] = {}
+    if api_key:
+        _request_headers["Authorization"] = f"Bearer {api_key}"
     compact_prompt_enabled = is_ollama_compact_prompt_enabled()
     prompt_payload = _build_compact_market_data_summary(data) if compact_prompt_enabled else data
     prompt = _build_ollama_prompt(
@@ -463,7 +513,7 @@ def ask_ollama_prediction(symbol: str, data: Dict, ollama_url: str, ollama_model
         }
         
         with httpx.Client(timeout=ollama_timeout_seconds) as client:
-            response = client.post(ollama_url, json=request_data)
+            response = client.post(ollama_url, json=request_data, headers=_request_headers)
             response.raise_for_status()
             
             result = response.json()
@@ -534,7 +584,10 @@ def process_symbol_with_ollama(
     symbol_file: Path,
     ollama_predictions_folder: Path,
     ollama_url: str,
-    ollama_model: str
+    ollama_model: str,
+    api_key: Optional[str] = None,
+    num_ctx: Optional[int] = None,
+    timeout_seconds: Optional[float] = None,
 ) -> bool:
     """
     Process one symbol and generate prediction using Ollama.
@@ -559,7 +612,10 @@ def process_symbol_with_ollama(
             return False
         
         # Get prediction from Ollama
-        prediction_dict = ask_ollama_prediction(symbol, data, ollama_url, ollama_model)
+        prediction_dict = ask_ollama_prediction(
+            symbol, data, ollama_url, ollama_model,
+            api_key=api_key, num_ctx=num_ctx, timeout_seconds=timeout_seconds,
+        )
         
         if prediction_dict:
             # Create final output with required structure
@@ -808,3 +864,138 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
     
     shutdown_mt5()
     print("\n🛑 Ollama Service Loop ukončen")
+
+
+def ollama_cloud_service_loop(service_dest_folder: Path, stop_event) -> None:
+    """
+    Cloud Ollama service loop – generates predictions using a remote Ollama endpoint.
+
+    Reuses market data already collected by ollama_service_loop (ollama/source/).
+    Does NOT connect to MT5 itself. Saves predictions to ollama_cloud/predikce/.
+    OLLAMA_CLOUD_ENABLED is re-read from .env each cycle to support runtime toggle.
+    """
+    print("\n" + "=" * 60)
+    print("☁️  Ollama Cloud Service Loop spuštěn")
+    print("=" * 60)
+    print("Funkcionalita: Predikce přes cloudový Ollama endpoint")
+    print("Ovládání: Změňte OLLAMA_CLOUD_ENABLED v .env za běhu")
+    print("=" * 60 + "\n")
+
+    cycle_count = 0
+
+    while not stop_event.is_set():
+        try:
+            cycle_count += 1
+
+            if not is_ollama_cloud_enabled():
+                print(f"\n⏸️  [Cloud Ollama Cyklus #{cycle_count}] Cloud není aktivní")
+                print("   Čekám 5 minut... (Změňte OLLAMA_CLOUD_ENABLED=true v .env)")
+                for _ in range(300):
+                    if stop_event.is_set():
+                        return
+                    time.sleep(1)
+                continue
+
+            print(f"\n{'=' * 60}")
+            print(f"☁️  Cloud Ollama Cyklus #{cycle_count}")
+            print(f"{'=' * 60}")
+
+            cloud_url = get_ollama_cloud_url()
+            cloud_model = get_ollama_cloud_model()
+            cloud_api_key = get_ollama_cloud_api_key()
+            cloud_parallelism = get_ollama_cloud_max_parallel_requests()
+            cloud_num_ctx = get_ollama_cloud_num_ctx()
+            cloud_timeout = get_ollama_cloud_timeout_seconds()
+
+            print(f"⚙️  Cloud model: {cloud_model}")
+            print(f"⚙️  Cloud URL:   {cloud_url}")
+            print(f"⚙️  Paralelismus: {cloud_parallelism}")
+
+            # Source data is shared with local Ollama service
+            ollama_source = service_dest_folder / "ollama" / "source"
+            cloud_predictions = service_dest_folder / "ollama_cloud" / "predikce"
+            cloud_predictions.mkdir(parents=True, exist_ok=True)
+
+            if not ollama_source.exists() or not any(ollama_source.glob("*.json")):
+                print("⚠️  Zdrojová data z lokálního Ollama service nenalezena, čekám 60s...")
+                for _ in range(60):
+                    if stop_event.is_set():
+                        return
+                    time.sleep(1)
+                continue
+
+            symbol_files = list(ollama_source.glob("*.json"))
+            print(f"📊 Nalezeno {len(symbol_files)} symbolů ke zpracování")
+
+            start_time = datetime.now(tz=timezone.utc)
+            processed_count = 0
+            skipped_count = 0
+
+            if cloud_parallelism <= 1:
+                for symbol_file in symbol_files:
+                    if stop_event.is_set():
+                        print("\n🛑 Zastavuji Cloud Ollama service...")
+                        return
+                    success = process_symbol_with_ollama(
+                        symbol_file,
+                        cloud_predictions,
+                        cloud_url,
+                        cloud_model,
+                        api_key=cloud_api_key,
+                        num_ctx=cloud_num_ctx,
+                        timeout_seconds=cloud_timeout,
+                    )
+                    if success:
+                        processed_count += 1
+                    else:
+                        skipped_count += 1
+            else:
+                with ThreadPoolExecutor(max_workers=cloud_parallelism) as executor:
+                    future_to_name = {
+                        executor.submit(
+                            process_symbol_with_ollama,
+                            sf,
+                            cloud_predictions,
+                            cloud_url,
+                            cloud_model,
+                            cloud_api_key,
+                            cloud_num_ctx,
+                            cloud_timeout,
+                        ): sf.name
+                        for sf in symbol_files
+                        if not stop_event.is_set()
+                    }
+                    for future in as_completed(future_to_name):
+                        try:
+                            success = future.result()
+                        except Exception as exc:
+                            print(f"❌ Cloud worker chyba ({future_to_name[future]}): {exc}")
+                            success = False
+                        if success:
+                            processed_count += 1
+                        else:
+                            skipped_count += 1
+
+            end_time = datetime.now(tz=timezone.utc)
+            duration = (end_time - start_time).total_seconds()
+            duration_mins = int(duration // 60)
+            duration_secs = int(duration % 60)
+
+            print(f"\n☁️  Cloud cyklus #{cycle_count} dokončen")
+            print(f"   Zpracováno: {processed_count} | Přeskočeno: {skipped_count} | Čas: {duration_mins}m {duration_secs}s")
+            print("\n⏳ Čekám 60 sekund před dalším cloud cyklem...")
+
+            for _ in range(60):
+                if stop_event.is_set():
+                    return
+                time.sleep(1)
+
+        except Exception as exc:
+            print(f"\n❌ Chyba v Cloud Ollama loop: {exc}")
+            print("⏳ Čekám 5 minut před dalším pokusem...")
+            for _ in range(300):
+                if stop_event.is_set():
+                    return
+                time.sleep(1)
+
+    print("\n🛑 Cloud Ollama Service Loop ukončen")
