@@ -378,11 +378,19 @@ def _get_int_env(name: str, default: int, *, minimum: int = 0) -> int:
 
 
 def _load_market_data_for_symbol(
-	predictions_folder: Path,
+	predictions_folder: Optional[Path],
 	symbol: str,
 	source_folder_override: Optional[Path] = None,
+	service_folder_fallback: Optional[Path] = None,
 ) -> Optional[Dict]:
-	source_folder = source_folder_override if source_folder_override is not None else predictions_folder.parent / "source"
+	if source_folder_override is not None:
+		source_folder = source_folder_override
+	elif predictions_folder is not None:
+		source_folder = predictions_folder.parent / "source"
+	elif service_folder_fallback is not None:
+		source_folder = service_folder_fallback
+	else:
+		return None
 	market_data_file = source_folder / f"{symbol}.json"
 	if not market_data_file.exists():
 		return None
@@ -732,8 +740,7 @@ class StrategyExecutionProfile:
 	source_folder: Optional[Path] = None
 
 
-def _build_quant_ranked_candidates(predictions_folder: Path) -> List[RankedCandidate]:
-	source_folder = predictions_folder.parent / "source"
+def _build_quant_ranked_candidates(source_folder: Path, service_folder: Path) -> List[RankedCandidate]:
 	quant_candidates = build_quant_candidates(source_folder)
 	ranked: List[RankedCandidate] = []
 	for index, candidate in enumerate(quant_candidates, start=1):
@@ -746,7 +753,6 @@ def _build_quant_ranked_candidates(predictions_folder: Path) -> List[RankedCandi
 			)
 		)
 
-	service_folder = predictions_folder.parent
 	for index, candidate in enumerate(quant_candidates, start=1):
 		_log_jsonl(
 			service_folder,
@@ -1049,7 +1055,7 @@ def _attempt_strategy_trade(
 	*,
 	profile: StrategyExecutionProfile,
 	candidates: List[RankedCandidate],
-	predictions_folder: Path,
+	predictions_folder: Optional[Path],
 	service_folder: Path,
 	account_state: Dict,
 	open_positions: List[Dict],
@@ -1214,7 +1220,9 @@ def _attempt_strategy_trade(
 			continue
 
 		market_data = _load_market_data_for_symbol(
-			predictions_folder, symbol, source_folder_override=profile.source_folder
+			predictions_folder, symbol,
+			source_folder_override=profile.source_folder,
+			service_folder_fallback=service_folder,
 		)
 		if market_data is None:
 			_record_candidate_rejection(service_folder, profile.context.strategy_id, symbol, action, "market_data_missing")
@@ -1538,7 +1546,7 @@ def _resolve_trade_parameters(
 	return lot_size, take_profit
 
 
-def make_final_trading_decision(predictions_folder: Path, service_folder: Path) -> bool:
+def make_final_trading_decision(predictions_folder: Optional[Path], service_folder: Path) -> bool:
 	"""Make a final trading decision and execute a trade with limited retries."""
 	print("\n" + "=" * 60)
 	print("🎯 Final Trading Decision Phase")
@@ -1546,15 +1554,39 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 
 	try:
 		print("\n📊 Loading remaining predictions...")
-		predictions = load_predictions(predictions_folder)
-		quant_candidates = _build_quant_ranked_candidates(predictions_folder) if is_quant_strategy_enabled() else []
+		predictions = load_predictions(predictions_folder) if predictions_folder is not None else []
+
+		# Load cloud Ollama predictions early – used both for the cloud strategy slot and
+		# as a fallback candidate pool for secondary (parallel/reversal) strategies when
+		# Gemini predictions are unavailable.
+		cloud_preds_folder = service_folder / "ollama_cloud" / "predikce"
+		cloud_predictions_loaded: List[Dict] = (
+			load_predictions(cloud_preds_folder)
+			if is_ollama_cloud_enabled() and cloud_preds_folder.exists()
+			else []
+		)
+
+		# Quant reads raw market data – falls back to service_folder when predictions_folder
+		# is None (e.g. cloud-only mode where Gemini was not called).
+		if is_quant_strategy_enabled():
+			quant_source = (
+				predictions_folder.parent / "source"
+				if predictions_folder is not None
+				else service_folder
+			)
+			quant_candidates = _build_quant_ranked_candidates(quant_source, service_folder)
+		else:
+			quant_candidates = []
+
 		print(
-			f"   Found {len(predictions)} filtered predictions "
+			f"   Found {len(predictions)} Gemini predictions "
 			f"(standard >= {get_base_prediction_threshold():.0f}%, crypto >= {get_crypto_prediction_threshold():.0f}%)"
 		)
+		if cloud_predictions_loaded:
+			print(f"   Found {len(cloud_predictions_loaded)} Cloud Ollama predictions")
 		if quant_candidates:
 			print(f"   Found {len(quant_candidates)} quant candidates from raw market data")
-		if not predictions and not quant_candidates:
+		if not predictions and not quant_candidates and not cloud_predictions_loaded:
 			print("⚠️  No strong predictions available and quant strategy found no candidates")
 			_log_trade_decision_audit(
 				service_folder,
@@ -1584,7 +1616,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		if is_ollama_cloud_enabled():
 			cloud_predictions_folder = service_folder / "ollama_cloud" / "predikce"
 			cloud_source_folder = service_folder / "ollama" / "source"
-			cloud_predictions = load_predictions(cloud_predictions_folder) if cloud_predictions_folder.exists() else []
+			cloud_predictions = cloud_predictions_loaded  # reuse already-loaded list
 			print(f"\n☁️  Cloud Ollama: {len(cloud_predictions)} predikcí k dispozici")
 			if cloud_predictions:
 				cloud_advisory = _resolve_ollama_cloud_advisory_candidates(
@@ -1641,6 +1673,7 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 		primary_activation_met = activation_margin_percent >= primary_profile.context.activation_margin_percent
 		parallel_activation_met = can_activate_parallel_strategy(account_state, open_positions)
 
+		# Primary strategy depends on Gemini predictions – skip advisory and trade if unavailable.
 		advisory_candidates: List[RankedCandidate] = []
 		if primary_activation_met and predictions:
 			advisory_candidates = _resolve_gemini_advisory_candidates(
@@ -1649,16 +1682,27 @@ def make_final_trading_decision(predictions_folder: Path, service_folder: Path) 
 				account_state=account_state,
 				service_folder=service_folder,
 			)
-		elif primary_activation_met:
-			print("ℹ️  No AI predictions available for Gemini advisory, keeping primary queue empty")
+		elif primary_activation_met and not predictions:
+			print("ℹ️  Primary (Gemini) strategy: no Gemini predictions available, skipping primary")
 		else:
-			print("ℹ️  Primary activation threshold not met, skipping Gemini advisory and using local candidate ranking only")
-		candidate_queue = _build_candidate_queue(predictions, advisory_candidates)
+			print("ℹ️  Primary activation threshold not met, skipping Gemini advisory")
+
+		# Candidate pool: Gemini-ranked when available; cloud Ollama predictions as fallback
+		# for secondary strategies (parallel/reversal) when Gemini was not called.
+		gemini_candidate_queue = _build_candidate_queue(predictions, advisory_candidates)
+		if predictions:
+			candidate_queue = gemini_candidate_queue
+		elif cloud_predictions_loaded:
+			print("ℹ️  No Gemini predictions – Cloud Ollama predictions used as secondary candidate pool")
+			candidate_queue = _build_candidate_queue(cloud_predictions_loaded, [])
+		else:
+			candidate_queue = []
 		_log_candidate_queue(service_folder, candidate_queue)
 
-		if candidate_queue and _attempt_strategy_trade(
+		# Primary trades only with Gemini predictions.
+		if predictions and gemini_candidate_queue and _attempt_strategy_trade(
 			profile=primary_profile,
-			candidates=candidate_queue,
+			candidates=gemini_candidate_queue,
 			predictions_folder=predictions_folder,
 			service_folder=service_folder,
 			account_state=account_state,
