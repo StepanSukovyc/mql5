@@ -911,20 +911,25 @@ def ollama_cloud_service_loop(service_dest_folder: Path, stop_event) -> None:
             print(f"⚙️  Cloud URL:   {cloud_url}")
             print(f"⚙️  Paralelismus: {cloud_parallelism}")
 
-            # Source data is shared with local Ollama service
+            # Source data is shared with local Ollama service; fall back to economy
+            # data written directly to service_dest_folder when local Ollama is disabled.
             ollama_source = service_dest_folder / "ollama" / "source"
             cloud_predictions = service_dest_folder / "ollama_cloud" / "predikce"
             cloud_predictions.mkdir(parents=True, exist_ok=True)
 
-            if not ollama_source.exists() or not any(ollama_source.glob("*.json")):
-                print("⚠️  Zdrojová data z lokálního Ollama service nenalezena, čekám 60s...")
+            if ollama_source.exists() and any(ollama_source.glob("*.json")):
+                symbol_files = list(ollama_source.glob("*.json"))
+                print(f"📂 Zdrojová data: ollama/source ({len(symbol_files)} souborů)")
+            elif any(service_dest_folder.glob("*.json")):
+                symbol_files = list(service_dest_folder.glob("*.json"))
+                print(f"📂 Zdrojová data: economy fallback – service_dest_folder ({len(symbol_files)} souborů)")
+            else:
+                print("⚠️  Zdrojová data nenalezena (ollama/source ani economy data), čekám 60s...")
                 for _ in range(60):
                     if stop_event.is_set():
                         return
                     time.sleep(1)
                 continue
-
-            symbol_files = list(ollama_source.glob("*.json"))
             print(f"📊 Nalezeno {len(symbol_files)} symbolů ke zpracování")
 
             start_time = datetime.now(tz=timezone.utc)
