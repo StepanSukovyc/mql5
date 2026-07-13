@@ -1673,19 +1673,19 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 		primary_activation_met = activation_margin_percent >= primary_profile.context.activation_margin_percent
 		parallel_activation_met = can_activate_parallel_strategy(account_state, open_positions)
 
-		# Primary strategy depends on Gemini predictions – skip advisory and trade if unavailable.
+		# Primary strategy advisory – uses Ollama Cloud instead of Gemini for final selection.
 		advisory_candidates: List[RankedCandidate] = []
 		if primary_activation_met and predictions:
-			advisory_candidates = _resolve_gemini_advisory_candidates(
+			advisory_candidates = _resolve_ollama_cloud_advisory_candidates(
 				predictions=predictions,
 				open_positions=open_positions,
 				account_state=account_state,
 				service_folder=service_folder,
 			)
 		elif primary_activation_met and not predictions:
-			print("ℹ️  Primary (Gemini) strategy: no Gemini predictions available, skipping primary")
+			print("ℹ️  Primary strategy: no predictions available, skipping primary")
 		else:
-			print("ℹ️  Primary activation threshold not met, skipping Gemini advisory")
+			print("ℹ️  Primary activation threshold not met, skipping advisory")
 
 		# Candidate pool: Gemini-ranked when available; cloud Ollama predictions as fallback
 		# for secondary strategies (parallel/reversal) when Gemini was not called.

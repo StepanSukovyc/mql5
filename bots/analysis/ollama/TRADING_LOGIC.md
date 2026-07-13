@@ -27,17 +27,23 @@ Gemini a Ollama jsou teď pomocné predikční vrstvy. Nejsou autoritou pro fin�
 
 ## Role AI
 
+### Ollama Cloud (primary advisory)
+
+- pro **finální výběr instrumentu a směru** pro primární strategii je nyní autoritou Ollama Cloud
+- volá se přes `_resolve_ollama_cloud_advisory_candidates()` v `final_decision.py`
+- vrací seřazený shortlist kandidátů (symbol, action, reasoning) ve stejném formátu jako dříve Gemini
+- platí stejné limity: `GEMINI_ADVISORY_MAX_CANDIDATES`, `GEMINI_DECISION_CACHE_MINUTES`, `GEMINI_REJECTION_COOLDOWN_MINUTES`
+- konfigurace: `OLLAMA_CLOUD_URL`, `OLLAMA_CLOUD_MODEL`, `OLLAMA_CLOUD_API_KEY`, `OLLAMA_CLOUD_TIMEOUT_SECONDS`
+
 ### Gemini
 
-- používá se jako **advisory ranking layer**, ne jako exekuční autorita
-- vrací doporučený symbol a směr, případně seřazený shortlist kandidátů a reasoning pro log
-- shortlist se ořezává přes `GEMINI_ADVISORY_MAX_CANDIDATES`, takže Gemini neurčuje neomezeně dlouhou kandidátní frontu
-- nad stejným stavem se zbytečně neopakuje díky:
-  - `GEMINI_DECISION_CACHE_MINUTES`
-  - `GEMINI_REJECTION_COOLDOWN_MINUTES`
+- nadále slouží jako **upstream predikční vrstva** — generuje per-symbol market analýzu (BUY/SELL% + reasoning)
+- tyto predikce jsou vstupem pro advisory vrstvu (Ollama Cloud)
+- finální výběr (advisory ranking) už Gemini neprovádí
+- cache a rejection cooldown jsou sdílené s Ollama Cloud advisory path
 - perzistentní stav je uložen v `trade_logs/gemini_advisory_state.json`
 
-### Ollama
+### Lokální Ollama
 
 - je volitelný lokální scanner/predikční služba v upstream části toku
 - může běžet paralelně, ale nemusí
@@ -164,36 +170,44 @@ Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
 ## Správa ztrátových pozic
 
-Runtime obsahuje dvě vzájemně doplňující se vrstvy pro čištění starých ztrátových pozic.
+Runtime obsahuje jednu aktivní strategii pro čištění starých ztrátových pozic a dvě deaktivované legacy vrstvy.
 
-### Denní loss-cleanup strategie (`loss_cleanup_strategy.py`)
+### Týdenní surplus cleanup (`weekly_surplus_cleanup_strategy.py`) — **aktivní**
 
-- Spouští se jednou denně v nakonfigurovaný čas (výchozí 12:45 Prague time)
-- Budget = realizovaný zisk **předchozího dne** z MT5 deal history (profit + swap + commission + fee)
-- Po odečtení buffer rezervy (výchozí 2 % balance) hledá jednu ztrátovou pozici starší než 7 dní, která se do budgetu vejde
-- Může pozici **skutečně uzavřít** (pokud `LOSS_CLEANUP_STRATEGY_DRY_RUN=false`)
+- Spouští se jednou za ISO týden v nakonfigurovaný den (výchozí pátek) a hodinu UTC (výchozí 15:00)
+- Počítá realizovaný P&L celého týdne: pondělí 00:00 UTC → čas spuštění (profit + swap + commission + fee z closing deals)
+- **Minimální příjem** = `WEEKLY_CLEANUP_MIN_PROFIT_USD` (fixní USD), nebo auto: `TRADING_ACCOUNT_BALANCE_CAP × WEEKLY_CLEANUP_MIN_INCOME_PERCENT / 100` (výchozí 10 %)
+- Pokud `týdenní_zisk < minimum` → přeskočí bez jakékoli akce (minimum je vždy chráněno)
+- Pokud `týdenní_zisk ≥ minimum`: `surplus = týdenní_zisk − minimum` = budget na cleanup
+- Kandidáti: otevřené pozice starší než `WEEKLY_CLEANUP_MIN_POSITION_AGE_DAYS` dní (výchozí 7), ve ztrátě
+- Řazení: nejstarší první, při shodě nejmenší ztráta — maximalizuje počet uzavřených pozic ze stejného budgetu
+- Greedy výběr: zavírá pozice dokud budget stačí
+- Může pozici **skutečně uzavřít** (pokud `WEEKLY_CLEANUP_DRY_RUN=false`)
+- Přeskakuje se během swap rollover blok okna
+- Stav (ISO week key) je persistovaný v `trade_logs/weekly_surplus_cleanup_state.json`
+- Logy v `trade_logs/weekly_surplus_cleanup.csv`
 
-### Měsíční rolling advisory strategie (`monthly_loss_cleanup_strategy.py`)
-
-- Spouští se jednou denně (výchozí 13:00 Prague time)
-- Budget je počítán přes **plovoucí okno 30 kalendářních dní**
-- `target = effective_active_days × 50 USD`, kde `effective_active_days = max(aktivní_obchodní_dny, MIN_ACTIVE_DAYS)`
-- Aktivní obchodní dny = počet unikátních dat v okně s aspoň jedním uzavřeným obchodem (automaticky pokrývá svátky, víkendy i výpadky bota)
-- `surplus = realized_profit_30d − target`
-- Pokud surplus > 0: greedy výběr ztrátových pozic starších než 30 dní od největší ztráty dolů
-- **Nikdy nezavírá pozice** — pouze zapíše doporučení do `trade_logs/monthly_loss_cleanup_recommendations.json`
-- Slouží jako podklad pro ruční rozhodnutí operátora
-
-### Konfigurace monthly advisory
+### Konfigurace weekly surplus cleanup
 
 | Klíč | Výchozí | Popis |
 |---|---|---|
-| `MONTHLY_LOSS_CLEANUP_ENABLED` | `true` | Zapnutí/vypnutí |
-| `MONTHLY_LOSS_CLEANUP_HOUR` | `13` | Hodina spuštění (Prague) |
-| `MONTHLY_LOSS_CLEANUP_MINUTE` | `0` | Minuta spuštění |
-| `MONTHLY_LOSS_CLEANUP_DAILY_TARGET_USD` | `50.0` | Denní cíl v USD |
-| `MONTHLY_LOSS_CLEANUP_MIN_ACTIVE_DAYS` | `15` | Floor pro výpočet targetu |
-| `MONTHLY_LOSS_CLEANUP_MIN_POSITION_AGE_DAYS` | `30` | Minimální věk pozice |
+| `WEEKLY_CLEANUP_ENABLED` | `true` | Zapnutí/vypnutí |
+| `WEEKLY_CLEANUP_DRY_RUN` | `true` | Bezpečný start — pouze loguje, nezavírá |
+| `WEEKLY_CLEANUP_RUN_WEEKDAY` | `4` | Den spuštění (0=Po … 4=Pá) |
+| `WEEKLY_CLEANUP_RUN_HOUR_UTC` | `15` | Hodina UTC |
+| `WEEKLY_CLEANUP_MIN_PROFIT_USD` | `0` | Fixní minimum v USD (0 = použij % výpočet) |
+| `WEEKLY_CLEANUP_MIN_INCOME_PERCENT` | `10.0` | % z `TRADING_ACCOUNT_BALANCE_CAP` |
+| `WEEKLY_CLEANUP_MIN_POSITION_AGE_DAYS` | `7` | Minimální věk pozice |
+
+### Denní loss-cleanup strategie (`loss_cleanup_strategy.py`) — **deaktivována**
+
+- `LOSS_CLEANUP_STRATEGY_ENABLED=false`
+- Nahrazena týdenní surplus cleanup strategií
+
+### Měsíční rolling advisory strategie (`monthly_loss_cleanup_strategy.py`) — **deaktivována**
+
+- `MONTHLY_LOSS_CLEANUP_ENABLED=false`
+- Nahrazena týdenní surplus cleanup strategií
 
 ## Logy a stavové soubory
 
@@ -208,6 +222,8 @@ Runtime zapisuje více specializovaných logů:
 - `trade_logs/trade_decision_snapshot.csv`
 - `trade_logs/parallel_strategy_status.csv`
 - `trade_logs/reversal_strategy_status.csv`
+- `trade_logs/weekly_surplus_cleanup.csv`
+- `trade_logs/weekly_surplus_cleanup_state.json`
 - `trade_logs/monthly_loss_cleanup_recommendations.json`
 - `trade_logs/monthly_loss_cleanup_state.json`
 

@@ -4,7 +4,7 @@ The script starts immediately and then repeats every N seconds
 (default 3600 = one hour).
 """
 
-__version__ = "1.8.0"
+__version__ = "1.9.0"
 
 from __future__ import annotations
 

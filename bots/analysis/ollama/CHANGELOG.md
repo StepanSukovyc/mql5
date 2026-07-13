@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-07-13 (Ollama Cloud Advisory + Weekly Surplus Cleanup)
+
+- **Switched Primary Strategy Advisory From Gemini To Ollama Cloud**
+  - `final_decision.py` now calls `_resolve_ollama_cloud_advisory_candidates()` instead of `_resolve_gemini_advisory_candidates()` for the primary strategy's final candidate selection
+  - Gemini still generates per-symbol market predictions upstream; Ollama Cloud now makes the final instrument and direction selection
+  - Advisory cache (`GEMINI_DECISION_CACHE_MINUTES`) and max-candidate cap (`GEMINI_ADVISORY_MAX_CANDIDATES`) are reused for the Ollama Cloud advisory path
+  - The existing `ollama_advisory.py` module provides `ask_ollama_final_decision()` which was already used by the cloud Ollama strategy slot and is now the primary advisory backend
+
+- **Added `weekly_surplus_cleanup_strategy.py` — closes stale losing positions from weekly profit surplus**
+  - Runs once per ISO week on a configurable weekday (default Friday) after a configurable UTC hour (default 15:00)
+  - Computes realized P&L for the full week (Monday 00:00 UTC → run time) from MT5 deal history
+  - Minimum income floor: `WEEKLY_CLEANUP_MIN_PROFIT_USD` (fixed USD) or auto = `TRADING_ACCOUNT_BALANCE_CAP × WEEKLY_CLEANUP_MIN_INCOME_PERCENT / 100` (default 10 %)
+  - If `weekly_profit > min_income`: surplus = difference; otherwise skipped entirely (minimum income is always protected)
+  - Finds all open positions older than `WEEKLY_CLEANUP_MIN_POSITION_AGE_DAYS` (default 7) that are currently in net loss (profit + swap − fee < 0)
+  - Sorts candidates: oldest first, then smallest loss (maximises the count of positions cleared from the same budget)
+  - Greedy selection: closes positions until the surplus budget is exhausted
+  - Skipped during the swap rollover block window
+  - Last-run ISO week key persisted in `trade_logs/weekly_surplus_cleanup_state.json`
+  - All actions logged to `trade_logs/weekly_surplus_cleanup.csv`
+  - Wired into `account_monitor.py` → `run_position_management_monitor`
+  - **Starts with `WEEKLY_CLEANUP_DRY_RUN=true`** — runs in observation mode until operator confirms the behavior is correct
+
+- **Disabled Legacy Loss-Cleanup Strategies**
+  - `MONTHLY_LOSS_CLEANUP_ENABLED=false` — the rolling 30-day advisory is superseded by the weekly surplus cleanup
+  - `LOSS_CLEANUP_STRATEGY_ENABLED` remains `false` — the daily cleanup continues to be inactive
+
 ## 2026-06-12 (Secondary Strategies Use Full Non-Crypto Universe When Whitelist Is Empty)
 
 - **Changed Empty Secondary Whitelists To Mean Full Non-Crypto Coverage**

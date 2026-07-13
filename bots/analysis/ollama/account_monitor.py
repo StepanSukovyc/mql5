@@ -12,6 +12,7 @@ from account_state import get_account_state
 from loss_cleanup_strategy import run_loss_cleanup_strategy_if_due
 from monthly_loss_cleanup_strategy import run_monthly_loss_cleanup_strategy_if_due
 from profit_protection_strategy import run_profit_protection_strategy_if_due
+from weekly_surplus_cleanup_strategy import run_weekly_surplus_cleanup_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
 from reversal_pattern_strategy import is_reversal_strategy_enabled
 from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context
@@ -164,6 +165,7 @@ def run_position_management_monitor(check_interval_seconds: int = 60, stop_event
 				run_swap_rollover_cleanup_strategy_if_due(account_info)
 				run_loss_cleanup_strategy_if_due(account_info)
 				run_monthly_loss_cleanup_strategy_if_due(account_info)
+				run_weekly_surplus_cleanup_strategy_if_due(account_info)
 			except Exception as exc:
 				_log_position_management_event(
 					"position_management_monitor_error",
