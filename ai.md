@@ -530,3 +530,185 @@ Před implementací prosím potvrď hlavně tyto body:
 5. že alternativní strategie má mít aktivační práh `PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT - PARALLEL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT`
 6. že alternativní strategie má mít vlastní limit otevřených pozic přes `.env`, výchozí návrh `7`
 7. že alternativní strategie se má v této fázi připravit architektonicky a ownershipem, ale nemusí být hned plně zapnutá do produkčního flow
+
+---
+
+## 8. Analýza úkolu: Cloud Ollama strategie
+
+### Zadání
+
+Projekt aktuálně používá lokální Ollamu přes parametry `OLLAMA_ENABLED`, `OLLAMA_URL`, `OLLAMA_MODEL`.
+Nový požadavek:
+
+- přidat podporu **cloud Ollamy** (`OLLAMA_CLOUD_ENABLED`)
+- cloud strategie funguje na stejném principu jako lokální – dotazy jsou identické, ale cílí na cloudový endpoint
+- finální rozhodnutí cloud strategie má probíhat **čistě přes Ollamu** (nikoli přes Gemini)
+- obě strategie mohou běžet vedle sebe
+- **pořadí provádění**, pokud je cloud zapnutý:
+  1. Cloud Ollama strategie (podmínky + finální dotaz pouze přes Ollamu)
+  2. Lokální Ollama + Gemini strategie (stávající chování)
+  3. Ostatní strategie v pořadí, jak fungují dnes (parallel, reversal, quant)
+
+### Architektura stávajícího flow
+
+Pro správné napojení je nutné rozumět, jak dnes systém funguje:
+
+1. **`ollama_service.py`** běží ve vlákně na pozadí a generuje predikce pro každý symbol přes lokální Ollamu. Výsledky ukládá jako JSON soubory do složky `SERVICE_DEST_FOLDER/ollama/predikce/`.
+2. **`trading_logic.py`** generuje predikce přes Gemini Vertex AI a ukládá je do `SERVICE_DEST_FOLDER/predict/`.
+3. **`final_decision.py`** → `make_final_trading_decision()` vezme predikce (buď lokální ollama nebo gemini), zavolá `_resolve_gemini_advisory_candidates()` (která voláním `ask_gemini_final_decision` nechá Gemini vybrat kandidáty), sestaví `candidate_queue` a pak iterativně zkouší strategie:
+   - primární (gemini_primary) → parallel (mean reversion) → reversal pattern → quant math
+
+Klíčová věc: **Gemini je dnes zodpovědný za advisory výběr kandidátů** (`ask_gemini_final_decision` v `gemini_decision.py`). U cloud Ollama strategie tuto roli má převzít Ollama (cloudová instance).
+
+### Co je potřeba implementovat
+
+#### 1. Nové `.env` konfigurace
+
+```
+OLLAMA_CLOUD_ENABLED=false
+OLLAMA_CLOUD_URL=https://ollama.com/api/generate
+OLLAMA_CLOUD_MODEL=gpt-oss:120b
+OLLAMA_CLOUD_API_KEY=
+OLLAMA_CLOUD_TIMEOUT_SECONDS=120
+OLLAMA_CLOUD_NUM_CTX=16384
+OLLAMA_CLOUD_MAX_PARALLEL_REQUESTS=1
+OLLAMA_CLOUD_STRATEGY_ID=ollama_cloud_primary
+OLLAMA_CLOUD_STRATEGY_MAGIC=234500
+OLLAMA_CLOUD_MANAGE_LEGACY_POSITIONS=false
+OLLAMA_CLOUD_MAX_OPEN_POSITIONS=5
+OLLAMA_CLOUD_SESSION_START_HOUR_UTC=6
+OLLAMA_CLOUD_SESSION_END_HOUR_UTC=20
+OLLAMA_CLOUD_FRIDAY_CUTOFF_HOUR_UTC=16
+OLLAMA_CLOUD_RISK_PER_TRADE_PERCENT=0.50
+OLLAMA_CLOUD_SYNTHETIC_STOP_ATR_MULTIPLIER=1.5
+OLLAMA_CLOUD_TAKE_PROFIT_R_MULTIPLIER=2.2
+OLLAMA_CLOUD_MAX_TRADES_PER_DAY=0
+OLLAMA_CLOUD_MAX_TRADES_PER_SYMBOL_PER_DAY=0
+OLLAMA_CLOUD_SYMBOL_TRADE_COOLDOWN_MINUTES=15
+OLLAMA_CLOUD_MAX_SPREAD_POINTS=45
+```
+
+Predikce cloud strategie se budou ukládat do separátní podsložky, aby se nepromíchaly s lokálními predikcemi ani predikcemi Gemini:
+
+```
+SERVICE_DEST_FOLDER/ollama_cloud/predikce/    ← výstupy cloud ollama
+SERVICE_DEST_FOLDER/ollama/predikce/          ← výstupy lokální ollama (beze změny)
+```
+
+#### 2. Nový modul `ollama_cloud_service.py`
+
+Lze z velké části zkopírovat logiku `ollama_service.py` a parametrizovat URL, model a cílovou složku. Hlavní rozdíl oproti lokálnímu service modulu:
+
+- čte `OLLAMA_CLOUD_URL` místo `OLLAMA_URL`
+- čte `OLLAMA_CLOUD_MODEL` místo `OLLAMA_MODEL`
+- čte `OLLAMA_CLOUD_API_KEY` a pokud je neprázdný, přidá ho jako `Authorization: Bearer <key>` header do každého HTTP requestu
+- ukládá predikce do `ollama_cloud/predikce/` místo `ollama/predikce/`
+- případně lze rozšířit stávající `ollama_service.py` o parametr instance (local/cloud) místo duplikace
+
+Alternativně – čistší přístup: přidat do `ollama_service.py` funkci `is_ollama_cloud_enabled()` a `get_ollama_cloud_*()` helpery (stejný vzor jako stávající `_load_dotenv_value` + `is_ollama_enabled()`), a volání obsloužit v existujícím service threadu jako druhou instanci.
+
+#### 3. Nový modul `ollama_advisory.py` (nebo rozšíření `gemini_decision.py`)
+
+Toto je klíčová nová komponenta. Dnešní `ask_gemini_final_decision()` vezme predikce + stav účtu a vrátí kandidáty pro exekuci. Pro cloud strategii je potřeba ekvivalentní funkce `ask_ollama_final_decision()`, která:
+
+- sestaví prompt ve stejném stylu jako `_build_ollama_prompt()` v `ollama_service.py`, ale zaměřený na výběr nejlepšího obchodu (ne jen scoring instrumentu)
+- odešle request na `OLLAMA_CLOUD_URL` (nebo obecněji na parametrizovaný Ollama endpoint)
+- parsuje odpověď do struktury kompatibilní s `_extract_ranked_candidates_from_decision_payload()`
+
+Doporučeno umístit do nového souboru `ollama_advisory.py` tak, aby nedošlo k záměně s existující funkcionalitou.
+
+Prompt pro ollama advisory musí požádat o:
+
+```json
+{
+  "recommended_symbol": "...",
+  "action": "BUY|SELL",
+  "candidates": [
+    {"symbol": "...", "action": "..."},
+    ...
+  ]
+}
+```
+
+Toto je totožný formát, jaký dnes vrací Gemini advisory, takže `_extract_ranked_candidates_from_decision_payload()` bude fungovat bez úprav.
+
+#### 4. Rozšíření `final_decision.py`
+
+V `make_final_trading_decision()` je potřeba přidat nový slot **před** primární strategií:
+
+```python
+# Nové místo (přidá se jako první pokus)
+if is_ollama_cloud_enabled():
+    cloud_advisory_candidates = _resolve_ollama_cloud_advisory_candidates(...)
+    cloud_candidate_queue = _build_candidate_queue(cloud_predictions, cloud_advisory_candidates)
+    cloud_profile = StrategyExecutionProfile(
+        label="ollama_cloud",
+        context=get_ollama_cloud_strategy_context(),
+        signal_validator=validate_trend_following_signal,  # stejná pravidla jako primary
+        risk_percent_env="OLLAMA_CLOUD_RISK_PER_TRADE_PERCENT",
+        stop_atr_multiplier_env="OLLAMA_CLOUD_SYNTHETIC_STOP_ATR_MULTIPLIER",
+        tp_r_multiple_env="OLLAMA_CLOUD_TAKE_PROFIT_R_MULTIPLIER",
+        ...
+    )
+    if cloud_candidate_queue and _attempt_strategy_trade(profile=cloud_profile, ...):
+        return True
+
+# Stávající primární flow pokračuje beze změny...
+```
+
+Funkce `_resolve_ollama_cloud_advisory_candidates()` bude analogická k `_resolve_gemini_advisory_candidates()`, ale volá `ask_ollama_final_decision()` (z nového `ollama_advisory.py`) místo `ask_gemini_final_decision()`.
+
+#### 5. Nový `StrategyContext` pro cloud strategii
+
+V `strategy_context.py` přidat `get_ollama_cloud_strategy_context()` analogicky k `get_primary_strategy_context()`. Čte `OLLAMA_CLOUD_STRATEGY_ID`, `OLLAMA_CLOUD_STRATEGY_MAGIC` a ostatní cloud-specifické `.env` hodnoty.
+
+### Schéma pořadí provádění po implementaci
+
+```
+make_final_trading_decision()
+│
+├─ [OLLAMA_CLOUD_ENABLED=true]
+│   ├─ Načti cloud predikce z ollama_cloud/predikce/
+│   ├─ ask_ollama_final_decision() → cloud advisory kandidáti (čistě Ollama)
+│   ├─ Sestav cloud_candidate_queue
+│   └─ _attempt_strategy_trade(profile=cloud_profile) ──► obchod? → KONEC
+│
+├─ [stávající primary flow]
+│   ├─ Načti lokální predikce z ollama/predikce/ + predict/
+│   ├─ ask_gemini_final_decision() → gemini advisory kandidáti
+│   ├─ Sestav candidate_queue
+│   └─ _attempt_strategy_trade(profile=primary_profile) ──► obchod? → KONEC
+│
+├─ parallel mean reversion
+├─ reversal pattern
+└─ quant math
+```
+
+### Zpětná kompatibilita
+
+- Pokud `OLLAMA_CLOUD_ENABLED=false` (výchozí), chování je 100% identické se stávajícím stavem.
+- Žádný existující kód se nemusí měnit; cloud strategie je aditivní vrstva.
+- Magic number cloud strategie (`234500`) nekoliduje s existujícími (`234000`–`234400`).
+- Predikce cloud strategie jsou v separátní složce, takže se nepromíchají s lokálními.
+
+### Potenciální problémy a doporučení
+
+1. **Latence**: Cloudová Ollama může mít vyšší latenci než lokální. Doporučuji oddělit generování cloud predikcí do vlastního vlákna (stejný vzor jako lokální `ollama_service.py`), spustit jej souběžně a výsledky číst ze souborů – stejně jako dnes.
+
+2. **Cache pro cloud advisory**: Stávající Gemini advisory má cache přes `get_cached_decision()` / `store_cached_decision()`. Stejný mechanismus by měl být aplikován i na cloud Ollama advisory, aby se neposílaly duplicitní dotazy.
+
+3. **Fallback**: Pokud cloud Ollama neodpoví nebo vrátí neplatnou odpověď, cloud strategie přeskočí (stejný vzor jako `ask_gemini_final_decision()` vrátí `None` → pokračuje se bez advisory). Stávající local+gemini flow není dotčeno.
+
+4. **Prompt formát pro advisory**: Ollama modely (např. `deepseek-coder-v2`) jsou méně instruktable pro striktní JSON výstup než Gemini. Doporučuji prompt zakončit striktní instrukcí formátu se vzorem odpovědi a obalit parsování do robustního fallbacku (přes `_extract_json_from_text()` z `ollama_service.py`).
+
+5. **Oddělení signal_validator**: Cloud strategie může sdílet `validate_trend_following_signal` s primární strategií – vstupy jsou stejná pravidla, liší se jen zdroj advisory. Pokud by se do budoucna chtěly pravidla lišit, stačí přidat nový validator.
+
+### Doporučené pořadí implementace
+
+1. Přidat helpery `is_ollama_cloud_enabled()` a `get_ollama_cloud_*()` do `ollama_service.py` (nebo nový `env_utils` helper)
+2. Přidat generování cloud predikcí – buď nový `ollama_cloud_service.py`, nebo rozšířit stávající service o instanci
+3. Přidat `get_ollama_cloud_strategy_context()` do `strategy_context.py`
+4. Napsat `ollama_advisory.py` s funkcí `ask_ollama_final_decision()`
+5. Rozšířit `final_decision.py` o nový cloud slot před primárním flow
+6. Rozšířit `.env` a dokumentaci o nové klíče
+7. Otestovat s `OLLAMA_CLOUD_ENABLED=false` (backward compat), pak s `=true`

@@ -4,6 +4,8 @@ The script starts immediately and then repeats every N seconds
 (default 3600 = one hour).
 """
 
+__version__ = "1.8.0"
+
 from __future__ import annotations
 
 import json
@@ -22,7 +24,7 @@ from account_monitor import run_account_monitor, run_position_management_monitor
 from trading_logic import run_trading_logic
 from final_decision import make_final_trading_decision
 from mt5_connection import initialize_mt5, shutdown_mt5
-from ollama_service import ollama_service_loop
+from ollama_service import ollama_service_loop, ollama_cloud_service_loop, is_ollama_cloud_enabled
 from swap_rollover import get_swap_block_window
 from market_data import (
 	collect_symbol_payload,
@@ -349,6 +351,8 @@ def main() -> int:
 	# Event to signal Ollama service shutdown
 	ollama_stop_event = threading.Event()
 	ollama_thread = None
+	ollama_cloud_stop_event = threading.Event()
+	ollama_cloud_thread = None
 
 	try:
 		initialize_mt5(login=cfg.mt5_login, password=cfg.mt5_password, server=cfg.mt5_server)
@@ -364,7 +368,7 @@ def main() -> int:
 		print("🛡️  Position management monitor started...")
 		
 		print("\n" + "="*60)
-		print("🤖 Obchodní Automat - Nekonečný cyklus")
+		print(f"🤖 Obchodní Automat v{__version__} - Nekonečný cyklus")
 		print("="*60)
 		print("Monitoring → Predictions → Final Decision → Trade → Repeat")
 		print("Ukončení: Ctrl+C")
@@ -384,6 +388,16 @@ def main() -> int:
 			)
 			ollama_thread.start()
 			print("🔮 Ollama Service thread spuštěn...\n")
+
+		cloud_enabled = os.getenv("OLLAMA_CLOUD_ENABLED", "").strip().lower() in {"true", "1", "yes", "y", "on"}
+		if cloud_enabled:
+			ollama_cloud_thread = threading.Thread(
+				target=lambda: ollama_cloud_service_loop(cfg.service_dest_folder, ollama_cloud_stop_event),
+				name="OllamaCloudService",
+				daemon=False,
+			)
+			ollama_cloud_thread.start()
+			print("☁️  Ollama Cloud Service thread spuštěn...\n")
 		
 		cycle_count = 0
 		
@@ -468,20 +482,40 @@ def main() -> int:
 						# Need to download data and get new predictions
 						print("📥 Downloading market data for current hour...")
 						run_cycle(cfg)
-						
-						print("🤖 Getting predictions from Gemini AI...")
-						try:
-							success, pred_folder = run_trading_logic(cfg.service_dest_folder)
-							predictions_folder = pred_folder
-							if success:
-								print("✅ Trading logic completed successfully")
-							else:
-								print("⚠️  Trading logic completed with warnings")
-						except Exception as trading_exc:
-							print(f"❌ Trading logic failed: {trading_exc}")
+
+						# Gemini per-symbol predictions are needed only for primary/index strategies.
+						# Skip the Gemini call when cloud Ollama already provides predictions –
+						# parallel, reversal and quant use raw data; cloud Ollama uses its own predictions.
+						_cloud_pf = cfg.service_dest_folder / "ollama_cloud" / "predikce"
+						_cloud_ready = (
+							is_ollama_cloud_enabled()
+							and _cloud_pf.exists()
+							and any(_cloud_pf.glob("*.json"))
+						)
+						if _cloud_ready:
+							print("☁️  Cloud Ollama predikce dostupné – přeskakuji Gemini per-symbol predikce")
+						else:
+							print("🤖 Getting predictions from Gemini AI...")
+							try:
+								success, pred_folder = run_trading_logic(cfg.service_dest_folder)
+								predictions_folder = pred_folder
+								if success:
+									print("✅ Trading logic completed successfully")
+								else:
+									print("⚠️  Trading logic completed with warnings")
+							except Exception as trading_exc:
+								print(f"❌ Trading logic failed: {trading_exc}")
 					
-					# Make final trading decision if we have predictions
-					if predictions_folder:
+					# Make final trading decision if we have predictions OR cloud Ollama is ready
+					cloud_preds_folder = cfg.service_dest_folder / "ollama_cloud" / "predikce"
+					cloud_has_preds = (
+						is_ollama_cloud_enabled()
+						and cloud_preds_folder.exists()
+						and any(cloud_preds_folder.glob("*.json"))
+					)
+					if predictions_folder or cloud_has_preds:
+						if not predictions_folder:
+							print("\n⚠️  Gemini predictions nedostupné – spouštím pouze Cloud Ollama strategii...")
 						print("\n🎯 Making final trading decision...")
 						try:
 							trade_executed = make_final_trading_decision(predictions_folder, cfg.service_dest_folder)
@@ -513,6 +547,9 @@ def main() -> int:
 		ollama_stop_event.set()
 		if ollama_thread and ollama_thread.is_alive():
 			ollama_thread.join(timeout=5)
+		ollama_cloud_stop_event.set()
+		if ollama_cloud_thread and ollama_cloud_thread.is_alive():
+			ollama_cloud_thread.join(timeout=5)
 		return 0
 	except Exception as exc:  # pylint: disable=broad-except
 		print(f"Fatal error: {exc}")
@@ -527,6 +564,10 @@ def main() -> int:
 		if ollama_thread and ollama_thread.is_alive():
 			print("🛑 Čekám na ukončení Ollama Service...")
 			ollama_thread.join(timeout=10)
+		ollama_cloud_stop_event.set()
+		if ollama_cloud_thread and ollama_cloud_thread.is_alive():
+			print("🛑 Čekám na ukončení Cloud Ollama Service...")
+			ollama_cloud_thread.join(timeout=10)
 		
 		shutdown_mt5()
 		print("MetaTrader 5 connection closed.")
