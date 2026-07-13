@@ -4,6 +4,8 @@ The script starts immediately and then repeats every N seconds
 (default 3600 = one hour).
 """
 
+__version__ = "1.8.0"
+
 from __future__ import annotations
 
 import json
@@ -366,7 +368,7 @@ def main() -> int:
 		print("🛡️  Position management monitor started...")
 		
 		print("\n" + "="*60)
-		print("🤖 Obchodní Automat - Nekonečný cyklus")
+		print(f"🤖 Obchodní Automat v{__version__} - Nekonečný cyklus")
 		print("="*60)
 		print("Monitoring → Predictions → Final Decision → Trade → Repeat")
 		print("Ukončení: Ctrl+C")
