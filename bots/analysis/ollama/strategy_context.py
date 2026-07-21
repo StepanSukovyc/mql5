@@ -174,6 +174,20 @@ def get_ollama_cloud_strategy_context() -> StrategyContext:
 	)
 
 
+def get_scalping_strategy_context() -> StrategyContext:
+	"""Context pro Liquidity Sweep Scalping strategii (magic 234600)."""
+	return StrategyContext(
+		strategy_id=os.getenv("SCALP_STRATEGY_ID", "liquidity_sweep_scalping"),
+		magic=_get_env_int("SCALP_STRATEGY_MAGIC", 234600),
+		manage_legacy_positions=False,
+		activation_margin_percent=_get_env_float("SCALP_ACTIVATION_MARGIN_PERCENT", 5.0),
+		max_open_positions=_get_env_int("SCALP_MAX_POSITIONS_TOTAL", 3),
+		session_start_hour_utc=0,
+		session_end_hour_utc=24,
+		friday_cutoff_hour_utc=_get_env_int("SCALP_FRIDAY_CUTOFF_HOUR_UTC", 16),
+	)
+
+
 def is_strategy_trade_window_open(context: StrategyContext, now_utc: Optional[datetime] = None) -> bool:
 	now = now_utc or datetime.now(tz=timezone.utc)
 	current_hour = now.hour
@@ -234,6 +248,7 @@ def position_belongs_to_strategy(position: Any, context: StrategyContext) -> boo
 		get_quant_strategy_context(),
 		get_index_strategy_context(),
 		get_ollama_cloud_strategy_context(),
+		get_scalping_strategy_context(),
 	]
 	if _is_known_strategy_position(position, known_contexts):
 		return False

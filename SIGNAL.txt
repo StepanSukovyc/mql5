@@ -1,6 +1,6 @@
 ═════════════════════════════════════════════════════════════════════════════════
 
-SMART TRADING SIGNAL SYSTEM  v1.9.0
+SMART TRADING SIGNAL SYSTEM  v2.0.0
 
 ═════════════════════════════════════════════════════════════════════════════════
 
@@ -10,17 +10,35 @@ This system is an automated MT5 trading workflow with multiple strategy layers,
 AI-assisted advisory, and autonomous position management.
 
 Strategy execution order (each layer runs only when the previous one does not open a trade):
-  1. Primary strategy      — trend-following across D1/H4/H1 timeframes
-  2. Parallel strategy     — mean-reversion fallback on the full non-crypto universe
-  3. Reversal strategy     — candlestick-pattern reversal at Bollinger extremes
-  4. Quant strategy        — pure mathematical signal scoring without AI predictions
-  5. Index strategy        — Gemini-driven setups on major equity indices and commodities
-  6. Cloud Ollama strategy — cloud LLM-driven setups as an independent entry layer
+  1. Primary strategy          — trend-following across D1/H4/H1 timeframes
+  2. Parallel strategy         — mean-reversion fallback on the full non-crypto universe
+  3. Reversal strategy         — candlestick-pattern reversal at Bollinger extremes
+  4. Quant strategy            — pure mathematical signal scoring without AI predictions
+  5. Index strategy            — Gemini-driven setups on major equity indices and commodities
+  6. Cloud Ollama strategy     — cloud LLM-driven setups as an independent entry layer
+  7. Scalping strategy (NEW)   — liquidity sweep / false breakout scalping on M5 bars
+
+The scalping strategy is the last fallback and activates only when:
+  - no previous strategy opened a trade in the cycle
+  - free margin / balance >= SCALP_ACTIVATION_MARGIN_PERCENT (default 5 %)
+
+Scalping logic (Liquidity Sweep / False Breakout):
+  - LONG: last closed bar swept the local low (N bars) and closed back above it
+  - SHORT: last closed bar swept the local high and closed back below it
+  - Signal scoring 0–105 pts: sweep +40, engulfing +20, wick +15, EMA context +15,
+    ATR/spread/session filters +5 each — minimum score SCALP_MIN_SIGNAL_SCORE (default 70)
+  - Exit: emergency stop reference, invalidation level, max floating loss per trade,
+    max holding time (bars × timeframe minutes), account drawdown limit
+  - No broker-side stop loss — all protection is managed by the runtime cleanup loop
+  - Position metadata (invalidation, emergency ref, lot, score) persisted to
+    trade_logs/scalping_position_state.json across restarts
+  - Position management runs unconditionally every cycle in final_decision.py
 
 AI advisory:
   - Ollama Cloud selects the final instrument and direction for the primary strategy.
   - Gemini generates per-symbol market predictions (BUY/SELL%) used as input to the advisory.
   - Final lot size, synthetic stop, and take-profit are always calculated locally by the risk engine.
+  - Scalping strategy does NOT use AI predictions — pure deterministic price-action logic.
 
 Position management (runs independently every minute):
   - Profit protection: trails and closes profitable positions that retrace past a threshold.
@@ -31,12 +49,16 @@ Position management (runs independently every minute):
 All trades are filtered by margin level, spread, volatility (ATR), RSI, ADX, trading
 session windows, Friday cutoff, and swap-block protection before execution.
 
+Strategy magic numbers:
+  Primary 234000 | Index 234100 | Parallel 234200 | Reversal 234300
+  Quant 234400   | Cloud Ollama 234500             | Scalping 234600
+
 In short: AI suggests, local rules verify, and the bot executes only when the setup
 passes deterministic safety checks.
 
 ═════════════════════════════════════════════════════════════════════════════════
 
-INTELIGENTNÍ OBCHODNÍ SIGNALIZAČNÍ SYSTÉM  v1.9.0
+INTELIGENTNÍ OBCHODNÍ SIGNALIZAČNÍ SYSTÉM  v2.0.0
 
 ═════════════════════════════════════════════════════════════════════════════════
 
@@ -46,17 +68,35 @@ Tento systém je automatizovaný MT5 trading workflow s více strategickými vrs
 AI poradní vrstvou a autonomní správou pozic.
 
 Pořadí exekuce strategií (každá vrstva se spustí jen tehdy, když předchozí neotevře obchod):
-  1. Primární strategie     — trendová obchodní pravidla přes D1/H4/H1 timeframes
-  2. Paralelní strategie    — mean-reversion fallback na celém non-crypto univerzu
-  3. Reverzní strategie     — svíčkové reverzní formace na Bollingerových extrémech
-  4. Quant strategie        — čistě matematické hodnocení signálů bez AI predikcí
-  5. Index strategie        — Gemini-řízené setupy na hlavních akciových indexech a komoditách
-  6. Cloud Ollama strategie — cloud LLM-řízené setupy jako nezávislá vstupní vrstva
+  1. Primární strategie             — trendová pravidla přes D1/H4/H1 timeframes
+  2. Paralelní strategie            — mean-reversion fallback na celém non-crypto univerzu
+  3. Reverzní strategie             — svíčkové reverzní formace na Bollingerových extrémech
+  4. Quant strategie                — čistě matematické hodnocení signálů bez AI predikcí
+  5. Index strategie                — Gemini-řízené setupy na hlavních indexech a komoditách
+  6. Cloud Ollama strategie         — cloud LLM-řízené setupy jako nezávislá vstupní vrstva
+  7. Skalpovací strategie (NOVÁ)    — liquidity sweep / false breakout skalping na M5 svíčkách
+
+Skalpovací strategie je poslední záloha a aktivuje se pouze pokud:
+  - žádná předchozí strategie neotevřela obchod v daném cyklu
+  - volná marže / balance >= SCALP_ACTIVATION_MARGIN_PERCENT (výchozí 5 %)
+
+Obchodní logika (Liquidity Sweep / False Breakout):
+  - LONG: poslední uzavřená svíčka prorazila lokální minimum (posledních N svíček) a zavřela zpět nad ním
+  - SHORT: poslední uzavřená svíčka prorazila lokální maximum a zavřela zpět pod ním
+  - Scoring 0–105 bodů: sweep +40, engulfing +20, wick +15, EMA kontext +15,
+    ATR/spread/session filtr po +5 — vstup jen pokud score >= SCALP_MIN_SIGNAL_SCORE (výchozí 70)
+  - Exit: emergency stop reference, invalidation level, max floating loss na pozici,
+    max holding time (bary × minuty timeframu), account drawdown limit
+  - Žádný broker-side stop loss — veškerá ochrana je spravována runtime cleanup smyčkou
+  - Metadata pozic (invalidation, emergency ref, lot, score) jsou persistována do
+    trade_logs/scalping_position_state.json přes restarty
+  - Správa pozic se volá vždy v každém cyklu v final_decision.py, nezávisle na ostatních strategiích
 
 AI poradní vrstva:
   - Ollama Cloud vybírá finální instrument a směr pro primární strategii.
   - Gemini generuje per-symbol tržní predikce (BUY/SELL%) jako vstup pro advisory.
   - Finální velikost pozice, syntetický stop a take-profit se vždy počítají lokálně přes risk engine.
+  - Skalpovací strategie AI predikce nepoužívá — čistě deterministická price-action logika.
 
 Správa pozic (běží nezávisle každou minutu):
   - Ochrana zisku: sleduje a zavírá ziskové pozice, které se přiblíží retracementu.
@@ -64,8 +104,12 @@ Správa pozic (běží nezávisle každou minutu):
   - Týdenní surplus cleanup: každý pátek zavírá nejstarší stálé ztrátové pozice z přebytku
     týdenního zisku nad nastavenou hranicí minimálního příjmu.
 
-Všechny obchody jsou před exekucí filtrovány marginí, spreadem, volatilitou (ATR), RSI,
+Všechny obchody jsou před exekucí filtrovány marží, spreadem, volatilitou (ATR), RSI,
 ADX, obchodními session okny, pátečním cutoffem a swap blok ochranou.
+
+Magic čísla strategií:
+  Primary 234000 | Index 234100 | Parallel 234200 | Reversal 234300
+  Quant 234400   | Cloud Ollama 234500             | Scalping 234600
 
 Stručně: AI navrhuje, lokální pravidla ověřují a bot exekuuje jen ty obchody, které
 projdou deterministickými bezpečnostními filtry.

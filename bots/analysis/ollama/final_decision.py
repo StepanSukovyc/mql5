@@ -38,6 +38,12 @@ from reversal_pattern_strategy import (
 	is_reversal_strategy_enabled,
 	validate_reversal_pattern_signal,
 )
+from liquidity_sweep_scalping_strategy import (
+	LiquiditySweepScalpingStrategy,
+	ScalpingAppContext,
+	can_activate_scalping_strategy,
+	is_scalping_strategy_enabled,
+)
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
 from strategy_context import (
@@ -1603,6 +1609,17 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 
 		open_positions = get_open_positions()
 		_print_open_positions(open_positions)
+
+		# Správa existujících skalpovacích pozic probíhá vždy – nezávisle na tom,
+		# zda ostatní strategie v tomto cyklu otevřely obchod.
+		if is_scalping_strategy_enabled():
+			try:
+				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
+				_scalp_mgr = LiquiditySweepScalpingStrategy(_scalp_ctx)
+				_scalp_mgr.manage_existing_positions()
+			except Exception as _scalp_mgmt_exc:
+				print(f"⚠️  Scalping position management error: {_scalp_mgmt_exc}")
+
 		open_crypto_positions = _count_open_crypto_positions(open_positions)
 		print(f"   Open crypto positions: {open_crypto_positions}/{get_crypto_max_open_positions()}")
 		full_control_every_n = _get_gemini_full_control_every_n_trades()
@@ -1818,6 +1835,43 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				stage="strategy_blocked",
 				trade_executed=False,
 				reason=reason,
+			)
+
+		# ── Šestá záloha: Liquidity Sweep Scalping ───────────────────────────
+		# Aktivuje se jako poslední, pokud žádná předchozí strategie nenašla obchod.
+		# Podmínka: volná marže > SCALP_ACTIVATION_MARGIN_PERCENT (výchozí 5 %).
+		scalping_enabled = is_scalping_strategy_enabled()
+		scalping_activation_met = scalping_enabled and can_activate_scalping_strategy(
+			account_state, open_positions
+		)
+		if scalping_activation_met:
+			try:
+				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
+				_scalp_strategy = LiquiditySweepScalpingStrategy(_scalp_ctx)
+				if _scalp_strategy.run():
+					print("\n" + "=" * 60)
+					print("✅ Final Trading Decision Completed (Scalping)")
+					print("=" * 60)
+					return True
+			except Exception as _scalp_exc:
+				print(f"❌ Scalping strategy error: {_scalp_exc}")
+				_log_trade_decision_audit(
+					service_folder,
+					strategy_id="liquidity_sweep_scalping",
+					strategy_label="scalping",
+					stage="strategy_error",
+					trade_executed=False,
+					reason="exception",
+					details={"error": str(_scalp_exc)},
+				)
+		elif scalping_enabled:
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id="liquidity_sweep_scalping",
+				strategy_label="scalping",
+				stage="strategy_blocked",
+				trade_executed=False,
+				reason="activation_gate_not_satisfied",
 			)
 
 		print("❌ No strategy found an executable trade in this cycle")
