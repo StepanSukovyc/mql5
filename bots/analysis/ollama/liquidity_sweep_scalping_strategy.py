@@ -255,11 +255,13 @@ def _load_scalping_config() -> Dict[str, Any]:
 		"max_usd_exposure": get_float_env("SCALP_MAX_USD_EXPOSURE", 2.0),
 		"max_floating_loss_per_trade": get_float_env("SCALP_MAX_FLOATING_LOSS_PER_TRADE", 20.0),
 		"max_daily_loss": get_float_env("SCALP_MAX_DAILY_LOSS", 100.0),
-		"max_account_drawdown_percent": get_float_env("SCALP_MAX_ACCOUNT_DRAWDOWN_PERCENT", 5.0),
 		"use_emergency_stop": get_bool_env("SCALP_USE_EMERGENCY_STOP_REFERENCE", True),
 		"allow_buy": get_bool_env("SCALP_ALLOW_BUY", True),
 		"allow_sell": get_bool_env("SCALP_ALLOW_SELL", True),
 		"activation_margin_percent": get_float_env("SCALP_ACTIVATION_MARGIN_PERCENT", 5.0),
+		# Drawdown check slouží jen jako emergency backstop pro exit existujících pozic.
+		# Vstup do obchodu je řízený výlučně prahovou hodnotou volné marže (activation_margin_percent).
+		"max_account_drawdown_percent": get_float_env("SCALP_MAX_ACCOUNT_DRAWDOWN_PERCENT", 90.0),
 		"friday_cutoff_hour_utc": get_int_env("SCALP_FRIDAY_CUTOFF_HOUR_UTC", 16),
 		"max_spread_by_symbol": {
 			"EURUSD": _spread("EURUSD", 15.0),
@@ -945,10 +947,12 @@ class LiquiditySweepScalpingStrategy:
 			except (ValueError, TypeError):
 				pass
 
-		# ── 5. Account drawdown ──────────────────────────────────────────────
+		# ── 5. Account drawdown (nízký nouzový backstop, výchozí 90 %) ────────────────
+		# Aktivuje se jen při excesiálních ztrátách. Vstupní podmínka (5 % volná marže)
+		# již garantuje, že účet má dostatek kapitálu pro další obchod.
 		balance = float(account_state.get("balance", 0.0) or 0.0)
 		equity = float(account_state.get("equity", balance) or balance)
-		max_dd = cfg.get("max_account_drawdown_percent", 5.0)
+		max_dd = cfg.get("max_account_drawdown_percent", 90.0)
 		if balance > 0 and ((balance - equity) / balance * 100.0) >= max_dd:
 			return ExitDecision(
 				should_close=True,
@@ -1015,14 +1019,6 @@ class LiquiditySweepScalpingStrategy:
 		max_daily = cfg.get("max_daily_loss", 100.0)
 		if daily_loss >= max_daily:
 			self._log.warning(f"[SCALP] Denní ztrátový limit ({daily_loss:.2f}/{max_daily})")
-			return False
-
-		# ── Account drawdown ─────────────────────────────────────────────────
-		balance = float(account_state.get("balance", 0.0) or 0.0)
-		equity = float(account_state.get("equity", balance) or balance)
-		max_dd = cfg.get("max_account_drawdown_percent", 5.0)
-		if balance > 0 and ((balance - equity) / balance * 100.0) >= max_dd:
-			self._log.warning("[SCALP] Account drawdown limit dosažen")
 			return False
 
 		# ── Povolený směr obchodu ────────────────────────────────────────────
