@@ -338,10 +338,21 @@ def _get_point_size(symbol: str) -> float:
 
 
 def _strip_suffix(symbol: str) -> str:
-	"""Odstraní suffix brokera ze symbolu pro lookup v konfiguraci."""
+	"""Odstraní suffix brokera ze symbolu pro lookup v konfiguraci.
+
+	Nejprve použije MT5_SYMBOL_SUFFIX z env. Pokud není nastaven,
+	automaticky detekuje běžné broker suffixes (_ecn, _raw, _pro …).
+	Tím je zajištěno, že EURUSD_ecn → EURUSD funguje i bez MT5_SYMBOL_SUFFIX.
+	"""
 	suffix = os.getenv("MT5_SYMBOL_SUFFIX", "")
-	if suffix and symbol.endswith(suffix):
-		return symbol[: -len(suffix)]
+	if suffix:
+		if symbol.endswith(suffix):
+			return symbol[: -len(suffix)]
+		return symbol
+	# MT5_SYMBOL_SUFFIX není nastaveno – zkusíme běžné suffixes automaticky
+	for _sfx in ("_ecn", "_raw", "_pro", "_std", ".ecn", ".raw"):
+		if symbol.endswith(_sfx):
+			return symbol[: -len(_sfx)]
 	return symbol
 
 
