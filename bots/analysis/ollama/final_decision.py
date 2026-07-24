@@ -1602,6 +1602,25 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				trade_executed=False,
 				reason="no_predictions",
 			)
+			# Skalpovací strategie nepotřebuje AI predikce – zkusíme ji i v tomto případě.
+			if is_scalping_strategy_enabled():
+				try:
+					_np_account = get_account_state(include_margin_percent=True)
+					_np_positions = get_open_positions()
+					_scalp_ctx_np = ScalpingAppContext(service_folder=service_folder)
+					_scalp_np = LiquiditySweepScalpingStrategy(_scalp_ctx_np)
+					_scalp_np.manage_existing_positions()
+					if can_activate_scalping_strategy(_np_account, _np_positions):
+						print("ℹ️  Skalpovací strategie: spouštím bez AI predikcí")
+						if _scalp_np.run():
+							print("\n" + "=" * 60)
+							print("✅ Final Trading Decision Completed (Scalping – no predictions)")
+							print("=" * 60)
+							return True
+					else:
+						print("ℹ️  Skalpovací strategie: aktivační podmínka nesplněna (marže příliš nízká nebo plný limit pozic)")
+				except Exception as _np_exc:
+					print(f"❌ Scalping (no-predictions mode) error: {_np_exc}")
 			return False
 
 		account_state = get_account_state(include_margin_percent=True)

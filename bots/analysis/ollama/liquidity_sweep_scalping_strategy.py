@@ -372,7 +372,19 @@ class ScalpingAppContext:
 		logger: Optional[logging.Logger] = None,
 		service_folder: Optional[Path] = None,
 	) -> None:
-		self.logger = logger or logging.getLogger(__name__)
+		if logger is not None:
+			self.logger = logger
+		else:
+			# Konfigurujeme vlastní handler, aby [SCALP:...] zprávy byly vidět v terminálu
+			# stejně jako print() volání v ostatních modulech.
+			_log = logging.getLogger("liquidity_sweep_scalping")
+			if not _log.handlers:
+				_h = logging.StreamHandler()
+				_h.setFormatter(logging.Formatter("%(message)s"))
+				_log.addHandler(_h)
+				_log.setLevel(logging.INFO)
+			_log.propagate = False
+			self.logger = _log
 		self.service_folder = service_folder
 
 	def get_config(self) -> Dict[str, Any]:
