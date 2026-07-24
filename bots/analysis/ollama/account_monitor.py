@@ -15,7 +15,8 @@ from profit_protection_strategy import run_profit_protection_strategy_if_due
 from weekly_surplus_cleanup_strategy import run_weekly_surplus_cleanup_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
 from reversal_pattern_strategy import is_reversal_strategy_enabled
-from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context
+from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context, get_scalping_strategy_context
+from liquidity_sweep_scalping_strategy import is_scalping_strategy_enabled
 from swap_rollover_cleanup_strategy import run_swap_rollover_cleanup_strategy_if_due
 
 
@@ -102,6 +103,8 @@ def _get_margin_threshold() -> float:
 	)
 	if is_reversal_strategy_enabled():
 		default_threshold_percent = min(default_threshold_percent, get_reversal_strategy_context().activation_margin_percent)
+	if is_scalping_strategy_enabled():
+		default_threshold_percent = min(default_threshold_percent, get_scalping_strategy_context().activation_margin_percent)
 	threshold_str = os.environ.get('TRADING_TRIGGER_MARGIN_THRESHOLD', str(default_threshold_percent))
 	try:
 		threshold_percent = float(threshold_str)
