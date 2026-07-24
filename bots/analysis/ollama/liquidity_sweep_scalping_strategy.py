@@ -536,15 +536,23 @@ class LiquiditySweepScalpingStrategy:
 		if not self._activation_gate_passed(account_state, open_positions):
 			return False
 
+		print(f"[SCALP] Vyhodnocuji {len(self._cfg.get('symbols', []))} symbolů...")
 		trade_opened = False
+		hold_reasons: list = []
 		for symbol in self._cfg.get("symbols", []):
 			try:
 				if self.process_symbol(symbol):
 					trade_opened = True
 					break  # Skalpovací strategie otevírá max 1 obchod za cyklus
+				else:
+					# Sbíráme důvody pro souhrnný výstup
+					hold_reasons.append(symbol)
 			except Exception as exc:
 				self._log.error(f"[SCALP] Chyba při zpracování {symbol}: {exc}")
 				continue
+
+		if not trade_opened and hold_reasons:
+			print(f"[SCALP] Žádný signal – všechny symboly HOLD ({', '.join(hold_reasons)})")
 
 		return trade_opened
 
@@ -600,9 +608,9 @@ class LiquiditySweepScalpingStrategy:
 		self._last_processed_bar_time[symbol] = latest_bar_time
 
 		if signal.side == "HOLD":
-			self._log.debug(
-				f"[SCALP:{symbol}] HOLD – {signal.reason} (long={signal.metadata.get('long_score', 0):.0f}"
-				f" short={signal.metadata.get('short_score', 0):.0f})"
+			self._log.info(
+				f"[SCALP:{symbol}] HOLD – {signal.reason} "
+				f"(long={signal.metadata.get('long_score', 0):.0f} short={signal.metadata.get('short_score', 0):.0f})"
 			)
 			return False
 

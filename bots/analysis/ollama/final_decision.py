@@ -1864,6 +1864,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			account_state, open_positions
 		)
 		if scalping_activation_met:
+			print("ℹ️  Scalping strategie: aktivována (poslední fallback)")
 			try:
 				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
 				_scalp_strategy = LiquiditySweepScalpingStrategy(_scalp_ctx)
@@ -1884,6 +1885,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 					details={"error": str(_scalp_exc)},
 				)
 		elif scalping_enabled:
+			print("⚠️  Scalping strategie: aktivační podmínka nesplněna (marže příliš nízká nebo plný limit pozic)")
 			_log_trade_decision_audit(
 				service_folder,
 				strategy_id="liquidity_sweep_scalping",
