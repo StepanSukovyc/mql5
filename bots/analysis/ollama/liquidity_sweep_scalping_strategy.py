@@ -608,7 +608,7 @@ class LiquiditySweepScalpingStrategy:
 		self._last_processed_bar_time[symbol] = latest_bar_time
 
 		if signal.side == "HOLD":
-			self._log.info(
+			print(
 				f"[SCALP:{symbol}] HOLD – {signal.reason} "
 				f"(long={signal.metadata.get('long_score', 0):.0f} short={signal.metadata.get('short_score', 0):.0f})"
 			)
@@ -617,54 +617,8 @@ class LiquiditySweepScalpingStrategy:
 		return self.open_trade_if_allowed(signal, symbol, account_state, open_positions)
 
 	def manage_existing_positions(self) -> None:
-		"""
-		Vyhodnotí existující pozice patřící této strategii a uzavře je pokud jsou splněny výstupní podmínky.
-
-		Volá se vždy při každém cyklu, nezávisle na tom, zda jiné strategie obchodovaly.
-		Tím je zajištěno, že otevřené skalpovací pozice jsou průběžně chráněny.
-		"""
-		cfg = self._cfg or _load_scalping_config()
-		strategy_ctx = self._build_strategy_context(cfg)
-
-		try:
-			open_positions = self._ctx.get_open_positions()
-			account_state = self._ctx.get_account_state()
-		except Exception as exc:
-			self._log.error(f"[SCALP] manage_existing_positions – nelze načíst data: {exc}")
-			return
-
-		my_positions = [
-			pos for pos in open_positions
-			if position_belongs_to_strategy(pos, strategy_ctx)
-		]
-
-		self._cleanup_stale_state(open_positions)
-
-		if not my_positions:
-			return
-
-		self._log.info(f"[SCALP] Správa {len(my_positions)} otevřených pozic strategie")
-
-		for position in my_positions:
-			symbol = position.get("symbol", "")
-			ticket = position.get("ticket", 0)
-
-			bars_needed = cfg.get("lookback_bars", 20) + cfg.get("atr_period", 14) + 5
-			rates = self._ctx.get_ohlcv(symbol, cfg.get("timeframe", mt5.TIMEFRAME_M5), bars_needed)
-			spread = float(self._ctx.get_spread(symbol) or 0.0)
-
-			try:
-				exit_decision = self.evaluate_exit_conditions(position, rates, spread, account_state)
-			except Exception as exc:
-				self._log.error(f"[SCALP:{symbol}] Chyba při vyhodnocení exitu pro ticket {ticket}: {exc}")
-				continue
-
-			if exit_decision.should_close:
-				self._log.info(
-					f"[SCALP:{symbol}] EXIT pro ticket {ticket}: "
-					f"{exit_decision.reason} (urgency={exit_decision.urgency})"
-				)
-				self.close_position_if_required(position, exit_decision)
+		# Exit je delegován na MT5 TP a cleanup strategii – zde nic neděláme.
+		return
 
 	# ── Vstupní logika ────────────────────────────────────────────────────────
 
