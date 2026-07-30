@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import os
 import sys
 from dataclasses import dataclass
@@ -50,6 +51,7 @@ from strategy_context import (
 	StrategyContext,
 	build_strategy_comment,
 	count_open_positions_for_strategy,
+	get_chaotic_strategy_context,
 	get_ollama_cloud_strategy_context,
 	get_parallel_strategy_context,
 	get_primary_strategy_context,
@@ -60,6 +62,8 @@ from strategy_context import (
 from trade_execution import execute_trade
 from trade_history import count_successful_trades, count_successful_trades_since, count_successful_trades_today
 from trading_validation import check_margin_requirements, validate_symbol
+
+import MetaTrader5 as mt5
 
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -149,6 +153,12 @@ REASON_TEXT_CS = {
 	"gemini_candidates_exhausted_local_fallback": "Gemini kandidati byli vycerpani a strategie presla na lokalni fallback.",
 	"no_executable_trade": "V tomto cyklu nebyl nalezen zadny obchod k exekuci.",
 	"no_predictions": "Nejsou k dispozici zadne pouzitelne predikce.",
+	"chaotic_disabled": "Chaotic strategie neni povolena v konfiguraci.",
+	"chaotic_margin_outside_range": "Volna marze neni v aktivacnim pasmu chaotic strategie.",
+	"chaotic_ollama_unavailable": "Cloud Ollama neni pro chaotic strategii dostupna.",
+	"chaotic_no_raw_predictions": "Chaotic strategie nema k dispozici zadne AI predikce.",
+	"chaotic_ollama_no_decision": "Ollama nevratila platne chaotic rozhodnuti.",
+	"chaotic_trade_parameters_invalid": "Chaotic strategie nedokazala pripravit TP-only parametry obchodu.",
 	"exception": "Behem rozhodovaci faze doslo k vyjimce.",
 }
 
@@ -1042,6 +1052,143 @@ def _get_strategy_limit(env_name: str, default: int) -> int:
 	return _get_int_env(env_name, default, minimum=0)
 
 
+def _get_float_env(name: str, default: float, *, minimum: float = 0.0) -> float:
+	raw = os.getenv(name)
+	if raw is None:
+		return default
+	try:
+		value = float(raw)
+		if value < minimum:
+			raise ValueError
+		return value
+	except (TypeError, ValueError):
+		return default
+
+
+def is_chaotic_strategy_enabled() -> bool:
+	return os.getenv("CHAOTIC_STRATEGY_ENABLED", "false").strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def _get_chaotic_margin_band() -> Tuple[float, float]:
+	minimum = _get_float_env("CHAOTIC_MIN_FREE_MARGIN_PERCENT", 10.0, minimum=0.0)
+	maximum = _get_float_env("CHAOTIC_MAX_FREE_MARGIN_PERCENT", 20.0, minimum=0.0)
+	return (minimum, maximum) if maximum > minimum else (10.0, 20.0)
+
+
+def _get_latest_atr(market_data: Dict) -> Optional[float]:
+	try:
+		atr_value = float(market_data["oscillators"]["1h"]["atr14"][-1]["value"])
+		return atr_value if atr_value > 0 else None
+	except (IndexError, KeyError, TypeError, ValueError):
+		return None
+
+
+def _resolve_chaotic_trade_parameters(
+	*,
+	symbol: str,
+	action: str,
+	account_state: Dict,
+	market_data: Dict,
+) -> Optional[Tuple[float, float, Dict[str, float]]]:
+	"""Build a TP-only order whose estimated required margin stays within its budget."""
+	if action not in {"BUY", "SELL"}:
+		return None
+
+	symbol_info = get_symbol_info(symbol)
+	entry_price = get_current_price(symbol, action=action)
+	atr_value = _get_latest_atr(market_data)
+	if symbol_info is None or entry_price is None or atr_value is None:
+		return None
+
+	position_margin_percent = _get_float_env("CHAOTIC_POSITION_MARGIN_PERCENT", 5.0, minimum=0.01)
+	balance = float(account_state.get("balance", 0.0) or 0.0)
+	free_margin = float(account_state.get("margin_free", 0.0) or 0.0)
+	margin_budget = min(balance * (position_margin_percent / 100.0), free_margin)
+	if margin_budget <= 0:
+		return None
+
+	order_type = mt5.ORDER_TYPE_BUY if action == "BUY" else mt5.ORDER_TYPE_SELL
+	margin_per_lot = mt5.order_calc_margin(order_type, symbol, 1.0, entry_price)
+	if margin_per_lot is None or margin_per_lot <= 0:
+		return None
+
+	volume_step = float(getattr(symbol_info, "volume_step", 0.0) or 0.0)
+	minimum_volume = float(getattr(symbol_info, "volume_min", 0.0) or 0.0)
+	if volume_step <= 0 or minimum_volume <= 0:
+		return None
+
+	lot_size = math.floor((margin_budget / float(margin_per_lot)) / volume_step) * volume_step
+	lot_size = round(lot_size, 8)
+	if lot_size < minimum_volume:
+		return None
+
+	required_margin = mt5.order_calc_margin(order_type, symbol, lot_size, entry_price)
+	while required_margin is not None and required_margin > margin_budget and lot_size >= minimum_volume:
+		lot_size = round(lot_size - volume_step, 8)
+		required_margin = mt5.order_calc_margin(order_type, symbol, lot_size, entry_price)
+	if lot_size < minimum_volume or required_margin is None or required_margin > margin_budget:
+		return None
+
+	tp_multiplier = _get_float_env("CHAOTIC_TAKE_PROFIT_ATR_MULTIPLIER", 1.5, minimum=0.01)
+	take_profit = entry_price + (atr_value * tp_multiplier) if action == "BUY" else entry_price - (atr_value * tp_multiplier)
+	digits = getattr(symbol_info, "digits", None)
+	if isinstance(digits, int) and digits >= 0:
+		take_profit = round(take_profit, digits)
+	if (action == "BUY" and take_profit <= entry_price) or (action == "SELL" and take_profit >= entry_price):
+		return None
+
+	return lot_size, take_profit, {
+		"entry_price": entry_price,
+		"atr14_1h": atr_value,
+		"margin_budget": margin_budget,
+		"estimated_required_margin": float(required_margin),
+		"position_margin_percent": position_margin_percent,
+	}
+
+
+def _resolve_chaotic_ollama_candidate(
+	*,
+	predictions: List[Dict],
+	open_positions: List[Dict],
+	account_state: Dict,
+	service_folder: Path,
+) -> Optional[RankedCandidate]:
+	if not predictions:
+		return None
+
+	from ollama_advisory import ask_ollama_final_decision
+
+	decision_text = ask_ollama_final_decision(
+		predictions,
+		open_positions,
+		account_state,
+		chaotic_mode=True,
+	)
+	if not decision_text:
+		return None
+	try:
+		payload = json.loads(decision_text)
+	except json.JSONDecodeError:
+		return None
+
+	candidates = _extract_ranked_candidates_from_decision_payload(payload, "chaotic_ollama")
+	if not candidates:
+		return None
+	candidate = candidates[0]
+	_log_jsonl(
+		service_folder,
+		"ai_log.jsonl",
+		{
+			"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+			"source": "chaotic_ollama",
+			"recommended_symbol": candidate.symbol,
+			"action": candidate.action,
+			"prediction_count": len(predictions),
+		},
+	)
+	return candidate
+
+
 def _is_candidate_rejected(service_folder: Path, strategy_id: str, symbol: str, action: str) -> Optional[Dict[str, object]]:
 	return get_active_rejection(service_folder, strategy_id=strategy_id, symbol=symbol, action=action)
 
@@ -1433,6 +1580,106 @@ def _attempt_strategy_trade(
 	return False
 
 
+def _attempt_chaotic_trade(
+	*,
+	candidate: RankedCandidate,
+	predictions_folder: Optional[Path],
+	service_folder: Path,
+	account_state: Dict,
+) -> bool:
+	context = get_chaotic_strategy_context()
+	is_valid, error_message = validate_symbol(candidate.symbol)
+	if not is_valid:
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=context.strategy_id,
+			strategy_label="chaotic",
+			symbol=candidate.symbol,
+			action=candidate.action,
+			candidate_source=candidate.source,
+			stage="candidate_rejected",
+			trade_executed=False,
+			reason="symbol_validation_failed",
+			details={"error_msg": error_message},
+		)
+		return False
+
+	market_data = _load_market_data_for_symbol(predictions_folder, candidate.symbol, service_folder_fallback=service_folder)
+	if market_data is None:
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=context.strategy_id,
+			strategy_label="chaotic",
+			symbol=candidate.symbol,
+			action=candidate.action,
+			candidate_source=candidate.source,
+			stage="candidate_rejected",
+			trade_executed=False,
+			reason="market_data_missing",
+		)
+		return False
+
+	resolved = _resolve_chaotic_trade_parameters(
+		symbol=candidate.symbol,
+		action=candidate.action,
+		account_state=account_state,
+		market_data=market_data,
+	)
+	if resolved is None:
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=context.strategy_id,
+			strategy_label="chaotic",
+			symbol=candidate.symbol,
+			action=candidate.action,
+			candidate_source=candidate.source,
+			stage="candidate_rejected",
+			trade_executed=False,
+			reason="chaotic_trade_parameters_invalid",
+		)
+		return False
+
+	lot_size, take_profit, parameter_log = resolved
+	if execute_trade(
+		candidate.symbol,
+		candidate.action,
+		lot_size,
+		service_folder,
+		take_profit,
+		lot_source="chaotic_margin_budget",
+		strategy_id=context.strategy_id,
+		magic=context.magic,
+		comment=build_strategy_comment(context.strategy_id),
+		extra_log_data={"decision_source": candidate.source, "stop_loss": None, **parameter_log},
+	):
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=context.strategy_id,
+			strategy_label="chaotic",
+			symbol=candidate.symbol,
+			action=candidate.action,
+			candidate_source=candidate.source,
+			stage="trade_executed",
+			trade_executed=True,
+			reason="trade_opened",
+			details={"lot_size": lot_size, "take_profit": take_profit, **parameter_log},
+		)
+		return True
+
+	_log_trade_decision_audit(
+		service_folder,
+		strategy_id=context.strategy_id,
+		strategy_label="chaotic",
+		symbol=candidate.symbol,
+		action=candidate.action,
+		candidate_source=candidate.source,
+		stage="candidate_rejected",
+		trade_executed=False,
+		reason="trade_execution_failed",
+	)
+	return False
+
+
 def _exclude_symbol_and_retry(symbol: str, reason: str, predictions: List[Dict], excluded_symbols: List[str]) -> bool:
 	"""Exclude the current symbol and continue with a different prediction when possible."""
 	print(f"⚠️  {reason}")
@@ -1561,6 +1808,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 	try:
 		print("\n📊 Loading remaining predictions...")
 		predictions = load_predictions(predictions_folder) if predictions_folder is not None else []
+		raw_predictions = load_predictions(predictions_folder, require_threshold=False) if predictions_folder is not None else []
 
 		# Load cloud Ollama predictions early – used both for the cloud strategy slot and
 		# as a fallback candidate pool for secondary (parallel/reversal) strategies when
@@ -1568,6 +1816,11 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 		cloud_preds_folder = service_folder / "ollama_cloud" / "predikce"
 		cloud_predictions_loaded: List[Dict] = (
 			load_predictions(cloud_preds_folder)
+			if is_ollama_cloud_enabled() and cloud_preds_folder.exists()
+			else []
+		)
+		raw_cloud_predictions: List[Dict] = (
+			load_predictions(cloud_preds_folder, require_threshold=False)
 			if is_ollama_cloud_enabled() and cloud_preds_folder.exists()
 			else []
 		)
@@ -1592,7 +1845,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			print(f"   Found {len(cloud_predictions_loaded)} Cloud Ollama predictions")
 		if quant_candidates:
 			print(f"   Found {len(quant_candidates)} quant candidates from raw market data")
-		if not predictions and not quant_candidates and not cloud_predictions_loaded:
+		if not predictions and not quant_candidates and not cloud_predictions_loaded and not raw_predictions and not raw_cloud_predictions:
 			print("⚠️  No strong predictions available and quant strategy found no candidates")
 			_log_trade_decision_audit(
 				service_folder,
@@ -1893,6 +2146,88 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				stage="strategy_blocked",
 				trade_executed=False,
 				reason="activation_gate_not_satisfied",
+			)
+
+		chaotic_context = get_chaotic_strategy_context()
+		if is_chaotic_strategy_enabled():
+			minimum_margin, maximum_margin = _get_chaotic_margin_band()
+			free_margin_percent = _get_strategy_activation_margin_percent(account_state)
+			if not minimum_margin < free_margin_percent < maximum_margin:
+				_log_trade_decision_audit(
+					service_folder,
+					strategy_id=chaotic_context.strategy_id,
+					strategy_label="chaotic",
+					stage="strategy_blocked",
+					trade_executed=False,
+					reason="chaotic_margin_outside_range",
+					details={"free_margin_percent": free_margin_percent, "minimum": minimum_margin, "maximum": maximum_margin},
+				)
+			elif count_successful_trades_today(service_folder, strategy_id=chaotic_context.strategy_id) >= _get_int_env(
+				"CHAOTIC_MAX_TRADES_PER_DAY", 2, minimum=1
+			):
+				_log_trade_decision_audit(
+					service_folder,
+					strategy_id=chaotic_context.strategy_id,
+					strategy_label="chaotic",
+					stage="strategy_blocked",
+					trade_executed=False,
+					reason="daily_trade_limit_reached",
+				)
+			else:
+				chaotic_predictions = raw_predictions or raw_cloud_predictions
+				chaotic_predictions_folder = predictions_folder if raw_predictions else (cloud_preds_folder if raw_cloud_predictions else None)
+				if not chaotic_predictions:
+					_log_trade_decision_audit(
+						service_folder,
+						strategy_id=chaotic_context.strategy_id,
+						strategy_label="chaotic",
+						stage="strategy_blocked",
+						trade_executed=False,
+						reason="chaotic_no_raw_predictions",
+					)
+				elif not is_ollama_cloud_enabled():
+					_log_trade_decision_audit(
+						service_folder,
+						strategy_id=chaotic_context.strategy_id,
+						strategy_label="chaotic",
+						stage="strategy_blocked",
+						trade_executed=False,
+						reason="chaotic_ollama_unavailable",
+					)
+				else:
+					chaotic_candidate = _resolve_chaotic_ollama_candidate(
+						predictions=chaotic_predictions,
+						open_positions=open_positions,
+						account_state=account_state,
+						service_folder=service_folder,
+					)
+					if chaotic_candidate is None:
+						_log_trade_decision_audit(
+							service_folder,
+							strategy_id=chaotic_context.strategy_id,
+							strategy_label="chaotic",
+							stage="strategy_blocked",
+							trade_executed=False,
+							reason="chaotic_ollama_no_decision",
+						)
+					elif _attempt_chaotic_trade(
+						candidate=chaotic_candidate,
+						predictions_folder=chaotic_predictions_folder,
+						service_folder=service_folder,
+						account_state=account_state,
+					):
+						print("\n" + "=" * 60)
+						print("✅ Final Trading Decision Completed (Chaotic)")
+						print("=" * 60)
+						return True
+		else:
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=chaotic_context.strategy_id,
+				strategy_label="chaotic",
+				stage="strategy_blocked",
+				trade_executed=False,
+				reason="chaotic_disabled",
 			)
 
 		print("❌ No strategy found an executable trade in this cycle")

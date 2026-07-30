@@ -264,10 +264,12 @@ Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví 
 | Quant | 234400 | `quant_math` |
 | Cloud Ollama | 234500 | `ollama_cloud_primary` |
 | Scalping | 234600 | `liquidity_sweep_scalping` |
+| Chaotic | 234700 | `chaotic` |
 
 - primární strategie může podle konfigurace spravovat i manuální nebo legacy pozice
 - všechny ostatní strategie jsou od legacy správy oddělené
 - scalping strategie ukládá rozšířená metadata pozic (invalidation level, emergency ref) do `scalping_position_state.json`
+- chaotic strategie je výchozím stavem vypnutá; běží až jako poslední fallback při volné marži mezi `CHAOTIC_MIN_FREE_MARGIN_PERCENT` a `CHAOTIC_MAX_FREE_MARGIN_PERCENT`, maximálně `CHAOTIC_MAX_TRADES_PER_DAY`-krát denně. Používá nefiltrované AI predikce, posílá pouze Take Profit ve vzdálenosti `CHAOTIC_TAKE_PROFIT_ATR_MULTIPLIER × ATR` a objem omezuje na `CHAOTIC_POSITION_MARGIN_PERCENT` efektivního kapitálu jako odhadovanou požadovanou marži.
 
 Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
