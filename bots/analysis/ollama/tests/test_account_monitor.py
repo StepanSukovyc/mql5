@@ -58,6 +58,24 @@ class AccountMonitorTests(unittest.TestCase):
 
 		self.assertFalse(check_stop_condition(account_info))
 
+	@patch.dict(
+		os.environ,
+		{
+			"TRADING_TRIGGER_MARGIN_THRESHOLD": "15",
+			"CHAOTIC_STRATEGY_ENABLED": "true",
+			"CHAOTIC_MIN_FREE_MARGIN_PERCENT": "10",
+		},
+		clear=False,
+	)
+	def test_chaotic_strategy_lowers_explicit_trigger_to_its_minimum_margin(self) -> None:
+		account_info = {
+			"balance": 5000.0,
+			"margin_free": 600.0,
+			"raw_margin_free": 600.0,
+		}
+
+		self.assertTrue(check_stop_condition(account_info))
+
 	@patch("account_monitor.run_loss_cleanup_strategy_if_due")
 	@patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due")
 	@patch("account_monitor.run_profit_protection_strategy_if_due")

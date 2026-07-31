@@ -33,8 +33,8 @@ def clean_gemini_response(text: str) -> str:
 	return text.strip()
 
 
-def load_predictions(predictions_folder: Path) -> List[Dict]:
-	"""Load remaining prediction files and keep only strong BUY/SELL candidates."""
+def load_predictions(predictions_folder: Path, *, require_threshold: bool = True) -> List[Dict]:
+	"""Load prediction files, optionally retaining predictions below the normal threshold."""
 	predictions = []
 	base_threshold = get_base_prediction_threshold()
 	crypto_threshold = get_crypto_prediction_threshold()
@@ -50,7 +50,7 @@ def load_predictions(predictions_folder: Path) -> List[Dict]:
 			symbol = str(prediction.get("symbol", ""))
 			required_threshold = crypto_threshold if is_crypto_symbol(symbol) else base_threshold
 
-			if buy_pct >= required_threshold or sell_pct >= required_threshold:
+			if not require_threshold or buy_pct >= required_threshold or sell_pct >= required_threshold:
 				predictions.append(prediction)
 		except Exception as exc:
 			print(f"  ⚠️  Error loading {pred_file.name}: {exc}")

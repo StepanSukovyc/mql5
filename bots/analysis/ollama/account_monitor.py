@@ -15,7 +15,8 @@ from profit_protection_strategy import run_profit_protection_strategy_if_due
 from weekly_surplus_cleanup_strategy import run_weekly_surplus_cleanup_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
 from reversal_pattern_strategy import is_reversal_strategy_enabled
-from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context
+from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context, get_scalping_strategy_context
+from liquidity_sweep_scalping_strategy import is_scalping_strategy_enabled
 from swap_rollover_cleanup_strategy import run_swap_rollover_cleanup_strategy_if_due
 
 
@@ -92,9 +93,7 @@ def _get_margin_threshold() -> float:
 	"""
 	Get the account-monitor trigger threshold as a ratio.
 
-	If TRADING_TRIGGER_MARGIN_THRESHOLD is set, it wins.
-	Otherwise the monitor should wake up when at least one strategy can trade,
-	so the default is the minimum activation threshold across active profiles.
+	The monitor wakes up when at least one enabled entry strategy can trade.
 	"""
 	default_threshold_percent = min(
 		get_primary_strategy_context().activation_margin_percent,
@@ -102,12 +101,25 @@ def _get_margin_threshold() -> float:
 	)
 	if is_reversal_strategy_enabled():
 		default_threshold_percent = min(default_threshold_percent, get_reversal_strategy_context().activation_margin_percent)
+	if is_scalping_strategy_enabled():
+		default_threshold_percent = min(default_threshold_percent, get_scalping_strategy_context().activation_margin_percent)
 	threshold_str = os.environ.get('TRADING_TRIGGER_MARGIN_THRESHOLD', str(default_threshold_percent))
 	try:
 		threshold_percent = float(threshold_str)
-		return threshold_percent / 100  # Convert percentage to decimal
 	except ValueError:
-		return default_threshold_percent / 100
+		threshold_percent = default_threshold_percent
+
+	chaotic_enabled = os.environ.get("CHAOTIC_STRATEGY_ENABLED", "false").strip().lower() in {"1", "true", "yes", "y", "on"}
+	if chaotic_enabled:
+		try:
+			chaotic_minimum = float(os.environ.get("CHAOTIC_MIN_FREE_MARGIN_PERCENT", "10"))
+			if chaotic_minimum < 0:
+				raise ValueError
+			threshold_percent = min(threshold_percent, chaotic_minimum)
+		except ValueError:
+			threshold_percent = min(threshold_percent, 10.0)
+
+	return threshold_percent / 100  # Convert percentage to decimal
 
 
 def check_stop_condition(account_info: dict) -> bool:

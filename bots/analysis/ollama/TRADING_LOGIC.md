@@ -24,6 +24,9 @@ Gemini a Ollama jsou teď pomocné predikční vrstvy. Nejsou autoritou pro fin�
 8. Zbytek rozhodnutí už běží lokálně nad kandidátní frontou.
 9. Pokud primární strategie nenajde proveditelný obchod, runtime může přejít na paralelní mean-reversion strategii.
 10. Pokud neuspěje ani paralelní profil a `REVERSAL_STRATEGY_ENABLED=true`, runtime může zkusit třetí reversal-pattern fallback.
+11. Pokud neuspěje ani reversal a `QUANT_STRATEGY_ENABLED=true`, runtime zkusí čtvrtý quant-math fallback.
+12. Pokud neuspěje ani quant a `SCALP_ENABLED=true` a volná marže překračuje `SCALP_ACTIVATION_MARGIN_PERCENT`, runtime zkusí liquidity-sweep scalping fallback.
+13. Pokud neuspěje ani scalping a `CHAOTIC_STRATEGY_ENABLED=true`, runtime zkusí poslední Chaotic fallback.
 
 ## Role AI
 
@@ -130,6 +133,107 @@ Používané filtry:
 
 Reverzní strategie má vlastní risk profil, session guardy i samostatný status log.
 
+## Quant strategie
+
+Quant profil v `quant_math_strategy.py` je čtvrtý fallback. Funguje výhradně na lokálních matematických metrikách bez AI predikcí.
+
+Aktivuje se jen když:
+
+- `QUANT_STRATEGY_ENABLED=true`
+- primary, parallel ani reversal strategie neotevřely obchod
+- účet splňuje vlastní maržový práh aktivace
+- quant profil nepřekročil limit otevřených pozic
+- kandidát dosáhne minimálního skóre `QUANT_MIN_SIGNAL_SCORE`
+
+Používané filtry:
+
+- H4 ADX minimum pro trendové prostředí
+- spread pod limitem
+- EMA vzdálenost jako proxy impulsu
+- directional streak a curvature scoring
+- volitelný news block
+
+Quant strategie má vlastní risk profil a session guardy. Výstupem je `quant_strategy_status.csv`.
+
+## Liquidity Sweep Scalping strategie
+
+Skalpovací profil v `liquidity_sweep_scalping_strategy.py` je šestý a poslední fallback ve výkonnostním řetězci. Obchoduje výhradně na M5 svíčkách načtených přímo z MT5 přes `copy_rates_from_pos`.
+
+Aktivuje se jen když:
+
+- `SCALP_ENABLED=true`
+- žádná předchozí strategie v daném cyklu neotevřela obchod
+- volná marže / balance >= `SCALP_ACTIVATION_MARGIN_PERCENT` (výchozí 5 %)
+- skalpovací profil nepřekročil `SCALP_MAX_POSITIONS_TOTAL`
+
+Základní obchodní logika (Liquidity Sweep / False Breakout):
+
+- **LONG**: poslední uzavřená svíčka prorazila lokální minimum posledních N svíček LOW cenou a zavřela zpět NAD tímto minimem (odmítnutí nízké ceny — sweep stop-lossů)
+- **SHORT**: poslední uzavřená svíčka prorazila lokální maximum HIGH cenou a zavřela zpět POD tímto maximem (odmítnutí vysoké ceny)
+
+Scoring systém (0 – 105 bodů, vstup jen pokud score ≥ `SCALP_MIN_SIGNAL_SCORE`):
+
+| Podmínka | Body |
+|---|---|
+| Liquidity sweep detekován | +40 |
+| Engulfing potvrzení | +20 |
+| Silný wick | +15 |
+| EMA kontext | +15 |
+| ATR filter | +5 |
+| Spread filter | +5 |
+| Session filter | +5 |
+
+Používané filtry:
+
+- spread pod per-symbol limitem (`SCALP_MAX_SPREAD_{SYMBOL}`)
+- ATR v povoleném rozsahu (příliš nízký = stagnace, příliš vysoký = přílišná volatilita)
+- session filtr: London (07:00–11:00 UTC) a New York (13:30–17:00 UTC), pátek cutoff 16:00 UTC
+- maximálně 1 pozice na symbol (`SCALP_MAX_POSITIONS_PER_SYMBOL`)
+- celkový USD exposure limit (`SCALP_MAX_USD_EXPOSURE`)
+- denní loss limit (`SCALP_MAX_DAILY_LOSS`) a account drawdown limit
+
+Exit management (bez klasického broker-side stop lossu):
+
+- **Emergency stop reference**: vypočtená úroveň (1.5× ATR od low/high svíčky), kontrolována každý cyklus — urgency=emergency
+- **Invalidation level**: logické zneplatnění setupu (cena prolomí úroveň ve špatném směru) — urgency=emergency
+- **Max floating loss**: absolutní USD limit na pozici (`SCALP_MAX_FLOATING_LOSS_PER_TRADE`) — urgency=emergency
+- **Max holding time**: `SCALP_MAX_HOLDING_BARS × timeframe_minutes` (výchozí 8 svíček × 5 min = 40 min) — urgency=normal
+- **Account drawdown**: pokud účet překročí `SCALP_MAX_ACCOUNT_DRAWDOWN_PERCENT` — urgency=emergency
+
+Ochrana duplicitního vstupu:
+
+- `_last_processed_bar_time[symbol]` ukládá Unix timestamp poslední zpracované svíčky
+- nová svíčka = nový timestamp → zpracuje se; stejný timestamp → přeskočí se
+
+Persistence:
+
+- metadata pozic (invalidation level, emergency ref, max loss, lot size, score, čas otevření) jsou uložena v `trade_logs/scalping_position_state.json`
+- správa pozic (`manage_existing_positions()`) se volá **vždy** při každém cyklu v `final_decision.py`, nezávisle na tom, zda jiné strategie obchodovaly
+
+Skalpovací strategie má vlastní `ScalpingAppContext` (DI kontejner) a `magic` číslo `234600`.
+
+## Chaotic strategie
+
+Chaotic profil je opt-in poslední fallback v `final_decision.py`. Aktivuje se až poté, co žádná předchozí strategie v cyklu neotevřela obchod.
+
+Aktivuje se jen když:
+
+- `CHAOTIC_STRATEGY_ENABLED=true`
+- volná marže / balance je přísně mezi `CHAOTIC_MIN_FREE_MARGIN_PERCENT` a `CHAOTIC_MAX_FREE_MARGIN_PERCENT`
+- počet otevřených pozic označených `CHAOTIC_STRATEGY_MAGIC` nebo `ga:CHAOTIC_STRATEGY_ID` je nižší než `CHAOTIC_MAX_OPEN_POSITIONS` (výchozí `2`)
+- Cloud Ollama vrátí platný symbol a směr z nefiltrovaných AI predikcí
+
+Chaotic záměrně obchází běžné signalové filtry, cooldowny, denní limity, whitelisty a session pravidla ostatních strategií. Neobchází technické ochrany MT5: validaci symbolu, brokerový lot step, dostupnou efektivní marži a platný směr Take Profitu.
+
+Exekuce je TP-only:
+
+- brokerovi se nikdy neposílá Stop Loss
+- TP je vzdálen `CHAOTIC_TAKE_PROFIT_ATR_MULTIPLIER × ATR(1H)` od vstupu
+- lot se zaokrouhluje dolů tak, aby odhadovaná marže nepřekročila `CHAOTIC_POSITION_MARGIN_PERCENT` efektivního kapitálu
+- zdrojová data pro ATR se hledají v Cloud Ollama, archivní i economy složce; bez platných dat se obchod neotevře
+
+Strategie nemá páteční cutoff ani vlastní session okno. Nadále však platí globální večerní swap rollover blok z `logika.py`.
+
 ## Session a časová omezení
 
 Každý strategy profile má vlastní UTC obchodní okno.
@@ -152,6 +256,24 @@ Každý strategy profile má vlastní UTC obchodní okno.
 - `REVERSAL_SESSION_END_HOUR_UTC`
 - `REVERSAL_FRIDAY_CUTOFF_HOUR_UTC`
 
+### Quant strategie
+
+- `QUANT_SESSION_START_HOUR_UTC`
+- `QUANT_SESSION_END_HOUR_UTC`
+- `QUANT_FRIDAY_CUTOFF_HOUR_UTC`
+
+### Liquidity Sweep Scalping strategie
+
+Session logika je implementována přímo uvnitř `LiquiditySweepScalpingStrategy.passes_session_filter()` a konfigurována přes:
+
+- `SCALP_SESSION_LONDON_ENABLED` / `SCALP_SESSION_LONDON_START_HOUR_UTC` / `SCALP_SESSION_LONDON_END_HOUR_UTC`
+- `SCALP_SESSION_NEWYORK_ENABLED` / `SCALP_SESSION_NEWYORK_START_HOUR_UTC` / `SCALP_SESSION_NEWYORK_END_HOUR_UTC`
+- `SCALP_FRIDAY_CUTOFF_HOUR_UTC`
+
+### Chaotic strategie
+
+Chaotic nepoužívá vlastní UTC session ani páteční cutoff. Řídí se pouze globálním swap blok oknem.
+
 `final_decision.py` před pokusem o obchod ověří, jestli je daný profil uvnitř svého okna. Pokud ne, profil se přeskočí a runtime pokračuje bez exekuce tohoto setupu.
 
 Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví celý trading flow bez ohledu na strategii.
@@ -160,11 +282,21 @@ Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví 
 
 `strategy_context.py` zajišťuje jednotné označení a rozpoznání pozic:
 
-- primární strategie má vlastní `magic` a `strategy_id`
-- paralelní strategie má vlastní `magic` a `strategy_id`
-- reverzní strategie má vlastní `magic` a `strategy_id`
+| Strategie | Magic | Strategy ID |
+|---|---|---|
+| Primární | 234000 | `gemini_primary` |
+| Index | 234100 | `gemini_indices` |
+| Paralelní | 234200 | `parallel_mean_reversion` |
+| Reverzní | 234300 | `reversal_pattern` |
+| Quant | 234400 | `quant_math` |
+| Cloud Ollama | 234500 | `ollama_cloud_primary` |
+| Scalping | 234600 | `liquidity_sweep_scalping` |
+| Chaotic | 234700 | `chaotic` |
+
 - primární strategie může podle konfigurace spravovat i manuální nebo legacy pozice
-- paralelní a reverzní strategie jsou od legacy správy oddělené
+- všechny ostatní strategie jsou od legacy správy oddělené
+- scalping strategie ukládá rozšířená metadata pozic (invalidation level, emergency ref) do `scalping_position_state.json`
+- chaotic strategie je výchozím stavem vypnutá; běží až jako poslední fallback při volné marži mezi `CHAOTIC_MIN_FREE_MARGIN_PERCENT` a `CHAOTIC_MAX_FREE_MARGIN_PERCENT`. Má nejvýše `CHAOTIC_MAX_OPEN_POSITIONS` současně otevřených pozic, používá nefiltrované AI predikce, posílá pouze Take Profit ve vzdálenosti `CHAOTIC_TAKE_PROFIT_ATR_MULTIPLIER × ATR` a objem omezuje na `CHAOTIC_POSITION_MARGIN_PERCENT` efektivního kapitálu jako odhadovanou požadovanou marži.
 
 Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
@@ -222,6 +354,8 @@ Runtime zapisuje více specializovaných logů:
 - `trade_logs/trade_decision_snapshot.csv`
 - `trade_logs/parallel_strategy_status.csv`
 - `trade_logs/reversal_strategy_status.csv`
+- `trade_logs/quant_strategy_status.csv`
+- `trade_logs/scalping_position_state.json`
 - `trade_logs/weekly_surplus_cleanup.csv`
 - `trade_logs/weekly_surplus_cleanup_state.json`
 - `trade_logs/monthly_loss_cleanup_recommendations.json`
@@ -265,6 +399,9 @@ Aktuální architektura je záměrně konzervativnější než původní Gemini-
 
 - AI navrhuje, ale lokální pravidla rozhodují
 - risk je lokální a deterministický
-- paralelní i reverzní strategie jsou fallback vrstvy, ne samostatné nezávislé exekuční enginy
+- fallback řetězec má šest vrstev: primary → parallel → reversal → quant → (cloud ollama) → scalping
+- scalping je poslední záloha — spouští se jedině pokud žádná předchozí strategie neobchodovala a marže > 5 %
+- scalping pracuje přímo s M5 OHLCV daty z MT5, není závislý na AI predikcích ani precomputed indikátorech
 - opakované Gemini dotazy jsou omezené cache a cooldownem
 - obchodování je svázané jak globálním swap blokem, tak session okny jednotlivých strategií
+- správa skalpovacích pozic (exit podmínky) běží vždy při každém cyklu, nezávisle na ostatních strategiích

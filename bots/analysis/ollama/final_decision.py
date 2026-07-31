@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import os
 import sys
 from dataclasses import dataclass
@@ -38,12 +39,19 @@ from reversal_pattern_strategy import (
 	is_reversal_strategy_enabled,
 	validate_reversal_pattern_signal,
 )
+from liquidity_sweep_scalping_strategy import (
+	LiquiditySweepScalpingStrategy,
+	ScalpingAppContext,
+	can_activate_scalping_strategy,
+	is_scalping_strategy_enabled,
+)
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
 from strategy_context import (
 	StrategyContext,
 	build_strategy_comment,
 	count_open_positions_for_strategy,
+	get_chaotic_strategy_context,
 	get_ollama_cloud_strategy_context,
 	get_parallel_strategy_context,
 	get_primary_strategy_context,
@@ -54,6 +62,8 @@ from strategy_context import (
 from trade_execution import execute_trade
 from trade_history import count_successful_trades, count_successful_trades_since, count_successful_trades_today
 from trading_validation import check_margin_requirements, validate_symbol
+
+import MetaTrader5 as mt5
 
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -143,6 +153,12 @@ REASON_TEXT_CS = {
 	"gemini_candidates_exhausted_local_fallback": "Gemini kandidati byli vycerpani a strategie presla na lokalni fallback.",
 	"no_executable_trade": "V tomto cyklu nebyl nalezen zadny obchod k exekuci.",
 	"no_predictions": "Nejsou k dispozici zadne pouzitelne predikce.",
+	"chaotic_disabled": "Chaotic strategie neni povolena v konfiguraci.",
+	"chaotic_margin_outside_range": "Volna marze neni v aktivacnim pasmu chaotic strategie.",
+	"chaotic_ollama_unavailable": "Cloud Ollama neni pro chaotic strategii dostupna.",
+	"chaotic_no_raw_predictions": "Chaotic strategie nema k dispozici zadne AI predikce.",
+	"chaotic_ollama_no_decision": "Ollama nevratila platne chaotic rozhodnuti.",
+	"chaotic_trade_parameters_invalid": "Chaotic strategie nedokazala pripravit TP-only parametry obchodu.",
 	"exception": "Behem rozhodovaci faze doslo k vyjimce.",
 }
 
@@ -383,21 +399,24 @@ def _load_market_data_for_symbol(
 	source_folder_override: Optional[Path] = None,
 	service_folder_fallback: Optional[Path] = None,
 ) -> Optional[Dict]:
-	if source_folder_override is not None:
-		source_folder = source_folder_override
-	elif predictions_folder is not None:
-		source_folder = predictions_folder.parent / "source"
-	elif service_folder_fallback is not None:
-		source_folder = service_folder_fallback
-	else:
-		return None
-	market_data_file = source_folder / f"{symbol}.json"
-	if not market_data_file.exists():
-		return None
-	try:
-		return json.loads(market_data_file.read_text(encoding="utf-8"))
-	except (OSError, json.JSONDecodeError):
-		return None
+	source_folders: List[Path] = []
+	for source_folder in (
+		source_folder_override,
+		predictions_folder.parent / "source" if predictions_folder is not None else None,
+		service_folder_fallback,
+	):
+		if source_folder is not None and source_folder not in source_folders:
+			source_folders.append(source_folder)
+
+	for source_folder in source_folders:
+		market_data_file = source_folder / f"{symbol}.json"
+		if not market_data_file.exists():
+			continue
+		try:
+			return json.loads(market_data_file.read_text(encoding="utf-8"))
+		except (OSError, json.JSONDecodeError):
+			continue
+	return None
 
 
 def _log_jsonl(service_folder: Path, file_name: str, payload: Dict) -> None:
@@ -1036,6 +1055,143 @@ def _get_strategy_limit(env_name: str, default: int) -> int:
 	return _get_int_env(env_name, default, minimum=0)
 
 
+def _get_float_env(name: str, default: float, *, minimum: float = 0.0) -> float:
+	raw = os.getenv(name)
+	if raw is None:
+		return default
+	try:
+		value = float(raw)
+		if value < minimum:
+			raise ValueError
+		return value
+	except (TypeError, ValueError):
+		return default
+
+
+def is_chaotic_strategy_enabled() -> bool:
+	return os.getenv("CHAOTIC_STRATEGY_ENABLED", "false").strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def _get_chaotic_margin_band() -> Tuple[float, float]:
+	minimum = _get_float_env("CHAOTIC_MIN_FREE_MARGIN_PERCENT", 10.0, minimum=0.0)
+	maximum = _get_float_env("CHAOTIC_MAX_FREE_MARGIN_PERCENT", 20.0, minimum=0.0)
+	return (minimum, maximum) if maximum > minimum else (10.0, 20.0)
+
+
+def _get_latest_atr(market_data: Dict) -> Optional[float]:
+	try:
+		atr_value = float(market_data["oscillators"]["1h"]["atr14"][-1]["value"])
+		return atr_value if atr_value > 0 else None
+	except (IndexError, KeyError, TypeError, ValueError):
+		return None
+
+
+def _resolve_chaotic_trade_parameters(
+	*,
+	symbol: str,
+	action: str,
+	account_state: Dict,
+	market_data: Dict,
+) -> Optional[Tuple[float, float, Dict[str, float]]]:
+	"""Build a TP-only order whose estimated required margin stays within its budget."""
+	if action not in {"BUY", "SELL"}:
+		return None
+
+	symbol_info = get_symbol_info(symbol)
+	entry_price = get_current_price(symbol, action=action)
+	atr_value = _get_latest_atr(market_data)
+	if symbol_info is None or entry_price is None or atr_value is None:
+		return None
+
+	position_margin_percent = _get_float_env("CHAOTIC_POSITION_MARGIN_PERCENT", 5.0, minimum=0.01)
+	balance = float(account_state.get("balance", 0.0) or 0.0)
+	free_margin = float(account_state.get("margin_free", 0.0) or 0.0)
+	margin_budget = min(balance * (position_margin_percent / 100.0), free_margin)
+	if margin_budget <= 0:
+		return None
+
+	order_type = mt5.ORDER_TYPE_BUY if action == "BUY" else mt5.ORDER_TYPE_SELL
+	margin_per_lot = mt5.order_calc_margin(order_type, symbol, 1.0, entry_price)
+	if margin_per_lot is None or margin_per_lot <= 0:
+		return None
+
+	volume_step = float(getattr(symbol_info, "volume_step", 0.0) or 0.0)
+	minimum_volume = float(getattr(symbol_info, "volume_min", 0.0) or 0.0)
+	if volume_step <= 0 or minimum_volume <= 0:
+		return None
+
+	lot_size = math.floor((margin_budget / float(margin_per_lot)) / volume_step) * volume_step
+	lot_size = round(lot_size, 8)
+	if lot_size < minimum_volume:
+		return None
+
+	required_margin = mt5.order_calc_margin(order_type, symbol, lot_size, entry_price)
+	while required_margin is not None and required_margin > margin_budget and lot_size >= minimum_volume:
+		lot_size = round(lot_size - volume_step, 8)
+		required_margin = mt5.order_calc_margin(order_type, symbol, lot_size, entry_price)
+	if lot_size < minimum_volume or required_margin is None or required_margin > margin_budget:
+		return None
+
+	tp_multiplier = _get_float_env("CHAOTIC_TAKE_PROFIT_ATR_MULTIPLIER", 1.5, minimum=0.01)
+	take_profit = entry_price + (atr_value * tp_multiplier) if action == "BUY" else entry_price - (atr_value * tp_multiplier)
+	digits = getattr(symbol_info, "digits", None)
+	if isinstance(digits, int) and digits >= 0:
+		take_profit = round(take_profit, digits)
+	if (action == "BUY" and take_profit <= entry_price) or (action == "SELL" and take_profit >= entry_price):
+		return None
+
+	return lot_size, take_profit, {
+		"entry_price": entry_price,
+		"atr14_1h": atr_value,
+		"margin_budget": margin_budget,
+		"estimated_required_margin": float(required_margin),
+		"position_margin_percent": position_margin_percent,
+	}
+
+
+def _resolve_chaotic_ollama_candidate(
+	*,
+	predictions: List[Dict],
+	open_positions: List[Dict],
+	account_state: Dict,
+	service_folder: Path,
+) -> Optional[RankedCandidate]:
+	if not predictions:
+		return None
+
+	from ollama_advisory import ask_ollama_final_decision
+
+	decision_text = ask_ollama_final_decision(
+		predictions,
+		open_positions,
+		account_state,
+		chaotic_mode=True,
+	)
+	if not decision_text:
+		return None
+	try:
+		payload = json.loads(decision_text)
+	except json.JSONDecodeError:
+		return None
+
+	candidates = _extract_ranked_candidates_from_decision_payload(payload, "chaotic_ollama")
+	if not candidates:
+		return None
+	candidate = candidates[0]
+	_log_jsonl(
+		service_folder,
+		"ai_log.jsonl",
+		{
+			"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+			"source": "chaotic_ollama",
+			"recommended_symbol": candidate.symbol,
+			"action": candidate.action,
+			"prediction_count": len(predictions),
+		},
+	)
+	return candidate
+
+
 def _is_candidate_rejected(service_folder: Path, strategy_id: str, symbol: str, action: str) -> Optional[Dict[str, object]]:
 	return get_active_rejection(service_folder, strategy_id=strategy_id, symbol=symbol, action=action)
 
@@ -1427,6 +1583,125 @@ def _attempt_strategy_trade(
 	return False
 
 
+def _attempt_chaotic_trade(
+	*,
+	candidate: RankedCandidate,
+	predictions_folder: Optional[Path],
+	source_folder: Optional[Path],
+	service_folder: Path,
+	account_state: Dict,
+) -> bool:
+	context = get_chaotic_strategy_context()
+	print(f"🎯 Chaotic strategie: kandidat {candidate.symbol} {candidate.action}")
+	is_valid, error_message = validate_symbol(candidate.symbol)
+	if not is_valid:
+		print(f"⚠️  Chaotic strategie: symbol neprosel validaci: {error_message}")
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=context.strategy_id,
+			strategy_label="chaotic",
+			symbol=candidate.symbol,
+			action=candidate.action,
+			candidate_source=candidate.source,
+			stage="candidate_rejected",
+			trade_executed=False,
+			reason="symbol_validation_failed",
+			details={"error_msg": error_message},
+		)
+		return False
+
+	market_data = _load_market_data_for_symbol(
+		predictions_folder,
+		candidate.symbol,
+		source_folder_override=source_folder,
+		service_folder_fallback=service_folder,
+	)
+	if market_data is None:
+		print(f"⚠️  Chaotic strategie: chybi market data pro {candidate.symbol}")
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=context.strategy_id,
+			strategy_label="chaotic",
+			symbol=candidate.symbol,
+			action=candidate.action,
+			candidate_source=candidate.source,
+			stage="candidate_rejected",
+			trade_executed=False,
+			reason="market_data_missing",
+		)
+		return False
+
+	resolved = _resolve_chaotic_trade_parameters(
+		symbol=candidate.symbol,
+		action=candidate.action,
+		account_state=account_state,
+		market_data=market_data,
+	)
+	if resolved is None:
+		print(
+			"⚠️  Chaotic strategie: nelze pripravit TP-only obchod "
+			"(ATR, minimalni lot nebo marzovy rozpocet nevyhovuji)"
+		)
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=context.strategy_id,
+			strategy_label="chaotic",
+			symbol=candidate.symbol,
+			action=candidate.action,
+			candidate_source=candidate.source,
+			stage="candidate_rejected",
+			trade_executed=False,
+			reason="chaotic_trade_parameters_invalid",
+		)
+		return False
+
+	lot_size, take_profit, parameter_log = resolved
+	print(
+		f"📐 Chaotic strategie: lot {lot_size}, TP {take_profit}, "
+		f"odhadovana marze {parameter_log['estimated_required_margin']:.2f}/"
+		f"rozpocet {parameter_log['margin_budget']:.2f}"
+	)
+	if execute_trade(
+		candidate.symbol,
+		candidate.action,
+		lot_size,
+		service_folder,
+		take_profit,
+		lot_source="chaotic_margin_budget",
+		strategy_id=context.strategy_id,
+		magic=context.magic,
+		comment=build_strategy_comment(context.strategy_id),
+		extra_log_data={"decision_source": candidate.source, "stop_loss": None, **parameter_log},
+	):
+		_log_trade_decision_audit(
+			service_folder,
+			strategy_id=context.strategy_id,
+			strategy_label="chaotic",
+			symbol=candidate.symbol,
+			action=candidate.action,
+			candidate_source=candidate.source,
+			stage="trade_executed",
+			trade_executed=True,
+			reason="trade_opened",
+			details={"lot_size": lot_size, "take_profit": take_profit, **parameter_log},
+		)
+		return True
+
+	print("⚠️  Chaotic strategie: broker nebo kontrola marze odmitly prikaz")
+	_log_trade_decision_audit(
+		service_folder,
+		strategy_id=context.strategy_id,
+		strategy_label="chaotic",
+		symbol=candidate.symbol,
+		action=candidate.action,
+		candidate_source=candidate.source,
+		stage="candidate_rejected",
+		trade_executed=False,
+		reason="trade_execution_failed",
+	)
+	return False
+
+
 def _exclude_symbol_and_retry(symbol: str, reason: str, predictions: List[Dict], excluded_symbols: List[str]) -> bool:
 	"""Exclude the current symbol and continue with a different prediction when possible."""
 	print(f"⚠️  {reason}")
@@ -1555,6 +1830,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 	try:
 		print("\n📊 Loading remaining predictions...")
 		predictions = load_predictions(predictions_folder) if predictions_folder is not None else []
+		raw_predictions = load_predictions(predictions_folder, require_threshold=False) if predictions_folder is not None else []
 
 		# Load cloud Ollama predictions early – used both for the cloud strategy slot and
 		# as a fallback candidate pool for secondary (parallel/reversal) strategies when
@@ -1562,6 +1838,11 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 		cloud_preds_folder = service_folder / "ollama_cloud" / "predikce"
 		cloud_predictions_loaded: List[Dict] = (
 			load_predictions(cloud_preds_folder)
+			if is_ollama_cloud_enabled() and cloud_preds_folder.exists()
+			else []
+		)
+		raw_cloud_predictions: List[Dict] = (
+			load_predictions(cloud_preds_folder, require_threshold=False)
 			if is_ollama_cloud_enabled() and cloud_preds_folder.exists()
 			else []
 		)
@@ -1586,7 +1867,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			print(f"   Found {len(cloud_predictions_loaded)} Cloud Ollama predictions")
 		if quant_candidates:
 			print(f"   Found {len(quant_candidates)} quant candidates from raw market data")
-		if not predictions and not quant_candidates and not cloud_predictions_loaded:
+		if not predictions and not quant_candidates and not cloud_predictions_loaded and not raw_predictions and not raw_cloud_predictions:
 			print("⚠️  No strong predictions available and quant strategy found no candidates")
 			_log_trade_decision_audit(
 				service_folder,
@@ -1596,6 +1877,25 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				trade_executed=False,
 				reason="no_predictions",
 			)
+			# Skalpovací strategie nepotřebuje AI predikce – zkusíme ji i v tomto případě.
+			if is_scalping_strategy_enabled():
+				try:
+					_np_account = get_account_state(include_margin_percent=True)
+					_np_positions = get_open_positions()
+					_scalp_ctx_np = ScalpingAppContext(service_folder=service_folder)
+					_scalp_np = LiquiditySweepScalpingStrategy(_scalp_ctx_np)
+					_scalp_np.manage_existing_positions()
+					if can_activate_scalping_strategy(_np_account, _np_positions):
+						print("ℹ️  Skalpovací strategie: spouštím bez AI predikcí")
+						if _scalp_np.run():
+							print("\n" + "=" * 60)
+							print("✅ Final Trading Decision Completed (Scalping – no predictions)")
+							print("=" * 60)
+							return True
+					else:
+						print("ℹ️  Skalpovací strategie: aktivační podmínka nesplněna (marže příliš nízká nebo plný limit pozic)")
+				except Exception as _np_exc:
+					print(f"❌ Scalping (no-predictions mode) error: {_np_exc}")
 			return False
 
 		account_state = get_account_state(include_margin_percent=True)
@@ -1603,6 +1903,17 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 
 		open_positions = get_open_positions()
 		_print_open_positions(open_positions)
+
+		# Správa existujících skalpovacích pozic probíhá vždy – nezávisle na tom,
+		# zda ostatní strategie v tomto cyklu otevřely obchod.
+		if is_scalping_strategy_enabled():
+			try:
+				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
+				_scalp_mgr = LiquiditySweepScalpingStrategy(_scalp_ctx)
+				_scalp_mgr.manage_existing_positions()
+			except Exception as _scalp_mgmt_exc:
+				print(f"⚠️  Scalping position management error: {_scalp_mgmt_exc}")
+
 		open_crypto_positions = _count_open_crypto_positions(open_positions)
 		print(f"   Open crypto positions: {open_crypto_positions}/{get_crypto_max_open_positions()}")
 		full_control_every_n = _get_gemini_full_control_every_n_trades()
@@ -1818,6 +2129,152 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				stage="strategy_blocked",
 				trade_executed=False,
 				reason=reason,
+			)
+
+		# ── Šestá záloha: Liquidity Sweep Scalping ───────────────────────────
+		# Aktivuje se jako poslední, pokud žádná předchozí strategie nenašla obchod.
+		# Podmínka: volná marže > SCALP_ACTIVATION_MARGIN_PERCENT (výchozí 5 %).
+		scalping_enabled = is_scalping_strategy_enabled()
+		scalping_activation_met = scalping_enabled and can_activate_scalping_strategy(
+			account_state, open_positions
+		)
+		if scalping_activation_met:
+			print("ℹ️  Scalping strategie: aktivována (poslední fallback)")
+			try:
+				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
+				_scalp_strategy = LiquiditySweepScalpingStrategy(_scalp_ctx)
+				if _scalp_strategy.run():
+					print("\n" + "=" * 60)
+					print("✅ Final Trading Decision Completed (Scalping)")
+					print("=" * 60)
+					return True
+			except Exception as _scalp_exc:
+				print(f"❌ Scalping strategy error: {_scalp_exc}")
+				_log_trade_decision_audit(
+					service_folder,
+					strategy_id="liquidity_sweep_scalping",
+					strategy_label="scalping",
+					stage="strategy_error",
+					trade_executed=False,
+					reason="exception",
+					details={"error": str(_scalp_exc)},
+				)
+		elif scalping_enabled:
+			print("⚠️  Scalping strategie: aktivační podmínka nesplněna (marže příliš nízká nebo plný limit pozic)")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id="liquidity_sweep_scalping",
+				strategy_label="scalping",
+				stage="strategy_blocked",
+				trade_executed=False,
+				reason="activation_gate_not_satisfied",
+			)
+
+		chaotic_context = get_chaotic_strategy_context()
+		if is_chaotic_strategy_enabled():
+			minimum_margin, maximum_margin = _get_chaotic_margin_band()
+			free_margin_percent = _get_strategy_activation_margin_percent(account_state)
+			print(
+				"ℹ️  Chaotic strategie: aktivni "
+				f"(volna marze {free_margin_percent:.2f} %, pasmo {minimum_margin:.2f}-{maximum_margin:.2f} %)"
+			)
+			if not minimum_margin < free_margin_percent < maximum_margin:
+				print("⚠️  Chaotic strategie: volna marze je mimo aktivacni pasmo")
+				_log_trade_decision_audit(
+					service_folder,
+					strategy_id=chaotic_context.strategy_id,
+					strategy_label="chaotic",
+					stage="strategy_blocked",
+					trade_executed=False,
+					reason="chaotic_margin_outside_range",
+					details={"free_margin_percent": free_margin_percent, "minimum": minimum_margin, "maximum": maximum_margin},
+				)
+			else:
+				chaotic_open_positions = count_open_positions_for_strategy(open_positions, chaotic_context)
+				chaotic_max_open_positions = _get_int_env("CHAOTIC_MAX_OPEN_POSITIONS", 2, minimum=1)
+				if chaotic_open_positions >= chaotic_max_open_positions:
+					print(
+						"⚠️  Chaotic strategie: dosazen limit aktivnich pozic "
+						f"({chaotic_open_positions}/{chaotic_max_open_positions})"
+					)
+					_log_trade_decision_audit(
+						service_folder,
+						strategy_id=chaotic_context.strategy_id,
+						strategy_label="chaotic",
+						stage="strategy_blocked",
+						trade_executed=False,
+						reason="max_open_positions_reached",
+						details={
+							"open_chaotic_positions": chaotic_open_positions,
+							"max_chaotic_positions": chaotic_max_open_positions,
+						},
+					)
+				else:
+					chaotic_predictions = raw_predictions or raw_cloud_predictions
+					chaotic_predictions_folder = predictions_folder if raw_predictions else (cloud_preds_folder if raw_cloud_predictions else None)
+					chaotic_source_folder = (
+						predictions_folder.parent / "source"
+						if raw_predictions and predictions_folder is not None
+						else service_folder / "ollama" / "source"
+					)
+					if not chaotic_predictions:
+						print("⚠️  Chaotic strategie: chybi nefiltrovane AI predikce")
+						_log_trade_decision_audit(
+							service_folder,
+							strategy_id=chaotic_context.strategy_id,
+							strategy_label="chaotic",
+							stage="strategy_blocked",
+							trade_executed=False,
+							reason="chaotic_no_raw_predictions",
+						)
+					elif not is_ollama_cloud_enabled():
+						print("⚠️  Chaotic strategie: Cloud Ollama neni aktivni")
+						_log_trade_decision_audit(
+							service_folder,
+							strategy_id=chaotic_context.strategy_id,
+							strategy_label="chaotic",
+							stage="strategy_blocked",
+							trade_executed=False,
+							reason="chaotic_ollama_unavailable",
+						)
+					else:
+						print(f"🤖 Chaotic strategie: dotazuji Cloud Ollamu nad {len(chaotic_predictions)} predikcemi")
+						chaotic_candidate = _resolve_chaotic_ollama_candidate(
+							predictions=chaotic_predictions,
+							open_positions=open_positions,
+							account_state=account_state,
+							service_folder=service_folder,
+						)
+						if chaotic_candidate is None:
+							print("⚠️  Chaotic strategie: Ollama nevratila platne rozhodnuti")
+							_log_trade_decision_audit(
+								service_folder,
+								strategy_id=chaotic_context.strategy_id,
+								strategy_label="chaotic",
+								stage="strategy_blocked",
+								trade_executed=False,
+								reason="chaotic_ollama_no_decision",
+							)
+						elif _attempt_chaotic_trade(
+							candidate=chaotic_candidate,
+							predictions_folder=chaotic_predictions_folder,
+							source_folder=chaotic_source_folder,
+							service_folder=service_folder,
+							account_state=account_state,
+						):
+							print("\n" + "=" * 60)
+							print("✅ Final Trading Decision Completed (Chaotic)")
+							print("=" * 60)
+							return True
+		else:
+			print("ℹ️  Chaotic strategie: vypnuta (CHAOTIC_STRATEGY_ENABLED neni true v prostredi procesu)")
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id=chaotic_context.strategy_id,
+				strategy_label="chaotic",
+				stage="strategy_blocked",
+				trade_executed=False,
+				reason="chaotic_disabled",
 			)
 
 		print("❌ No strategy found an executable trade in this cycle")

@@ -28,6 +28,8 @@ def ask_ollama_final_decision(
     predictions: List[Dict],
     open_positions: List[Dict],
     account_state: Dict,
+    *,
+    chaotic_mode: bool = False,
 ) -> Optional[str]:
     """Ask cloud Ollama for a final trading decision.
 
@@ -43,7 +45,7 @@ def ask_ollama_final_decision(
         if is_crypto_symbol(str(p.get("symbol", "")))
     ]
     crypto_note = ""
-    if crypto_symbols:
+    if crypto_symbols and not chaotic_mode:
         crypto_note = (
             "\n\nPRAVIDLA PRO CRYPTO INSTRUMENTY:\n"
             f"- Crypto kandidati v tomto vyberu: {', '.join(crypto_symbols)}\n"
@@ -73,6 +75,14 @@ def ask_ollama_final_decision(
         ensure_ascii=False,
     )
 
+    prediction_label = "vsechny dostupne predikce bez minimalniho prahu" if chaotic_mode else "filtrovane - pouze BUY/SELL >= 35%"
+    mode_note = (
+        "\nCHAOTIC REZIM: Jde o posledni fallback. Vyber jeden nejlepsi instrument a smer "
+        "z libovolne dostupne predikce; neaplikuj vlastni minimalni prah confidence ani dalsi obchodni omezeni."
+        if chaotic_mode
+        else ""
+    )
+
     prompt = f"""Jsi expert obchodni poradce. Na zaklade analyzy ucin finalni obchodni rozhodnutí.
 
 STAV UCTU:
@@ -81,8 +91,8 @@ STAV UCTU:
 OTEVRENE POZICE:
 {json.dumps(open_positions, indent=2, ensure_ascii=False)}
 
-DOSTUPNE PREDIKCE (filtrovane - pouze BUY/SELL >= 35%):
-{json.dumps(predictions, indent=2, ensure_ascii=False)}{crypto_note}
+DOSTUPNE PREDIKCE ({prediction_label}):
+{json.dumps(predictions, indent=2, ensure_ascii=False)}{crypto_note}{mode_note}
 
 UKOL:
 1. Vyber hlavniho kandidata z dostupnych predikcí.

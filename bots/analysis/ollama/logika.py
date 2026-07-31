@@ -22,7 +22,7 @@ from typing import Dict, Iterable, List, Optional
 import MetaTrader5 as mt5
 from account_monitor import run_account_monitor, run_position_management_monitor
 from trading_logic import run_trading_logic
-from final_decision import make_final_trading_decision
+from final_decision import is_chaotic_strategy_enabled, make_final_trading_decision
 from mt5_connection import initialize_mt5, shutdown_mt5
 from ollama_service import ollama_service_loop, ollama_cloud_service_loop, is_ollama_cloud_enabled
 from swap_rollover import get_swap_block_window
@@ -474,7 +474,7 @@ def main() -> int:
 						# Use existing predictions from current hour
 						print("💡 Using existing predictions from current hour")
 						has_predictions = process_existing_predictions(existing_predictions)
-						if has_predictions:
+						if has_predictions or is_chaotic_strategy_enabled():
 							predictions_folder = existing_predictions
 						else:
 							print("⚠️  Existing predictions were filtered out, restarting cycle...")
