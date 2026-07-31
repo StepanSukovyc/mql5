@@ -2152,7 +2152,12 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 		if is_chaotic_strategy_enabled():
 			minimum_margin, maximum_margin = _get_chaotic_margin_band()
 			free_margin_percent = _get_strategy_activation_margin_percent(account_state)
+			print(
+				"ℹ️  Chaotic strategie: aktivni "
+				f"(volna marze {free_margin_percent:.2f} %, pasmo {minimum_margin:.2f}-{maximum_margin:.2f} %)"
+			)
 			if not minimum_margin < free_margin_percent < maximum_margin:
+				print("⚠️  Chaotic strategie: volna marze je mimo aktivacni pasmo")
 				_log_trade_decision_audit(
 					service_folder,
 					strategy_id=chaotic_context.strategy_id,
@@ -2165,6 +2170,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			elif count_successful_trades_today(service_folder, strategy_id=chaotic_context.strategy_id) >= _get_int_env(
 				"CHAOTIC_MAX_TRADES_PER_DAY", 2, minimum=1
 			):
+				print("⚠️  Chaotic strategie: dosazen denni limit obchodu")
 				_log_trade_decision_audit(
 					service_folder,
 					strategy_id=chaotic_context.strategy_id,
@@ -2177,6 +2183,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				chaotic_predictions = raw_predictions or raw_cloud_predictions
 				chaotic_predictions_folder = predictions_folder if raw_predictions else (cloud_preds_folder if raw_cloud_predictions else None)
 				if not chaotic_predictions:
+					print("⚠️  Chaotic strategie: chybi nefiltrovane AI predikce")
 					_log_trade_decision_audit(
 						service_folder,
 						strategy_id=chaotic_context.strategy_id,
@@ -2186,6 +2193,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 						reason="chaotic_no_raw_predictions",
 					)
 				elif not is_ollama_cloud_enabled():
+					print("⚠️  Chaotic strategie: Cloud Ollama neni aktivni")
 					_log_trade_decision_audit(
 						service_folder,
 						strategy_id=chaotic_context.strategy_id,
@@ -2195,6 +2203,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 						reason="chaotic_ollama_unavailable",
 					)
 				else:
+					print(f"🤖 Chaotic strategie: dotazuji Cloud Ollamu nad {len(chaotic_predictions)} predikcemi")
 					chaotic_candidate = _resolve_chaotic_ollama_candidate(
 						predictions=chaotic_predictions,
 						open_positions=open_positions,
@@ -2202,6 +2211,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 						service_folder=service_folder,
 					)
 					if chaotic_candidate is None:
+						print("⚠️  Chaotic strategie: Ollama nevratila platne rozhodnuti")
 						_log_trade_decision_audit(
 							service_folder,
 							strategy_id=chaotic_context.strategy_id,
@@ -2221,6 +2231,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 						print("=" * 60)
 						return True
 		else:
+			print("ℹ️  Chaotic strategie: vypnuta (CHAOTIC_STRATEGY_ENABLED neni true v prostredi procesu)")
 			_log_trade_decision_audit(
 				service_folder,
 				strategy_id=chaotic_context.strategy_id,
