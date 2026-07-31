@@ -1584,6 +1584,7 @@ def _attempt_chaotic_trade(
 	*,
 	candidate: RankedCandidate,
 	predictions_folder: Optional[Path],
+	source_folder: Optional[Path],
 	service_folder: Path,
 	account_state: Dict,
 ) -> bool:
@@ -1606,7 +1607,12 @@ def _attempt_chaotic_trade(
 		)
 		return False
 
-	market_data = _load_market_data_for_symbol(predictions_folder, candidate.symbol, service_folder_fallback=service_folder)
+	market_data = _load_market_data_for_symbol(
+		predictions_folder,
+		candidate.symbol,
+		source_folder_override=source_folder,
+		service_folder_fallback=service_folder,
+	)
 	if market_data is None:
 		print(f"⚠️  Chaotic strategie: chybi market data pro {candidate.symbol}")
 		_log_trade_decision_audit(
@@ -2195,6 +2201,11 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			else:
 				chaotic_predictions = raw_predictions or raw_cloud_predictions
 				chaotic_predictions_folder = predictions_folder if raw_predictions else (cloud_preds_folder if raw_cloud_predictions else None)
+				chaotic_source_folder = (
+					predictions_folder.parent / "source"
+					if raw_predictions and predictions_folder is not None
+					else service_folder / "ollama" / "source"
+				)
 				if not chaotic_predictions:
 					print("⚠️  Chaotic strategie: chybi nefiltrovane AI predikce")
 					_log_trade_decision_audit(
@@ -2236,6 +2247,7 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 					elif _attempt_chaotic_trade(
 						candidate=chaotic_candidate,
 						predictions_folder=chaotic_predictions_folder,
+						source_folder=chaotic_source_folder,
 						service_folder=service_folder,
 						account_state=account_state,
 					):
