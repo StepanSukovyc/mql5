@@ -399,21 +399,24 @@ def _load_market_data_for_symbol(
 	source_folder_override: Optional[Path] = None,
 	service_folder_fallback: Optional[Path] = None,
 ) -> Optional[Dict]:
-	if source_folder_override is not None:
-		source_folder = source_folder_override
-	elif predictions_folder is not None:
-		source_folder = predictions_folder.parent / "source"
-	elif service_folder_fallback is not None:
-		source_folder = service_folder_fallback
-	else:
-		return None
-	market_data_file = source_folder / f"{symbol}.json"
-	if not market_data_file.exists():
-		return None
-	try:
-		return json.loads(market_data_file.read_text(encoding="utf-8"))
-	except (OSError, json.JSONDecodeError):
-		return None
+	source_folders: List[Path] = []
+	for source_folder in (
+		source_folder_override,
+		predictions_folder.parent / "source" if predictions_folder is not None else None,
+		service_folder_fallback,
+	):
+		if source_folder is not None and source_folder not in source_folders:
+			source_folders.append(source_folder)
+
+	for source_folder in source_folders:
+		market_data_file = source_folder / f"{symbol}.json"
+		if not market_data_file.exists():
+			continue
+		try:
+			return json.loads(market_data_file.read_text(encoding="utf-8"))
+		except (OSError, json.JSONDecodeError):
+			continue
+	return None
 
 
 def _log_jsonl(service_folder: Path, file_name: str, payload: Dict) -> None:
