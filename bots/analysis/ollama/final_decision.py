@@ -2189,75 +2189,83 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 					reason="chaotic_margin_outside_range",
 					details={"free_margin_percent": free_margin_percent, "minimum": minimum_margin, "maximum": maximum_margin},
 				)
-			elif count_successful_trades_today(service_folder, strategy_id=chaotic_context.strategy_id) >= _get_int_env(
-				"CHAOTIC_MAX_TRADES_PER_DAY", 2, minimum=1
-			):
-				print("⚠️  Chaotic strategie: dosazen denni limit obchodu")
-				_log_trade_decision_audit(
-					service_folder,
-					strategy_id=chaotic_context.strategy_id,
-					strategy_label="chaotic",
-					stage="strategy_blocked",
-					trade_executed=False,
-					reason="daily_trade_limit_reached",
-				)
 			else:
-				chaotic_predictions = raw_predictions or raw_cloud_predictions
-				chaotic_predictions_folder = predictions_folder if raw_predictions else (cloud_preds_folder if raw_cloud_predictions else None)
-				chaotic_source_folder = (
-					predictions_folder.parent / "source"
-					if raw_predictions and predictions_folder is not None
-					else service_folder / "ollama" / "source"
-				)
-				if not chaotic_predictions:
-					print("⚠️  Chaotic strategie: chybi nefiltrovane AI predikce")
-					_log_trade_decision_audit(
-						service_folder,
-						strategy_id=chaotic_context.strategy_id,
-						strategy_label="chaotic",
-						stage="strategy_blocked",
-						trade_executed=False,
-						reason="chaotic_no_raw_predictions",
+				chaotic_open_positions = count_open_positions_for_strategy(open_positions, chaotic_context)
+				chaotic_max_open_positions = _get_int_env("CHAOTIC_MAX_OPEN_POSITIONS", 2, minimum=1)
+				if chaotic_open_positions >= chaotic_max_open_positions:
+					print(
+						"⚠️  Chaotic strategie: dosazen limit aktivnich pozic "
+						f"({chaotic_open_positions}/{chaotic_max_open_positions})"
 					)
-				elif not is_ollama_cloud_enabled():
-					print("⚠️  Chaotic strategie: Cloud Ollama neni aktivni")
 					_log_trade_decision_audit(
 						service_folder,
 						strategy_id=chaotic_context.strategy_id,
 						strategy_label="chaotic",
 						stage="strategy_blocked",
 						trade_executed=False,
-						reason="chaotic_ollama_unavailable",
+						reason="max_open_positions_reached",
+						details={
+							"open_chaotic_positions": chaotic_open_positions,
+							"max_chaotic_positions": chaotic_max_open_positions,
+						},
 					)
 				else:
-					print(f"🤖 Chaotic strategie: dotazuji Cloud Ollamu nad {len(chaotic_predictions)} predikcemi")
-					chaotic_candidate = _resolve_chaotic_ollama_candidate(
-						predictions=chaotic_predictions,
-						open_positions=open_positions,
-						account_state=account_state,
-						service_folder=service_folder,
+					chaotic_predictions = raw_predictions or raw_cloud_predictions
+					chaotic_predictions_folder = predictions_folder if raw_predictions else (cloud_preds_folder if raw_cloud_predictions else None)
+					chaotic_source_folder = (
+						predictions_folder.parent / "source"
+						if raw_predictions and predictions_folder is not None
+						else service_folder / "ollama" / "source"
 					)
-					if chaotic_candidate is None:
-						print("⚠️  Chaotic strategie: Ollama nevratila platne rozhodnuti")
+					if not chaotic_predictions:
+						print("⚠️  Chaotic strategie: chybi nefiltrovane AI predikce")
 						_log_trade_decision_audit(
 							service_folder,
 							strategy_id=chaotic_context.strategy_id,
 							strategy_label="chaotic",
 							stage="strategy_blocked",
 							trade_executed=False,
-							reason="chaotic_ollama_no_decision",
+							reason="chaotic_no_raw_predictions",
 						)
-					elif _attempt_chaotic_trade(
-						candidate=chaotic_candidate,
-						predictions_folder=chaotic_predictions_folder,
-						source_folder=chaotic_source_folder,
-						service_folder=service_folder,
-						account_state=account_state,
-					):
-						print("\n" + "=" * 60)
-						print("✅ Final Trading Decision Completed (Chaotic)")
-						print("=" * 60)
-						return True
+					elif not is_ollama_cloud_enabled():
+						print("⚠️  Chaotic strategie: Cloud Ollama neni aktivni")
+						_log_trade_decision_audit(
+							service_folder,
+							strategy_id=chaotic_context.strategy_id,
+							strategy_label="chaotic",
+							stage="strategy_blocked",
+							trade_executed=False,
+							reason="chaotic_ollama_unavailable",
+						)
+					else:
+						print(f"🤖 Chaotic strategie: dotazuji Cloud Ollamu nad {len(chaotic_predictions)} predikcemi")
+						chaotic_candidate = _resolve_chaotic_ollama_candidate(
+							predictions=chaotic_predictions,
+							open_positions=open_positions,
+							account_state=account_state,
+							service_folder=service_folder,
+						)
+						if chaotic_candidate is None:
+							print("⚠️  Chaotic strategie: Ollama nevratila platne rozhodnuti")
+							_log_trade_decision_audit(
+								service_folder,
+								strategy_id=chaotic_context.strategy_id,
+								strategy_label="chaotic",
+								stage="strategy_blocked",
+								trade_executed=False,
+								reason="chaotic_ollama_no_decision",
+							)
+						elif _attempt_chaotic_trade(
+							candidate=chaotic_candidate,
+							predictions_folder=chaotic_predictions_folder,
+							source_folder=chaotic_source_folder,
+							service_folder=service_folder,
+							account_state=account_state,
+						):
+							print("\n" + "=" * 60)
+							print("✅ Final Trading Decision Completed (Chaotic)")
+							print("=" * 60)
+							return True
 		else:
 			print("ℹ️  Chaotic strategie: vypnuta (CHAOTIC_STRATEGY_ENABLED neni true v prostredi procesu)")
 			_log_trade_decision_audit(
