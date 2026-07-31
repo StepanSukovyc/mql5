@@ -1588,8 +1588,10 @@ def _attempt_chaotic_trade(
 	account_state: Dict,
 ) -> bool:
 	context = get_chaotic_strategy_context()
+	print(f"🎯 Chaotic strategie: kandidat {candidate.symbol} {candidate.action}")
 	is_valid, error_message = validate_symbol(candidate.symbol)
 	if not is_valid:
+		print(f"⚠️  Chaotic strategie: symbol neprosel validaci: {error_message}")
 		_log_trade_decision_audit(
 			service_folder,
 			strategy_id=context.strategy_id,
@@ -1606,6 +1608,7 @@ def _attempt_chaotic_trade(
 
 	market_data = _load_market_data_for_symbol(predictions_folder, candidate.symbol, service_folder_fallback=service_folder)
 	if market_data is None:
+		print(f"⚠️  Chaotic strategie: chybi market data pro {candidate.symbol}")
 		_log_trade_decision_audit(
 			service_folder,
 			strategy_id=context.strategy_id,
@@ -1626,6 +1629,10 @@ def _attempt_chaotic_trade(
 		market_data=market_data,
 	)
 	if resolved is None:
+		print(
+			"⚠️  Chaotic strategie: nelze pripravit TP-only obchod "
+			"(ATR, minimalni lot nebo marzovy rozpocet nevyhovuji)"
+		)
 		_log_trade_decision_audit(
 			service_folder,
 			strategy_id=context.strategy_id,
@@ -1640,6 +1647,11 @@ def _attempt_chaotic_trade(
 		return False
 
 	lot_size, take_profit, parameter_log = resolved
+	print(
+		f"📐 Chaotic strategie: lot {lot_size}, TP {take_profit}, "
+		f"odhadovana marze {parameter_log['estimated_required_margin']:.2f}/"
+		f"rozpocet {parameter_log['margin_budget']:.2f}"
+	)
 	if execute_trade(
 		candidate.symbol,
 		candidate.action,
@@ -1666,6 +1678,7 @@ def _attempt_chaotic_trade(
 		)
 		return True
 
+	print("⚠️  Chaotic strategie: broker nebo kontrola marze odmitly prikaz")
 	_log_trade_decision_audit(
 		service_folder,
 		strategy_id=context.strategy_id,
