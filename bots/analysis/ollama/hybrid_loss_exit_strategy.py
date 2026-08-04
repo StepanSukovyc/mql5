@@ -332,10 +332,29 @@ def _get_equity(account_info: Optional[dict[str, Any]]) -> float:
 	return float(getattr(account, "equity", 0.0) or 0.0) if account is not None else 0.0
 
 
+def _get_free_margin_percent(account_info: Optional[dict[str, Any]]) -> float:
+	"""Return actual free margin as a percentage of the account balance."""
+	if account_info is not None:
+		balance = float(account_info.get("raw_balance", account_info.get("balance", 0.0)) or 0.0)
+		free_margin = float(account_info.get("raw_margin_free", account_info.get("margin_free", 0.0)) or 0.0)
+	else:
+		account = mt5.account_info()
+		if account is None:
+			return 0.0
+		balance = float(getattr(account, "balance", 0.0) or 0.0)
+		free_margin = float(getattr(account, "margin_free", 0.0) or 0.0)
+	if balance <= 0:
+		return 0.0
+	return (free_margin / balance) * 100.0
+
+
 def run_hybrid_loss_exit_strategy_if_due(account_info: Optional[dict[str, Any]] = None) -> None:
 	"""Evaluate internal loss exits. Live close remains disabled by default."""
 	global _LAST_EVALUATED_AT
 	if not _get_bool("HYBRID_EXIT_ENABLED", False):
+		return
+	maximum_free_margin_percent = _get_float("HYBRID_EXIT_MAX_FREE_MARGIN_PERCENT", 5.0)
+	if _get_free_margin_percent(account_info) >= maximum_free_margin_percent:
 		return
 	now_utc = datetime.now(timezone.utc)
 	interval = timedelta(minutes=_get_int("HYBRID_EXIT_CHECK_INTERVAL_MINUTES", 15, 1))

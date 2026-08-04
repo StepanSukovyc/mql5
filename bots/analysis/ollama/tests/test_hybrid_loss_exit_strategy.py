@@ -33,6 +33,22 @@ class HybridLossExitStrategyTests(unittest.TestCase):
 		self.assertTrue(candidate.legacy)
 		self.assertEqual(candidate.decision, "legacy_excluded")
 
+	def test_free_margin_percent_prefers_actual_account_values(self) -> None:
+		self.assertEqual(
+			hybrid._get_free_margin_percent(
+				{"balance": 7000.0, "margin_free": 500.0, "raw_balance": 10000.0, "raw_margin_free": 400.0}
+			),
+			4.0,
+		)
+
+	@patch.dict(os.environ, {"HYBRID_EXIT_ENABLED": "true", "HYBRID_EXIT_MAX_FREE_MARGIN_PERCENT": "5"}, clear=False)
+	@patch("hybrid_loss_exit_strategy.mt5.positions_get")
+	def test_high_free_margin_skips_evaluation_without_consuming_interval(self, mock_positions) -> None:
+		hybrid.run_hybrid_loss_exit_strategy_if_due({"raw_balance": 10000.0, "raw_margin_free": 500.0})
+
+		mock_positions.assert_not_called()
+		self.assertIsNone(hybrid._LAST_EVALUATED_AT)
+
 	@patch.dict(os.environ, {"HYBRID_EXIT_ENABLED": "true", "HYBRID_EXIT_DRY_RUN": "true", "HYBRID_EXIT_ANALYSIS_START_DATE": "2026-08-01", "HYBRID_EXIT_TIMEZONE": "Europe/Prague", "HYBRID_EXIT_CHECK_INTERVAL_MINUTES": "1"}, clear=False)
 	@patch("hybrid_loss_exit_strategy.close_position_by_ticket")
 	@patch("hybrid_loss_exit_strategy._market_reason_codes", return_value=(["h1_new_low", "h1_close_below_ema20"], {}))
