@@ -155,7 +155,7 @@ def _get_state_path(service_folder: Optional[Path]) -> Path:
 	return state_dir / STATE_FILE_NAME
 
 
-def _load_state(service_folder: Optional[Path]) -> dict[str, dict[str, float]]:
+def _load_state(service_folder: Optional[Path]) -> dict[str, dict[str, Any]]:
 	state_path = _get_state_path(service_folder)
 	if not state_path.exists():
 		return {}
@@ -166,7 +166,7 @@ def _load_state(service_folder: Optional[Path]) -> dict[str, dict[str, float]]:
 		return {}
 
 
-def _save_state(service_folder: Optional[Path], state: dict[str, dict[str, float]]) -> None:
+def _save_state(service_folder: Optional[Path], state: dict[str, dict[str, Any]]) -> None:
 	state_path = _get_state_path(service_folder)
 	state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -283,6 +283,11 @@ def run_profit_protection_strategy_if_due() -> None:
 	max_hold_days = _get_max_hold_days()
 	dry_run = _get_dry_run()
 	updated_state = dict(state)
+	open_tickets = {
+		int(getattr(position, "ticket", 0) or 0)
+		for position in positions
+		if int(getattr(position, "ticket", 0) or 0) > 0
+	}
 
 	for position in positions:
 		strategy_context = get_profit_protection_context_for_position(position)
@@ -313,6 +318,9 @@ def run_profit_protection_strategy_if_due() -> None:
 			"max_net_profit": max_net_profit,
 			"current_net_profit": net_profit,
 			"locked_net_profit": locked_net_profit,
+			"last_observed_at_utc": now_utc.isoformat(),
+			"symbol": str(getattr(position, "symbol", "")),
+			"strategy_id": strategy_context.strategy_id,
 		}
 
 		close_reason: Optional[str] = None
@@ -361,6 +369,17 @@ def run_profit_protection_strategy_if_due() -> None:
 			message=message,
 		)
 		if closed:
+			updated_state.pop(state_key, None)
+
+	# State is only meaningful while its MT5 ticket remains open. Keeping old
+	# tickets made the file look stale even while the strategy was healthy.
+	for state_key in list(updated_state):
+		try:
+			ticket = int(state_key.rsplit(":", maxsplit=1)[1])
+		except (IndexError, ValueError):
+			updated_state.pop(state_key, None)
+			continue
+		if ticket not in open_tickets:
 			updated_state.pop(state_key, None)
 
 	_save_state(service_folder, updated_state)

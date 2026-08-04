@@ -10,6 +10,7 @@ from typing import Optional
 
 from account_state import get_account_state
 from hybrid_loss_exit_strategy import run_hybrid_loss_exit_strategy_if_due
+from profit_cleanup_strategy import run_profit_cleanup_strategy_if_due
 from profit_protection_strategy import run_profit_protection_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
 from reversal_pattern_strategy import is_reversal_strategy_enabled
@@ -172,6 +173,7 @@ def run_position_management_monitor(check_interval_seconds: int = 60, stop_event
 					raw_margin_free=account_info.get("raw_margin_free"),
 				)
 				run_profit_protection_strategy_if_due()
+				run_profit_cleanup_strategy_if_due(account_info)
 				run_swap_rollover_cleanup_strategy_if_due(account_info)
 				run_hybrid_loss_exit_strategy_if_due(account_info)
 			except Exception as exc:
@@ -230,6 +232,7 @@ def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: 
 				print_account_status(account_info)
 				if run_management_tasks:
 					run_profit_protection_strategy_if_due()
+					run_profit_cleanup_strategy_if_due(account_info)
 					run_swap_rollover_cleanup_strategy_if_due(account_info)
 					run_hybrid_loss_exit_strategy_if_due(account_info)
 				
