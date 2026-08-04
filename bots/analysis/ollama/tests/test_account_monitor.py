@@ -78,14 +78,12 @@ class AccountMonitorTests(unittest.TestCase):
 
 	@patch("account_monitor.run_hybrid_loss_exit_strategy_if_due")
 	@patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due")
-	@patch("account_monitor.run_profit_cleanup_strategy_if_due")
 	@patch("account_monitor.run_profit_protection_strategy_if_due")
 	@patch("account_monitor.get_account_state_snapshot")
 	def test_position_management_monitor_writes_heartbeat_log(
 		self,
 		mock_get_account_state_snapshot,
 		mock_profit_protection,
-		mock_profit_cleanup,
 		mock_swap_cleanup,
 		mock_hybrid_exit,
 	) -> None:
@@ -111,7 +109,6 @@ class AccountMonitorTests(unittest.TestCase):
 		self.assertTrue(any(entry["event"] == "position_management_monitor_tick" for entry in entries))
 		self.assertTrue(any(entry["event"] == "position_management_monitor_stopped" for entry in entries))
 		mock_profit_protection.assert_called()
-		mock_profit_cleanup.assert_called()
 		mock_swap_cleanup.assert_called()
 		mock_hybrid_exit.assert_called()
 
