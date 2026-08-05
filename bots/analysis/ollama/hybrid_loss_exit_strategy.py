@@ -1,4 +1,4 @@
-"""Deterministic internal exit management for eligible losing positions."""
+"""Deterministic internal exit management for chaotic losing positions."""
 
 from __future__ import annotations
 
@@ -17,13 +17,6 @@ import MetaTrader5 as mt5
 from market_data import exponential_moving_average
 from strategy_context import (
 	get_chaotic_strategy_context,
-	get_index_strategy_context,
-	get_ollama_cloud_strategy_context,
-	get_parallel_strategy_context,
-	get_primary_strategy_context,
-	get_quant_strategy_context,
-	get_reversal_strategy_context,
-	get_scalping_strategy_context,
 	position_belongs_to_strategy,
 )
 from swap_rollover import get_swap_block_window
@@ -158,25 +151,13 @@ def calculate_active_market_age(opened_at: datetime, now_utc: datetime) -> tuple
 def _age_band(active_age_hours: float) -> str:
 	if active_age_hours < _get_int("HYBRID_EXIT_YOUNG_HOURS", 24, 1):
 		return "young"
-	if active_age_hours < _get_int("HYBRID_EXIT_OLD_HOURS", 72, 1):
+	if active_age_hours < _get_int("HYBRID_EXIT_OLD_HOURS", 48, 1):
 		return "middle"
 	return "old"
 
 
 def _belongs_to_managed_strategy(position: Any) -> bool:
-	comment = str(position.get("comment", "") if isinstance(position, dict) else getattr(position, "comment", "") or "").strip()
-	magic = int(position.get("magic", 0) if isinstance(position, dict) else getattr(position, "magic", 0) or 0)
-	if not comment:
-		return _get_bool("HYBRID_EXIT_MANAGE_MANUAL_POSITIONS", False) and magic == 0
-
-	contexts = [
-		get_primary_strategy_context(), get_parallel_strategy_context(), get_reversal_strategy_context(),
-		get_quant_strategy_context(), get_index_strategy_context(), get_ollama_cloud_strategy_context(),
-		get_scalping_strategy_context(), get_chaotic_strategy_context(),
-	]
-	if any(position_belongs_to_strategy(position, context) for context in contexts):
-		return True
-	return False
+	return position_belongs_to_strategy(position, get_chaotic_strategy_context())
 
 
 def _closed_rates(symbol: str, timeframe: int, count: int = 260) -> list[Any]:

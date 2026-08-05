@@ -33,22 +33,16 @@ class HybridLossExitStrategyTests(unittest.TestCase):
 		self.assertTrue(candidate.legacy)
 		self.assertEqual(candidate.decision, "legacy_excluded")
 
-	@patch.dict(os.environ, {"HYBRID_EXIT_MANAGE_MANUAL_POSITIONS": "false"}, clear=False)
-	def test_uncommented_manual_position_is_not_hybrid_eligible(self) -> None:
-		position = SimpleNamespace(ticket=11, symbol="EURUSD_ecn", type=0, volume=0.01, magic=0, comment="", profit=-2.0, swap=0.0, time=int(datetime(2026, 8, 2, tzinfo=timezone.utc).timestamp()))
+	def test_only_chaotic_positions_are_hybrid_eligible(self) -> None:
+		parallel = SimpleNamespace(ticket=11, symbol="EURUSD_ecn", type=0, volume=0.01, magic=234200, comment="ga:parallel_mean_reversion", profit=-2.0, swap=0.0, time=int(datetime(2026, 8, 2, tzinfo=timezone.utc).timestamp()))
+		chaotic = SimpleNamespace(ticket=12, symbol="EURUSD_ecn", type=0, volume=0.01, magic=234700, comment="ga:chaotic", profit=-2.0, swap=0.0, time=int(datetime(2026, 8, 2, tzinfo=timezone.utc).timestamp()))
 
-		candidate = hybrid._build_candidate(position, datetime(2026, 8, 5, tzinfo=timezone.utc), datetime(2026, 8, 1, tzinfo=timezone.utc))
+		parallel_candidate = hybrid._build_candidate(parallel, datetime(2026, 8, 5, tzinfo=timezone.utc), datetime(2026, 8, 1, tzinfo=timezone.utc))
+		chaotic_candidate = hybrid._build_candidate(chaotic, datetime(2026, 8, 5, tzinfo=timezone.utc), datetime(2026, 8, 1, tzinfo=timezone.utc))
 
-		self.assertFalse(candidate.eligible)
-		self.assertEqual(candidate.decision, "ineligible")
-
-	@patch.dict(os.environ, {"HYBRID_EXIT_MANAGE_MANUAL_POSITIONS": "true"}, clear=False)
-	def test_manual_position_requires_explicit_hybrid_opt_in(self) -> None:
-		position = SimpleNamespace(ticket=12, symbol="EURUSD_ecn", type=0, volume=0.01, magic=0, comment="", profit=-2.0, swap=0.0, time=int(datetime(2026, 8, 2, tzinfo=timezone.utc).timestamp()))
-
-		candidate = hybrid._build_candidate(position, datetime(2026, 8, 5, tzinfo=timezone.utc), datetime(2026, 8, 1, tzinfo=timezone.utc))
-
-		self.assertTrue(candidate.eligible)
+		self.assertFalse(parallel_candidate.eligible)
+		self.assertEqual(parallel_candidate.decision, "ineligible")
+		self.assertTrue(chaotic_candidate.eligible)
 
 	def test_free_margin_percent_prefers_actual_account_values(self) -> None:
 		self.assertEqual(
@@ -73,7 +67,7 @@ class HybridLossExitStrategyTests(unittest.TestCase):
 	@patch("hybrid_loss_exit_strategy.get_swap_block_window")
 	def test_dry_run_never_sends_close(self, mock_window, mock_positions, _mock_market, mock_close) -> None:
 		mock_window.return_value = SimpleNamespace(contains=lambda _now: False)
-		mock_positions.return_value = (SimpleNamespace(ticket=2, symbol="EURUSD_ecn", type=0, volume=0.01, magic=234200, comment="ga:parallel_mean_reversion", profit=-5.0, swap=0.0, time=int(datetime(2026, 8, 1, tzinfo=timezone.utc).timestamp())),)
+		mock_positions.return_value = (SimpleNamespace(ticket=2, symbol="EURUSD_ecn", type=0, volume=0.01, magic=234700, comment="ga:chaotic", profit=-5.0, swap=0.0, time=int(datetime(2026, 8, 1, tzinfo=timezone.utc).timestamp())),)
 
 		hybrid.run_hybrid_loss_exit_strategy_if_due()
 
@@ -86,7 +80,7 @@ class HybridLossExitStrategyTests(unittest.TestCase):
 	@patch("hybrid_loss_exit_strategy.get_swap_block_window")
 	def test_emergency_loss_is_selected_without_market_data(self, mock_window, mock_positions, mock_market, mock_log) -> None:
 		mock_window.return_value = SimpleNamespace(contains=lambda _now: False)
-		mock_positions.return_value = (SimpleNamespace(ticket=3, symbol="EURUSD_ecn", type=0, volume=0.01, magic=234200, comment="ga:parallel_mean_reversion", profit=-20.0, swap=0.0, time=int(datetime(2026, 8, 1, tzinfo=timezone.utc).timestamp())),)
+		mock_positions.return_value = (SimpleNamespace(ticket=3, symbol="EURUSD_ecn", type=0, volume=0.01, magic=234700, comment="ga:chaotic", profit=-20.0, swap=0.0, time=int(datetime(2026, 8, 1, tzinfo=timezone.utc).timestamp())),)
 
 		hybrid.run_hybrid_loss_exit_strategy_if_due({"equity": 1000.0})
 
