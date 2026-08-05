@@ -7,7 +7,7 @@ import json
 import os
 import uuid
 from dataclasses import asdict, dataclass
-from datetime import date, datetime, time, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone, tzinfo
 from pathlib import Path
 from typing import Any, Optional
 from zoneinfo import ZoneInfo
@@ -83,12 +83,17 @@ def _get_float(name: str, default: float, minimum: float = 0.0) -> float:
 		return default
 
 
-def _get_timezone() -> ZoneInfo:
+def _get_timezone() -> tzinfo:
 	name = os.getenv("HYBRID_EXIT_TIMEZONE", "Europe/Prague")
 	try:
 		return ZoneInfo(name)
 	except Exception:
-		return ZoneInfo("Europe/Prague")
+		try:
+			import pytz
+
+			return pytz.timezone(name)
+		except Exception:
+			return timezone.utc
 
 
 def _get_analysis_start_utc() -> datetime:
@@ -159,6 +164,11 @@ def _age_band(active_age_hours: float) -> str:
 
 
 def _belongs_to_managed_strategy(position: Any) -> bool:
+	comment = str(position.get("comment", "") if isinstance(position, dict) else getattr(position, "comment", "") or "").strip()
+	magic = int(position.get("magic", 0) if isinstance(position, dict) else getattr(position, "magic", 0) or 0)
+	if not comment:
+		return _get_bool("HYBRID_EXIT_MANAGE_MANUAL_POSITIONS", False) and magic == 0
+
 	contexts = [
 		get_primary_strategy_context(), get_parallel_strategy_context(), get_reversal_strategy_context(),
 		get_quant_strategy_context(), get_index_strategy_context(), get_ollama_cloud_strategy_context(),
@@ -166,7 +176,7 @@ def _belongs_to_managed_strategy(position: Any) -> bool:
 	]
 	if any(position_belongs_to_strategy(position, context) for context in contexts):
 		return True
-	return _get_bool("HYBRID_EXIT_MANAGE_MANUAL_POSITIONS", False) and int(getattr(position, "magic", 0) or 0) == 0
+	return False
 
 
 def _closed_rates(symbol: str, timeframe: int, count: int = 260) -> list[Any]:
