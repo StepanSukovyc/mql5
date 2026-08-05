@@ -76,7 +76,7 @@ class AccountMonitorTests(unittest.TestCase):
 
 		self.assertTrue(check_stop_condition(account_info))
 
-	@patch("account_monitor.run_loss_cleanup_strategy_if_due")
+	@patch("account_monitor.run_hybrid_loss_exit_strategy_if_due")
 	@patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due")
 	@patch("account_monitor.run_profit_protection_strategy_if_due")
 	@patch("account_monitor.get_account_state_snapshot")
@@ -85,7 +85,7 @@ class AccountMonitorTests(unittest.TestCase):
 		mock_get_account_state_snapshot,
 		mock_profit_protection,
 		mock_swap_cleanup,
-		mock_loss_cleanup,
+		mock_hybrid_exit,
 	) -> None:
 		mock_get_account_state_snapshot.return_value = {
 			"timestamp": "2026-05-22T13:00:00+00:00",
@@ -110,7 +110,7 @@ class AccountMonitorTests(unittest.TestCase):
 		self.assertTrue(any(entry["event"] == "position_management_monitor_stopped" for entry in entries))
 		mock_profit_protection.assert_called()
 		mock_swap_cleanup.assert_called()
-		mock_loss_cleanup.assert_called()
+		mock_hybrid_exit.assert_called()
 
 
 if __name__ == "__main__":

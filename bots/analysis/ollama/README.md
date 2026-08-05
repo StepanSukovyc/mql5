@@ -49,21 +49,12 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Pokud je čistý zisk alespoň `0.10 USD`, pozice je vhodná k uzavření kvůli vyhnutí se swapu
   - Audit log zapisuje i skip/no-candidate průchody, takže je vidět, zda strategie byla mimo okno nebo uvnitř okna nic nenašla
   - Přepínač `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
-10. **Denní loss cleanup** (`LOSS_CLEANUP_STRATEGY_ENABLED`, default `true`):
-  - Spustí se nejvýše jednou za pražský den po čase `LOSS_CLEANUP_STRATEGY_HOUR:LOSS_CLEANUP_STRATEGY_MINUTE` (default `12:45`)
-  - Použije realizovaný výsledek za předchozí uzavřený pražský den z historie MT5 dealů jako `profit + swap + commission + actual deal.fee`
-  - Pro diagnostiku dál loguje i `daily_clean_profit`, tedy čistý součet `profit` jen z uzavřených pozic referenčního dne podle `position_id`
-  - Tento údaj není totéž jako aktuální floating P/L otevřených pozic v panelu Obchodování
-  - Modelový poplatek `0.10 USD` za každých `0.01` lotu se nepoužívá pro `daily_realized_profit`; používá se jen při hodnocení ztráty kandidátní otevřené pozice
-  - K realizovanému výsledku z předchozího dne přičte jen záporný aktuální open P/L (`equity - raw_balance`), aby nezavíral další ztrátu v momentě, kdy jsou otevřené pozice už celkově v mínusu
-  - Od takto upraveného bezpečného rozpočtu odečte `LOSS_CLEANUP_BALANCE_BUFFER_PERCENT` % z aktuální bilance účtu a získá limit `Z` (default `2`)
-  - Z otevřených pozic starších než 7 dní najde největší ztrátovou pozici, jejíž ztráta včetně swapu a poplatku `0.10 USD` za každých `0.01` lotu je stále menší než `Z`
-  - Zároveň kandidáta odmítne, pokud by po jeho uzavření klesl tento bezpečný rozpočet pod `0.00`
-  - Pokud mají dva bezpeční kandidáti stejnou ztrátu, ponechá první nalezenou pozici
-  - Pokud taková pozice existuje, uzavře ji; jinak neudělá nic
-  - Stavový soubor `trade_logs/loss_cleanup_state.json` brání tomu, aby se po restartu proces spustil vícekrát ve stejný pražský den
-  - V čase swap blokovacího okna se cleanup nespouští stejně jako běžné obchodování
-  - Přepínač `LOSS_CLEANUP_STRATEGY_DRY_RUN` (default `true`) vypíše kandidáta a zaloguje akci, ale pozici skutečně nezavře
+10. **Hybridní interní exit ztrátových pozic** (`HYBRID_EXIT_ENABLED`):
+  - Je jediným automatickým loss-exit mechanismem; denní, týdenní a měsíční cleanup strategie byly odstraněny.
+  - Smí vyhodnocovat pouze pozice otevřené od `HYBRID_EXIT_ANALYSIS_START_DATE` v časovém pásmu `HYBRID_EXIT_TIMEZONE`; starší pozice nikdy nezavírá.
+  - Stáří počítá v aktivních obchodních hodinách, takže víkend mezi pátkem 23:00 a nedělí 23:00 Prague time pozici neuměle nezestárne.
+  - U staré ztrátové pozice mimo break-even buffer vyžaduje alespoň dva negativní signály z uzavřených H1/H4 svíček.
+  - `HYBRID_EXIT_DRY_RUN=true` pouze zapisuje rozhodnutí do `hybrid_loss_exit.csv` a `hybrid_loss_exit_events.jsonl`; neposílá close pokyn.
 11. **Provede obchod** na MT5 podle aktivního režimu
 12. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
 13. **Vrátí se na krok 3** (restart monitoring)
@@ -181,11 +172,16 @@ SWAP_BLOCK_END_HOUR=23
 SWAP_BLOCK_END_MINUTE=30
 # SWAP_ROLLOVER_LOOKBACK_DAYS=14
 # SWAP_BLOCK_HALF_WINDOW_MINUTES=30
-LOSS_CLEANUP_STRATEGY_ENABLED=true
-LOSS_CLEANUP_STRATEGY_HOUR=12
-LOSS_CLEANUP_STRATEGY_MINUTE=45
-LOSS_CLEANUP_BALANCE_BUFFER_PERCENT=2
-LOSS_CLEANUP_STRATEGY_DRY_RUN=true
+HYBRID_EXIT_ENABLED=true
+HYBRID_EXIT_DRY_RUN=true
+HYBRID_EXIT_ANALYSIS_START_DATE=2026-08-01
+HYBRID_EXIT_TIMEZONE=Europe/Prague
+HYBRID_EXIT_CHECK_INTERVAL_MINUTES=15
+HYBRID_EXIT_YOUNG_HOURS=24
+HYBRID_EXIT_OLD_HOURS=72
+HYBRID_EXIT_BREAK_EVEN_BUFFER_USD=0.20
+HYBRID_EXIT_MAX_CLOSES_PER_CYCLE=1
+HYBRID_EXIT_MANAGE_MANUAL_POSITIONS=false
 
 # Ollama service konfigurace (nezávislé predikce)
 OLLAMA_ENABLED=true
@@ -322,7 +318,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
 - **profit_cleanup_strategy.py** - Volitelná minutová strategie pro uzavírání všech otevřených profitních pozic, které překročí svůj vypočtený limit `PCZ`
 - **verify_profit_cleanup_strategy.py** - Lokální validační skript pro výpočet `VOLUME`, `ZISK` a `PCZ` na zadaných scénářích
-- **loss_cleanup_strategy.py** - Volitelná hodinová strategie pro uzavření jedné starší ztrátové pozice podle limitu `Z`
+- **hybrid_loss_exit_strategy.py** - Jediný interní exit pro způsobilé ztrátové pozice; používá aktivní tržní stáří a uzavřené H1/H4 svíčky
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
 - **ollama_service.py** - Paralelní služba generující predikce pomocí lokálního Ollama AI (běží v samostatném threadu)
@@ -334,11 +330,11 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json` - Finální rozhodnutí
 - `<SERVICE_DEST_FOLDER>/ollama/predikce/{symbol}.json` - Předchystané Ollama predikce (použitelné v hlavní logice při stáří <= 1h)
 - `<SERVICE_DEST_FOLDER>/trade_logs/profit_cleanup.csv` - Audit minutové profit cleanup strategie včetně `B`, referenčního `VOLUME`, `ZISK`, `PCZ` a výsledku close pokusu
-- `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup.csv` - Audit hodinové cleanup strategie včetně hodnot `daily_clean_profit`, `daily_realized_profit`, `Z` a případně uzavřené pozice
-- `<SERVICE_DEST_FOLDER>/trade_logs/loss_cleanup_daily_deals.csv` - Diagnostický snapshot všech dealů, které MT5 API při cleanup běhu skutečně vrátilo, včetně `actual_fee`, `modeled_fee` a `realized_component`
+- `<SERVICE_DEST_FOLDER>/trade_logs/hybrid_loss_exit.csv` - Přehled rozhodnutí hybridu a případných close pokusů
+- `<SERVICE_DEST_FOLDER>/trade_logs/hybrid_loss_exit_events.jsonl` - Strukturované market snapshoty a reason codes rozhodnutí
+- `<SERVICE_DEST_FOLDER>/trade_logs/hybrid_loss_exit_outcomes.jsonl` - Výsledek kandidátů po nakonfigurovaných horizontech 24/48 hodin
 - Dokud testujete, nechte `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
-- Dokud testujete, nechte `LOSS_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
-- `LOSS_CLEANUP_BALANCE_BUFFER_PERCENT=2` určuje, jak velkou část aktuální raw bilance má loss cleanup ponechat jako bezpečnostní rezervu před zavřením ztrátové pozice
+- Dokud testujete, nechte `HYBRID_EXIT_DRY_RUN=true`; po vyhodnocení diagnostických outcome logů změňte na `false`
 
 ## Poznamky
 

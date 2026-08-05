@@ -302,44 +302,11 @@ Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
 ## Správa ztrátových pozic
 
-Runtime obsahuje jednu aktivní strategii pro čištění starých ztrátových pozic a dvě deaktivované legacy vrstvy.
+`hybrid_loss_exit_strategy.py` je jediný automatický loss-exit mechanismus. Denní `loss_cleanup_strategy.py`, týdenní `weekly_surplus_cleanup_strategy.py` a měsíční `monthly_loss_cleanup_strategy.py` byly odstraněny spolu s jejich konfigurací.
 
-### Týdenní surplus cleanup (`weekly_surplus_cleanup_strategy.py`) — **aktivní**
+Hybrid vyhodnocuje pouze ztrátové pozice otevřené od `HYBRID_EXIT_ANALYSIS_START_DATE`; starší pozice jsou vždy `legacy_excluded`. Analýza běží nejdříve po uplynutí `HYBRID_EXIT_CHECK_INTERVAL_MINUTES` (výchozí 15 minut) a pouze pokud je skutečná volná marže `raw_margin_free / raw_balance` nižší než `HYBRID_EXIT_MAX_FREE_MARGIN_PERCENT` (výchozí 5 %). Pokud marže limit nesplňuje, interval se nespotřebuje a hybrid se vyhodnotí při nejbližším dalším monitoringu po jejím poklesu pod limit. Stáří je počítáno v aktivních obchodních hodinách s výjimkou konfigurovaného FX víkendu. Stará pozice mimo break-even buffer může být uzavřena až při alespoň dvou negativních reason codes z uzavřených H1/H4 svíček. Výchozí `HYBRID_EXIT_DRY_RUN=true` jen loguje rozhodnutí.
 
-- Spouští se jednou za ISO týden v nakonfigurovaný den (výchozí pátek) a hodinu UTC (výchozí 15:00)
-- Počítá realizovaný P&L celého týdne: pondělí 00:00 UTC → čas spuštění (profit + swap + commission + fee z closing deals)
-- **Minimální příjem** = `WEEKLY_CLEANUP_MIN_PROFIT_USD` (fixní USD), nebo auto: `TRADING_ACCOUNT_BALANCE_CAP × WEEKLY_CLEANUP_MIN_INCOME_PERCENT / 100` (výchozí 10 %)
-- Pokud `týdenní_zisk < minimum` → přeskočí bez jakékoli akce (minimum je vždy chráněno)
-- Pokud `týdenní_zisk ≥ minimum`: `surplus = týdenní_zisk − minimum` = budget na cleanup
-- Kandidáti: otevřené pozice starší než `WEEKLY_CLEANUP_MIN_POSITION_AGE_DAYS` dní (výchozí 7), ve ztrátě
-- Řazení: nejstarší první, při shodě nejmenší ztráta — maximalizuje počet uzavřených pozic ze stejného budgetu
-- Greedy výběr: zavírá pozice dokud budget stačí
-- Může pozici **skutečně uzavřít** (pokud `WEEKLY_CLEANUP_DRY_RUN=false`)
-- Přeskakuje se během swap rollover blok okna
-- Stav (ISO week key) je persistovaný v `trade_logs/weekly_surplus_cleanup_state.json`
-- Logy v `trade_logs/weekly_surplus_cleanup.csv`
-
-### Konfigurace weekly surplus cleanup
-
-| Klíč | Výchozí | Popis |
-|---|---|---|
-| `WEEKLY_CLEANUP_ENABLED` | `true` | Zapnutí/vypnutí |
-| `WEEKLY_CLEANUP_DRY_RUN` | `true` | Bezpečný start — pouze loguje, nezavírá |
-| `WEEKLY_CLEANUP_RUN_WEEKDAY` | `4` | Den spuštění (0=Po … 4=Pá) |
-| `WEEKLY_CLEANUP_RUN_HOUR_UTC` | `15` | Hodina UTC |
-| `WEEKLY_CLEANUP_MIN_PROFIT_USD` | `0` | Fixní minimum v USD (0 = použij % výpočet) |
-| `WEEKLY_CLEANUP_MIN_INCOME_PERCENT` | `10.0` | % z `TRADING_ACCOUNT_BALANCE_CAP` |
-| `WEEKLY_CLEANUP_MIN_POSITION_AGE_DAYS` | `7` | Minimální věk pozice |
-
-### Denní loss-cleanup strategie (`loss_cleanup_strategy.py`) — **deaktivována**
-
-- `LOSS_CLEANUP_STRATEGY_ENABLED=false`
-- Nahrazena týdenní surplus cleanup strategií
-
-### Měsíční rolling advisory strategie (`monthly_loss_cleanup_strategy.py`) — **deaktivována**
-
-- `MONTHLY_LOSS_CLEANUP_ENABLED=false`
-- Nahrazena týdenní surplus cleanup strategií
+Detailní audit zapisuje `trade_logs/hybrid_loss_exit.csv` a `trade_logs/hybrid_loss_exit_events.jsonl`.
 
 ## Logy a stavové soubory
 
@@ -356,10 +323,8 @@ Runtime zapisuje více specializovaných logů:
 - `trade_logs/reversal_strategy_status.csv`
 - `trade_logs/quant_strategy_status.csv`
 - `trade_logs/scalping_position_state.json`
-- `trade_logs/weekly_surplus_cleanup.csv`
-- `trade_logs/weekly_surplus_cleanup_state.json`
-- `trade_logs/monthly_loss_cleanup_recommendations.json`
-- `trade_logs/monthly_loss_cleanup_state.json`
+- `trade_logs/hybrid_loss_exit.csv`
+- `trade_logs/hybrid_loss_exit_events.jsonl`
 
 Význam nových CSV souborů:
 
