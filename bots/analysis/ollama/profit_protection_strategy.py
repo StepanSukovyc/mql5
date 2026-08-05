@@ -20,7 +20,6 @@ from strategy_context import (
 	get_primary_strategy_context,
 	get_quant_strategy_context,
 	get_reversal_strategy_context,
-	get_scalping_strategy_context,
 	position_belongs_to_strategy,
 )
 from swap_rollover import get_swap_block_window
@@ -207,7 +206,7 @@ def calculate_profit_protection_locked_profit_usd(max_net_profit: float, activat
 
 
 def get_profit_protection_contexts() -> list[StrategyContext]:
-	"""Return every strategy whose profitable positions profit protection manages."""
+	"""Return strategies managed by the generic profit-protection exit."""
 	return [
 		get_primary_strategy_context(),
 		get_parallel_strategy_context(),
@@ -215,12 +214,25 @@ def get_profit_protection_contexts() -> list[StrategyContext]:
 		get_quant_strategy_context(),
 		get_index_strategy_context(),
 		get_ollama_cloud_strategy_context(),
-		get_scalping_strategy_context(),
 		get_chaotic_strategy_context(),
 	]
 
 
+def _get_position_take_profit(position: Any) -> float:
+	if isinstance(position, dict):
+		value = position.get("tp", position.get("take_profit", 0.0))
+	else:
+		value = getattr(position, "tp", 0.0)
+	try:
+		return float(value or 0.0)
+	except (TypeError, ValueError):
+		return 0.0
+
+
 def get_profit_protection_context_for_position(position: Any) -> Optional[StrategyContext]:
+	# A broker-side TP owns the profitable exit for this position.
+	if _get_position_take_profit(position) > 0:
+		return None
 	for context in get_profit_protection_contexts():
 		if position_belongs_to_strategy(position, context):
 			return context
@@ -302,11 +314,7 @@ def run_profit_protection_strategy_if_due() -> None:
 	max_hold_days = _get_max_hold_days()
 	dry_run = _get_dry_run()
 	updated_state = dict(state)
-	open_tickets = {
-		int(getattr(position, "ticket", 0) or 0)
-		for position in positions
-		if int(getattr(position, "ticket", 0) or 0) > 0
-	}
+	managed_state_keys: set[str] = set()
 
 	for position in positions:
 		strategy_context = get_profit_protection_context_for_position(position)
@@ -316,6 +324,7 @@ def run_profit_protection_strategy_if_due() -> None:
 		ticket = int(getattr(position, "ticket", 0) or 0)
 		if ticket <= 0:
 			continue
+		managed_state_keys.add(f"{strategy_context.strategy_id}:{ticket}")
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
 		if volume <= 0:
 			continue
@@ -390,15 +399,11 @@ def run_profit_protection_strategy_if_due() -> None:
 		if closed:
 			updated_state.pop(state_key, None)
 
-	# State is only meaningful while its MT5 ticket remains open. Keeping old
-	# tickets made the file look stale even while the strategy was healthy.
+	# State is only meaningful while the generic strategy still owns the exit.
+	# This removes peaks for closed positions and for positions moved to a
+	# broker-side TP or scalping-specific management.
 	for state_key in list(updated_state):
-		try:
-			ticket = int(state_key.rsplit(":", maxsplit=1)[1])
-		except (IndexError, ValueError):
-			updated_state.pop(state_key, None)
-			continue
-		if ticket not in open_tickets:
+		if state_key not in managed_state_keys:
 			updated_state.pop(state_key, None)
 
 	_save_state(service_folder, updated_state)

@@ -21,6 +21,8 @@ from reversal_pattern_strategy import can_activate_reversal_strategy, validate_r
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
 from strategy_context import get_index_strategy_context, get_parallel_strategy_context, get_primary_strategy_context, get_quant_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
+from strategy_context import get_scalping_strategy_context
+from swap_rollover_cleanup_strategy import _find_candidates
 
 
 def _build_market_data(
@@ -521,7 +523,7 @@ class ProfitProtectionTests(unittest.TestCase):
 		self.assertEqual(resolved_context.strategy_id, index_context.strategy_id)
 		self.assertTrue(is_position_under_profit_protection(index_position))
 
-	def test_profit_protection_covers_all_registered_strategy_contexts(self) -> None:
+	def test_profit_protection_covers_generic_strategy_contexts_only(self) -> None:
 		contexts = get_profit_protection_contexts()
 
 		self.assertEqual(
@@ -536,13 +538,44 @@ class ProfitProtectionTests(unittest.TestCase):
 				get_quant_strategy_context().strategy_id,
 				get_index_strategy_context().strategy_id,
 				"ollama_cloud_primary",
-				"liquidity_sweep_scalping",
 				"chaotic",
 			},
 		)
 		for context in contexts:
 			position = {"magic": context.magic, "comment": f"ga:{context.strategy_id}"}
 			self.assertTrue(is_position_under_profit_protection(position))
+
+		scalping = get_scalping_strategy_context()
+		self.assertFalse(is_position_under_profit_protection({"magic": scalping.magic}))
+
+	def test_profit_protection_excludes_positions_with_broker_take_profit(self) -> None:
+		primary = get_primary_strategy_context()
+		position = {"magic": primary.magic, "comment": f"ga:{primary.strategy_id}", "tp": 75.804}
+
+		self.assertIsNone(get_profit_protection_context_for_position(position))
+		self.assertFalse(is_position_under_profit_protection(position))
+
+	@patch("swap_rollover_cleanup_strategy.mt5.positions_get")
+	def test_rollover_cleanup_excludes_scalping_positions(self, mock_positions_get) -> None:
+		scalping = get_scalping_strategy_context()
+		mock_positions_get.return_value = [
+			type(
+				"Position",
+				(),
+				{
+					"magic": scalping.magic,
+					"comment": f"ga:{scalping.strategy_id}",
+					"volume": 0.01,
+					"profit": 2.0,
+					"swap": 0.0,
+					"ticket": 123,
+					"symbol": "EURUSD_ecn",
+					"type": 0,
+				},
+			)()
+		]
+
+		self.assertEqual(_find_candidates(5000.0), [])
 
 
 if __name__ == "__main__":

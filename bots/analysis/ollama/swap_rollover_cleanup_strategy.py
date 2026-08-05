@@ -12,6 +12,7 @@ import MetaTrader5 as mt5
 
 from profit_protection_strategy import is_position_under_profit_protection
 from swap_rollover import get_swap_block_window
+from strategy_context import get_scalping_strategy_context, position_belongs_to_strategy
 from trade_execution import close_position_by_ticket
 
 
@@ -154,8 +155,9 @@ def _find_candidates(balance: float) -> list[SwapRolloverCleanupCandidate]:
 		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
 
 	candidates: list[SwapRolloverCleanupCandidate] = []
+	scalping_context = get_scalping_strategy_context()
 	for position in positions:
-		if is_position_under_profit_protection(position):
+		if is_position_under_profit_protection(position) or position_belongs_to_strategy(position, scalping_context):
 			continue
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
 		profit = float(getattr(position, "profit", 0.0) or 0.0)
