@@ -161,3 +161,9 @@ Denní očista:
 uzavři 1-2 nejstarší ztrátové pozice, pokud je účet ten den v realizovaném zisku.
 
 Takový přístup většinou vede k mnohem stabilnější equity křivce než čisté "čekání na návrat", protože řeší hlavní problém těchto strategií: některé obchody se už prostě nevrátí.
+
+## Napad I
+přemýšlím, že bych potřebovl rozhodovacímu mechanizmu chaotic strategii dát nějakým způsobem vědět, jak dopadla jeho dejme tomu posledních 7 rozhodnutí, včetně informaci o tom, co ho vedlo k obchodu až k tomu, jak nakonec ten obchod dopadl, jestli v získu nebo ve ztrátě
+a požádat aby brál tyto informace při dalším rozhodování v potaz...
+
+jde tohle nějak realizovat?
