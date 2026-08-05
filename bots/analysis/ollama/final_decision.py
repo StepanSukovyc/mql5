@@ -1180,6 +1180,14 @@ def _resolve_chaotic_ollama_candidate(
 		payload = json.loads(decision_text)
 	except json.JSONDecodeError:
 		return None
+	if payload.get("tradeable_within_horizon") is not True:
+		return None
+	try:
+		expected_holding_hours = float(payload.get("expected_holding_hours"))
+	except (TypeError, ValueError):
+		return None
+	if not 0 < expected_holding_hours <= _get_int_env("CHAOTIC_TARGET_HORIZON_HOURS", 12, minimum=1):
+		return None
 
 	candidates = _extract_ranked_candidates_from_decision_payload(payload, "chaotic_ollama")
 	if not candidates:

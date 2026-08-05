@@ -11,10 +11,25 @@ from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
-from final_decision import RankedCandidate, _resolve_chaotic_trade_parameters, _resolve_trade_parameters, make_final_trading_decision
+from final_decision import RankedCandidate, _resolve_chaotic_ollama_candidate, _resolve_chaotic_trade_parameters, _resolve_trade_parameters, make_final_trading_decision
 
 
 class FinalDecisionRetryTests(unittest.TestCase):
+	@patch("ollama_advisory.ask_ollama_final_decision", return_value=json.dumps({"tradeable_within_horizon": False, "action": "NO_TRADE"}))
+	@patch("final_decision.record_chaotic_decision")
+	@patch("final_decision.build_chaotic_recent_feedback")
+	def test_chaotic_no_trade_horizon_response_is_not_executable(self, _mock_feedback, mock_record, _mock_ollama) -> None:
+		with tempfile.TemporaryDirectory() as temporary_directory:
+			candidate = _resolve_chaotic_ollama_candidate(
+				predictions=[{"symbol": "EURUSD_ecn", "BUY": 55, "SELL": 45}],
+				open_positions=[],
+				account_state={},
+				service_folder=Path(temporary_directory),
+			)
+
+		self.assertIsNone(candidate)
+		mock_record.assert_not_called()
+
 	@patch.dict(
 		os.environ,
 		{

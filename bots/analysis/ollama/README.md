@@ -182,6 +182,9 @@ HYBRID_EXIT_OLD_HOURS=48
 HYBRID_EXIT_BREAK_EVEN_BUFFER_USD=0.20
 HYBRID_EXIT_MAX_CLOSES_PER_CYCLE=1
 
+# Chaotic advisory opens only setups that it explicitly estimates can reach the ATR-based TP within this horizon.
+CHAOTIC_TARGET_HORIZON_HOURS=12
+
 # Ollama service konfigurace (nezávislé predikce)
 OLLAMA_ENABLED=true
 OLLAMA_URL=http://localhost:11434/api/generate
