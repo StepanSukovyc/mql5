@@ -30,6 +30,7 @@ def ask_ollama_final_decision(
     account_state: Dict,
     *,
     chaotic_mode: bool = False,
+    recent_chaotic_feedback: Optional[Dict] = None,
 ) -> Optional[str]:
     """Ask cloud Ollama for a final trading decision.
 
@@ -82,6 +83,17 @@ def ask_ollama_final_decision(
         if chaotic_mode
         else ""
     )
+    feedback_note = ""
+    if chaotic_mode and recent_chaotic_feedback is not None:
+        feedback_note = (
+            "\n\nZPETNA VAZBA POSLEDNICH UZAVRENYCH CHAOTIC OBCHODU:\n"
+            f"{json.dumps(recent_chaotic_feedback, ensure_ascii=False)}\n"
+            "PRAVIDLA PRO ZPETNOU VAZBU:\n"
+            "- Jde pouze o maly vzorek, ne o dukaz zmeny trhu.\n"
+            "- Neotevirej obchod jen proto, abys dohnal predchozi ztratu.\n"
+            "- Stale vyber pouze kandidata z aktualne dodanych predikci.\n"
+            "- Uved, zda feedback ovlivnil rozhodnuti."
+        )
 
     prompt = f"""Jsi expert obchodni poradce. Na zaklade analyzy ucin finalni obchodni rozhodnutí.
 
@@ -92,7 +104,7 @@ OTEVRENE POZICE:
 {json.dumps(open_positions, indent=2, ensure_ascii=False)}
 
 DOSTUPNE PREDIKCE ({prediction_label}):
-{json.dumps(predictions, indent=2, ensure_ascii=False)}{crypto_note}{mode_note}
+{json.dumps(predictions, indent=2, ensure_ascii=False)}{crypto_note}{mode_note}{feedback_note}
 
 UKOL:
 1. Vyber hlavniho kandidata z dostupnych predikcí.
@@ -101,6 +113,7 @@ UKOL:
 4. Pokud davaji smysl alternativy, vrat i 2 az 3 serazene kandidaty pro fallback.
 5. DIVERZIFIKACE: Preferuj symboly bez otevrenych pozic.
 6. Nerikis lot_size ani take_profit - pouze instrument a smer.
+7. Pri chaotic rezimu vrat navic feedback_assessment a feedback_influenced_decision.
 
 Odpovez POUZE jako JSON bez dalsiho textu:
 

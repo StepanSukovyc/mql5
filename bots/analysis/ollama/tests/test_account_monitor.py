@@ -10,7 +10,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from account_monitor import check_stop_condition, run_position_management_monitor
+from account_monitor import _run_management_tasks, check_stop_condition, run_position_management_monitor
 
 
 class AccountMonitorTests(unittest.TestCase):
@@ -19,6 +19,8 @@ class AccountMonitorTests(unittest.TestCase):
 		{
 			"PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT": "20",
 			"PARALLEL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT": "5",
+			"CHAOTIC_STRATEGY_ENABLED": "false",
+			"TRADING_TRIGGER_MARGIN_THRESHOLD": "15",
 		},
 		clear=False,
 	)
@@ -36,6 +38,8 @@ class AccountMonitorTests(unittest.TestCase):
 		{
 			"PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT": "20",
 			"PARALLEL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT": "5",
+			"CHAOTIC_STRATEGY_ENABLED": "false",
+			"TRADING_TRIGGER_MARGIN_THRESHOLD": "15",
 		},
 		clear=False,
 	)
@@ -79,10 +83,12 @@ class AccountMonitorTests(unittest.TestCase):
 	@patch("account_monitor.run_hybrid_loss_exit_strategy_if_due")
 	@patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due")
 	@patch("account_monitor.run_profit_protection_strategy_if_due")
+	@patch("account_monitor.reconcile_chaotic_trade_outcomes")
 	@patch("account_monitor.get_account_state_snapshot")
 	def test_position_management_monitor_writes_heartbeat_log(
 		self,
 		mock_get_account_state_snapshot,
+		mock_reconcile,
 		mock_profit_protection,
 		mock_swap_cleanup,
 		mock_hybrid_exit,
@@ -111,6 +117,25 @@ class AccountMonitorTests(unittest.TestCase):
 		mock_profit_protection.assert_called()
 		mock_swap_cleanup.assert_called()
 		mock_hybrid_exit.assert_called()
+		mock_reconcile.assert_called()
+
+	@patch("account_monitor.reconcile_chaotic_trade_outcomes")
+	@patch("account_monitor.run_hybrid_loss_exit_strategy_if_due", side_effect=RuntimeError("missing timezone data"))
+	@patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due")
+	@patch("account_monitor.run_profit_protection_strategy_if_due")
+	def test_failed_hybrid_exit_does_not_prevent_profit_protection(
+		self,
+		mock_profit_protection,
+		mock_swap_cleanup,
+		mock_hybrid_exit,
+		mock_reconcile,
+	) -> None:
+		_run_management_tasks({"balance": 5000.0})
+
+		mock_profit_protection.assert_called_once()
+		mock_swap_cleanup.assert_called_once()
+		mock_hybrid_exit.assert_called_once()
+		mock_reconcile.assert_called_once()
 
 
 if __name__ == "__main__":

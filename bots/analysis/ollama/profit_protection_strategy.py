@@ -4,13 +4,25 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
-from strategy_context import StrategyContext, get_index_strategy_context, get_primary_strategy_context, position_belongs_to_strategy
+from strategy_context import (
+	StrategyContext,
+	get_chaotic_strategy_context,
+	get_index_strategy_context,
+	get_ollama_cloud_strategy_context,
+	get_parallel_strategy_context,
+	get_primary_strategy_context,
+	get_quant_strategy_context,
+	get_reversal_strategy_context,
+	get_scalping_strategy_context,
+	position_belongs_to_strategy,
+)
 from swap_rollover import get_swap_block_window
 from trade_execution import close_position_by_ticket
 
@@ -140,7 +152,7 @@ def _get_max_hold_days() -> int:
 
 
 def _get_service_folder() -> Optional[Path]:
-	raw_value = _load_dotenv_value("SERVICE_DEST_FOLDER")
+	raw_value = os.getenv("SERVICE_DEST_FOLDER") or _load_dotenv_value("SERVICE_DEST_FOLDER")
 	if not raw_value:
 		return None
 	return Path(raw_value)
@@ -195,10 +207,17 @@ def calculate_profit_protection_locked_profit_usd(max_net_profit: float, activat
 
 
 def get_profit_protection_contexts() -> list[StrategyContext]:
-	contexts = [get_primary_strategy_context()]
-	if _get_index_strategy_enabled():
-		contexts.append(get_index_strategy_context())
-	return contexts
+	"""Return every strategy whose profitable positions profit protection manages."""
+	return [
+		get_primary_strategy_context(),
+		get_parallel_strategy_context(),
+		get_reversal_strategy_context(),
+		get_quant_strategy_context(),
+		get_index_strategy_context(),
+		get_ollama_cloud_strategy_context(),
+		get_scalping_strategy_context(),
+		get_chaotic_strategy_context(),
+	]
 
 
 def get_profit_protection_context_for_position(position: Any) -> Optional[StrategyContext]:

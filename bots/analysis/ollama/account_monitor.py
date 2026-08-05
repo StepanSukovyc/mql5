@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Optional
 
 from account_state import get_account_state
+from chaotic_trade_feedback import reconcile_chaotic_trade_outcomes
 from hybrid_loss_exit_strategy import run_hybrid_loss_exit_strategy_if_due
 from profit_protection_strategy import run_profit_protection_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
@@ -54,6 +55,22 @@ def _log_position_management_event(event: str, **payload: object) -> None:
 	}
 	with open(log_dir / "position_management_monitor.jsonl", "a", encoding="utf-8") as handle:
 		handle.write(json.dumps(entry, ensure_ascii=False, sort_keys=True, default=str) + "\n")
+
+
+def _run_management_tasks(account_info: dict) -> None:
+	"""Run independent position-management tasks without letting one disable the others."""
+	tasks = (
+		("profit_protection", run_profit_protection_strategy_if_due),
+		("swap_rollover_cleanup", lambda: run_swap_rollover_cleanup_strategy_if_due(account_info)),
+		("hybrid_loss_exit", lambda: run_hybrid_loss_exit_strategy_if_due(account_info)),
+		("chaotic_trade_feedback", lambda: reconcile_chaotic_trade_outcomes(Path(os.environ.get("SERVICE_DEST_FOLDER", ".")))),
+	)
+	for task_name, task in tasks:
+		try:
+			task()
+		except Exception as exc:
+			_log_position_management_event("position_management_task_error", task=task_name, error=str(exc))
+			print(f"❌ Position management task {task_name} failed: {exc}")
 
 def get_account_state_snapshot() -> dict:
 	"""Get current account status: balance, equity, margin, available margin."""
@@ -171,9 +188,7 @@ def run_position_management_monitor(check_interval_seconds: int = 60, stop_event
 					margin_free=account_info.get("margin_free"),
 					raw_margin_free=account_info.get("raw_margin_free"),
 				)
-				run_profit_protection_strategy_if_due()
-				run_swap_rollover_cleanup_strategy_if_due(account_info)
-				run_hybrid_loss_exit_strategy_if_due(account_info)
+				_run_management_tasks(account_info)
 			except Exception as exc:
 				_log_position_management_event(
 					"position_management_monitor_error",
@@ -229,9 +244,7 @@ def run_account_monitor(check_interval_seconds: int = 60, max_duration_seconds: 
 				account_info = get_account_state_snapshot()
 				print_account_status(account_info)
 				if run_management_tasks:
-					run_profit_protection_strategy_if_due()
-					run_swap_rollover_cleanup_strategy_if_due(account_info)
-					run_hybrid_loss_exit_strategy_if_due(account_info)
+					_run_management_tasks(account_info)
 				
 				# Check if we should trigger trading logic
 				if check_stop_condition(account_info):

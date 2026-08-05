@@ -14,6 +14,7 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 from account_state import get_account_state
 from ai_advisory_state import build_decision_signature, get_active_rejection, get_cached_decision, record_rejection, store_cached_decision
+from chaotic_trade_feedback import build_chaotic_recent_feedback, record_chaotic_decision, record_chaotic_position_opened
 from gemini_config import GeminiVertexConfig, load_gemini_api_config
 from gemini_decision import ask_gemini_final_decision, load_predictions
 from ollama_service import is_ollama_cloud_enabled
@@ -740,6 +741,7 @@ class RankedCandidate:
 	action: str
 	source: str
 	score: float
+	decision_id: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -1161,11 +1163,16 @@ def _resolve_chaotic_ollama_candidate(
 
 	from ollama_advisory import ask_ollama_final_decision
 
+	feedback = build_chaotic_recent_feedback(
+		service_folder,
+		limit=_get_int_env("CHAOTIC_FEEDBACK_MAX_CLOSED_TRADES", 7, minimum=0),
+	)
 	decision_text = ask_ollama_final_decision(
 		predictions,
 		open_positions,
 		account_state,
 		chaotic_mode=True,
+		recent_chaotic_feedback=feedback,
 	)
 	if not decision_text:
 		return None
@@ -1178,6 +1185,30 @@ def _resolve_chaotic_ollama_candidate(
 	if not candidates:
 		return None
 	candidate = candidates[0]
+	prediction_snapshot = next(
+		(
+			{"buy": prediction.get("BUY"), "sell": prediction.get("SELL")}
+			for prediction in predictions
+			if str(prediction.get("symbol", "")) == candidate.symbol
+		),
+		{},
+	)
+	decision_id = record_chaotic_decision(
+		service_folder,
+		symbol=candidate.symbol,
+		action=candidate.action,
+		candidate_source=candidate.source,
+		decision_payload=payload,
+		prediction_snapshot=prediction_snapshot,
+		account_state=account_state,
+	)
+	candidate = RankedCandidate(
+		symbol=candidate.symbol,
+		action=candidate.action,
+		source=candidate.source,
+		score=candidate.score,
+		decision_id=decision_id,
+	)
 	_log_jsonl(
 		service_folder,
 		"ai_log.jsonl",
@@ -1661,7 +1692,7 @@ def _attempt_chaotic_trade(
 		f"odhadovana marze {parameter_log['estimated_required_margin']:.2f}/"
 		f"rozpocet {parameter_log['margin_budget']:.2f}"
 	)
-	if execute_trade(
+	execution_result = execute_trade(
 		candidate.symbol,
 		candidate.action,
 		lot_size,
@@ -1672,7 +1703,19 @@ def _attempt_chaotic_trade(
 		magic=context.magic,
 		comment=build_strategy_comment(context.strategy_id),
 		extra_log_data={"decision_source": candidate.source, "stop_loss": None, **parameter_log},
-	):
+		return_execution_result=True,
+	)
+	if bool(getattr(execution_result, "success", execution_result)):
+		if candidate.decision_id is not None:
+			record_chaotic_position_opened(
+				service_folder,
+				decision_id=candidate.decision_id,
+				position_ticket=getattr(execution_result, "position_ticket", None),
+				order_ticket=getattr(execution_result, "order_ticket", None),
+				deal_ticket=getattr(execution_result, "deal_ticket", None),
+				filled_price=getattr(execution_result, "filled_price", None),
+				filled_volume=getattr(execution_result, "filled_volume", None),
+			)
 		_log_trade_decision_audit(
 			service_folder,
 			strategy_id=context.strategy_id,

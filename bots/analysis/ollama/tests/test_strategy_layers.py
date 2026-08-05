@@ -3,13 +3,16 @@ from __future__ import annotations
 import os
 import unittest
 from datetime import datetime, timezone
+from pathlib import Path
 from unittest.mock import patch
 
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
 from profit_protection_strategy import (
+	_get_service_folder,
 	calculate_profit_protection_activation_usd,
 	calculate_profit_protection_locked_profit_usd,
 	calculate_profit_protection_target_profit_usd,
+	get_profit_protection_contexts,
 	get_profit_protection_context_for_position,
 	is_position_under_profit_protection,
 )
@@ -156,6 +159,10 @@ def _build_quant_short_market_data(*, adx_h4: float = 24.0, rsi_h1: float = 37.0
 
 
 class SignalRuleTests(unittest.TestCase):
+	@patch.dict(os.environ, {"SERVICE_DEST_FOLDER": "C:/runtime/trade-output"}, clear=False)
+	def test_profit_protection_uses_active_service_destination(self) -> None:
+		self.assertEqual(_get_service_folder(), Path("C:/runtime/trade-output"))
+
 	def test_trend_following_rules_allow_valid_long(self) -> None:
 		result = validate_trend_following_signal("EURUSD_ecn", "BUY", _build_market_data())
 
@@ -513,6 +520,29 @@ class ProfitProtectionTests(unittest.TestCase):
 		assert resolved_context is not None
 		self.assertEqual(resolved_context.strategy_id, index_context.strategy_id)
 		self.assertTrue(is_position_under_profit_protection(index_position))
+
+	def test_profit_protection_covers_all_registered_strategy_contexts(self) -> None:
+		contexts = get_profit_protection_contexts()
+
+		self.assertEqual(
+			{
+				context.strategy_id
+				for context in contexts
+			},
+			{
+				get_primary_strategy_context().strategy_id,
+				get_parallel_strategy_context().strategy_id,
+				get_reversal_strategy_context().strategy_id,
+				get_quant_strategy_context().strategy_id,
+				get_index_strategy_context().strategy_id,
+				"ollama_cloud_primary",
+				"liquidity_sweep_scalping",
+				"chaotic",
+			},
+		)
+		for context in contexts:
+			position = {"magic": context.magic, "comment": f"ga:{context.strategy_id}"}
+			self.assertTrue(is_position_under_profit_protection(position))
 
 
 if __name__ == "__main__":
