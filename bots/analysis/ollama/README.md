@@ -129,6 +129,8 @@ MT5_SYMBOL_SUFFIX=_ecn
 # MT5_SYMBOL_SUFFIX=
 MT5_SYMBOL_BLACKLIST=
 # Carkou oddelene symboly nebo masky, ktere se maji preskocit, napr. BTCUSD,ETHUSD,X*_ecn,__CFD__
+# Pri dosazeni limitu se preskoci cely rozhodovaci cyklus pro nove vstupy
+MT5_MAX_OPEN_POSITIONS=17
 MT5_CRYPTO_SYMBOL_PATTERNS=BTCUSD*,ETHUSD*,LTCUSD*,BCHUSD*
 MT5_MIN_SIGNAL_PERCENT=35
 MT5_CRYPTO_MIN_SIGNAL_PERCENT=65

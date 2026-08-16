@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -42,6 +43,32 @@ class TradeExecutionResult:
 	filled_price: Optional[float] = None
 	filled_volume: Optional[float] = None
 	error_message: str = ""
+
+
+def get_max_open_positions() -> int:
+	"""Return the account-wide position cap, defaulting to 17."""
+	raw = os.getenv("MT5_MAX_OPEN_POSITIONS", "17")
+	try:
+		value = int(raw)
+		return value if value > 0 else 17
+	except (TypeError, ValueError):
+		return 17
+
+
+def _check_open_position_limit() -> tuple[bool, str]:
+	"""Allow a new entry only when the account-wide position count is below the cap."""
+	positions = mt5.positions_get()
+	if positions is None:
+		return False, f"Failed to verify open position limit: {mt5.last_error()}"
+
+	max_open_positions = get_max_open_positions()
+	open_position_count = len(positions)
+	if open_position_count >= max_open_positions:
+		return False, (
+			f"Open position limit reached: {open_position_count}/{max_open_positions} "
+			"(MT5_MAX_OPEN_POSITIONS)"
+		)
+	return True, ""
 
 
 def close_position_by_ticket(
@@ -223,6 +250,25 @@ def execute_trade(
 	print(f"   Action: {action}")
 	print(f"   Requested Lot Size: {lot_size}")
 	print(f"   Take Profit: {take_profit if take_profit is not None else 'None'}")
+
+	within_position_limit, position_limit_error = _check_open_position_limit()
+	if not within_position_limit:
+		print(f"❌ Trade blocked: {position_limit_error}")
+		log_trade(
+			strategy_id,
+			magic,
+			comment or strategy_id,
+			symbol,
+			action,
+			lot_size,
+			lot_source,
+			0.0,
+			take_profit,
+			False,
+			position_limit_error,
+			service_folder,
+		)
+		return _result(False, position_limit_error)
 
 	is_valid, error_msg = validate_symbol(symbol)
 	if not is_valid:

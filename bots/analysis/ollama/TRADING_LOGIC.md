@@ -6,7 +6,9 @@ Aktuální runtime už není postavený na tom, že Gemini přímo řídí exeku
 
 1. **Signal layer**: lokální pravidla ověří, jestli kandidát opravdu odpovídá obchodovatelnému setupu.
 2. **Risk layer**: `risk_engine.py` spočítá `lot_size`, syntetický interní stop a lokální `take_profit`.
-3. **Execution layer**: MT5 exekuce otevře obchod, zapíše vlastnictví strategie a uloží audit logy.
+3. **Execution layer**: MT5 exekuce ověří globální limit otevřených pozic, otevře obchod, zapíše vlastnictví strategie a uloží audit logy.
+
+Na začátku cyklu se načte aktuální počet pozic přímo z MT5. Pokud je počet roven nebo vyšší než `MT5_MAX_OPEN_POSITIONS` (výchozí `17`), přeskočí se načítání predikcí, AI advisory, signal validation i risk calculation pro všechny strategie. Správa již otevřených pozic zůstává aktivní. Stejný limit se znovu ověří těsně před odesláním příkazu brokerovi, aby se pokryl souběh s jiným procesem. Při chybě této finální kontroly se nový obchod z bezpečnostních důvodů neotevře.
 
 Gemini a Ollama jsou teď pomocné predikční vrstvy. Nejsou autoritou pro finální velikost pozice ani pro řízení rizika.
 

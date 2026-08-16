@@ -15,6 +15,32 @@ from final_decision import RankedCandidate, _resolve_chaotic_ollama_candidate, _
 
 
 class FinalDecisionRetryTests(unittest.TestCase):
+	@patch.dict(os.environ, {"MT5_MAX_OPEN_POSITIONS": "17"}, clear=False)
+	@patch("final_decision.is_scalping_strategy_enabled", return_value=False)
+	@patch("final_decision.get_account_state")
+	@patch("final_decision.load_predictions")
+	@patch("final_decision.get_open_positions", return_value=[{"symbol": f"SYM{index}", "type": "BUY", "volume": 0.01, "pnl": 0.0} for index in range(17)])
+	def test_position_limit_skips_decision_cycle_before_loading_predictions(
+		self,
+		_mock_get_open_positions,
+		mock_load_predictions,
+		mock_get_account_state,
+		_mock_scalping_enabled,
+	) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "predikce"
+			service_folder = Path(temp_dir) / "service"
+			predictions_folder.mkdir(parents=True, exist_ok=True)
+
+			result = make_final_trading_decision(predictions_folder, service_folder)
+			with open(service_folder / "trade_logs" / "trade_decision_audit.csv", "r", encoding="utf-8", newline="") as handle:
+				audit_rows = list(csv.DictReader(handle))
+
+		self.assertFalse(result)
+		mock_load_predictions.assert_not_called()
+		mock_get_account_state.assert_not_called()
+		self.assertEqual(audit_rows[-1]["reason"], "global_max_open_positions_reached")
+
 	@patch("ollama_advisory.ask_ollama_final_decision", return_value=json.dumps({"tradeable_within_horizon": False, "action": "NO_TRADE"}))
 	@patch("final_decision.record_chaotic_decision")
 	@patch("final_decision.build_chaotic_recent_feedback")

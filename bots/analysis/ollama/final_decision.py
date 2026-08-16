@@ -60,7 +60,7 @@ from strategy_context import (
 	get_reversal_strategy_context,
 	is_strategy_trade_window_open,
 )
-from trade_execution import execute_trade
+from trade_execution import execute_trade, get_max_open_positions
 from trade_history import count_successful_trades, count_successful_trades_since, count_successful_trades_today
 from trading_validation import check_margin_requirements, validate_symbol
 
@@ -137,6 +137,7 @@ REASON_TEXT_CS = {
 	"activation_margin_below_threshold": "Volna marze je pod aktivacnim prahem strategie.",
 	"outside_session_window": "Strategie je mimo povolene obchodni hodiny.",
 	"max_open_positions_reached": "Strategie uz ma maximalni pocet otevrenych pozic.",
+	"global_max_open_positions_reached": "Ucet uz ma maximalni povoleny pocet otevrenych pozic.",
 	"daily_trade_limit_reached": "Byl dosazen denni limit obchodu pro strategii.",
 	"rejection_cooldown_active": "Bezi cooldown po predchozim zamitnuti kandidata.",
 	"open_position_exists": "Na tomto symbolu uz existuje otevrena pozice.",
@@ -1879,6 +1880,38 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 	print("=" * 60)
 
 	try:
+		open_positions = get_open_positions()
+		_print_open_positions(open_positions)
+
+		# Existing-position management remains active even when new entries are blocked.
+		if is_scalping_strategy_enabled():
+			try:
+				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
+				_scalp_mgr = LiquiditySweepScalpingStrategy(_scalp_ctx)
+				_scalp_mgr.manage_existing_positions()
+			except Exception as _scalp_mgmt_exc:
+				print(f"⚠️  Scalping position management error: {_scalp_mgmt_exc}")
+
+		max_open_positions = get_max_open_positions()
+		if len(open_positions) >= max_open_positions:
+			print(
+				f"⛔ Decision cycle skipped: open position limit reached "
+				f"({len(open_positions)}/{max_open_positions})"
+			)
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id="runtime",
+				strategy_label="cycle",
+				stage="cycle_skipped",
+				trade_executed=False,
+				reason="global_max_open_positions_reached",
+				details={
+					"open_positions": len(open_positions),
+					"max_open_positions": max_open_positions,
+				},
+			)
+			return False
+
 		print("\n📊 Loading remaining predictions...")
 		predictions = load_predictions(predictions_folder) if predictions_folder is not None else []
 		raw_predictions = load_predictions(predictions_folder, require_threshold=False) if predictions_folder is not None else []
@@ -1932,11 +1965,9 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			if is_scalping_strategy_enabled():
 				try:
 					_np_account = get_account_state(include_margin_percent=True)
-					_np_positions = get_open_positions()
 					_scalp_ctx_np = ScalpingAppContext(service_folder=service_folder)
 					_scalp_np = LiquiditySweepScalpingStrategy(_scalp_ctx_np)
-					_scalp_np.manage_existing_positions()
-					if can_activate_scalping_strategy(_np_account, _np_positions):
+					if can_activate_scalping_strategy(_np_account, open_positions):
 						print("ℹ️  Skalpovací strategie: spouštím bez AI predikcí")
 						if _scalp_np.run():
 							print("\n" + "=" * 60)
@@ -1951,19 +1982,6 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 
 		account_state = get_account_state(include_margin_percent=True)
 		_print_account_state(account_state)
-
-		open_positions = get_open_positions()
-		_print_open_positions(open_positions)
-
-		# Správa existujících skalpovacích pozic probíhá vždy – nezávisle na tom,
-		# zda ostatní strategie v tomto cyklu otevřely obchod.
-		if is_scalping_strategy_enabled():
-			try:
-				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
-				_scalp_mgr = LiquiditySweepScalpingStrategy(_scalp_ctx)
-				_scalp_mgr.manage_existing_positions()
-			except Exception as _scalp_mgmt_exc:
-				print(f"⚠️  Scalping position management error: {_scalp_mgmt_exc}")
 
 		open_crypto_positions = _count_open_crypto_positions(open_positions)
 		print(f"   Open crypto positions: {open_crypto_positions}/{get_crypto_max_open_positions()}")
