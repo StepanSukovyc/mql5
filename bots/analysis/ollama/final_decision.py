@@ -14,6 +14,7 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 from account_state import get_account_state
 from ai_advisory_state import build_decision_signature, get_active_rejection, get_cached_decision, record_rejection, store_cached_decision
+from chaotic_trade_feedback import build_chaotic_recent_feedback, record_chaotic_decision, record_chaotic_position_opened
 from gemini_config import GeminiVertexConfig, load_gemini_api_config
 from gemini_decision import ask_gemini_final_decision, load_predictions
 from ollama_service import is_ollama_cloud_enabled
@@ -59,7 +60,7 @@ from strategy_context import (
 	get_reversal_strategy_context,
 	is_strategy_trade_window_open,
 )
-from trade_execution import execute_trade
+from trade_execution import execute_trade, get_max_open_positions
 from trade_history import count_successful_trades, count_successful_trades_since, count_successful_trades_today
 from trading_validation import check_margin_requirements, validate_symbol
 
@@ -136,6 +137,7 @@ REASON_TEXT_CS = {
 	"activation_margin_below_threshold": "Volna marze je pod aktivacnim prahem strategie.",
 	"outside_session_window": "Strategie je mimo povolene obchodni hodiny.",
 	"max_open_positions_reached": "Strategie uz ma maximalni pocet otevrenych pozic.",
+	"global_max_open_positions_reached": "Ucet uz ma maximalni povoleny pocet otevrenych pozic.",
 	"daily_trade_limit_reached": "Byl dosazen denni limit obchodu pro strategii.",
 	"rejection_cooldown_active": "Bezi cooldown po predchozim zamitnuti kandidata.",
 	"open_position_exists": "Na tomto symbolu uz existuje otevrena pozice.",
@@ -740,6 +742,7 @@ class RankedCandidate:
 	action: str
 	source: str
 	score: float
+	decision_id: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -1161,11 +1164,16 @@ def _resolve_chaotic_ollama_candidate(
 
 	from ollama_advisory import ask_ollama_final_decision
 
+	feedback = build_chaotic_recent_feedback(
+		service_folder,
+		limit=_get_int_env("CHAOTIC_FEEDBACK_MAX_CLOSED_TRADES", 7, minimum=0),
+	)
 	decision_text = ask_ollama_final_decision(
 		predictions,
 		open_positions,
 		account_state,
 		chaotic_mode=True,
+		recent_chaotic_feedback=feedback,
 	)
 	if not decision_text:
 		return None
@@ -1173,11 +1181,43 @@ def _resolve_chaotic_ollama_candidate(
 		payload = json.loads(decision_text)
 	except json.JSONDecodeError:
 		return None
+	if payload.get("tradeable_within_horizon") is not True:
+		return None
+	try:
+		expected_holding_hours = float(payload.get("expected_holding_hours"))
+	except (TypeError, ValueError):
+		return None
+	if not 0 < expected_holding_hours <= _get_int_env("CHAOTIC_TARGET_HORIZON_HOURS", 12, minimum=1):
+		return None
 
 	candidates = _extract_ranked_candidates_from_decision_payload(payload, "chaotic_ollama")
 	if not candidates:
 		return None
 	candidate = candidates[0]
+	prediction_snapshot = next(
+		(
+			{"buy": prediction.get("BUY"), "sell": prediction.get("SELL")}
+			for prediction in predictions
+			if str(prediction.get("symbol", "")) == candidate.symbol
+		),
+		{},
+	)
+	decision_id = record_chaotic_decision(
+		service_folder,
+		symbol=candidate.symbol,
+		action=candidate.action,
+		candidate_source=candidate.source,
+		decision_payload=payload,
+		prediction_snapshot=prediction_snapshot,
+		account_state=account_state,
+	)
+	candidate = RankedCandidate(
+		symbol=candidate.symbol,
+		action=candidate.action,
+		source=candidate.source,
+		score=candidate.score,
+		decision_id=decision_id,
+	)
 	_log_jsonl(
 		service_folder,
 		"ai_log.jsonl",
@@ -1661,7 +1701,7 @@ def _attempt_chaotic_trade(
 		f"odhadovana marze {parameter_log['estimated_required_margin']:.2f}/"
 		f"rozpocet {parameter_log['margin_budget']:.2f}"
 	)
-	if execute_trade(
+	execution_result = execute_trade(
 		candidate.symbol,
 		candidate.action,
 		lot_size,
@@ -1672,7 +1712,19 @@ def _attempt_chaotic_trade(
 		magic=context.magic,
 		comment=build_strategy_comment(context.strategy_id),
 		extra_log_data={"decision_source": candidate.source, "stop_loss": None, **parameter_log},
-	):
+		return_execution_result=True,
+	)
+	if bool(getattr(execution_result, "success", execution_result)):
+		if candidate.decision_id is not None:
+			record_chaotic_position_opened(
+				service_folder,
+				decision_id=candidate.decision_id,
+				position_ticket=getattr(execution_result, "position_ticket", None),
+				order_ticket=getattr(execution_result, "order_ticket", None),
+				deal_ticket=getattr(execution_result, "deal_ticket", None),
+				filled_price=getattr(execution_result, "filled_price", None),
+				filled_volume=getattr(execution_result, "filled_volume", None),
+			)
 		_log_trade_decision_audit(
 			service_folder,
 			strategy_id=context.strategy_id,
@@ -1828,6 +1880,38 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 	print("=" * 60)
 
 	try:
+		open_positions = get_open_positions()
+		_print_open_positions(open_positions)
+
+		# Existing-position management remains active even when new entries are blocked.
+		if is_scalping_strategy_enabled():
+			try:
+				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
+				_scalp_mgr = LiquiditySweepScalpingStrategy(_scalp_ctx)
+				_scalp_mgr.manage_existing_positions()
+			except Exception as _scalp_mgmt_exc:
+				print(f"⚠️  Scalping position management error: {_scalp_mgmt_exc}")
+
+		max_open_positions = get_max_open_positions()
+		if len(open_positions) >= max_open_positions:
+			print(
+				f"⛔ Decision cycle skipped: open position limit reached "
+				f"({len(open_positions)}/{max_open_positions})"
+			)
+			_log_trade_decision_audit(
+				service_folder,
+				strategy_id="runtime",
+				strategy_label="cycle",
+				stage="cycle_skipped",
+				trade_executed=False,
+				reason="global_max_open_positions_reached",
+				details={
+					"open_positions": len(open_positions),
+					"max_open_positions": max_open_positions,
+				},
+			)
+			return False
+
 		print("\n📊 Loading remaining predictions...")
 		predictions = load_predictions(predictions_folder) if predictions_folder is not None else []
 		raw_predictions = load_predictions(predictions_folder, require_threshold=False) if predictions_folder is not None else []
@@ -1881,11 +1965,9 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			if is_scalping_strategy_enabled():
 				try:
 					_np_account = get_account_state(include_margin_percent=True)
-					_np_positions = get_open_positions()
 					_scalp_ctx_np = ScalpingAppContext(service_folder=service_folder)
 					_scalp_np = LiquiditySweepScalpingStrategy(_scalp_ctx_np)
-					_scalp_np.manage_existing_positions()
-					if can_activate_scalping_strategy(_np_account, _np_positions):
+					if can_activate_scalping_strategy(_np_account, open_positions):
 						print("ℹ️  Skalpovací strategie: spouštím bez AI predikcí")
 						if _scalp_np.run():
 							print("\n" + "=" * 60)
@@ -1900,19 +1982,6 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 
 		account_state = get_account_state(include_margin_percent=True)
 		_print_account_state(account_state)
-
-		open_positions = get_open_positions()
-		_print_open_positions(open_positions)
-
-		# Správa existujících skalpovacích pozic probíhá vždy – nezávisle na tom,
-		# zda ostatní strategie v tomto cyklu otevřely obchod.
-		if is_scalping_strategy_enabled():
-			try:
-				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
-				_scalp_mgr = LiquiditySweepScalpingStrategy(_scalp_ctx)
-				_scalp_mgr.manage_existing_positions()
-			except Exception as _scalp_mgmt_exc:
-				print(f"⚠️  Scalping position management error: {_scalp_mgmt_exc}")
 
 		open_crypto_positions = _count_open_crypto_positions(open_positions)
 		print(f"   Open crypto positions: {open_crypto_positions}/{get_crypto_max_open_positions()}")

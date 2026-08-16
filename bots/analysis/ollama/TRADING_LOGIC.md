@@ -6,7 +6,9 @@ Aktuální runtime už není postavený na tom, že Gemini přímo řídí exeku
 
 1. **Signal layer**: lokální pravidla ověří, jestli kandidát opravdu odpovídá obchodovatelnému setupu.
 2. **Risk layer**: `risk_engine.py` spočítá `lot_size`, syntetický interní stop a lokální `take_profit`.
-3. **Execution layer**: MT5 exekuce otevře obchod, zapíše vlastnictví strategie a uloží audit logy.
+3. **Execution layer**: MT5 exekuce ověří globální limit otevřených pozic, otevře obchod, zapíše vlastnictví strategie a uloží audit logy.
+
+Na začátku cyklu se načte aktuální počet pozic přímo z MT5. Pokud je počet roven nebo vyšší než `MT5_MAX_OPEN_POSITIONS` (výchozí `17`), přeskočí se načítání predikcí, AI advisory, signal validation i risk calculation pro všechny strategie. Správa již otevřených pozic zůstává aktivní. Stejný limit se znovu ověří těsně před odesláním příkazu brokerovi, aby se pokryl souběh s jiným procesem. Při chybě této finální kontroly se nový obchod z bezpečnostních důvodů neotevře.
 
 Gemini a Ollama jsou teď pomocné predikční vrstvy. Nejsou autoritou pro finální velikost pozice ani pro řízení rizika.
 
@@ -304,7 +306,7 @@ Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
 `hybrid_loss_exit_strategy.py` je jediný automatický loss-exit mechanismus. Denní `loss_cleanup_strategy.py`, týdenní `weekly_surplus_cleanup_strategy.py` a měsíční `monthly_loss_cleanup_strategy.py` byly odstraněny spolu s jejich konfigurací.
 
-Hybrid vyhodnocuje pouze ztrátové pozice otevřené od `HYBRID_EXIT_ANALYSIS_START_DATE`; starší pozice jsou vždy `legacy_excluded`. Analýza běží nejdříve po uplynutí `HYBRID_EXIT_CHECK_INTERVAL_MINUTES` (výchozí 15 minut) a pouze pokud je skutečná volná marže `raw_margin_free / raw_balance` nižší než `HYBRID_EXIT_MAX_FREE_MARGIN_PERCENT` (výchozí 5 %). Pokud marže limit nesplňuje, interval se nespotřebuje a hybrid se vyhodnotí při nejbližším dalším monitoringu po jejím poklesu pod limit. Stáří je počítáno v aktivních obchodních hodinách s výjimkou konfigurovaného FX víkendu. Stará pozice mimo break-even buffer může být uzavřena až při alespoň dvou negativních reason codes z uzavřených H1/H4 svíček. Výchozí `HYBRID_EXIT_DRY_RUN=true` jen loguje rozhodnutí.
+Hybrid vyhodnocuje pouze ztrátové pozice strategie `chaotic`, otevřené od `HYBRID_EXIT_ANALYSIS_START_DATE`; starší pozice jsou vždy `legacy_excluded`. Analýza běží nejdříve po uplynutí `HYBRID_EXIT_CHECK_INTERVAL_MINUTES` (výchozí 15 minut) a pouze pokud je skutečná volná marže `raw_margin_free / raw_balance` nižší než `HYBRID_EXIT_MAX_FREE_MARGIN_PERCENT` (výchozí 5 %). Pokud marže limit nesplňuje, interval se nespotřebuje a hybrid se vyhodnotí při nejbližším dalším monitoringu po jejím poklesu pod limit. Stáří je počítáno v aktivních obchodních hodinách s výjimkou konfigurovaného FX víkendu. Stará pozice mimo break-even buffer může být uzavřena až při alespoň dvou negativních reason codes z uzavřených H1/H4 svíček. Výchozí `HYBRID_EXIT_DRY_RUN=true` jen loguje rozhodnutí.
 
 Detailní audit zapisuje `trade_logs/hybrid_loss_exit.csv` a `trade_logs/hybrid_loss_exit_events.jsonl`.
 

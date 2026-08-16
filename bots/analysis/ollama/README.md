@@ -129,6 +129,8 @@ MT5_SYMBOL_SUFFIX=_ecn
 # MT5_SYMBOL_SUFFIX=
 MT5_SYMBOL_BLACKLIST=
 # Carkou oddelene symboly nebo masky, ktere se maji preskocit, napr. BTCUSD,ETHUSD,X*_ecn,__CFD__
+# Pri dosazeni limitu se preskoci cely rozhodovaci cyklus pro nove vstupy
+MT5_MAX_OPEN_POSITIONS=17
 MT5_CRYPTO_SYMBOL_PATTERNS=BTCUSD*,ETHUSD*,LTCUSD*,BCHUSD*
 MT5_MIN_SIGNAL_PERCENT=35
 MT5_CRYPTO_MIN_SIGNAL_PERCENT=65
@@ -178,10 +180,12 @@ HYBRID_EXIT_ANALYSIS_START_DATE=2026-08-01
 HYBRID_EXIT_TIMEZONE=Europe/Prague
 HYBRID_EXIT_CHECK_INTERVAL_MINUTES=15
 HYBRID_EXIT_YOUNG_HOURS=24
-HYBRID_EXIT_OLD_HOURS=72
+HYBRID_EXIT_OLD_HOURS=48
 HYBRID_EXIT_BREAK_EVEN_BUFFER_USD=0.20
 HYBRID_EXIT_MAX_CLOSES_PER_CYCLE=1
-HYBRID_EXIT_MANAGE_MANUAL_POSITIONS=false
+
+# Chaotic advisory opens only setups that it explicitly estimates can reach the ATR-based TP within this horizon.
+CHAOTIC_TARGET_HORIZON_HOURS=12
 
 # Ollama service konfigurace (nezávislé predikce)
 OLLAMA_ENABLED=true
