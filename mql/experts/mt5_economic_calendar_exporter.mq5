@@ -24,9 +24,20 @@ string IsoTime(datetime value)
 
 string NumberOrNull(double value)
 {
-   if(value == EMPTY_VALUE)
+   if(!MathIsValidNumber(value) || value == EMPTY_VALUE)
       return "null";
    return DoubleToString(value, 8);
+}
+
+string ImportanceName(ENUM_CALENDAR_EVENT_IMPORTANCE importance)
+{
+   if(importance == CALENDAR_IMPORTANCE_HIGH)
+      return "HIGH";
+   if(importance == CALENDAR_IMPORTANCE_MODERATE)
+      return "MODERATE";
+   if(importance == CALENDAR_IMPORTANCE_LOW)
+      return "LOW";
+   return "NONE";
 }
 
 void ExportCalendar()
@@ -58,11 +69,13 @@ void ExportCalendar()
       if(!CalendarEventById(values[index].event_id, event) || !CalendarCountryById(event.country_id, country))
          continue;
       datetime utc_time = values[index].time - server_offset_seconds;
+      double actual_value = values[index].GetActualValue();
+      bool has_actual = MathIsValidNumber(actual_value) && actual_value != EMPTY_VALUE;
       if(!first) FileWriteString(handle, ",");
       first = false;
       FileWriteString(handle, StringFormat("{\"event_id\":\"%I64u\",\"value_id\":\"%I64u\",\"country_id\":\"%I64d\",\"country_code\":\"%s\",\"currency\":\"%s\",\"event_name\":\"%s\",\"importance\":\"%s\",\"event_time_server\":\"%s\",\"event_time_utc\":%s,\"time_is_trusted\":%s,\"actual\":%s,\"forecast\":%s,\"previous\":%s,\"revised\":%s,\"status\":\"%s\",\"source\":\"MT5_ECONOMIC_CALENDAR\"}",
-         values[index].event_id, values[index].id, event.country_id, EscapeJson(country.code), EscapeJson(country.currency), EscapeJson(event.name), EnumToString(event.importance), IsoTime(values[index].time),
-         offset_trusted ? "\"" + IsoTime(utc_time) + "Z\"" : "null", offset_trusted ? "true" : "false", NumberOrNull(values[index].GetActualValue()), NumberOrNull(values[index].GetForecastValue()), NumberOrNull(values[index].GetPreviousValue()), NumberOrNull(values[index].GetRevisedValue()), values[index].GetActualValue() == EMPTY_VALUE ? "SCHEDULED" : "RELEASED"));
+         values[index].event_id, values[index].id, event.country_id, EscapeJson(country.code), EscapeJson(country.currency), EscapeJson(event.name), ImportanceName(event.importance), IsoTime(values[index].time),
+         offset_trusted ? "\"" + IsoTime(utc_time) + "Z\"" : "null", offset_trusted ? "true" : "false", NumberOrNull(actual_value), NumberOrNull(values[index].GetForecastValue()), NumberOrNull(values[index].GetPreviousValue()), NumberOrNull(values[index].GetRevisedValue()), has_actual ? "RELEASED" : "SCHEDULED"));
    }
    FileWriteString(handle, "]}");
    FileClose(handle);
