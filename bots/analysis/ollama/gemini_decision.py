@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -38,6 +39,13 @@ def load_predictions(predictions_folder: Path, *, require_threshold: bool = True
 	predictions = []
 	base_threshold = get_base_prediction_threshold()
 	crypto_threshold = get_crypto_prediction_threshold()
+	calendar_service = None
+	try:
+		from economic_calendar import EconomicCalendarService
+		service_folder = Path(os.getenv("SERVICE_DEST_FOLDER", "")) if os.getenv("SERVICE_DEST_FOLDER") else None
+		calendar_service = EconomicCalendarService(service_folder)
+	except Exception as exc:
+		print(f"  ⚠️ Economic calendar candidate filter unavailable: {exc}")
 
 	for pred_file in predictions_folder.glob("*.json"):
 		try:
@@ -48,6 +56,11 @@ def load_predictions(predictions_folder: Path, *, require_threshold: bool = True
 			buy_pct = prediction.get("BUY", 0)
 			sell_pct = prediction.get("SELL", 0)
 			symbol = str(prediction.get("symbol", ""))
+			if calendar_service is not None:
+				risk = calendar_service.evaluate(symbol)
+				if not risk.allow_new_trade:
+					print(f"  ⛔ Excluding {symbol}: ECONOMIC_EVENT_BLOCKED")
+					continue
 			required_threshold = crypto_threshold if is_crypto_symbol(symbol) else base_threshold
 
 			if not require_threshold or buy_pct >= required_threshold or sell_pct >= required_threshold:
@@ -153,6 +166,8 @@ DOSTUPNÉ INFORMACE:
 
 3. Dostupné obchodní predikce (filtrované - pouze ty s BUY/SELL >= 35%):
 {json.dumps(predictions, indent=2)}{excluded_note}{mode_text}{crypto_note}
+
+Pole `fundamental_*` a `event_risk_level` jsou pouze doplnkovy kontext. Nikdy nevybirej symbol s `event_risk_level` HIGH; deterministicky filtr takove kandidaty odstranuje pred exekuci.
 
 ÚKOL:
 Na základě všech dostupných informací (predikce, otevřené pozice, stav účtu):

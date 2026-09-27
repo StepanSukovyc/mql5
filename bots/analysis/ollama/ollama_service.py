@@ -230,6 +230,7 @@ def _build_ollama_prompt(
     prompt_payload: Dict,
     prompt_guidance: str,
     compact_prompt_enabled: bool,
+    fundamental_context: Optional[Dict] = None,
 ) -> str:
     """Build Ollama prompt text for one symbol."""
     payload_label = "Kompaktni data" if compact_prompt_enabled else "Kompletni data"
@@ -240,6 +241,7 @@ def _build_ollama_prompt(
     )
     oscillators_json = _serialize_prompt_json(oscillators_summary, compact=True)
     payload_json = _serialize_prompt_json(prompt_payload, compact=compact_prompt_enabled)
+    fundamental_json = _serialize_prompt_json(fundamental_context or {"fundamental_data_status": "NO_DATA"}, compact=True)
 
     return f"""Jsi financni poradce a expert na technickou analyzu financnich instrumentu.
 
@@ -249,6 +251,9 @@ RSI a MA podle timeframe: {oscillators_json}
 
 {payload_label}:
 {payload_json}
+
+Fundamentalni kontext (pouze doplnek, nenahrazuje technickou analyzu):
+{fundamental_json}
 
 Rezim vstupu: {prompt_mode_note}
 
@@ -472,6 +477,14 @@ def ask_ollama_prediction(
         _request_headers["Authorization"] = f"Bearer {api_key}"
     compact_prompt_enabled = is_ollama_compact_prompt_enabled()
     prompt_payload = _build_compact_market_data_summary(data) if compact_prompt_enabled else data
+    fundamental_context: Dict = {"fundamental_data_status": "NO_DATA"}
+    try:
+        from economic_calendar import EconomicCalendarService
+        service_folder_raw = os.getenv("SERVICE_DEST_FOLDER", "").strip()
+        fundamental_context = EconomicCalendarService(Path(service_folder_raw) if service_folder_raw else None).context_for_symbol(symbol)
+        fundamental_context["fundamental_data_status"] = "AVAILABLE" if fundamental_context["calendar_status"] == "AVAILABLE" else fundamental_context["calendar_status"]
+    except Exception as exc:
+        print(f"⚠️ Fundamental context unavailable for {symbol}: {exc}")
     prompt = _build_ollama_prompt(
         symbol,
         current_price,
@@ -479,6 +492,7 @@ def ask_ollama_prediction(
         prompt_payload,
         prompt_guidance,
         compact_prompt_enabled,
+        fundamental_context,
     )
 
     if not compact_prompt_enabled and len(prompt) > prompt_char_budget:
@@ -491,6 +505,7 @@ def ask_ollama_prediction(
             prompt_payload,
             prompt_guidance,
             compact_prompt_enabled,
+            fundamental_context,
         )
         print(
             f"⚠️  Prompt pro {symbol} presahl odhadovany limit pro num_ctx={ollama_num_ctx} "
@@ -558,7 +573,11 @@ def ask_ollama_prediction(
                     "BUY": float(prediction_data.get("BUY", 0)),
                     "SELL": float(prediction_data.get("SELL", 0)),
                     "HOLD": float(prediction_data.get("HOLD", 0)),
-                    "reasoning": prediction_data.get("reasoning", "")
+                    "reasoning": prediction_data.get("reasoning", ""),
+                    "fundamental_context_used": fundamental_context.get("calendar_status") == "AVAILABLE",
+                    "fundamental_data_status": fundamental_context.get("fundamental_data_status", "NO_DATA"),
+                    "event_risk_level": fundamental_context.get("risk_level", "UNKNOWN"),
+                    "pair_fundamental_sentiment": fundamental_context.get("pair_sentiment", {}).get("sentiment_score"),
                 }
                 
                 print(f"✅ Predikce pro {symbol} získána (BUY:{result_dict['BUY']}, SELL:{result_dict['SELL']}, HOLD:{result_dict['HOLD']})")
@@ -625,6 +644,10 @@ def process_symbol_with_ollama(
                 "SELL": prediction_dict["SELL"],
                 "HOLD": prediction_dict["HOLD"],
                 "reasoning": prediction_dict["reasoning"],
+                "fundamental_context_used": prediction_dict.get("fundamental_context_used", False),
+                "fundamental_data_status": prediction_dict.get("fundamental_data_status", "NO_DATA"),
+                "event_risk_level": prediction_dict.get("event_risk_level", "UNKNOWN"),
+                "pair_fundamental_sentiment": prediction_dict.get("pair_fundamental_sentiment"),
                 "timestamp": datetime.now(tz=timezone.utc).isoformat(),
                 "model": ollama_model
             }

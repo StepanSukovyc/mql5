@@ -362,6 +362,20 @@ def execute_trade(
 	if validated_tp is not None:
 		request["tp"] = validated_tp
 
+	# This applies only to new entries in this function; close_position_by_ticket remains untouched.
+	try:
+		from economic_calendar import EconomicCalendarService
+
+		event_risk = EconomicCalendarService(service_folder).evaluate(symbol)
+		if not event_risk.allow_new_trade:
+			error_msg = "ECONOMIC_EVENT_BLOCKED_AT_EXECUTION"
+			print(f"❌ Trade blocked: {error_msg}")
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
+			return _result(False, error_msg)
+	except Exception as exc:
+		# Calendar faults never break the legacy execution path; configured fail mode is applied by the service.
+		print(f"⚠️ Economic calendar execution recheck unavailable: {exc}")
+
 	result = mt5.order_send(request)
 	if result is None:
 		error_msg = f"Order send failed: {mt5.last_error()}"

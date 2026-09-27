@@ -1,3 +1,22 @@
+# Economic calendar
+
+The optional Economic Calendar layer protects **new entries only**. Existing positions continue to be managed solely by the existing profit cleanup, swap rollover cleanup, and hybrid-loss-exit strategies. The deterministic event-risk filter always takes precedence over AI context; Ollama and Gemini never send orders.
+
+The installed Python `MetaTrader5` package does not expose Economic Calendar functions, so compile [mql/experts/mt5_economic_calendar_exporter.mq5](../../../mql/experts/mt5_economic_calendar_exporter.mq5) in MetaEditor and attach it to any chart. It is read-only and exports `economic_calendar.json` to MT5 Common Files every `RefreshSeconds`. Set `ECONOMIC_CALENDAR_EXPORT_PATH` to that file's absolute path.
+
+The exporter retains server timestamp and writes UTC only when its server-to-UTC offset can be measured. Events with untrusted time never block a trade. Python reads its JSON atomically, normalizes all comparisons to aware UTC datetimes, and writes snapshots to `SERVICE_DEST_FOLDER/economic_calendar/` plus `trade_logs/economic_calendar_filter.csv` and `economic_calendar_events.jsonl`.
+
+Enable gradually: first `ECONOMIC_CALENDAR_ENABLED=false`; then enable it with `ECONOMIC_FILTER_DRY_RUN=true`; inspect audits; only then set dry-run to `false`. `ECONOMIC_FAIL_MODE=OPEN` (the default) preserves prior behavior on unavailable, invalid, or stale data; `CLOSED` rejects only new entries. `AVAILABLE`, `PARTIAL`, `NO_DATA`, `STALE`, and `INVALID` are explicit states: `NO_DATA` is not a neutral score.
+
+Forex mappings strip broker suffixes such as `EURUSD_ecn`; major pairs, XAU/XAG and BTC/ETH USD exposure are supported. Crypto calendar context represents only its fiat side. Unknown CFD/index symbols remain `UNMAPPED` unless explicitly supplied through `ECONOMIC_SYMBOL_EXPOSURE_MAP`; they are not blocked by guesswork.
+
+Run offline calendar tests with:
+
+```powershell
+cd bots/analysis/ollama
+..\..\..\.venv\Scripts\python.exe -m pytest tests/test_economic_calendar.py -q
+```
+
 # MT5 Hourly Collector (Python)
 
 Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekonečný automat**: kontroluje marži, stahuje data, filtruje signály, vytváří finální obchodní doporučení pomocí Gemini na **Vertex AI v Google Cloud**, **automaticky provádí obchody** a **opakuje celý cyklus**.
