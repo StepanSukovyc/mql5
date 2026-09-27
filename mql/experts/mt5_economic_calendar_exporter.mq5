@@ -38,10 +38,15 @@ void ExportCalendar()
    MqlCalendarValue values[];
    datetime until = server_now + LookaheadHours * 3600;
    int total = CalendarValueHistory(values, server_now - 3600, until, NULL, NULL);
+   if(total < 0)
+   {
+      Print("CalendarValueHistory failed: ", GetLastError());
+      return;
+   }
    int handle = FileOpen(OutputFile + ".tmp", FILE_WRITE|FILE_TXT|FILE_COMMON|FILE_ANSI);
    if(handle == INVALID_HANDLE)
    {
-      Print("Calendar export open failed: ", GetLastError());
+      Print("Calendar export open failed for Common\\Files\\", OutputFile, ".tmp: ", GetLastError());
       return;
    }
    FileWriteString(handle, StringFormat("{\"schema_version\":1,\"generated_at_utc\":\"%sZ\",\"source\":\"MT5_ECONOMIC_CALENDAR\",\"server_utc_offset_seconds\":%d,\"events\":[", IsoTime(utc_now), server_offset_seconds));
@@ -61,12 +66,19 @@ void ExportCalendar()
    }
    FileWriteString(handle, "]}");
    FileClose(handle);
-   FileMove(OutputFile + ".tmp", FILE_COMMON, OutputFile, FILE_COMMON|FILE_REWRITE);
+   ResetLastError();
+   if(!FileMove(OutputFile + ".tmp", FILE_COMMON, OutputFile, FILE_REWRITE))
+   {
+      Print("Calendar export move failed for Common\\Files\\", OutputFile, ": ", GetLastError());
+      return;
+   }
+   Print("Calendar export completed: Common\\Files\\", OutputFile, "; events=", total);
 }
 
 int OnInit()
 {
    EventSetTimer(MathMax(1, RefreshSeconds));
+   Print("Economic calendar exporter started; refresh_seconds=", RefreshSeconds);
    ExportCalendar();
    return(INIT_SUCCEEDED);
 }
