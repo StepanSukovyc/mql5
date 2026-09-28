@@ -67,3 +67,5 @@ bots/analysis/ollama/output/
 analysis/predict/*.local.json
 
 gen-lang-client-0664584625-006a028fcc3e.json
+
+tasks/*
