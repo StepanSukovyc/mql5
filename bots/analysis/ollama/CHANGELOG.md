@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-09-29 (Automatic Whole-Thousand Strategy Balance Cap)
+
+- **Replaced The Fixed Balance Cap With An Automatic Cap**
+  - The strategy balance is now always the current MT5 balance rounded down to the nearest `$1,000`
+  - Examples: `11125` uses `11000`; `9999` uses `9000`
+  - The amount above that boundary remains a safety reserve and is excluded from available margin during order validation
+  - Removed obsolete `TRADING_ACCOUNT_BALANCE_CAP` entries from `.env` and `.env.example`
+  - `trading_logic.py` now reports the automatic-cap rule at startup
+
+- **Updated Documentation And Validation**
+  - `README.md` and `TRADING_LOGIC.md` document the automatic cap and its margin effect
+  - `verify_account_balance_cap.py` calculates and displays a cap for each supplied balance scenario
+  - Added focused tests for whole-thousand cap boundaries
+
 ## 2026-07-13 (Ollama Cloud Advisory + Weekly Surplus Cleanup)
 
 - **Switched Primary Strategy Advisory From Gemini To Ollama Cloud**
@@ -11,7 +25,7 @@
 - **Added `weekly_surplus_cleanup_strategy.py` — closes stale losing positions from weekly profit surplus**
   - Runs once per ISO week on a configurable weekday (default Friday) after a configurable UTC hour (default 15:00)
   - Computes realized P&L for the full week (Monday 00:00 UTC → run time) from MT5 deal history
-  - Minimum income floor: `WEEKLY_CLEANUP_MIN_PROFIT_USD` (fixed USD) or auto = `TRADING_ACCOUNT_BALANCE_CAP × WEEKLY_CLEANUP_MIN_INCOME_PERCENT / 100` (default 10 %)
+  - Minimum income floor: `WEEKLY_CLEANUP_MIN_PROFIT_USD` (fixed USD) or auto = strategy balance cap × `WEEKLY_CLEANUP_MIN_INCOME_PERCENT / 100` (default 10 %)
   - If `weekly_profit > min_income`: surplus = difference; otherwise skipped entirely (minimum income is always protected)
   - Finds all open positions older than `WEEKLY_CLEANUP_MIN_POSITION_AGE_DAYS` (default 7) that are currently in net loss (profit + swap − fee < 0)
   - Sorts candidates: oldest first, then smallest loss (maximises the count of positions cleared from the same budget)

@@ -1,8 +1,7 @@
-"""Utility script to verify strategy balance-cap calculations from .env."""
+"""Utility script to verify dynamic strategy balance-cap calculations."""
 
 from __future__ import annotations
 
-import os
 import sys
 from pathlib import Path
 
@@ -12,22 +11,6 @@ from account_state import (
 	get_effective_balance,
 	get_effective_free_margin,
 )
-
-
-def _load_dotenv(dotenv_path: Path) -> None:
-	"""Load .env values into process env if keys are not already set."""
-	if not dotenv_path.exists():
-		return
-
-	for raw_line in dotenv_path.read_text(encoding="utf-8").splitlines():
-		line = raw_line.strip()
-		if not line or line.startswith("#") or "=" not in line:
-			continue
-		key, value = line.split("=", 1)
-		key = key.strip()
-		value = value.strip().strip('"').strip("'")
-		if key and key not in os.environ:
-			os.environ[key] = value
 
 
 def _default_scenarios() -> list[tuple[float, float]]:
@@ -57,11 +40,7 @@ def _parse_scenarios(argv: list[str]) -> list[tuple[float, float]]:
 
 
 def main(argv: list[str]) -> int:
-	"""Print effective balance and free margin for configured cap scenarios."""
-	base_dir = Path(__file__).resolve().parent
-	_load_dotenv(base_dir / ".env")
-	_load_dotenv(base_dir.parent / ".env")
-	_load_dotenv(Path.cwd() / ".env")
+	"""Print effective balance and free margin for dynamic cap scenarios."""
 
 	try:
 		scenarios = _parse_scenarios(argv)
@@ -69,16 +48,14 @@ def main(argv: list[str]) -> int:
 		print(f"❌ {exc}")
 		return 1
 
-	cap = get_account_balance_cap()
-	print(f"Strategy balance cap from env: {cap:.2f}")
-	print()
-
 	for balance, free_margin in scenarios:
+		cap = get_account_balance_cap(balance)
 		reserve = get_balance_reserve(balance, cap=cap)
 		effective_balance = get_effective_balance(balance, cap=cap)
 		effective_free_margin = get_effective_free_margin(balance, free_margin, cap=cap)
 
 		print(f"Raw balance: {balance:.2f}")
+		print(f"Strategy balance cap: {cap:.2f}")
 		print(f"Raw free margin: {free_margin:.2f}")
 		print(f"Reserve above cap: {reserve:.2f}")
 		print(f"Effective balance: {effective_balance:.2f}")

@@ -12,6 +12,12 @@ Na začátku cyklu se načte aktuální počet pozic přímo z MT5. Pokud je po�
 
 Gemini a Ollama jsou teď pomocné predikční vrstvy. Nejsou autoritou pro finální velikost pozice ani pro řízení rizika.
 
+## Automatický balance cap
+
+Pro výpočet dostupné marže strategie používá aktuální balance zaokrouhlený dolů na celé tisíce USD. Například balance `11125` vytvoří strategický cap `11000`; zbylých `125` USD je bezpečnostní rezerva. Při balance `9999` je cap `9000` a rezerva `999` USD.
+
+Rezerva se odečte z raw free margin před kontrolou požadované marže objednávky. `TRADING_ACCOUNT_BALANCE_CAP` již není konfigurační proměnná.
+
 ## Hlavní tok runtime
 
 1. `logika.py` hlídá swap blok okno a mimo něj spouští obchodní cyklus.

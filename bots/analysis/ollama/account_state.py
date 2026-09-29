@@ -3,38 +3,32 @@
 from __future__ import annotations
 
 import os
+import math
 from datetime import datetime, timezone
 from typing import Any, Dict
 
 import MetaTrader5 as mt5
 
 
-DEFAULT_ACCOUNT_BALANCE_CAP = 5000.0
+ACCOUNT_BALANCE_CAP_STEP = 1000.0
 
 
-def get_account_balance_cap() -> float:
-	"""Return the strategy balance cap configured via environment."""
-	raw_value = os.getenv("TRADING_ACCOUNT_BALANCE_CAP", str(DEFAULT_ACCOUNT_BALANCE_CAP))
-	try:
-		value = float(raw_value)
-		if value <= 0:
-			return DEFAULT_ACCOUNT_BALANCE_CAP
-		return value
-	except (TypeError, ValueError):
-		return DEFAULT_ACCOUNT_BALANCE_CAP
+def get_account_balance_cap(balance: float) -> float:
+	"""Return the current balance rounded down to a whole thousand."""
+	return max(math.floor(float(balance) / ACCOUNT_BALANCE_CAP_STEP) * ACCOUNT_BALANCE_CAP_STEP, 0.0)
 
 
 def get_effective_balance(balance: float, *, cap: float | None = None) -> float:
 	"""Return the balance used by the strategy after applying the safety reserve cap."""
 	if cap is None:
-		cap = get_account_balance_cap()
+		cap = get_account_balance_cap(balance)
 	return min(float(balance), cap)
 
 
 def get_balance_reserve(balance: float, *, cap: float | None = None) -> float:
 	"""Return the part of balance kept outside strategy calculations as reserve."""
 	if cap is None:
-		cap = get_account_balance_cap()
+		cap = get_account_balance_cap(balance)
 	return max(float(balance) - cap, 0.0)
 
 
@@ -46,7 +40,7 @@ def get_effective_free_margin(
 ) -> float:
 	"""Return free margin reduced by any balance amount held in reserve above the cap."""
 	if cap is None:
-		cap = get_account_balance_cap()
+		cap = get_account_balance_cap(balance)
 	reserve = get_balance_reserve(balance, cap=cap)
 	return max(float(margin_free) - reserve, 0.0)
 
@@ -72,7 +66,7 @@ def get_account_state(*, include_timestamp: bool = False, include_margin_percent
 	account = get_account_info_raw()
 	raw_balance = float(account.balance)
 	raw_margin_free = float(account.margin_free)
-	balance_cap = get_account_balance_cap()
+	balance_cap = get_account_balance_cap(raw_balance)
 	balance_reserve = get_balance_reserve(raw_balance, cap=balance_cap)
 	effective_balance = get_effective_balance(raw_balance, cap=balance_cap)
 	effective_margin_free = get_effective_free_margin(raw_balance, raw_margin_free, cap=balance_cap)

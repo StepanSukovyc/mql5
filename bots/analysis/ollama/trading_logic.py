@@ -15,7 +15,6 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 
-from account_state import get_account_balance_cap
 from gemini_config import load_gemini_api_config
 from gemini_decision import clean_gemini_response
 from gemini_vertex import request_prediction_json
@@ -354,7 +353,7 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 		print(f"   Project: {gemini_config.project}")
 		print(f"   Region: {gemini_config.region}")
 		print(f"   Model chain: {', '.join(gemini_config.fallback_models)}")
-		print(f"🛡️  Strategy balance cap: {get_account_balance_cap():.2f}")
+		print("🛡️  Strategy balance cap: current balance rounded down to the nearest $1,000")
 	except Exception as exc:
 		print(f"❌ Failed to load Gemini config: {exc}")
 		return False, None

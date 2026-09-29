@@ -223,6 +223,15 @@ OLLAMA_COMPACT_PROMPT=true
 
 `GOOGLE_APPLICATION_CREDENTIALS` musí ukazovat na service-account JSON s oprávněním volat Vertex AI. Soubor drž mimo repository a neposílej ho do gitu.
 
+### Automatický balance cap
+
+Strategie automaticky používá aktuální balance zaokrouhlený dolů na celé tisíce USD. `TRADING_ACCOUNT_BALANCE_CAP` se již nenastavuje v `.env`.
+
+- `11125` znamená cap `11000` a bezpečnostní rezervu `125`.
+- `9999` znamená cap `9000` a bezpečnostní rezervu `999`.
+
+Rezerva se odečítá také z volné marže před kontrolou objednávky. Tím strategie nevyužije prostředky nad aktuální celou tisícovku.
+
 `VERTEX_AI_PROJECT_ID`, `VERTEX_AI_REGION` a `VERTEX_AI_MODEL` určují, do jakého Google Cloud projektu a regionu se bude volat. Výchozí model chain je postaven tak, aby při výpadku nebo nedostupnosti konkrétního flash modelu uměl přejít na rozumný fallback ve stejné třídě modelů, ale tento chain se používá jen tehdy, když není aktivní legacy API-key fallback.
 
 Gemini requesty teď běží primárně přes Python SDK `google-genai` v režimu `vertexai=True`, používají stabilní API `v1`, mají vypnuté thinking, vynucený structured JSON response schema a logují token usage, response id, finish reason a fallback model.
