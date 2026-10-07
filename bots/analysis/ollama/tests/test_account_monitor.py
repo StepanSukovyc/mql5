@@ -19,7 +19,6 @@ class AccountMonitorTests(unittest.TestCase):
 		{
 			"PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT": "20",
 			"PARALLEL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT": "5",
-			"CHAOTIC_STRATEGY_ENABLED": "false",
 			"TRADING_TRIGGER_MARGIN_THRESHOLD": "15",
 		},
 		clear=False,
@@ -38,7 +37,6 @@ class AccountMonitorTests(unittest.TestCase):
 		{
 			"PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT": "20",
 			"PARALLEL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT": "5",
-			"CHAOTIC_STRATEGY_ENABLED": "false",
 			"TRADING_TRIGGER_MARGIN_THRESHOLD": "15",
 		},
 		clear=False,
@@ -62,36 +60,14 @@ class AccountMonitorTests(unittest.TestCase):
 
 		self.assertFalse(check_stop_condition(account_info))
 
-	@patch.dict(
-		os.environ,
-		{
-			"TRADING_TRIGGER_MARGIN_THRESHOLD": "15",
-			"CHAOTIC_STRATEGY_ENABLED": "true",
-			"CHAOTIC_MIN_FREE_MARGIN_PERCENT": "10",
-		},
-		clear=False,
-	)
-	def test_chaotic_strategy_lowers_explicit_trigger_to_its_minimum_margin(self) -> None:
-		account_info = {
-			"balance": 5000.0,
-			"margin_free": 600.0,
-			"raw_margin_free": 600.0,
-		}
-
-		self.assertTrue(check_stop_condition(account_info))
-
-	@patch("account_monitor.run_hybrid_loss_exit_strategy_if_due")
 	@patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due")
 	@patch("account_monitor.run_profit_protection_strategy_if_due")
-	@patch("account_monitor.reconcile_chaotic_trade_outcomes")
 	@patch("account_monitor.get_account_state_snapshot")
 	def test_position_management_monitor_writes_heartbeat_log(
 		self,
 		mock_get_account_state_snapshot,
-		mock_reconcile,
 		mock_profit_protection,
 		mock_swap_cleanup,
-		mock_hybrid_exit,
 	) -> None:
 		mock_get_account_state_snapshot.return_value = {
 			"timestamp": "2026-05-22T13:00:00+00:00",
@@ -116,26 +92,18 @@ class AccountMonitorTests(unittest.TestCase):
 		self.assertTrue(any(entry["event"] == "position_management_monitor_stopped" for entry in entries))
 		mock_profit_protection.assert_called()
 		mock_swap_cleanup.assert_called()
-		mock_hybrid_exit.assert_called()
-		mock_reconcile.assert_called()
 
-	@patch("account_monitor.reconcile_chaotic_trade_outcomes")
-	@patch("account_monitor.run_hybrid_loss_exit_strategy_if_due", side_effect=RuntimeError("missing timezone data"))
+	@patch("account_monitor.run_profit_protection_strategy_if_due", side_effect=RuntimeError("management failure"))
 	@patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due")
-	@patch("account_monitor.run_profit_protection_strategy_if_due")
-	def test_failed_hybrid_exit_does_not_prevent_profit_protection(
+	def test_failed_management_task_does_not_prevent_remaining_tasks(
 		self,
-		mock_profit_protection,
 		mock_swap_cleanup,
-		mock_hybrid_exit,
-		mock_reconcile,
+		mock_profit_protection,
 	) -> None:
 		_run_management_tasks({"balance": 5000.0})
 
-		mock_profit_protection.assert_called_once()
 		mock_swap_cleanup.assert_called_once()
-		mock_hybrid_exit.assert_called_once()
-		mock_reconcile.assert_called_once()
+		mock_profit_protection.assert_called_once()
 
 
 if __name__ == "__main__":

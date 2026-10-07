@@ -9,8 +9,6 @@ from pathlib import Path
 from typing import Optional
 
 from account_state import get_account_state
-from chaotic_trade_feedback import reconcile_chaotic_trade_outcomes
-from hybrid_loss_exit_strategy import run_hybrid_loss_exit_strategy_if_due
 from profit_protection_strategy import run_profit_protection_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
 from reversal_pattern_strategy import is_reversal_strategy_enabled
@@ -62,8 +60,6 @@ def _run_management_tasks(account_info: dict) -> None:
 	tasks = (
 		("profit_protection", run_profit_protection_strategy_if_due),
 		("swap_rollover_cleanup", lambda: run_swap_rollover_cleanup_strategy_if_due(account_info)),
-		("hybrid_loss_exit", lambda: run_hybrid_loss_exit_strategy_if_due(account_info)),
-		("chaotic_trade_feedback", lambda: reconcile_chaotic_trade_outcomes(Path(os.environ.get("SERVICE_DEST_FOLDER", ".")))),
 	)
 	for task_name, task in tasks:
 		try:
@@ -123,16 +119,6 @@ def _get_margin_threshold() -> float:
 		threshold_percent = float(threshold_str)
 	except ValueError:
 		threshold_percent = default_threshold_percent
-
-	chaotic_enabled = os.environ.get("CHAOTIC_STRATEGY_ENABLED", "false").strip().lower() in {"1", "true", "yes", "y", "on"}
-	if chaotic_enabled:
-		try:
-			chaotic_minimum = float(os.environ.get("CHAOTIC_MIN_FREE_MARGIN_PERCENT", "10"))
-			if chaotic_minimum < 0:
-				raise ValueError
-			threshold_percent = min(threshold_percent, chaotic_minimum)
-		except ValueError:
-			threshold_percent = min(threshold_percent, 10.0)
 
 	return threshold_percent / 100  # Convert percentage to decimal
 

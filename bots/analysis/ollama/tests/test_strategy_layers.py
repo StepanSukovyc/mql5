@@ -538,7 +538,6 @@ class ProfitProtectionTests(unittest.TestCase):
 				get_quant_strategy_context().strategy_id,
 				get_index_strategy_context().strategy_id,
 				"ollama_cloud_primary",
-				"chaotic",
 			},
 		)
 		for context in contexts:

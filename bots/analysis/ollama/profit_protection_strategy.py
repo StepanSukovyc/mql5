@@ -13,7 +13,6 @@ import MetaTrader5 as mt5
 
 from strategy_context import (
 	StrategyContext,
-	get_chaotic_strategy_context,
 	get_index_strategy_context,
 	get_ollama_cloud_strategy_context,
 	get_parallel_strategy_context,
@@ -214,7 +213,6 @@ def get_profit_protection_contexts() -> list[StrategyContext]:
 		get_quant_strategy_context(),
 		get_index_strategy_context(),
 		get_ollama_cloud_strategy_context(),
-		get_chaotic_strategy_context(),
 	]
 
 

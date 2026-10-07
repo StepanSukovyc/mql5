@@ -9,7 +9,6 @@ without modifications.
 from __future__ import annotations
 
 import json
-import os
 from typing import Dict, List, Optional
 
 import httpx
@@ -29,9 +28,6 @@ def ask_ollama_final_decision(
     predictions: List[Dict],
     open_positions: List[Dict],
     account_state: Dict,
-    *,
-    chaotic_mode: bool = False,
-    recent_chaotic_feedback: Optional[Dict] = None,
 ) -> Optional[str]:
     """Ask cloud Ollama for a final trading decision.
 
@@ -41,18 +37,13 @@ def ask_ollama_final_decision(
     if not predictions:
         return None
 
-    try:
-        chaotic_target_horizon_hours = max(int(os.getenv("CHAOTIC_TARGET_HORIZON_HOURS", "12")), 1)
-    except ValueError:
-        chaotic_target_horizon_hours = 12
-
     crypto_symbols = [
         str(p.get("symbol"))
         for p in predictions
         if is_crypto_symbol(str(p.get("symbol", "")))
     ]
     crypto_note = ""
-    if crypto_symbols and not chaotic_mode:
+    if crypto_symbols:
         crypto_note = (
             "\n\nPRAVIDLA PRO CRYPTO INSTRUMENTY:\n"
             f"- Crypto kandidati v tomto vyberu: {', '.join(crypto_symbols)}\n"
@@ -77,37 +68,7 @@ def ask_ollama_final_decision(
             },
         ],
     }
-    if chaotic_mode:
-        response_payload.update(
-            {
-                "tradeable_within_horizon": True,
-                "expected_holding_hours": 8,
-                "feedback_assessment": "",
-                "feedback_influenced_decision": False,
-            }
-        )
     response_example = json.dumps(response_payload, indent=2, ensure_ascii=False)
-
-    prediction_label = "vsechny dostupne predikce bez minimalniho prahu" if chaotic_mode else "filtrovane - pouze BUY/SELL >= 35%"
-    mode_note = (
-        "\nCHAOTIC REZIM: Jde o kratkodoby posledni fallback. Vyber pouze smer, u ktereho ma "
-        f"lokalne vypocteny TP z 1h ATR realistickou sanci byt dosazen do {chaotic_target_horizon_hours} hodin. "
-        "Pokud takovy kandidat neni, vrat tradeable_within_horizon=false a action=NO_TRADE; "
-        "v takovem pripade nevracej symbol ani kandidaty. Neotevirej obchod jen proto, ze strategie je fallback."
-        if chaotic_mode
-        else ""
-    )
-    feedback_note = ""
-    if chaotic_mode and recent_chaotic_feedback is not None:
-        feedback_note = (
-            "\n\nZPETNA VAZBA POSLEDNICH UZAVRENYCH CHAOTIC OBCHODU:\n"
-            f"{json.dumps(recent_chaotic_feedback, ensure_ascii=False)}\n"
-            "PRAVIDLA PRO ZPETNOU VAZBU:\n"
-            "- Jde pouze o maly vzorek, ne o dukaz zmeny trhu.\n"
-            "- Neotevirej obchod jen proto, abys dohnal predchozi ztratu.\n"
-            "- Stale vyber pouze kandidata z aktualne dodanych predikci.\n"
-            "- Uved, zda feedback ovlivnil rozhodnuti."
-        )
 
     prompt = f"""Jsi expert obchodni poradce. Na zaklade analyzy ucin finalni obchodni rozhodnutí.
 
@@ -117,8 +78,8 @@ STAV UCTU:
 OTEVRENE POZICE:
 {json.dumps(open_positions, indent=2, ensure_ascii=False)}
 
-DOSTUPNE PREDIKCE ({prediction_label}):
-{json.dumps(predictions, indent=2, ensure_ascii=False)}{crypto_note}{mode_note}{feedback_note}
+DOSTUPNE PREDIKCE (filtrovane - pouze BUY/SELL >= 35%):
+{json.dumps(predictions, indent=2, ensure_ascii=False)}{crypto_note}
 
 UKOL:
 1. Vyber hlavniho kandidata z dostupnych predikcí.
@@ -127,8 +88,6 @@ UKOL:
 4. Pokud davaji smysl alternativy, vrat i 2 az 3 serazene kandidaty pro fallback.
 5. DIVERZIFIKACE: Preferuj symboly bez otevrenych pozic.
 6. Nerikis lot_size ani take_profit - pouze instrument a smer.
-7. Pri chaotic rezimu vrat tradeable_within_horizon, expected_holding_hours, feedback_assessment a feedback_influenced_decision.
-
 Odpovez POUZE jako JSON bez dalsiho textu:
 
 {response_example}"""
@@ -170,10 +129,6 @@ Odpovez POUZE jako JSON bez dalsiho textu:
         if not parsed:
             print("  ⚠️  Nelze parsovat JSON z odpovedi cloud Ollamy")
             return None
-
-        if chaotic_mode and parsed.get("tradeable_within_horizon") is False:
-            print("  ℹ️  Chaotic Ollama nenasla obchod realizovatelny v cilovem horizontu")
-            return json.dumps(parsed, ensure_ascii=False)
 
         if not parsed.get("recommended_symbol") or not parsed.get("action"):
             print("  ⚠️  Cloud Ollama neposkytla povinne pole recommended_symbol/action")

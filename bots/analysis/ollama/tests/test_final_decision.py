@@ -11,7 +11,7 @@ from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
-from final_decision import RankedCandidate, _resolve_chaotic_ollama_candidate, _resolve_chaotic_trade_parameters, _resolve_trade_parameters, make_final_trading_decision
+from final_decision import RankedCandidate, _resolve_trade_parameters, make_final_trading_decision
 
 
 class FinalDecisionRetryTests(unittest.TestCase):
@@ -40,56 +40,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_load_predictions.assert_not_called()
 		mock_get_account_state.assert_not_called()
 		self.assertEqual(audit_rows[-1]["reason"], "global_max_open_positions_reached")
-
-	@patch("ollama_advisory.ask_ollama_final_decision", return_value=json.dumps({"tradeable_within_horizon": False, "action": "NO_TRADE"}))
-	@patch("final_decision.record_chaotic_decision")
-	@patch("final_decision.build_chaotic_recent_feedback")
-	def test_chaotic_no_trade_horizon_response_is_not_executable(self, _mock_feedback, mock_record, _mock_ollama) -> None:
-		with tempfile.TemporaryDirectory() as temporary_directory:
-			candidate = _resolve_chaotic_ollama_candidate(
-				predictions=[{"symbol": "EURUSD_ecn", "BUY": 55, "SELL": 45}],
-				open_positions=[],
-				account_state={},
-				service_folder=Path(temporary_directory),
-			)
-
-		self.assertIsNone(candidate)
-		mock_record.assert_not_called()
-
-	@patch.dict(
-		os.environ,
-		{
-			"CHAOTIC_POSITION_MARGIN_PERCENT": "5",
-			"CHAOTIC_TAKE_PROFIT_ATR_MULTIPLIER": "1.5",
-		},
-		clear=False,
-	)
-	@patch("final_decision.mt5.order_calc_margin")
-	@patch("final_decision.get_current_price")
-	@patch("final_decision.get_symbol_info")
-	def test_chaotic_parameters_use_margin_budget_and_atr_take_profit(
-		self,
-		mock_get_symbol_info,
-		mock_get_current_price,
-		mock_order_calc_margin,
-	) -> None:
-		mock_get_symbol_info.return_value = SimpleNamespace(volume_min=0.01, volume_step=0.01, digits=2)
-		mock_get_current_price.return_value = 100.0
-		mock_order_calc_margin.side_effect = lambda order_type, symbol, volume, price: volume * 1000.0
-
-		resolved = _resolve_chaotic_trade_parameters(
-			symbol="EURUSD_ecn",
-			action="BUY",
-			account_state={"balance": 5000.0, "margin_free": 750.0},
-			market_data={"oscillators": {"1h": {"atr14": [{"value": 0.5}]}}},
-		)
-
-		self.assertIsNotNone(resolved)
-		lot_size, take_profit, details = resolved
-		self.assertEqual(lot_size, 0.25)
-		self.assertEqual(take_profit, 100.75)
-		self.assertEqual(details["margin_budget"], 250.0)
-		self.assertEqual(details["estimated_required_margin"], 250.0)
 
 	@patch("final_decision.estimate_order_profit")
 	@patch("final_decision.get_symbol_info")

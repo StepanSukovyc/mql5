@@ -1,6 +1,6 @@
 # Economic calendar
 
-The optional Economic Calendar layer protects **new entries only**. Existing positions continue to be managed solely by the existing profit cleanup, swap rollover cleanup, and hybrid-loss-exit strategies. The deterministic event-risk filter always takes precedence over AI context; Ollama and Gemini never send orders.
+The optional Economic Calendar layer protects **new entries only**. Existing positions continue to be managed by the profit cleanup and swap rollover cleanup. The deterministic event-risk filter always takes precedence over AI context; Ollama and Gemini never send orders.
 
 The installed Python `MetaTrader5` package does not expose Economic Calendar functions, so compile [mql/experts/mt5_economic_calendar_exporter.mq5](../../../mql/experts/mt5_economic_calendar_exporter.mq5) in MetaEditor and attach it to any chart. It is read-only and exports `economic_calendar.json` to MT5 Common Files every `RefreshSeconds`. Set `ECONOMIC_CALENDAR_EXPORT_PATH` to that file's absolute path.
 
@@ -68,15 +68,9 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Pokud je čistý zisk alespoň `0.10 USD`, pozice je vhodná k uzavření kvůli vyhnutí se swapu
   - Audit log zapisuje i skip/no-candidate průchody, takže je vidět, zda strategie byla mimo okno nebo uvnitř okna nic nenašla
   - Přepínač `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
-10. **Hybridní interní exit ztrátových pozic** (`HYBRID_EXIT_ENABLED`):
-  - Je jediným automatickým loss-exit mechanismem; denní, týdenní a měsíční cleanup strategie byly odstraněny.
-  - Smí vyhodnocovat pouze pozice otevřené od `HYBRID_EXIT_ANALYSIS_START_DATE` v časovém pásmu `HYBRID_EXIT_TIMEZONE`; starší pozice nikdy nezavírá.
-  - Stáří počítá v aktivních obchodních hodinách, takže víkend mezi pátkem 23:00 a nedělí 23:00 Prague time pozici neuměle nezestárne.
-  - U staré ztrátové pozice mimo break-even buffer vyžaduje alespoň dva negativní signály z uzavřených H1/H4 svíček.
-  - `HYBRID_EXIT_DRY_RUN=true` pouze zapisuje rozhodnutí do `hybrid_loss_exit.csv` a `hybrid_loss_exit_events.jsonl`; neposílá close pokyn.
-11. **Provede obchod** na MT5 podle aktivního režimu
-12. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
-13. **Vrátí se na krok 3** (restart monitoring)
+10. **Provede obchod** na MT5 podle aktivního režimu
+11. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
+12. **Vrátí se na krok 3** (restart monitoring)
 
 **Automatické pozastavení v swap blokovacím okně:**
 - Blokace se řídí pevným ručním intervalem z `.env`
@@ -193,18 +187,6 @@ SWAP_BLOCK_END_HOUR=23
 SWAP_BLOCK_END_MINUTE=30
 # SWAP_ROLLOVER_LOOKBACK_DAYS=14
 # SWAP_BLOCK_HALF_WINDOW_MINUTES=30
-HYBRID_EXIT_ENABLED=true
-HYBRID_EXIT_DRY_RUN=true
-HYBRID_EXIT_ANALYSIS_START_DATE=2026-08-01
-HYBRID_EXIT_TIMEZONE=Europe/Prague
-HYBRID_EXIT_CHECK_INTERVAL_MINUTES=15
-HYBRID_EXIT_YOUNG_HOURS=24
-HYBRID_EXIT_OLD_HOURS=48
-HYBRID_EXIT_BREAK_EVEN_BUFFER_USD=0.20
-HYBRID_EXIT_MAX_CLOSES_PER_CYCLE=1
-
-# Chaotic advisory opens only setups that it explicitly estimates can reach the ATR-based TP within this horizon.
-CHAOTIC_TARGET_HORIZON_HOURS=12
 
 # Ollama service konfigurace (nezávislé predikce)
 OLLAMA_ENABLED=true
@@ -350,7 +332,6 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
 - **profit_cleanup_strategy.py** - Volitelná minutová strategie pro uzavírání všech otevřených profitních pozic, které překročí svůj vypočtený limit `PCZ`
 - **verify_profit_cleanup_strategy.py** - Lokální validační skript pro výpočet `VOLUME`, `ZISK` a `PCZ` na zadaných scénářích
-- **hybrid_loss_exit_strategy.py** - Jediný interní exit pro způsobilé ztrátové pozice; používá aktivní tržní stáří a uzavřené H1/H4 svíčky
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
 - **ollama_service.py** - Paralelní služba generující predikce pomocí lokálního Ollama AI (běží v samostatném threadu)
@@ -362,11 +343,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json` - Finální rozhodnutí
 - `<SERVICE_DEST_FOLDER>/ollama/predikce/{symbol}.json` - Předchystané Ollama predikce (použitelné v hlavní logice při stáří <= 1h)
 - `<SERVICE_DEST_FOLDER>/trade_logs/profit_cleanup.csv` - Audit minutové profit cleanup strategie včetně `B`, referenčního `VOLUME`, `ZISK`, `PCZ` a výsledku close pokusu
-- `<SERVICE_DEST_FOLDER>/trade_logs/hybrid_loss_exit.csv` - Přehled rozhodnutí hybridu a případných close pokusů
-- `<SERVICE_DEST_FOLDER>/trade_logs/hybrid_loss_exit_events.jsonl` - Strukturované market snapshoty a reason codes rozhodnutí
-- `<SERVICE_DEST_FOLDER>/trade_logs/hybrid_loss_exit_outcomes.jsonl` - Výsledek kandidátů po nakonfigurovaných horizontech 24/48 hodin
 - Dokud testujete, nechte `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
-- Dokud testujete, nechte `HYBRID_EXIT_DRY_RUN=true`; po vyhodnocení diagnostických outcome logů změňte na `false`
 
 ## Poznamky
 
@@ -385,4 +362,3 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - Ostatní obchody používají `lot_size` od Gemini a bez take profit
 - **Nekonečný loop:** Skript běží dokola, dokud není ručně zastaven
 - Ukončení skriptu: `Ctrl+C`
-
