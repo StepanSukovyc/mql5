@@ -8,6 +8,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+import MetaTrader5 as mt5
+
 from account_state import get_account_state
 from profit_protection_strategy import run_profit_protection_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
@@ -55,9 +57,61 @@ def _log_position_management_event(event: str, **payload: object) -> None:
 		handle.write(json.dumps(entry, ensure_ascii=False, sort_keys=True, default=str) + "\n")
 
 
+def _remove_negative_swap_take_profits() -> None:
+	"""Remove broker-side TP from any open position with accrued negative swap."""
+	positions = mt5.positions_get()
+	if positions is None:
+		raise RuntimeError(f"Failed to get positions for negative-swap TP removal: {mt5.last_error()}")
+
+	for position in positions:
+		if not (position.swap < 0 and position.tp > 0):
+			continue
+
+		# Refresh the position so we preserve its latest SL and recheck eligibility.
+		current_positions = mt5.positions_get(ticket=position.ticket)
+		if current_positions is None:
+			message = f"Failed to refresh position: {mt5.last_error()}"
+			_log_position_management_event(
+				"negative_swap_tp_removal_error", ticket=position.ticket,
+				symbol=position.symbol, error=message,
+			)
+			print(f"Negative-swap TP removal failed for ticket {position.ticket}: {message}")
+			continue
+		if not current_positions:
+			continue
+		current = current_positions[0]
+		if not (current.swap < 0 and current.tp > 0):
+			continue
+
+		request = {
+			"action": mt5.TRADE_ACTION_SLTP,
+			"position": current.ticket,
+			"symbol": current.symbol,
+			"sl": current.sl,
+			"tp": 0.0,
+		}
+		result = mt5.order_send(request)
+		success = result is not None and result.retcode == mt5.TRADE_RETCODE_DONE
+		error = ""
+		if result is None:
+			error = f"MT5 order_send failed: {mt5.last_error()}"
+		elif not success:
+			error = f"{result.retcode} - {result.comment}"
+		_log_position_management_event(
+			"negative_swap_tp_removed" if success else "negative_swap_tp_removal_error",
+			ticket=current.ticket, symbol=current.symbol, swap=current.swap,
+			previous_tp=current.tp, sl=current.sl, error=error,
+		)
+		if success:
+			print(f"Take profit removed: ticket={current.ticket}, symbol={current.symbol}, swap={current.swap}")
+		else:
+			print(f"Negative-swap TP removal failed for ticket {current.ticket}: {error}")
+
+
 def _run_management_tasks(account_info: dict) -> None:
 	"""Run independent position-management tasks without letting one disable the others."""
 	tasks = (
+		("negative_swap_tp_removal", _remove_negative_swap_take_profits),
 		("profit_protection", run_profit_protection_strategy_if_due),
 		("swap_rollover_cleanup", lambda: run_swap_rollover_cleanup_strategy_if_due(account_info)),
 	)

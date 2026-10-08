@@ -41,6 +41,11 @@ AI advisory:
   - Scalping strategy does NOT use AI predictions — pure deterministic price-action logic.
 
 Position management (runs independently every minute):
+  - Negative accrued swap: removes an existing broker-side take profit from every
+    open position with swap < 0, including manual and scalping positions, preserving SL.
+    Swap >= 0 leaves TP unchanged; absent TP is not restored. Runs before other
+    management tasks, even during the entry swap block, without cleanup dry-run flags.
+    MT5 failures are logged and retried on the next check; no position is closed by this rule.
   - Profit protection: trails and closes profitable positions that retrace past a threshold.
   - Swap rollover protection: blocks position changes around the broker rollover window.
   - Weekly surplus cleanup: every Friday, closes the oldest stale losing positions using
@@ -99,6 +104,11 @@ AI poradní vrstva:
   - Skalpovací strategie AI predikce nepoužívá — čistě deterministická price-action logika.
 
 Správa pozic (běží nezávisle každou minutu):
+  - Záporný zaúčtovaný swap: odstraní existující broker-side take profit ze všech
+    otevřených pozic se swapem < 0, včetně manuálních a skalpovacích; SL zachová.
+    Swap >= 0 ponechá TP beze změny; chybějící TP se neobnovuje. Běží před ostatní
+    správou, i během vstupního swap bloku, bez dry-run přepínačů cleanup strategií.
+    Chyby MT5 se logují a opakují při další kontrole; toto pravidlo pozici nezavírá.
   - Ochrana zisku: sleduje a zavírá ziskové pozice, které se přiblíží retracementu.
   - Ochrana proti swap rolloveru: blokuje změny pozic v okně okolo brokerského rolloveru.
   - Týdenní surplus cleanup: každý pátek zavírá nejstarší stálé ztrátové pozice z přebytku

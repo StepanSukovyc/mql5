@@ -279,6 +279,19 @@ Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví 
 
 Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
+### Take profit při záporném swapu
+
+Samostatný minutový monitor v `account_monitor.py` kontroluje všechny otevřené pozice účtu, včetně manuálních, legacy a skalpovacích pozic, bez filtru magic čísla:
+
+- pokud je skutečně zaúčtovaný `position.swap < 0` a pozice má `position.tp > 0`, odstraní broker-side TP příkazem `TRADE_ACTION_SLTP` s `tp=0.0`
+- při swapu `>= 0` ponechá stávající TP beze změny; chybějící TP se nenastavuje ani neobnovuje
+- pozice bez TP se nemodifikuje; nerozhoduje zisk/ztráta pozice ani predikovaná swapová sazba instrumentu
+- těsně před modifikací znovu načte pozici podle ticketu, ověří swap a TP a zachová aktuální stop loss; pozici nezavírá
+- kontrola běží před profit protection a rollover cleanup, nezávisle na vstupních strategiích, marži a globálním swap blok okně; toto pravidlo není dry-run a neřídí se dry-run přepínači cleanup strategií
+- chyby MT5 jsou hlášeny v konzoli a logu, neblokují ostatní management úlohy ani další pozice; neúspěšné odstranění se zkusí znovu při další kontrole
+
+Pravidlo pracuje s již otevřenými pozicemi; výpočet TP při vstupu do nového obchodu se nemění. Po odstranění TP zůstávají ostatní existující pravidla správy pozic aktivní podle svých dosavadních podmínek.
+
 ## Logy a stavové soubory
 
 Runtime zapisuje více specializovaných logů:
@@ -294,6 +307,7 @@ Runtime zapisuje více specializovaných logů:
 - `trade_logs/reversal_strategy_status.csv`
 - `trade_logs/quant_strategy_status.csv`
 - `trade_logs/scalping_position_state.json`
+- `trade_logs/position_management_monitor.jsonl`: heartbeat monitoru, odstranění TP (`negative_swap_tp_removed`) a chyby (`negative_swap_tp_removal_error` nebo `position_management_task_error`); zápis vyžaduje `SERVICE_DEST_FOLDER`
 
 Význam nových CSV souborů:
 
@@ -326,6 +340,7 @@ Důležité pokrytí:
 - advisory cache a rejection cooldown
 - local fallback candidate queue
 - session guardy pro strategické profily
+- odstranění TP při záporném swapu, ponechání při nulovém/kladném swapu, zachování aktuálního SL, všechny typy ownership a opakování po chybě MT5
 
 ## Stručné shrnutí
 
