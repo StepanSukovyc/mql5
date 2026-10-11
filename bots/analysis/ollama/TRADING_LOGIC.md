@@ -283,7 +283,11 @@ Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
 ### Denní uzavírání ziskových pozic
 
-`profit_cleanup_strategy.py` běží z account monitoru pouze každý den mezi 22:00 a 22:10 v `Europe/Prague`, s automatickým přechodem mezi letním a zimním časem. V tomto okně projde všechny otevřené pozice a uzavře každou, jejíž čistý výsledek `profit + swap - odhadovaná komise` je alespoň `0,50 USD` (`PCZ`). Limit je pevný, nezávisí na balance ani objemu. Strategie respektuje také swap blokovací okno; zapíná se přes `PROFIT_CLEANUP_STRATEGY_ENABLED` a `PROFIT_CLEANUP_STRATEGY_DRY_RUN=false` povoluje skutečné close příkazy. Výsledky a důvody zapisuje do `trade_logs/profit_cleanup.csv`.
+`profit_cleanup_strategy.py` běží z account monitoru pouze každý den mezi 21:50 a 22:00 v `Europe/Prague`, tedy před obvyklým koncem americké akciové seance. Časy se řídí evropským letním/zimním časem. V tomto okně projde všechny otevřené pozice a uzavře každou, jejíž čistý výsledek `profit + swap - odhadovaná komise` je alespoň `0,50 USD` (`PCZ`). Limit je pevný, nezávisí na balance ani objemu. Strategie respektuje také swap blokovací okno; zapíná se přes `PROFIT_CLEANUP_STRATEGY_ENABLED` a `PROFIT_CLEANUP_STRATEGY_DRY_RUN=false` povoluje skutečné close příkazy. Výsledky a důvody zapisuje do `trade_logs/profit_cleanup.csv`.
+
+### Večerní blokace nových vstupů
+
+Nové pozice se neotevírají od 21:50 do 00:00 `Europe/Prague`. Plánovač zahodí připravené signály a počká, až zákaz skončí; exekuční vrstva kontroluje čas ještě jednou bezprostředně před odesláním MT5 příkazu. Ostatní strategie zavírání a správy již otevřených pozic běží dál. Vedle tohoto pevného večerního okna zůstává aktivní také samostatná blokace kolem swap rolloveru.
 
 ### Take profit při záporném swapu
 

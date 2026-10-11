@@ -52,11 +52,10 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Každý N-tý obchod: použije se i `take_profit` od Gemini
   - Ostatní obchody: `take_profit` se nepoužije
 8. **Denní profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`):
-  - Account monitor ho spouští v okně 22:00–22:10 `Europe/Prague`; respektuje letní/zimní čas a neběží mimo toto denní okno ani během swap blokovacího okna
+  - Account monitor ho spouští v okně 21:50–22:00 `Europe/Prague`, tedy před obvyklým koncem americké akciové seance; respektuje letní/zimní čas a neběží mimo toto denní okno ani během swap blokovacího okna
   - Pro každou otevřenou pozici spočítá čistý zisk `ZISK = profit + swap - fee`, kde `fee = 0.10 USD` za každých `0.01` lotu
   - Uzavře pozici, pokud je její čistý zisk alespoň `0.50 USD` (`PCZ`); práh se neváže na balance ani objem
   - V jednom průchodu projde všechny otevřené pozice a uzavře všechny, které splní práh
-  - V jednom průchodu uzavírá všechny aktuálně vhodné pozice
   - Přepínač `PROFIT_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic; live uzavírání povolte nastavením na `false`
 9. **Swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`):
   - Běží v account monitoru každou minutu, ale pouze uvnitř swap blokovacího okna
@@ -76,6 +75,12 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Systém se zastaví v intervalu `SWAP_BLOCK_START_*` až `SWAP_BLOCK_END_*`
   - Jakákoli připravená rozhodnutí se v tomto okně zahodí
   - Aktuální konfigurace je `22:30-23:30` v čase `Europe/Prague`
+
+**Večerní zákaz nových vstupů:**
+- Od `21:50` do `00:00` `Europe/Prague` se neotevírají nové pozice.
+- Zákaz je ověřen v plánovači i znovu těsně před odesláním vstupního příkazu do MT5.
+- Platí pro všechny vstupní strategie; uzavírání a správa stávajících pozic pokračují beze změny.
+- Praha se převádí přes časovou zónu IANA, takže přepnutí letního/zimního času je zohledněno.
 
 **Ukončení:** Ctrl+C
 
@@ -329,7 +334,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 
 - **logika.py** - Hlavní orchestrace nekonečného cyklu (monitoring → predikce → finální rozhodnutí → obchod → restart)
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
-- **profit_cleanup_strategy.py** - Volitelná denní strategie pro uzavírání všech otevřených pozic s čistým ziskem alespoň `0.50 USD` během okna 22:00–22:10 `Europe/Prague`
+- **profit_cleanup_strategy.py** - Volitelná denní strategie pro uzavírání všech otevřených pozic s čistým ziskem alespoň `0.50 USD` během okna 21:50–22:00 `Europe/Prague`
 - **verify_profit_cleanup_strategy.py** - Lokální validační skript pro odhad poplatku, čistého zisku a pevného limitu `PCZ` na zadaných scénářích
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod

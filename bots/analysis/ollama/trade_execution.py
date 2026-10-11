@@ -14,6 +14,7 @@ from typing import List, Optional
 import MetaTrader5 as mt5
 
 from mt5_symbols import get_symbol_info, get_symbol_tick
+from swap_rollover import get_prague_entry_block_end_utc
 from trading_validation import get_margin_requirement, validate_lot_size, validate_symbol
 
 
@@ -330,6 +331,29 @@ def execute_trade(
 	print(f"   Take Profit: {take_profit if take_profit is not None else 'None'}")
 	requested_lot_size = float(lot_size)
 
+	entry_block_end = get_prague_entry_block_end_utc()
+	if entry_block_end is not None:
+		error_msg = (
+			"NEW_ENTRY_BLOCKED_PRAGUE_EVENING_WINDOW: no new positions from 21:50 "
+			f"until 00:00 Europe/Prague (resumes at {entry_block_end.isoformat()})"
+		)
+		print(f"⏸️  Trade blocked: {error_msg}")
+		log_trade(
+			strategy_id,
+			magic,
+			comment or strategy_id,
+			symbol,
+			action,
+			lot_size,
+			lot_source,
+			0.0,
+			take_profit,
+			False,
+			error_msg,
+			service_folder,
+		)
+		return _result(False, error_msg)
+
 	within_position_limit, position_limit_error = _check_open_position_limit()
 	if not within_position_limit:
 		print(f"❌ Trade blocked: {position_limit_error}")
@@ -515,6 +539,29 @@ def execute_trade(
 	except Exception as exc:
 		# Calendar faults never break the legacy execution path; configured fail mode is applied by the service.
 		print(f"⚠️ Economic calendar execution recheck unavailable: {exc}")
+
+	entry_block_end = get_prague_entry_block_end_utc()
+	if entry_block_end is not None:
+		error_msg = (
+			"NEW_ENTRY_BLOCKED_PRAGUE_EVENING_WINDOW: no new positions from 21:50 "
+			f"until 00:00 Europe/Prague (resumes at {entry_block_end.isoformat()})"
+		)
+		print(f"⏸️  Trade blocked: {error_msg}")
+		log_trade(
+			strategy_id,
+			magic,
+			comment or strategy_id,
+			symbol,
+			action,
+			lot_size,
+			lot_source,
+			price,
+			take_profit,
+			False,
+			error_msg,
+			service_folder,
+		)
+		return _result(False, error_msg)
 
 	result = None
 	while True:

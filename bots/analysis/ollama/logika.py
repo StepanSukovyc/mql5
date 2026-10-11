@@ -25,7 +25,7 @@ from trading_logic import run_trading_logic
 from final_decision import make_final_trading_decision
 from mt5_connection import initialize_mt5, shutdown_mt5
 from ollama_service import ollama_service_loop, ollama_cloud_service_loop, is_ollama_cloud_enabled
-from swap_rollover import get_swap_block_window
+from swap_rollover import PRAGUE_TZ, get_prague_entry_block_end_utc, get_swap_block_window
 from market_data import (
 	collect_symbol_payload,
 	get_symbols,
@@ -297,48 +297,56 @@ def process_existing_predictions(predictions_folder: Path) -> bool:
 
 def is_in_restricted_trading_hours() -> bool:
 	"""
-	Check if current time is in the broker-derived swap rollover block window.
+	Check if new entries are blocked by the evening or swap window.
 
-	Trading is paused from 30 minutes before to 30 minutes after the detected
-	swap rollover time.
+	The evening entry block runs from 21:50 to midnight Europe/Prague.
 	"""
 	now_utc = datetime.now(tz=timezone.utc)
 	window = get_swap_block_window(now_utc=now_utc)
-	return window.contains(now_utc)
+	return window.contains(now_utc) or get_prague_entry_block_end_utc(now_utc) is not None
 
 
 def wait_until_trading_allowed() -> None:
 	"""
-	Wait until the broker-derived swap rollover block window has passed.
+	Wait until both evening and swap-rollover entry blocks have passed.
 	"""
 	while True:
 		now_utc = datetime.now(tz=timezone.utc)
 		window = get_swap_block_window(now_utc=now_utc)
-		if not window.contains(now_utc):
+		active_block_ends = []
+		if window.contains(now_utc):
+			active_block_ends.append(window.end_utc)
+		prague_block_end = get_prague_entry_block_end_utc(now_utc)
+		if prague_block_end is not None:
+			active_block_ends.append(prague_block_end)
+		if not active_block_ends:
 			break
 
-		sleep_seconds = (window.end_utc - now_utc).total_seconds()
-		if sleep_seconds > 0:
-			print("\n⏸️  TRADING PAUSE - Swap rollover block window")
-			print(f"   Current UTC:      {now_utc.strftime('%H:%M:%S')}")
-			print(
-				"   Block window:     "
-				f"{window.start_utc.strftime('%H:%M')} - {window.end_utc.strftime('%H:%M')} UTC"
-			)
-			print(f"   Rollover center:  {window.rollover_at_utc.strftime('%H:%M')} UTC")
-			print(f"   Source:           {window.rollover_time.source}")
-			print(f"   Resuming trades:  {window.end_utc.strftime('%H:%M:%S')} UTC")
-			print(f"   Sleeping for:     {int(sleep_seconds)} seconds (~{int(sleep_seconds/60)} minutes)")
-			print("   Reason:           Avoid swap on rollover-adjacent trading\n")
-			
-			# Sleep in 10-second intervals to allow graceful shutdown
-			remaining = sleep_seconds
-			while remaining > 0:
-				time.sleep(min(10, remaining))
-				remaining -= 10
-			break
-		else:
+		resume_at_utc = max(active_block_ends)
+		sleep_seconds = (resume_at_utc - now_utc).total_seconds()
+		if sleep_seconds <= 0:
 			time.sleep(1)
+			continue
+
+		now_prague = now_utc.astimezone(PRAGUE_TZ)
+		print("\n⏸️  TRADING PAUSE - entry restriction window")
+		print(f"   Current UTC:      {now_utc.strftime('%H:%M:%S')}")
+		print(f"   Current Prague:   {now_prague.strftime('%H:%M:%S')}")
+		if prague_block_end is not None:
+			print("   Entry block:      21:50 - 00:00 Europe/Prague")
+		if window.contains(now_utc):
+			print(
+				"   Swap block (UTC): "
+				f"{window.start_utc.strftime('%H:%M')} - {window.end_utc.strftime('%H:%M')}"
+			)
+		print(f"   Resuming trades:  {resume_at_utc.isoformat()}")
+		print(f"   Waiting about {int(sleep_seconds / 60)} minutes\n")
+
+		while True:
+			remaining = (resume_at_utc - datetime.now(tz=timezone.utc)).total_seconds()
+			if remaining <= 0:
+				break
+			time.sleep(min(10, remaining))
 
 
 def main() -> int:
@@ -453,14 +461,10 @@ def main() -> int:
 			
 			# Check if trading trigger was set by monitor
 			if trading_trigger_event.is_set():
-				# Double-check we're not in the broker-derived swap block window before proceeding.
+				# Double-check evening and swap entry restrictions before proceeding.
 				if is_in_restricted_trading_hours():
-					window = get_swap_block_window()
-					print("\n🛑 TRADING BLOCKED - Swap rollover block window")
-					print(
-						"   Discarding prepared signals and waiting until "
-						f"{window.end_utc.strftime('%H:%M:%S')} UTC..."
-					)
+					print("\n🛑 NEW ENTRIES BLOCKED - evening or swap restriction")
+					print("   Discarding prepared signals and waiting until entries are allowed...")
 					wait_until_trading_allowed()
 				else:
 					print("\n🚀 Stop condition met - proceeding with trading...")

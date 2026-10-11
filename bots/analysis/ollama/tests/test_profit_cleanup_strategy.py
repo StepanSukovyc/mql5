@@ -77,7 +77,7 @@ class ProfitCleanupStrategyTests(unittest.TestCase):
 
 	def test_cleanup_runs_during_daily_prague_window(self) -> None:
 		now_utc = pytz.timezone("Europe/Prague").localize(
-			datetime(2026, 10, 11, 22, 5)
+			datetime(2026, 10, 11, 21, 55)
 		).astimezone(timezone.utc)
 		position = SimpleNamespace(
 			ticket=123,
@@ -105,9 +105,21 @@ class ProfitCleanupStrategyTests(unittest.TestCase):
 			comment="Profit cleanup strategy",
 		)
 
+	def test_cleanup_does_not_run_at_or_after_2200_prague_time(self) -> None:
+		now_utc = pytz.timezone("Europe/Prague").localize(
+			datetime(2026, 10, 11, 22, 0)
+		).astimezone(timezone.utc)
+		with patch("profit_cleanup_strategy._get_strategy_enabled", return_value=True), patch(
+			"profit_cleanup_strategy.get_swap_block_window"
+		) as mock_swap_window, patch("profit_cleanup_strategy.mt5.positions_get") as mock_positions:
+			run_profit_cleanup_strategy_if_due({"raw_balance": 10000.0}, now_utc=now_utc)
+
+		mock_swap_window.assert_not_called()
+		mock_positions.assert_not_called()
+
 	def test_cleanup_does_not_run_outside_daily_prague_window(self) -> None:
 		now_utc = pytz.timezone("Europe/Prague").localize(
-			datetime(2026, 10, 11, 22, 10)
+			datetime(2026, 10, 11, 21, 49)
 		).astimezone(timezone.utc)
 		with patch("profit_cleanup_strategy._get_strategy_enabled", return_value=True), patch(
 			"profit_cleanup_strategy.get_swap_block_window"

@@ -4,6 +4,7 @@ import os
 import json
 import tempfile
 import unittest
+from datetime import datetime, timezone
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -15,6 +16,32 @@ from trading_validation import MarginRequirement
 
 
 class TradeExecutionPositionLimitTests(unittest.TestCase):
+	@patch(
+		"trade_execution.get_prague_entry_block_end_utc",
+		return_value=datetime(2026, 10, 11, 22, 0, tzinfo=timezone.utc),
+	)
+	@patch("trade_execution.mt5.order_send")
+	@patch("trade_execution.mt5.positions_get")
+	def test_evening_block_prevents_opening_new_position(
+		self,
+		mock_positions_get,
+		mock_order_send,
+		_mock_entry_block,
+	) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			result = execute_trade(
+				"EURUSD_ecn",
+				"BUY",
+				0.01,
+				Path(temp_dir),
+				return_execution_result=True,
+			)
+
+		self.assertFalse(result.success)
+		self.assertIn("NEW_ENTRY_BLOCKED_PRAGUE_EVENING_WINDOW", result.error_message)
+		mock_positions_get.assert_not_called()
+		mock_order_send.assert_not_called()
+
 	@patch.dict(os.environ, {}, clear=True)
 	@patch("trade_execution.mt5.order_send")
 	@patch("trade_execution.mt5.positions_get", return_value=[object()] * 17)

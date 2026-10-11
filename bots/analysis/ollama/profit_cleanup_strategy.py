@@ -20,8 +20,8 @@ DEFAULT_DRY_RUN = True
 ACCOUNT_BALANCE_STEP = 500.0
 MIN_NET_PROFIT_TO_CLOSE = 0.50
 FEE_PER_001_LOT = 0.10
-DAILY_RUN_START = time(hour=22)
-DAILY_RUN_END = time(hour=22, minute=10)
+DAILY_RUN_START = time(hour=21, minute=50)
+DAILY_RUN_END = time(hour=22)
 PROFIT_CLEANUP_LOG_HEADERS = [
 	"timestamp",
 	"dry_run",
@@ -230,7 +230,7 @@ def run_profit_cleanup_strategy_if_due(
 	*,
 	now_utc: Optional[datetime] = None,
 ) -> None:
-	"""Evaluate profitable positions once per minute during the Prague 22:00 window."""
+	"""Evaluate profitable positions once per minute before the Prague 22:00 close."""
 	global _LAST_EVALUATED_MINUTE_KEY
 
 	if not _get_strategy_enabled():

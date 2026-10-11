@@ -8,7 +8,13 @@ from types import SimpleNamespace
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from swap_rollover import detect_swap_rollover_time_from_deals, get_swap_block_window
+import pytz
+
+from swap_rollover import (
+	detect_swap_rollover_time_from_deals,
+	get_prague_entry_block_end_utc,
+	get_swap_block_window,
+)
 
 
 def _deal(*, hour: int, minute: int, reason: int = 0, comment: str = "", swap: float = 0.0, deal_type: int = 0, entry: int = 0):
@@ -25,6 +31,26 @@ def _deal(*, hour: int, minute: int, reason: int = 0, comment: str = "", swap: f
 
 
 class SwapRolloverTests(unittest.TestCase):
+	def test_prague_evening_entry_block_starts_at_2150_and_ends_at_midnight(self) -> None:
+		prague = pytz.timezone("Europe/Prague")
+		before_start = prague.localize(datetime(2026, 10, 11, 21, 49)).astimezone(timezone.utc)
+		at_start = prague.localize(datetime(2026, 10, 11, 21, 50)).astimezone(timezone.utc)
+		at_end = prague.localize(datetime(2026, 10, 12, 0, 0)).astimezone(timezone.utc)
+
+		self.assertIsNone(get_prague_entry_block_end_utc(before_start))
+		self.assertEqual(
+			get_prague_entry_block_end_utc(at_start),
+			prague.localize(datetime(2026, 10, 12, 0, 0)).astimezone(timezone.utc),
+		)
+		self.assertIsNone(get_prague_entry_block_end_utc(at_end))
+
+	def test_prague_evening_entry_block_handles_dst_transition(self) -> None:
+		prague = pytz.timezone("Europe/Prague")
+		at_start = prague.localize(datetime(2026, 3, 29, 21, 50)).astimezone(timezone.utc)
+		expected_end = prague.localize(datetime(2026, 3, 30, 0, 0)).astimezone(timezone.utc)
+
+		self.assertEqual(get_prague_entry_block_end_utc(at_start), expected_end)
+
 	def test_detects_most_common_rollover_minute(self) -> None:
 		deals = [
 			_deal(hour=23, minute=0, comment="rollover"),

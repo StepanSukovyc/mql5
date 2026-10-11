@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, time, timedelta, timezone
 from typing import Any, Iterable, Optional
 
 import MetaTrader5 as mt5
@@ -21,6 +21,7 @@ DEFAULT_LOOKBACK_DAYS = 14
 DEFAULT_BLOCK_MINUTES = 30
 CACHE_TTL_MINUTES = 15
 PRAGUE_TZ = pytz.timezone("Europe/Prague")
+PRAGUE_ENTRY_BLOCK_START = time(hour=21, minute=50)
 
 _CACHED_BUCKET_KEY: Optional[str] = None
 _CACHED_ROLLOVER_TIME: Optional["SwapRolloverTime"] = None
@@ -44,6 +45,18 @@ class SwapBlockWindow:
 
 	def contains(self, now_utc: datetime) -> bool:
 		return self.start_utc <= now_utc < self.end_utc
+
+
+def get_prague_entry_block_end_utc(now_utc: Optional[datetime] = None) -> Optional[datetime]:
+	"""Return the next Prague midnight when new entries are blocked after 21:50."""
+	now = _normalize_now(now_utc)
+	now_prague = now.astimezone(PRAGUE_TZ)
+	if now_prague.time().replace(tzinfo=None) < PRAGUE_ENTRY_BLOCK_START:
+		return None
+
+	tomorrow = now_prague.date() + timedelta(days=1)
+	midnight_prague = PRAGUE_TZ.localize(datetime.combine(tomorrow, time.min))
+	return midnight_prague.astimezone(timezone.utc)
 
 
 def _normalize_now(now_utc: Optional[datetime]) -> datetime:
