@@ -20,10 +20,10 @@ class Scenario:
 def _default_scenarios() -> list[Scenario]:
 	"""Return sample scenarios including the user's example and edge cases."""
 	return [
-		Scenario("user_example_not_eligible", 3261.0, 0.06, 6.34, -0.30),
+		Scenario("user_example_eligible_at_fixed_threshold", 3261.0, 0.06, 6.34, -0.30),
 		Scenario("eligible_medium_position", 3261.0, 0.01, 60.00, 0.00),
-		Scenario("minimum_target_profit_floor", 10.0, 0.01, 0.30, -0.10),
-		Scenario("negative_net_profit", 1500.0, 0.03, 0.80, -0.40),
+		Scenario("exact_minimum_net_profit", 10000.0, 0.01, 0.60, 0.0),
+		Scenario("below_minimum_net_profit", 1500.0, 0.03, 0.80, -0.40),
 	]
 
 
@@ -72,10 +72,10 @@ def main(argv: list[str]) -> int:
 		print(f"  L: {metrics.position_volume:.2f}")
 		print(f"  profit: {metrics.profit:.2f}")
 		print(f"  swap: {metrics.swap:.2f}")
-		print(f"  VOLUME: {metrics.reference_volume:.2f}")
+		print(f"  Reference VOLUME (audit only): {metrics.reference_volume:.2f}")
 		print(f"  fee: {metrics.fee:.2f}")
 		print(f"  ZISK: {metrics.net_profit:.2f}")
-		print(f"  PCZ: {metrics.target_profit:.4f}")
+		print(f"  PCZ minimum net profit: {metrics.target_profit:.2f} USD")
 		print(f"  eligible: {metrics.eligible}")
 		print("-" * 40)
 

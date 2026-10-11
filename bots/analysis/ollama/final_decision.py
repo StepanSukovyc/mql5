@@ -1164,7 +1164,7 @@ def _attempt_strategy_trade(
 		active_rejection = _is_candidate_rejected(service_folder, profile.context.strategy_id, symbol, action)
 		if active_rejection is not None:
 			print(f"⚠️  {profile.label} rejection cooldown active for {symbol} {action}")
-			_log_trade_decision_audit(
+			_update_trade_decision_snapshot(
 				service_folder,
 				strategy_id=profile.context.strategy_id,
 				strategy_label=profile.label,

@@ -2,12 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Tuple
+from dataclasses import dataclass
+from typing import Optional, Tuple
 
 import MetaTrader5 as mt5
 
 from account_state import get_account_info_raw, get_effective_free_margin
 from mt5_symbols import get_current_price, get_symbol_info
+
+
+@dataclass(frozen=True)
+class MarginRequirement:
+	required: Optional[float]
+	available: Optional[float]
+	raw_available: Optional[float] = None
+	error: str = ""
 
 
 def validate_symbol(symbol: str) -> Tuple[bool, str]:
@@ -53,12 +62,12 @@ def validate_lot_size(symbol: str, lot_size: float) -> Tuple[float, str]:
 	return lot_size, ""
 
 
-def check_margin_requirements(symbol: str, action: str, lot_size: float) -> Tuple[bool, str]:
-	"""Validate that free margin is sufficient for the proposed order."""
+def get_margin_requirement(symbol: str, action: str, lot_size: float) -> MarginRequirement:
+	"""Return estimated order margin and strategy-adjusted free margin."""
 	try:
 		account_info = get_account_info_raw()
 	except RuntimeError:
-		return False, "Failed to get account info"
+		return MarginRequirement(None, None, error="Failed to get account info")
 
 	raw_balance = float(account_info.balance)
 	raw_free_margin = float(account_info.margin_free)
@@ -67,29 +76,38 @@ def check_margin_requirements(symbol: str, action: str, lot_size: float) -> Tupl
 
 	symbol_info = get_symbol_info(symbol)
 	if symbol_info is None:
-		return False, f"Cannot get symbol info for {symbol}"
+		return MarginRequirement(None, free_margin, raw_free_margin, f"Cannot get symbol info for {symbol}")
 
 	price = get_current_price(symbol, action=action)
 	if price is None:
-		return False, f"Cannot get tick for {symbol}"
+		return MarginRequirement(None, free_margin, raw_free_margin, f"Cannot get tick for {symbol}")
 
 	required_margin = mt5.order_calc_margin(order_type, symbol, lot_size, price)
 	if required_margin is None:
-		return False, f"Cannot calculate margin for {symbol}"
+		return MarginRequirement(None, free_margin, raw_free_margin, f"Cannot calculate margin for {symbol}")
 
-	if required_margin > free_margin:
-		if free_margin != raw_free_margin:
+	return MarginRequirement(float(required_margin), free_margin, raw_free_margin)
+
+
+def check_margin_requirements(symbol: str, action: str, lot_size: float) -> Tuple[bool, str]:
+	"""Validate that free margin is sufficient for the proposed order."""
+	margin = get_margin_requirement(symbol, action, lot_size)
+	if margin.error or margin.required is None or margin.available is None:
+		return False, margin.error or "Margin data unavailable"
+
+	if margin.required > margin.available:
+		if margin.raw_available is not None and margin.available != margin.raw_available:
 			return False, (
-				f"Insufficient margin: required {required_margin:.2f}, available {free_margin:.2f} "
-				f"(strategy cap applied, raw free margin {raw_free_margin:.2f})"
+				f"Insufficient margin: required {margin.required:.2f}, available {margin.available:.2f} "
+				f"(strategy cap applied, raw free margin {margin.raw_available:.2f})"
 			)
-		return False, f"Insufficient margin: required {required_margin:.2f}, available {free_margin:.2f}"
+		return False, f"Insufficient margin: required {margin.required:.2f}, available {margin.available:.2f}"
 
-	if free_margin != raw_free_margin:
+	if margin.raw_available is not None and margin.available != margin.raw_available:
 		print(
-			f"   ✅ Margin check passed: required {required_margin:.2f}, "
-			f"available {free_margin:.2f} (strategy cap applied, raw {raw_free_margin:.2f})"
+			f"   ✅ Margin check passed: required {margin.required:.2f}, "
+			f"available {margin.available:.2f} (strategy cap applied, raw {margin.raw_available:.2f})"
 		)
 	else:
-		print(f"   ✅ Margin check passed: required {required_margin:.2f}, available {free_margin:.2f}")
+		print(f"   ✅ Margin check passed: required {margin.required:.2f}, available {margin.available:.2f}")
 	return True, ""

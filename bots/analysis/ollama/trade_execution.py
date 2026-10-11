@@ -6,14 +6,19 @@ import csv
 import json
 import os
 from dataclasses import dataclass
+from decimal import Decimal, ROUND_CEILING, ROUND_FLOOR
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
 
 import MetaTrader5 as mt5
 
-from mt5_symbols import get_symbol_tick
-from trading_validation import check_margin_requirements, validate_lot_size, validate_symbol
+from mt5_symbols import get_symbol_info, get_symbol_tick
+from trading_validation import get_margin_requirement, validate_lot_size, validate_symbol
+
+
+MAX_MARGIN_RETRIES = 6
+MARGIN_SAFETY_FACTOR = 0.95
 
 
 TRADE_LOG_HEADERS = [
@@ -42,6 +47,7 @@ class TradeExecutionResult:
 	position_ticket: Optional[int] = None
 	filled_price: Optional[float] = None
 	filled_volume: Optional[float] = None
+	margin_retry_count: int = 0
 	error_message: str = ""
 
 
@@ -69,6 +75,78 @@ def _check_open_position_limit() -> tuple[bool, str]:
 			"(MT5_MAX_OPEN_POSITIONS)"
 		)
 	return True, ""
+
+
+def _next_margin_sized_lot(
+	symbol: str,
+	current_lot: float,
+	required_margin: float,
+	available_margin: float,
+	*,
+	broker_rejected: bool = False,
+) -> Optional[float]:
+	"""Return a strictly smaller broker-valid volume sized for available margin."""
+	symbol_info = get_symbol_info(symbol)
+	if symbol_info is None or required_margin <= 0 or available_margin <= 0:
+		return None
+
+	minimum = float(symbol_info.volume_min)
+	step = float(symbol_info.volume_step)
+	if minimum <= 0 or step <= 0:
+		return None
+
+	scale = (available_margin / required_margin) * MARGIN_SAFETY_FACTOR
+	if broker_rejected:
+		scale = min(scale, 0.5)
+	scale = min(scale, MARGIN_SAFETY_FACTOR)
+	target = current_lot * scale
+	minimum_decimal = Decimal(str(minimum))
+	step_decimal = Decimal(str(step))
+	current_decimal = Decimal(str(current_lot))
+	target_decimal = Decimal(str(target))
+	if target_decimal < minimum_decimal:
+		return None
+	target_steps = int(((target_decimal - minimum_decimal) / step_decimal).to_integral_value(rounding=ROUND_FLOOR))
+	max_strict_steps = int(
+		((current_decimal - minimum_decimal) / step_decimal).to_integral_value(rounding=ROUND_CEILING)
+	) - 1
+	steps = min(target_steps, max_strict_steps)
+	next_lot = minimum_decimal + (steps * step_decimal)
+	if steps < 0 or next_lot >= current_decimal:
+		return None
+	return float(next_lot)
+
+
+def _log_margin_retry(
+	service_folder: Optional[Path],
+	*,
+	symbol: str,
+	action: str,
+	attempt: int,
+	previous_lot: float,
+	next_lot: float,
+	required_margin: float,
+	available_margin: float,
+	reason: str,
+) -> None:
+	if service_folder is None:
+		return
+	log_path = service_folder / "trade_logs" / "execution_log.jsonl"
+	log_path.parent.mkdir(parents=True, exist_ok=True)
+	payload = {
+		"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+		"event": "margin_sizing_retry",
+		"symbol": symbol,
+		"action": action,
+		"attempt": attempt,
+		"previous_lot": previous_lot,
+		"next_lot": next_lot,
+		"required_margin": required_margin,
+		"available_margin": available_margin,
+		"reason": reason,
+	}
+	with open(log_path, "a", encoding="utf-8") as handle:
+		handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
 
 
 def close_position_by_ticket(
@@ -250,6 +328,7 @@ def execute_trade(
 	print(f"   Action: {action}")
 	print(f"   Requested Lot Size: {lot_size}")
 	print(f"   Take Profit: {take_profit if take_profit is not None else 'None'}")
+	requested_lot_size = float(lot_size)
 
 	within_position_limit, position_limit_error = _check_open_position_limit()
 	if not within_position_limit:
@@ -289,11 +368,72 @@ def execute_trade(
 	print(f"   Final Lot Size: {lot_size}")
 	print(f"   Lot Source: {lot_source}")
 
-	has_margin, margin_msg = check_margin_requirements(symbol, action, lot_size)
-	if not has_margin:
-		print(f"❌ Margin check failed: {margin_msg}")
-		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, 0.0, take_profit, False, margin_msg, service_folder)
-		return _result(False, margin_msg)
+	margin_retry_count = 0
+	last_margin_error = ""
+	while True:
+		margin = get_margin_requirement(symbol, action, lot_size)
+		if margin.error or margin.required is None or margin.available is None:
+			last_margin_error = margin.error or "Margin data unavailable"
+			break
+		if margin.required <= margin.available:
+			if margin.raw_available is not None and margin.available != margin.raw_available:
+				print(
+					f"   ✅ Margin check passed: required {margin.required:.2f}, "
+					f"available {margin.available:.2f} (strategy cap applied, raw {margin.raw_available:.2f})"
+				)
+			else:
+				print(
+					f"   ✅ Margin check passed: required {margin.required:.2f}, "
+					f"available {margin.available:.2f}"
+				)
+			break
+
+		last_margin_error = (
+			f"Insufficient margin: required {margin.required:.2f}, available {margin.available:.2f}"
+		)
+		if margin.raw_available is not None and margin.available != margin.raw_available:
+			last_margin_error += f" (strategy cap applied, raw free margin {margin.raw_available:.2f})"
+		if margin_retry_count >= MAX_MARGIN_RETRIES:
+			break
+
+		smaller_lot = _next_margin_sized_lot(
+			symbol,
+			lot_size,
+			margin.required,
+			margin.available,
+		)
+		if smaller_lot is None:
+			last_margin_error += "; no smaller broker-valid volume can be placed"
+			break
+
+		margin_retry_count += 1
+		print(
+			f"⚠️  Insufficient margin; retrying with smaller volume "
+			f"{lot_size:g} -> {smaller_lot:g} "
+			f"({margin_retry_count}/{MAX_MARGIN_RETRIES})"
+		)
+		_log_margin_retry(
+			service_folder,
+			symbol=symbol,
+			action=action,
+			attempt=margin_retry_count,
+			previous_lot=lot_size,
+			next_lot=smaller_lot,
+			required_margin=margin.required,
+			available_margin=margin.available,
+			reason="preflight_insufficient_margin",
+		)
+		lot_size = smaller_lot
+
+	if last_margin_error and (
+		margin.error
+		or margin.required is None
+		or margin.available is None
+		or margin.required > margin.available
+	):
+		print(f"❌ Margin check failed: {last_margin_error}")
+		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, 0.0, take_profit, False, last_margin_error, service_folder)
+		return _result(False, last_margin_error)
 
 	tick = get_symbol_tick(symbol)
 	if tick is None:
@@ -376,18 +516,63 @@ def execute_trade(
 		# Calendar faults never break the legacy execution path; configured fail mode is applied by the service.
 		print(f"⚠️ Economic calendar execution recheck unavailable: {exc}")
 
-	result = mt5.order_send(request)
-	if result is None:
-		error_msg = f"Order send failed: {mt5.last_error()}"
-		print(f"❌ {error_msg}")
-		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
-		return _result(False, error_msg)
+	result = None
+	while True:
+		request["volume"] = lot_size
+		result = mt5.order_send(request)
+		if result is None:
+			error_msg = f"Order send failed: {mt5.last_error()}"
+			print(f"❌ {error_msg}")
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
+			return _result(False, error_msg)
 
-	if result.retcode != mt5.TRADE_RETCODE_DONE:
+		if result.retcode == mt5.TRADE_RETCODE_DONE:
+			break
+
 		error_msg = f"Order failed with retcode: {result.retcode} - {result.comment}"
-		print(f"❌ {error_msg}")
-		log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
-		return _result(False, error_msg)
+		no_money_retcode = getattr(mt5, "TRADE_RETCODE_NO_MONEY", 10019)
+		if result.retcode != no_money_retcode or margin_retry_count >= MAX_MARGIN_RETRIES:
+			print(f"❌ {error_msg}")
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
+			return _result(False, error_msg)
+
+		margin = get_margin_requirement(symbol, action, lot_size)
+		if margin.error or margin.required is None or margin.available is None:
+			error_msg = f"{error_msg}; unable to recalculate margin for retry: {margin.error or 'missing margin data'}"
+			print(f"❌ {error_msg}")
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
+			return _result(False, error_msg)
+		smaller_lot = _next_margin_sized_lot(
+			symbol,
+			lot_size,
+			margin.required,
+			margin.available,
+			broker_rejected=True,
+		)
+		if smaller_lot is None:
+			error_msg = f"{error_msg}; no smaller broker-valid volume can be placed"
+			print(f"❌ {error_msg}")
+			log_trade(strategy_id, magic, comment or strategy_id, symbol, action, lot_size, lot_source, price, take_profit, False, error_msg, service_folder)
+			return _result(False, error_msg)
+
+		margin_retry_count += 1
+		print(
+			f"⚠️  Broker rejected order for margin; retrying with smaller volume "
+			f"{lot_size:g} -> {smaller_lot:g} "
+			f"({margin_retry_count}/{MAX_MARGIN_RETRIES})"
+		)
+		_log_margin_retry(
+			service_folder,
+			symbol=symbol,
+			action=action,
+			attempt=margin_retry_count,
+			previous_lot=lot_size,
+			next_lot=smaller_lot,
+			required_margin=margin.required,
+			available_margin=margin.available,
+			reason="broker_insufficient_margin",
+		)
+		lot_size = smaller_lot
 
 	print(f"✅ Trade executed successfully!")
 	print(f"   Order: {result.order}")
@@ -409,16 +594,61 @@ def execute_trade(
 			"result_order": getattr(result, "order", None),
 			"result_price": getattr(result, "price", None),
 			"result_volume": getattr(result, "volume", None),
+			"requested_volume": requested_lot_size,
+			"margin_retry_count": margin_retry_count,
 			**extra_log_data,
 		}
 		with open(log_path, "a", encoding="utf-8") as handle:
 			handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
+	position_ticket = int(getattr(result, "order", 0) or 0) or None
+	filled_volume = float(getattr(result, "volume", 0.0) or 0.0) or lot_size
+	filled_price = float(getattr(result, "price", 0.0) or 0.0) or price
+	if service_folder is not None and position_ticket is not None:
+		try:
+			from trade_outcomes import register_open_trade
+
+			initial_risk = None
+			if extra_log_data and extra_log_data.get("risk_usd") is not None:
+				initial_risk = float(extra_log_data["risk_usd"]) * (filled_volume / requested_lot_size)
+			register_open_trade(
+				service_folder,
+				position_id=position_ticket,
+				strategy_id=strategy_id,
+				symbol=symbol,
+				action=action,
+				entry_time_utc=datetime.now(tz=timezone.utc),
+				entry_volume=filled_volume,
+				entry_price=filled_price,
+				initial_risk_usd=initial_risk,
+			)
+		except (OSError, RuntimeError, TypeError, ValueError) as exc:
+			error = f"Could not register opened position for outcome tracking: {exc}"
+			print(f"⚠️  {error}")
+			if service_folder is not None:
+				log_path = service_folder / "trade_logs" / "execution_log.jsonl"
+				log_path.parent.mkdir(parents=True, exist_ok=True)
+				with open(log_path, "a", encoding="utf-8") as handle:
+					handle.write(
+						json.dumps(
+							{
+								"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+								"event": "trade_outcome_registration_failed",
+								"position_id": position_ticket,
+								"strategy_id": strategy_id,
+								"symbol": symbol,
+								"error": str(exc),
+							},
+							ensure_ascii=False,
+						)
+						+ "\n"
+					)
 	return _result(
 		True,
 		deal_ticket=int(getattr(result, "deal", 0) or 0) or None,
 		order_ticket=int(getattr(result, "order", 0) or 0) or None,
 		# MT5 uses the opening order ticket as the position id in the supported hedging account mode.
-		position_ticket=int(getattr(result, "order", 0) or 0) or None,
-		filled_price=float(getattr(result, "price", 0.0) or 0.0),
-		filled_volume=float(getattr(result, "volume", 0.0) or 0.0),
+		position_ticket=position_ticket,
+		filled_price=filled_price,
+		filled_volume=filled_volume,
+		margin_retry_count=margin_retry_count,
 	)

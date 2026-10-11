@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
@@ -28,12 +29,13 @@ def _parse_datetime(raw_value: object) -> Optional[datetime]:
 def _load_state(service_folder: Path) -> Dict[str, object]:
 	path = _state_path(service_folder)
 	if not path.exists():
-		return {"cache": {}, "rejections": []}
+		return {"cache": {}, "rejections": [], "candidate_rejection_stats": {}}
 	try:
 		loaded = json.loads(path.read_text(encoding="utf-8"))
 		if isinstance(loaded, dict):
 			loaded.setdefault("cache", {})
 			loaded.setdefault("rejections", [])
+			loaded.setdefault("candidate_rejection_stats", {})
 			return loaded
 	except (OSError, json.JSONDecodeError):
 		pass
@@ -42,6 +44,30 @@ def _load_state(service_folder: Path) -> Dict[str, object]:
 
 def _save_state(service_folder: Path, state: Dict[str, object]) -> None:
 	_state_path(service_folder).write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _candidate_rejection_key(strategy_id: str, symbol: str, action: str) -> str:
+	return json.dumps([strategy_id, symbol, action], ensure_ascii=False, separators=(",", ":"))
+
+
+def _write_candidate_rejection_summary(service_folder: Path, stats: Dict[str, object]) -> None:
+	candidates = [item for item in stats.values() if isinstance(item, dict)]
+	candidates.sort(
+		key=lambda item: (
+			str(item.get("strategy_id", "")),
+			str(item.get("symbol", "")),
+			str(item.get("action", "")),
+		)
+	)
+	summary = {
+		"generated_at": datetime.now(tz=timezone.utc).isoformat(),
+		"unique_candidate_count": len(candidates),
+		"candidates": candidates,
+	}
+	path = service_folder / "trade_logs" / "candidate_rejection_summary.json"
+	temporary_path = path.with_suffix(".json.tmp")
+	temporary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+	os.replace(temporary_path, path)
 
 
 def _normalize_account_state(account_state: Dict) -> Dict[str, float]:
@@ -143,12 +169,34 @@ def record_rejection(
 ) -> None:
 	state = _load_state(service_folder)
 	rejections = state.setdefault("rejections", [])
+	stats = state.setdefault("candidate_rejection_stats", {})
 	if not isinstance(rejections, list):
 		rejections = []
 		state["rejections"] = rejections
+	if not isinstance(stats, dict):
+		stats = {}
+		state["candidate_rejection_stats"] = stats
 
 	now = datetime.now(tz=timezone.utc)
 	expires_at = now + timedelta(minutes=max(cooldown_minutes, 0))
+	key = _candidate_rejection_key(strategy_id, symbol, action)
+	stat = stats.get(key)
+	if not isinstance(stat, dict):
+		stat = {
+			"strategy_id": strategy_id,
+			"symbol": symbol,
+			"action": action,
+			"first_rejection_reason": reason,
+			"first_rejected_at": now.isoformat(),
+			"rejection_windows": 0,
+			"repeated_cooldown_skips": 0,
+		}
+	stats[key] = stat
+	stat["rejection_windows"] = int(stat.get("rejection_windows", 0) or 0) + 1
+	stat["last_rejection_reason"] = reason
+	stat["last_rejected_at"] = now.isoformat()
+	stat["active_cooldown_expires_at"] = expires_at.isoformat()
+
 	rejections[:] = [
 		entry
 		for entry in rejections
@@ -167,9 +215,11 @@ def record_rejection(
 			"reason": reason,
 			"created_at": now.isoformat(),
 			"expires_at": expires_at.isoformat(),
+			"repeat_skip_count": 0,
 		}
 	)
 	_save_state(service_folder, state)
+	_write_candidate_rejection_summary(service_folder, stats)
 
 
 def get_active_rejection(service_folder: Path, *, strategy_id: str, symbol: str, action: str) -> Optional[Dict[str, object]]:
@@ -181,22 +231,57 @@ def get_active_rejection(service_folder: Path, *, strategy_id: str, symbol: str,
 	now = datetime.now(tz=timezone.utc)
 	active_entries: List[Dict[str, object]] = []
 	found: Optional[Dict[str, object]] = None
+	expired_matching_entry = False
 	for entry in rejections:
 		if not isinstance(entry, dict):
 			continue
 		expires_at = _parse_datetime(entry.get("expires_at"))
-		if expires_at is None or expires_at <= now:
-			continue
-		active_entries.append(entry)
-		if (
+		matches_candidate = (
 			str(entry.get("strategy_id", "")) == strategy_id
 			and str(entry.get("symbol", "")) == symbol
 			and str(entry.get("action", "")) == action
-		):
+		)
+		if expires_at is None or expires_at <= now:
+			expired_matching_entry = expired_matching_entry or matches_candidate
+			continue
+		active_entries.append(entry)
+		if matches_candidate:
 			found = entry
 
-	if len(active_entries) != len(rejections):
+	if found is not None:
+		found["repeat_skip_count"] = int(found.get("repeat_skip_count", 0) or 0) + 1
+		stats = state.setdefault("candidate_rejection_stats", {})
+		if isinstance(stats, dict):
+			key = _candidate_rejection_key(strategy_id, symbol, action)
+			stat = stats.get(key)
+			if not isinstance(stat, dict):
+				stat = {
+					"strategy_id": strategy_id,
+					"symbol": symbol,
+					"action": action,
+					"first_rejection_reason": str(found.get("reason", "")),
+					"first_rejected_at": str(found.get("created_at", "")),
+					"rejection_windows": 1,
+					"repeated_cooldown_skips": 0,
+					"last_rejection_reason": str(found.get("reason", "")),
+					"last_rejected_at": str(found.get("created_at", "")),
+					"active_cooldown_expires_at": str(found.get("expires_at", "")),
+				}
+				stats[key] = stat
+			if isinstance(stat, dict):
+				stat["repeated_cooldown_skips"] = int(stat.get("repeated_cooldown_skips", 0) or 0) + 1
+				stat["last_cooldown_skip_at"] = now.isoformat()
+				_write_candidate_rejection_summary(service_folder, stats)
+		_save_state(service_folder, state)
+	elif len(active_entries) != len(rejections):
 		state["rejections"] = active_entries
+		if expired_matching_entry:
+			stats = state.get("candidate_rejection_stats", {})
+			if isinstance(stats, dict):
+				stat = stats.get(_candidate_rejection_key(strategy_id, symbol, action))
+				if isinstance(stat, dict):
+					stat["active_cooldown_expires_at"] = ""
+					_write_candidate_rejection_summary(service_folder, stats)
 		_save_state(service_folder, state)
 
 	return found

@@ -18,6 +18,8 @@ Pro výpočet dostupné marže strategie používá aktuální balance zaokrouhl
 
 Rezerva se odečte z raw free margin před kontrolou požadované marže objednávky. `TRADING_ACCOUNT_BALANCE_CAP` již není konfigurační proměnná.
 
+Při nedostatečné marži se `trade_execution.py` pokusí nejvýše šestkrát přepočítat menší objem podle aktuálně dostupné marže a znovu ho ověří proti brokerovu minimu, maximu a kroku objemu. Každý pokus ponechává pětiprocentní rezervu. Stejný omezený postup se použije při brokerově `NO_MONEY` odmítnutí; při jiné chybě se neopakuje. Pokud by menší objem klesl pod brokerovo minimum, obchod se odmítne. Tato úprava nemění ani nepřidává broker-side stop loss.
+
 ## Hlavní tok runtime
 
 1. `logika.py` hlídá swap blok okno a mimo něj spouští obchodní cyklus.
@@ -279,6 +281,10 @@ Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví 
 
 Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
+### Denní uzavírání ziskových pozic
+
+`profit_cleanup_strategy.py` běží z account monitoru pouze každý den mezi 22:00 a 22:10 v `Europe/Prague`, s automatickým přechodem mezi letním a zimním časem. V tomto okně projde všechny otevřené pozice a uzavře každou, jejíž čistý výsledek `profit + swap - odhadovaná komise` je alespoň `0,50 USD` (`PCZ`). Limit je pevný, nezávisí na balance ani objemu. Strategie respektuje také swap blokovací okno; zapíná se přes `PROFIT_CLEANUP_STRATEGY_ENABLED` a `PROFIT_CLEANUP_STRATEGY_DRY_RUN=false` povoluje skutečné close příkazy. Výsledky a důvody zapisuje do `trade_logs/profit_cleanup.csv`.
+
 ### Take profit při záporném swapu
 
 Samostatný minutový monitor v `account_monitor.py` kontroluje všechny otevřené pozice účtu, včetně manuálních, legacy a skalpovacích pozic, bez filtru magic čísla:
@@ -307,6 +313,9 @@ Runtime zapisuje více specializovaných logů:
 - `trade_logs/reversal_strategy_status.csv`
 - `trade_logs/quant_strategy_status.csv`
 - `trade_logs/scalping_position_state.json`
+- `trade_logs/candidate_rejection_summary.json`: jeden řádek na unikátní kombinaci strategie/symbol/směr, první důvod zamítnutí, počet rejection oken a počet opakovaných cooldown přeskočení
+- `trade_logs/trade_outcomes_state.json`: stav pozic čekajících na uzavření
+- `trade_logs/closed_trade_outcomes.csv`: jeden uzavřený výsledek na position ID, včetně čistého P/L po profit/commission/swap/fee, doby držení a R-multiple, pokud je znám počáteční risk. R-multiple vychází z plánovaného syntetického risku, nejde o riziko omezené broker-side SL.
 - `trade_logs/position_management_monitor.jsonl`: heartbeat monitoru, odstranění TP (`negative_swap_tp_removed`) a chyby (`negative_swap_tp_removal_error` nebo `position_management_task_error`); zápis vyžaduje `SERVICE_DEST_FOLDER`
 
 Význam nových CSV souborů:
@@ -314,6 +323,8 @@ Význam nových CSV souborů:
 - `trade_decision_audit.csv`: úplná historie rozhodovacích kroků. Je vidět, kterou strategii runtime zkoušel, pro jaký symbol, jestli obchod provedl, a pokud ne, proč ne.
 - `trade_decision_snapshot.csv`: pouze poslední známý stav bez historie. Obsahuje vždy aktuální poslední řádek pro `primary`, `parallel`, `reversal` a případně `cycle`, takže je vhodný pro rychlou ruční kontrolu bez procházení celé historie.
 - `parallel_strategy_status.csv` a `reversal_strategy_status.csv`: poslední detailní stav každé sekundární strategie, včetně root rejection důvodu, rule failures a cooldown expiry.
+- `candidate_rejection_summary.json`: opakované přeskočení během aktivního cooldownu se již nezapisuje jako nový řádek do `trade_decision_audit.csv`; počítá se odděleně od prvotního zamítnutí.
+- `closed_trade_outcomes.csv`: běžící monitor páruje uzavřené MT5 dealy podle position ID. Nové pozice se párují přes opening-order ticket; tracker proto předpokládá hedging účet. Výsledky pozic otevřených před nasazením trackeru lze zaznamenat bez počátečního risku; v takovém případě zůstane `r_multiple` prázdné. Nové souhrny odmítnutí a výsledků se začnou tvořit od nasazení této verze; staré auditní záznamy se automaticky nemigrují.
 
 V audit logu jsou teď navíc vidět i pomocné přechodové informace:
 
@@ -341,6 +352,9 @@ Důležité pokrytí:
 - local fallback candidate queue
 - session guardy pro strategické profily
 - odstranění TP při záporném swapu, ponechání při nulovém/kladném swapu, zachování aktuálního SL, všechny typy ownership a opakování po chybě MT5
+- omezené zmenšení objemu při nedostatku marže a odmítnutí při dosažení brokerova minima
+- souhrn unikátních odmítnutých kandidátů a opakovaných cooldown přeskočení
+- uzavřené výsledky podle MT5 position ID včetně čistého P/L, doby držení a dostupného R-multiple
 
 ## Stručné shrnutí
 

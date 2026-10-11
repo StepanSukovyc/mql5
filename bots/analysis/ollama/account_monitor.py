@@ -16,7 +16,9 @@ from mt5_connection import initialize_mt5, shutdown_mt5
 from reversal_pattern_strategy import is_reversal_strategy_enabled
 from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context, get_scalping_strategy_context
 from liquidity_sweep_scalping_strategy import is_scalping_strategy_enabled
+from profit_cleanup_strategy import run_profit_cleanup_strategy_if_due
 from swap_rollover_cleanup_strategy import run_swap_rollover_cleanup_strategy_if_due
+from trade_outcomes import process_closed_trade_outcomes
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -110,8 +112,16 @@ def _remove_negative_swap_take_profits() -> None:
 
 def _run_management_tasks(account_info: dict) -> None:
 	"""Run independent position-management tasks without letting one disable the others."""
+	def _track_closed_trade_outcomes() -> None:
+		service_dest_folder = os.environ.get("SERVICE_DEST_FOLDER", "").strip()
+		if not service_dest_folder:
+			raise RuntimeError("SERVICE_DEST_FOLDER is required for closed trade outcome tracking")
+		process_closed_trade_outcomes(Path(service_dest_folder))
+
 	tasks = (
 		("negative_swap_tp_removal", _remove_negative_swap_take_profits),
+		("closed_trade_outcomes", _track_closed_trade_outcomes),
+		("profit_cleanup", lambda: run_profit_cleanup_strategy_if_due(account_info)),
 		("profit_protection", run_profit_protection_strategy_if_due),
 		("swap_rollover_cleanup", lambda: run_swap_rollover_cleanup_strategy_if_due(account_info)),
 	)

@@ -1,24 +1,27 @@
-"""Minute-by-minute strategy for closing sufficiently profitable positions."""
+"""Daily strategy for closing positions with sufficient net profit."""
 
 from __future__ import annotations
 
 import csv
+import os
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, time, timezone
 from pathlib import Path
 from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
-from swap_rollover import get_swap_block_window
+from swap_rollover import PRAGUE_TZ, get_swap_block_window
 from trade_execution import close_position_by_ticket
 
 
 DEFAULT_ENABLED = True
 DEFAULT_DRY_RUN = True
 ACCOUNT_BALANCE_STEP = 500.0
-MIN_TARGET_PROFIT = 0.005
+MIN_NET_PROFIT_TO_CLOSE = 0.50
 FEE_PER_001_LOT = 0.10
+DAILY_RUN_START = time(hour=22)
+DAILY_RUN_END = time(hour=22, minute=10)
 PROFIT_CLEANUP_LOG_HEADERS = [
 	"timestamp",
 	"dry_run",
@@ -97,15 +100,17 @@ def _to_bool(value: Optional[str], *, default: bool) -> bool:
 
 
 def _get_strategy_enabled() -> bool:
-	return _to_bool(_load_dotenv_value("PROFIT_CLEANUP_STRATEGY_ENABLED"), default=DEFAULT_ENABLED)
+	value = os.getenv("PROFIT_CLEANUP_STRATEGY_ENABLED") or _load_dotenv_value("PROFIT_CLEANUP_STRATEGY_ENABLED")
+	return _to_bool(value, default=DEFAULT_ENABLED)
 
 
 def _get_strategy_dry_run() -> bool:
-	return _to_bool(_load_dotenv_value("PROFIT_CLEANUP_STRATEGY_DRY_RUN"), default=DEFAULT_DRY_RUN)
+	value = os.getenv("PROFIT_CLEANUP_STRATEGY_DRY_RUN") or _load_dotenv_value("PROFIT_CLEANUP_STRATEGY_DRY_RUN")
+	return _to_bool(value, default=DEFAULT_DRY_RUN)
 
 
 def _get_service_folder() -> Optional[Path]:
-	raw_value = _load_dotenv_value("SERVICE_DEST_FOLDER")
+	raw_value = os.getenv("SERVICE_DEST_FOLDER") or _load_dotenv_value("SERVICE_DEST_FOLDER")
 	if not raw_value:
 		return None
 	return Path(raw_value)
@@ -122,34 +127,25 @@ def _get_reference_volume(balance: float) -> float:
 	return round(reference_volume, 2)
 
 
-def _get_target_profit(balance: float, reference_volume: float, position_volume: float) -> float:
-	if reference_volume <= 0:
-		return MIN_TARGET_PROFIT
-
-	target_profit = (0.01 * float(position_volume) / float(reference_volume)) * float(balance)
-	return max(target_profit, MIN_TARGET_PROFIT)
-
-
 def calculate_profit_cleanup_metrics(balance: float, position_volume: float, profit: float, swap: float) -> ProfitCleanupMetrics:
-	"""Return all derived values used by the minute profit cleanup strategy."""
-	reference_volume = _get_reference_volume(balance)
+	"""Return net profit and eligibility against the fixed minimum close profit."""
 	fee = _get_position_fee(position_volume)
 	net_profit = round(float(profit) + float(swap) - fee, 2)
-	target_profit = _get_target_profit(balance, reference_volume, position_volume)
+	target_profit = MIN_NET_PROFIT_TO_CLOSE
 	return ProfitCleanupMetrics(
 		balance=float(balance),
-		reference_volume=reference_volume,
+		reference_volume=_get_reference_volume(balance),
 		position_volume=float(position_volume),
 		profit=float(profit),
 		swap=float(swap),
 		fee=fee,
 		net_profit=net_profit,
 		target_profit=target_profit,
-		eligible=net_profit > target_profit,
+		eligible=net_profit >= target_profit,
 	)
 
 
-def _find_candidates(balance: float, reference_volume: float) -> list[ProfitCleanupCandidate]:
+def _find_candidates(balance: float) -> list[ProfitCleanupCandidate]:
 	positions = mt5.positions_get()
 	if positions is None:
 		raise RuntimeError(f"Failed to get open positions: {mt5.last_error()}")
@@ -166,9 +162,7 @@ def _find_candidates(balance: float, reference_volume: float) -> list[ProfitClea
 			profit=float(getattr(position, "profit", 0.0) or 0.0),
 			swap=float(getattr(position, "swap", 0.0) or 0.0),
 		)
-		if metrics.net_profit <= 0:
-			continue
-		if metrics.net_profit <= metrics.target_profit:
+		if not metrics.eligible:
 			continue
 
 		candidates.append(
@@ -231,19 +225,31 @@ def _log_cleanup_action(
 		)
 
 
-def run_profit_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = None) -> None:
-	"""Evaluate the profit cleanup strategy at most once per minute."""
+def run_profit_cleanup_strategy_if_due(
+	account_info: Optional[dict[str, Any]] = None,
+	*,
+	now_utc: Optional[datetime] = None,
+) -> None:
+	"""Evaluate profitable positions once per minute during the Prague 22:00 window."""
 	global _LAST_EVALUATED_MINUTE_KEY
 
 	if not _get_strategy_enabled():
 		return
 
-	now_utc = datetime.now(tz=timezone.utc)
+	now_utc = now_utc or datetime.now(tz=timezone.utc)
+	if now_utc.tzinfo is None:
+		now_utc = now_utc.replace(tzinfo=timezone.utc)
+	else:
+		now_utc = now_utc.astimezone(timezone.utc)
 	minute_key = now_utc.strftime("%Y%m%d%H%M")
 	if _LAST_EVALUATED_MINUTE_KEY == minute_key:
 		return
 
 	_LAST_EVALUATED_MINUTE_KEY = minute_key
+	now_prague = now_utc.astimezone(PRAGUE_TZ)
+	if not DAILY_RUN_START <= now_prague.time().replace(tzinfo=None) < DAILY_RUN_END:
+		return
+
 	service_folder = _get_service_folder()
 	dry_run = _get_strategy_dry_run()
 
@@ -261,11 +267,20 @@ def run_profit_cleanup_strategy_if_due(account_info: Optional[dict[str, Any]] = 
 			balance = float(account_info.get("raw_balance", account_info.get("balance", 0.0)))
 
 		reference_volume = _get_reference_volume(balance)
-		candidates = _find_candidates(balance, reference_volume)
+		candidates = _find_candidates(balance)
 		if not candidates:
+			_log_cleanup_action(
+				service_folder=service_folder,
+				now_utc=now_utc,
+				balance=balance,
+				reference_volume=reference_volume,
+				candidate=None,
+				closed=False,
+				message="No eligible profitable positions in scheduled cleanup window",
+			)
 			return
 
-		print("\n💰 Minute profit cleanup strategy")
+		print("\n💰 Scheduled profit cleanup strategy")
 		print(f"   Time (UTC): {now_utc.strftime('%Y-%m-%d %H:%M:%S')}")
 		print(f"   Dry run: {'ON' if dry_run else 'OFF'}")
 		print(f"   Balance B: {balance:.2f}")

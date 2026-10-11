@@ -83,11 +83,17 @@ class AccountMonitorTests(unittest.TestCase):
 		with tempfile.TemporaryDirectory() as temp_dir:
 			stop_event = threading.Event()
 			with patch.dict(os.environ, {"SERVICE_DEST_FOLDER": temp_dir}, clear=False):
-				with patch("account_monitor._remove_negative_swap_take_profits") as mock_remove_tp, patch(
+				with patch("account_monitor.process_closed_trade_outcomes") as mock_outcomes, patch(
+					"account_monitor._remove_negative_swap_take_profits"
+				) as mock_remove_tp, patch(
+					"account_monitor.run_profit_cleanup_strategy_if_due"
+				) as mock_profit_cleanup, patch(
 					"account_monitor.time.sleep", side_effect=lambda _seconds: stop_event.set()
 				):
 					run_position_management_monitor(check_interval_seconds=1, stop_event=stop_event)
 					mock_remove_tp.assert_called_once()
+					mock_outcomes.assert_called_once_with(Path(temp_dir))
+					mock_profit_cleanup.assert_called_once_with(mock_get_account_state_snapshot.return_value)
 
 			log_file = Path(temp_dir) / "trade_logs" / "position_management_monitor.jsonl"
 			self.assertTrue(log_file.exists())
@@ -106,8 +112,12 @@ class AccountMonitorTests(unittest.TestCase):
 		mock_swap_cleanup,
 		mock_profit_protection,
 	) -> None:
-		with patch("account_monitor._remove_negative_swap_take_profits"):
-			_run_management_tasks({"balance": 5000.0})
+		with tempfile.TemporaryDirectory() as temp_dir:
+			with patch.dict(os.environ, {"SERVICE_DEST_FOLDER": temp_dir}, clear=False), patch(
+				"account_monitor.process_closed_trade_outcomes"
+			) as mock_outcomes, patch("account_monitor._remove_negative_swap_take_profits"):
+				_run_management_tasks({"balance": 5000.0})
+				mock_outcomes.assert_called_once_with(Path(temp_dir))
 
 		mock_swap_cleanup.assert_called_once()
 		mock_profit_protection.assert_called_once()
@@ -196,18 +206,24 @@ class NegativeSwapTakeProfitTests(unittest.TestCase):
 	def test_removal_runs_before_profit_protection_and_cleanup(self) -> None:
 		calls = []
 		with patch("account_monitor._remove_negative_swap_take_profits", side_effect=lambda: calls.append("tp")), patch(
+			"account_monitor.run_profit_cleanup_strategy_if_due",
+			side_effect=lambda _account: calls.append("profit_cleanup"),
+		), patch(
 			"account_monitor.run_profit_protection_strategy_if_due", side_effect=lambda: calls.append("profit")
 		), patch(
 			"account_monitor.run_swap_rollover_cleanup_strategy_if_due", side_effect=lambda _account: calls.append("cleanup")
 		):
 			_run_management_tasks({"balance": 5000.0})
-		self.assertEqual(calls, ["tp", "profit", "cleanup"])
+		self.assertEqual(calls, ["tp", "profit_cleanup", "profit", "cleanup"])
 
 	def test_removal_failure_does_not_disable_other_management_tasks(self) -> None:
 		with patch("account_monitor._remove_negative_swap_take_profits", side_effect=RuntimeError("read failure")), patch(
+			"account_monitor.run_profit_cleanup_strategy_if_due"
+		) as profit_cleanup, patch(
 			"account_monitor.run_profit_protection_strategy_if_due"
 		) as profit, patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due") as cleanup:
 			_run_management_tasks({"balance": 5000.0})
+		profit_cleanup.assert_called_once_with({"balance": 5000.0})
 		profit.assert_called_once_with()
 		cleanup.assert_called_once_with({"balance": 5000.0})
 
