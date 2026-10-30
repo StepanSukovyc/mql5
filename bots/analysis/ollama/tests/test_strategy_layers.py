@@ -4,8 +4,10 @@ import os
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
+import profit_protection_strategy
 from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
 from profit_protection_strategy import (
 	_get_service_folder,
@@ -15,6 +17,7 @@ from profit_protection_strategy import (
 	get_profit_protection_contexts,
 	get_profit_protection_context_for_position,
 	is_position_under_profit_protection,
+	run_profit_protection_strategy_if_due,
 )
 from quant_math_strategy import validate_quant_signal
 from reversal_pattern_strategy import can_activate_reversal_strategy, validate_reversal_pattern_signal
@@ -477,6 +480,95 @@ class StrategyOwnershipTests(unittest.TestCase):
 
 
 class ProfitProtectionTests(unittest.TestCase):
+	def setUp(self) -> None:
+		profit_protection_strategy._LAST_EVALUATED_MINUTE_KEY = None
+
+	def _evaluate_old_position(
+		self,
+		profit: float,
+		*,
+		volume: float = 0.01,
+		swap: float = 0.0,
+		charged_costs: float = 0.0,
+		age_hours: float = 6 * 24,
+	) -> int:
+		profit_protection_strategy._LAST_EVALUATED_MINUTE_KEY = None
+		now_utc = datetime.now(tz=timezone.utc)
+		position = SimpleNamespace(
+			ticket=123,
+			identifier=123,
+			symbol="EURUSD",
+			type=0,
+			volume=volume,
+			profit=profit,
+			swap=swap,
+			time=int(now_utc.timestamp()) - int(age_hours * 60 * 60),
+			magic=get_primary_strategy_context().magic,
+			comment="ga:gemini_primary",
+			tp=0.0,
+		)
+		with patch("profit_protection_strategy._get_enabled", return_value=True), patch(
+			"profit_protection_strategy._get_dry_run", return_value=False
+		), patch("profit_protection_strategy._get_stale_hours", return_value=12), patch(
+			"profit_protection_strategy._get_max_hold_days", return_value=5
+		), patch("profit_protection_strategy._get_service_folder", return_value=None), patch(
+			"profit_protection_strategy._load_state", return_value={}
+		), patch("profit_protection_strategy._save_state"), patch(
+			"profit_protection_strategy._log_action"
+		), patch("profit_protection_strategy.get_swap_block_window") as swap_window, patch(
+			"profit_protection_strategy.mt5.positions_get", return_value=(position,)
+		), patch(
+			"profit_protection_strategy.mt5.history_deals_get",
+			return_value=(SimpleNamespace(commission=charged_costs, fee=0.0),),
+		), patch(
+			"profit_protection_strategy.mt5.account_info",
+			return_value=SimpleNamespace(balance=10000.0),
+		), patch(
+			"profit_protection_strategy.calculate_profit_protection_activation_usd",
+			return_value=10.0,
+		), patch(
+			"profit_protection_strategy.close_position_by_ticket", return_value=True
+		) as close_position:
+			swap_window.return_value.contains.return_value = False
+			run_profit_protection_strategy_if_due()
+
+		return close_position.call_count
+
+	def test_five_day_exit_waits_for_half_dollar_profit_plus_swap(self) -> None:
+		self.assertEqual(self._evaluate_old_position(0.49), 0)
+
+	def test_five_day_exit_closes_at_half_dollar_profit_plus_swap(self) -> None:
+		self.assertEqual(self._evaluate_old_position(0.60), 1)
+
+	def test_five_day_exit_ignores_overestimated_fee_on_large_position(self) -> None:
+		self.assertEqual(
+			self._evaluate_old_position(
+				339.00,
+				volume=100.0,
+				swap=-316.97,
+				charged_costs=-2.00,
+			),
+			1,
+		)
+
+	def test_twelve_hour_exit_uses_actual_position_costs(self) -> None:
+		self.assertEqual(
+			self._evaluate_old_position(
+				20.0,
+				charged_costs=-15.0,
+				age_hours=13,
+			),
+			0,
+		)
+		self.assertEqual(
+			self._evaluate_old_position(
+				30.0,
+				charged_costs=-15.0,
+				age_hours=13,
+			),
+			1,
+		)
+
 	@patch("profit_protection_strategy._load_dotenv_value")
 	def test_profit_protection_scales_with_balance_and_volume(self, mock_load_dotenv_value) -> None:
 		mock_load_dotenv_value.side_effect = lambda key: {

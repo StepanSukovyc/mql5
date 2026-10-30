@@ -11,6 +11,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
+from position_costs import get_position_charged_costs
 from strategy_context import (
 	StrategyContext,
 	get_index_strategy_context,
@@ -33,10 +34,11 @@ DEFAULT_ACTIVATION_TARGET_RATIO = 0.50
 DEFAULT_RETRACE_RATIO = 0.55
 DEFAULT_STALE_HOURS = 12
 DEFAULT_MAX_HOLD_DAYS = 5
+MIN_NET_PROFIT_FOR_MAX_HOLD_CLOSE = 0.50
 DEFAULT_STRATEGY_ID = "gemini_primary"
 DEFAULT_STRATEGY_MAGIC = 234000
-FEE_PER_001_LOT = 0.10
 STATE_FILE_NAME = "profit_protection_state.json"
+NET_PROFIT_BASIS = "mt5_charged_costs_v1"
 LOG_HEADERS = [
 	"timestamp",
 	"strategy_id",
@@ -179,10 +181,6 @@ def _load_state(service_folder: Optional[Path]) -> dict[str, dict[str, Any]]:
 def _save_state(service_folder: Optional[Path], state: dict[str, dict[str, Any]]) -> None:
 	state_path = _get_state_path(service_folder)
 	state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
-
-
-def _get_fee(volume: float) -> float:
-	return round((float(volume) / 0.01) * FEE_PER_001_LOT, 2)
 
 
 def calculate_profit_protection_target_profit_usd(balance: float, volume: float) -> float:
@@ -329,37 +327,51 @@ def run_profit_protection_strategy_if_due() -> None:
 
 		profit = float(getattr(position, "profit", 0.0) or 0.0)
 		swap = float(getattr(position, "swap", 0.0) or 0.0)
-		net_profit = round(profit + swap - _get_fee(volume), 2)
-		if net_profit <= 0:
-			continue
-		activation_usd = calculate_profit_protection_activation_usd(balance, volume)
-
+		charged_costs = get_position_charged_costs(position)
+		net_profit = round(profit + swap + charged_costs, 2)
+		net_profit_for_log = net_profit
 		opened_at = datetime.fromtimestamp(int(getattr(position, "time", 0) or 0), tz=timezone.utc)
 		age_hours = max((now_utc - opened_at).total_seconds() / 3600.0, 0.0)
-		state_key = f"{strategy_context.strategy_id}:{ticket}"
-		position_state = updated_state.get(state_key, {})
-		max_net_profit = max(float(position_state.get("max_net_profit", 0.0) or 0.0), net_profit)
-		locked_net_profit = calculate_profit_protection_locked_profit_usd(max_net_profit, activation_usd)
-		updated_state[state_key] = {
-			"max_net_profit": max_net_profit,
-			"current_net_profit": net_profit,
-			"locked_net_profit": locked_net_profit,
-			"last_observed_at_utc": now_utc.isoformat(),
-			"symbol": str(getattr(position, "symbol", "")),
-			"strategy_id": strategy_context.strategy_id,
-		}
-
 		close_reason: Optional[str] = None
-		if max_net_profit >= activation_usd and net_profit <= locked_net_profit:
-			locked_profit_usd = locked_net_profit
-			close_reason = (
-				f"profit retracement detected: current {net_profit:.2f} <= "
-				f"locked {locked_profit_usd:.2f} (activation {activation_usd:.2f})"
+		max_net_profit = 0.0
+		state_key = f"{strategy_context.strategy_id}:{ticket}"
+		if net_profit > 0:
+			activation_usd = calculate_profit_protection_activation_usd(balance, volume)
+			position_state = updated_state.get(state_key, {})
+			previous_max_net_profit = (
+				float(position_state.get("max_net_profit", 0.0) or 0.0)
+				if position_state.get("net_profit_basis") == NET_PROFIT_BASIS
+				else 0.0
 			)
-		elif age_hours >= stale_hours and net_profit > activation_usd:
-			close_reason = f"profitable stale position older than {stale_hours}h"
-		elif age_hours >= (24.0 * max_hold_days) and net_profit > 0:
-			close_reason = f"profitable position older than {max_hold_days} days"
+			max_net_profit = max(previous_max_net_profit, net_profit)
+			locked_net_profit = calculate_profit_protection_locked_profit_usd(max_net_profit, activation_usd)
+			updated_state[state_key] = {
+				"net_profit_basis": NET_PROFIT_BASIS,
+				"max_net_profit": max_net_profit,
+				"current_net_profit": net_profit,
+				"locked_net_profit": locked_net_profit,
+				"last_observed_at_utc": now_utc.isoformat(),
+				"symbol": str(getattr(position, "symbol", "")),
+				"strategy_id": strategy_context.strategy_id,
+			}
+
+			if max_net_profit >= activation_usd and net_profit <= locked_net_profit:
+				locked_profit_usd = locked_net_profit
+				close_reason = (
+					f"profit retracement detected: current {net_profit:.2f} <= "
+					f"locked {locked_profit_usd:.2f} (activation {activation_usd:.2f})"
+				)
+			elif age_hours >= stale_hours and net_profit > activation_usd:
+				close_reason = f"profitable stale position older than {stale_hours}h"
+
+		if close_reason is None and age_hours >= (24.0 * max_hold_days):
+			if net_profit >= MIN_NET_PROFIT_FOR_MAX_HOLD_CLOSE:
+				close_reason = (
+					f"profitable position older than {max_hold_days} days "
+					f"with profit after charged commission/fees at least "
+					f"{MIN_NET_PROFIT_FOR_MAX_HOLD_CLOSE:.2f} USD "
+					f"(current {net_profit:.2f} USD)"
+				)
 
 		if close_reason is None:
 			continue
@@ -388,7 +400,7 @@ def run_profit_protection_strategy_if_due() -> None:
 			strategy_id=strategy_context.strategy_id,
 			symbol=str(getattr(position, "symbol", "")),
 			ticket=ticket,
-			net_profit=net_profit,
+			net_profit=net_profit_for_log,
 			max_net_profit=max_net_profit,
 			profit_age_hours=age_hours,
 			closed=closed,

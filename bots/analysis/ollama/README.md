@@ -51,18 +51,18 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - `lot_size` se vždy použije z finální Gemini predikce
   - Každý N-tý obchod: použije se i `take_profit` od Gemini
   - Ostatní obchody: `take_profit` se nepoužije
-8. **Denní profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`):
-  - Account monitor ho spouští v okně 21:50–22:00 `Europe/Prague`, tedy před obvyklým koncem americké akciové seance; respektuje letní/zimní čas a neběží mimo toto denní okno ani během swap blokovacího okna
-  - Pro každou otevřenou pozici spočítá čistý zisk `ZISK = profit + swap - fee`, kde `fee = 0.10 USD` za každých `0.01` lotu
-  - Uzavře pozici, pokud je její čistý zisk alespoň `0.50 USD` (`PCZ`); práh se neváže na balance ani objem
-  - V jednom průchodu projde všechny otevřené pozice a uzavře všechny, které splní práh
+8. **Profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`):
+  - Account monitor kontroluje pozice každou minutu; vyhodnocení se přeskočí během swap blokovacího okna
+  - Minutový scénář uzavírá pozice při překročení dynamického cíle `PCZ = max((0.01 × position_volume / reference_volume) × balance, 0.005 USD)`; `reference_volume = (int(balance / 500) + 1) × 0.01`
+  - Denní scénář uzavírá pozice v okně 21:50–22:00 `Europe/Prague`, pokud čistý zisk `profit + swap + commission + fee` dosáhne alespoň 0,50 USD
+  - Oba scénáře používají skutečnou `commission` a `fee` z MT5 historie dealů podle ID pozice; nedostupná historie se nepovažuje za nulové náklady
   - Přepínač `PROFIT_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic; live uzavírání povolte nastavením na `false`
 9. **Swap rollover cleanup** (`SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED`, default `true`):
   - Běží v account monitoru každou minutu, ale pouze uvnitř swap blokovacího okna
   - Swap blokovací okno se nyní bere vždy z pevného ručního intervalu z `.env` přes `SWAP_BLOCK_START_*` a `SWAP_BLOCK_END_*`
   - Aktuální interval je `22:30-23:30` v čase `Europe/Prague` a používá se stejně pro lock i rollover cleanup
-  - Projde všechny otevřené pozice, které mají aktuální `profit > 0`
-  - Spočítá čistý zisk `ZISK = profit + swap - fee`, kde `fee = 0.10 USD` za každých `0.01` lotu
+  - Projde otevřené pozice mimo správu profit protection a scalping
+  - Spočítá čistý zisk `ZISK = profit + swap + commission + fee` pomocí skutečných nákladů konkrétní pozice z MT5 historie dealů
   - Pokud je čistý zisk alespoň `0.10 USD`, pozice je vhodná k uzavření kvůli vyhnutí se swapu
   - Audit log zapisuje i skip/no-candidate průchody, takže je vidět, zda strategie byla mimo okno nebo uvnitř okna nic nenašla
   - Přepínač `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
@@ -268,7 +268,7 @@ ollama pull deepseek-coder-v2
 python logika.py
 ```
 
-Pro rychlé ověření výpočtu profit cleanup bez MT5 můžete spustit:
+Pro rychlé ověření výpočtu profit cleanup bez MT5 můžete zadat hodnoty balance/volume/profit/swap/skutečné commission+fee:
 
 ```bash
 python verify_profit_cleanup_strategy.py
@@ -334,8 +334,9 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 
 - **logika.py** - Hlavní orchestrace nekonečného cyklu (monitoring → predikce → finální rozhodnutí → obchod → restart)
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
-- **profit_cleanup_strategy.py** - Volitelná denní strategie pro uzavírání všech otevřených pozic s čistým ziskem alespoň `0.50 USD` během okna 21:50–22:00 `Europe/Prague`
-- **verify_profit_cleanup_strategy.py** - Lokální validační skript pro odhad poplatku, čistého zisku a pevného limitu `PCZ` na zadaných scénářích
+- **profit_cleanup_strategy.py** - Minutové a večerní uzavírání pozic podle čistého zisku po skutečné commission a fee z MT5
+- **profit_protection_strategy.py** - Ochrana zisku a uzavření spravovaných pozic po výchozích 5 dnech, pokud `profit + swap + skutečně zaúčtované náklady` dosáhne alespoň `0.50 USD`
+- **verify_profit_cleanup_strategy.py** - Lokální validační skript pro čistý zisk po zadaných skutečných nákladech a dynamický limit `PCZ`
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod
 - **ollama_service.py** - Paralelní služba generující predikce pomocí lokálního Ollama AI (běží v samostatném threadu)
@@ -346,7 +347,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - `<SERVICE_DEST_FOLDER>/<timestamp>/predikce/*.json` - Filtrované predikce
 - `<SERVICE_DEST_FOLDER>/geminipredictions/PREDIKCE_<timestamp>.json` - Finální rozhodnutí
 - `<SERVICE_DEST_FOLDER>/ollama/predikce/{symbol}.json` - Předchystané Ollama predikce (použitelné v hlavní logice při stáří <= 1h)
-- `<SERVICE_DEST_FOLDER>/trade_logs/profit_cleanup.csv` - Audit denní profit cleanup strategie včetně `B`, referenčního `VOLUME`, `ZISK`, `PCZ` a výsledku close pokusu
+- `<SERVICE_DEST_FOLDER>/trade_logs/profit_cleanup.csv` - Audit minutového i večerního profit cleanupu včetně `B`, referenčního `VOLUME`, `ZISK`, použitého cíle a výsledku close pokusu
 - Dokud testujete, nechte `PROFIT_CLEANUP_STRATEGY_DRY_RUN=true`; po ověření změňte na `false`
 
 ## Poznamky

@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-10-30 (Minute Profit Cleanup Restored)
+
+- **Restored the Previous Minute-by-Minute Cleanup Rule**
+  - Removed the narrow Prague-time cleanup window
+  - Restored the dynamic target based on account balance and position volume
+  - Eligibility uses `profit + swap + actual commission + fee` from MT5 position deals and requires net profit to strictly exceed the target
+- Updated cleanup tests and operator documentation to match the historical behavior
+- Restored the separate Prague evening close window (21:50–22:00) with its fixed `$0.50` net-profit threshold
+- Unified actual MT5 deal-history commission/fee accounting across profit cleanup, all profit-protection exits, and swap rollover cleanup; positions are not closed when cost history is unavailable
+- Reset persisted profit-protection peaks when switching from estimated to actual-cost net-profit accounting
+
+## 2026-10-30 (Five-Day Profit Protection Threshold)
+
+- Positions reaching the configured maximum hold duration (default 5 days) now require at least `$0.50` after actual commission and fees from MT5 position deals, without subtracting the inaccurate volume-based fee estimate
+- The existing 12-hour stale-position exit now uses the same actual commission/fee accounting
+- Added threshold and large-volume fee-estimate regression tests
+
 ## 2026-09-29 (Automatic Whole-Thousand Strategy Balance Cap)
 
 - **Replaced The Fixed Balance Cap With An Automatic Cap**

@@ -281,9 +281,24 @@ Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví 
 
 Komentáře obchodů používají marker ve tvaru `ga:<strategy_id>`.
 
-### Denní uzavírání ziskových pozic
+### Minutový profit cleanup
 
-`profit_cleanup_strategy.py` běží z account monitoru pouze každý den mezi 21:50 a 22:00 v `Europe/Prague`, tedy před obvyklým koncem americké akciové seance. Časy se řídí evropským letním/zimním časem. V tomto okně projde všechny otevřené pozice a uzavře každou, jejíž čistý výsledek `profit + swap - odhadovaná komise` je alespoň `0,50 USD` (`PCZ`). Limit je pevný, nezávisí na balance ani objemu. Strategie respektuje také swap blokovací okno; zapíná se přes `PROFIT_CLEANUP_STRATEGY_ENABLED` a `PROFIT_CLEANUP_STRATEGY_DRY_RUN=false` povoluje skutečné close příkazy. Výsledky a důvody zapisuje do `trade_logs/profit_cleanup.csv`.
+Pro ECN účet podle dodaného výpisu broker účtuje celou komisi při vstupním dealu (`in`); při výstupním dealu (`out`) další komise účtována není. Výpočet proto nesmí přidávat odhadovaný poplatek za zavření: používá součet skutečných `commission` a `fee` z MT5 historie všech dealů dané pozice, včetně vstupního.
+
+`profit_cleanup_strategy.py` obsahuje dva nezávislé výstupní scénáře, oba zapínané přes `PROFIT_CLEANUP_STRATEGY_ENABLED` a respektující swap blokovací okno:
+
+- Minutová kontrola běží každou minutu a zavírá pozici, pokud čistý zisk `profit + swap + skutečně zaúčtovaná commission + fee` dynamický cíl přísně překročí. Náklady čte z MT5 deal historie podle identifikátoru pozice; `None` (chyba historie) se nepovažuje za nulové náklady a průchod se zapíše jako chyba bez zavření kandidáta. Cíl je `PCZ = max((0,01 × position_volume / reference_volume) × balance, 0,005 USD)`, přičemž `reference_volume = (int(balance / 500) + 1) × 0,01`.
+- Denní uzavírání běží v okně **21:50 až 22:00 Europe/Prague** a zavře pozici při čistém zisku alespoň `0,50 USD` po započtení skutečných nákladů z MT5 historie a swapu. Nezávisí na stáří pozice a nekoliduje s pětidenním pravidlem profit protection.
+
+`PROFIT_CLEANUP_STRATEGY_DRY_RUN=false` povoluje skutečné close příkazy. Výsledky a důvody obou scénářů zapisuje do `trade_logs/profit_cleanup.csv`; sloupec `fee` obsahuje skutečný součet `commission + fee` z MT5 (typicky zápornou částku).
+
+### Profit protection starých pozic
+
+`profit_protection_strategy.py` používá pro všechny své výstupy jednotný čistý zisk `profit + swap + skutečně zaúčtovaná commission + fee`. Náklady se načítají z MT5 deal historie podle identifikátoru pozice; nedostupná nebo prázdná historie se neinterpretuje jako nulové náklady a pozice se podle takového výpočtu nezavře. Ochrana zisku, pravidlo `PROFIT_PROTECTION_STALE_HOURS` (výchozí 12 hodin) i výstup po `PROFIT_PROTECTION_MAX_HOLD_DAYS` (výchozí 5 dní; minimálně `0,50 USD`) sdílejí tento výpočet. Při změně výpočtu se dříve uložený vrchol zisku zahodí a vytvoří se znovu ve stejné účetní bázi. Pravidla se vztahují pouze na pozice spravované profit protection; pozice s broker-side TP tato vrstva nespravuje.
+
+### Swap rollover cleanup
+
+`swap_rollover_cleanup_strategy.py` během swap blokovacího okna uzavírá způsobilé pozice při čistém zisku alespoň `0,10 USD`. Stejně jako profit cleanup počítá `profit + swap + skutečně zaúčtovaná commission + fee` z MT5 deal historie podle identifikátoru pozice; nedostupná nebo prázdná historie nedovolí uzavření podle předpokládaných nulových nákladů. Pozice spravované profit protection a skalpovací strategií tato úklidová větev nadále přeskočí.
 
 ### Večerní blokace nových vstupů
 

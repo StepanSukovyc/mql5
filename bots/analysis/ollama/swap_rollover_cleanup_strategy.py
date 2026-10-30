@@ -10,6 +10,7 @@ from typing import Any, Optional
 
 import MetaTrader5 as mt5
 
+from position_costs import get_position_charged_costs
 from profit_protection_strategy import is_position_under_profit_protection
 from swap_rollover import get_swap_block_window
 from strategy_context import get_scalping_strategy_context, position_belongs_to_strategy
@@ -18,7 +19,6 @@ from trade_execution import close_position_by_ticket
 
 DEFAULT_ENABLED = True
 DEFAULT_DRY_RUN = True
-FEE_PER_001_LOT = 0.10
 MIN_NET_PROFIT_TO_CLOSE = 0.10
 ROLLOVER_CLEANUP_LOG_HEADERS = [
 	"timestamp",
@@ -123,26 +123,22 @@ def _get_balance_from_account_info(account_info: Optional[dict[str, Any]]) -> fl
 	return float(account_info.get("raw_balance", account_info.get("balance", 0.0)))
 
 
-def _get_position_fee(volume: float) -> float:
-	return round((float(volume) / 0.01) * FEE_PER_001_LOT, 2)
-
-
 def calculate_swap_rollover_cleanup_metrics(
 	balance: float,
 	position_volume: float,
 	profit: float,
 	swap: float,
+	charged_costs: float,
 ) -> SwapRolloverCleanupMetrics:
 	"""Return all derived values used by the rollover-window cleanup strategy."""
-	fee = _get_position_fee(position_volume)
-	net_profit = round(float(profit) + float(swap) - fee, 2)
+	net_profit = round(float(profit) + float(swap) + float(charged_costs), 2)
 	target_profit = MIN_NET_PROFIT_TO_CLOSE
 	return SwapRolloverCleanupMetrics(
 		balance=float(balance),
 		position_volume=float(position_volume),
 		profit=float(profit),
 		swap=float(swap),
-		fee=fee,
+		fee=float(charged_costs),
 		net_profit=net_profit,
 		target_profit=target_profit,
 		eligible=net_profit >= target_profit,
@@ -161,14 +157,19 @@ def _find_candidates(balance: float) -> list[SwapRolloverCleanupCandidate]:
 			continue
 		volume = float(getattr(position, "volume", 0.0) or 0.0)
 		profit = float(getattr(position, "profit", 0.0) or 0.0)
-		if volume <= 0 or profit <= 0:
+		if volume <= 0:
 			continue
 
+		swap = float(getattr(position, "swap", 0.0) or 0.0)
+		if round(profit + swap, 2) < MIN_NET_PROFIT_TO_CLOSE:
+			continue
+		charged_costs = get_position_charged_costs(position)
 		metrics = calculate_swap_rollover_cleanup_metrics(
 			balance=balance,
 			position_volume=volume,
 			profit=profit,
-			swap=float(getattr(position, "swap", 0.0) or 0.0),
+			swap=swap,
+			charged_costs=charged_costs,
 		)
 		if not metrics.eligible:
 			continue

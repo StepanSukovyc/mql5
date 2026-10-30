@@ -12,6 +12,7 @@ from swap_rollover_cleanup_strategy import _find_candidates, calculate_swap_roll
 class _Position:
 	def __init__(self, ticket: int, symbol: str, position_type: int, volume: float, profit: float, swap: float, magic: int = 0, comment: str = "") -> None:
 		self.ticket = ticket
+		self.identifier = ticket
 		self.symbol = symbol
 		self.type = position_type
 		self.volume = volume
@@ -28,9 +29,10 @@ class SwapRolloverCleanupStrategyTests(unittest.TestCase):
 			position_volume=0.06,
 			profit=0.70,
 			swap=-0.05,
+			charged_costs=-0.60,
 		)
 
-		self.assertEqual(metrics.fee, 0.60)
+		self.assertEqual(metrics.fee, -0.60)
 		self.assertEqual(metrics.net_profit, 0.05)
 		self.assertEqual(metrics.target_profit, 0.10)
 		self.assertFalse(metrics.eligible)
@@ -41,9 +43,10 @@ class SwapRolloverCleanupStrategyTests(unittest.TestCase):
 			position_volume=0.01,
 			profit=0.25,
 			swap=0.0,
+			charged_costs=-0.10,
 		)
 
-		self.assertEqual(metrics.fee, 0.10)
+		self.assertEqual(metrics.fee, -0.10)
 		self.assertEqual(metrics.net_profit, 0.15)
 		self.assertEqual(metrics.target_profit, 0.10)
 		self.assertTrue(metrics.eligible)
@@ -54,9 +57,10 @@ class SwapRolloverCleanupStrategyTests(unittest.TestCase):
 			position_volume=0.01,
 			profit=0.20,
 			swap=0.0,
+			charged_costs=-0.10,
 		)
 
-		self.assertEqual(metrics.fee, 0.10)
+		self.assertEqual(metrics.fee, -0.10)
 		self.assertEqual(metrics.net_profit, 0.10)
 		self.assertEqual(metrics.target_profit, 0.10)
 		self.assertTrue(metrics.eligible)
@@ -67,16 +71,20 @@ class SwapRolloverCleanupStrategyTests(unittest.TestCase):
 			position_volume=0.03,
 			profit=0.20,
 			swap=-0.40,
+			charged_costs=-0.30,
 		)
 
-		self.assertEqual(metrics.fee, 0.30)
+		self.assertEqual(metrics.fee, -0.30)
 		self.assertEqual(metrics.net_profit, -0.50)
 		self.assertEqual(metrics.target_profit, 0.10)
 		self.assertFalse(metrics.eligible)
 
 	@patch.dict(os.environ, {"PROFIT_PROTECTION_STRATEGY_ENABLED": "true", "INDEX_STRATEGY_ENABLED": "true"}, clear=False)
 	@patch("swap_rollover_cleanup_strategy.mt5.positions_get")
-	def test_swap_cleanup_skips_positions_managed_by_profit_protection(self, mock_positions_get) -> None:
+	@patch("swap_rollover_cleanup_strategy.get_position_charged_costs", return_value=-0.10)
+	def test_swap_cleanup_skips_positions_managed_by_profit_protection(
+		self, _mock_costs, mock_positions_get
+	) -> None:
 		mock_positions_get.return_value = [
 			_Position(
 				ticket=1,
@@ -104,6 +112,30 @@ class SwapRolloverCleanupStrategyTests(unittest.TestCase):
 
 		self.assertEqual(len(candidates), 1)
 		self.assertEqual(candidates[0].ticket, 2)
+
+	@patch("swap_rollover_cleanup_strategy.mt5.positions_get")
+	@patch("swap_rollover_cleanup_strategy.get_position_charged_costs", return_value=-2.0)
+	def test_large_position_uses_actual_position_costs(self, _mock_costs, mock_positions_get) -> None:
+		position = _Position(3, "VIX_ecn", 0, 100.0, 80.0, 0.0, magic=999999)
+		mock_positions_get.return_value = [position]
+
+		candidates = _find_candidates(balance=10000.0)
+
+		self.assertEqual(len(candidates), 1)
+		self.assertEqual(candidates[0].net_profit, 78.0)
+
+	@patch("swap_rollover_cleanup_strategy.mt5.positions_get")
+	@patch(
+		"swap_rollover_cleanup_strategy.get_position_charged_costs",
+		side_effect=RuntimeError("MT5 deal history unavailable"),
+	)
+	def test_missing_mt5_cost_history_fails_closed(self, _mock_costs, mock_positions_get) -> None:
+		mock_positions_get.return_value = [
+			_Position(4, "EURUSD_ecn", 0, 0.01, 10.0, 0.0, magic=999999)
+		]
+
+		with self.assertRaisesRegex(RuntimeError, "deal history unavailable"):
+			_find_candidates(balance=10000.0)
 
 
 if __name__ == "__main__":

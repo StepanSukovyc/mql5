@@ -15,37 +15,40 @@ class Scenario:
 	position_volume: float
 	profit: float
 	swap: float
+	charged_costs: float
 
 
 def _default_scenarios() -> list[Scenario]:
 	"""Return sample scenarios including the user's example and edge cases."""
 	return [
-		Scenario("user_example_eligible_at_fixed_threshold", 3261.0, 0.06, 6.34, -0.30),
-		Scenario("eligible_medium_position", 3261.0, 0.01, 60.00, 0.00),
-		Scenario("exact_minimum_net_profit", 10000.0, 0.01, 0.60, 0.0),
-		Scenario("below_minimum_net_profit", 1500.0, 0.03, 0.80, -0.40),
+		Scenario("user_example_not_eligible", 3261.0, 0.06, 6.34, -0.30, -0.60),
+		Scenario("eligible_medium_position", 3261.0, 0.01, 60.00, 0.00, -0.10),
+		Scenario("minimum_target_profit_floor", 10.0, 0.01, 0.30, -0.10, -0.10),
+		Scenario("negative_net_profit", 1500.0, 0.03, 0.80, -0.40, -0.30),
 	]
 
 
 def _parse_scenarios(argv: list[str]) -> list[Scenario]:
-	"""Parse CLI args as repeated balance/volume/profit/swap quartets."""
+	"""Parse CLI args as repeated balance/volume/profit/swap/cost quintets."""
 	if not argv:
 		return _default_scenarios()
 
-	if len(argv) % 4 != 0:
+	if len(argv) % 5 != 0:
 		raise ValueError(
-			"Provide balance/volume/profit/swap quartets, e.g. 3261 0.06 6.34 -0.30 1000 0.01 15 0"
+			"Provide balance/volume/profit/swap/charged-cost quintets, "
+			"e.g. 3261 0.06 6.34 -0.30 -0.60 1000 0.01 15 0 -0.10"
 		)
 
 	scenarios: list[Scenario] = []
-	for index in range(0, len(argv), 4):
+	for index in range(0, len(argv), 5):
 		scenarios.append(
 			Scenario(
-				name=f"cli_scenario_{index // 4 + 1}",
+				name=f"cli_scenario_{index // 5 + 1}",
 				balance=float(argv[index]),
 				position_volume=float(argv[index + 1]),
 				profit=float(argv[index + 2]),
 				swap=float(argv[index + 3]),
+				charged_costs=float(argv[index + 4]),
 			)
 		)
 	return scenarios
@@ -65,6 +68,7 @@ def main(argv: list[str]) -> int:
 			position_volume=scenario.position_volume,
 			profit=scenario.profit,
 			swap=scenario.swap,
+			charged_costs=scenario.charged_costs,
 		)
 
 		print(f"Scenario: {scenario.name}")
@@ -72,10 +76,10 @@ def main(argv: list[str]) -> int:
 		print(f"  L: {metrics.position_volume:.2f}")
 		print(f"  profit: {metrics.profit:.2f}")
 		print(f"  swap: {metrics.swap:.2f}")
-		print(f"  Reference VOLUME (audit only): {metrics.reference_volume:.2f}")
-		print(f"  fee: {metrics.fee:.2f}")
+		print(f"  VOLUME: {metrics.reference_volume:.2f}")
+		print(f"  charged costs: {metrics.fee:.2f}")
 		print(f"  ZISK: {metrics.net_profit:.2f}")
-		print(f"  PCZ minimum net profit: {metrics.target_profit:.2f} USD")
+		print(f"  PCZ: {metrics.target_profit:.4f}")
 		print(f"  eligible: {metrics.eligible}")
 		print("-" * 40)
 
