@@ -301,6 +301,57 @@ Skript běží jako **nekonečný obchodní automat**:
 
 **Poznámka:** Ollama Service běží paralelně celou dobu a generuje vlastní predikce nezávisle. **Stahuje data přímo z MT5** (vlastní připojení) - není závislý na hlavní logice.
 
+## Smoke test Gemini 4 Argon (PowerShell)
+
+Tento test ověřuje skutečné API volání a validaci JSON odpovědi Argonu, nikoli kvalitu obchodní predikce. Používá syntetická data, neotevírá obchod, nespouští trading smyčku a neukládá obchodní predikci. API požadavek může být zpoplatněný.
+
+Spusť celý následující blok v PowerShellu **ze složky `bots\analysis\ollama`**, kde jsou `logika.py` a `.env`. Nevkládej před něj další `Push-Location`, pokud už v této složce jsi. Python launcher `py -3.14` musí používat interpreter s nainstalovanými závislostmi z `requirements.txt`; dostupné interpretery zjistíš pomocí `py --list-paths`.
+
+```powershell
+@'
+import os
+from pathlib import Path
+from logika import _load_dotenv
+from gemini_config import load_gemini_api_config
+from gemini_vertex import request_prediction_json
+
+_load_dotenv(Path(".env"))
+os.environ.pop("GEMINI_API_KEY", None)
+os.environ.pop("GEMINI_URL", None)
+
+config = load_gemini_api_config()
+assert config.model == "gemini-4-argon", config.model
+assert config.region == "eu", config.region
+
+prompt = """
+Connectivity test with synthetic data.
+Return only JSON with symbol, BUY, SELL, HOLD, reasoning.
+symbol must be TEST_SYMBOL.
+BUY=40, SELL=20, HOLD=40.
+reasoning must be a short connectivity-test explanation.
+"""
+
+print(request_prediction_json(config, "TEST_SYMBOL", prompt))
+print("SMOKE TEST OK: Argon EU returned a validated response.")
+'@ | py -3.14 -X utf8 -
+
+if ($LASTEXITCODE -ne 0) {
+    throw "Smoke test failed. See the error above."
+}
+```
+
+Pokud používáš jiný interpreter, nahraď `py -3.14` jeho příkazem nebo absolutní cestou, například `& 'C:\path\to\python.exe'`. Ukončovací `'@` musí začínat na začátku řádku. Pokud po neúplném vložení zůstane terminál na promptu `>>`, stiskni Ctrl+C a vlož blok znovu celý.
+
+### Vyhodnocení
+
+- Úspěch vyžaduje závěrečné `SMOKE TEST OK`, validovaný JSON s `symbol`, `BUY`, `SELL`, `HOLD`, `reasoning` a log `event="success"`, `model="gemini-4-argon"`, `region="eu"`.
+- `transport="google-genai-sdk"` znamená úspěch SDK cesty. `transport="vertex-rest-fallback"` znamená úspěch záložního Vertex REST požadavku na stejný model; předchozí SDK chyba je vidět v logu.
+- Test záměrně vypne API-key fallback pouze ve svém procesu, i kdyby byly klíč a URL zděděné z prostředí. Nepřejde na Gemini 2.5 Flash a nemění `.env` ani prostředí běžící trading aplikace.
+- `ModuleNotFoundError` znamená chybějící závislost ve zvoleném interpreteru. Chyby autentizace, oprávnění, modelu, lokace nebo kvóty se projeví chybovým výpisem a nenulovým návratovým kódem.
+- Loader `.env` nepřepisuje již nastavené proměnné procesu. Pokud selže kontrola modelu nebo regionu, zkontroluj také `$env:VERTEX_AI_MODEL` a `$env:VERTEX_AI_REGION`.
+
+Test byl živě ověřen 1. 11. 2026: `google-genai-sdk`, `gemini-4-argon`, `eu`, MEDIUM thinking, `fallback_model=false`, ukončení `STOP` a validní JSON. To potvrzuje přístup k modelu a funkčnost této cesty v okamžiku testu, nikoli budoucí dostupnost služby nebo výkonnost strategie.
+
 ## Automatické spuštění
 
 Protože skript běží jako nekonečný automat, stačí ho spustit **jednou** při startu systému:
