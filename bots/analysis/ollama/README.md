@@ -392,6 +392,21 @@ py -3.14 -X utf8 benchmark_ollama.py --source '..\..\..\analysis\python' --limit
 
 Vyhodnotit chyby, validitu, stabilitu dominantního směru a rozdíly mezi modely z `responses.jsonl` a `summary.json`. Produkční model zatím ponechat beze změny; pro rozhodnutí podle výnosů je nutný samostatný backtest s následnými cenami, náklady a identickými pravidly vstupu/výstupu.
 
+## Hourly Gemini exit review (realized daily profit)
+
+`daily_profit_exit_strategy.py` přehodnocuje všechny pozice včetně manuálních a scalping jednou za 60 minut, pokud má účet dnešní realizovaný čistý trading zisk. Do 21:15 `Europe/Prague` může Gemini doporučit HOLD nebo CLOSE; lokální kontrola povolí více plných close za review postupně podle priorit Gemini, pokud po potvrzení každého předchozího close zůstávají splněné všechny podmínky včetně aktuálního denního zisku a rezervy na skluz. Žádný trade se nemusí uzavřít.
+
+```dotenv
+DAILY_PROFIT_EXIT_ENABLED=true
+DAILY_PROFIT_EXIT_DRY_RUN=false
+DAILY_PROFIT_EXIT_MIN_RETAINED_USD=1.0
+DAILY_PROFIT_EXIT_SLIPPAGE_BUFFER_USD=1.0
+```
+
+Jde o **live povolení pro všechny pozice účtu**. `.env.example` z bezpečnostních důvodů obsahuje enabled `false` a dry-run `true`; pro nasazení výše uvedené hodnoty explicitně nastav v serverové `.env` a restartuj aplikaci. Vrstva vyžaduje USD účet, funkční Gemini a MT5 historii; vklady a floating profit rozpočet nenavyšují. Vývojové testy neposílají skutečné API požadavky ani MT5 příkazy.
+
+Sleduj `trade_logs/daily_profit_exit.jsonl`: `ai_review` dokládá získání rozhodnutí, `close_requested`/`close_result` pokus o exekuci a teprve `close_confirmed` ověření pozice/dealů. `close_confirmation_pending` blokuje další pokusy této vrstvy, nikoli ostatní správu; pending stav nemaž bez kontroly brokerovy historie. Detaily účetnictví, guardů a omezení jsou v [TRADING_LOGIC.md](TRADING_LOGIC.md).
+
 ## Automatické spuštění
 
 Protože skript běží jako nekonečný automat, stačí ho spustit **jednou** při startu systému:

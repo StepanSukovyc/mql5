@@ -67,6 +67,56 @@ _FINAL_DECISION_RESPONSE_SCHEMA = {
 	},
 }
 
+_EXIT_RESPONSE_SCHEMA = {
+	"type": "OBJECT",
+	"required": ["decisions"],
+	"properties": {
+		"decisions": {
+			"type": "ARRAY",
+			"items": {
+				"type": "OBJECT",
+				"required": ["ticket", "action", "reasoning"],
+				"properties": {
+					"ticket": {"type": "INTEGER"},
+					"action": {"type": "STRING", "enum": ["HOLD", "CLOSE"]},
+					"reasoning": {"type": "STRING"},
+				},
+			},
+		},
+	},
+}
+
+
+def _validate_exit_decisions(payload: Dict[str, Any], tickets: set[int]) -> Dict[str, Any]:
+	decisions = payload.get("decisions")
+	if not isinstance(decisions, list):
+		raise GeminiVertexRequestError("Exit decisions must be an array")
+	seen: set[int] = set()
+	for row in decisions:
+		if not isinstance(row, dict):
+			raise GeminiVertexRequestError("Exit decision must be an object")
+		ticket = row.get("ticket")
+		if isinstance(ticket, bool) or not isinstance(ticket, int) or ticket not in tickets or ticket in seen:
+			raise GeminiVertexRequestError("Unknown, duplicate or invalid exit ticket")
+		action = row.get("action")
+		if not isinstance(action, str) or action not in {"HOLD", "CLOSE"}:
+			raise GeminiVertexRequestError("Exit action must be HOLD or CLOSE")
+		reasoning = row.get("reasoning")
+		if not isinstance(reasoning, str) or not reasoning.strip():
+			raise GeminiVertexRequestError("Exit reasoning is required")
+		seen.add(ticket)
+	if seen != tickets:
+		raise GeminiVertexRequestError("Exit response must assess every supplied position")
+	return {"decisions": decisions}
+
+
+def request_exit_decisions(config: GeminiVertexConfig, prompt: str, tickets: set[int]) -> Dict[str, Any]:
+	return _request_structured_json(
+		config=config, prompt=prompt, response_schema=_EXIT_RESPONSE_SCHEMA,
+		validator=lambda payload: _validate_exit_decisions(payload, tickets),
+		task_name="daily_profit_exit", max_output_tokens=8192,
+	)
+
 
 class GeminiVertexError(RuntimeError):
 	"""Base error raised by the shared Gemini Vertex AI helper."""

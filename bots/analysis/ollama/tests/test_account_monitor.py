@@ -17,6 +17,9 @@ from account_monitor import _remove_negative_swap_take_profits, _run_management_
 
 
 class AccountMonitorTests(unittest.TestCase):
+	def setUp(self) -> None:
+		self.daily_profit_exit = self.enterContext(patch("account_monitor.run_daily_profit_exit_strategy_if_due"))
+
 	@patch.dict(
 		os.environ,
 		{
@@ -94,6 +97,7 @@ class AccountMonitorTests(unittest.TestCase):
 					mock_remove_tp.assert_called_once()
 					mock_outcomes.assert_called_once_with(Path(temp_dir))
 					mock_profit_cleanup.assert_called_once_with(mock_get_account_state_snapshot.return_value)
+					self.daily_profit_exit.assert_called_once_with(stop_event)
 
 			log_file = Path(temp_dir) / "trade_logs" / "position_management_monitor.jsonl"
 			self.assertTrue(log_file.exists())
@@ -121,6 +125,7 @@ class AccountMonitorTests(unittest.TestCase):
 
 		mock_swap_cleanup.assert_called_once()
 		mock_profit_protection.assert_called_once()
+		self.daily_profit_exit.assert_called_once_with(None)
 
 
 class NegativeSwapTakeProfitTests(unittest.TestCase):

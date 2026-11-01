@@ -371,6 +371,42 @@ Pro ECN účet podle dodaného výpisu broker účtuje celou komisi při vstupn�
 
 `PROFIT_CLEANUP_STRATEGY_DRY_RUN=false` povoluje skutečné close příkazy. Výsledky a důvody obou scénářů zapisuje do `trade_logs/profit_cleanup.csv`; sloupec `fee` obsahuje skutečný součet `commission + fee` z MT5 (typicky zápornou částku).
 
+### Hodinové Gemini přehodnocení všech pozic ze zisku dne
+
+[`daily_profit_exit_strategy.py`](daily_profit_exit_strategy.py) implementuje „Nápad I“: přehodnocuje všechny otevřené pozice účtu, včetně manuálních, legacy, scalping a pozic s broker-side TP. Nemění jejich ownership, TP ani velikost a neotevírá nové obchody.
+
+- `DAILY_PROFIT_EXIT_ENABLED` zapíná vrstvu (výchozí `false`).
+- `DAILY_PROFIT_EXIT_DRY_RUN` řídí skutečné close příkazy (výchozí `true`). Aktuální lokální `.env` je podle schválení nastavena na enabled/live; `.env.example` zůstává bezpečně disabled/dry-run.
+- `DAILY_PROFIT_EXIT_MIN_RETAINED_USD=1.0` zachovává nejméně 1 USD dnešního výdělku.
+- `DAILY_PROFIT_EXIT_SLIPPAGE_BUFFER_USD=1.0` přidává další 1 USD rezervy pro skluz. Limity vyžadují USD účet; chybná konfigurace nebo nečíselné/nekonečné hodnoty vyhodnocení ukončí s chybou.
+
+Aktivace používá pouze dnešní realizovaný trading výsledek od půlnoci `Europe/Prague` do okamžiku kontroly: součet `profit + swap + commission + fee` všech BUY/SELL dealů. Zahrnuje vstupní komise zaplacené dnes, nikoli vklady, výběry, kredit nebo floating profit. Samostatné záporné brokerovy charges, komise a úroky rozpočet dále snižují; jejich kladné protějšky jej nezvyšují. Účetní korekce či zrušené dealy zablokují vyhodnocení do vyjasnění historie. Chyba historie ani chybějící/nečíselné náklady nejsou nulový výdělek: žádný close se při nich nepovolí.
+
+Rozhodovací požadavek se spouští nejvýše jednou za 60 minut, pouze při realizovaném výsledku **větším než zachovávaný zisk + slippage buffer**, při otevřených pozicích a před **21:15 Europe/Prague**. Po 21:15 nové přehodnocení ani jeho exekuce neproběhnou. Globální swap blok zůstává respektovaný. Při vyčerpání rozpočtu vrstva dočasně nepokračuje. Nezávisí na `TRADING_TRIGGER_MARGIN_THRESHOLD`, dostupnosti vstupních predikcí nebo úspěchu vstupní strategie.
+
+Monitor spouští oddělený worker, takže čekání na Gemini nezastaví ostatní minutové management úlohy. Mutex a souborový lock ve stejné servisní složce brání souběhu této vrstvy v několika vláknech/procesech. Timestamp pokusu se uloží před voláním; chyba nebo restart nezpůsobí opakování AI požadavku v témže 60minutovém intervalu.
+
+Gemini dostane aktuální účet, realizovaný zisk, všechny pozice a čerstvá H1/H4/D1 data s indikátory. Chybějící svíčky nebo požadované RSI/EMA/ATR/ADX indikátory ukončí vyhodnocení s chybou. Může vrátit **HOLD pro všechny**: není povinnost využít denní rozpočet. Posuzuje současnou strukturu trhu; původní vstupní záměr není uložený a model jej nesmí vymýšlet. Data mohou obsahovat právě vznikající svíčku, kterou prompt výslovně zakazuje považovat za uzavřené potvrzení.
+
+Samostatné JSON schema vyžaduje pro každý dodaný ticket právě jednu odpověď HOLD/CLOSE s odůvodněním. Neznámé/duplicitní tickety, chybějící posouzení nebo jiná akce odpověď zneplatní. Modelový výběr používá Gemini Vertex konfiguraci a její stávající fallback politiku, ne Ollama ranking nebo vstupní BUY/SELL schema.
+
+Před každým navrženým close se znovu ověří:
+
+1. enabled/live režim, shutdown, swap blok a konec 21:15; odpověď starší 10 minut nebo z jiného obchodního dne se neexekuuje;
+2. shoda MT5 účtu (login/server) s uloženým stavem, existence pozice, její ticket/identifier, symbol, směr, objem, čas otevření a magic;
+3. aktuální čistý P/L `profit + swap + skutečně zaúčtované commission + fee`, čerstvý tick (nejvýše 120 sekund) a MT5 odhad P/L uzavření na aktuálním bid/ask;
+4. dnešní realizovaný zisk a dostatečný rozpočet na horší z odhadovaných ztrát (celkový čistý P/L, nový cash increment bez již zaplacených vstupních komisí, nebo quote-based close P/L se swapem).
+
+Při dnešním realizovaném zisku 20 USD a rezervách 1 + 1 USD lze pokrýt nejvýše 18 USD odhadované ztráty. Původní vstupní komise mohou už být v dnešním výsledku; používá se konzervativně horší odhad, aby se rozpočet nepřecenil. Skluz, nové obchody či souběžné výstupy jiných vrstev přesto mohou výsledek změnit: nejde o garantovaný kladný den ani garantovaný stop-loss.
+
+Gemini může seřadit více CLOSE návrhů a za jedno přehodnocení se může uzavřít **více pozic postupně**, bez pevného limitu počtu. Před každým odesláním se atomicky uloží pending marker. Dokud MT5 nepotvrdí zánik pozice podle identifieru a odpovídající výstupní deal v historii, další AI/close této vrstvy jsou blokované. Po potvrzení se pokračuje dalším návrhem z téže odpovědi Gemini, ale znovu se načtou aktuální pozice, kotace a dnešní realizovaný výsledek a ověří všechny podmínky včetně rozpočtu a času. V dry-run se zaznamenává více způsobilých návrhů, jejich odhadované ztráty se průběžně odečítají od simulovaného rozpočtu; hypotetické zisky jej nezvyšují. Neúspěšný, částečný nebo nejednoznačný close se slepě neopakuje; stav vyžaduje kontrolu skutečných dealů a pozice. Ostatní management vrstvy nadále běží.
+
+Logy v `SERVICE_DEST_FOLDER/trade_logs`:
+
+- `daily_profit_exit.jsonl`: start review, AI HOLD/CLOSE návrhy, lokální zamítnutí, would-close, požadavek a výsledek close, následné potvrzení a chyby;
+- `daily_profit_exit_state.json`: poslední pokus a případný pending close (neodstraňovat bez ověření MT5 historie);
+- `daily_profit_exit_state.lock`: souborový lock, samotná existence souboru neznamená běžící worker.
+
 ### Profit protection starých pozic
 
 `profit_protection_strategy.py` používá pro všechny své výstupy jednotný čistý zisk `profit + swap + skutečně zaúčtovaná commission + fee`. Náklady se načítají z MT5 deal historie podle identifikátoru pozice; nedostupná nebo prázdná historie se neinterpretuje jako nulové náklady a pozice se podle takového výpočtu nezavře. Ochrana zisku, pravidlo `PROFIT_PROTECTION_STALE_HOURS` (výchozí 12 hodin) i výstup po `PROFIT_PROTECTION_MAX_HOLD_DAYS` (výchozí 5 dní; minimálně `0,50 USD`) sdílejí tento výpočet. Při změně výpočtu se dříve uložený vrchol zisku zahodí a vytvoří se znovu ve stejné účetní bázi. Pravidla se vztahují pouze na pozice spravované profit protection; pozice s broker-side TP tato vrstva nespravuje.
