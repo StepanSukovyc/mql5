@@ -357,7 +357,7 @@ Test byl živě ověřen 1. 11. 2026: `google-genai-sdk`, `gemini-4-argon`, `eu`
 Ze složky `bots\analysis\ollama` lze spustit samostatné porovnání per-symbol predikcí:
 
 ```powershell
-py -3.14 -X utf8 benchmark_ollama.py --source '..\..\..\analysis\python\ollama\source' --limit 10
+py -3.14 -X utf8 benchmark_ollama.py --source '..\..\..\analysis\python' --limit 10
 ```
 
 Pokud zdrojová data leží jinde, zadej skutečnou složku market-data JSON souborů obsahujících `candles` a `oscillators`, nikoli složku výsledných predikcí. Test používá klíč a cloudový endpoint z `.env`; klíč nevkládej do příkazu ani nesdílej. Ověř, že je dovoleno odesílat vybraná data poskytovateli.
@@ -368,6 +368,29 @@ Pokud zdrojová data leží jinde, zadej skutečnou složku market-data JSON sou
 - Test nevolá MT5 exekuci, nemění produkční model ani predikce. Vlastní vstupy, prompty, raw odpovědi, SHA-256 promptu, latency a chyby ukládá do nové složky `benchmarks\<UTC timestamp>`. Tyto soubory mohou obsahovat citlivá vstupní data; nesdílej je ani necommituj bez kontroly.
 - `summary.json` porovnává validitu odpovědí, počty BUY/SELL/HOLD/TIE a shodu dominantního směru. Nejde o skutečné runtime NO_TRADE: lokální signal/risk filtry nejsou součástí testu. Při chybě končí nenulovým návratovým kódem.
 - Jde pouze o test použitelnosti predikcí, nikoli advisory rankingu, P/L, profit factoru nebo drawdownu. Opakování umožní následnou kontrolu stability v uložených odpovědích. Ziskovost vyžaduje samostatný časově korektní backtest se simulací nákladů a výstupů.
+
+### První živé porovnání: 1. 11. 2026
+
+Serverový běh `20261101T181942868731Z` porovnal jeden zmrazený vstup pro `AUDCAD_ecn`. Data byla vygenerována `2026-10-30T20:44:56.598148+00:00`, nešlo tedy o aktuální tržní predikci. Oba požadavky měly shodný SHA-256 promptu a žádný nepoužil živý fundamental context.
+
+| Model | BUY | SELL | HOLD | Latency | Output eval tokens | Cached input tokens |
+|---|---|---|---|---|---|---|
+| `gpt-oss:120b` | 20 % | 55 % | 25 % | 2,204 s | 534 | 2192 |
+| `deepseek-v4-pro:0813-cloud` | 20 % | 50 % | 30 % | 9,783 s | 1844 | 0 |
+
+Oba modely vrátily validní JSON, ukončily odpověď s `done_reason=stop` a shodly se na dominantním směru SELL. Obě zdůvodnění zdůrazňovala cenu pod H4/denní/týdenní MA a RSI kolem 42–43; DeepSeek přidělil více váhy nejistotě (HOLD).
+
+Tento běh potvrzuje dostupnost obou přesných tagů na testovaném cloudovém účtu v době testu. **Neurčuje vítěze ani ziskovost:** vzorek tvoří pouze jeden symbol a jeden pokus, GPT měl výrazně cachovaný vstup a DeepSeek nikoli, takže poměr latency není čistým srovnáním rychlosti modelů. Output token counts nejsou samy o sobě cenou nebo spotřebou cloudové allowance.
+
+Předchozí pokus s `qwen3.8:27b` na stejném endpointu skončil HTTP 404, zatímco GPT uspěl. Tento Qwen tag se proto v benchmarku nahradil DeepSeekem; nejde o obecné tvrzení o kvalitě nebo dostupnosti všech Qwen modelů.
+
+Doporučené pokračování (60 API požadavků, bez obchodování):
+
+```powershell
+py -3.14 -X utf8 benchmark_ollama.py --source '..\..\..\analysis\python' --limit 10 --repeats 3
+```
+
+Vyhodnotit chyby, validitu, stabilitu dominantního směru a rozdíly mezi modely z `responses.jsonl` a `summary.json`. Produkční model zatím ponechat beze změny; pro rozhodnutí podle výnosů je nutný samostatný backtest s následnými cenami, náklady a identickými pravidly vstupu/výstupu.
 
 ## Automatické spuštění
 
