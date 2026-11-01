@@ -309,19 +309,6 @@ def _strategy_status_file_name(strategy_label: str) -> Optional[str]:
 	return None
 
 
-def _get_gemini_full_control_every_n_trades() -> int:
-	"""Return how often Gemini should fully control lot size and take profit."""
-	raw = os.getenv("GEMINI_FULL_CONTROL_EVERY_N_TRADES", "3")
-	try:
-		value = int(raw)
-		if value <= 0:
-			return 3
-		return value
-	except (TypeError, ValueError):
-		return 3
-
-
-
 def _print_account_state(account_state: Dict) -> None:
 	"""Print a concise account-state summary."""
 	print("\n💰 Getting account state...")
@@ -348,12 +335,11 @@ def _load_gemini_api_config() -> GeminiVertexConfig:
 	return load_gemini_api_config()
 
 
-def _print_trade_mode(successful_trades: int, next_trade_number: int, full_control_every_n: int, gemini_full_control_mode: bool) -> None:
+def _print_trade_mode(successful_trades: int, next_trade_number: int) -> None:
 	"""Print the current trade execution mode."""
 	print("\n🧭 Trade Execution Mode")
 	print(f"   Successful trades so far: {successful_trades}")
 	print(f"   Current trade number: #{next_trade_number}")
-	print(f"   Legacy Gemini full-control cadence (ignored for lot/TP): N={full_control_every_n}")
 	print(
 		f"   Crypto safeguards: min signal {get_crypto_prediction_threshold():.0f}%, "
 		f"lot x{get_crypto_lot_multiplier():.2f}, max open positions {get_crypto_max_open_positions()}, "
@@ -363,14 +349,7 @@ def _print_trade_mode(successful_trades: int, next_trade_number: int, full_contr
 		f"   CFD safeguards: min net ${get_cfd_min_net_profit_usd():.2f} after modeled fee, "
 		f"TP max distance {get_cfd_tp_max_distance_percent():.2f}%"
 	)
-	print(
-		"   Mode: "
-		+ (
-			"ADVISORY GEMINI MODE (Gemini may rank symbol/action only)"
-			if gemini_full_control_mode
-			else "LOCAL SIGNAL/RISK MODE (lot_size + take_profit from local logic)"
-		)
-	)
+	print("   Mode: LOCAL SIGNAL/RISK MODE (lot_size + take_profit from local logic)")
 
 
 def _get_int_env(name: str, default: int, *, minimum: int = 0) -> int:
@@ -1011,8 +990,6 @@ def _resolve_gemini_advisory_candidates(
 		account_state,
 		gemini_config,
 		trade_number=count_successful_trades(service_folder) + 1,
-		full_control_every_n=_get_gemini_full_control_every_n_trades(),
-		gemini_full_control_mode=False,
 	)
 	if not decision_text:
 		return []
@@ -1664,12 +1641,10 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 
 		open_crypto_positions = _count_open_crypto_positions(open_positions)
 		print(f"   Open crypto positions: {open_crypto_positions}/{get_crypto_max_open_positions()}")
-		full_control_every_n = _get_gemini_full_control_every_n_trades()
 		successful_trades = count_successful_trades(service_folder)
 		next_trade_number = successful_trades + 1
-		gemini_full_control_mode = (next_trade_number % full_control_every_n) == 0
 
-		_print_trade_mode(successful_trades, next_trade_number, full_control_every_n, gemini_full_control_mode)
+		_print_trade_mode(successful_trades, next_trade_number)
 
 		# ── Cloud Ollama strategy (runs first when enabled) ──────────────────────
 		if is_ollama_cloud_enabled():

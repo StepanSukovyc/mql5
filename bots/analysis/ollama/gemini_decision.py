@@ -78,8 +78,6 @@ def ask_gemini_final_decision(
 	gemini_config,
 	excluded_symbols: List[str] = None,
 	trade_number: Optional[int] = None,
-	full_control_every_n: Optional[int] = None,
-	gemini_full_control_mode: bool = False,
 ) -> Optional[str]:
 	"""Ask Gemini AI for a final trading decision based on predictions and account state."""
 	global _gemini_suspended_until
@@ -111,12 +109,10 @@ def ask_gemini_final_decision(
 		excluded_note = f"\n\nVYLOUČENÉ SYMBOLY (nevybírej): {', '.join(excluded_symbols)}"
 
 	mode_text = ""
-	if trade_number is not None and full_control_every_n is not None:
-		mode_label = "ANO" if gemini_full_control_mode else "NE"
+	if trade_number is not None:
 		mode_text = (
 			f"\n\nREŽIM AKTUÁLNÍHO OBCHODU:\n"
 			f"- Pořadí obchodu: #{trade_number}\n"
-			f"- Každý {full_control_every_n}. obchod je plně řízen Gemini (legacy informace): {mode_label}\n"
 			f"- V aktualnim advisory rezimu Gemini vybira pouze instrument a smer.\n"
 			f"- lot_size a take_profit se ve finalni exekuci pocitaji lokalne."
 		)

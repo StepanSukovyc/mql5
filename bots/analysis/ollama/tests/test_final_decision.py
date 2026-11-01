@@ -107,7 +107,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.ask_gemini_final_decision")
 	@patch("final_decision.count_successful_trades_since")
 	@patch("final_decision.count_successful_trades")
-	@patch("final_decision._get_gemini_full_control_every_n_trades")
 	@patch("final_decision._load_gemini_api_config")
 	@patch("final_decision.get_open_positions")
 	@patch("final_decision.get_account_state")
@@ -118,7 +117,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_get_account_state,
 		mock_get_open_positions,
 		mock_load_gemini_api_config,
-		mock_trade_mode,
 		mock_count_successful_trades,
 		mock_count_successful_trades_since,
 		mock_ask_gemini_final_decision,
@@ -148,7 +146,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			model="gemini-2.5-flash",
 			fallback_models=("gemini-2.5-flash",),
 		)
-		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 123
 		mock_count_successful_trades_since.return_value = 0
 		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
@@ -209,7 +206,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.count_successful_trades_since")
 	@patch("final_decision.count_successful_trades_today")
 	@patch("final_decision.count_successful_trades")
-	@patch("final_decision._get_gemini_full_control_every_n_trades")
 	@patch("final_decision._load_gemini_api_config")
 	@patch("final_decision.get_open_positions")
 	@patch("final_decision.get_account_state")
@@ -220,7 +216,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_get_account_state,
 		mock_get_open_positions,
 		mock_load_gemini_api_config,
-		mock_trade_mode,
 		mock_count_successful_trades,
 		mock_count_successful_trades_today,
 		mock_count_successful_trades_since,
@@ -248,7 +243,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			model="gemini-2.5-flash",
 			fallback_models=("gemini-2.5-flash",),
 		)
-		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 123
 		mock_count_successful_trades_today.return_value = 99
 		mock_count_successful_trades_since.return_value = 0
@@ -299,7 +293,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.count_successful_trades_since")
 	@patch("final_decision.count_successful_trades_today")
 	@patch("final_decision.count_successful_trades")
-	@patch("final_decision._get_gemini_full_control_every_n_trades")
 	@patch("final_decision._load_gemini_api_config")
 	@patch("final_decision.get_open_positions")
 	@patch("final_decision.get_account_state")
@@ -310,7 +303,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_get_account_state,
 		mock_get_open_positions,
 		mock_load_gemini_api_config,
-		mock_trade_mode,
 		mock_count_successful_trades,
 		mock_count_successful_trades_today,
 		mock_count_successful_trades_since,
@@ -341,7 +333,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			model="gemini-2.5-flash",
 			fallback_models=("gemini-2.5-flash",),
 		)
-		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 6
 		mock_count_successful_trades_today.return_value = 0
 		mock_load_market_data_for_symbol.return_value = {"oscillators": {}, "candles": {}}
@@ -394,7 +385,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.count_successful_trades_since")
 	@patch("final_decision.count_successful_trades_today")
 	@patch("final_decision.count_successful_trades")
-	@patch("final_decision._get_gemini_full_control_every_n_trades")
 	@patch("final_decision._load_gemini_api_config")
 	@patch("final_decision.get_open_positions")
 	@patch("final_decision.get_account_state")
@@ -405,7 +395,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_get_account_state,
 		mock_get_open_positions,
 		mock_load_gemini_api_config,
-		mock_trade_mode,
 		mock_count_successful_trades,
 		mock_count_successful_trades_today,
 		mock_count_successful_trades_since,
@@ -437,7 +426,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			model="gemini-2.5-flash",
 			fallback_models=("gemini-2.5-flash",),
 		)
-		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 10
 		mock_count_successful_trades_today.return_value = 0
 		mock_count_successful_trades_since.return_value = 0
@@ -495,7 +483,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.count_successful_trades_since")
 	@patch("final_decision.count_successful_trades_today")
 	@patch("final_decision.count_successful_trades")
-	@patch("final_decision._get_gemini_full_control_every_n_trades")
 	@patch("final_decision._load_gemini_api_config")
 	@patch("final_decision.get_open_positions")
 	@patch("final_decision.get_account_state")
@@ -506,7 +493,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_get_account_state,
 		mock_get_open_positions,
 		mock_load_gemini_api_config,
-		mock_trade_mode,
 		mock_count_successful_trades,
 		mock_count_successful_trades_today,
 		mock_count_successful_trades_since,
@@ -538,7 +524,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			model="gemini-2.5-flash",
 			fallback_models=("gemini-2.5-flash",),
 		)
-		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 10
 		mock_count_successful_trades_today.return_value = 0
 		mock_count_successful_trades_since.return_value = 0
@@ -602,7 +587,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 	@patch("final_decision.count_successful_trades_since")
 	@patch("final_decision.count_successful_trades_today")
 	@patch("final_decision.count_successful_trades")
-	@patch("final_decision._get_gemini_full_control_every_n_trades")
 	@patch("final_decision._load_gemini_api_config")
 	@patch("final_decision.get_open_positions")
 	@patch("final_decision.get_account_state")
@@ -613,7 +597,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		mock_get_account_state,
 		mock_get_open_positions,
 		mock_load_gemini_api_config,
-		mock_trade_mode,
 		mock_count_successful_trades,
 		mock_count_successful_trades_today,
 		mock_count_successful_trades_since,
@@ -647,7 +630,6 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			model="gemini-2.5-flash",
 			fallback_models=("gemini-2.5-flash",),
 		)
-		mock_trade_mode.return_value = 1
 		mock_count_successful_trades.return_value = 10
 		mock_count_successful_trades_today.return_value = 0
 		mock_count_successful_trades_since.return_value = 0

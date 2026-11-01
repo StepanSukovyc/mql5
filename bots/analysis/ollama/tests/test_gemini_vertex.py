@@ -30,6 +30,7 @@ class GeminiVertexParsingTests(unittest.TestCase):
 			open_positions=[],
 			account_state={"balance": 5000},
 			gemini_config=SimpleNamespace(),
+			trade_number=7,
 		)
 
 		self.assertIsNotNone(decision)
@@ -38,6 +39,9 @@ class GeminiVertexParsingTests(unittest.TestCase):
 		self.assertIn('"candidates": [', prompt)
 		self.assertIn('"recommended_symbol": "SYMBOL_NAME"', prompt)
 		self.assertIn("Pole reasoning musí být krátké", prompt)
+		self.assertIn("Pořadí obchodu: #7", prompt)
+		self.assertIn("lot_size a take_profit se ve finalni exekuci pocitaji lokalne.", prompt)
+		self.assertNotIn("plně řízen Gemini", prompt)
 
 	def test_parses_json_wrapped_in_code_fence(self) -> None:
 		response = SimpleNamespace(

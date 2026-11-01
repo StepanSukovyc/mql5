@@ -10,47 +10,91 @@ Aktuální runtime už není postavený na tom, že Gemini přímo řídí exeku
 
 Na začátku cyklu se načte aktuální počet pozic přímo z MT5. Pokud je počet roven nebo vyšší než `MT5_MAX_OPEN_POSITIONS` (výchozí `17`), přeskočí se načítání predikcí, AI advisory, signal validation i risk calculation pro všechny strategie. Správa již otevřených pozic zůstává aktivní. Stejný limit se znovu ověří těsně před odesláním příkazu brokerovi, aby se pokryl souběh s jiným procesem. Při chybě této finální kontroly se nový obchod z bezpečnostních důvodů neotevře.
 
-Gemini a Ollama jsou teď pomocné predikční vrstvy. Nejsou autoritou pro finální velikost pozice ani pro řízení rizika.
+Gemini a Ollama dodávají predikce a advisory ranking. Cloud Ollama má navíc vlastní vstupní strategický profil, ale ani v něm AI neurčuje finální velikost pozice ani řízení rizika.
+
+Pořadí obchodu nepřepíná režim AI ani výpočet lotu a TP. Původní `GEMINI_FULL_CONTROL_EVERY_N_TRADES` byla odstraněna z runtime; případná položka ve starší konfiguraci se ignoruje.
 
 ## Automatický balance cap
 
 Pro výpočet dostupné marže strategie používá aktuální balance zaokrouhlený dolů na celé tisíce USD. Například balance `11125` vytvoří strategický cap `11000`; zbylých `125` USD je bezpečnostní rezerva. Při balance `9999` je cap `9000` a rezerva `999` USD.
 
-Rezerva se odečte z raw free margin před kontrolou požadované marže objednávky. `TRADING_ACCOUNT_BALANCE_CAP` již není konfigurační proměnná.
+Výpočet v [`account_state.py`](account_state.py) je `max(floor(raw_balance / 1000) × 1000, 0)`. Tento cap je efektivní `balance` ve strategickém stavu účtu; rezerva se odečte z raw free margin před kontrolou požadované marže objednávky. Při balance pod `1000` je cap nulový.
+
+`TRADING_ACCOUNT_BALANCE_CAP` runtime již nečte: nejde o aktivní konfigurační proměnnou a její případné nastavení nemění cap. V aktuálních `bots/analysis/ollama/.env` a `.env.example` už není. Hodnota `TRADING_ACCOUNT_BALANCE_CAP=11000` zůstává v podkladové kopii [`tasks/strategie/podklady/.env`](../../../tasks/strategie/podklady/.env), zatímco [`tasks/aktualni/.env`](../../../tasks/aktualni/.env) obsahuje `10000`. Tyto položky i komentáře odvozující limity od této proměnné jsou historické, nikoli popis aktuálního výpočtu.
 
 Při nedostatečné marži se `trade_execution.py` pokusí nejvýše šestkrát přepočítat menší objem podle aktuálně dostupné marže a znovu ho ověří proti brokerovu minimu, maximu a kroku objemu. Každý pokus ponechává pětiprocentní rezervu. Stejný omezený postup se použije při brokerově `NO_MONEY` odmítnutí; při jiné chybě se neopakuje. Pokud by menší objem klesl pod brokerovo minimum, obchod se odmítne. Tato úprava nemění ani nepřidává broker-side stop loss.
 
+## Maržové prahy: probuzení cyklu versus aktivace strategií
+
+`TRADING_MARGIN_THRESHOLD` a `TRADING_TRIGGER_MARGIN_THRESHOLD` se stále používají, ale nejsou zaměnitelné. Hodnoty se zadávají v procentech: `5` znamená 5 %, nikoli poměr `5.0`.
+
+### `TRADING_TRIGGER_MARGIN_THRESHOLD`: brána hlavního plánovače
+
+[`check_stop_condition()`](account_monitor.py) ukončí čekací monitor a nastaví `trading_trigger_event`, pokud:
+
+`raw_margin_free / balance × 100 > TRADING_TRIGGER_MARGIN_THRESHOLD`
+
+`balance` je automaticky zaokrouhlený strategický cap, nikoli raw balance nebo equity. Při nulovém capu helper vrací poměr `0`. Používá se skutečná raw free margin bez odečtení rezervy; na kontrolu marže konkrétní objednávky se rezerva nadále vztahuje.
+
+[`logika.py`](logika.py) čeká na tento event před přípravou predikcí a finální rozhodovací fází. Splnění triggeru tedy pouze dovolí zahájit rozhodovací cyklus, nezaručuje otevření obchodu a nenahrazuje maržové, signální, session ani poziční guardy jednotlivých strategií. Správa již otevřených pozic běží nezávisle.
+
+V aktuální `.env` je `TRADING_TRIGGER_MARGIN_THRESHOLD=5`. Při capu `11000` se monitor probudí až při raw free margin **nad `550`**, nikoli při přesných `550`. Vyšší trigger může zadržet celý vstupní cyklus, i když některá fallback strategie už splňuje svůj nižší práh.
+
+Pokud proměnná chybí nebo nejde převést na číslo, `_get_margin_threshold()` použije minimum prahů Primary a Parallel, případně také zapnutého Reversal a Scalping. **Cloud Ollama a Quant tento automatický výběr nezahrnuje**; nejde tedy obecně o minimum všech šesti vstupních profilů.
+
+### `TRADING_MARGIN_THRESHOLD`: výchozí práh Primary
+
+[`get_primary_strategy_context()`](strategy_context.py) čte `TRADING_MARGIN_THRESHOLD` jako výchozí hodnotu pro `PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT`. Výchozí hodnota při chybějícím/nečíselném nastavení je `20`.
+
+Pokud je `PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT` explicitně a platně nastavený, má přednost. Aktuální `.env` obsahuje obě hodnoty `20`, takže změna samotného `TRADING_MARGIN_THRESHOLD` nyní primární práh nezmění. Bez explicitního primárního nastavení se jeho změna přenese také na odvozené prahy Parallel, Reversal, Quant a na výchozí práh Cloud Ollama.
+
+Vstupní profily kontrolují stejný maržový poměr `raw_margin_free / balance × 100`, ale k aktivaci jim stačí **`>=` jejich vlastní práh**. Aktuální konfigurace dává:
+
+| Profil | Maržový práh | Odvození |
+|---|---|---|
+| Cloud Ollama | 20 % | `OLLAMA_CLOUD_STRATEGY_ACTIVATION_MARGIN_PERCENT` není v aktuální `.env` nastavený, dědí Primary |
+| Primary | 20 % | explicitní `PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT=20` |
+| Parallel | 15 % | `max(Primary − PARALLEL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT, 0)` = `20 − 5` |
+| Reversal | 13 % | `max(Primary − REVERSAL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT, 0)` = `20 − 7` |
+| Quant | 10 % | `max(Primary − QUANT_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT, 0)` = `20 − 10` |
+| Scalping | 5 % | samostatné `SCALP_ACTIVATION_MARGIN_PERCENT=5.0` |
+
+Například při capu `11000` a raw free margin `1100` (10 %) trigger `5` cyklus probudí, ale Cloud Ollama, Primary, Parallel a Reversal mají maržovou bránu zavřenou. Quant a Scalping mohou splnit maržovou aktivaci; stále musí projít všemi ostatními podmínkami. Tyto prahy nejsou brokerův „margin level“ (`equity / used margin`) ani velikost rizika na obchod.
+
 ## Hlavní tok runtime
 
-1. `logika.py` hlídá swap blok okno a mimo něj spouští obchodní cyklus.
-2. `trading_logic.py` připraví predikce:
-   - v economy mode bere čerstvá MT5 data a používá Gemini jen když je potřeba
-   - mimo economy mode může znovu použít čerstvé Ollama predikce nebo spadnout na Gemini fallback
-3. Slabé predikce se odfiltrují.
-4. `final_decision.py` načte stav účtu, otevřené pozice a dostupné predikce.
-5. Gemini může vrátit seřazený advisory shortlist kandidátů pro symbol a směr.
-6. Runtime zkusí maximálně `GEMINI_ADVISORY_MAX_CANDIDATES` Gemini kandidátů, výchozí hodnota je `3`.
-7. Pokud žádný z těchto Gemini kandidátů neprojde validací, cooldownem nebo exekucí, runtime přejde na čistě lokální kandidátní frontu bez Gemini.
-8. Zbytek rozhodnutí už běží lokálně nad kandidátní frontou.
-9. Pokud primární strategie nenajde proveditelný obchod, runtime může přejít na paralelní mean-reversion strategii.
-10. Pokud neuspěje ani paralelní profil a `REVERSAL_STRATEGY_ENABLED=true`, runtime může zkusit třetí reversal-pattern fallback.
-11. Pokud neuspěje ani reversal a `QUANT_STRATEGY_ENABLED=true`, runtime zkusí čtvrtý quant-math fallback.
-12. Pokud neuspěje ani quant a `SCALP_ENABLED=true` a volná marže překračuje `SCALP_ACTIVATION_MARGIN_PERCENT`, runtime zkusí liquidity-sweep scalping fallback.
+Autoritativní pořadí pokusů o nový vstup v [`make_final_trading_decision()`](final_decision.py) je:
+
+**Cloud Ollama → Primary → Parallel → Reversal → Quant → Scalping**
+
+Jde o šest vstupních profilů, nikoli o pořadí volání AI. Po prvním úspěšném otevření obchodu rozhodovací funkce vrátí `True`; další profily se v daném cyklu nezkoušejí. Vypnutý profil, chybějící kandidáti nebo nesplněné aktivační podmínky znamenají přeskočení profilu, ne změnu pořadí.
+
+1. `logika.py` hlídá globální časové blokace a limit otevřených pozic. Při `OLLAMA_CLOUD_ENABLED=true` běží cloudová predikční služba ve vlastním vlákně.
+2. Plánovač nejprve hledá existující predikce z aktuální UTC hodiny. Pokud je nemá, ale cloudová složka obsahuje JSON predikce, nemusí volat Gemini. Jinak `trading_logic.py` připraví predikce: v economy mode z čerstvých MT5 dat přes Gemini, mimo něj může znovu použít čerstvé lokální Ollama predikce nebo použít Gemini fallback. Slabé predikce se odfiltrují.
+3. Plánovač volá `final_decision.py`, pokud má běžnou predikční složku nebo cloudové predikce. Funkce načte otevřené pozice, provede správu skalpovacích pozic, ověří globální limit a načte kandidáty i stav účtu.
+4. **Cloud Ollama** při zapnutí a dostupných cloudových predikcích zkusí svůj vlastní trend-following profil. Cloudový advisory shortlist doplní lokální ranking těchto predikcí.
+5. **Primary** se zkouší jen s predikcemi z běžné predikční složky, kterou kód označuje jako Gemini predictions (může obsahovat i znovu použité lokální Ollama predikce). Její advisory ranking rovněž poskytuje Cloud Ollama. Pokud advisory nevrátí kandidáty nebo nevedou k obchodu, zbývá lokální ranking; na Gemini advisory se v tomto toku nepřepíná.
+6. **Parallel**, poté zapnutý **Reversal**, používají společnou kandidátní frontu: běžné predikce s advisory rankingem, nebo při jejich absenci lokální ranking cloudových predikcí. Primary samotná tuto cloudovou náhradu nepoužívá.
+7. Zapnutý **Quant** používá vlastní kandidáty z raw market dat, nikoli AI shortlist.
+8. Zapnutý **Scalping** je poslední profil a používá vlastní M5 data z MT5. Vyžaduje mimo jiné maržový práh alespoň `SCALP_ACTIVATION_MARGIN_PERCENT` a volný limit skalpovacích pozic.
+
+Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudových predikcí a bez quant kandidátů, může zkusit rovnou scalping. To neznamená, že jej hlavní plánovač volá v každém cyklu bez predikcí: bez běžné predikční složky i cloudových JSON souborů rozhodovací fázi přeskočí.
 
 ## Role AI
 
-### Ollama Cloud (primary advisory)
+### Ollama Cloud (vlastní strategie i advisory)
 
-- pro **finální výběr instrumentu a směru** pro primární strategii je nyní autoritou Ollama Cloud
-- volá se přes `_resolve_ollama_cloud_advisory_candidates()` v `final_decision.py`
-- vrací seřazený shortlist kandidátů (symbol, action, reasoning) ve stejném formátu jako dříve Gemini
-- platí stejné limity: `GEMINI_ADVISORY_MAX_CANDIDATES`, `GEMINI_DECISION_CACHE_MINUTES`, `GEMINI_REJECTION_COOLDOWN_MINUTES`
-- konfigurace: `OLLAMA_CLOUD_URL`, `OLLAMA_CLOUD_MODEL`, `OLLAMA_CLOUD_API_KEY`, `OLLAMA_CLOUD_TIMEOUT_SECONDS`
+- **Vlastní vstupní profil** `ollama_cloud` se zkouší jako první při `OLLAMA_CLOUD_ENABLED=true`. Čte predikce ze `SERVICE_DEST_FOLDER/ollama_cloud/predikce`, používá trend-following validaci a vlastní risk, session, cooldown a ownership konfiguraci.
+- **Advisory služba** `_resolve_ollama_cloud_advisory_candidates()` poskytuje ranking jak tomuto cloudovému profilu, tak následnému profilu `primary`. Jde o stejnou AI službu, ale dva samostatné pokusy o obchod.
+- `OLLAMA_CLOUD_ENABLED` řídí cloudovou predikční službu a první vstupní profil. Volání advisory pro `primary` tímto přepínačem v `final_decision.py` podmíněno není; spouští se při splnění primárního maržového prahu a dostupnosti běžných predikcí.
+- Shortlist obsahuje symbol, action a reasoning. Není autoritou pro konečný vstup: kandidáta mohou odmítnout lokální filtry, cooldown, risk nebo exekuce. Za shortlist se připojí lokálně seřazení kandidáti bez duplicit symbol/směr.
+- Historicky pojmenované `GEMINI_ADVISORY_MAX_CANDIDATES` (výchozí `3`) omezuje počet vrácených cloudových advisory kandidátů, nikoli celkový počet lokálních kandidátů. `GEMINI_DECISION_CACHE_MINUTES` řídí advisory cache a `GEMINI_REJECTION_COOLDOWN_MINUTES` lokální rejection cooldown.
+- API konfigurace: `OLLAMA_CLOUD_URL`, `OLLAMA_CLOUD_MODEL`, `OLLAMA_CLOUD_API_KEY`, `OLLAMA_CLOUD_TIMEOUT_SECONDS`.
 
 ### Gemini
 
 - nadále slouží jako **upstream predikční vrstva** — generuje per-symbol market analýzu (BUY/SELL% + reasoning)
-- tyto predikce jsou vstupem pro advisory vrstvu (Ollama Cloud)
+- tyto predikce mohou být vstupem pro primární profil a jeho advisory vrstvu (Ollama Cloud); vlastní cloudový profil používá své cloudové predikce
 - finální výběr (advisory ranking) už Gemini neprovádí
 - cache a rejection cooldown jsou sdílené s Ollama Cloud advisory path
 - perzistentní stav je uložen v `trade_logs/gemini_advisory_state.json`
@@ -64,7 +108,7 @@ Při nedostatečné marži se `trade_execution.py` pokusí nejvýše šestkrát 
 
 ## Primární strategie
 
-Primární profil je trend-following vrstva nad lokálními pravidly v `signal_rules.py`.
+Primární profil `primary` je druhý vstupní profil, po Cloud Ollama. Název „primární“ neznamená první místo v aktuálním řetězci. Je to trend-following vrstva nad lokálními pravidly v `signal_rules.py`, s vlastním ownership `gemini_primary`, odlišným od `ollama_cloud_primary`.
 
 Typické filtry:
 
@@ -86,13 +130,38 @@ Pokud primární strategie kandidáta potvrdí, `risk_engine.py` spočítá:
 
 Broker-side stop loss se neposílá. Syntetický stop slouží pro sizing, interní kontrolu rizika a logování.
 
+## Index profil: ownership a výstupy, nikoli samostatná vstupní strategie
+
+Přítomnost `INDEX_STRATEGY_ENABLED=true` v `.env` neznamená, že aktuální runtime spouští samostatnou index strategii. V [`final_decision.py`](final_decision.py) není indexový `StrategyExecutionProfile`, indexový signal validator ani pokus o indexový vstup. Index proto není sedmou větví fallback řetězce a nemá vlastní implementovanou BUY/SELL signální logiku.
+
+Co aktuální kód skutečně používá:
+
+- [`get_index_strategy_context()`](strategy_context.py) načítá identitu `INDEX_STRATEGY_ID` (výchozí `gemini_indices`), magic `INDEX_STRATEGY_MAGIC` (výchozí `234100`) a `INDEX_MANAGE_LEGACY_POSITIONS` (aktuálně `false`). Pozice s tímto magic nebo odpovídajícím komentářem se rozpoznají jako indexové; primary je nepřebírá jako manuální/legacy pozice.
+- [`get_profit_protection_contexts()`](profit_protection_strategy.py) zahrnuje index kontext bez podmínky `INDEX_STRATEGY_ENABLED`. Již otevřené indexové pozice bez broker-side TP tedy může spravovat obecná profit protection, pokud je tato ochrana zapnutá. Platí její společná pravidla čistého zisku a držení pozice, nikoli zvláštní indexové signály. Pozice s TP tato ochrana nepřebírá.
+- [`trade_outcomes.py`](trade_outcomes.py) rozpoznává výchozí magic `234100` jako `gemini_indices` při evidenci výsledků uzavřených obchodů.
+
+Rozdíl mezi konfigurací a zapojením do runtime:
+
+| Parametry / aktuální hodnoty v `.env` | Skutečné použití |
+|---|---|
+| `INDEX_STRATEGY_ENABLED=true` | Getter přepínače v `profit_protection_strategy.py` nemá volajícího. Nezapíná vstupní strategii ani nepodmiňuje zařazení do profit protection. |
+| `INDEX_SESSION_START_HOUR_UTC=7`, `INDEX_SESSION_END_HOUR_UTC=19`, `INDEX_FRIDAY_CUTOFF_HOUR_UTC=15` | Načítají se do index kontextu, ale bez indexové vstupní větve se jako indexové vstupní session guardy nepoužijí. Neomezují obecnou profit protection na toto okno. |
+| `INDEX_MAX_OPEN_POSITIONS=0`, `INDEX_STRATEGY_ACTIVATION_MARGIN_PERCENT` | Kontext je umí načíst, ale pro samostatný indexový vstup se nekontrolují, protože takový vstup není zapojený. |
+| `INDEX_STRATEGY_SYMBOL_WHITELIST` | Čte jej klasifikační helper `is_index_symbol()` v `instrument_utils.py`. Tento helper má aktuálně volající jen v testech, nikoli v živém rozhodovacím toku; whitelist tedy není aktivním indexovým vstupním filtrem. |
+| `INDEX_MAX_SPREAD_POINTS=60`, `INDEX_MAX_LOT_CAP=0.10`, `INDEX_BALANCE_STEP_USD=1500`, `INDEX_LOT_PER_BALANCE_STEP=0.01` | Aktuální runtime tyto proměnné nečte. Nejde o vynucené limity indexových obchodů otevíraných jinými profily. |
+| `INDEX_MAX_TRADES_PER_DAY=0`, `INDEX_MAX_TRADES_PER_SYMBOL_PER_DAY=0`, `INDEX_STRATEGY_SERVICE_SUBDIR=indices_strategy` | Aktuální runtime je nečte; samostatný indexový plánovač ani výstupní složku podle nich nevytváří. |
+
+Konfigurovaný whitelist je `US100_ecn, US500_ecn, US30_ecn, GER40_ecn, FRA40_ecn, UK100_ecn, JP225_ecn, EU50_ecn, HKD50_ecn, FANG_ecn, USOIL_ecn`. Jde o konfigurovaný seznam, nikoli důkaz samostatného obchodování těchto symbolů; obsahuje také ropu `USOIL_ecn`.
+
+Indexové instrumenty mohou obchodovat ostatní vstupní profily, pokud jsou v jejich kandidátech a projdou jejich pravidly. Takový obchod má ownership, session, spread a sizing daného profilu, nikoli automaticky `gemini_indices` ani limity `INDEX_*`. Samotné vypnutí `INDEX_STRATEGY_ENABLED` proto nezakazuje ostatním profilům obchodovat indexy a nevypíná správu již rozpoznaných indexových pozic.
+
 ## Paralelní strategie
 
-Paralelní profil v `parallel_strategy_mean_reversion.py` je fallback, ne hlavní tok.
+Paralelní profil v `parallel_strategy_mean_reversion.py` je třetí vstupní profil a fallback po Cloud Ollama a Primary, ne souběžně obchodující hlavní tok.
 
 Aktivuje se jen když:
 
-- primární strategie neotevřela obchod
+- cloudová ani primární strategie neotevřely obchod
 - účet splňuje vlastní maržový práh aktivace
 - paralelní profil nepřekročil svůj limit otevřených pozic
 - kandidát spadá do povoleného sekundárního universe a projde mean-reversion pravidly
@@ -115,12 +184,12 @@ Paralelní strategie má vlastní risk profil i vlastní session guardy.
 
 ## Reverzní strategie
 
-Reverzní profil v `reversal_pattern_strategy.py` je třetí fallback vrstva. Nespouští se jako konkurent primary strategie, ale až po primary a paralelní mean reversion větvi.
+Reverzní profil v `reversal_pattern_strategy.py` je čtvrtý vstupní profil. Nespouští se jako konkurent primary strategie, ale až po Cloud Ollama, Primary a paralelní mean-reversion větvi.
 
 Aktivuje se jen když:
 
 - `REVERSAL_STRATEGY_ENABLED=true`
-- primary ani parallel strategie neotevřely obchod
+- cloudová, primary ani parallel strategie neotevřely obchod
 - účet splňuje vlastní maržový práh aktivace
 - reversal profil nepřekročil limit otevřených pozic
 - kandidát spadá do povoleného sekundárního universe a projde reverzní pattern validací
@@ -144,12 +213,12 @@ Reverzní strategie má vlastní risk profil, session guardy i samostatný statu
 
 ## Quant strategie
 
-Quant profil v `quant_math_strategy.py` je čtvrtý fallback. Funguje výhradně na lokálních matematických metrikách bez AI predikcí.
+Quant profil v `quant_math_strategy.py` je pátý vstupní profil, fallback po Reversal. Funguje výhradně na lokálních matematických metrikách bez AI predikcí.
 
 Aktivuje se jen když:
 
 - `QUANT_STRATEGY_ENABLED=true`
-- primary, parallel ani reversal strategie neotevřely obchod
+- cloudová, primary, parallel ani reversal strategie neotevřely obchod
 - účet splňuje vlastní maržový práh aktivace
 - quant profil nepřekročil limit otevřených pozic
 - kandidát dosáhne minimálního skóre `QUANT_MIN_SIGNAL_SCORE`
@@ -166,13 +235,13 @@ Quant strategie má vlastní risk profil a session guardy. Výstupem je `quant_s
 
 ## Liquidity Sweep Scalping strategie
 
-Skalpovací profil v `liquidity_sweep_scalping_strategy.py` je šestý a poslední fallback ve výkonnostním řetězci. Obchoduje výhradně na M5 svíčkách načtených přímo z MT5 přes `copy_rates_from_pos`.
+Skalpovací profil v `liquidity_sweep_scalping_strategy.py` je šestý a poslední vstupní profil, fallback po Quant. Obchoduje výhradně na M5 svíčkách načtených přímo z MT5 přes `copy_rates_from_pos`.
 
 Aktivuje se jen když:
 
 - `SCALP_ENABLED=true`
 - žádná předchozí strategie v daném cyklu neotevřela obchod
-- volná marže / balance >= `SCALP_ACTIVATION_MARGIN_PERCENT` (výchozí 5 %)
+- `raw_margin_free / balance × 100 >= SCALP_ACTIVATION_MARGIN_PERCENT` (výchozí 5 %); `balance` je automatický cap a při nulovém capu se profil neaktivuje. Aktivační kontrola scalping používá raw free margin, zatímco kontrola marže objednávky odečítá rezervu
 - skalpovací profil nepřekročil `SCALP_MAX_POSITIONS_TOTAL`
 
 Základní obchodní logika (Liquidity Sweep / False Breakout):
@@ -225,6 +294,12 @@ Skalpovací strategie má vlastní `ScalpingAppContext` (DI kontejner) a `magic`
 
 Každý strategy profile má vlastní UTC obchodní okno.
 
+### Cloud Ollama strategie
+
+- `OLLAMA_CLOUD_SESSION_START_HOUR_UTC`
+- `OLLAMA_CLOUD_SESSION_END_HOUR_UTC`
+- `OLLAMA_CLOUD_FRIDAY_CUTOFF_HOUR_UTC`
+
 ### Primární strategie
 
 - `PRIMARY_SESSION_START_HOUR_UTC`
@@ -267,12 +342,12 @@ Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví 
 
 | Strategie | Magic | Strategy ID |
 |---|---|---|
-| Primární | 234000 | `gemini_primary` |
-| Index | 234100 | `gemini_indices` |
+| Primární (druhý vstupní profil) | 234000 | `gemini_primary` |
+| Index (ownership bez vlastní vstupní větve) | 234100 | `gemini_indices` |
 | Paralelní | 234200 | `parallel_mean_reversion` |
 | Reverzní | 234300 | `reversal_pattern` |
 | Quant | 234400 | `quant_math` |
-| Cloud Ollama | 234500 | `ollama_cloud_primary` |
+| Cloud Ollama (první vstupní profil) | 234500 | `ollama_cloud_primary` |
 | Scalping | 234600 | `liquidity_sweep_scalping` |
 
 - primární strategie může podle konfigurace spravovat i manuální nebo legacy pozice
@@ -347,9 +422,9 @@ Význam nových CSV souborů:
 
 V audit logu jsou teď navíc vidět i pomocné přechodové informace:
 
-- `candidate_queue`: jestli byl kandidát z Gemini nebo z lokálního rankingu
+- `candidate_source` a `candidate_queue`: skutečný zdroj kandidáta, například `ollama_cloud_live_advisory_candidate_1`, `ollama_cloud_cached_advisory_candidate_1`, `local` nebo `quant`. Cloudové zdroje se v `candidate_queue` zatím ponechávají v plném tvaru zdroje
 - `candidate_rank`: pořadí kandidáta v dané frontě
-- `queue_transition` s důvodem `gemini_candidates_exhausted_local_fallback`: okamžik, kdy runtime po vyčerpání Gemini shortlistu přešel na local-only flow
+- `queue_transition` s důvodem `gemini_candidates_exhausted_local_fallback`: historická větev pro přechod z kandidátů označených jako Gemini na lokální ranking. Aktuální cloudové advisory zdroje tuto událost nespouštějí; její absence neznamená, že se lokální fallback nezkusil
 
 Tím je oddělené:
 
@@ -381,9 +456,12 @@ Aktuální architektura je záměrně konzervativnější než původní Gemini-
 
 - AI navrhuje, ale lokální pravidla rozhodují
 - risk je lokální a deterministický
-- fallback řetězec má šest vrstev: primary → parallel → reversal → quant → (cloud ollama) → scalping
-- scalping je poslední záloha — spouští se jedině pokud žádná předchozí strategie neobchodovala a marže > 5 %
+- vstupní řetězec má šest profilů: **Cloud Ollama → Primary → Parallel → Reversal → Quant → Scalping**
+- Cloud Ollama má vlastní první vstupní profil a zároveň poskytuje advisory ranking pro Primary; tyto dvě role se nesmějí zaměňovat
+- Index má samostatný ownership pro správu existujících pozic, ale není zapojený jako vstupní strategie; `INDEX_STRATEGY_ENABLED` ani indexové spread/lot limity nové vstupy neřídí
+- cap se automaticky odvozuje z aktuální balance po tisících; historické `TRADING_ACCOUNT_BALANCE_CAP` v podkladových env souborech nemá účinek
+- scalping je poslední záloha — nový vstup zkouší jen pokud žádný předchozí profil neotevřel obchod a marže dosahuje nakonfigurovaného prahu (výchozí alespoň 5 %)
 - scalping pracuje přímo s M5 OHLCV daty z MT5, není závislý na AI predikcích ani precomputed indikátorech
-- opakované Gemini dotazy jsou omezené cache a cooldownem
+- opakované cloudové advisory dotazy omezuje cache; opakované odmítnuté kandidáty omezuje rejection cooldown
 - obchodování je svázané jak globálním swap blokem, tak session okny jednotlivých strategií
 - správa skalpovacích pozic (exit podmínky) běží vždy při každém cyklu, nezávisle na ostatních strategiích

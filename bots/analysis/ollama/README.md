@@ -45,12 +45,11 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
-  - Gemini na Vertex AI vybere **1 instrument**, rozhodne **BUY/SELL**, navrhne `lot_size` a `take_profit`
+  - Cloud Ollama poskytuje advisory ranking instrumentu a směru; finální vstup schvalují lokální pravidla
   - V promptu zohledňuje swing styl (nejde o intraday), denní cíl ziskovosti a poplatek `0.10 USD` za každých `0.01` lotu
-7. **Režim exekuce dle pořadí obchodu** (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`, default 3):
-  - `lot_size` se vždy použije z finální Gemini predikce
-  - Každý N-tý obchod: použije se i `take_profit` od Gemini
-  - Ostatní obchody: `take_profit` se nepoužije
+7. **Lokální signal/risk exekuce**:
+  - `lot_size` a `take_profit` se počítají lokálně v `risk_engine.py`
+  - Pořadí obchodu nemění sizing, TP ani advisory režim
 8. **Profit cleanup** (`PROFIT_CLEANUP_STRATEGY_ENABLED`, default `true`):
   - Account monitor kontroluje pozice každou minutu; vyhodnocení se přeskočí během swap blokovacího okna
   - Minutový scénář uzavírá pozice při překročení dynamického cíle `PCZ = max((0.01 × position_volume / reference_volume) × balance, 0.005 USD)`; `reference_volume = (int(balance / 500) + 1) × 0.01`
@@ -175,8 +174,6 @@ VERTEX_AI_PROJECT_ID=your-gcp-project-id
 VERTEX_AI_REGION=europe-west4
 VERTEX_AI_MODEL=gemini-2.5-flash
 
-# Každý N-tý obchod je plně řízen Gemini (lot_size + take_profit)
-GEMINI_FULL_CONTROL_EVERY_N_TRADES=3
 PROFIT_CLEANUP_STRATEGY_ENABLED=true
 PROFIT_CLEANUP_STRATEGY_DRY_RUN=true
 SWAP_ROLLOVER_CLEANUP_STRATEGY_ENABLED=true
@@ -362,8 +359,6 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - Hardening: Pokud filtr smaže všechny existující predikce, obchodní krok se bezpečně přeskočí
 - Hardening: Reuse Ollama predikce ověřuje konzistenci symbolu, aby nedošlo ke křížení párů
 - Finální rozhodnutí se dělá na **právě jednom měnovém páru** s vypočtenou velikostí lotu
-- Finální rozhodnutí se dělá na **právě jednom měnovém páru** s velikostí lotu převzatou z Gemini predikce
-- Každý `N`-tý obchod (`GEMINI_FULL_CONTROL_EVERY_N_TRADES`) používá `lot_size + take_profit` od Gemini
-- Ostatní obchody používají `lot_size` od Gemini a bez take profit
+- Velikost lotu a take profit určuje lokální risk engine, nikoli pořadí obchodu nebo AI
 - **Nekonečný loop:** Skript běží dokola, dokud není ručně zastaven
 - Ukončení skriptu: `Ctrl+C`
