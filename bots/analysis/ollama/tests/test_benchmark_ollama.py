@@ -47,7 +47,7 @@ class BenchmarkTests(unittest.TestCase):
                 self.assertEqual(main(), 0)
             self.assertEqual(len(requests), 2)
             self.assertEqual(requests[0]["prompt"], requests[1]["prompt"])
-            self.assertEqual({r["model"] for r in requests}, {"gpt-oss:120b", "qwen3.8:27b"})
+            self.assertEqual({r["model"] for r in requests}, {"gpt-oss:120b", "deepseek-v4-pro:0813-cloud"})
             result = next((root / "benchmarks").glob("*/summary.json"))
             self.assertEqual(json.loads(result.read_text())["direction_agreements"], 1)
             self.assertEqual(len(list(source.iterdir())), 1)

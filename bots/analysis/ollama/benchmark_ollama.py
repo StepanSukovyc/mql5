@@ -78,7 +78,7 @@ def main() -> int:
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--repeats", type=int, default=1)
-    parser.add_argument("--models", nargs=2, default=["gpt-oss:120b", "qwen3.8:27b"])
+    parser.add_argument("--models", nargs=2, default=["gpt-oss:120b", "deepseek-v4-pro:0813-cloud"])
     args = parser.parse_args()
     if args.limit < 1 or args.repeats < 1 or args.models[0] == args.models[1]:
         parser.error("Use positive limit/repeats and two different models")
