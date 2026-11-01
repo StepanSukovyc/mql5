@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import unittest
+import json
+import os
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from gemini_config import GeminiVertexConfig
 from gemini_vertex import (
 	GeminiVertexRequestError,
 	_get_legacy_prompt_with_schema,
@@ -13,6 +16,11 @@ from gemini_vertex import (
 	_parse_structured_json_response,
 	_should_skip_remaining_vertex_models,
 	_should_try_rest_fallback,
+	_get_vertex_rest_endpoint,
+	_get_thinking_config,
+	_get_model_output_token_limit,
+	_request_structured_json_via_rest,
+	request_prediction_json,
 )
 
 
@@ -172,6 +180,159 @@ class GeminiVertexParsingTests(unittest.TestCase):
 		api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
 
 		self.assertEqual(_normalize_legacy_gemini_api_url(api_url), api_url)
+
+
+class GeminiArgonRequestTests(unittest.TestCase):
+	def _config(self, model="gemini-4-argon", region="eu"):
+		return GeminiVertexConfig(
+			credentials_path="test-credentials.json",
+			project="test-project",
+			region=region,
+			model=model,
+			fallback_models=(model,),
+		)
+
+	def _prediction(self):
+		return {"symbol": "EURUSD_ecn", "BUY": 60, "SELL": 20, "HOLD": 20, "reasoning": "test"}
+
+	def test_vertex_endpoints_cover_multi_region_global_and_regional(self) -> None:
+		for region, host in {
+			"eu": "aiplatform.eu.rep.googleapis.com",
+			"us": "aiplatform.us.rep.googleapis.com",
+			"global": "aiplatform.googleapis.com",
+			"europe-west1": "europe-west1-aiplatform.googleapis.com",
+		}.items():
+			with self.subTest(region=region):
+				self.assertEqual(
+					_get_vertex_rest_endpoint(self._config(region=region), "gemini-4-argon"),
+					f"https://{host}/v1/projects/test-project/locations/{region}"
+					"/publishers/google/models/gemini-4-argon:generateContent",
+				)
+
+	def test_thinking_and_output_limits_preserve_flash_behavior(self) -> None:
+		self.assertEqual(
+			_get_thinking_config("gemini-4-argon"),
+			{"include_thoughts": False, "thinking_level": "MEDIUM"},
+		)
+		self.assertEqual(
+			_get_thinking_config("gemini-2.5-flash"),
+			{"include_thoughts": False, "thinking_budget": 0},
+		)
+		for limit in (512, 768):
+			self.assertEqual(_get_model_output_token_limit("gemini-4-argon", limit), 8192)
+			self.assertEqual(_get_model_output_token_limit("gemini-2.5-flash", limit), limit)
+		self.assertEqual(_get_model_output_token_limit("gemini-4-argon", 16384), 16384)
+
+	@patch("gemini_vertex._log_event")
+	@patch("gemini_vertex._load_legacy_gemini_api_config", return_value=None)
+	@patch("google.genai.Client")
+	@patch.dict(os.environ, {}, clear=False)
+	def test_sdk_argon_request_uses_medium_without_budget(self, mock_client, _legacy, mock_log) -> None:
+		client = mock_client.return_value.__enter__.return_value
+		client.models.generate_content.return_value = SimpleNamespace(
+			parsed=self._prediction(), text=json.dumps(self._prediction()),
+		)
+
+		result = json.loads(request_prediction_json(self._config(), "EURUSD_ecn", "synthetic test"))
+
+		self.assertEqual(result, self._prediction())
+		self.assertEqual(mock_client.call_args.kwargs["location"], "eu")
+		self.assertTrue(mock_client.call_args.kwargs["vertexai"])
+		request = client.models.generate_content.call_args.kwargs
+		self.assertEqual(request["model"], "gemini-4-argon")
+		self.assertEqual(request["config"].max_output_tokens, 8192)
+		self.assertEqual(request["config"].thinking_config.thinking_level, "MEDIUM")
+		self.assertIsNone(request["config"].thinking_config.thinking_budget)
+		self.assertEqual(request["config"].response_mime_type, "application/json")
+		self.assertEqual(mock_log.call_args.kwargs["transport"], "google-genai-sdk")
+		self.assertEqual(mock_log.call_args.kwargs["model"], "gemini-4-argon")
+
+	@patch("gemini_vertex._log_event")
+	@patch("gemini_vertex._load_legacy_gemini_api_config", return_value=None)
+	@patch("google.genai.Client")
+	@patch.dict(os.environ, {}, clear=False)
+	def test_sdk_flash_request_retains_disabled_thinking_and_small_limit(self, mock_client, _legacy, _log) -> None:
+		client = mock_client.return_value.__enter__.return_value
+		client.models.generate_content.return_value = SimpleNamespace(
+			parsed=self._prediction(), text=json.dumps(self._prediction()),
+		)
+		request_prediction_json(self._config(model="gemini-2.5-flash", region="europe-west1"), "EURUSD_ecn", "test")
+		request_config = client.models.generate_content.call_args.kwargs["config"]
+		self.assertEqual(request_config.max_output_tokens, 512)
+		self.assertEqual(request_config.thinking_config.thinking_budget, 0)
+		self.assertIsNone(request_config.thinking_config.thinking_level)
+
+	@patch("gemini_vertex._get_service_account_access_token", return_value="test-token")
+	@patch("gemini_vertex.urllib.request.urlopen")
+	def test_rest_argon_request_uses_eu_endpoint_and_medium(self, mock_urlopen, _token) -> None:
+		mock_urlopen.return_value.__enter__.return_value.read.return_value = b'{"candidates":[]}'
+		result = _request_structured_json_via_rest(
+			config=self._config(), model_name="gemini-4-argon", prompt="synthetic test",
+			response_schema={"type": "OBJECT"}, max_output_tokens=512,
+		)
+		request = mock_urlopen.call_args.args[0]
+		self.assertTrue(request.full_url.startswith("https://aiplatform.eu.rep.googleapis.com/v1/"))
+		generation = json.loads(request.data)["generationConfig"]
+		self.assertEqual(generation["thinkingConfig"], {"includeThoughts": False, "thinkingLevel": "MEDIUM"})
+		self.assertEqual(generation["maxOutputTokens"], 8192)
+		self.assertEqual(result, {"candidates": []})
+
+	@patch("gemini_vertex._get_service_account_access_token", return_value="test-token")
+	@patch("gemini_vertex.urllib.request.urlopen")
+	def test_rest_flash_request_preserves_existing_payload(self, mock_urlopen, _token) -> None:
+		mock_urlopen.return_value.__enter__.return_value.read.return_value = b'{"candidates":[]}'
+		_request_structured_json_via_rest(
+			config=self._config(model="gemini-2.5-flash", region="europe-west1"),
+			model_name="gemini-2.5-flash", prompt="test",
+			response_schema={"type": "OBJECT"}, max_output_tokens=512,
+		)
+		request = mock_urlopen.call_args.args[0]
+		self.assertTrue(request.full_url.startswith("https://europe-west1-aiplatform.googleapis.com/"))
+		generation = json.loads(request.data)["generationConfig"]
+		self.assertEqual(generation["maxOutputTokens"], 512)
+		self.assertNotIn("thinkingConfig", generation)
+
+	@patch("gemini_vertex._log_event")
+	@patch("gemini_vertex._request_structured_json_via_rest")
+	@patch("gemini_vertex._load_legacy_gemini_api_config", return_value=None)
+	@patch("google.genai.Client")
+	@patch.dict(os.environ, {}, clear=False)
+	def test_argon_sdk_parse_error_can_use_same_model_vertex_rest(
+		self, mock_client, _legacy, mock_rest, mock_log,
+	) -> None:
+		client = mock_client.return_value.__enter__.return_value
+		client.models.generate_content.side_effect = GeminiVertexRequestError("Gemini returned invalid JSON: test")
+		mock_rest.return_value = {"candidates": [{"content": {"parts": [
+			{"text": json.dumps(self._prediction())},
+		]}}]}
+		result = json.loads(request_prediction_json(self._config(), "EURUSD_ecn", "synthetic test"))
+		self.assertEqual(result, self._prediction())
+		self.assertEqual(mock_rest.call_args.kwargs["model_name"], "gemini-4-argon")
+		self.assertEqual(mock_rest.call_args.kwargs["max_output_tokens"], 8192)
+		self.assertEqual(mock_log.call_args.kwargs["transport"], "vertex-rest-fallback")
+
+	@patch("gemini_vertex._log_event")
+	@patch("gemini_vertex._request_structured_json_via_legacy_api")
+	@patch("gemini_vertex._load_legacy_gemini_api_config", return_value={
+		"api_key": "test-key",
+		"api_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+	})
+	@patch("google.genai.Client")
+	@patch.dict(os.environ, {}, clear=False)
+	def test_argon_error_preserves_explicit_flash_api_key_fallback(
+		self, mock_client, _config, mock_legacy, mock_log,
+	) -> None:
+		client = mock_client.return_value.__enter__.return_value
+		client.models.generate_content.side_effect = GeminiVertexRequestError("test Vertex failure")
+		mock_legacy.return_value = {"candidates": [{"content": {"parts": [
+			{"text": json.dumps(self._prediction())},
+		]}}]}
+		result = json.loads(request_prediction_json(self._config(), "EURUSD_ecn", "synthetic test"))
+		self.assertEqual(result, self._prediction())
+		client.models.generate_content.assert_called_once()
+		mock_legacy.assert_called_once()
+		self.assertIn("gemini-2.5-flash:generateContent", mock_legacy.call_args.kwargs["api_url"])
+		self.assertEqual(mock_log.call_args.kwargs["transport"], "legacy-gemini-api")
 
 
 if __name__ == "__main__":

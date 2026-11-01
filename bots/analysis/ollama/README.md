@@ -171,8 +171,14 @@ PRETTY_JSON=true
 # Používej service account JSON z Google Cloud, ne API key flow.
 GOOGLE_APPLICATION_CREDENTIALS=C:/secure/google-cloud/service-account.json
 VERTEX_AI_PROJECT_ID=your-gcp-project-id
-VERTEX_AI_REGION=europe-west4
-VERTEX_AI_MODEL=gemini-2.5-flash
+VERTEX_AI_REGION=eu
+VERTEX_AI_MODEL=gemini-4-argon
+
+# Argon: MEDIUM thinking bez thinking_budget, limit alespoň 8192 output tokenů.
+# Vyžaduje google-genai>=1.73.1.
+# Volitelný API-key fallback na Gemini 2.5 Flash nezaručuje EU zpracování:
+# GEMINI_API_KEY=your_api_key
+# GEMINI_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
 
 PROFIT_CLEANUP_STRATEGY_ENABLED=true
 PROFIT_CLEANUP_STRATEGY_DRY_RUN=true

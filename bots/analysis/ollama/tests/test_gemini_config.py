@@ -8,6 +8,9 @@ from gemini_config import _build_model_fallbacks
 
 
 class GeminiConfigFallbackTests(unittest.TestCase):
+	def test_argon_does_not_silently_change_vertex_model(self) -> None:
+		self.assertEqual(_build_model_fallbacks("gemini-4-argon"), ("gemini-4-argon",))
+
 	def test_flash_model_stays_on_supported_series(self) -> None:
 		self.assertEqual(
 			_build_model_fallbacks("gemini-2.5-flash"),

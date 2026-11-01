@@ -25,6 +25,7 @@ _GOOGLE_CLOUD_PLATFORM_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
 _LEGACY_GEMINI_TIMEOUT_SECONDS = 60.0
 _PREDICTION_MAX_OUTPUT_TOKENS = 512
 _FINAL_DECISION_MAX_OUTPUT_TOKENS = 768
+_ARGON_MAX_OUTPUT_TOKENS = 8192
 _LEGACY_GEMINI_MODEL_REWRITES = {
 	"/models/gemini-2.0-flash:generateContent": "/models/gemini-2.5-flash:generateContent",
 	"/models/gemini-2.0-flash-001:generateContent": "/models/gemini-2.5-flash:generateContent",
@@ -439,11 +440,28 @@ def _should_skip_remaining_vertex_models(status_code: Optional[int], message: st
 
 
 def _get_vertex_rest_endpoint(config: GeminiVertexConfig, model_name: str) -> str:
-	host = "aiplatform.googleapis.com" if config.region == "global" else f"{config.region}-aiplatform.googleapis.com"
+	if config.region in {"eu", "us"}:
+		host = f"aiplatform.{config.region}.rep.googleapis.com"
+	elif config.region == "global":
+		host = "aiplatform.googleapis.com"
+	else:
+		host = f"{config.region}-aiplatform.googleapis.com"
 	return (
 		f"https://{host}/v1/projects/{config.project}/locations/{config.region}"
 		f"/publishers/google/models/{model_name}:generateContent"
 	)
+
+
+def _get_thinking_config(model_name: str) -> Dict[str, Any]:
+	if model_name == "gemini-4-argon":
+		return {"include_thoughts": False, "thinking_level": "MEDIUM"}
+	return {"include_thoughts": False, "thinking_budget": 0}
+
+
+def _get_model_output_token_limit(model_name: str, max_output_tokens: int) -> int:
+	if model_name == "gemini-4-argon":
+		return max(max_output_tokens, _ARGON_MAX_OUTPUT_TOKENS)
+	return max_output_tokens
 
 
 def _get_service_account_access_token(credentials_path: str) -> str:
@@ -578,6 +596,14 @@ def _request_structured_json_via_rest(
 			"responseSchema": response_schema,
 		},
 	}
+	if model_name == "gemini-4-argon":
+		payload["generationConfig"]["thinkingConfig"] = {
+			"includeThoughts": False,
+			"thinkingLevel": _get_thinking_config(model_name)["thinking_level"],
+		}
+		payload["generationConfig"]["maxOutputTokens"] = _get_model_output_token_limit(
+			model_name, max_output_tokens
+		)
 	request = urllib.request.Request(
 		_get_vertex_rest_endpoint(config, model_name),
 		data=json.dumps(payload).encode("utf-8"),
@@ -626,6 +652,7 @@ def _request_structured_json(
 	last_error: Optional[GeminiVertexRequestError] = None
 
 	for model_index, model_name in enumerate(vertex_models, start=1):
+		model_output_tokens = _get_model_output_token_limit(model_name, max_output_tokens)
 		skip_remaining_vertex_models = False
 		for attempt in range(1, max_attempts_per_model + 1):
 			started_at = time.perf_counter()
@@ -647,13 +674,10 @@ def _request_structured_json(
 						config=types.GenerateContentConfig(
 							temperature=0,
 							candidate_count=1,
-							max_output_tokens=max_output_tokens,
+							max_output_tokens=model_output_tokens,
 							response_mime_type="application/json",
 							response_schema=response_schema,
-							thinking_config=types.ThinkingConfig(
-								include_thoughts=False,
-								thinking_budget=0,
-							),
+							thinking_config=types.ThinkingConfig(**_get_thinking_config(model_name)),
 						),
 					)
 
@@ -674,7 +698,9 @@ def _request_structured_json(
 					duration_ms=duration_ms,
 					response_id=getattr(response, "response_id", None),
 					finish_reason=finish_reason,
-					max_output_tokens=max_output_tokens,
+					max_output_tokens=model_output_tokens,
+					thinking_config=_get_thinking_config(model_name),
+					transport="google-genai-sdk",
 					prompt_token_count=_extract_usage_value(usage_metadata, "prompt_token_count"),
 					response_token_count=_extract_usage_value(usage_metadata, "response_token_count")
 					or _extract_usage_value(usage_metadata, "candidates_token_count"),
@@ -707,7 +733,7 @@ def _request_structured_json(
 							model_name=model_name,
 							prompt=prompt,
 							response_schema=response_schema,
-							max_output_tokens=max_output_tokens,
+							max_output_tokens=model_output_tokens,
 						)
 						validated_payload = validator(_parse_structured_json_response(rest_response))
 						usage_metadata = rest_response.get("usageMetadata")
@@ -727,7 +753,7 @@ def _request_structured_json(
 							previous_error=_extract_text_snippet(message),
 							response_id=rest_response.get("responseId"),
 							finish_reason=finish_reason,
-							max_output_tokens=max_output_tokens,
+							max_output_tokens=model_output_tokens,
 							prompt_token_count=_extract_usage_value(usage_metadata, "promptTokenCount"),
 							response_token_count=_extract_usage_value(usage_metadata, "responseTokenCount")
 							or _extract_usage_value(usage_metadata, "candidatesTokenCount"),
