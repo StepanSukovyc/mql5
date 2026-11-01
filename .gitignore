@@ -62,6 +62,7 @@ out/
 # ---- Project generated market data ----
 bots/analysis/gemini/mql5/
 bots/analysis/ollama/output/
+bots/analysis/ollama/benchmarks/
 
 # ---- Optional: if this appears in repo in future ----
 analysis/predict/*.local.json

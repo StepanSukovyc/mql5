@@ -352,6 +352,23 @@ Pokud používáš jiný interpreter, nahraď `py -3.14` jeho příkazem nebo ab
 
 Test byl živě ověřen 1. 11. 2026: `google-genai-sdk`, `gemini-4-argon`, `eu`, MEDIUM thinking, `fallback_model=false`, ukončení `STOP` a validní JSON. To potvrzuje přístup k modelu a funkčnost této cesty v okamžiku testu, nikoli budoucí dostupnost služby nebo výkonnost strategie.
 
+## Shadow benchmark Ollama Cloud: GPT versus Qwen
+
+Ze složky `bots\analysis\ollama` lze spustit samostatné porovnání per-symbol predikcí:
+
+```powershell
+py -3.14 -X utf8 benchmark_ollama.py --source '..\..\..\analysis\python\ollama\source' --limit 10
+```
+
+Pokud zdrojová data leží jinde, zadej skutečnou složku market-data JSON souborů obsahujících `candles` a `oscillators`, nikoli složku výsledných predikcí. Test používá klíč a cloudový endpoint z `.env`; klíč nevkládej do příkazu ani nesdílej. Ověř, že je dovoleno odesílat vybraná data poskytovateli.
+
+- Výchozí modely jsou `gpt-oss:120b` a `qwen3.8:27b`. Dostupnost tohoto Qwen tagu na účtu není předem garantovaná; při HTTP 401/403/404/429 test zastaví další požadavky a uloží chybu do `responses.jsonl`.
+- První kontrolu dostupnosti proveď s `--limit 1` (dva API požadavky). Výchozí `--limit 10` znamená 20 požadavků; `--repeats 3` znamená 60. Test spotřebuje API allowance.
+- Oba modely dostávají totožný zmrazený kompaktní produkční predikční prompt. Fundamental context je explicitně `NO_DATA`, aby živý kalendář nevnesl rozdíly nebo budoucí informace. API parametry odpovídají predikční větvi: temperature 0.7, top_p 0.9, cloud num_ctx a výchozí thinking modelu.
+- Test nevolá MT5 exekuci, nemění produkční model ani predikce. Vlastní vstupy, prompty, raw odpovědi, SHA-256 promptu, latency a chyby ukládá do nové složky `benchmarks\<UTC timestamp>`. Tyto soubory mohou obsahovat citlivá vstupní data; nesdílej je ani necommituj bez kontroly.
+- `summary.json` porovnává validitu odpovědí, počty BUY/SELL/HOLD/TIE a shodu dominantního směru. Nejde o skutečné runtime NO_TRADE: lokální signal/risk filtry nejsou součástí testu. Při chybě končí nenulovým návratovým kódem.
+- Jde pouze o test použitelnosti predikcí, nikoli advisory rankingu, P/L, profit factoru nebo drawdownu. Opakování umožní následnou kontrolu stability v uložených odpovědích. Ziskovost vyžaduje samostatný časově korektní backtest se simulací nákladů a výstupů.
+
 ## Automatické spuštění
 
 Protože skript běží jako nekonečný automat, stačí ho spustit **jednou** při startu systému:
