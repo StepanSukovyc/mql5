@@ -274,8 +274,10 @@ def evaluate_daily_profit_exit(stop_event: threading.Event | None = None) -> Non
 			"margin_free": _finite(account.margin_free), "positions": rows, "markets": markets,
 		}, ensure_ascii=False, allow_nan=False)
 	)
-	decision = request_exit_decisions(load_gemini_api_config(), prompt, {p.ticket for p in positions})
-	_audit("ai_review", decisions=decision["decisions"])
+	gemini_config = load_gemini_api_config()
+	_audit("ai_request", model=gemini_config.model, prompt=prompt)
+	decision = request_exit_decisions(gemini_config, prompt, {p.ticket for p in positions})
+	_audit("ai_review", model=gemini_config.model, decisions=decision["decisions"])
 	simulated_loss = 0.0
 	for row in decision["decisions"]:
 		if row["action"] != "CLOSE":

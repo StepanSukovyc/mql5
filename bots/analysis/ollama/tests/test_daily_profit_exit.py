@@ -78,6 +78,22 @@ class DailyProfitExitTests(unittest.TestCase):
 		self.assertIn('"tp": 110', prompt)
 		self.assertIn("original entry thesis is unknown", prompt)
 		self.assertIn("pending_close", strategy._load())
+		events = self.events()
+		request = next(event for event in events if event["event"] == "ai_request")
+		review = next(event for event in events if event["event"] == "ai_review")
+		self.assertEqual(request["prompt"], prompt)
+		self.assertEqual(request["model"], "gemini-4-argon")
+		self.assertEqual(review["model"], "gemini-4-argon")
+		self.assertEqual(review["decisions"][0]["reasoning"], "market changed")
+
+	def test_prompt_is_logged_even_when_gemini_request_fails(self):
+		self.ai.side_effect = RuntimeError("Gemini unavailable")
+		with self.assertRaises(RuntimeError):
+			strategy.evaluate_daily_profit_exit()
+		events = self.events()
+		request = next(event for event in events if event["event"] == "ai_request")
+		self.assertIn("realized_today_usd", request["prompt"])
+		self.assertFalse(any(event["event"] == "ai_review" for event in events))
 
 	def test_scalping_positions_with_tp_are_not_excluded(self):
 		self.position.magic = 234600

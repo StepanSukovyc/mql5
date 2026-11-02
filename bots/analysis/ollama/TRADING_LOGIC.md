@@ -403,7 +403,7 @@ Gemini může seřadit více CLOSE návrhů a za jedno přehodnocení se může 
 
 Logy v `SERVICE_DEST_FOLDER/trade_logs`:
 
-- `daily_profit_exit.jsonl`: start review, AI HOLD/CLOSE návrhy, lokální zamítnutí, would-close, požadavek a výsledek close, následné potvrzení a chyby;
+- `daily_profit_exit.jsonl`: start review, úplný prompt odeslaný Gemini (`ai_request`, včetně účtu/pozic/tržních dat), model a validovaná HOLD/CLOSE rozhodnutí s reasoning (`ai_review`), lokální zamítnutí, would-close, požadavek a výsledek close, následné potvrzení a chyby. Log může obsahovat citlivý stav obchodního účtu; chraň přístup k `trade_logs`;
 - `daily_profit_exit_state.json`: poslední pokus a případný pending close (neodstraňovat bez ověření MT5 historie);
 - `daily_profit_exit_state.lock`: souborový lock, samotná existence souboru neznamená běžící worker.
 

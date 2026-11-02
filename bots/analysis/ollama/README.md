@@ -405,7 +405,7 @@ DAILY_PROFIT_EXIT_SLIPPAGE_BUFFER_USD=1.0
 
 Jde o **live povolení pro všechny pozice účtu**. `.env.example` z bezpečnostních důvodů obsahuje enabled `false` a dry-run `true`; pro nasazení výše uvedené hodnoty explicitně nastav v serverové `.env` a restartuj aplikaci. Vrstva vyžaduje USD účet, funkční Gemini a MT5 historii; vklady a floating profit rozpočet nenavyšují. Vývojové testy neposílají skutečné API požadavky ani MT5 příkazy.
 
-Sleduj `trade_logs/daily_profit_exit.jsonl`: `ai_review` dokládá získání rozhodnutí, `close_requested`/`close_result` pokus o exekuci a teprve `close_confirmed` ověření pozice/dealů. `close_confirmation_pending` blokuje další pokusy této vrstvy, nikoli ostatní správu; pending stav nemaž bez kontroly brokerovy historie. Detaily účetnictví, guardů a omezení jsou v [TRADING_LOGIC.md](TRADING_LOGIC.md).
+Sleduj `trade_logs/daily_profit_exit.jsonl`: `ai_request` obsahuje přesný prompt se snapshotem předaným Gemini (účet, pozice a tržní kontext), `ai_review` zaznamená model, akce HOLD/CLOSE a jejich odůvodnění. I neúspěšný Gemini request má předem uložený `ai_request`. `close_requested`/`close_result` značí pokus o exekuci a teprve `close_confirmed` ověření pozice/dealů. `close_confirmation_pending` blokuje další pokusy této vrstvy, nikoli ostatní správu; pending stav nemaž bez kontroly brokerovy historie. Log obsahuje citlivé obchodní údaje — omez přístup k `trade_logs`. Detaily účetnictví, guardů a omezení jsou v [TRADING_LOGIC.md](TRADING_LOGIC.md).
 
 ## Automatické spuštění
 
