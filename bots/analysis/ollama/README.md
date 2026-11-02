@@ -407,6 +407,8 @@ Jde o **live povolení pro všechny pozice účtu**. `.env.example` z bezpečnos
 
 Sleduj `trade_logs/daily_profit_exit.jsonl`: `ai_request` obsahuje přesný prompt se snapshotem předaným Gemini (účet, pozice a tržní kontext), `ai_review` zaznamená model, akce HOLD/CLOSE a jejich odůvodnění. I neúspěšný Gemini request má předem uložený `ai_request`. `close_requested`/`close_result` značí pokus o exekuci a teprve `close_confirmed` ověření pozice/dealů. `close_confirmation_pending` blokuje další pokusy této vrstvy, nikoli ostatní správu; pending stav nemaž bez kontroly brokerovy historie. Log obsahuje citlivé obchodní údaje — omez přístup k `trade_logs`. Detaily účetnictví, guardů a omezení jsou v [TRADING_LOGIC.md](TRADING_LOGIC.md).
 
+V `ai_request.snapshot` jsou stejné vstupy také jako strukturovaný JSON: denní realizovaný zisk, rezerva a buffer, stav účtu, P/L jednotlivých pozic včetně swapu a započtených nákladů a `markets` podle symbolu (cena, spread, posledních pět svíček a poslední hodnoty indikátorů pro 1h, 4h a day). Snapshot se ukládá před voláním Gemini i pro review, které skončí pouze HOLD. Starší logy se zpětně nedoplňují; nová pole se objeví po nasazení aktualizovaného kódu a novém review.
+
 ## Automatické spuštění
 
 Protože skript běží jako nekonečný automat, stačí ho spustit **jednou** při startu systému:

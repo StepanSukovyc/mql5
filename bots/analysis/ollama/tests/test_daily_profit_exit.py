@@ -93,7 +93,45 @@ class DailyProfitExitTests(unittest.TestCase):
 		events = self.events()
 		request = next(event for event in events if event["event"] == "ai_request")
 		self.assertIn("realized_today_usd", request["prompt"])
+		self.assertEqual(request["snapshot"], json.loads(request["prompt"].split("\n", 1)[1]))
 		self.assertFalse(any(event["event"] == "ai_review" for event in events))
+
+	def test_hold_review_logs_exact_input_snapshot_before_ai_call(self):
+		market = {
+			"generated_at": self.now.isoformat(), "price": 100,
+			"spread": {"bid": 100, "ask": 101},
+			"candles": {tf: [{"close": 100}] for tf in ("1h", "4h", "day")},
+			"indicators": {tf: {
+				name: {"value": 20}
+				for name in ("rsi", "ema20", "ema50", "ema200", "atr14", "adx14")
+			} for tf in ("1h", "4h", "day")},
+		}
+		self.mock("_market_context", return_value=market)
+		def hold(_config, prompt, _tickets):
+			request = self.events()[-1]
+			self.assertEqual(request["event"], "ai_request")
+			snapshot = request["snapshot"]
+			self.assertEqual(snapshot, json.loads(prompt.split("\n", 1)[1]))
+			self.assertEqual(snapshot["markets"], {"TEST": market})
+			self.assertEqual(snapshot["as_of_utc"], self.now.isoformat())
+			self.assertEqual(snapshot["realized_today_usd"], 20)
+			self.assertEqual(snapshot["min_retained_usd"], 1)
+			self.assertEqual(snapshot["slippage_buffer_usd"], 1)
+			self.assertEqual(snapshot["balance"], 10000)
+			self.assertEqual(snapshot["equity"], 9900)
+			self.assertEqual(snapshot["margin_free"], 1000)
+			position = snapshot["positions"][0]
+			self.assertEqual(position["ticket"], 1)
+			self.assertEqual(position["profit"], -5)
+			self.assertEqual(position["swap"], -1)
+			self.assertEqual(position["net_profit_usd"], -6.2)
+			self.assertEqual(position["incremental_close_pnl_usd"], -6)
+			return {"decisions": [{"ticket": 1, "action": "HOLD", "reasoning": "trend intact"}]}
+		self.ai.side_effect = hold
+		strategy.evaluate_daily_profit_exit()
+		self.ai.assert_called_once()
+		self.close.assert_not_called()
+		self.assertEqual(self.events()[-1]["event"], "ai_review")
 
 	def test_scalping_positions_with_tp_are_not_excluded(self):
 		self.position.magic = 234600
