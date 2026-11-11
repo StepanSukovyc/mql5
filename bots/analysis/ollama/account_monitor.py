@@ -20,6 +20,7 @@ from profit_cleanup_strategy import run_profit_cleanup_strategy_if_due
 from swap_rollover_cleanup_strategy import run_swap_rollover_cleanup_strategy_if_due
 from trade_outcomes import process_closed_trade_outcomes
 from daily_profit_exit_strategy import run_daily_profit_exit_strategy_if_due
+from virtual_stop_loss_strategy import run_virtual_stop_loss_strategy_if_due
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -124,6 +125,7 @@ def _run_management_tasks(account_info: dict, stop_event: Optional[threading.Eve
 		("closed_trade_outcomes", _track_closed_trade_outcomes),
 		("profit_cleanup", lambda: run_profit_cleanup_strategy_if_due(account_info)),
 		("profit_protection", run_profit_protection_strategy_if_due),
+		("virtual_stop_loss", run_virtual_stop_loss_strategy_if_due),
 		("swap_rollover_cleanup", lambda: run_swap_rollover_cleanup_strategy_if_due(account_info)),
 		("daily_profit_exit", lambda: run_daily_profit_exit_strategy_if_due(stop_event)),
 	)

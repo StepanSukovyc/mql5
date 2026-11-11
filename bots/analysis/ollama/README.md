@@ -447,6 +447,7 @@ Vytvoř task, který spustí `python logika.py` při startu systému.
 - **account_monitor.py** - Monitoruje volnou marži a signalizuje překročení 20% prahu (single-line output)
 - **profit_cleanup_strategy.py** - Minutové a večerní uzavírání pozic podle čistého zisku po skutečné commission a fee z MT5
 - **profit_protection_strategy.py** - Ochrana zisku a uzavření spravovaných pozic po výchozích 5 dnech, pokud `profit + swap + skutečně zaúčtované náklady` dosáhne alespoň `0.50 USD`
+- **virtual_stop_loss_strategy.py** - Experimentální virtuální stop loss: obchody otevřené ve čtvrtek a pátek (dle času Praha) se evidují v `trade_logs/virtual_stop_loss_state.json` včetně SL úrovně odvozené od skutečné fill ceny; broker SL se nezadává a minutový monitor uzavře pozici při proražení (BUY: Bid <= SL, SELL: Ask >= SL). Zapíná se `VIRTUAL_STOP_LOSS_ENABLED`, ostrý režim `VIRTUAL_STOP_LOSS_DRY_RUN=false`
 - **verify_profit_cleanup_strategy.py** - Lokální validační skript pro čistý zisk po zadaných skutečných nákladech a dynamický limit `PCZ`
 - **trading_logic.py** - Stahuje data z MT5, preferuje čerstvé Ollama predikce, fallbackuje na Gemini a filtruje slabé signály
 - **final_decision.py** - Kombinuje predikce se stavem účtu, dělá finální rozhodnutí a provádí obchod

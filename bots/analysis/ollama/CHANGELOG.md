@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-11 (Experimental Thursday/Friday Virtual Stop Loss)
+
+- **Added `virtual_stop_loss_strategy.py` (Napad II experiment)**
+  - Trades opened on Thursday or Friday (evaluated in Europe/Prague time) are recorded in a dedicated `trade_logs/virtual_stop_loss_state.json` with a virtual SL price
+  - No broker-side Stop Loss is placed; the SL level keeps the planned synthetic ATR stop distance but is anchored to the actual fill price
+  - The account monitor checks the level every minute and closes a losing position once price crosses it (BUY: Bid <= SL, SELL: Ask >= SL), skipping the swap rollover block window
+  - State entries for positions closed by any other mechanism (profit protection, TP, manual close) are removed automatically on the next monitoring pass
+  - Controlled by `VIRTUAL_STOP_LOSS_ENABLED` (default `false`); disabling the flag also stops monitoring of already registered positions
+  - `VIRTUAL_STOP_LOSS_DRY_RUN` (default `true`) logs breaches to `trade_logs/virtual_stop_loss.csv` without closing
+  - Registration is hooked into `execute_trade()` for entries carrying `synthetic_stop_distance` (the synthetic-risk strategies); scalping keeps its own emergency exit management
+
 ## 2026-10-30 (Minute Profit Cleanup Restored)
 
 - **Restored the Previous Minute-by-Minute Cleanup Rule**

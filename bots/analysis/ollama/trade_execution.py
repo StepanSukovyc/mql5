@@ -689,6 +689,26 @@ def execute_trade(
 						)
 						+ "\n"
 					)
+	if service_folder is not None and position_ticket is not None and extra_log_data:
+		stop_distance = extra_log_data.get("synthetic_stop_distance")
+		if stop_distance is not None:
+			# Virtual SL experiment: no broker SL is placed; the level is tracked and enforced by the account monitor.
+			try:
+				from virtual_stop_loss_strategy import register_virtual_stop_loss
+
+				register_virtual_stop_loss(
+					service_folder=service_folder,
+					position_ticket=position_ticket,
+					symbol=symbol,
+					action=action,
+					filled_price=filled_price,
+					synthetic_stop_distance=float(stop_distance),
+					volume=filled_volume,
+					strategy_id=strategy_id,
+					magic=magic,
+				)
+			except (OSError, RuntimeError, TypeError, ValueError) as exc:
+				print(f"⚠️  Could not register virtual stop loss: {exc}")
 	return _result(
 		True,
 		deal_ticket=int(getattr(result, "deal", 0) or 0) or None,
