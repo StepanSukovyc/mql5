@@ -134,6 +134,8 @@ Pokud primární strategie kandidáta potvrdí, `risk_engine.py` spočítá:
 
 Broker-side stop loss se neposílá. Syntetický stop slouží pro sizing, interní kontrolu rizika a logování.
 
+Při zapnutém `VIRTUAL_STOP_LOSS_ENABLED` se u nových čtvrtečních/pátečních vstupů (Praha) nejprve uloží nouzový ATR stop. Gemini poté z aktuálních svíček a indikátorů předpoví absolutní cenu virtuálního SL a zdůvodní ji. AI nesmí zvětšit riziko nad nouzový limit; při nedostupnosti AI, neúplných datech či neplatné odpovědi zůstane nouzový stop a uloží se chyba. Cenu hlídá minutový monitor, nikoli další AI dotaz. Již evidované úrovně se nemění, starší neevidované pozice se nepřebírají. Nejde o garantovaný limit ztráty: monitor musí běžet a nadále platí swapové blokovací okno a riziko skluzu. Ostré uzavírání vyžaduje `VIRTUAL_STOP_LOSS_DRY_RUN=false` a po změně kódu či konfigurace restart procesů.
+
 ## Index profil: ownership a výstupy, nikoli samostatná vstupní strategie
 
 Přítomnost `INDEX_STRATEGY_ENABLED=true` v `.env` neznamená, že aktuální runtime spouští samostatnou index strategii. V [`final_decision.py`](final_decision.py) není indexový `StrategyExecutionProfile`, indexový signal validator ani pokus o indexový vstup. Index proto není sedmou větví fallback řetězce a nemá vlastní implementovanou BUY/SELL signální logiku.

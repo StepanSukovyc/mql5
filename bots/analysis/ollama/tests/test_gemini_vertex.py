@@ -21,7 +21,27 @@ from gemini_vertex import (
 	_get_model_output_token_limit,
 	_request_structured_json_via_rest,
 	request_prediction_json,
+	request_stop_loss_decision,
 )
+
+
+class StopLossDecisionTests(unittest.TestCase):
+	@patch("gemini_vertex._request_structured_json")
+	def test_validates_direction_risk_ceiling_and_finite_price(self, request) -> None:
+		for action, emergency, valid_price, wrong_side, too_far in (
+			("BUY", 1.19, 1.195, 1.21, 1.18),
+			("SELL", 1.21, 1.205, 1.19, 1.22),
+		):
+			request_stop_loss_decision(SimpleNamespace(), "prompt", "EURUSD", action, 1.2, emergency)
+			validate = request.call_args.kwargs["validator"]
+			payload = {"symbol": "EURUSD", "action": action, "stop_loss_price": valid_price, "reasoning": "Trend"}
+			self.assertEqual(validate(payload), payload)
+			for price in (wrong_side, too_far, 1.2, float("nan"), float("inf"), True, "1.195", 0):
+				with self.subTest(action=action, price=price), self.assertRaises(GeminiVertexRequestError):
+					validate({**payload, "stop_loss_price": price})
+			for overrides in ({"symbol": "OTHER"}, {"action": "HOLD"}, {"reasoning": ""}):
+				with self.assertRaises(GeminiVertexRequestError):
+					validate({**payload, **overrides})
 
 
 class GeminiVertexParsingTests(unittest.TestCase):

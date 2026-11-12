@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import json
+import math
 import os
 from pathlib import Path
 import time
@@ -115,6 +116,45 @@ def request_exit_decisions(config: GeminiVertexConfig, prompt: str, tickets: set
 		config=config, prompt=prompt, response_schema=_EXIT_RESPONSE_SCHEMA,
 		validator=lambda payload: _validate_exit_decisions(payload, tickets),
 		task_name="daily_profit_exit", max_output_tokens=8192,
+	)
+
+
+def request_stop_loss_decision(
+	config: GeminiVertexConfig, prompt: str, symbol: str, action: str,
+	entry_price: float, emergency_stop_price: float,
+) -> Dict[str, Any]:
+	schema = {
+		"type": "OBJECT",
+		"required": ["symbol", "action", "stop_loss_price", "reasoning"],
+		"properties": {
+			"symbol": {"type": "STRING"},
+			"action": {"type": "STRING", "enum": ["BUY", "SELL"]},
+			"stop_loss_price": {"type": "NUMBER"},
+			"reasoning": {"type": "STRING"},
+		},
+	}
+
+	def validate(payload: Dict[str, Any]) -> Dict[str, Any]:
+		if payload.get("symbol") != symbol or payload.get("action") != action:
+			raise GeminiVertexRequestError("Stop loss symbol/action mismatch")
+		price = payload.get("stop_loss_price")
+		if isinstance(price, bool) or not isinstance(price, (int, float)) or not math.isfinite(price) or price <= 0:
+			raise GeminiVertexRequestError("Stop loss price must be finite and positive")
+		valid = (
+			emergency_stop_price <= price < entry_price if action == "BUY"
+			else entry_price < price <= emergency_stop_price if action == "SELL"
+			else False
+		)
+		if not valid:
+			raise GeminiVertexRequestError("Stop loss must be on the loss side without exceeding the emergency risk")
+		reasoning = payload.get("reasoning")
+		if not isinstance(reasoning, str) or not reasoning.strip():
+			raise GeminiVertexRequestError("Stop loss reasoning is required")
+		return payload
+
+	return _request_structured_json(
+		config=config, prompt=prompt, response_schema=schema, validator=validate,
+		task_name=f"virtual_stop_loss:{symbol}", max_output_tokens=8192,
 	)
 
 
