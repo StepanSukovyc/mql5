@@ -65,6 +65,8 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Pokud je čistý zisk alespoň `0.10 USD`, pozice je vhodná k uzavření kvůli vyhnutí se swapu
   - Audit log zapisuje i skip/no-candidate průchody, takže je vidět, zda strategie byla mimo okno nebo uvnitř okna nic nenašla
   - Přepínač `SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN` (default `true`) pouze vypíše kandidáty a zapíše audit bez skutečného zavření pozic
+  - **Old loss cleanup** v monitoru každých přibližně 5 minut automaticky zavře všechny otevřené pozice v čisté ztrátě starší než `OLD_LOSS_MAX_AGE_DAYS` kalendářních dní (výchozí hodnota `77`). Platí i pro ruční pozice a během swap blokovacího okna; po restartu proběhne první kontrola ihned.
+  - Čistá ztráta je `profit + swap + commission + fee` podle dostupné historie MT5, zaokrouhlená na dvě desetinná místa, bez odhadu budoucích nákladů uzavření. Pokud náklady nelze načíst, pozice se nezavře a chyba se zaznamená. Výsledky a chyby se zapisují do `trade_logs/position_management_monitor.jsonl`; neúspěšné uzavření se zkusí znovu při další kontrole. Neplatný nebo nekladný parametr způsobí chybu, nikoli výchozí hodnotu.
 10. **Provede obchod** na MT5 podle aktivního režimu
 11. Uloží rozhodnutí do `geminipredictions/PREDIKCE_<timestamp>.json`
 12. **Vrátí se na krok 3** (restart monitoring)

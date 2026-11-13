@@ -1,6 +1,7 @@
 """Account status monitor - checks balance, equity, margin every minute."""
 
 import json
+import math
 import os
 import threading
 import time
@@ -21,6 +22,12 @@ from swap_rollover_cleanup_strategy import run_swap_rollover_cleanup_strategy_if
 from trade_outcomes import process_closed_trade_outcomes
 from daily_profit_exit_strategy import run_daily_profit_exit_strategy_if_due
 from virtual_stop_loss_strategy import run_virtual_stop_loss_strategy_if_due
+from position_costs import get_position_charged_costs
+from trade_execution import close_position_by_ticket
+
+
+_OLD_LOSS_CLEANUP_LOCK = threading.Lock()
+_LAST_OLD_LOSS_CLEANUP_BUCKET: Optional[int] = None
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -112,6 +119,79 @@ def _remove_negative_swap_take_profits() -> None:
 			print(f"Negative-swap TP removal failed for ticket {current.ticket}: {error}")
 
 
+def run_old_loss_cleanup_if_due(*, now_utc: Optional[datetime] = None) -> None:
+	"""Close positions older than the configured age if their current net result is negative."""
+	global _LAST_OLD_LOSS_CLEANUP_BUCKET
+
+	now = now_utc or datetime.now(tz=timezone.utc)
+	if now.tzinfo is None:
+		raise ValueError("Old loss cleanup requires a timezone-aware timestamp")
+	bucket = int(now.timestamp()) // 300
+	with _OLD_LOSS_CLEANUP_LOCK:
+		if _LAST_OLD_LOSS_CLEANUP_BUCKET == bucket:
+			return
+		_LAST_OLD_LOSS_CLEANUP_BUCKET = bucket
+
+		raw_days = os.getenv("OLD_LOSS_MAX_AGE_DAYS", "77")
+		try:
+			max_age_days = int(raw_days)
+		except ValueError as exc:
+			raise ValueError(f"Invalid OLD_LOSS_MAX_AGE_DAYS: {raw_days!r}") from exc
+		if max_age_days <= 0:
+			raise ValueError("OLD_LOSS_MAX_AGE_DAYS must be a positive integer")
+
+		positions = mt5.positions_get()
+		if positions is None:
+			raise RuntimeError(f"Failed to get positions for old loss cleanup: {mt5.last_error()}")
+
+		for position in positions:
+			try:
+				opened_at = float(position.time)
+				if not math.isfinite(opened_at) or opened_at <= 0:
+					raise ValueError("Invalid position opening time")
+				if now.timestamp() - opened_at <= max_age_days * 86400:
+					continue
+
+				current_positions = mt5.positions_get(ticket=position.ticket)
+				if current_positions is None:
+					raise RuntimeError(f"Failed to refresh position: {mt5.last_error()}")
+				if not current_positions:
+					continue
+				current = current_positions[0]
+				opened_at = float(current.time)
+				if not math.isfinite(opened_at) or opened_at <= 0:
+					raise ValueError("Invalid refreshed position opening time")
+				if now.timestamp() - opened_at <= max_age_days * 86400:
+					continue
+
+				net_profit = round(float(current.profit) + float(current.swap) + get_position_charged_costs(current), 2)
+				if not math.isfinite(net_profit):
+					raise ValueError("Invalid position net profit")
+				if net_profit >= 0:
+					continue
+
+				closed = close_position_by_ticket(
+					position_ticket=int(current.ticket),
+					symbol=str(current.symbol),
+					position_type=int(current.type),
+					volume=float(current.volume),
+					comment="Old loss cleanup",
+				)
+				_log_position_management_event(
+					"old_loss_cleanup_closed" if closed else "old_loss_cleanup_close_failed",
+					ticket=current.ticket, symbol=current.symbol, net_profit=net_profit,
+					age_days=(now.timestamp() - opened_at) / 86400, max_age_days=max_age_days,
+				)
+				if not closed:
+					print(f"Old loss cleanup failed to close ticket {current.ticket}")
+			except (AttributeError, TypeError, ValueError, RuntimeError, OverflowError) as exc:
+				_log_position_management_event(
+					"old_loss_cleanup_position_error",
+					ticket=getattr(position, "ticket", None), error=str(exc),
+				)
+				print(f"Old loss cleanup failed for ticket {getattr(position, 'ticket', None)}: {exc}")
+
+
 def _run_management_tasks(account_info: dict, stop_event: Optional[threading.Event] = None) -> None:
 	"""Run independent position-management tasks without letting one disable the others."""
 	def _track_closed_trade_outcomes() -> None:
@@ -126,6 +206,7 @@ def _run_management_tasks(account_info: dict, stop_event: Optional[threading.Eve
 		("profit_cleanup", lambda: run_profit_cleanup_strategy_if_due(account_info)),
 		("profit_protection", run_profit_protection_strategy_if_due),
 		("virtual_stop_loss", run_virtual_stop_loss_strategy_if_due),
+		("old_loss_cleanup", run_old_loss_cleanup_if_due),
 		("swap_rollover_cleanup", lambda: run_swap_rollover_cleanup_strategy_if_due(account_info)),
 		("daily_profit_exit", lambda: run_daily_profit_exit_strategy_if_due(stop_event)),
 	)
