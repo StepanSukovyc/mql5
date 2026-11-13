@@ -28,6 +28,7 @@ from trade_execution import close_position_by_ticket
 
 _OLD_LOSS_CLEANUP_LOCK = threading.Lock()
 _LAST_OLD_LOSS_CLEANUP_BUCKET: Optional[int] = None
+DEFAULT_MAX_POSITION_LOSS = 333.0
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -120,7 +121,7 @@ def _remove_negative_swap_take_profits() -> None:
 
 
 def run_old_loss_cleanup_if_due(*, now_utc: Optional[datetime] = None) -> None:
-	"""Close positions older than the configured age if their current net result is negative."""
+	"""Close positions past the age limit or beyond the absolute net-loss limit."""
 	global _LAST_OLD_LOSS_CLEANUP_BUCKET
 
 	now = now_utc or datetime.now(tz=timezone.utc)
@@ -133,12 +134,28 @@ def run_old_loss_cleanup_if_due(*, now_utc: Optional[datetime] = None) -> None:
 		_LAST_OLD_LOSS_CLEANUP_BUCKET = bucket
 
 		raw_days = os.getenv("OLD_LOSS_MAX_AGE_DAYS", "77")
+		max_age_days: Optional[int]
 		try:
 			max_age_days = int(raw_days)
-		except ValueError as exc:
-			raise ValueError(f"Invalid OLD_LOSS_MAX_AGE_DAYS: {raw_days!r}") from exc
-		if max_age_days <= 0:
-			raise ValueError("OLD_LOSS_MAX_AGE_DAYS must be a positive integer")
+			if max_age_days <= 0:
+				raise ValueError
+		except ValueError:
+			max_age_days = None
+			message = f"Invalid OLD_LOSS_MAX_AGE_DAYS: {raw_days!r}; age-based closing is disabled"
+			_log_position_management_event("old_loss_cleanup_configuration_error", error=message)
+			print(message)
+
+		raw_max_loss = os.getenv("OLD_LOSS_MAX_AMOUNT", str(DEFAULT_MAX_POSITION_LOSS))
+		max_position_loss: Optional[float]
+		try:
+			max_position_loss = float(raw_max_loss)
+			if not math.isfinite(max_position_loss) or max_position_loss <= 0:
+				raise ValueError
+		except ValueError:
+			max_position_loss = None
+			message = f"Invalid OLD_LOSS_MAX_AMOUNT: {raw_max_loss!r}; loss-limit closing is disabled"
+			_log_position_management_event("old_loss_cleanup_configuration_error", error=message)
+			print(message)
 
 		positions = mt5.positions_get()
 		if positions is None:
@@ -146,12 +163,6 @@ def run_old_loss_cleanup_if_due(*, now_utc: Optional[datetime] = None) -> None:
 
 		for position in positions:
 			try:
-				opened_at = float(position.time)
-				if not math.isfinite(opened_at) or opened_at <= 0:
-					raise ValueError("Invalid position opening time")
-				if now.timestamp() - opened_at <= max_age_days * 86400:
-					continue
-
 				current_positions = mt5.positions_get(ticket=position.ticket)
 				if current_positions is None:
 					raise RuntimeError(f"Failed to refresh position: {mt5.last_error()}")
@@ -161,26 +172,36 @@ def run_old_loss_cleanup_if_due(*, now_utc: Optional[datetime] = None) -> None:
 				opened_at = float(current.time)
 				if not math.isfinite(opened_at) or opened_at <= 0:
 					raise ValueError("Invalid refreshed position opening time")
-				if now.timestamp() - opened_at <= max_age_days * 86400:
-					continue
 
 				net_profit = round(float(current.profit) + float(current.swap) + get_position_charged_costs(current), 2)
 				if not math.isfinite(net_profit):
 					raise ValueError("Invalid position net profit")
-				if net_profit >= 0:
+				age_days = (now.timestamp() - opened_at) / 86400
+				loss_limit_triggered = (
+					max_position_loss is not None
+					and net_profit < -max_position_loss
+				)
+				age_limit_triggered = (
+					max_age_days is not None
+					and age_days > max_age_days
+					and net_profit < 0
+				)
+				if not loss_limit_triggered and not age_limit_triggered:
 					continue
 
+				close_reason = "loss_limit" if loss_limit_triggered else "age_limit"
 				closed = close_position_by_ticket(
 					position_ticket=int(current.ticket),
 					symbol=str(current.symbol),
 					position_type=int(current.type),
 					volume=float(current.volume),
-					comment="Old loss cleanup",
+					comment="Position loss limit cleanup" if loss_limit_triggered else "Old loss cleanup",
 				)
 				_log_position_management_event(
 					"old_loss_cleanup_closed" if closed else "old_loss_cleanup_close_failed",
 					ticket=current.ticket, symbol=current.symbol, net_profit=net_profit,
-					age_days=(now.timestamp() - opened_at) / 86400, max_age_days=max_age_days,
+					age_days=age_days, max_age_days=max_age_days,
+					close_reason=close_reason, max_position_loss=max_position_loss,
 				)
 				if not closed:
 					print(f"Old loss cleanup failed to close ticket {current.ticket}")

@@ -271,6 +271,43 @@ class OldLossCleanupTests(unittest.TestCase):
 			volume=0.1, comment="Old loss cleanup",
 		)
 		self.assertEqual(self.log.call_args.args[0], "old_loss_cleanup_closed")
+		self.assertEqual(self.log.call_args.kwargs["close_reason"], "age_limit")
+
+	def test_loss_over_333_closes_young_position_regardless_of_age_setting(self) -> None:
+		position = self.position(1, timedelta(days=1), -333.01)
+		self.positions_get.return_value = (position,)
+		with patch.dict(os.environ, {"OLD_LOSS_MAX_AGE_DAYS": "invalid"}):
+			run_old_loss_cleanup_if_due(now_utc=self.now)
+
+		self.close.assert_called_once_with(
+			position_ticket=1, symbol="EURUSD", position_type=0,
+			volume=0.1, comment="Position loss limit cleanup",
+		)
+		self.assertEqual(self.log.call_args.kwargs["close_reason"], "loss_limit")
+
+	def test_configured_loss_limit_overrides_default(self) -> None:
+		position = self.position(1, timedelta(days=1), -250.01)
+		self.positions_get.return_value = (position,)
+		with patch.dict(os.environ, {"OLD_LOSS_MAX_AMOUNT": "250"}):
+			run_old_loss_cleanup_if_due(now_utc=self.now)
+
+		self.close.assert_called_once()
+		self.assertEqual(self.log.call_args.kwargs["max_position_loss"], 250.0)
+
+	def test_loss_exactly_333_does_not_trigger_absolute_loss_limit(self) -> None:
+		position = self.position(1, timedelta(days=1), -332.5)
+		self.positions_get.return_value = (position,)
+		self.costs.return_value = -0.5
+		run_old_loss_cleanup_if_due(now_utc=self.now)
+		self.close.assert_not_called()
+
+	def test_absolute_loss_uses_net_result_including_swap_and_costs(self) -> None:
+		position = self.position(1, timedelta(days=1), -330, swap=-2)
+		self.positions_get.return_value = (position,)
+		self.costs.return_value = -1.01
+		run_old_loss_cleanup_if_due(now_utc=self.now)
+		self.close.assert_called_once()
+		self.assertEqual(self.log.call_args.kwargs["close_reason"], "loss_limit")
 
 	def test_refresh_rechecks_current_net_result(self) -> None:
 		old = self.position(1, timedelta(days=80), -2)
@@ -309,8 +346,11 @@ class OldLossCleanupTests(unittest.TestCase):
 
 	def test_invalid_age_and_unavailable_positions_are_explicit_errors(self) -> None:
 		with patch.dict(os.environ, {"OLD_LOSS_MAX_AGE_DAYS": "0"}):
-			with self.assertRaisesRegex(ValueError, "positive"):
-				run_old_loss_cleanup_if_due(now_utc=self.now)
+			run_old_loss_cleanup_if_due(now_utc=self.now)
+		self.assertTrue(any(
+			call.args[0] == "old_loss_cleanup_configuration_error"
+			for call in self.log.call_args_list
+		))
 		account_monitor._LAST_OLD_LOSS_CLEANUP_BUCKET = None
 		self.positions_get.return_value = None
 		with patch("account_monitor.mt5.last_error", return_value=(-1, "unavailable")):
