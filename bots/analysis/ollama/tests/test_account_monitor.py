@@ -257,9 +257,9 @@ class OldLossCleanupTests(unittest.TestCase):
 	def test_only_positions_over_default_age_and_in_net_loss_are_closed(self) -> None:
 		positions = (
 			self.position(1, timedelta(days=77, seconds=1), 0.6, swap=-0.2),
-			self.position(2, timedelta(days=77), -10),
+			self.position(2, timedelta(days=77), -10, swap=-0.1),
 			self.position(3, timedelta(days=78), 1),
-			self.position(4, timedelta(days=78), 0.5),
+			self.position(4, timedelta(days=78), -1, swap=0.1),
 		)
 		self.positions_get.side_effect = lambda **kwargs: tuple(
 			p for p in positions if not kwargs or p.ticket == kwargs["ticket"]
@@ -272,6 +272,18 @@ class OldLossCleanupTests(unittest.TestCase):
 		)
 		self.assertEqual(self.log.call_args.args[0], "old_loss_cleanup_closed")
 		self.assertEqual(self.log.call_args.kwargs["close_reason"], "age_limit")
+
+	def test_age_limit_does_not_close_a_losing_position_with_positive_swap(self) -> None:
+		position = self.position(1, timedelta(days=80), -1, swap=0.1)
+		self.positions_get.return_value = (position,)
+		run_old_loss_cleanup_if_due(now_utc=self.now)
+		self.close.assert_not_called()
+
+	def test_age_limit_does_not_close_a_losing_position_with_zero_swap(self) -> None:
+		position = self.position(1, timedelta(days=80), -1, swap=0)
+		self.positions_get.return_value = (position,)
+		run_old_loss_cleanup_if_due(now_utc=self.now)
+		self.close.assert_not_called()
 
 	def test_loss_over_333_closes_young_position_regardless_of_age_setting(self) -> None:
 		position = self.position(1, timedelta(days=1), -333.01)
@@ -324,7 +336,7 @@ class OldLossCleanupTests(unittest.TestCase):
 		self.close.assert_not_called()
 
 	def test_five_minute_buckets_and_custom_age_retry_failed_closes(self) -> None:
-		position = self.position(1, timedelta(days=31), -1)
+		position = self.position(1, timedelta(days=31), -1, swap=-0.1)
 		self.positions_get.return_value = (position,)
 		self.close.return_value = False
 		with patch.dict(os.environ, {"OLD_LOSS_MAX_AGE_DAYS": "30"}):
@@ -335,8 +347,8 @@ class OldLossCleanupTests(unittest.TestCase):
 		self.assertEqual(self.log.call_args.args[0], "old_loss_cleanup_close_failed")
 
 	def test_missing_cost_history_skips_one_position_but_not_others(self) -> None:
-		first = self.position(1, timedelta(days=80), -1)
-		second = self.position(2, timedelta(days=80), -1)
+		first = self.position(1, timedelta(days=80), -1, swap=-0.1)
+		second = self.position(2, timedelta(days=80), -1, swap=-0.1)
 		self.positions_get.side_effect = [(first, second), (first,), (second,)]
 		self.costs.side_effect = [RuntimeError("history unavailable"), -0.5]
 		run_old_loss_cleanup_if_due(now_utc=self.now)

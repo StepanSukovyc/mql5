@@ -185,6 +185,7 @@ def run_old_loss_cleanup_if_due(*, now_utc: Optional[datetime] = None) -> None:
 					max_age_days is not None
 					and age_days > max_age_days
 					and net_profit < 0
+					and float(current.swap) < 0
 				)
 				if not loss_limit_triggered and not age_limit_triggered:
 					continue
