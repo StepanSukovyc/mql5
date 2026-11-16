@@ -30,7 +30,6 @@ from market_data import (
 	collect_symbol_payload,
 	get_symbols,
 )
-from strategy_context import is_gemini_prediction_strategy_enabled
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -222,6 +221,20 @@ def run_scheduler(cfg: Config, trading_trigger_event: threading.Event) -> None:
 				break
 			time.sleep(min(1.0, sleep_remaining))
 			sleep_remaining -= 1.0
+
+
+def _select_prediction_folder(
+	service_folder: Path,
+	existing_predictions: Optional[Path],
+	cloud_predictions_enabled: bool,
+) -> Optional[Path]:
+	if not cloud_predictions_enabled:
+		return existing_predictions
+
+	cloud_predictions_folder = service_folder / "ollama_cloud" / "predikce"
+	if cloud_predictions_folder.exists() and any(cloud_predictions_folder.glob("*.json")):
+		return cloud_predictions_folder
+	return None
 
 
 def find_predictions_folder_for_current_hour(service_folder: Path) -> Optional[Path]:
@@ -470,46 +483,52 @@ def main() -> int:
 				else:
 					print("\n🚀 Stop condition met - proceeding with trading...")
 					
-					predictions_folder = None
-					
-					# Check if predictions from current hour already exist
-					existing_predictions = find_predictions_folder_for_current_hour(cfg.service_dest_folder)
-					
-					if existing_predictions:
-						# Use existing predictions from current hour
-						print("💡 Using existing predictions from current hour")
-						has_predictions = process_existing_predictions(existing_predictions)
-						if has_predictions:
-							predictions_folder = existing_predictions
+					cloud_predictions_enabled = is_ollama_cloud_enabled()
+					existing_predictions = (
+						None
+						if cloud_predictions_enabled
+						else find_predictions_folder_for_current_hour(cfg.service_dest_folder)
+					)
+					predictions_folder = _select_prediction_folder(
+						cfg.service_dest_folder,
+						existing_predictions,
+						cloud_predictions_enabled,
+					)
+
+					if cloud_predictions_enabled:
+						if predictions_folder:
+							print("☁️  Using Ollama Cloud per-symbol predictions for Cloud and Gemini decisions")
 						else:
+							print("📥 Cloud predictions unavailable; refreshing market data...")
+							run_cycle(cfg)
+							predictions_folder = _select_prediction_folder(
+								cfg.service_dest_folder,
+								None,
+								cloud_predictions_enabled=True,
+							)
+							if predictions_folder:
+								print("☁️  Using newly available Ollama Cloud predictions")
+							else:
+								print("⏳ Ollama Cloud predictions are not ready; Gemini per-symbol calls are disabled")
+								time.sleep(max(1, cfg.no_trade_retry_seconds))
+					elif existing_predictions:
+						print("💡 Using existing predictions from current hour")
+						if not process_existing_predictions(existing_predictions):
+							predictions_folder = None
 							print("⚠️  Existing predictions were filtered out, restarting cycle...")
 					else:
-						# Need to download data and get new predictions
 						print("📥 Downloading market data for current hour...")
 						run_cycle(cfg)
-
-						# Gemini per-symbol predictions are needed only for primary/index strategies.
-						# Skip the Gemini call when cloud Ollama already provides predictions –
-						# parallel, reversal and quant use raw data; cloud Ollama uses its own predictions.
-						_cloud_pf = cfg.service_dest_folder / "ollama_cloud" / "predikce"
-						_cloud_ready = (
-							is_ollama_cloud_enabled()
-							and _cloud_pf.exists()
-							and any(_cloud_pf.glob("*.json"))
-						)
-						if _cloud_ready and not is_gemini_prediction_strategy_enabled():
-							print("☁️  Cloud Ollama predikce dostupné – přeskakuji Gemini per-symbol predikce")
-						else:
-							print("🤖 Getting predictions from Gemini AI...")
-							try:
-								success, pred_folder = run_trading_logic(cfg.service_dest_folder)
-								predictions_folder = pred_folder
-								if success:
-									print("✅ Trading logic completed successfully")
-								else:
-									print("⚠️  Trading logic completed with warnings")
-							except Exception as trading_exc:
-								print(f"❌ Trading logic failed: {trading_exc}")
+						print("🤖 Getting predictions from Gemini AI...")
+						try:
+							success, pred_folder = run_trading_logic(cfg.service_dest_folder)
+							predictions_folder = pred_folder
+							if success:
+								print("✅ Trading logic completed successfully")
+							else:
+								print("⚠️  Trading logic completed with warnings")
+						except Exception as trading_exc:
+							print(f"❌ Trading logic failed: {trading_exc}")
 					
 					# Make final trading decision if we have predictions OR cloud Ollama is ready
 					cloud_preds_folder = cfg.service_dest_folder / "ollama_cloud" / "predikce"
@@ -520,7 +539,7 @@ def main() -> int:
 					)
 					if predictions_folder or cloud_has_preds:
 						if not predictions_folder:
-							print("\n⚠️  Gemini predictions nedostupné – spouštím pouze Cloud Ollama strategii...")
+							print("\nℹ️  Spouštím dostupné Cloud a raw-data strategie bez další predikční složky...")
 						print("\n🎯 Making final trading decision...")
 						try:
 							trade_executed = make_final_trading_decision(predictions_folder, cfg.service_dest_folder)

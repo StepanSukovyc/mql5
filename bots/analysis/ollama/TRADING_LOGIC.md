@@ -67,16 +67,16 @@ Autoritativní pořadí pokusů o nový vstup v [`make_final_trading_decision()`
 
 **Cloud Ollama → Gemini Prediction → Primary → Parallel → Reversal → Quant → Scalping**
 
-V aktuálním `.env` jsou zapnuté `OLLAMA_CLOUD_ENABLED=true` a `GEMINI_PREDICTION_ENABLED=true`; oba profily jsou samostatné a používají vlastní strategy ID/magic. `gemini_prediction` používá per-symbol Gemini predikce a Gemini advisory ranking. Při `ECONOMY_MODE_ENABLED=true` se nové predikce vytvářejí přes Gemini a lokální Ollama predikce se nepoužívají. `PARALLEL_STRATEGY_ENABLED=false` vypíná mean-reversion profil.
+Při `OLLAMA_CLOUD_ENABLED=true` dodává jednotlivé symbolové predikce Ollama Cloud. Profily `ollama_cloud` a `gemini_prediction` používají stejnou sadu predikcí, ale vlastní finální advisory: Ollama Cloud, respektive Gemini. Při vypnuté Cloud službě zůstává dostupná starší cesta `trading_logic.py` s Gemini predikcemi. `PARALLEL_STRATEGY_ENABLED=false` vypíná mean-reversion profil.
 
 Jde o sedm možných vstupních profilů, nikoli o pořadí volání AI. Po prvním úspěšném otevření obchodu rozhodovací funkce vrátí `True`; další profily se v daném cyklu nezkoušejí. Vypnutý profil, chybějící kandidáti nebo nesplněné aktivační podmínky znamenají přeskočení profilu, ne změnu pořadí.
 
 1. `logika.py` hlídá globální časové blokace a limit otevřených pozic. Při `OLLAMA_CLOUD_ENABLED=true` běží cloudová predikční služba ve vlastním vlákně.
-2. Plánovač nejprve hledá existující predikce z aktuální UTC hodiny. Pokud je nemá a `gemini_prediction` je vypnutá, ale cloudová složka obsahuje JSON predikce, nemusí volat Gemini. Je-li `gemini_prediction` zapnutá, cloudové predikce Gemini volání nepřeskočí. `trading_logic.py` připraví predikce: v economy mode z čerstvých MT5 dat přes Gemini, mimo něj může znovu použít čerstvé lokální Ollama predikce nebo použít Gemini fallback. Slabé predikce se odfiltrují.
+2. Pokud je Cloud Ollama zapnutá, plánovač použije JSON predikce z `ollama_cloud/predikce` jako společný vstup pro rozhodovací profily a nevolá per-symbol Gemini predikce. Gemini se použije pouze pro finální advisory. Bez Cloud služby zůstává původní cesta přes `trading_logic.py`.
 3. Plánovač volá `final_decision.py`, pokud má běžnou predikční složku nebo cloudové predikce. Funkce načte otevřené pozice, provede správu skalpovacích pozic, ověří globální limit a načte kandidáty i stav účtu.
 4. **Cloud Ollama** při zapnutí a dostupných cloudových predikcích zkusí svůj vlastní trend-following profil. Cloudový advisory shortlist doplní lokální ranking těchto predikcí.
-5. **Gemini Prediction** používá běžné Gemini predikce a Gemini advisory ranking. Má stejný trend-following validator a risk/session profil jako Cloud Ollama, ale samostatnou konfiguraci a ownership.
-6. **Primary** používá běžné predikce; jeho advisory ranking nadále poskytuje Cloud Ollama. Pokud advisory nevrátí kandidáty nebo nevedou k obchodu, zbývá lokální ranking.
+5. **Gemini Prediction** používá symbolové predikce z Cloud Ollama a Gemini advisory ranking. Má stejný trend-following validator a risk/session profil jako Cloud Ollama, ale samostatnou konfiguraci a ownership.
+6. **Primary (`gemini_primary`)** používá vybranou symbolovou sadu a Gemini advisory ranking. Cloud profil si přitom zachovává vlastní Ollama advisory a samostatné strategy ID.
 7. **Parallel**, pokud `PARALLEL_STRATEGY_ENABLED=true`, a poté zapnutý **Reversal** používají společnou kandidátní frontu: běžné predikce s advisory rankingem, nebo při jejich absenci lokální ranking cloudových predikcí.
 8. Zapnutý **Quant** používá vlastní kandidáty z raw market dat, nikoli AI shortlist.
 9. Zapnutý **Scalping** je poslední profil a používá vlastní M5 data z MT5. Vyžaduje mimo jiné maržový práh alespoň `SCALP_ACTIVATION_MARGIN_PERCENT` a volný limit skalpovacích pozic.
@@ -88,8 +88,8 @@ Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudový
 ### Ollama Cloud (vlastní strategie i advisory)
 
 - **Vlastní vstupní profil** `ollama_cloud` se zkouší jako první při `OLLAMA_CLOUD_ENABLED=true`. Čte predikce ze `SERVICE_DEST_FOLDER/ollama_cloud/predikce`, používá trend-following validaci a vlastní risk, session, cooldown a ownership konfiguraci.
-- **Advisory služba** `_resolve_ollama_cloud_advisory_candidates()` poskytuje ranking jak tomuto cloudovému profilu, tak následnému profilu `primary`. Jde o stejnou AI službu, ale dva samostatné pokusy o obchod.
-- `OLLAMA_CLOUD_ENABLED` řídí cloudovou predikční službu a první vstupní profil. Volání advisory pro `primary` tímto přepínačem v `final_decision.py` podmíněno není; spouští se při splnění primárního maržového prahu a dostupnosti běžných predikcí.
+- **Advisory služba** `_resolve_ollama_cloud_advisory_candidates()` poskytuje finální ranking pouze cloudovému profilu `ollama_cloud`.
+- `OLLAMA_CLOUD_ENABLED` řídí cloudovou predikční službu a první vstupní profil. Když je Cloud zapnutá, její per-symbol predikce jsou také vstupem Gemini profilů.
 - Shortlist obsahuje symbol, action a reasoning. Není autoritou pro konečný vstup: kandidáta mohou odmítnout lokální filtry, cooldown, risk nebo exekuce. Za shortlist se připojí lokálně seřazení kandidáti bez duplicit symbol/směr.
 - Historicky pojmenované `GEMINI_ADVISORY_MAX_CANDIDATES` (výchozí `3`) omezuje počet vrácených cloudových advisory kandidátů, nikoli celkový počet lokálních kandidátů. `GEMINI_DECISION_CACHE_MINUTES` řídí advisory cache a `GEMINI_REJECTION_COOLDOWN_MINUTES` krátký cooldown po chybě exekuce.
 - Běžná odmítnutí kandidáta (signálové filtry, limity, chybějící data nebo otevřená pozice na symbolu) se znovu vyhodnocují v dalším cyklu. Cooldown se ukládá zvlášť pro strategy ID, symbol a směr pouze po selhání exekuce; výchozí `GEMINI_REJECTION_COOLDOWN_MINUTES=5` omezuje opakování neúspěšného příkazu. Původní důvod a expirace jsou v `trade_logs/gemini_advisory_state.json`; starší cooldowny z jiných důvodů se ignorují a odstraní při kontrole kandidáta.
@@ -98,7 +98,7 @@ Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudový
 ### Gemini Prediction
 
 - Samostatný vstupní profil `gemini_prediction` je řízen `GEMINI_PREDICTION_ENABLED`.
-- Pro kandidáty používá běžné per-symbol Gemini predikce a `_resolve_gemini_advisory_candidates()`; nezávisí na Ollama Cloud advisory.
+- Při zapnuté Cloud službě používá její per-symbol predikce a `_resolve_gemini_advisory_candidates()` pro finální výběr; nevytváří další Gemini predikci pro každý symbol.
 - Trend-following validace, risk výpočet a výchozí obchodní okno odpovídají Cloud Ollama profilu. Má vlastní strategy ID `gemini_prediction`, magic `234700` a rejection cooldown.
 
 ### Gemini

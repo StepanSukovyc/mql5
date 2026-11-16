@@ -97,12 +97,12 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		)
 
 		with tempfile.TemporaryDirectory() as temp_dir:
-			predictions_folder = Path(temp_dir) / "20261116_181600" / "predikce"
-			predictions_folder.mkdir(parents=True)
 			service_folder = Path(temp_dir) / "service"
+			predictions_folder = service_folder / "ollama_cloud" / "predikce"
+			predictions_folder.mkdir(parents=True)
 
 			with (
-				patch("final_decision.is_ollama_cloud_enabled", return_value=False),
+				patch("final_decision.is_ollama_cloud_enabled", return_value=True),
 				patch("final_decision.is_gemini_prediction_strategy_enabled", return_value=True),
 				patch("final_decision.is_scalping_strategy_enabled", return_value=False),
 				patch("final_decision.is_quant_strategy_enabled", return_value=False),
@@ -119,20 +119,30 @@ class FinalDecisionRetryTests(unittest.TestCase):
 				patch("final_decision.count_successful_trades", return_value=0),
 				patch("final_decision.load_predictions", return_value=predictions),
 				patch(
+					"final_decision._resolve_ollama_cloud_advisory_candidates",
+					return_value=[],
+				) as ollama_advisory,
+				patch(
 					"final_decision._resolve_gemini_advisory_candidates",
 					return_value=[gemini_candidate],
 				) as gemini_advisory,
-				patch("final_decision._attempt_strategy_trade", return_value=True) as attempt_trade,
+				patch("final_decision._attempt_strategy_trade", side_effect=[False, True]) as attempt_trade,
 			):
 				result = make_final_trading_decision(predictions_folder, service_folder)
 
 		self.assertTrue(result)
+		ollama_advisory.assert_called_once()
+		self.assertEqual(ollama_advisory.call_args.kwargs["predictions"], predictions)
 		gemini_advisory.assert_called_once()
-		profile = attempt_trade.call_args.kwargs["profile"]
+		self.assertEqual(gemini_advisory.call_args.kwargs["predictions"], predictions)
+		self.assertEqual(attempt_trade.call_args_list[0].kwargs["profile"].label, "ollama_cloud")
+		profile = attempt_trade.call_args_list[1].kwargs["profile"]
 		self.assertEqual(profile.label, "gemini_prediction")
 		self.assertEqual(profile.context.strategy_id, "gemini_prediction")
 		self.assertEqual(profile.context.magic, 234700)
-		self.assertEqual(attempt_trade.call_args.kwargs["candidates"][0].source, "gemini_live_advisory")
+		self.assertEqual(profile.source_folder, service_folder / "ollama" / "source")
+		self.assertEqual(attempt_trade.call_args_list[1].kwargs["predictions_folder"], predictions_folder)
+		self.assertEqual(attempt_trade.call_args_list[1].kwargs["candidates"][0].source, "gemini_live_advisory")
 
 	@patch.dict(os.environ, {"MT5_MAX_OPEN_POSITIONS": "17"}, clear=False)
 	@patch("final_decision.is_scalping_strategy_enabled", return_value=False)

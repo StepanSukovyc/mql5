@@ -13,7 +13,7 @@ from final_decision import _print_trade_mode, _resolve_trade_parameters, make_fi
 
 class FinalDecisionLocalRiskTests(unittest.TestCase):
 	@patch("final_decision._attempt_strategy_trade", return_value=True)
-	@patch("final_decision._resolve_ollama_cloud_advisory_candidates", return_value=[])
+	@patch("final_decision._resolve_gemini_advisory_candidates", return_value=[])
 	@patch("final_decision.count_successful_trades", return_value=6)
 	@patch("final_decision.get_account_state", return_value={
 		"balance_cap": 5000.0,
