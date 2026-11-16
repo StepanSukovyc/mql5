@@ -11,7 +11,15 @@ from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
-from final_decision import RankedCandidate, _build_advisory_cache_signature, _resolve_trade_parameters, make_final_trading_decision
+from final_decision import (
+	RankedCandidate,
+	_build_advisory_cache_signature,
+	_get_gemini_rejection_cooldown_minutes,
+	_is_candidate_rejected,
+	_record_candidate_rejection,
+	_resolve_trade_parameters,
+	make_final_trading_decision,
+)
 
 
 class FinalDecisionRetryTests(unittest.TestCase):
@@ -37,6 +45,47 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		)
 
 		self.assertNotEqual(gemini_signature, ollama_signature)
+
+	def test_execution_failure_cooldown_defaults_to_five_minutes(self) -> None:
+		with patch.dict(os.environ, {}, clear=True):
+			self.assertEqual(_get_gemini_rejection_cooldown_minutes(), 5)
+
+	def test_rejection_cooldown_only_applies_to_execution_failures(self) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			service_folder = Path(temp_dir)
+			_record_candidate_rejection(
+				service_folder,
+				"gemini_prediction",
+				"EURUSD_ecn",
+				"BUY",
+				"signal_rejected:spread_above_limit",
+			)
+			self.assertIsNone(
+				_is_candidate_rejected(
+					service_folder,
+					"gemini_prediction",
+					"EURUSD_ecn",
+					"BUY",
+				)
+			)
+
+			_record_candidate_rejection(
+				service_folder,
+				"gemini_prediction",
+				"EURUSD_ecn",
+				"BUY",
+				"trade_execution_failed",
+			)
+			active_rejection = _is_candidate_rejected(
+				service_folder,
+				"gemini_prediction",
+				"EURUSD_ecn",
+				"BUY",
+			)
+
+		self.assertIsNotNone(active_rejection)
+		assert active_rejection is not None
+		self.assertEqual(active_rejection["reason"], "trade_execution_failed")
 
 	def test_gemini_prediction_profile_uses_gemini_advisory_and_own_identity(self) -> None:
 		predictions = [{"symbol": "EURUSD_ecn", "BUY": 65, "SELL": 20, "HOLD": 15}]

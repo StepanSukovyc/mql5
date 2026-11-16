@@ -794,7 +794,7 @@ def _get_gemini_decision_cache_minutes() -> int:
 
 
 def _get_gemini_rejection_cooldown_minutes() -> int:
-	return _get_int_env("GEMINI_REJECTION_COOLDOWN_MINUTES", 30, minimum=0)
+	return _get_int_env("GEMINI_REJECTION_COOLDOWN_MINUTES", 5, minimum=0)
 
 
 def _build_advisory_cache_signature(provider: str, account_state: Dict, open_positions: List[Dict], predictions: List[Dict]) -> str:
@@ -1042,10 +1042,18 @@ def _get_strategy_limit(env_name: str, default: int) -> int:
 
 
 def _is_candidate_rejected(service_folder: Path, strategy_id: str, symbol: str, action: str) -> Optional[Dict[str, object]]:
-	return get_active_rejection(service_folder, strategy_id=strategy_id, symbol=symbol, action=action)
+	return get_active_rejection(
+		service_folder,
+		strategy_id=strategy_id,
+		symbol=symbol,
+		action=action,
+		allowed_reasons={"trade_execution_failed"},
+	)
 
 
 def _record_candidate_rejection(service_folder: Path, strategy_id: str, symbol: str, action: str, reason: str) -> None:
+	if reason != "trade_execution_failed":
+		return
 	record_rejection(
 		service_folder,
 		strategy_id=strategy_id,

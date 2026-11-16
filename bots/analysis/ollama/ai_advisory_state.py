@@ -222,16 +222,24 @@ def record_rejection(
 	_write_candidate_rejection_summary(service_folder, stats)
 
 
-def get_active_rejection(service_folder: Path, *, strategy_id: str, symbol: str, action: str) -> Optional[Dict[str, object]]:
+def get_active_rejection(
+	service_folder: Path,
+	*,
+	strategy_id: str,
+	symbol: str,
+	action: str,
+	allowed_reasons: Optional[Iterable[str]] = None,
+) -> Optional[Dict[str, object]]:
 	state = _load_state(service_folder)
 	rejections = state.get("rejections", [])
 	if not isinstance(rejections, list):
 		return None
 
 	now = datetime.now(tz=timezone.utc)
+	allowed_reason_set = set(allowed_reasons) if allowed_reasons is not None else None
 	active_entries: List[Dict[str, object]] = []
 	found: Optional[Dict[str, object]] = None
-	expired_matching_entry = False
+	inactive_matching_entry = False
 	for entry in rejections:
 		if not isinstance(entry, dict):
 			continue
@@ -242,7 +250,14 @@ def get_active_rejection(service_folder: Path, *, strategy_id: str, symbol: str,
 			and str(entry.get("action", "")) == action
 		)
 		if expires_at is None or expires_at <= now:
-			expired_matching_entry = expired_matching_entry or matches_candidate
+			inactive_matching_entry = inactive_matching_entry or matches_candidate
+			continue
+		if (
+			matches_candidate
+			and allowed_reason_set is not None
+			and str(entry.get("reason", "")) not in allowed_reason_set
+		):
+			inactive_matching_entry = True
 			continue
 		active_entries.append(entry)
 		if matches_candidate:
@@ -275,7 +290,7 @@ def get_active_rejection(service_folder: Path, *, strategy_id: str, symbol: str,
 		_save_state(service_folder, state)
 	elif len(active_entries) != len(rejections):
 		state["rejections"] = active_entries
-		if expired_matching_entry:
+		if inactive_matching_entry:
 			stats = state.get("candidate_rejection_stats", {})
 			if isinstance(stats, dict):
 				stat = stats.get(_candidate_rejection_key(strategy_id, symbol, action))

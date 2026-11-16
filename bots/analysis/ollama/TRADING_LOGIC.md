@@ -91,8 +91,8 @@ Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudový
 - **Advisory služba** `_resolve_ollama_cloud_advisory_candidates()` poskytuje ranking jak tomuto cloudovému profilu, tak následnému profilu `primary`. Jde o stejnou AI službu, ale dva samostatné pokusy o obchod.
 - `OLLAMA_CLOUD_ENABLED` řídí cloudovou predikční službu a první vstupní profil. Volání advisory pro `primary` tímto přepínačem v `final_decision.py` podmíněno není; spouští se při splnění primárního maržového prahu a dostupnosti běžných predikcí.
 - Shortlist obsahuje symbol, action a reasoning. Není autoritou pro konečný vstup: kandidáta mohou odmítnout lokální filtry, cooldown, risk nebo exekuce. Za shortlist se připojí lokálně seřazení kandidáti bez duplicit symbol/směr.
-- Historicky pojmenované `GEMINI_ADVISORY_MAX_CANDIDATES` (výchozí `3`) omezuje počet vrácených cloudových advisory kandidátů, nikoli celkový počet lokálních kandidátů. `GEMINI_DECISION_CACHE_MINUTES` řídí advisory cache a `GEMINI_REJECTION_COOLDOWN_MINUTES` lokální rejection cooldown.
-- Rejection cooldown se ukládá zvlášť pro strategy ID, symbol a směr. Při výchozím `GEMINI_REJECTION_COOLDOWN_MINUTES=30` přeskočí jen stejného kandidáta v dané strategii po dobu 30 minut; ostatní kandidáti a samostatná strategie mohou pokračovat. Čas expirace a původní důvod jsou v `trade_logs/gemini_advisory_state.json`.
+- Historicky pojmenované `GEMINI_ADVISORY_MAX_CANDIDATES` (výchozí `3`) omezuje počet vrácených cloudových advisory kandidátů, nikoli celkový počet lokálních kandidátů. `GEMINI_DECISION_CACHE_MINUTES` řídí advisory cache a `GEMINI_REJECTION_COOLDOWN_MINUTES` krátký cooldown po chybě exekuce.
+- Běžná odmítnutí kandidáta (signálové filtry, limity, chybějící data nebo otevřená pozice na symbolu) se znovu vyhodnocují v dalším cyklu. Cooldown se ukládá zvlášť pro strategy ID, symbol a směr pouze po selhání exekuce; výchozí `GEMINI_REJECTION_COOLDOWN_MINUTES=5` omezuje opakování neúspěšného příkazu. Původní důvod a expirace jsou v `trade_logs/gemini_advisory_state.json`; starší cooldowny z jiných důvodů se ignorují a odstraní při kontrole kandidáta.
 - API konfigurace: `OLLAMA_CLOUD_URL`, `OLLAMA_CLOUD_MODEL`, `OLLAMA_CLOUD_API_KEY`, `OLLAMA_CLOUD_TIMEOUT_SECONDS`.
 
 ### Gemini Prediction
@@ -110,7 +110,7 @@ Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudový
 - nadále slouží jako **upstream predikční vrstva** — generuje per-symbol market analýzu (BUY/SELL% + reasoning)
 - tyto predikce jsou vstupem pro `gemini_prediction` a primární profil; vlastní Cloud Ollama profil používá své cloudové predikce
 - finální výběr (advisory ranking) už Gemini neprovádí
-- cache a rejection cooldown jsou sdílené s Ollama Cloud advisory path
+- advisory cache je oddělená podle poskytovatele; stav cooldownu je v témže souboru, ale klíčuje se podle strategie, symbolu a směru
 - perzistentní stav je uložen v `trade_logs/gemini_advisory_state.json`
 
 ### Lokální Ollama
@@ -460,7 +460,7 @@ Runtime zapisuje více specializovaných logů:
 - `trade_logs/reversal_strategy_status.csv`
 - `trade_logs/quant_strategy_status.csv`
 - `trade_logs/scalping_position_state.json`
-- `trade_logs/candidate_rejection_summary.json`: jeden řádek na unikátní kombinaci strategie/symbol/směr, první důvod zamítnutí, počet rejection oken a počet opakovaných cooldown přeskočení
+- `trade_logs/candidate_rejection_summary.json`: jeden řádek na unikátní kombinaci strategie/symbol/směr s neúspěšnou exekucí a počtem opakovaných cooldown přeskočení
 - `trade_logs/trade_outcomes_state.json`: stav pozic čekajících na uzavření
 - `trade_logs/closed_trade_outcomes.csv`: jeden uzavřený výsledek na position ID, včetně čistého P/L po profit/commission/swap/fee, doby držení a R-multiple, pokud je znám počáteční risk. R-multiple vychází z plánovaného syntetického risku, nejde o riziko omezené broker-side SL.
 - `trade_logs/position_management_monitor.jsonl`: heartbeat monitoru, odstranění TP (`negative_swap_tp_removed`) a chyby (`negative_swap_tp_removal_error` nebo `position_management_task_error`); zápis vyžaduje `SERVICE_DEST_FOLDER`
@@ -470,7 +470,7 @@ Význam nových CSV souborů:
 - `trade_decision_audit.csv`: úplná historie rozhodovacích kroků. Je vidět, kterou strategii runtime zkoušel, pro jaký symbol, jestli obchod provedl, a pokud ne, proč ne.
 - `trade_decision_snapshot.csv`: pouze poslední známý stav bez historie. Obsahuje vždy aktuální poslední řádek pro `primary`, `parallel`, `reversal` a případně `cycle`, takže je vhodný pro rychlou ruční kontrolu bez procházení celé historie.
 - `parallel_strategy_status.csv` a `reversal_strategy_status.csv`: poslední detailní stav každé sekundární strategie, včetně root rejection důvodu, rule failures a cooldown expiry.
-- `candidate_rejection_summary.json`: opakované přeskočení během aktivního cooldownu se již nezapisuje jako nový řádek do `trade_decision_audit.csv`; počítá se odděleně od prvotního zamítnutí.
+- `candidate_rejection_summary.json`: opakované přeskočení po selhání exekuce se již nezapisuje jako nový řádek do `trade_decision_audit.csv`; počítá se odděleně od prvotního selhání.
 - `closed_trade_outcomes.csv`: běžící monitor páruje uzavřené MT5 dealy podle position ID. Nové pozice se párují přes opening-order ticket; tracker proto předpokládá hedging účet. Výsledky pozic otevřených před nasazením trackeru lze zaznamenat bez počátečního risku; v takovém případě zůstane `r_multiple` prázdné. Nové souhrny odmítnutí a výsledků se začnou tvořit od nasazení této verze; staré auditní záznamy se automaticky nemigrují.
 
 V audit logu jsou teď navíc vidět i pomocné přechodové informace:

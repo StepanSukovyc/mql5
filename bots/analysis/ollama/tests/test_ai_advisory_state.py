@@ -9,6 +9,32 @@ from ai_advisory_state import get_active_rejection, record_rejection
 
 
 class CandidateRejectionSummaryTests(unittest.TestCase):
+	def test_reason_filter_clears_legacy_non_execution_cooldown(self) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			service_folder = Path(temp_dir)
+			record_rejection(
+				service_folder,
+				strategy_id="gemini_prediction",
+				symbol="EURUSD_ecn",
+				action="BUY",
+				reason="signal_rejected:spread_above_limit",
+				cooldown_minutes=30,
+			)
+
+			active = get_active_rejection(
+				service_folder,
+				strategy_id="gemini_prediction",
+				symbol="EURUSD_ecn",
+				action="BUY",
+				allowed_reasons={"trade_execution_failed"},
+			)
+			state = json.loads(
+				(service_folder / "trade_logs" / "gemini_advisory_state.json").read_text(encoding="utf-8")
+			)
+
+		self.assertIsNone(active)
+		self.assertEqual(state["rejections"], [])
+
 	def test_reports_unique_candidates_first_reason_and_repeat_skips_separately(self) -> None:
 		with tempfile.TemporaryDirectory() as temp_dir:
 			service_folder = Path(temp_dir)
