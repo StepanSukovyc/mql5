@@ -44,6 +44,7 @@ STRATEGY_MAGIC_IDS = {
 	234400: "quant_math",
 	234500: "ollama_cloud_primary",
 	234600: "liquidity_sweep_scalping",
+	234700: "gemini_prediction",
 }
 _STATE_LOCK = threading.RLock()
 

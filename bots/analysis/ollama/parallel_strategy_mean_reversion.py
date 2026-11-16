@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Dict, List, Optional
 
-from env_utils import get_float_env, parse_csv_env
+from env_utils import get_bool_env, get_float_env, parse_csv_env
 from instrument_utils import is_secondary_strategy_symbol_allowed
 from signal_rules import SignalValidationResult, _is_news_blocked
 from strategy_context import count_open_positions_for_strategy, get_parallel_strategy_context
@@ -33,6 +33,10 @@ def get_parallel_symbol_whitelist() -> List[str]:
 		"PARALLEL_SYMBOL_WHITELIST",
 		"EURUSD*,GBPUSD*,USDJPY*,AUDUSD*,USDCHF*",
 	)
+
+
+def is_parallel_strategy_enabled() -> bool:
+	return get_bool_env("PARALLEL_STRATEGY_ENABLED", True)
 
 
 def validate_mean_reversion_signal(symbol: str, action: str, market_data: Dict) -> SignalValidationResult:
@@ -100,6 +104,8 @@ def validate_mean_reversion_signal(symbol: str, action: str, market_data: Dict) 
 
 def can_activate_parallel_strategy(account_state: Dict, open_positions: List[dict]) -> bool:
 	"""Return whether the parallel strategy is eligible to trade under its own margin gate."""
+	if not is_parallel_strategy_enabled():
+		return False
 	parallel = get_parallel_strategy_context()
 	balance = float(account_state.get("balance", 0.0) or 0.0)
 	raw_free_margin = float(account_state.get("raw_margin_free", account_state.get("margin_free", 0.0)) or 0.0)

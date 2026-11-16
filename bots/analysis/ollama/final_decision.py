@@ -31,7 +31,11 @@ from instrument_utils import (
 )
 from mt5_symbols import estimate_order_profit, get_current_price, get_symbol_info
 from mt5_positions import get_open_positions
-from parallel_strategy_mean_reversion import can_activate_parallel_strategy, validate_mean_reversion_signal
+from parallel_strategy_mean_reversion import (
+	can_activate_parallel_strategy,
+	is_parallel_strategy_enabled,
+	validate_mean_reversion_signal,
+)
 from quant_math_strategy import build_quant_candidates, can_activate_quant_strategy, is_quant_strategy_enabled, validate_quant_signal
 from reversal_pattern_strategy import (
 	can_activate_reversal_strategy,
@@ -51,6 +55,8 @@ from strategy_context import (
 	build_strategy_comment,
 	count_open_positions_for_strategy,
 	get_ollama_cloud_strategy_context,
+	get_gemini_prediction_strategy_context,
+	is_gemini_prediction_strategy_enabled,
 	get_parallel_strategy_context,
 	get_primary_strategy_context,
 	get_quant_strategy_context,
@@ -791,6 +797,10 @@ def _get_gemini_rejection_cooldown_minutes() -> int:
 	return _get_int_env("GEMINI_REJECTION_COOLDOWN_MINUTES", 30, minimum=0)
 
 
+def _build_advisory_cache_signature(provider: str, account_state: Dict, open_positions: List[Dict], predictions: List[Dict]) -> str:
+	return f"{provider}:{build_decision_signature(account_state, open_positions, predictions)}"
+
+
 def _get_gemini_advisory_max_candidates() -> int:
 	return _get_int_env("GEMINI_ADVISORY_MAX_CANDIDATES", 3, minimum=0)
 
@@ -921,7 +931,9 @@ def _resolve_ollama_cloud_advisory_candidates(
 	from ollama_advisory import ask_ollama_final_decision as _ask_cloud
 
 	max_candidates = _get_gemini_advisory_max_candidates()
-	cache_signature = build_decision_signature(account_state, open_positions, predictions)
+	cache_signature = _build_advisory_cache_signature(
+		"ollama_cloud", account_state, open_positions, predictions
+	)
 	cached_decision = get_cached_decision(service_folder, cache_signature, _get_gemini_decision_cache_minutes())
 	if isinstance(cached_decision, dict):
 		cached_source = cached_decision.get("_source", "")
@@ -962,7 +974,9 @@ def _resolve_gemini_advisory_candidates(
 		print("ℹ️  Gemini advisory candidate limit is 0, using local candidate ranking only")
 		return []
 
-	cache_signature = build_decision_signature(account_state, open_positions, predictions)
+	cache_signature = _build_advisory_cache_signature(
+		"gemini", account_state, open_positions, predictions
+	)
 	cached_decision = get_cached_decision(service_folder, cache_signature, _get_gemini_decision_cache_minutes())
 	if isinstance(cached_decision, dict):
 		cached_candidates = _extract_ranked_candidates_from_decision_payload(cached_decision, "gemini_cached_advisory")
@@ -999,6 +1013,7 @@ def _resolve_gemini_advisory_candidates(
 		decision_payload = json.loads(decision_text)
 	except json.JSONDecodeError:
 		return []
+	decision_payload["_source"] = "gemini"
 	store_cached_decision(service_folder, cache_signature, decision_payload)
 
 	live_candidates = _extract_ranked_candidates_from_decision_payload(decision_payload, "gemini_live_advisory")
@@ -1691,6 +1706,57 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				print("ℹ️  Cloud Ollama: žádné predikce, cloud slot přeskočen")
 		# ── End cloud Ollama slot ─────────────────────────────────────────────────
 
+		gemini_prediction_profile = StrategyExecutionProfile(
+			label="gemini_prediction",
+			context=get_gemini_prediction_strategy_context(),
+			signal_validator=validate_trend_following_signal,
+			risk_percent_env="GEMINI_PREDICTION_RISK_PER_TRADE_PERCENT",
+			stop_atr_multiplier_env="GEMINI_PREDICTION_SYNTHETIC_STOP_ATR_MULTIPLIER",
+			tp_r_multiple_env="GEMINI_PREDICTION_TAKE_PROFIT_R_MULTIPLIER",
+			max_trades_per_day_env="GEMINI_PREDICTION_MAX_TRADES_PER_DAY",
+			max_trades_per_symbol_per_day_env="GEMINI_PREDICTION_MAX_TRADES_PER_SYMBOL_PER_DAY",
+			trade_cooldown_env="GEMINI_PREDICTION_SYMBOL_TRADE_COOLDOWN_MINUTES",
+			default_trade_cooldown_minutes=15,
+			source_folder=(
+				predictions_folder.parent / "source"
+				if predictions_folder is not None
+				else service_folder
+			),
+		)
+		if is_gemini_prediction_strategy_enabled():
+			print(f"\n🤖 Gemini prediction: {len(predictions)} Gemini predikcí k dispozici")
+			if predictions:
+				gemini_prediction_advisory: List[RankedCandidate] = []
+				if (
+					_get_strategy_activation_margin_percent(account_state)
+					>= gemini_prediction_profile.context.activation_margin_percent
+				):
+					gemini_prediction_advisory = _resolve_gemini_advisory_candidates(
+						predictions=predictions,
+						open_positions=open_positions,
+						account_state=account_state,
+						service_folder=service_folder,
+					)
+				gemini_prediction_queue = _build_candidate_queue(
+					predictions, gemini_prediction_advisory
+				)
+				_log_candidate_queue(service_folder, gemini_prediction_queue)
+				if gemini_prediction_queue and _attempt_strategy_trade(
+					profile=gemini_prediction_profile,
+					candidates=gemini_prediction_queue,
+					predictions_folder=predictions_folder,
+					service_folder=service_folder,
+					account_state=account_state,
+					open_positions=open_positions,
+					open_crypto_positions=open_crypto_positions,
+				):
+					print("\n" + "=" * 60)
+					print("✅ Final Trading Decision Completed (Gemini Prediction)")
+					print("=" * 60)
+					return True
+			else:
+				print("ℹ️  Gemini prediction: žádné Gemini predikce, slot přeskočen")
+
 		primary_profile = StrategyExecutionProfile(
 			label="primary",
 			context=get_primary_strategy_context(),
@@ -1705,7 +1771,10 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 		)
 		activation_margin_percent = _get_strategy_activation_margin_percent(account_state)
 		primary_activation_met = activation_margin_percent >= primary_profile.context.activation_margin_percent
-		parallel_activation_met = can_activate_parallel_strategy(account_state, open_positions)
+		parallel_activation_met = (
+			is_parallel_strategy_enabled()
+			and can_activate_parallel_strategy(account_state, open_positions)
+		)
 
 		# Primary strategy advisory – uses Ollama Cloud instead of Gemini for final selection.
 		advisory_candidates: List[RankedCandidate] = []

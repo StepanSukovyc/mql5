@@ -11,10 +11,80 @@ from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
-from final_decision import RankedCandidate, _resolve_trade_parameters, make_final_trading_decision
+from final_decision import RankedCandidate, _build_advisory_cache_signature, _resolve_trade_parameters, make_final_trading_decision
 
 
 class FinalDecisionRetryTests(unittest.TestCase):
+	def setUp(self) -> None:
+		for target, value in (
+			("final_decision.is_ollama_cloud_enabled", False),
+			("final_decision.is_gemini_prediction_strategy_enabled", False),
+			("final_decision.is_parallel_strategy_enabled", True),
+		):
+			patcher = patch(target, return_value=value)
+			patcher.start()
+			self.addCleanup(patcher.stop)
+
+	def test_advisory_cache_is_separate_for_each_ai_provider(self) -> None:
+		account_state = {"balance": 5000.0, "equity": 5000.0}
+		predictions = [{"symbol": "EURUSD_ecn", "BUY": 60, "SELL": 20}]
+
+		gemini_signature = _build_advisory_cache_signature(
+			"gemini", account_state, [], predictions
+		)
+		ollama_signature = _build_advisory_cache_signature(
+			"ollama_cloud", account_state, [], predictions
+		)
+
+		self.assertNotEqual(gemini_signature, ollama_signature)
+
+	def test_gemini_prediction_profile_uses_gemini_advisory_and_own_identity(self) -> None:
+		predictions = [{"symbol": "EURUSD_ecn", "BUY": 65, "SELL": 20, "HOLD": 15}]
+		gemini_candidate = RankedCandidate(
+			symbol="EURUSD_ecn",
+			action="BUY",
+			source="gemini_live_advisory",
+			score=10_000_000.0,
+		)
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir) / "20261116_181600" / "predikce"
+			predictions_folder.mkdir(parents=True)
+			service_folder = Path(temp_dir) / "service"
+
+			with (
+				patch("final_decision.is_ollama_cloud_enabled", return_value=False),
+				patch("final_decision.is_gemini_prediction_strategy_enabled", return_value=True),
+				patch("final_decision.is_scalping_strategy_enabled", return_value=False),
+				patch("final_decision.is_quant_strategy_enabled", return_value=False),
+				patch("final_decision.is_parallel_strategy_enabled", return_value=False),
+				patch("final_decision.get_open_positions", return_value=[]),
+				patch("final_decision.get_account_state", return_value={
+					"balance_cap": 5000.0,
+					"balance": 5000.0,
+					"equity": 5000.0,
+					"margin_free": 4500.0,
+					"raw_margin_free": 4500.0,
+					"margin_percent": 90.0,
+				}),
+				patch("final_decision.count_successful_trades", return_value=0),
+				patch("final_decision.load_predictions", return_value=predictions),
+				patch(
+					"final_decision._resolve_gemini_advisory_candidates",
+					return_value=[gemini_candidate],
+				) as gemini_advisory,
+				patch("final_decision._attempt_strategy_trade", return_value=True) as attempt_trade,
+			):
+				result = make_final_trading_decision(predictions_folder, service_folder)
+
+		self.assertTrue(result)
+		gemini_advisory.assert_called_once()
+		profile = attempt_trade.call_args.kwargs["profile"]
+		self.assertEqual(profile.label, "gemini_prediction")
+		self.assertEqual(profile.context.strategy_id, "gemini_prediction")
+		self.assertEqual(profile.context.magic, 234700)
+		self.assertEqual(attempt_trade.call_args.kwargs["candidates"][0].source, "gemini_live_advisory")
+
 	@patch.dict(os.environ, {"MT5_MAX_OPEN_POSITIONS": "17"}, clear=False)
 	@patch("final_decision.is_scalping_strategy_enabled", return_value=False)
 	@patch("final_decision.get_account_state")

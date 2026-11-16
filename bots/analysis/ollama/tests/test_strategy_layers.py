@@ -23,7 +23,7 @@ from quant_math_strategy import validate_quant_signal
 from reversal_pattern_strategy import can_activate_reversal_strategy, validate_reversal_pattern_signal
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
-from strategy_context import get_index_strategy_context, get_parallel_strategy_context, get_primary_strategy_context, get_quant_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
+from strategy_context import get_gemini_prediction_strategy_context, get_index_strategy_context, get_ollama_cloud_strategy_context, get_parallel_strategy_context, get_primary_strategy_context, get_quant_strategy_context, get_reversal_strategy_context, is_strategy_trade_window_open, position_belongs_to_strategy
 from strategy_context import get_scalping_strategy_context
 from swap_rollover_cleanup_strategy import _find_candidates
 
@@ -444,11 +444,42 @@ class StrategyOwnershipTests(unittest.TestCase):
 		self.assertTrue(position_belongs_to_strategy(quant_position, quant_context))
 
 	def test_parallel_activation_uses_derived_margin_threshold_and_position_cap(self) -> None:
-		account_state = {"balance": 5000.0, "raw_margin_free": 900.0}
-		parallel = get_parallel_strategy_context()
-		open_positions = [{"magic": parallel.magic, "comment": f"ga:{parallel.strategy_id}"} for _ in range(parallel.max_open_positions)]
+		with patch.dict(os.environ, {"PARALLEL_STRATEGY_ENABLED": "true"}, clear=False):
+			account_state = {"balance": 5000.0, "raw_margin_free": 900.0}
+			parallel = get_parallel_strategy_context()
+			open_positions = [{"magic": parallel.magic, "comment": f"ga:{parallel.strategy_id}"} for _ in range(parallel.max_open_positions)]
 
-		self.assertFalse(can_activate_parallel_strategy(account_state, open_positions))
+			self.assertFalse(can_activate_parallel_strategy(account_state, open_positions))
+
+	@patch.dict(os.environ, {"PARALLEL_STRATEGY_ENABLED": "false"}, clear=False)
+	def test_disabled_parallel_strategy_cannot_activate(self) -> None:
+		self.assertFalse(can_activate_parallel_strategy({"balance": 5000.0, "raw_margin_free": 5000.0}, []))
+
+	@patch.dict(
+		os.environ,
+		{
+			"OLLAMA_CLOUD_STRATEGY_ACTIVATION_MARGIN_PERCENT": "18",
+			"OLLAMA_CLOUD_MAX_OPEN_POSITIONS": "4",
+			"OLLAMA_CLOUD_SESSION_START_HOUR_UTC": "2",
+			"OLLAMA_CLOUD_SESSION_END_HOUR_UTC": "19",
+			"OLLAMA_CLOUD_FRIDAY_CUTOFF_HOUR_UTC": "15",
+			"GEMINI_PREDICTION_STRATEGY_ID": "gemini_prediction",
+			"GEMINI_PREDICTION_STRATEGY_MAGIC": "234700",
+		},
+		clear=True,
+	)
+	def test_gemini_prediction_context_mirrors_cloud_profile_with_separate_identity(self) -> None:
+		cloud = get_ollama_cloud_strategy_context()
+		gemini = get_gemini_prediction_strategy_context()
+
+		self.assertEqual(gemini.strategy_id, "gemini_prediction")
+		self.assertEqual(gemini.magic, 234700)
+		self.assertEqual(gemini.activation_margin_percent, cloud.activation_margin_percent)
+		self.assertEqual(gemini.max_open_positions, cloud.max_open_positions)
+		self.assertEqual(gemini.session_start_hour_utc, cloud.session_start_hour_utc)
+		self.assertEqual(gemini.session_end_hour_utc, cloud.session_end_hour_utc)
+		self.assertEqual(gemini.friday_cutoff_hour_utc, cloud.friday_cutoff_hour_utc)
+		self.assertFalse(gemini.manage_legacy_positions)
 
 	@patch.dict(os.environ, {"REVERSAL_STRATEGY_ENABLED": "true"}, clear=False)
 	def test_reversal_activation_uses_enable_flag_and_position_cap(self) -> None:
@@ -629,6 +660,7 @@ class ProfitProtectionTests(unittest.TestCase):
 				get_reversal_strategy_context().strategy_id,
 				get_quant_strategy_context().strategy_id,
 				get_index_strategy_context().strategy_id,
+				get_gemini_prediction_strategy_context().strategy_id,
 				"ollama_cloud_primary",
 			},
 		)

@@ -14,6 +14,7 @@ import MetaTrader5 as mt5
 from account_state import get_account_state
 from profit_protection_strategy import run_profit_protection_strategy_if_due
 from mt5_connection import initialize_mt5, shutdown_mt5
+from parallel_strategy_mean_reversion import is_parallel_strategy_enabled
 from reversal_pattern_strategy import is_reversal_strategy_enabled
 from strategy_context import get_parallel_strategy_context, get_primary_strategy_context, get_reversal_strategy_context, get_scalping_strategy_context
 from liquidity_sweep_scalping_strategy import is_scalping_strategy_enabled
@@ -277,10 +278,10 @@ def _get_margin_threshold() -> float:
 
 	The monitor wakes up when at least one enabled entry strategy can trade.
 	"""
-	default_threshold_percent = min(
-		get_primary_strategy_context().activation_margin_percent,
-		get_parallel_strategy_context().activation_margin_percent,
-	)
+	enabled_thresholds = [get_primary_strategy_context().activation_margin_percent]
+	if is_parallel_strategy_enabled():
+		enabled_thresholds.append(get_parallel_strategy_context().activation_margin_percent)
+	default_threshold_percent = min(enabled_thresholds)
 	if is_reversal_strategy_enabled():
 		default_threshold_percent = min(default_threshold_percent, get_reversal_strategy_context().activation_margin_percent)
 	if is_scalping_strategy_enabled():

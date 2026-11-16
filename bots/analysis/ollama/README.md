@@ -42,10 +42,12 @@ Automatický obchodní systém s AI rozhodováním. Skript běží jako **nekone
   - Gemini fallback dotazy mohou běžet paralelně, omezené přes `GEMINI_FALLBACK_MAX_PARALLEL_REQUESTS`
   - Po vyčerpání limitu Gemini fallbacku se další instrumenty bez čerstvé Ollama predikce přeskočí
   - Pokud po tomto filtrování nezůstane žádný instrument s použitelnou predikcí, celý cyklus se přeskočí bez nákupu
+  - Pokud je `gemini_prediction` zapnutá, dostupné Cloud Ollama predikce už nebrání vytvoření běžné predikční složky pro Gemini
 5. Filtruje slabé předpovědi (BUY < 35% AND SELL < 35% → smaže)
 6. Dělá **finální rozhodnutí**:
    - Kombinuje zbývající predikce se stavem účtu a otevřenými pozicemi
-  - Cloud Ollama poskytuje advisory ranking instrumentu a směru; finální vstup schvalují lokální pravidla
+  - `ollama_cloud_primary` používá vlastní Cloud Ollama predikce a advisory; `gemini_prediction` používá Gemini predikce i Gemini advisory
+  - Oba AI profily před finálním vstupem ověřují lokální pravidla a používají vlastní risk konfiguraci
   - V promptu zohledňuje swing styl (nejde o intraday), denní cíl ziskovosti a poplatek `0.10 USD` za každých `0.01` lotu
 7. **Lokální signal/risk exekuce**:
   - `lot_size` a `take_profit` se počítají lokálně v `risk_engine.py`

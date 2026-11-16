@@ -30,6 +30,7 @@ from market_data import (
 	collect_symbol_payload,
 	get_symbols,
 )
+from strategy_context import is_gemini_prediction_strategy_enabled
 
 
 def _load_dotenv(dotenv_path: Path) -> None:
@@ -496,7 +497,7 @@ def main() -> int:
 							and _cloud_pf.exists()
 							and any(_cloud_pf.glob("*.json"))
 						)
-						if _cloud_ready:
+						if _cloud_ready and not is_gemini_prediction_strategy_enabled():
 							print("☁️  Cloud Ollama predikce dostupné – přeskakuji Gemini per-symbol predikce")
 						else:
 							print("🤖 Getting predictions from Gemini AI...")

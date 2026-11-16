@@ -15,6 +15,7 @@ from position_costs import get_position_charged_costs
 from strategy_context import (
 	StrategyContext,
 	get_index_strategy_context,
+	get_gemini_prediction_strategy_context,
 	get_ollama_cloud_strategy_context,
 	get_parallel_strategy_context,
 	get_primary_strategy_context,
@@ -211,6 +212,7 @@ def get_profit_protection_contexts() -> list[StrategyContext]:
 		get_quant_strategy_context(),
 		get_index_strategy_context(),
 		get_ollama_cloud_strategy_context(),
+		get_gemini_prediction_strategy_context(),
 	]
 
 

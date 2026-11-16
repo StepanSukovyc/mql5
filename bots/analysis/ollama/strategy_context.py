@@ -158,6 +158,39 @@ def get_index_strategy_context() -> StrategyContext:
 	)
 
 
+def is_gemini_prediction_strategy_enabled() -> bool:
+	return _get_env_bool("GEMINI_PREDICTION_ENABLED", False)
+
+
+def get_gemini_prediction_strategy_context() -> StrategyContext:
+	cloud_context = get_ollama_cloud_strategy_context()
+	return StrategyContext(
+		strategy_id=os.getenv("GEMINI_PREDICTION_STRATEGY_ID", "gemini_prediction"),
+		magic=_get_env_int("GEMINI_PREDICTION_STRATEGY_MAGIC", 234700),
+		manage_legacy_positions=False,
+		activation_margin_percent=_get_env_float(
+			"GEMINI_PREDICTION_STRATEGY_ACTIVATION_MARGIN_PERCENT",
+			cloud_context.activation_margin_percent,
+		),
+		max_open_positions=_get_env_int(
+			"GEMINI_PREDICTION_MAX_OPEN_POSITIONS",
+			cloud_context.max_open_positions,
+		),
+		session_start_hour_utc=_get_env_int(
+			"GEMINI_PREDICTION_SESSION_START_HOUR_UTC",
+			cloud_context.session_start_hour_utc,
+		),
+		session_end_hour_utc=_get_env_int(
+			"GEMINI_PREDICTION_SESSION_END_HOUR_UTC",
+			cloud_context.session_end_hour_utc,
+		),
+		friday_cutoff_hour_utc=_get_env_int(
+			"GEMINI_PREDICTION_FRIDAY_CUTOFF_HOUR_UTC",
+			cloud_context.friday_cutoff_hour_utc,
+		),
+	)
+
+
 def get_ollama_cloud_strategy_context() -> StrategyContext:
 	primary_activation = get_primary_strategy_context().activation_margin_percent
 	return StrategyContext(
@@ -248,6 +281,7 @@ def position_belongs_to_strategy(position: Any, context: StrategyContext) -> boo
 		get_quant_strategy_context(),
 		get_index_strategy_context(),
 		get_ollama_cloud_strategy_context(),
+		get_gemini_prediction_strategy_context(),
 		get_scalping_strategy_context(),
 	]
 	if _is_known_strategy_position(position, known_contexts):

@@ -69,6 +69,23 @@ class AccountMonitorTests(unittest.TestCase):
 
 		self.assertFalse(check_stop_condition(account_info))
 
+	@patch.dict(
+		os.environ,
+		{
+			"PARALLEL_STRATEGY_ENABLED": "false",
+			"PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT": "20",
+		},
+		clear=True,
+	)
+	@patch("account_monitor.is_scalping_strategy_enabled", return_value=False)
+	@patch("account_monitor.is_reversal_strategy_enabled", return_value=False)
+	def test_default_trigger_ignores_disabled_parallel_strategy(
+		self,
+		_mock_reversal_enabled,
+		_mock_scalping_enabled,
+	) -> None:
+		self.assertEqual(account_monitor._get_margin_threshold(), 0.2)
+
 	@patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due")
 	@patch("account_monitor.run_profit_protection_strategy_if_due")
 	@patch("account_monitor.get_account_state_snapshot")

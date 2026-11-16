@@ -9,7 +9,7 @@ Třída LiquiditySweepScalpingStrategy pracuje výhradně přes ScalpingAppConte
 který obaluje existující interní služby (MT5 data, trade execution, account info).
 Konfigurace probíhá přes proměnné prostředí s prefixem SCALP_. Strategie se
 aktivuje jako poslední záloha po vyčerpání celého fallback řetězce (Cloud Ollama
--> Primary -> Parallel -> Reversal -> Quant) a pouze pokud volná marže účtu
+-> Gemini Prediction -> Primary -> Parallel -> Reversal -> Quant) a pouze pokud volná marže účtu
 překračuje SCALP_ACTIVATION_MARGIN_PERCENT (výchozí 5 %).
 
 ZÁSADNÍ OBCHODNÍ KOMENTÁŘE:

@@ -40,7 +40,7 @@ Při nedostatečné marži se `trade_execution.py` pokusí nejvýše šestkrát 
 
 V aktuální `.env` je `TRADING_TRIGGER_MARGIN_THRESHOLD=5`. Při capu `11000` se monitor probudí až při raw free margin **nad `550`**, nikoli při přesných `550`. Vyšší trigger může zadržet celý vstupní cyklus, i když některá fallback strategie už splňuje svůj nižší práh.
 
-Pokud proměnná chybí nebo nejde převést na číslo, `_get_margin_threshold()` použije minimum prahů Primary a Parallel, případně také zapnutého Reversal a Scalping. **Cloud Ollama a Quant tento automatický výběr nezahrnuje**; nejde tedy obecně o minimum všech šesti vstupních profilů.
+Pokud proměnná chybí nebo nejde převést na číslo, `_get_margin_threshold()` použije minimum prahů Primary a zapnutých profilů Parallel, Reversal a Scalping. **Cloud Ollama, Gemini Prediction a Quant tento automatický výběr nezahrnuje**; nejde tedy obecně o minimum všech sedmi vstupních profilů.
 
 ### `TRADING_MARGIN_THRESHOLD`: výchozí práh Primary
 
@@ -65,18 +65,21 @@ Například při capu `11000` a raw free margin `1100` (10 %) trigger `5` cyklus
 
 Autoritativní pořadí pokusů o nový vstup v [`make_final_trading_decision()`](final_decision.py) je:
 
-**Cloud Ollama → Primary → Parallel → Reversal → Quant → Scalping**
+**Cloud Ollama → Gemini Prediction → Primary → Parallel → Reversal → Quant → Scalping**
 
-Jde o šest vstupních profilů, nikoli o pořadí volání AI. Po prvním úspěšném otevření obchodu rozhodovací funkce vrátí `True`; další profily se v daném cyklu nezkoušejí. Vypnutý profil, chybějící kandidáti nebo nesplněné aktivační podmínky znamenají přeskočení profilu, ne změnu pořadí.
+V aktuálním `.env` jsou zapnuté `OLLAMA_CLOUD_ENABLED=true` a `GEMINI_PREDICTION_ENABLED=true`; oba profily jsou samostatné a používají vlastní strategy ID/magic. `gemini_prediction` používá per-symbol Gemini predikce a Gemini advisory ranking. Při `ECONOMY_MODE_ENABLED=true` se nové predikce vytvářejí přes Gemini a lokální Ollama predikce se nepoužívají. `PARALLEL_STRATEGY_ENABLED=false` vypíná mean-reversion profil.
+
+Jde o sedm možných vstupních profilů, nikoli o pořadí volání AI. Po prvním úspěšném otevření obchodu rozhodovací funkce vrátí `True`; další profily se v daném cyklu nezkoušejí. Vypnutý profil, chybějící kandidáti nebo nesplněné aktivační podmínky znamenají přeskočení profilu, ne změnu pořadí.
 
 1. `logika.py` hlídá globální časové blokace a limit otevřených pozic. Při `OLLAMA_CLOUD_ENABLED=true` běží cloudová predikční služba ve vlastním vlákně.
-2. Plánovač nejprve hledá existující predikce z aktuální UTC hodiny. Pokud je nemá, ale cloudová složka obsahuje JSON predikce, nemusí volat Gemini. Jinak `trading_logic.py` připraví predikce: v economy mode z čerstvých MT5 dat přes Gemini, mimo něj může znovu použít čerstvé lokální Ollama predikce nebo použít Gemini fallback. Slabé predikce se odfiltrují.
+2. Plánovač nejprve hledá existující predikce z aktuální UTC hodiny. Pokud je nemá a `gemini_prediction` je vypnutá, ale cloudová složka obsahuje JSON predikce, nemusí volat Gemini. Je-li `gemini_prediction` zapnutá, cloudové predikce Gemini volání nepřeskočí. `trading_logic.py` připraví predikce: v economy mode z čerstvých MT5 dat přes Gemini, mimo něj může znovu použít čerstvé lokální Ollama predikce nebo použít Gemini fallback. Slabé predikce se odfiltrují.
 3. Plánovač volá `final_decision.py`, pokud má běžnou predikční složku nebo cloudové predikce. Funkce načte otevřené pozice, provede správu skalpovacích pozic, ověří globální limit a načte kandidáty i stav účtu.
 4. **Cloud Ollama** při zapnutí a dostupných cloudových predikcích zkusí svůj vlastní trend-following profil. Cloudový advisory shortlist doplní lokální ranking těchto predikcí.
-5. **Primary** se zkouší jen s predikcemi z běžné predikční složky, kterou kód označuje jako Gemini predictions (může obsahovat i znovu použité lokální Ollama predikce). Její advisory ranking rovněž poskytuje Cloud Ollama. Pokud advisory nevrátí kandidáty nebo nevedou k obchodu, zbývá lokální ranking; na Gemini advisory se v tomto toku nepřepíná.
-6. **Parallel**, poté zapnutý **Reversal**, používají společnou kandidátní frontu: běžné predikce s advisory rankingem, nebo při jejich absenci lokální ranking cloudových predikcí. Primary samotná tuto cloudovou náhradu nepoužívá.
-7. Zapnutý **Quant** používá vlastní kandidáty z raw market dat, nikoli AI shortlist.
-8. Zapnutý **Scalping** je poslední profil a používá vlastní M5 data z MT5. Vyžaduje mimo jiné maržový práh alespoň `SCALP_ACTIVATION_MARGIN_PERCENT` a volný limit skalpovacích pozic.
+5. **Gemini Prediction** používá běžné Gemini predikce a Gemini advisory ranking. Má stejný trend-following validator a risk/session profil jako Cloud Ollama, ale samostatnou konfiguraci a ownership.
+6. **Primary** používá běžné predikce; jeho advisory ranking nadále poskytuje Cloud Ollama. Pokud advisory nevrátí kandidáty nebo nevedou k obchodu, zbývá lokální ranking.
+7. **Parallel**, pokud `PARALLEL_STRATEGY_ENABLED=true`, a poté zapnutý **Reversal** používají společnou kandidátní frontu: běžné predikce s advisory rankingem, nebo při jejich absenci lokální ranking cloudových predikcí.
+8. Zapnutý **Quant** používá vlastní kandidáty z raw market dat, nikoli AI shortlist.
+9. Zapnutý **Scalping** je poslední profil a používá vlastní M5 data z MT5. Vyžaduje mimo jiné maržový práh alespoň `SCALP_ACTIVATION_MARGIN_PERCENT` a volný limit skalpovacích pozic.
 
 Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudových predikcí a bez quant kandidátů, může zkusit rovnou scalping. To neznamená, že jej hlavní plánovač volá v každém cyklu bez predikcí: bez běžné predikční složky i cloudových JSON souborů rozhodovací fázi přeskočí.
 
@@ -89,7 +92,14 @@ Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudový
 - `OLLAMA_CLOUD_ENABLED` řídí cloudovou predikční službu a první vstupní profil. Volání advisory pro `primary` tímto přepínačem v `final_decision.py` podmíněno není; spouští se při splnění primárního maržového prahu a dostupnosti běžných predikcí.
 - Shortlist obsahuje symbol, action a reasoning. Není autoritou pro konečný vstup: kandidáta mohou odmítnout lokální filtry, cooldown, risk nebo exekuce. Za shortlist se připojí lokálně seřazení kandidáti bez duplicit symbol/směr.
 - Historicky pojmenované `GEMINI_ADVISORY_MAX_CANDIDATES` (výchozí `3`) omezuje počet vrácených cloudových advisory kandidátů, nikoli celkový počet lokálních kandidátů. `GEMINI_DECISION_CACHE_MINUTES` řídí advisory cache a `GEMINI_REJECTION_COOLDOWN_MINUTES` lokální rejection cooldown.
+- Rejection cooldown se ukládá zvlášť pro strategy ID, symbol a směr. Při výchozím `GEMINI_REJECTION_COOLDOWN_MINUTES=30` přeskočí jen stejného kandidáta v dané strategii po dobu 30 minut; ostatní kandidáti a samostatná strategie mohou pokračovat. Čas expirace a původní důvod jsou v `trade_logs/gemini_advisory_state.json`.
 - API konfigurace: `OLLAMA_CLOUD_URL`, `OLLAMA_CLOUD_MODEL`, `OLLAMA_CLOUD_API_KEY`, `OLLAMA_CLOUD_TIMEOUT_SECONDS`.
+
+### Gemini Prediction
+
+- Samostatný vstupní profil `gemini_prediction` je řízen `GEMINI_PREDICTION_ENABLED`.
+- Pro kandidáty používá běžné per-symbol Gemini predikce a `_resolve_gemini_advisory_candidates()`; nezávisí na Ollama Cloud advisory.
+- Trend-following validace, risk výpočet a výchozí obchodní okno odpovídají Cloud Ollama profilu. Má vlastní strategy ID `gemini_prediction`, magic `234700` a rejection cooldown.
 
 ### Gemini
 
@@ -98,7 +108,7 @@ Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudový
 - primární pokus používá nakonfigurovaný Vertex model. Pokud jsou nastavené `GEMINI_API_KEY` a `GEMINI_URL`, při chybě následuje API-key REST fallback (aktuálně Gemini 2.5 Flash), který nezaručuje evropské zpracování. Bez obou hodnot zůstávají retry a případný REST fallback na Vertex se service account autentizací
 - úspěšný SDK požadavek loguje skutečný `model`, `region`, `transport=google-genai-sdk`, thinking nastavení a tokenový limit; API-key fallback loguje `transport=legacy-gemini-api`. Pouhý úspěch cyklu tedy není důkaz použití Argonu
 - nadále slouží jako **upstream predikční vrstva** — generuje per-symbol market analýzu (BUY/SELL% + reasoning)
-- tyto predikce mohou být vstupem pro primární profil a jeho advisory vrstvu (Ollama Cloud); vlastní cloudový profil používá své cloudové predikce
+- tyto predikce jsou vstupem pro `gemini_prediction` a primární profil; vlastní Cloud Ollama profil používá své cloudové predikce
 - finální výběr (advisory ranking) už Gemini neprovádí
 - cache a rejection cooldown jsou sdílené s Ollama Cloud advisory path
 - perzistentní stav je uložen v `trade_logs/gemini_advisory_state.json`
@@ -112,7 +122,7 @@ Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudový
 
 ## Primární strategie
 
-Primární profil `primary` je druhý vstupní profil, po Cloud Ollama. Název „primární“ neznamená první místo v aktuálním řetězci. Je to trend-following vrstva nad lokálními pravidly v `signal_rules.py`, s vlastním ownership `gemini_primary`, odlišným od `ollama_cloud_primary`.
+Primární profil `primary` je třetí vstupní profil, po Cloud Ollama a `gemini_prediction`. Název „primární“ neznamená první místo v aktuálním řetězci. Je to trend-following vrstva nad lokálními pravidly v `signal_rules.py`, s vlastním ownership `gemini_primary`, odlišným od `ollama_cloud_primary` i `gemini_prediction`.
 
 Typické filtry:
 
@@ -163,7 +173,7 @@ Indexové instrumenty mohou obchodovat ostatní vstupní profily, pokud jsou v j
 
 ## Paralelní strategie
 
-Paralelní profil v `parallel_strategy_mean_reversion.py` je třetí vstupní profil a fallback po Cloud Ollama a Primary, ne souběžně obchodující hlavní tok.
+Paralelní profil v `parallel_strategy_mean_reversion.py` je čtvrtý vstupní profil a fallback po Cloud Ollama, Gemini Prediction a Primary, ne souběžně obchodující hlavní tok. Lze jej vypnout přes `PARALLEL_STRATEGY_ENABLED=false`.
 
 Aktivuje se jen když:
 
@@ -190,7 +200,7 @@ Paralelní strategie má vlastní risk profil i vlastní session guardy.
 
 ## Reverzní strategie
 
-Reverzní profil v `reversal_pattern_strategy.py` je čtvrtý vstupní profil. Nespouští se jako konkurent primary strategie, ale až po Cloud Ollama, Primary a paralelní mean-reversion větvi.
+Reverzní profil v `reversal_pattern_strategy.py` je pátý vstupní profil. Nespouští se jako konkurent primary strategie, ale až po Cloud Ollama, Gemini Prediction, Primary a paralelní mean-reversion větvi.
 
 Aktivuje se jen když:
 
@@ -219,7 +229,7 @@ Reverzní strategie má vlastní risk profil, session guardy i samostatný statu
 
 ## Quant strategie
 
-Quant profil v `quant_math_strategy.py` je pátý vstupní profil, fallback po Reversal. Funguje výhradně na lokálních matematických metrikách bez AI predikcí.
+Quant profil v `quant_math_strategy.py` je šestý vstupní profil, fallback po Reversal. Funguje výhradně na lokálních matematických metrikách bez AI predikcí.
 
 Aktivuje se jen když:
 
@@ -241,7 +251,7 @@ Quant strategie má vlastní risk profil a session guardy. Výstupem je `quant_s
 
 ## Liquidity Sweep Scalping strategie
 
-Skalpovací profil v `liquidity_sweep_scalping_strategy.py` je šestý a poslední vstupní profil, fallback po Quant. Obchoduje výhradně na M5 svíčkách načtených přímo z MT5 přes `copy_rates_from_pos`.
+Skalpovací profil v `liquidity_sweep_scalping_strategy.py` je sedmý a poslední vstupní profil, fallback po Quant. Obchoduje výhradně na M5 svíčkách načtených přímo z MT5 přes `copy_rates_from_pos`.
 
 Aktivuje se jen když:
 
@@ -355,6 +365,7 @@ Vedle toho dál platí globální swap blok okno z `logika.py`, které zastaví 
 | Quant | 234400 | `quant_math` |
 | Cloud Ollama (první vstupní profil) | 234500 | `ollama_cloud_primary` |
 | Scalping | 234600 | `liquidity_sweep_scalping` |
+| Gemini Prediction | 234700 | `gemini_prediction` |
 
 - primární strategie může podle konfigurace spravovat i manuální nebo legacy pozice
 - všechny ostatní strategie jsou od legacy správy oddělené
@@ -498,8 +509,9 @@ Aktuální architektura je záměrně konzervativnější než původní Gemini-
 
 - AI navrhuje, ale lokální pravidla rozhodují
 - risk je lokální a deterministický
-- vstupní řetězec má šest profilů: **Cloud Ollama → Primary → Parallel → Reversal → Quant → Scalping**
+- vstupní řetězec má sedm profilů: **Cloud Ollama → Gemini Prediction → Primary → Parallel → Reversal → Quant → Scalping**
 - Cloud Ollama má vlastní první vstupní profil a zároveň poskytuje advisory ranking pro Primary; tyto dvě role se nesmějí zaměňovat
+- Gemini Prediction má vlastní profil a Gemini advisory ranking; jeho rejection cooldown není sdílený s Cloud Ollama
 - Index má samostatný ownership pro správu existujících pozic, ale není zapojený jako vstupní strategie; `INDEX_STRATEGY_ENABLED` ani indexové spread/lot limity nové vstupy neřídí
 - cap se automaticky odvozuje z aktuální balance po tisících; historické `TRADING_ACCOUNT_BALANCE_CAP` v podkladových env souborech nemá účinek
 - scalping je poslední záloha — nový vstup zkouší jen pokud žádný předchozí profil neotevřel obchod a marže dosahuje nakonfigurovaného prahu (výchozí alespoň 5 %)
