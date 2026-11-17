@@ -13,9 +13,11 @@ from unittest.mock import patch
 
 from final_decision import (
 	RankedCandidate,
+	StrategyAttempt,
 	_build_advisory_cache_signature,
 	_get_gemini_rejection_cooldown_minutes,
 	_is_candidate_rejected,
+	_order_strategy_attempts,
 	_record_candidate_rejection,
 	_resolve_trade_parameters,
 	make_final_trading_decision,
@@ -45,6 +47,41 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		)
 
 		self.assertNotEqual(gemini_signature, ollama_signature)
+
+	def test_strategy_attempts_are_ordered_by_loss_then_id_with_no_history_first(self) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			service_folder = Path(temp_dir)
+			trade_logs = service_folder / "trade_logs"
+			trade_logs.mkdir()
+			outcome_path = trade_logs / "closed_trade_outcomes.csv"
+			with open(outcome_path, "w", newline="", encoding="utf-8") as handle:
+				writer = csv.DictWriter(handle, fieldnames=["strategy_id", "net_profit"])
+				writer.writeheader()
+				writer.writerows(
+					[
+						{"strategy_id": "alpha", "net_profit": "-2.00"},
+						{"strategy_id": "alpha", "net_profit": "-1.00"},
+						{"strategy_id": "beta", "net_profit": "-3.00"},
+						{"strategy_id": "gamma", "net_profit": "-10.00"},
+						{"strategy_id": "gamma", "net_profit": "50.00"},
+					]
+				)
+
+			attempts = [
+				StrategyAttempt("gamma", "gamma", lambda: False),
+				StrategyAttempt("beta", "beta", lambda: False),
+				StrategyAttempt("new_strategy", "new", lambda: False),
+				StrategyAttempt("alpha", "alpha", lambda: False),
+			]
+			ordered, losses = _order_strategy_attempts(service_folder, attempts)
+
+		self.assertEqual(
+			[attempt.strategy_id for attempt in ordered],
+			["new_strategy", "alpha", "beta", "gamma"],
+		)
+		self.assertEqual(str(losses["alpha"]), "3.00")
+		self.assertEqual(str(losses["beta"]), "3.00")
+		self.assertEqual(str(losses["gamma"]), "10.00")
 
 	def test_execution_failure_cooldown_defaults_to_five_minutes(self) -> None:
 		with patch.dict(os.environ, {}, clear=True):
@@ -100,6 +137,23 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			service_folder = Path(temp_dir) / "service"
 			predictions_folder = service_folder / "ollama_cloud" / "predikce"
 			predictions_folder.mkdir(parents=True)
+			trade_logs = service_folder / "trade_logs"
+			trade_logs.mkdir()
+			with open(
+				trade_logs / "closed_trade_outcomes.csv",
+				"w",
+				newline="",
+				encoding="utf-8",
+			) as handle:
+				writer = csv.DictWriter(handle, fieldnames=["strategy_id", "net_profit"])
+				writer.writeheader()
+				writer.writerows(
+					[
+						{"strategy_id": "ollama_cloud_primary", "net_profit": "-1"},
+						{"strategy_id": "gemini_prediction", "net_profit": "-2"},
+						{"strategy_id": "gemini_primary", "net_profit": "-3"},
+					]
+				)
 
 			with (
 				patch("final_decision.is_ollama_cloud_enabled", return_value=True),
@@ -107,6 +161,7 @@ class FinalDecisionRetryTests(unittest.TestCase):
 				patch("final_decision.is_scalping_strategy_enabled", return_value=False),
 				patch("final_decision.is_quant_strategy_enabled", return_value=False),
 				patch("final_decision.is_parallel_strategy_enabled", return_value=False),
+				patch("final_decision.is_reversal_strategy_enabled", return_value=False),
 				patch("final_decision.get_open_positions", return_value=[]),
 				patch("final_decision.get_account_state", return_value={
 					"balance_cap": 5000.0,

@@ -8,6 +8,7 @@ import os
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from decimal import Decimal
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
 
@@ -61,10 +62,12 @@ from strategy_context import (
 	get_primary_strategy_context,
 	get_quant_strategy_context,
 	get_reversal_strategy_context,
+	get_scalping_strategy_context,
 	is_strategy_trade_window_open,
 )
 from trade_execution import execute_trade, get_max_open_positions
 from trade_history import count_successful_trades, count_successful_trades_since, count_successful_trades_today
+from trade_outcomes import load_strategy_loss_totals
 from trading_validation import check_margin_requirements, validate_symbol
 
 import MetaTrader5 as mt5
@@ -737,6 +740,28 @@ class StrategyExecutionProfile:
 	default_max_trades_per_day: int = 0
 	default_max_trades_per_symbol_per_day: int = 0
 	source_folder: Optional[Path] = None
+
+
+@dataclass(frozen=True)
+class StrategyAttempt:
+	strategy_id: str
+	label: str
+	run: Callable[[], bool]
+
+
+def _order_strategy_attempts(
+	service_folder: Path,
+	attempts: List[StrategyAttempt],
+) -> Tuple[List[StrategyAttempt], Dict[str, Decimal]]:
+	loss_totals = load_strategy_loss_totals(service_folder)
+	ordered_attempts = sorted(
+		attempts,
+		key=lambda attempt: (
+			loss_totals.get(attempt.strategy_id, Decimal("0")),
+			attempt.strategy_id.casefold(),
+		),
+	)
+	return ordered_attempts, loss_totals
 
 
 def _build_quant_ranked_candidates(source_folder: Path, service_folder: Path) -> List[RankedCandidate]:
@@ -1674,50 +1699,19 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 
 		_print_trade_mode(successful_trades, next_trade_number)
 
-		# ── Cloud Ollama strategy (runs first when enabled) ──────────────────────
-		if is_ollama_cloud_enabled():
-			cloud_predictions_folder = cloud_preds_folder
-			cloud_predictions = cloud_predictions_loaded  # reuse already-loaded list
-			print(f"\n☁️  Cloud Ollama: {len(cloud_predictions)} predikcí k dispozici")
-			if cloud_predictions:
-				cloud_advisory = _resolve_ollama_cloud_advisory_candidates(
-					predictions=cloud_predictions,
-					open_positions=open_positions,
-					account_state=account_state,
-					service_folder=service_folder,
-				)
-				cloud_queue = _build_candidate_queue(cloud_predictions, cloud_advisory)
-				_log_candidate_queue(service_folder, cloud_queue)
-				cloud_profile = StrategyExecutionProfile(
-					label="ollama_cloud",
-					context=get_ollama_cloud_strategy_context(),
-					signal_validator=validate_trend_following_signal,
-					risk_percent_env="OLLAMA_CLOUD_RISK_PER_TRADE_PERCENT",
-					stop_atr_multiplier_env="OLLAMA_CLOUD_SYNTHETIC_STOP_ATR_MULTIPLIER",
-					tp_r_multiple_env="OLLAMA_CLOUD_TAKE_PROFIT_R_MULTIPLIER",
-					max_trades_per_day_env="OLLAMA_CLOUD_MAX_TRADES_PER_DAY",
-					max_trades_per_symbol_per_day_env="OLLAMA_CLOUD_MAX_TRADES_PER_SYMBOL_PER_DAY",
-					trade_cooldown_env="OLLAMA_CLOUD_SYMBOL_TRADE_COOLDOWN_MINUTES",
-					default_trade_cooldown_minutes=15,
-					source_folder=cloud_source_folder,
-				)
-				if cloud_queue and _attempt_strategy_trade(
-					profile=cloud_profile,
-					candidates=cloud_queue,
-					predictions_folder=cloud_predictions_folder,
-					service_folder=service_folder,
-					account_state=account_state,
-					open_positions=open_positions,
-					open_crypto_positions=open_crypto_positions,
-				):
-					print("\n" + "=" * 60)
-					print("✅ Final Trading Decision Completed (Cloud Ollama)")
-					print("=" * 60)
-					return True
-			else:
-				print("ℹ️  Cloud Ollama: žádné predikce, cloud slot přeskočen")
-		# ── End cloud Ollama slot ─────────────────────────────────────────────────
-
+		cloud_profile = StrategyExecutionProfile(
+			label="ollama_cloud",
+			context=get_ollama_cloud_strategy_context(),
+			signal_validator=validate_trend_following_signal,
+			risk_percent_env="OLLAMA_CLOUD_RISK_PER_TRADE_PERCENT",
+			stop_atr_multiplier_env="OLLAMA_CLOUD_SYNTHETIC_STOP_ATR_MULTIPLIER",
+			tp_r_multiple_env="OLLAMA_CLOUD_TAKE_PROFIT_R_MULTIPLIER",
+			max_trades_per_day_env="OLLAMA_CLOUD_MAX_TRADES_PER_DAY",
+			max_trades_per_symbol_per_day_env="OLLAMA_CLOUD_MAX_TRADES_PER_SYMBOL_PER_DAY",
+			trade_cooldown_env="OLLAMA_CLOUD_SYMBOL_TRADE_COOLDOWN_MINUTES",
+			default_trade_cooldown_minutes=15,
+			source_folder=cloud_source_folder,
+		)
 		gemini_prediction_profile = StrategyExecutionProfile(
 			label="gemini_prediction",
 			context=get_gemini_prediction_strategy_context(),
@@ -1737,43 +1731,6 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				else service_folder
 			),
 		)
-		if is_gemini_prediction_strategy_enabled():
-			print(
-				f"\n🤖 Gemini final decision: {len(predictions)} "
-				f"{prediction_source_label} predikcí k dispozici"
-			)
-			if predictions:
-				gemini_prediction_advisory: List[RankedCandidate] = []
-				if (
-					_get_strategy_activation_margin_percent(account_state)
-					>= gemini_prediction_profile.context.activation_margin_percent
-				):
-					gemini_prediction_advisory = _resolve_gemini_advisory_candidates(
-						predictions=predictions,
-						open_positions=open_positions,
-						account_state=account_state,
-						service_folder=service_folder,
-					)
-				gemini_prediction_queue = _build_candidate_queue(
-					predictions, gemini_prediction_advisory
-				)
-				_log_candidate_queue(service_folder, gemini_prediction_queue)
-				if gemini_prediction_queue and _attempt_strategy_trade(
-					profile=gemini_prediction_profile,
-					candidates=gemini_prediction_queue,
-					predictions_folder=predictions_folder,
-					service_folder=service_folder,
-					account_state=account_state,
-					open_positions=open_positions,
-					open_crypto_positions=open_crypto_positions,
-				):
-					print("\n" + "=" * 60)
-					print("✅ Final Trading Decision Completed (Gemini Prediction)")
-					print("=" * 60)
-					return True
-			else:
-				print(f"ℹ️  Gemini prediction: žádné {prediction_source_label} predikce, slot přeskočen")
-
 		primary_profile = StrategyExecutionProfile(
 			label="primary",
 			context=get_primary_strategy_context(),
@@ -1786,119 +1743,32 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			trade_cooldown_env="SYMBOL_TRADE_COOLDOWN_MINUTES",
 			default_trade_cooldown_minutes=_get_symbol_trade_cooldown_minutes(),
 		)
-		activation_margin_percent = _get_strategy_activation_margin_percent(account_state)
-		primary_activation_met = activation_margin_percent >= primary_profile.context.activation_margin_percent
-		parallel_activation_met = (
-			is_parallel_strategy_enabled()
-			and can_activate_parallel_strategy(account_state, open_positions)
+		parallel_profile = StrategyExecutionProfile(
+			label="parallel",
+			context=get_parallel_strategy_context(),
+			signal_validator=validate_mean_reversion_signal,
+			risk_percent_env="PARALLEL_RISK_PER_TRADE_PERCENT",
+			stop_atr_multiplier_env="PARALLEL_SYNTHETIC_STOP_ATR_MULTIPLIER",
+			tp_r_multiple_env="PARALLEL_TAKE_PROFIT_R_MULTIPLIER",
+			max_trades_per_day_env="PARALLEL_MAX_TRADES_PER_DAY",
+			max_trades_per_symbol_per_day_env="PARALLEL_MAX_TRADES_PER_SYMBOL_PER_DAY",
+			trade_cooldown_env="PARALLEL_SYMBOL_TRADE_COOLDOWN_MINUTES",
+			default_trade_cooldown_minutes=30,
+			default_max_trades_per_symbol_per_day=1,
 		)
-
-		# Gemini Primary uses Gemini for final selection over the selected per-symbol predictions.
-		advisory_candidates: List[RankedCandidate] = []
-		if primary_activation_met and predictions:
-			advisory_candidates = _resolve_gemini_advisory_candidates(
-				predictions=predictions,
-				open_positions=open_positions,
-				account_state=account_state,
-				service_folder=service_folder,
-			)
-		elif primary_activation_met and not predictions:
-			print("ℹ️  Primary strategy: no predictions available, skipping primary")
-		else:
-			print("ℹ️  Primary activation threshold not met, skipping advisory")
-
-		# Candidate pool: Gemini-ranked predictions, or Cloud predictions as a fallback
-		# for secondary strategies (parallel/reversal) when no prediction folder exists.
-		gemini_candidate_queue = _build_candidate_queue(predictions, advisory_candidates)
-		if predictions:
-			candidate_queue = gemini_candidate_queue
-		elif cloud_predictions_loaded:
-			print(f"ℹ️  No {prediction_source_label} predictions – Cloud Ollama predictions used as secondary candidate pool")
-			candidate_queue = _build_candidate_queue(cloud_predictions_loaded, [])
-		else:
-			candidate_queue = []
-		_log_candidate_queue(service_folder, candidate_queue)
-
-		# Primary trades only with the selected per-symbol prediction source.
-		if predictions and gemini_candidate_queue and _attempt_strategy_trade(
-			profile=primary_profile,
-			candidates=gemini_candidate_queue,
-			predictions_folder=predictions_folder,
-			service_folder=service_folder,
-			account_state=account_state,
-			open_positions=open_positions,
-			open_crypto_positions=open_crypto_positions,
-		):
-			print("\n" + "=" * 60)
-			print("✅ Final Trading Decision Completed")
-			print("=" * 60)
-			return True
-
-		secondary_profiles: List[Tuple[bool, StrategyExecutionProfile]] = [
-			(
-				parallel_activation_met,
-				StrategyExecutionProfile(
-					label="parallel",
-					context=get_parallel_strategy_context(),
-					signal_validator=validate_mean_reversion_signal,
-					risk_percent_env="PARALLEL_RISK_PER_TRADE_PERCENT",
-					stop_atr_multiplier_env="PARALLEL_SYNTHETIC_STOP_ATR_MULTIPLIER",
-					tp_r_multiple_env="PARALLEL_TAKE_PROFIT_R_MULTIPLIER",
-					max_trades_per_day_env="PARALLEL_MAX_TRADES_PER_DAY",
-					max_trades_per_symbol_per_day_env="PARALLEL_MAX_TRADES_PER_SYMBOL_PER_DAY",
-					trade_cooldown_env="PARALLEL_SYMBOL_TRADE_COOLDOWN_MINUTES",
-					default_trade_cooldown_minutes=30,
-					default_max_trades_per_symbol_per_day=1,
-				),
-			),
-		]
-		if is_reversal_strategy_enabled():
-			secondary_profiles.append(
-				(
-					can_activate_reversal_strategy(account_state, open_positions),
-					StrategyExecutionProfile(
-						label="reversal",
-						context=get_reversal_strategy_context(),
-						signal_validator=validate_reversal_pattern_signal,
-						risk_percent_env="REVERSAL_RISK_PER_TRADE_PERCENT",
-						stop_atr_multiplier_env="REVERSAL_SYNTHETIC_STOP_ATR_MULTIPLIER",
-						tp_r_multiple_env="REVERSAL_TAKE_PROFIT_R_MULTIPLIER",
-						max_trades_per_day_env="REVERSAL_MAX_TRADES_PER_DAY",
-						max_trades_per_symbol_per_day_env="REVERSAL_MAX_TRADES_PER_SYMBOL_PER_DAY",
-						trade_cooldown_env="REVERSAL_SYMBOL_TRADE_COOLDOWN_MINUTES",
-						default_trade_cooldown_minutes=60,
-						default_max_trades_per_symbol_per_day=1,
-					),
-				)
-			)
-
-		for activation_met, profile in secondary_profiles:
-			if activation_met:
-				if candidate_queue and _attempt_strategy_trade(
-					profile=profile,
-					candidates=candidate_queue,
-					predictions_folder=predictions_folder,
-					service_folder=service_folder,
-					account_state=account_state,
-					open_positions=open_positions,
-					open_crypto_positions=open_crypto_positions,
-				):
-					print("\n" + "=" * 60)
-					print("✅ Final Trading Decision Completed")
-					print("=" * 60)
-					return True
-				continue
-
-			print(f"⚠️  {profile.label.capitalize()} strategy activation gate not satisfied")
-			_log_trade_decision_audit(
-				service_folder,
-				strategy_id=profile.context.strategy_id,
-				strategy_label=profile.label,
-				stage="strategy_blocked",
-				trade_executed=False,
-				reason="activation_gate_not_satisfied",
-			)
-
+		reversal_profile = StrategyExecutionProfile(
+			label="reversal",
+			context=get_reversal_strategy_context(),
+			signal_validator=validate_reversal_pattern_signal,
+			risk_percent_env="REVERSAL_RISK_PER_TRADE_PERCENT",
+			stop_atr_multiplier_env="REVERSAL_SYNTHETIC_STOP_ATR_MULTIPLIER",
+			tp_r_multiple_env="REVERSAL_TAKE_PROFIT_R_MULTIPLIER",
+			max_trades_per_day_env="REVERSAL_MAX_TRADES_PER_DAY",
+			max_trades_per_symbol_per_day_env="REVERSAL_MAX_TRADES_PER_SYMBOL_PER_DAY",
+			trade_cooldown_env="REVERSAL_SYMBOL_TRADE_COOLDOWN_MINUTES",
+			default_trade_cooldown_minutes=60,
+			default_max_trades_per_symbol_per_day=1,
+		)
 		quant_profile = StrategyExecutionProfile(
 			label="quant",
 			context=get_quant_strategy_context(),
@@ -1913,24 +1783,188 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 			default_max_trades_per_day=8,
 			default_max_trades_per_symbol_per_day=2,
 		)
+
+		activation_margin_percent = _get_strategy_activation_margin_percent(account_state)
+		primary_activation_met = (
+			activation_margin_percent >= primary_profile.context.activation_margin_percent
+		)
+		parallel_enabled = is_parallel_strategy_enabled()
+		parallel_activation_met = parallel_enabled and can_activate_parallel_strategy(
+			account_state, open_positions
+		)
+		reversal_enabled = is_reversal_strategy_enabled()
+		reversal_activation_met = reversal_enabled and can_activate_reversal_strategy(
+			account_state, open_positions
+		)
 		quant_enabled = is_quant_strategy_enabled()
-		quant_activation_met = quant_enabled and can_activate_quant_strategy(account_state, open_positions)
-		if quant_activation_met and quant_candidates:
-			if _attempt_strategy_trade(
-				profile=quant_profile,
-				candidates=quant_candidates,
-				predictions_folder=predictions_folder,
-				service_folder=service_folder,
-				account_state=account_state,
+		quant_activation_met = quant_enabled and can_activate_quant_strategy(
+			account_state, open_positions
+		)
+		scalping_enabled = is_scalping_strategy_enabled()
+		scalping_activation_met = scalping_enabled and can_activate_scalping_strategy(
+			account_state, open_positions
+		)
+
+		primary_queues_ready = False
+		gemini_candidate_queue: List[RankedCandidate] = []
+		candidate_queue: List[RankedCandidate] = []
+
+		def _get_primary_candidate_queues() -> Tuple[List[RankedCandidate], List[RankedCandidate]]:
+			nonlocal primary_queues_ready, gemini_candidate_queue, candidate_queue
+			if primary_queues_ready:
+				return gemini_candidate_queue, candidate_queue
+
+			advisory_candidates: List[RankedCandidate] = []
+			if primary_activation_met and predictions:
+				advisory_candidates = _resolve_gemini_advisory_candidates(
+					predictions=predictions,
+					open_positions=open_positions,
+					account_state=account_state,
+					service_folder=service_folder,
+				)
+			elif primary_activation_met:
+				print("ℹ️  Primary strategy: no predictions available, skipping primary")
+			else:
+				print("ℹ️  Primary activation threshold not met, skipping advisory")
+
+			gemini_candidate_queue = _build_candidate_queue(predictions, advisory_candidates)
+			if predictions:
+				candidate_queue = gemini_candidate_queue
+			elif cloud_predictions_loaded:
+				print(
+					f"ℹ️  No {prediction_source_label} predictions – Cloud predictions "
+					"used as secondary candidate pool"
+				)
+				candidate_queue = _build_candidate_queue(cloud_predictions_loaded, [])
+			_log_candidate_queue(service_folder, candidate_queue)
+			primary_queues_ready = True
+			return gemini_candidate_queue, candidate_queue
+
+		def _try_cloud_strategy() -> bool:
+			cloud_predictions = cloud_predictions_loaded
+			print(f"\n☁️  Cloud Ollama: {len(cloud_predictions)} predikcí k dispozici")
+			if not cloud_predictions:
+				print("ℹ️  Cloud Ollama: žádné predikce, cloud slot přeskočen")
+				return False
+			cloud_advisory = _resolve_ollama_cloud_advisory_candidates(
+				predictions=cloud_predictions,
 				open_positions=open_positions,
-				open_crypto_positions=open_crypto_positions,
+				account_state=account_state,
+				service_folder=service_folder,
+			)
+			cloud_queue = _build_candidate_queue(cloud_predictions, cloud_advisory)
+			_log_candidate_queue(service_folder, cloud_queue)
+			return bool(
+				cloud_queue
+				and _attempt_strategy_trade(
+					profile=cloud_profile,
+					candidates=cloud_queue,
+					predictions_folder=cloud_preds_folder,
+					service_folder=service_folder,
+					account_state=account_state,
+					open_positions=open_positions,
+					open_crypto_positions=open_crypto_positions,
+				)
+			)
+
+		def _try_gemini_prediction_strategy() -> bool:
+			print(
+				f"\n🤖 Gemini final decision: {len(predictions)} "
+				f"{prediction_source_label} predikcí k dispozici"
+			)
+			if not predictions:
+				print(f"ℹ️  Gemini prediction: žádné {prediction_source_label} predikce, slot přeskočen")
+				return False
+			gemini_prediction_advisory: List[RankedCandidate] = []
+			if (
+				activation_margin_percent
+				>= gemini_prediction_profile.context.activation_margin_percent
 			):
-				print("\n" + "=" * 60)
-				print("✅ Final Trading Decision Completed")
-				print("=" * 60)
-				return True
-		elif quant_enabled:
-			reason = "no_quant_candidates" if quant_activation_met and not quant_candidates else "activation_gate_not_satisfied"
+				gemini_prediction_advisory = _resolve_gemini_advisory_candidates(
+					predictions=predictions,
+					open_positions=open_positions,
+					account_state=account_state,
+					service_folder=service_folder,
+				)
+			gemini_prediction_queue = _build_candidate_queue(
+				predictions, gemini_prediction_advisory
+			)
+			_log_candidate_queue(service_folder, gemini_prediction_queue)
+			return bool(
+				gemini_prediction_queue
+				and _attempt_strategy_trade(
+					profile=gemini_prediction_profile,
+					candidates=gemini_prediction_queue,
+					predictions_folder=predictions_folder,
+					service_folder=service_folder,
+					account_state=account_state,
+					open_positions=open_positions,
+					open_crypto_positions=open_crypto_positions,
+				)
+			)
+
+		def _try_primary_strategy() -> bool:
+			if not predictions:
+				return False
+			primary_candidates, _ = _get_primary_candidate_queues()
+			return bool(
+				primary_candidates
+				and _attempt_strategy_trade(
+					profile=primary_profile,
+					candidates=primary_candidates,
+					predictions_folder=predictions_folder,
+					service_folder=service_folder,
+					account_state=account_state,
+					open_positions=open_positions,
+					open_crypto_positions=open_crypto_positions,
+				)
+			)
+
+		def _try_secondary_strategy(
+			profile: StrategyExecutionProfile,
+			activation_met: bool,
+		) -> bool:
+			if not activation_met:
+				print(f"⚠️  {profile.label.capitalize()} strategy activation gate not satisfied")
+				_log_trade_decision_audit(
+					service_folder,
+					strategy_id=profile.context.strategy_id,
+					strategy_label=profile.label,
+					stage="strategy_blocked",
+					trade_executed=False,
+					reason="activation_gate_not_satisfied",
+				)
+				return False
+			_, secondary_candidates = _get_primary_candidate_queues()
+			return bool(
+				secondary_candidates
+				and _attempt_strategy_trade(
+					profile=profile,
+					candidates=secondary_candidates,
+					predictions_folder=predictions_folder,
+					service_folder=service_folder,
+					account_state=account_state,
+					open_positions=open_positions,
+					open_crypto_positions=open_crypto_positions,
+				)
+			)
+
+		def _try_quant_strategy() -> bool:
+			if quant_activation_met and quant_candidates:
+				return _attempt_strategy_trade(
+					profile=quant_profile,
+					candidates=quant_candidates,
+					predictions_folder=predictions_folder,
+					service_folder=service_folder,
+					account_state=account_state,
+					open_positions=open_positions,
+					open_crypto_positions=open_crypto_positions,
+				)
+			reason = (
+				"no_quant_candidates"
+				if quant_activation_met and not quant_candidates
+				else "activation_gate_not_satisfied"
+			)
 			_log_trade_decision_audit(
 				service_folder,
 				strategy_id=quant_profile.context.strategy_id,
@@ -1939,45 +1973,133 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				trade_executed=False,
 				reason=reason,
 			)
+			return False
 
-		# ── Šestá záloha: Liquidity Sweep Scalping ───────────────────────────
-		# Aktivuje se jako poslední, pokud žádná předchozí strategie nenašla obchod.
-		# Podmínka: volná marže > SCALP_ACTIVATION_MARGIN_PERCENT (výchozí 5 %).
-		scalping_enabled = is_scalping_strategy_enabled()
-		scalping_activation_met = scalping_enabled and can_activate_scalping_strategy(
-			account_state, open_positions
-		)
-		if scalping_activation_met:
-			print("ℹ️  Scalping strategie: aktivována (poslední fallback)")
+		def _try_scalping_strategy() -> bool:
+			if not scalping_activation_met:
+				print(
+					"⚠️  Scalping strategie: aktivační podmínka nesplněna "
+					"(marže příliš nízká nebo plný limit pozic)"
+				)
+				_log_trade_decision_audit(
+					service_folder,
+					strategy_id=get_scalping_strategy_context().strategy_id,
+					strategy_label="scalping",
+					stage="strategy_blocked",
+					trade_executed=False,
+					reason="activation_gate_not_satisfied",
+				)
+				return False
 			try:
 				_scalp_ctx = ScalpingAppContext(service_folder=service_folder)
-				_scalp_strategy = LiquiditySweepScalpingStrategy(_scalp_ctx)
-				if _scalp_strategy.run():
-					print("\n" + "=" * 60)
-					print("✅ Final Trading Decision Completed (Scalping)")
-					print("=" * 60)
-					return True
+				return LiquiditySweepScalpingStrategy(_scalp_ctx).run()
 			except Exception as _scalp_exc:
 				print(f"❌ Scalping strategy error: {_scalp_exc}")
 				_log_trade_decision_audit(
 					service_folder,
-					strategy_id="liquidity_sweep_scalping",
+					strategy_id=get_scalping_strategy_context().strategy_id,
 					strategy_label="scalping",
 					stage="strategy_error",
 					trade_executed=False,
 					reason="exception",
 					details={"error": str(_scalp_exc)},
 				)
-		elif scalping_enabled:
-			print("⚠️  Scalping strategie: aktivační podmínka nesplněna (marže příliš nízká nebo plný limit pozic)")
-			_log_trade_decision_audit(
-				service_folder,
-				strategy_id="liquidity_sweep_scalping",
-				strategy_label="scalping",
-				stage="strategy_blocked",
-				trade_executed=False,
-				reason="activation_gate_not_satisfied",
+				return False
+
+		strategy_attempts = [
+			StrategyAttempt(
+				strategy_id=primary_profile.context.strategy_id,
+				label=primary_profile.label,
+				run=_try_primary_strategy,
 			)
+		]
+		if is_ollama_cloud_enabled():
+			strategy_attempts.append(
+				StrategyAttempt(
+					strategy_id=cloud_profile.context.strategy_id,
+					label=cloud_profile.label,
+					run=_try_cloud_strategy,
+				)
+			)
+		if is_gemini_prediction_strategy_enabled():
+			strategy_attempts.append(
+				StrategyAttempt(
+					strategy_id=gemini_prediction_profile.context.strategy_id,
+					label=gemini_prediction_profile.label,
+					run=_try_gemini_prediction_strategy,
+				)
+			)
+		if parallel_enabled:
+			strategy_attempts.append(
+				StrategyAttempt(
+					strategy_id=parallel_profile.context.strategy_id,
+					label=parallel_profile.label,
+					run=lambda: _try_secondary_strategy(
+						parallel_profile, parallel_activation_met
+					),
+				)
+			)
+		if reversal_enabled:
+			strategy_attempts.append(
+				StrategyAttempt(
+					strategy_id=reversal_profile.context.strategy_id,
+					label=reversal_profile.label,
+					run=lambda: _try_secondary_strategy(
+						reversal_profile, reversal_activation_met
+					),
+				)
+			)
+		if quant_enabled:
+			strategy_attempts.append(
+				StrategyAttempt(
+					strategy_id=quant_profile.context.strategy_id,
+					label=quant_profile.label,
+					run=_try_quant_strategy,
+				)
+			)
+		if scalping_enabled:
+			strategy_attempts.append(
+				StrategyAttempt(
+					strategy_id=get_scalping_strategy_context().strategy_id,
+					label="scalping",
+					run=_try_scalping_strategy,
+				)
+			)
+
+		ordered_attempts, strategy_losses = _order_strategy_attempts(
+			service_folder, strategy_attempts
+		)
+		priority_rows = [
+			{
+				"strategy_id": attempt.strategy_id,
+				"historical_loss": str(
+					strategy_losses.get(attempt.strategy_id, Decimal("0"))
+				),
+			}
+			for attempt in ordered_attempts
+		]
+		print(
+			"📊 Strategie podle historické ztráty: "
+			+ " → ".join(
+				f"{row['strategy_id']} ({row['historical_loss']})"
+				for row in priority_rows
+			)
+		)
+		_log_jsonl(
+			service_folder,
+			"decision_log.jsonl",
+			{
+				"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+				"event": "strategy_priority_order",
+				"order": priority_rows,
+			},
+		)
+		for attempt in ordered_attempts:
+			if attempt.run():
+				print("\n" + "=" * 60)
+				print(f"✅ Final Trading Decision Completed ({attempt.label})")
+				print("=" * 60)
+				return True
 
 		print("❌ No strategy found an executable trade in this cycle")
 		_log_trade_decision_audit(

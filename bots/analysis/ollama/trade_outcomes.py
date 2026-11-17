@@ -7,6 +7,7 @@ import json
 import os
 import threading
 from datetime import datetime, timedelta, timezone
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -427,3 +428,38 @@ def process_closed_trade_outcomes(
 ) -> int:
 	with _STATE_LOCK:
 		return _process_closed_trade_outcomes(service_folder, now_utc=now_utc)
+
+
+def load_strategy_loss_totals(service_folder: Path) -> Dict[str, Decimal]:
+	"""Return each strategy's cumulative realized net losses from closed positions."""
+	outcome_path = _trade_logs_dir(service_folder) / OUTCOME_FILE_NAME
+	if not outcome_path.exists():
+		return {}
+
+	loss_totals: Dict[str, Decimal] = {}
+	try:
+		with open(outcome_path, "r", newline="", encoding="utf-8") as handle:
+			for line_number, row in enumerate(csv.DictReader(handle), start=2):
+				strategy_id = str(row.get("strategy_id", "")).strip()
+				if not strategy_id:
+					raise RuntimeError(
+						f"Missing strategy_id in closed trade outcomes at line {line_number}"
+					)
+				try:
+					net_profit = Decimal(str(row.get("net_profit", "")).strip())
+				except InvalidOperation as exc:
+					raise RuntimeError(
+						f"Invalid net_profit in closed trade outcomes at line {line_number}"
+					) from exc
+				if not net_profit.is_finite():
+					raise RuntimeError(
+						f"Invalid net_profit in closed trade outcomes at line {line_number}"
+					)
+				if net_profit < 0:
+					loss_totals[strategy_id] = (
+						loss_totals.get(strategy_id, Decimal("0")) - net_profit
+					)
+	except (OSError, csv.Error) as exc:
+		raise RuntimeError(f"Could not read closed trade outcomes {outcome_path}: {exc}") from exc
+
+	return loss_totals
