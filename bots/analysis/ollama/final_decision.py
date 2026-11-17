@@ -6,6 +6,8 @@ import csv
 import json
 import os
 import sys
+from collections import Counter
+from contextvars import ContextVar
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
@@ -71,6 +73,11 @@ from trade_outcomes import load_strategy_loss_totals
 from trading_validation import check_margin_requirements, validate_symbol
 
 import MetaTrader5 as mt5
+
+
+_strategy_audit_events: ContextVar[Optional[List[Dict]]] = ContextVar(
+	"strategy_audit_events", default=None
+)
 
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -421,6 +428,11 @@ def _update_trade_decision_snapshot(
 	reason: str,
 	details: Optional[Dict[str, object]],
 ) -> None:
+	audit_events = _strategy_audit_events.get()
+	if audit_events is not None and stage in {
+		"candidate_rejected", "candidate_skipped", "strategy_blocked", "strategy_error",
+	}:
+		audit_events.append({"stage": stage, "reason": reason, "details": details or {}})
 	log_dir = service_folder / "trade_logs"
 	log_dir.mkdir(parents=True, exist_ok=True)
 	log_file = log_dir / "trade_decision_snapshot.csv"
@@ -747,6 +759,57 @@ class StrategyAttempt:
 	strategy_id: str
 	label: str
 	run: Callable[[], bool]
+
+
+def _run_strategy_attempt_with_summary(
+	service_folder: Path,
+	attempt: StrategyAttempt,
+	next_strategy_id: Optional[str],
+) -> bool:
+	events: List[Dict] = []
+	token = _strategy_audit_events.set(events)
+	print(f"\n▶ Strategie: {attempt.strategy_id}")
+	try:
+		trade_executed = attempt.run()
+	finally:
+		_strategy_audit_events.reset(token)
+
+	stages = Counter(event["stage"] for event in events)
+	reasons: Counter[str] = Counter()
+	for event in events:
+		codes = event["details"].get("reason_codes") or [event["reason"]]
+		reasons.update(codes)
+	fallback_to = next_strategy_id if not trade_executed else None
+	_log_jsonl(
+		service_folder,
+		"decision_log.jsonl",
+		{
+			"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+			"event": "strategy_attempt_summary",
+			"strategy_id": attempt.strategy_id,
+			"trade_executed": trade_executed,
+			"rejected_candidates": stages["candidate_rejected"],
+			"skipped_candidates": stages["candidate_skipped"],
+			"blocked": stages["strategy_blocked"] > 0,
+			"reason_counts": dict(reasons),
+			"fallback_to": fallback_to,
+		},
+	)
+	print(
+		f"Souhrn {attempt.strategy_id}: obchod {'ANO' if trade_executed else 'NE'}, "
+		f"zamitnuto {stages['candidate_rejected']}, preskoceno {stages['candidate_skipped']}."
+	)
+	for reason, count in reasons.most_common():
+		explanation = RULE_REASON_TEXT_CS.get(reason, _translate_reason_cs(reason))
+		print(f"  {count}x {reason}: {explanation}")
+	if not trade_executed:
+		if not reasons:
+			print("  Strategie neotevrela obchod; podrobny duvod nebyl zaznamenan.")
+		if fallback_to is not None:
+			print(f"Fallback: {attempt.strategy_id} → {fallback_to}")
+		else:
+			print("Fallback vycerpan: dalsi aktivni strategie uz neni k dispozici.")
+	return trade_executed
 
 
 def _order_strategy_attempts(
@@ -2094,8 +2157,13 @@ def make_final_trading_decision(predictions_folder: Optional[Path], service_fold
 				"order": priority_rows,
 			},
 		)
-		for attempt in ordered_attempts:
-			if attempt.run():
+		for index, attempt in enumerate(ordered_attempts):
+			next_strategy_id = (
+				ordered_attempts[index + 1].strategy_id
+				if index + 1 < len(ordered_attempts)
+				else None
+			)
+			if _run_strategy_attempt_with_summary(service_folder, attempt, next_strategy_id):
 				print("\n" + "=" * 60)
 				print(f"✅ Final Trading Decision Completed ({attempt.label})")
 				print("=" * 60)

@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import csv
+import io
 import json
 import os
 import tempfile
 import unittest
+from contextlib import redirect_stdout
 from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
@@ -18,6 +20,8 @@ from final_decision import (
 	_get_gemini_rejection_cooldown_minutes,
 	_is_candidate_rejected,
 	_order_strategy_attempts,
+	_log_trade_decision_audit,
+	_run_strategy_attempt_with_summary,
 	_record_candidate_rejection,
 	_resolve_trade_parameters,
 	make_final_trading_decision,
@@ -34,6 +38,73 @@ class FinalDecisionRetryTests(unittest.TestCase):
 			patcher = patch(target, return_value=value)
 			patcher.start()
 			self.addCleanup(patcher.stop)
+
+	def test_fallback_summary_counts_current_attempt_rejections_and_skips(self) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			service_folder = Path(temp_dir)
+
+			def reject_candidates():
+				for symbol, stage, reason, details in (
+					("XPTUSD", "candidate_rejected", "signal_rejected", {"reason_codes": ["spread_above_limit"]}),
+					("XAUUSD", "candidate_rejected", "signal_rejected", {"reason_codes": ["spread_above_limit"]}),
+					("EURGBP", "candidate_skipped", "open_position_exists", {}),
+				):
+					_log_trade_decision_audit(
+						service_folder, strategy_id="gemini_prediction",
+						strategy_label="gemini_prediction", symbol=symbol,
+						stage=stage, trade_executed=False, reason=reason, details=details,
+					)
+				return False
+
+			output = io.StringIO()
+			with redirect_stdout(output):
+				result = _run_strategy_attempt_with_summary(
+					service_folder,
+					StrategyAttempt("gemini_prediction", "gemini_prediction", reject_candidates),
+					"quant_math",
+				)
+				success = _run_strategy_attempt_with_summary(
+					service_folder, StrategyAttempt("quant_math", "quant", lambda: True), "unused",
+				)
+			records = [
+				json.loads(line) for line in
+				(service_folder / "trade_logs" / "decision_log.jsonl").read_text(encoding="utf-8").splitlines()
+			]
+
+		self.assertFalse(result)
+		self.assertTrue(success)
+		self.assertEqual(records[0]["rejected_candidates"], 2)
+		self.assertEqual(records[0]["skipped_candidates"], 1)
+		self.assertEqual(records[0]["reason_counts"], {"spread_above_limit": 2, "open_position_exists": 1})
+		self.assertEqual(records[0]["fallback_to"], "quant_math")
+		self.assertEqual(records[1]["reason_counts"], {})
+		self.assertIsNone(records[1]["fallback_to"])
+		self.assertIn("gemini_prediction → quant_math", output.getvalue())
+
+	def test_last_blocked_strategy_reports_exhausted_fallback(self) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			service_folder = Path(temp_dir)
+
+			def blocked():
+				_log_trade_decision_audit(
+					service_folder, strategy_id="quant_math", strategy_label="quant",
+					stage="strategy_blocked", trade_executed=False, reason="daily_trade_limit_reached",
+				)
+				return False
+
+			output = io.StringIO()
+			with redirect_stdout(output):
+				self.assertFalse(_run_strategy_attempt_with_summary(
+					service_folder, StrategyAttempt("quant_math", "quant", blocked), None,
+				))
+			record = json.loads(
+				(service_folder / "trade_logs" / "decision_log.jsonl").read_text(encoding="utf-8")
+			)
+
+		self.assertTrue(record["blocked"])
+		self.assertEqual(record["reason_counts"], {"daily_trade_limit_reached": 1})
+		self.assertIsNone(record["fallback_to"])
+		self.assertIn("Fallback vycerpan", output.getvalue())
 
 	def test_advisory_cache_is_separate_for_each_ai_provider(self) -> None:
 		account_state = {"balance": 5000.0, "equity": 5000.0}

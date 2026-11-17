@@ -84,6 +84,8 @@ Jde o sedm možných vstupních profilů, nikoli o pořadí volání AI. Vypnut�
 
 Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudových predikcí a bez quant kandidátů, může zkusit rovnou scalping. To neznamená, že jej hlavní plánovač volá v každém cyklu bez predikcí: bez běžné predikční složky i cloudových JSON souborů rozhodovací fázi přeskočí.
 
+Po každé vyzkoušené strategii se v konzoli zobrazí souhrn zamítnutých a přeskočených kandidátů, počty jednotlivých důvodů a přechod na další strategii. Stejná data se ukládají do `trade_logs/decision_log.jsonl` jako `strategy_attempt_summary` s `reason_counts` a `fallback_to`. Po úspěšném obchodu se další strategie nezkouší; pokud neuspěje ani poslední, výpis oznámí vyčerpání fallbacku. Jeden kandidát může nesplnit více pravidel, takže součet počtů důvodů může být vyšší než počet kandidátů. Pořadí ani vstupní a rizikové filtry se tím nemění.
+
 ## Role AI
 
 ### Ollama Cloud (vlastní strategie i advisory)
