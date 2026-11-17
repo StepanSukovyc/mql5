@@ -108,6 +108,8 @@ Pokud je `final_decision.py` zavolána bez použitelných běžných i cloudový
 - Argon dostává `thinking_level=MEDIUM`, bez nepodporovaného `thinking_budget`. Pro predikci i advisory má limit alespoň `8192` výstupních tokenů včetně thinking; nejde o záruku dokončení každého reasoning požadavku. Gemini 2.5 Flash zachovává původní SDK budget `0` a limity `512`/`768`
 - primární pokus používá nakonfigurovaný Vertex model. Pokud jsou nastavené `GEMINI_API_KEY` a `GEMINI_URL`, při chybě následuje API-key REST fallback (aktuálně Gemini 2.5 Flash), který nezaručuje evropské zpracování. Bez obou hodnot zůstávají retry a případný REST fallback na Vertex se service account autentizací
 - úspěšný SDK požadavek loguje skutečný `model`, `region`, `transport=google-genai-sdk`, thinking nastavení a tokenový limit; API-key fallback loguje `transport=legacy-gemini-api`. Pouhý úspěch cyklu tedy není důkaz použití Argonu
+- selhání každého Vertex/REST/API-key transportního pokusu se zapisuje do `trade_logs/gemini_request_errors.jsonl` včetně statusu, modelu, regionu a diagnostiky; konečné selhání advisory se navíc zapisuje do `trade_logs/gemini_decision_failures.jsonl`
+- HTTP 429 už nezpůsobí lokální pozastavení Gemini do půlnoci; další požadavky může nadále odmítnout samotný Google Cloud/Vertex kvůli svým limitům
 - nadále slouží jako **upstream predikční vrstva** — generuje per-symbol market analýzu (BUY/SELL% + reasoning)
 - tyto predikce jsou vstupem pro `gemini_prediction` a primární profil; vlastní Cloud Ollama profil používá své cloudové predikce
 - finální výběr (advisory ranking) už Gemini neprovádí

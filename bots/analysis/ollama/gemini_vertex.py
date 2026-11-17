@@ -195,6 +195,17 @@ def _import_google_auth():
 def _log_event(event: str, **payload: Any) -> None:
 	message = {"event": event, **payload}
 	print(f"  🧠 Gemini Vertex: {json.dumps(message, ensure_ascii=False, sort_keys=True, default=str)}")
+	if event != "error":
+		return
+
+	log_payload = {"timestamp": datetime.now(tz=timezone.utc).isoformat(), **message}
+	try:
+		log_dir = _get_trade_logs_dir()
+		log_dir.mkdir(parents=True, exist_ok=True)
+		with open(log_dir / "gemini_request_errors.jsonl", "a", encoding="utf-8") as handle:
+			handle.write(json.dumps(log_payload, ensure_ascii=False, sort_keys=True, default=str) + "\n")
+	except OSError as exc:
+		print(f"  ⚠️ Gemini error log write failed: {exc}")
 
 
 def _get_trade_logs_dir() -> Path:
@@ -871,13 +882,14 @@ def _request_structured_json(
 							project=config.project,
 							region=config.region,
 							model=model_name,
+							error_type=type(rest_exc).__name__,
 							fallback_model=(model_name != config.model),
 							fallback_position=model_index,
 							attempt=attempt,
 							duration_ms=round((time.perf_counter() - started_at) * 1000, 2),
 							transport="vertex-rest-fallback",
 							status_code=rest_exc.status_code,
-							error_snippet=_extract_text_snippet(str(rest_exc), limit=320),
+							error_snippet=_extract_text_snippet(str(rest_exc), limit=1000),
 						)
 						message = str(rest_exc)
 						status_code = rest_exc.status_code
@@ -903,14 +915,15 @@ def _request_structured_json(
 					project=config.project,
 					region=config.region,
 					model=model_name,
+					error_type=type(exc).__name__,
 					fallback_model=(model_name != config.model),
 					fallback_position=model_index,
 					attempt=attempt,
 					duration_ms=duration_ms,
 					transport="google-genai-sdk",
 					status_code=status_code,
-					response_snippet=_extract_text_snippet(response_text),
-					error_snippet=_extract_text_snippet(message),
+					response_snippet=_extract_text_snippet(response_text, limit=1000),
+					error_snippet=_extract_text_snippet(message, limit=1000),
 				)
 				skip_remaining_vertex_models = _should_skip_remaining_vertex_models(status_code, message)
 				if attempt < max_attempts_per_model and not skip_remaining_vertex_models:
@@ -966,13 +979,14 @@ def _request_structured_json(
 				project=config.project,
 				region=config.region,
 				model="gemini-api-key",
+				error_type=type(legacy_exc).__name__,
 				fallback_model=True,
 				fallback_position=len(vertex_models) + 1,
 				attempt=1,
 				duration_ms=duration_ms,
 				transport="legacy-gemini-api",
 				status_code=legacy_exc.status_code,
-				error_snippet=_extract_text_snippet(str(legacy_exc), limit=320),
+				error_snippet=_extract_text_snippet(str(legacy_exc), limit=1000),
 			)
 			last_error = legacy_exc
 

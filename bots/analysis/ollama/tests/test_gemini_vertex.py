@@ -2,15 +2,20 @@
 
 from __future__ import annotations
 
+import io
 import unittest
 import json
 import os
+import tempfile
+from contextlib import redirect_stdout
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
 from gemini_config import GeminiVertexConfig
 from gemini_vertex import (
 	GeminiVertexRequestError,
+	_log_event,
 	_get_legacy_prompt_with_schema,
 	_normalize_legacy_gemini_api_url,
 	_parse_structured_json_response,
@@ -23,6 +28,64 @@ from gemini_vertex import (
 	request_prediction_json,
 	request_stop_loss_decision,
 )
+
+
+class GeminiEventLoggingTests(unittest.TestCase):
+	def test_error_events_are_persisted_with_diagnostic_fields(self) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			log_dir = Path(temp_dir)
+			with patch("gemini_vertex._get_trade_logs_dir", return_value=log_dir), patch("builtins.print"):
+				_log_event(
+					"error",
+					task="final_decision",
+					project="test-project",
+					region="europe-west1",
+					model="gemini-test",
+					transport="google-genai-sdk",
+					status_code=429,
+					error_snippet="RESOURCE_EXHAUSTED",
+				)
+
+			log_path = log_dir / "gemini_request_errors.jsonl"
+			record = json.loads(log_path.read_text(encoding="utf-8").splitlines()[0])
+
+		self.assertTrue(record["timestamp"])
+		self.assertEqual(record["event"], "error")
+		self.assertEqual(record["status_code"], 429)
+		self.assertEqual(record["project"], "test-project")
+		self.assertEqual(record["region"], "europe-west1")
+		self.assertEqual(record["model"], "gemini-test")
+		self.assertEqual(record["transport"], "google-genai-sdk")
+		self.assertEqual(record["error_snippet"], "RESOURCE_EXHAUSTED")
+
+
+class GeminiFinalDecisionFailureTests(unittest.TestCase):
+	def test_429_is_logged_without_suspending_the_next_request(self) -> None:
+		from gemini_decision import ask_gemini_final_decision
+
+		failure = GeminiVertexRequestError("RESOURCE_EXHAUSTED: rate limit", status_code=429)
+		success = '{"recommended_symbol":"EURUSD_ecn","action":"BUY","reasoning":"ok"}'
+		with tempfile.TemporaryDirectory() as temp_dir:
+			with patch.dict(os.environ, {"SERVICE_DEST_FOLDER": temp_dir}, clear=False):
+				with patch(
+					"gemini_decision.request_final_decision_json",
+					side_effect=[failure, success],
+				) as mock_request:
+					with redirect_stdout(io.StringIO()):
+						first = ask_gemini_final_decision([], [], {}, SimpleNamespace())
+						second = ask_gemini_final_decision([], [], {}, SimpleNamespace())
+
+			log_path = Path(temp_dir) / "trade_logs" / "gemini_decision_failures.jsonl"
+			record = json.loads(log_path.read_text(encoding="utf-8").splitlines()[0])
+
+		self.assertIsNone(first)
+		self.assertEqual(second, success)
+		self.assertEqual(mock_request.call_count, 2)
+		self.assertTrue(record["timestamp"])
+		self.assertEqual(record["event"], "final_decision_failed")
+		self.assertEqual(record["status_code"], 429)
+		self.assertEqual(record["error_type"], "GeminiVertexRequestError")
+		self.assertIn("RESOURCE_EXHAUSTED", record["error"])
 
 
 class StopLossDecisionTests(unittest.TestCase):

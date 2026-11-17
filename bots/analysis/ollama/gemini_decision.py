@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -14,9 +14,6 @@ from instrument_utils import (
 	get_crypto_prediction_threshold,
 	is_crypto_symbol,
 )
-
-
-_gemini_suspended_until: Optional[datetime] = None
 
 
 def clean_gemini_response(text: str) -> str:
@@ -71,6 +68,33 @@ def load_predictions(predictions_folder: Path, *, require_threshold: bool = True
 	return predictions
 
 
+def _log_final_decision_failure(exc: Exception) -> None:
+	status_code = getattr(exc, "status_code", None)
+	if not isinstance(status_code, int):
+		status_code = None
+	error_message = " ".join(str(exc).split())[:1000]
+	payload = {
+		"timestamp": datetime.now(tz=timezone.utc).isoformat(),
+		"event": "final_decision_failed",
+		"task": "final_decision",
+		"error_type": type(exc).__name__,
+		"status_code": status_code,
+		"error": error_message,
+	}
+	service_dest_folder = (os.getenv("SERVICE_DEST_FOLDER") or "").strip()
+	log_dir = (
+		Path(service_dest_folder) / "trade_logs"
+		if service_dest_folder
+		else Path(__file__).resolve().parent / "trade_logs"
+	)
+	try:
+		log_dir.mkdir(parents=True, exist_ok=True)
+		with open(log_dir / "gemini_decision_failures.jsonl", "a", encoding="utf-8") as handle:
+			handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
+	except OSError as log_exc:
+		print(f"  ⚠️ Gemini decision failure log write failed: {log_exc}")
+
+
 def ask_gemini_final_decision(
 	predictions: List[Dict],
 	open_positions: List[Dict],
@@ -80,19 +104,6 @@ def ask_gemini_final_decision(
 	trade_number: Optional[int] = None,
 ) -> Optional[str]:
 	"""Ask Gemini AI for a final trading decision based on predictions and account state."""
-	global _gemini_suspended_until
-
-	if _gemini_suspended_until is not None:
-		now = datetime.now(tz=timezone.utc)
-		if now < _gemini_suspended_until:
-			remaining = (_gemini_suspended_until - now).total_seconds() / 3600
-			print(f"  ⏸️  Gemini suspended until {_gemini_suspended_until.isoformat()}")
-			print(f"     Remaining: {remaining:.1f} hours")
-			return None
-
-		print("  ✅ Gemini suspension lifted")
-		_gemini_suspended_until = None
-
 	if excluded_symbols:
 		filtered_predictions = [p for p in predictions if p.get("symbol") not in excluded_symbols]
 		print(f"  🔍 Excluded {len(excluded_symbols)} symbols: {excluded_symbols}")
@@ -196,19 +207,10 @@ Vrať pouze strukturovaný JSON objekt dle předepsaného schématu. Bez markdow
 
 	except GeminiVertexRequestError as exc:
 		print("  ℹ️  Finální decision request skončil chybou po všech fallback větvích")
-		if exc.status_code == 429:
-			now = datetime.now(tz=timezone.utc)
-			tomorrow = now + timedelta(days=1)
-			midnight_tomorrow = tomorrow.replace(hour=0, minute=0, second=0, microsecond=0)
-			_gemini_suspended_until = midnight_tomorrow
-
-			hours_until = (midnight_tomorrow - now).total_seconds() / 3600
-			print("  🚫 Quota překročena!")
-			print(f"  ⏸️  Gemini suspended until {midnight_tomorrow.isoformat()}")
-			print(f"     Suspension duration: {hours_until:.1f} hours")
-			return None
-		print(f"  ❌ HTTP chyba při dotazu na Gemini: {exc}")
+		_log_final_decision_failure(exc)
+		print(f"  ❌ HTTP chyba při dotazu na Gemini (status {exc.status_code}): {exc}")
 		return None
 	except Exception as exc:
+		_log_final_decision_failure(exc)
 		print(f"  ❌ Chyba při dotazu na Gemini: {exc}")
 		return None
