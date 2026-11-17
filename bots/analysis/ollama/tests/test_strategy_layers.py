@@ -19,6 +19,7 @@ from profit_protection_strategy import (
 	is_position_under_profit_protection,
 	run_profit_protection_strategy_if_due,
 )
+from liquidity_sweep_scalping_strategy import LiquiditySweepScalpingStrategy, _parse_session_env
 from quant_math_strategy import validate_quant_signal
 from reversal_pattern_strategy import can_activate_reversal_strategy, validate_reversal_pattern_signal
 from risk_engine import calculate_synthetic_risk_plan
@@ -508,6 +509,47 @@ class StrategyOwnershipTests(unittest.TestCase):
 		self.assertTrue(allowed)
 		self.assertFalse(blocked_after_cutoff)
 		self.assertFalse(blocked_before_session)
+
+	@patch.dict(
+		os.environ,
+		{
+			"PRIMARY_SESSION_START_HOUR_PRAGUE": "0",
+			"PRIMARY_SESSION_START_MINUTE_PRAGUE": "5",
+			"PRIMARY_SESSION_END_HOUR_UTC": "20",
+			"PRIMARY_FRIDAY_CUTOFF_HOUR_UTC": "24",
+		},
+		clear=True,
+	)
+	def test_prague_session_start_observes_minutes_and_dst(self) -> None:
+		primary = get_primary_strategy_context()
+
+		self.assertFalse(is_strategy_trade_window_open(primary, datetime(2026, 1, 14, 23, 4, tzinfo=timezone.utc)))
+		self.assertTrue(is_strategy_trade_window_open(primary, datetime(2026, 1, 14, 23, 5, tzinfo=timezone.utc)))
+		self.assertFalse(is_strategy_trade_window_open(primary, datetime(2026, 7, 14, 22, 4, tzinfo=timezone.utc)))
+		self.assertTrue(is_strategy_trade_window_open(primary, datetime(2026, 7, 14, 22, 5, tzinfo=timezone.utc)))
+		self.assertFalse(is_strategy_trade_window_open(primary, datetime(2026, 1, 15, 20, 0, tzinfo=timezone.utc)))
+
+	@patch.dict(
+		os.environ,
+		{
+			"SCALP_SESSION_LONDON_START_HOUR_PRAGUE": "0",
+			"SCALP_SESSION_LONDON_START_MINUTE_PRAGUE": "5",
+		},
+		clear=False,
+	)
+	def test_scalping_session_start_uses_prague_time_and_wraps_utc_day(self) -> None:
+		session = _parse_session_env("LONDON", 7, 0, 11, 0)
+		strategy = LiquiditySweepScalpingStrategy.__new__(LiquiditySweepScalpingStrategy)
+		strategy._cfg = {
+			"use_session_filter": True,
+			"friday_cutoff_hour_utc": 16,
+			"sessions": [session],
+		}
+
+		self.assertFalse(strategy.passes_session_filter(datetime(2026, 1, 14, 23, 4, tzinfo=timezone.utc)))
+		self.assertTrue(strategy.passes_session_filter(datetime(2026, 1, 14, 23, 5, tzinfo=timezone.utc)))
+		self.assertFalse(strategy.passes_session_filter(datetime(2026, 7, 14, 22, 4, tzinfo=timezone.utc)))
+		self.assertTrue(strategy.passes_session_filter(datetime(2026, 7, 14, 22, 5, tzinfo=timezone.utc)))
 
 
 class ProfitProtectionTests(unittest.TestCase):

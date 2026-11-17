@@ -88,6 +88,7 @@ from strategy_context import (
 	build_strategy_comment,
 	count_open_positions_for_strategy,
 	position_belongs_to_strategy,
+	prague_local_time_to_utc_minute,
 )
 from trade_execution import close_position_by_ticket, execute_trade
 
@@ -164,12 +165,13 @@ class SignalContext:
 
 @dataclass(frozen=True)
 class _TradingSession:
-	"""Obchodní seance definovaná v UTC hodinách a minutách."""
+	"""Obchodní seance s pražským nebo UTC začátkem a UTC koncem."""
 	name: str
 	start_hour: int
 	start_minute: int
 	end_hour: int
 	end_minute: int
+	start_is_prague: bool = False
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -177,12 +179,21 @@ class _TradingSession:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _parse_session_env(name: str, sh: int, sm: int, eh: int, em: int) -> _TradingSession:
+	prague_start_hour_name = f"SCALP_SESSION_{name}_START_HOUR_PRAGUE"
+	start_is_prague = os.getenv(prague_start_hour_name) is not None
+	start_hour_name = prague_start_hour_name if start_is_prague else f"SCALP_SESSION_{name}_START_HOUR_UTC"
+	start_minute_name = (
+		f"SCALP_SESSION_{name}_START_MINUTE_PRAGUE"
+		if start_is_prague
+		else f"SCALP_SESSION_{name}_START_MINUTE_UTC"
+	)
 	return _TradingSession(
 		name=name,
-		start_hour=get_int_env(f"SCALP_SESSION_{name}_START_HOUR_UTC", sh),
-		start_minute=get_int_env(f"SCALP_SESSION_{name}_START_MINUTE_UTC", sm),
+		start_hour=get_int_env(start_hour_name, sh),
+		start_minute=get_int_env(start_minute_name, sm),
 		end_hour=get_int_env(f"SCALP_SESSION_{name}_END_HOUR_UTC", eh),
 		end_minute=get_int_env(f"SCALP_SESSION_{name}_END_MINUTE_UTC", em),
+		start_is_prague=start_is_prague,
 	)
 
 
@@ -1399,9 +1410,15 @@ class LiquiditySweepScalpingStrategy:
 
 		now_mins = timestamp_utc.hour * 60 + timestamp_utc.minute
 		for s in sessions:
-			start_mins = s.start_hour * 60 + s.start_minute
+			start_mins = (
+				prague_local_time_to_utc_minute(timestamp_utc, s.start_hour, s.start_minute)
+				if s.start_is_prague
+				else s.start_hour * 60 + s.start_minute
+			)
 			end_mins = s.end_hour * 60 + s.end_minute
-			if start_mins <= now_mins < end_mins:
+			if start_mins <= end_mins and start_mins <= now_mins < end_mins:
+				return True
+			if start_mins > end_mins and (now_mins >= start_mins or now_mins < end_mins):
 				return True
 		return False
 

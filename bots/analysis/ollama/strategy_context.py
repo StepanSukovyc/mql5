@@ -5,6 +5,11 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Iterable, List, Optional
 
+import pytz
+
+
+PRAGUE_TZ = pytz.timezone("Europe/Prague")
+
 
 @dataclass(frozen=True)
 class StrategyContext:
@@ -16,6 +21,8 @@ class StrategyContext:
 	session_start_hour_utc: int
 	session_end_hour_utc: int
 	friday_cutoff_hour_utc: int
+	session_start_hour_prague: Optional[int] = None
+	session_start_minute_prague: int = 0
 
 
 def _get_env_int(name: str, default: int) -> int:
@@ -45,6 +52,47 @@ def _get_env_bool(name: str, default: bool) -> bool:
 	return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
 
 
+def _session_start_kwargs(
+	name: str,
+	fallback_utc_hour: int,
+	fallback_prague_hour: Optional[int] = None,
+	fallback_prague_minute: int = 0,
+) -> dict:
+	prague_hour_name = f"{name}_SESSION_START_HOUR_PRAGUE"
+	if os.getenv(prague_hour_name) is not None:
+		return {
+			"session_start_hour_utc": fallback_utc_hour,
+			"session_start_hour_prague": _get_env_int(prague_hour_name, 0),
+			"session_start_minute_prague": _get_env_int(f"{name}_SESSION_START_MINUTE_PRAGUE", 0),
+		}
+
+	utc_hour_name = f"{name}_SESSION_START_HOUR_UTC"
+	if os.getenv(utc_hour_name) is not None:
+		return {
+			"session_start_hour_utc": _get_env_int(utc_hour_name, fallback_utc_hour),
+			"session_start_hour_prague": None,
+			"session_start_minute_prague": 0,
+		}
+
+	return {
+		"session_start_hour_utc": fallback_utc_hour,
+		"session_start_hour_prague": fallback_prague_hour,
+		"session_start_minute_prague": fallback_prague_minute,
+	}
+
+
+def prague_local_time_to_utc_minute(now_utc: datetime, hour: int, minute: int) -> int:
+	if now_utc.tzinfo is None:
+		now_utc = now_utc.replace(tzinfo=timezone.utc)
+	else:
+		now_utc = now_utc.astimezone(timezone.utc)
+
+	local_date = now_utc.astimezone(PRAGUE_TZ).date()
+	local_start = PRAGUE_TZ.localize(datetime(local_date.year, local_date.month, local_date.day, hour, minute))
+	start_utc = local_start.astimezone(timezone.utc)
+	return start_utc.hour * 60 + start_utc.minute
+
+
 def get_primary_strategy_context() -> StrategyContext:
 	default_activation = _get_env_float("TRADING_MARGIN_THRESHOLD", 20.0)
 	manage_legacy_positions = _get_env_bool(
@@ -57,14 +105,15 @@ def get_primary_strategy_context() -> StrategyContext:
 		manage_legacy_positions=manage_legacy_positions,
 		activation_margin_percent=_get_env_float("PRIMARY_STRATEGY_ACTIVATION_MARGIN_PERCENT", default_activation),
 		max_open_positions=_get_env_int("PRIMARY_MAX_OPEN_POSITIONS", 0),
-		session_start_hour_utc=_get_env_int("PRIMARY_SESSION_START_HOUR_UTC", 0),
+		**_session_start_kwargs("PRIMARY", 0),
 		session_end_hour_utc=_get_env_int("PRIMARY_SESSION_END_HOUR_UTC", 24),
 		friday_cutoff_hour_utc=_get_env_int("PRIMARY_FRIDAY_CUTOFF_HOUR_UTC", 24),
 	)
 
 
 def get_parallel_strategy_context() -> StrategyContext:
-	primary_activation = get_primary_strategy_context().activation_margin_percent
+	primary_context = get_primary_strategy_context()
+	primary_activation = primary_context.activation_margin_percent
 	delta = _get_env_float("PARALLEL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT", 5.0)
 	return StrategyContext(
 		strategy_id=os.getenv("PARALLEL_STRATEGY_ID", "parallel_mean_reversion"),
@@ -72,22 +121,25 @@ def get_parallel_strategy_context() -> StrategyContext:
 		manage_legacy_positions=_get_env_bool("PARALLEL_MANAGE_LEGACY_POSITIONS", False),
 		activation_margin_percent=max(primary_activation - delta, 0.0),
 		max_open_positions=_get_env_int("PARALLEL_STRATEGY_MAX_OPEN_POSITIONS", 7),
-		session_start_hour_utc=_get_env_int(
-			"PARALLEL_SESSION_START_HOUR_UTC",
-			get_primary_strategy_context().session_start_hour_utc,
+		**_session_start_kwargs(
+			"PARALLEL",
+			primary_context.session_start_hour_utc,
+			primary_context.session_start_hour_prague,
+			primary_context.session_start_minute_prague,
 		),
 		session_end_hour_utc=_get_env_int(
 			"PARALLEL_SESSION_END_HOUR_UTC",
-			get_primary_strategy_context().session_end_hour_utc,
+			primary_context.session_end_hour_utc,
 		),
 		friday_cutoff_hour_utc=_get_env_int(
 			"PARALLEL_FRIDAY_CUTOFF_HOUR_UTC",
-			get_primary_strategy_context().friday_cutoff_hour_utc,
+			primary_context.friday_cutoff_hour_utc,
 		),
 	)
 
 
 def get_reversal_strategy_context() -> StrategyContext:
+	parallel_context = get_parallel_strategy_context()
 	primary_activation = get_primary_strategy_context().activation_margin_percent
 	delta = _get_env_float("REVERSAL_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT", 5.0)
 	return StrategyContext(
@@ -96,22 +148,25 @@ def get_reversal_strategy_context() -> StrategyContext:
 		manage_legacy_positions=_get_env_bool("REVERSAL_MANAGE_LEGACY_POSITIONS", False),
 		activation_margin_percent=max(primary_activation - delta, 0.0),
 		max_open_positions=_get_env_int("REVERSAL_STRATEGY_MAX_OPEN_POSITIONS", 3),
-		session_start_hour_utc=_get_env_int(
-			"REVERSAL_SESSION_START_HOUR_UTC",
-			get_parallel_strategy_context().session_start_hour_utc,
+		**_session_start_kwargs(
+			"REVERSAL",
+			parallel_context.session_start_hour_utc,
+			parallel_context.session_start_hour_prague,
+			parallel_context.session_start_minute_prague,
 		),
 		session_end_hour_utc=_get_env_int(
 			"REVERSAL_SESSION_END_HOUR_UTC",
-			get_parallel_strategy_context().session_end_hour_utc,
+			parallel_context.session_end_hour_utc,
 		),
 		friday_cutoff_hour_utc=_get_env_int(
 			"REVERSAL_FRIDAY_CUTOFF_HOUR_UTC",
-			get_parallel_strategy_context().friday_cutoff_hour_utc,
+			parallel_context.friday_cutoff_hour_utc,
 		),
 	)
 
 
 def get_quant_strategy_context() -> StrategyContext:
+	parallel_context = get_parallel_strategy_context()
 	primary_activation = get_primary_strategy_context().activation_margin_percent
 	delta = _get_env_float("QUANT_STRATEGY_ACTIVATION_MARGIN_DELTA_PERCENT", 8.0)
 	return StrategyContext(
@@ -120,40 +175,45 @@ def get_quant_strategy_context() -> StrategyContext:
 		manage_legacy_positions=_get_env_bool("QUANT_MANAGE_LEGACY_POSITIONS", False),
 		activation_margin_percent=max(primary_activation - delta, 0.0),
 		max_open_positions=_get_env_int("QUANT_STRATEGY_MAX_OPEN_POSITIONS", 8),
-		session_start_hour_utc=_get_env_int(
-			"QUANT_SESSION_START_HOUR_UTC",
-			get_parallel_strategy_context().session_start_hour_utc,
+		**_session_start_kwargs(
+			"QUANT",
+			parallel_context.session_start_hour_utc,
+			parallel_context.session_start_hour_prague,
+			parallel_context.session_start_minute_prague,
 		),
 		session_end_hour_utc=_get_env_int(
 			"QUANT_SESSION_END_HOUR_UTC",
-			get_parallel_strategy_context().session_end_hour_utc,
+			parallel_context.session_end_hour_utc,
 		),
 		friday_cutoff_hour_utc=_get_env_int(
 			"QUANT_FRIDAY_CUTOFF_HOUR_UTC",
-			get_parallel_strategy_context().friday_cutoff_hour_utc,
+			parallel_context.friday_cutoff_hour_utc,
 		),
 	)
 
 
 def get_index_strategy_context() -> StrategyContext:
-	primary_activation = get_primary_strategy_context().activation_margin_percent
+	primary_context = get_primary_strategy_context()
+	primary_activation = primary_context.activation_margin_percent
 	return StrategyContext(
 		strategy_id=os.getenv("INDEX_STRATEGY_ID", "gemini_indices"),
 		magic=_get_env_int("INDEX_STRATEGY_MAGIC", 234100),
 		manage_legacy_positions=_get_env_bool("INDEX_MANAGE_LEGACY_POSITIONS", False),
 		activation_margin_percent=_get_env_float("INDEX_STRATEGY_ACTIVATION_MARGIN_PERCENT", primary_activation),
 		max_open_positions=_get_env_int("INDEX_MAX_OPEN_POSITIONS", 0),
-		session_start_hour_utc=_get_env_int(
-			"INDEX_SESSION_START_HOUR_UTC",
-			get_primary_strategy_context().session_start_hour_utc,
+		**_session_start_kwargs(
+			"INDEX",
+			primary_context.session_start_hour_utc,
+			primary_context.session_start_hour_prague,
+			primary_context.session_start_minute_prague,
 		),
 		session_end_hour_utc=_get_env_int(
 			"INDEX_SESSION_END_HOUR_UTC",
-			get_primary_strategy_context().session_end_hour_utc,
+			primary_context.session_end_hour_utc,
 		),
 		friday_cutoff_hour_utc=_get_env_int(
 			"INDEX_FRIDAY_CUTOFF_HOUR_UTC",
-			get_primary_strategy_context().friday_cutoff_hour_utc,
+			primary_context.friday_cutoff_hour_utc,
 		),
 	)
 
@@ -176,9 +236,11 @@ def get_gemini_prediction_strategy_context() -> StrategyContext:
 			"GEMINI_PREDICTION_MAX_OPEN_POSITIONS",
 			cloud_context.max_open_positions,
 		),
-		session_start_hour_utc=_get_env_int(
-			"GEMINI_PREDICTION_SESSION_START_HOUR_UTC",
+		**_session_start_kwargs(
+			"GEMINI_PREDICTION",
 			cloud_context.session_start_hour_utc,
+			cloud_context.session_start_hour_prague,
+			cloud_context.session_start_minute_prague,
 		),
 		session_end_hour_utc=_get_env_int(
 			"GEMINI_PREDICTION_SESSION_END_HOUR_UTC",
@@ -201,7 +263,7 @@ def get_ollama_cloud_strategy_context() -> StrategyContext:
 			"OLLAMA_CLOUD_STRATEGY_ACTIVATION_MARGIN_PERCENT", primary_activation
 		),
 		max_open_positions=_get_env_int("OLLAMA_CLOUD_MAX_OPEN_POSITIONS", 5),
-		session_start_hour_utc=_get_env_int("OLLAMA_CLOUD_SESSION_START_HOUR_UTC", 6),
+		**_session_start_kwargs("OLLAMA_CLOUD", 6),
 		session_end_hour_utc=_get_env_int("OLLAMA_CLOUD_SESSION_END_HOUR_UTC", 20),
 		friday_cutoff_hour_utc=_get_env_int("OLLAMA_CLOUD_FRIDAY_CUTOFF_HOUR_UTC", 16),
 	)
@@ -223,18 +285,30 @@ def get_scalping_strategy_context() -> StrategyContext:
 
 def is_strategy_trade_window_open(context: StrategyContext, now_utc: Optional[datetime] = None) -> bool:
 	now = now_utc or datetime.now(tz=timezone.utc)
+	if now.tzinfo is None:
+		now = now.replace(tzinfo=timezone.utc)
+	else:
+		now = now.astimezone(timezone.utc)
 	current_hour = now.hour
 
 	if now.weekday() == 4 and current_hour >= max(min(context.friday_cutoff_hour_utc, 24), 0):
 		return False
 
-	start_hour = max(min(context.session_start_hour_utc, 24), 0)
+	if context.session_start_hour_prague is None:
+		start_minute = max(min(context.session_start_hour_utc, 24), 0) * 60
+	else:
+		start_hour_prague = max(min(context.session_start_hour_prague, 23), 0)
+		start_minute_prague = max(min(context.session_start_minute_prague, 59), 0)
+		start_minute = prague_local_time_to_utc_minute(now, start_hour_prague, start_minute_prague)
+
 	end_hour = max(min(context.session_end_hour_utc, 24), 0)
-	if start_hour == end_hour:
+	end_minute = end_hour * 60
+	if start_minute == end_minute:
 		return True
-	if start_hour < end_hour:
-		return start_hour <= current_hour < end_hour
-	return current_hour >= start_hour or current_hour < end_hour
+	current_minute = current_hour * 60 + now.minute
+	if start_minute < end_minute:
+		return start_minute <= current_minute < end_minute
+	return current_minute >= start_minute or current_minute < end_minute
 
 
 def build_strategy_comment(strategy_id: str) -> str:

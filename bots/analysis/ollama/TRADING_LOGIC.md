@@ -313,45 +313,61 @@ Skalpovací strategie má vlastní `ScalpingAppContext` (DI kontejner) a `magic`
 
 ## Session a časová omezení
 
-Každý strategy profile má vlastní UTC obchodní okno.
+Každý strategy profile má vlastní obchodní okno. Začátek lze nastavit v čase `Europe/Prague`; tento čas automaticky přechází mezi CET a CEST. Konec okna a páteční cutoff zůstávají v UTC.
 
 ### Cloud Ollama strategie
 
-- `OLLAMA_CLOUD_SESSION_START_HOUR_UTC`
+- `OLLAMA_CLOUD_SESSION_START_HOUR_PRAGUE`
+- `OLLAMA_CLOUD_SESSION_START_MINUTE_PRAGUE`
 - `OLLAMA_CLOUD_SESSION_END_HOUR_UTC`
 - `OLLAMA_CLOUD_FRIDAY_CUTOFF_HOUR_UTC`
 
 ### Primární strategie
 
-- `PRIMARY_SESSION_START_HOUR_UTC`
+- `PRIMARY_SESSION_START_HOUR_PRAGUE`
+- `PRIMARY_SESSION_START_MINUTE_PRAGUE`
 - `PRIMARY_SESSION_END_HOUR_UTC`
 - `PRIMARY_FRIDAY_CUTOFF_HOUR_UTC`
 
 ### Paralelní strategie
 
-- `PARALLEL_SESSION_START_HOUR_UTC`
+- `PARALLEL_SESSION_START_HOUR_PRAGUE`
+- `PARALLEL_SESSION_START_MINUTE_PRAGUE`
 - `PARALLEL_SESSION_END_HOUR_UTC`
 - `PARALLEL_FRIDAY_CUTOFF_HOUR_UTC`
 
 ### Reverzní strategie
 
-- `REVERSAL_SESSION_START_HOUR_UTC`
+- `REVERSAL_SESSION_START_HOUR_PRAGUE`
+- `REVERSAL_SESSION_START_MINUTE_PRAGUE`
 - `REVERSAL_SESSION_END_HOUR_UTC`
 - `REVERSAL_FRIDAY_CUTOFF_HOUR_UTC`
 
 ### Quant strategie
 
-- `QUANT_SESSION_START_HOUR_UTC`
+- `QUANT_SESSION_START_HOUR_PRAGUE`
+- `QUANT_SESSION_START_MINUTE_PRAGUE`
 - `QUANT_SESSION_END_HOUR_UTC`
 - `QUANT_FRIDAY_CUTOFF_HOUR_UTC`
+
+### Index strategie
+
+- `INDEX_SESSION_START_HOUR_PRAGUE`
+- `INDEX_SESSION_START_MINUTE_PRAGUE`
+- `INDEX_SESSION_END_HOUR_UTC`
+- `INDEX_FRIDAY_CUTOFF_HOUR_UTC`
 
 ### Liquidity Sweep Scalping strategie
 
 Session logika je implementována přímo uvnitř `LiquiditySweepScalpingStrategy.passes_session_filter()` a konfigurována přes:
 
-- `SCALP_SESSION_LONDON_ENABLED` / `SCALP_SESSION_LONDON_START_HOUR_UTC` / `SCALP_SESSION_LONDON_END_HOUR_UTC`
-- `SCALP_SESSION_NEWYORK_ENABLED` / `SCALP_SESSION_NEWYORK_START_HOUR_UTC` / `SCALP_SESSION_NEWYORK_END_HOUR_UTC`
+- `SCALP_SESSION_LONDON_ENABLED` / `SCALP_SESSION_LONDON_START_HOUR_PRAGUE` / `SCALP_SESSION_LONDON_START_MINUTE_PRAGUE` / `SCALP_SESSION_LONDON_END_HOUR_UTC`
+- `SCALP_SESSION_NEWYORK_ENABLED` / `SCALP_SESSION_NEWYORK_START_HOUR_PRAGUE` / `SCALP_SESSION_NEWYORK_START_MINUTE_PRAGUE` / `SCALP_SESSION_NEWYORK_END_HOUR_UTC`
 - `SCALP_FRIDAY_CUTOFF_HOUR_UTC`
+
+Kompatibilita je zachována: pokud není nastaven pražský začátek, runtime dál čte původní proměnnou `*_SESSION_START_HOUR_UTC`.
+
+Gemini prediction profil přebírá začátek z Cloud Ollama profilu, pokud nemá vlastní `GEMINI_PREDICTION_SESSION_START_HOUR_PRAGUE` a `GEMINI_PREDICTION_SESSION_START_MINUTE_PRAGUE`.
 
 `final_decision.py` před pokusem o obchod ověří, jestli je daný profil uvnitř svého okna. Pokud ne, profil se přeskočí a runtime pokračuje bez exekuce tohoto setupu.
 
