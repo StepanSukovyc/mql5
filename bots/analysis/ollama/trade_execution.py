@@ -8,11 +8,14 @@ import os
 from dataclasses import dataclass
 from decimal import Decimal, ROUND_CEILING, ROUND_FLOOR
 from datetime import datetime, timezone
+from fnmatch import fnmatch
 from pathlib import Path
 from typing import List, Optional
 
 import MetaTrader5 as mt5
 
+from instrument_utils import is_cfd_symbol
+from market_data import CFD_BLACKLIST_TOKEN
 from mt5_symbols import get_symbol_info, get_symbol_tick
 from swap_rollover import get_prague_entry_block_end_utc
 from trading_validation import get_margin_requirement, validate_lot_size, validate_symbol
@@ -60,6 +63,46 @@ def get_max_open_positions() -> int:
 		return value if value > 0 else 17
 	except (TypeError, ValueError):
 		return 17
+
+
+def _read_env_file_value(key: str) -> Optional[str]:
+	"""Read a value directly from .env so runtime edits apply without restart."""
+	env_path = Path(__file__).resolve().parent / ".env"
+	if not env_path.exists():
+		return None
+
+	for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+		line = raw_line.strip()
+		if not line or line.startswith("#") or "=" not in line:
+			continue
+		k, v = line.split("=", 1)
+		if k.strip() == key:
+			return v.strip().strip('"').strip("'")
+
+	return None
+
+
+def is_symbol_blacklisted(symbol: str) -> bool:
+	"""Check symbol against MT5_SYMBOL_BLACKLIST re-read from .env on every call.
+
+	Execution-level safety net: blocks blacklisted symbols even when the running
+	service still holds a stale blacklist loaded at startup.
+	"""
+	raw = _read_env_file_value("MT5_SYMBOL_BLACKLIST")
+	if raw is None:
+		raw = os.getenv("MT5_SYMBOL_BLACKLIST", "")
+
+	patterns = [item.strip().lower() for item in raw.split(",") if item.strip()]
+	if not patterns:
+		return False
+
+	if CFD_BLACKLIST_TOKEN in patterns:
+		patterns = [pattern for pattern in patterns if pattern != CFD_BLACKLIST_TOKEN]
+		if is_cfd_symbol(symbol):
+			return True
+
+	symbol_lower = symbol.lower()
+	return any(fnmatch(symbol_lower, pattern) for pattern in patterns)
 
 
 def _check_open_position_limit() -> tuple[bool, str]:
@@ -330,6 +373,25 @@ def execute_trade(
 	print(f"   Requested Lot Size: {lot_size}")
 	print(f"   Take Profit: {take_profit if take_profit is not None else 'None'}")
 	requested_lot_size = float(lot_size)
+
+	if is_symbol_blacklisted(symbol):
+		error_msg = f"SYMBOL_BLACKLISTED: {symbol} matches MT5_SYMBOL_BLACKLIST; new entry blocked"
+		print(f"⛔ Trade blocked: {error_msg}")
+		log_trade(
+			strategy_id,
+			magic,
+			comment or strategy_id,
+			symbol,
+			action,
+			lot_size,
+			lot_source,
+			0.0,
+			take_profit,
+			False,
+			error_msg,
+			service_folder,
+		)
+		return _result(False, error_msg)
 
 	entry_block_end = get_prague_entry_block_end_utc()
 	if entry_block_end is not None:

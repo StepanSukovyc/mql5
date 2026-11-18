@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-18 (Execution-Level Symbol Blacklist Safety Net)
+
+- **`execute_trade()` now enforces `MT5_SYMBOL_BLACKLIST` before every entry**
+  - The blacklist is re-read directly from `.env` on each call (same runtime-reload pattern as `OLLAMA_ENABLED`), so blacklist changes block new trades immediately without restarting the service
+  - Supports plain symbols, wildcard patterns, and the `__CFD__` token; matching is case-insensitive
+  - Blocked attempts are logged to `trade_logs/trades.csv` with error `SYMBOL_BLACKLISTED`
+  - Previously the blacklist was applied only during market data collection and was loaded once at service startup, so a running service could still open trades on freshly blacklisted symbols
+
 ## 2026-11-11 (Experimental Thursday/Friday Virtual Stop Loss)
 
 - **Added `virtual_stop_loss_strategy.py` (Napad II experiment)**

@@ -191,6 +191,10 @@ SWAP_ROLLOVER_CLEANUP_STRATEGY_DRY_RUN=true
 
 Speciální hodnota `__CFD__` v `MT5_SYMBOL_BLACKLIST` vyřadí všechny instrumenty rozpoznané jako CFD.
 
+`MT5_SYMBOL_BLACKLIST` se vynucuje na dvou místech: při sběru tržních dat (načteno při startu služby)
+a jako pojistka přímo v `trade_execution.execute_trade`, která hodnotu znovu čte z `.env` před každým
+otevřením pozice — změny blacklistu tak blokují nové obchody okamžitě, bez restartu služby.
+
 # Manualni fallback block window, kdyz MT5 historie neposkytne pouzitelny rollover cas
 SWAP_BLOCK_START_HOUR=22
 SWAP_BLOCK_START_MINUTE=30
