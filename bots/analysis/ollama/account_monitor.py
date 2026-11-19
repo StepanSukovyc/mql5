@@ -23,6 +23,7 @@ from swap_rollover_cleanup_strategy import run_swap_rollover_cleanup_strategy_if
 from trade_outcomes import process_closed_trade_outcomes
 from daily_profit_exit_strategy import run_daily_profit_exit_strategy_if_due
 from virtual_stop_loss_strategy import run_virtual_stop_loss_strategy_if_due
+from position_rotation_strategy import run_position_rotation_strategy_if_due
 from position_costs import get_position_charged_costs
 from trade_execution import close_position_by_ticket
 
@@ -226,6 +227,7 @@ def _run_management_tasks(account_info: dict, stop_event: Optional[threading.Eve
 	tasks = (
 		("negative_swap_tp_removal", _remove_negative_swap_take_profits),
 		("closed_trade_outcomes", _track_closed_trade_outcomes),
+		("position_rotation", run_position_rotation_strategy_if_due),
 		("profit_cleanup", lambda: run_profit_cleanup_strategy_if_due(account_info)),
 		("profit_protection", run_profit_protection_strategy_if_due),
 		("virtual_stop_loss", run_virtual_stop_loss_strategy_if_due),

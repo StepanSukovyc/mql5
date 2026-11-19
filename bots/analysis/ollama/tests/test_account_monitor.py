@@ -20,6 +20,7 @@ from account_monitor import _remove_negative_swap_take_profits, _run_management_
 
 class AccountMonitorTests(unittest.TestCase):
 	def setUp(self) -> None:
+		self.enterContext(patch.dict(os.environ, {"POSITION_ROTATION_STRATEGY_ENABLED": "false"}))
 		self.daily_profit_exit = self.enterContext(patch("account_monitor.run_daily_profit_exit_strategy_if_due"))
 		self.old_loss_cleanup = self.enterContext(patch("account_monitor.run_old_loss_cleanup_if_due"))
 
@@ -151,6 +152,7 @@ class AccountMonitorTests(unittest.TestCase):
 
 class NegativeSwapTakeProfitTests(unittest.TestCase):
 	def setUp(self) -> None:
+		self.enterContext(patch.dict(os.environ, {"POSITION_ROTATION_STRATEGY_ENABLED": "false"}))
 		self.positions_get = self.enterContext(patch("account_monitor.mt5.positions_get"))
 		self.order_send = self.enterContext(patch("account_monitor.mt5.order_send"))
 		self.log_event = self.enterContext(patch("account_monitor._log_position_management_event"))
@@ -233,6 +235,9 @@ class NegativeSwapTakeProfitTests(unittest.TestCase):
 	def test_removal_runs_before_profit_protection_and_cleanup(self) -> None:
 		calls = []
 		with patch("account_monitor._remove_negative_swap_take_profits", side_effect=lambda: calls.append("tp")), patch(
+			"account_monitor.run_position_rotation_strategy_if_due",
+			side_effect=lambda: calls.append("position_rotation"),
+		), patch(
 			"account_monitor.run_profit_cleanup_strategy_if_due",
 			side_effect=lambda _account: calls.append("profit_cleanup"),
 		), patch(
@@ -241,16 +246,19 @@ class NegativeSwapTakeProfitTests(unittest.TestCase):
 			"account_monitor.run_swap_rollover_cleanup_strategy_if_due", side_effect=lambda _account: calls.append("cleanup")
 		):
 			_run_management_tasks({"balance": 5000.0})
-		self.assertEqual(calls, ["tp", "profit_cleanup", "profit", "cleanup"])
+		self.assertEqual(calls, ["tp", "position_rotation", "profit_cleanup", "profit", "cleanup"])
 
 	def test_removal_failure_does_not_disable_other_management_tasks(self) -> None:
 		with patch("account_monitor._remove_negative_swap_take_profits", side_effect=RuntimeError("read failure")), patch(
+			"account_monitor.run_position_rotation_strategy_if_due"
+		) as rotation, patch(
 			"account_monitor.run_profit_cleanup_strategy_if_due"
 		) as profit_cleanup, patch(
 			"account_monitor.run_profit_protection_strategy_if_due"
 		) as profit, patch("account_monitor.run_swap_rollover_cleanup_strategy_if_due") as cleanup:
 			_run_management_tasks({"balance": 5000.0})
 		profit_cleanup.assert_called_once_with({"balance": 5000.0})
+		rotation.assert_called_once_with()
 		profit.assert_called_once_with()
 		cleanup.assert_called_once_with({"balance": 5000.0})
 

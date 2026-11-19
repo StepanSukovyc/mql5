@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-19 (Experimental Hourly Position Rotation)
+
+- **Added `position_rotation_strategy.py`** for the experimental configurable Europe/Prague position rotation window (default 07:25–20:34)
+  - Rechecks the account-wide position count before every close and preserves at least seven positions
+  - Closes old net-profitable positions during each minute of the five-minute scan window; later candidates (including one at :29 after a close at :25) are still eligible
+  - Only considers the least-losing old positions for the fallback, after the complete scan window has been observed and when no old/young profitable positions or intervening position closures were seen; a failed profitable close does not trigger loss cleanup
+  - Uses actual MT5 deal-history commission/fee costs, persists window state, and writes an audit CSV
+  - Controlled by `POSITION_ROTATION_STRATEGY_ENABLED` (default `false`) and `POSITION_ROTATION_STRATEGY_DRY_RUN` (default `true`)
+  - Start/end times are configurable with `POSITION_ROTATION_STRATEGY_START_HOUR`, `POSITION_ROTATION_STRATEGY_START_MINUTE`, `POSITION_ROTATION_STRATEGY_END_HOUR`, and `POSITION_ROTATION_STRATEGY_END_MINUTE`
+
 ## 2026-11-19 (Runtime Blacklist Applied To Decision Layers)
 
 - **Decision layers now skip blacklisted symbols even when stale market data files exist**
