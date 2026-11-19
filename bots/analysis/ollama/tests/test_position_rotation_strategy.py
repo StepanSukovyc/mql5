@@ -228,6 +228,53 @@ class PositionRotationStrategyTests(unittest.TestCase):
 		self.assertTrue(close.call_count > 0)
 		self.assertTrue(all(call.kwargs["position_ticket"] == 1 for call in close.call_args_list))
 
+	def test_failed_profit_close_logs_broker_retcode_and_comment(self) -> None:
+		positions = [self._position(1, profit=1)] + [
+			self._position(ticket, profit=-ticket) for ticket in range(2, 9)
+		]
+		with tempfile.TemporaryDirectory() as folder, patch(
+			"position_rotation_strategy._snapshot_positions",
+			side_effect=self._snapshot_side_effect(positions),
+		), patch(
+			"trade_execution.get_symbol_tick", return_value=SimpleNamespace(bid=1.1, ask=1.2)
+		), patch(
+			"trade_execution.mt5.order_send",
+			return_value=SimpleNamespace(retcode=10030, comment="Invalid fill, broker rejected"),
+		):
+			self._run_at(folder, 7, 25)
+			with (Path(folder) / "trade_logs" / rotation.LOG_FILE_NAME).open(
+				"r", newline="", encoding="utf-8"
+			) as handle:
+				logs = list(csv.DictReader(handle))
+
+		failure = next(row for row in logs if row["phase"] == "profit")
+		self.assertEqual(failure["result"], "close_failed")
+		self.assertIn("10030 - Invalid fill, broker rejected", failure["message"])
+
+	def test_failed_fallback_close_logs_missing_tick_error(self) -> None:
+		positions = [self._position(ticket, profit=-ticket) for ticket in range(1, 9)]
+		with tempfile.TemporaryDirectory() as folder, patch(
+			"position_rotation_strategy._snapshot_positions",
+			side_effect=self._snapshot_side_effect(positions),
+		), patch(
+			"trade_execution.get_symbol_tick", return_value=None
+		), patch(
+			"trade_execution.mt5.last_error", return_value=(-1, "terminal unavailable")
+		), patch("trade_execution.mt5.order_send") as order_send:
+			self._run_at(folder, 7, 25)
+			self._run_at(folder, 7, 30)
+			with (Path(folder) / "trade_logs" / rotation.LOG_FILE_NAME).open(
+				"r", newline="", encoding="utf-8"
+			) as handle:
+				logs = list(csv.DictReader(handle))
+
+		failures = [row for row in logs if row["phase"] == "fallback"]
+		self.assertEqual(len(failures), 2)
+		self.assertTrue(all(row["result"] == "close_failed" for row in failures))
+		self.assertIn("Failed to get tick for closing SYM1", failures[0]["message"])
+		self.assertIn("terminal unavailable", failures[0]["message"])
+		order_send.assert_not_called()
+
 	def test_young_profitable_position_prevents_loss_fallback(self) -> None:
 		positions = [self._position(ticket, profit=-1) for ticket in range(1, 9)]
 		positions[-1] = self._position(8, age_hours=0.5, profit=1)

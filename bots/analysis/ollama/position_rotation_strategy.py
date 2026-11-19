@@ -388,18 +388,23 @@ def _close_old_profitable_positions(
 			state["dry_run_closed_tickets"] = sorted(dry_run_closed_tickets)
 			_save_state(service_folder, state)
 			continue
+		close_errors: list[str] = []
 		closed = close_position_by_ticket(
 			position_ticket=current.ticket,
 			symbol=current.symbol,
 			position_type=current.position_type,
 			volume=current.volume,
 			comment="Position rotation profit",
+			on_failure=close_errors.append,
 		)
 		_log_action(
 			service_folder, now_utc=now_utc, window_key=window_key, phase="profit",
 			dry_run=False, open_position_count=open_count, candidate=current,
 			result="closed" if closed else "close_failed",
-			message="Closed old profitable position" if closed else "Position close failed",
+			message=(
+				"Closed old profitable position" if closed
+				else close_errors[0] if close_errors else "Position close failed; no diagnostic provided"
+			),
 		)
 		if closed:
 			closed_tickets.add(current.ticket)
@@ -478,15 +483,20 @@ def _run_loss_fallback(
 			result = "dry_run"
 			message = "Least-losing old position selected; no order sent"
 		else:
+			close_errors: list[str] = []
 			closed = close_position_by_ticket(
 				position_ticket=current.ticket,
 				symbol=current.symbol,
 				position_type=current.position_type,
 				volume=current.volume,
 				comment="Position rotation loss fallback",
+				on_failure=close_errors.append,
 			)
 			result = "closed" if closed else "close_failed"
-			message = "Closed least-losing old position" if closed else "Position close failed"
+			message = (
+				"Closed least-losing old position" if closed
+				else close_errors[0] if close_errors else "Position close failed; no diagnostic provided"
+			)
 			if closed:
 				closed_tickets.add(current.ticket)
 		_log_action(

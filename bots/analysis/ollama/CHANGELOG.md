@@ -8,6 +8,7 @@
   - Only considers the least-losing old positions for the fallback after at least one scan in the five-minute window, and when no old/young profitable positions or intervening position closures were seen; a failed profitable close does not trigger loss cleanup
   - Minute-monitor scheduling can drift with management-task duration, so fallback does not require an exact scan in each of the five individual minutes
   - Uses actual MT5 deal-history commission/fee costs, persists window state, and writes an audit CSV with per-scan age/profit eligibility details
+  - Failed closes include the MT5 error or broker return code and comment in the rotation CSV message
   - Controlled by `POSITION_ROTATION_STRATEGY_ENABLED` (default `false`) and `POSITION_ROTATION_STRATEGY_DRY_RUN` (default `true`)
   - Start/end times are configurable with `POSITION_ROTATION_STRATEGY_START_HOUR`, `POSITION_ROTATION_STRATEGY_START_MINUTE`, `POSITION_ROTATION_STRATEGY_END_HOUR`, and `POSITION_ROTATION_STRATEGY_END_MINUTE`
 

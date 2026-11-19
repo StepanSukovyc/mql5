@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from decimal import Decimal, ROUND_CEILING, ROUND_FLOOR
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import List, Optional
+from typing import Callable, List, Optional
 
 import MetaTrader5 as mt5
 
@@ -159,12 +159,18 @@ def close_position_by_ticket(
 	*,
 	comment: str = "Close position",
 	magic: int = 234000,
+	on_failure: Optional[Callable[[str], None]] = None,
 ) -> bool:
 	"""Close an existing MT5 position by sending the opposite market order."""
+	def fail(message: str) -> bool:
+		print(message)
+		if on_failure is not None:
+			on_failure(message)
+		return False
+
 	tick = get_symbol_tick(symbol)
 	if tick is None:
-		print(f"❌ Failed to get tick for closing {symbol}: {mt5.last_error()}")
-		return False
+		return fail(f"Failed to get tick for closing {symbol}: {mt5.last_error()}")
 
 	if position_type == mt5.POSITION_TYPE_BUY:
 		close_type = mt5.ORDER_TYPE_SELL
@@ -173,8 +179,7 @@ def close_position_by_ticket(
 		close_type = mt5.ORDER_TYPE_BUY
 		price = tick.ask
 	else:
-		print(f"❌ Unsupported position type for ticket {position_ticket}: {position_type}")
-		return False
+		return fail(f"Unsupported position type for ticket {position_ticket}: {position_type}")
 
 	request = {
 		"action": mt5.TRADE_ACTION_DEAL,
@@ -192,18 +197,16 @@ def close_position_by_ticket(
 
 	result = mt5.order_send(request)
 	if result is None:
-		print(f"❌ Position close failed for ticket {position_ticket}: {mt5.last_error()}")
-		return False
+		return fail(f"Position close failed for ticket {position_ticket}: {mt5.last_error()}")
 
 	if result.retcode != mt5.TRADE_RETCODE_DONE:
-		print(
-			f"❌ Position close failed for ticket {position_ticket}: "
+		return fail(
+			f"Position close failed for ticket {position_ticket}: "
 			f"{result.retcode} - {result.comment}"
 		)
-		return False
 
 	print(
-		f"✅ Position closed: ticket={position_ticket}, symbol={symbol}, "
+		f"Position closed: ticket={position_ticket}, symbol={symbol}, "
 		f"volume={volume}, price={result.price}"
 	)
 	return True

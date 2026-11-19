@@ -11,8 +11,48 @@ from unittest.mock import patch
 
 import MetaTrader5 as mt5
 
-from trade_execution import TradeExecutionResult, _next_margin_sized_lot, execute_trade
+from trade_execution import (
+	TradeExecutionResult, _next_margin_sized_lot, close_position_by_ticket, execute_trade,
+)
 from trading_validation import MarginRequirement
+
+
+class ClosePositionDiagnosticsTests(unittest.TestCase):
+	def test_order_send_failure_reports_last_error(self) -> None:
+		errors: list[str] = []
+		with patch(
+			"trade_execution.get_symbol_tick", return_value=SimpleNamespace(bid=1.1, ask=1.2)
+		), patch("trade_execution.mt5.order_send", return_value=None), patch(
+			"trade_execution.mt5.last_error", return_value=(-2, "send failed")
+		):
+			result = close_position_by_ticket(
+				123, "EURUSD", mt5.POSITION_TYPE_BUY, 0.01, on_failure=errors.append
+			)
+
+		self.assertIs(result, False)
+		self.assertEqual(errors, ["Position close failed for ticket 123: (-2, 'send failed')"])
+
+	def test_invalid_type_reports_failure_without_sending_order(self) -> None:
+		errors: list[str] = []
+		with patch(
+			"trade_execution.get_symbol_tick", return_value=SimpleNamespace(bid=1.1, ask=1.2)
+		), patch("trade_execution.mt5.order_send") as order_send:
+			result = close_position_by_ticket(123, "EURUSD", -99, 0.01, on_failure=errors.append)
+
+		self.assertIs(result, False)
+		self.assertEqual(errors, ["Unsupported position type for ticket 123: -99"])
+		order_send.assert_not_called()
+
+	def test_existing_callers_still_receive_boolean_success(self) -> None:
+		with patch(
+			"trade_execution.get_symbol_tick", return_value=SimpleNamespace(bid=1.1, ask=1.2)
+		), patch(
+			"trade_execution.mt5.order_send",
+			return_value=SimpleNamespace(retcode=mt5.TRADE_RETCODE_DONE, price=1.1),
+		):
+			result = close_position_by_ticket(123, "EURUSD", mt5.POSITION_TYPE_BUY, 0.01)
+
+		self.assertIs(result, True)
 
 
 class TradeExecutionPositionLimitTests(unittest.TestCase):
