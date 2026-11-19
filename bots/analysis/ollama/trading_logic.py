@@ -18,7 +18,7 @@ from typing import Dict, List, Optional, Set
 from gemini_config import load_gemini_api_config
 from gemini_decision import clean_gemini_response
 from gemini_vertex import request_prediction_json
-from instrument_utils import get_symbol_prompt_guidance
+from instrument_utils import get_symbol_prompt_guidance, is_symbol_blacklisted
 
 
 def ask_gemini_prediction(symbol: str, data: Dict, gemini_config) -> Optional[str]:
@@ -374,6 +374,10 @@ def run_trading_logic(source_folder: Path) -> tuple[bool, Optional[Path]]:
 	
 	# Get all JSON files in source folder
 	json_files = list(source_folder.glob("*.json"))
+	blacklisted_files = [f for f in json_files if is_symbol_blacklisted(f.stem)]
+	if blacklisted_files:
+		json_files = [f for f in json_files if f not in blacklisted_files]
+		print(f"⛔ Skipping {len(blacklisted_files)} blacklisted symbols: {', '.join(f.stem for f in blacklisted_files)}")
 	ollama_predictions_folder = source_folder / "ollama" / "predikce"
 	
 	if not json_files:

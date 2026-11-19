@@ -20,7 +20,7 @@ import re
 import MetaTrader5 as mt5
 
 from account_state import get_account_login
-from instrument_utils import get_symbol_prompt_guidance
+from instrument_utils import get_symbol_prompt_guidance, is_symbol_blacklisted
 from mt5_connection import initialize_mt5, shutdown_mt5
 from market_data import (
     collect_symbol_payload,
@@ -796,6 +796,10 @@ def ollama_service_loop(service_dest_folder: Path, stop_event) -> None:
             skipped_count = 0
 
             symbol_files = list(ollama_source.glob("*.json"))
+            blacklisted_files = [f for f in symbol_files if is_symbol_blacklisted(f.stem)]
+            if blacklisted_files:
+                symbol_files = [f for f in symbol_files if f not in blacklisted_files]
+                print(f"⛔ Přeskakuji {len(blacklisted_files)} blacklistovaných symbolů: {', '.join(f.stem for f in blacklisted_files)}")
 
             if ollama_parallelism <= 1:
                 for symbol_file in symbol_files:
@@ -953,6 +957,10 @@ def ollama_cloud_service_loop(service_dest_folder: Path, stop_event) -> None:
                         return
                     time.sleep(1)
                 continue
+            blacklisted_files = [f for f in symbol_files if is_symbol_blacklisted(f.stem)]
+            if blacklisted_files:
+                symbol_files = [f for f in symbol_files if f not in blacklisted_files]
+                print(f"⛔ Přeskakuji {len(blacklisted_files)} blacklistovaných symbolů: {', '.join(f.stem for f in blacklisted_files)}")
             print(f"📊 Nalezeno {len(symbol_files)} symbolů ke zpracování")
 
             start_time = datetime.now(tz=timezone.utc)

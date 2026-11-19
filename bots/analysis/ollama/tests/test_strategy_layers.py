@@ -20,7 +20,7 @@ from profit_protection_strategy import (
 	run_profit_protection_strategy_if_due,
 )
 from liquidity_sweep_scalping_strategy import LiquiditySweepScalpingStrategy, _parse_session_env
-from quant_math_strategy import validate_quant_signal
+from quant_math_strategy import QuantCandidate, build_quant_candidates, validate_quant_signal
 from reversal_pattern_strategy import can_activate_reversal_strategy, validate_reversal_pattern_signal
 from risk_engine import calculate_synthetic_risk_plan
 from signal_rules import validate_trend_following_signal
@@ -741,6 +741,31 @@ class ProfitProtectionTests(unittest.TestCase):
 		]
 
 		self.assertEqual(_find_candidates(5000.0), [])
+
+
+class QuantCandidateBlacklistTests(unittest.TestCase):
+	@patch("instrument_utils._read_env_file_value", return_value="NGAS_ecn")
+	@patch(
+		"quant_math_strategy._build_quant_signal",
+		side_effect=lambda symbol, market_data: QuantCandidate(symbol, "BUY", 5.0, {}),
+	)
+	@patch("quant_math_strategy._load_market_data_file", return_value={})
+	def test_build_quant_candidates_skips_blacklisted_symbols(
+		self,
+		_mock_load,
+		_mock_signal,
+		_mock_env,
+	) -> None:
+		import tempfile
+
+		with tempfile.TemporaryDirectory() as temp_dir:
+			source = Path(temp_dir)
+			(source / "ngas_ecn.json").write_text("{}", encoding="utf-8")
+			(source / "EURUSD_ecn.json").write_text("{}", encoding="utf-8")
+
+			candidates = build_quant_candidates(source)
+
+		self.assertEqual([candidate.symbol for candidate in candidates], ["EURUSD_ecn"])
 
 
 if __name__ == "__main__":

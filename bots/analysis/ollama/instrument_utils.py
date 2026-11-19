@@ -5,12 +5,15 @@ from __future__ import annotations
 import os
 from datetime import datetime, timedelta, timezone
 from fnmatch import fnmatch
+from pathlib import Path
 from typing import Iterable, List, Optional
 
 import MetaTrader5 as mt5
 
 from env_utils import get_bool_env, get_float_env, get_int_env
 from mt5_symbols import get_symbol_info
+
+CFD_BLACKLIST_TOKEN = "__cfd__"
 
 
 def _parse_csv(value: Optional[str]) -> List[str]:
@@ -87,6 +90,47 @@ def is_cfd_symbol(symbol: str, patterns: Optional[Iterable[str]] = None) -> bool
 	path = str(getattr(symbol_info, "path", "") or "").lower()
 	description = str(getattr(symbol_info, "description", "") or "").lower()
 	return "cfd" in path or "cfd" in description
+
+
+def _read_env_file_value(key: str) -> Optional[str]:
+	"""Read a value directly from .env so runtime edits apply without restart."""
+	env_path = Path(__file__).resolve().parent / ".env"
+	if not env_path.exists():
+		return None
+
+	for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+		line = raw_line.strip()
+		if not line or line.startswith("#") or "=" not in line:
+			continue
+		k, v = line.split("=", 1)
+		if k.strip() == key:
+			return v.strip().strip('"').strip("'")
+
+	return None
+
+
+def is_symbol_blacklisted(symbol: str) -> bool:
+	"""Check symbol against MT5_SYMBOL_BLACKLIST re-read from .env on every call.
+
+	Safety net shared by data collection, candidate generation, and trade
+	execution: blocks blacklisted symbols even when the running service still
+	holds a stale blacklist loaded at startup.
+	"""
+	raw = _read_env_file_value("MT5_SYMBOL_BLACKLIST")
+	if raw is None:
+		raw = os.getenv("MT5_SYMBOL_BLACKLIST", "")
+
+	patterns = [item.strip().lower() for item in raw.split(",") if item.strip()]
+	if not patterns:
+		return False
+
+	if CFD_BLACKLIST_TOKEN in patterns:
+		patterns = [pattern for pattern in patterns if pattern != CFD_BLACKLIST_TOKEN]
+		if is_cfd_symbol(symbol):
+			return True
+
+	symbol_lower = symbol.lower()
+	return any(fnmatch(symbol_lower, pattern) for pattern in patterns)
 
 
 def is_index_symbol(symbol: str) -> bool:

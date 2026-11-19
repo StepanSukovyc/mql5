@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-19 (Runtime Blacklist Applied To Decision Layers)
+
+- **Decision layers now skip blacklisted symbols even when stale market data files exist**
+  - Root cause of the 2026-11-19 incident: a running service collected `NGAS_ecn` into `ollama/source` using the blacklist snapshot loaded at startup, and `build_quant_candidates()` consumed every `*.json` file in that folder without a blacklist check — the quant fallback then proposed the trade (blocked only by the execution-level safety net)
+  - `is_symbol_blacklisted()` (and the CFD token) moved from `trade_execution.py`/`market_data.py` to `instrument_utils.py` and is now shared by all layers
+  - `quant_math_strategy.build_quant_candidates()` skips blacklisted symbols
+  - `ollama_service` local and cloud prediction loops skip blacklisted source files (saves AI requests)
+  - `trading_logic.run_trading_logic()` (Gemini pipeline) skips blacklisted source files
+
 ## 2026-11-18 (Execution-Level Symbol Blacklist Safety Net)
 
 - **`execute_trade()` now enforces `MT5_SYMBOL_BLACKLIST` before every entry**

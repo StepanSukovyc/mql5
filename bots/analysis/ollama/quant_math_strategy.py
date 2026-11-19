@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from env_utils import get_bool_env, get_float_env, get_int_env, parse_csv_env
-from instrument_utils import is_secondary_strategy_symbol_allowed
+from instrument_utils import is_secondary_strategy_symbol_allowed, is_symbol_blacklisted
 from signal_rules import SignalValidationResult, _is_news_blocked
 from strategy_context import count_open_positions_for_strategy, get_quant_strategy_context
 
@@ -196,6 +196,9 @@ def build_quant_candidates(source_folder: Path) -> List[QuantCandidate]:
 	candidates: List[QuantCandidate] = []
 	for market_data_file in source_folder.glob("*.json"):
 		symbol = market_data_file.stem
+		if is_symbol_blacklisted(symbol):
+			# Stale market data may exist for freshly blacklisted symbols.
+			continue
 		market_data = _load_market_data_file(market_data_file)
 		if market_data is None:
 			continue

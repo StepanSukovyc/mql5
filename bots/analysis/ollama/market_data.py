@@ -12,11 +12,8 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 import MetaTrader5 as mt5
-from instrument_utils import is_cfd_symbol
+from instrument_utils import CFD_BLACKLIST_TOKEN, is_cfd_symbol
 from mt5_symbols import get_current_price, get_symbol_info, get_symbol_tick
-
-
-CFD_BLACKLIST_TOKEN = "__cfd__"
 
 
 def simple_moving_average(values: List[float], period: int) -> List[Optional[float]]:

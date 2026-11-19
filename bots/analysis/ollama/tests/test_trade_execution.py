@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import os
 import json
@@ -200,7 +200,7 @@ class TradeExecutionMarginRetryTests(unittest.TestCase):
 
 
 class TradeExecutionBlacklistTests(unittest.TestCase):
-	@patch("trade_execution._read_env_file_value", return_value="__CFD__,NGAS_ecn")
+	@patch("instrument_utils._read_env_file_value", return_value="__CFD__,NGAS_ecn")
 	@patch("trade_execution.mt5.order_send")
 	@patch("trade_execution.mt5.positions_get")
 	def test_blacklisted_symbol_blocks_trade_case_insensitively(
@@ -216,7 +216,7 @@ class TradeExecutionBlacklistTests(unittest.TestCase):
 		mock_positions_get.assert_not_called()
 		mock_order_send.assert_not_called()
 
-	@patch("trade_execution._read_env_file_value", return_value="X*_ecn")
+	@patch("instrument_utils._read_env_file_value", return_value="X*_ecn")
 	@patch("trade_execution.mt5.order_send")
 	@patch("trade_execution.mt5.positions_get")
 	def test_wildcard_blacklist_pattern_blocks_trade(
@@ -235,7 +235,7 @@ class TradeExecutionBlacklistTests(unittest.TestCase):
 		"trade_execution.get_prague_entry_block_end_utc",
 		return_value=datetime(2026, 10, 11, 22, 0, tzinfo=timezone.utc),
 	)
-	@patch("trade_execution._read_env_file_value", return_value="__CFD__,NGAS_ecn")
+	@patch("instrument_utils._read_env_file_value", return_value="__CFD__,NGAS_ecn")
 	@patch("trade_execution.mt5.order_send")
 	def test_non_blacklisted_symbol_passes_blacklist_check(
 		self,
