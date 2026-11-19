@@ -72,6 +72,20 @@ class PositionRotationStrategyTests(unittest.TestCase):
 		self.assertFalse(rotation.is_position_rotation_active(self._prague(7, 24)))
 		self.assertFalse(rotation.is_position_rotation_active(self._prague(20, 35)))
 
+	def test_profitable_position_must_be_strictly_older_than_one_hour(self) -> None:
+		exactly_one_hour = rotation.PositionSnapshot(
+			ticket=1, symbol="A", position_type=0, volume=0.01,
+			opened_at=0, age_seconds=3600, profit=1, swap=0,
+			charged_costs=0, net_profit=1,
+		)
+		older = rotation.PositionSnapshot(
+			ticket=2, symbol="B", position_type=0, volume=0.01,
+			opened_at=0, age_seconds=3601, profit=1, swap=0,
+			charged_costs=0, net_profit=1,
+		)
+
+		self.assertEqual(rotation._eligible_old_profits([exactly_one_hour, older]), [older])
+
 	def test_closes_new_profitable_candidate_later_in_same_window(self) -> None:
 		first = self._position(1, profit=5)
 		second = self._position(2, profit=-1)
@@ -97,6 +111,29 @@ class PositionRotationStrategyTests(unittest.TestCase):
 			[call.kwargs["position_ticket"] for call in close.call_args_list],
 			[1, 2],
 		)
+		self.assertEqual(len(positions), 7)
+
+	def test_old_profitable_position_closes_even_if_a_young_position_is_profitable(self) -> None:
+		old_winner = self._position(1, age_hours=2, profit=5)
+		young_winner = self._position(2, age_hours=0.5, profit=2)
+		positions = [old_winner, young_winner] + [
+			self._position(ticket, age_hours=2, profit=-1) for ticket in range(3, 9)
+		]
+
+		def close_position(*, position_ticket: int, **_kwargs: object) -> bool:
+			positions[:] = [position for position in positions if position.ticket != position_ticket]
+			return True
+
+		with tempfile.TemporaryDirectory() as folder, patch(
+			"position_rotation_strategy._snapshot_positions",
+			side_effect=self._snapshot_side_effect(positions),
+		), patch(
+			"position_rotation_strategy.close_position_by_ticket", side_effect=close_position
+		) as close:
+			self._run_at(folder, 7, 27)
+
+		close.assert_called_once()
+		self.assertEqual(close.call_args.kwargs["position_ticket"], 1)
 		self.assertEqual(len(positions), 7)
 
 	def test_stale_mt5_snapshot_cannot_drop_account_below_seven_positions(self) -> None:
@@ -192,7 +229,29 @@ class PositionRotationStrategyTests(unittest.TestCase):
 
 		close.assert_not_called()
 
-	def test_fallback_is_skipped_when_five_minute_window_was_not_observed(self) -> None:
+	def test_fallback_runs_when_monitor_skips_a_minute_inside_observed_window(self) -> None:
+		positions = [self._position(ticket, profit=-1) for ticket in range(1, 9)]
+		def close_position(*, position_ticket: int, **_kwargs: object) -> bool:
+			positions[:] = [position for position in positions if position.ticket != position_ticket]
+			return True
+
+		with tempfile.TemporaryDirectory() as folder, patch(
+			"position_rotation_strategy._snapshot_positions",
+			side_effect=self._snapshot_side_effect(positions),
+		), patch(
+			"position_rotation_strategy.close_position_by_ticket", side_effect=close_position
+		) as close, patch(
+			"position_rotation_strategy.get_position_charged_costs", return_value=0
+		):
+			for minute in (25, 26, 28, 29, 30):
+				self._run_at(folder, 7, minute)
+			self.assertEqual(close.call_count, 1)
+			state = json.loads(
+				(Path(folder) / "trade_logs" / rotation.STATE_FILE_NAME).read_text(encoding="utf-8")
+			)
+		self.assertTrue(state["fallback_evaluated"])
+
+	def test_fallback_is_skipped_when_no_scan_ran_before_minute_30(self) -> None:
 		positions = [self._position(ticket, profit=-1) for ticket in range(1, 9)]
 		with tempfile.TemporaryDirectory() as folder, patch(
 			"position_rotation_strategy._snapshot_positions",
@@ -200,9 +259,7 @@ class PositionRotationStrategyTests(unittest.TestCase):
 		), patch("position_rotation_strategy.close_position_by_ticket") as close, patch(
 			"position_rotation_strategy.get_position_charged_costs", return_value=0
 		):
-			for minute in (25, 26, 28, 29, 30):
-				self._run_at(folder, 7, minute)
-
+			self._run_at(folder, 7, 30)
 			close.assert_not_called()
 			state = json.loads(
 				(Path(folder) / "trade_logs" / rotation.STATE_FILE_NAME).read_text(encoding="utf-8")

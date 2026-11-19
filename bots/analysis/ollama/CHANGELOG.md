@@ -5,8 +5,9 @@
 - **Added `position_rotation_strategy.py`** for the experimental configurable Europe/Prague position rotation window (default 07:25–20:34)
   - Rechecks the account-wide position count before every close and preserves at least seven positions
   - Closes old net-profitable positions during each minute of the five-minute scan window; later candidates (including one at :29 after a close at :25) are still eligible
-  - Only considers the least-losing old positions for the fallback, after the complete scan window has been observed and when no old/young profitable positions or intervening position closures were seen; a failed profitable close does not trigger loss cleanup
-  - Uses actual MT5 deal-history commission/fee costs, persists window state, and writes an audit CSV
+  - Only considers the least-losing old positions for the fallback after at least one scan in the five-minute window, and when no old/young profitable positions or intervening position closures were seen; a failed profitable close does not trigger loss cleanup
+  - Minute-monitor scheduling can drift with management-task duration, so fallback does not require an exact scan in each of the five individual minutes
+  - Uses actual MT5 deal-history commission/fee costs, persists window state, and writes an audit CSV with per-scan age/profit eligibility details
   - Controlled by `POSITION_ROTATION_STRATEGY_ENABLED` (default `false`) and `POSITION_ROTATION_STRATEGY_DRY_RUN` (default `true`)
   - Start/end times are configurable with `POSITION_ROTATION_STRATEGY_START_HOUR`, `POSITION_ROTATION_STRATEGY_START_MINUTE`, `POSITION_ROTATION_STRATEGY_END_HOUR`, and `POSITION_ROTATION_STRATEGY_END_MINUTE`
 

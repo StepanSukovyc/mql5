@@ -308,7 +308,7 @@ def _eligible_old_profits(positions: list[PositionSnapshot]) -> list[PositionSna
 	return sorted(
 		(
 			position for position in positions
-			if position.age_seconds >= MIN_POSITION_AGE_SECONDS and position.net_profit > 0
+			if position.age_seconds > MIN_POSITION_AGE_SECONDS and position.net_profit > 0
 		),
 		key=lambda position: position.net_profit,
 		reverse=True,
@@ -340,7 +340,7 @@ def _close_old_profitable_positions(
 		current = next((position for position in positions if position.ticket == candidate.ticket), None)
 		if (
 			current is None
-			or current.age_seconds < MIN_POSITION_AGE_SECONDS
+			or current.age_seconds <= MIN_POSITION_AGE_SECONDS
 			or current.net_profit <= 0
 		):
 			continue
@@ -409,7 +409,7 @@ def _run_loss_fallback(
 
 		young_profits = [
 			position for position in positions
-			if position.age_seconds < MIN_POSITION_AGE_SECONDS and position.net_profit > 0
+			if position.age_seconds <= MIN_POSITION_AGE_SECONDS and position.net_profit > 0
 		]
 		if young_profits:
 			_log_action(
@@ -422,7 +422,7 @@ def _run_loss_fallback(
 		loss_candidates = sorted(
 			(
 				position for position in positions
-				if position.age_seconds >= MIN_POSITION_AGE_SECONDS
+				if position.age_seconds > MIN_POSITION_AGE_SECONDS
 				and position.net_profit < 0
 				and position.ticket not in attempted_tickets
 			),
@@ -514,6 +514,25 @@ def run_position_rotation_strategy_if_due(*, now_utc: Optional[datetime] = None)
 			position for position in _eligible_old_profits(positions)
 			if not dry_run or position.ticket not in state["dry_run_closed_tickets"]
 		]
+		old_positions = [
+			position for position in positions
+			if position.age_seconds > MIN_POSITION_AGE_SECONDS
+		]
+		young_profit_count = sum(
+			position.age_seconds <= MIN_POSITION_AGE_SECONDS and position.net_profit > 0
+			for position in positions
+		)
+		best_old_position = max(old_positions, key=lambda position: position.net_profit, default=None)
+		_log_action(
+			service_folder, now_utc=now, window_key=window_key, phase="scan",
+			dry_run=dry_run, open_position_count=effective_open_count,
+			candidate=profit_candidates[0] if profit_candidates else best_old_position,
+			result="profit_candidates" if profit_candidates else "no_profit_candidates",
+			message=(
+				f"old_positions={len(old_positions)}, old_net_profitable={len(profit_candidates)}, "
+				f"young_net_profitable={young_profit_count}"
+			),
+		)
 		if profit_candidates:
 			state["profitable_position_seen"] = True
 			_save_state(service_folder, state)
@@ -532,10 +551,6 @@ def run_position_rotation_strategy_if_due(*, now_utc: Optional[datetime] = None)
 			if now_prague.minute >= PROFIT_WINDOW_END_MINUTE:
 				state["fallback_evaluated"] = True
 		elif now_prague.minute >= PROFIT_WINDOW_END_MINUTE:
-			required_minutes = {
-				now_prague.strftime("%Y-%m-%d-%H-") + f"{minute:02d}"
-				for minute in range(PROFIT_WINDOW_START_MINUTE, PROFIT_WINDOW_END_MINUTE)
-			}
 			observed_minutes = set(state["observed_profit_minutes"])
 			if state["profitable_position_seen"] or state["position_closed_during_window"]:
 				_log_action(
@@ -545,12 +560,12 @@ def run_position_rotation_strategy_if_due(*, now_utc: Optional[datetime] = None)
 					message="A position was profitable or closed during the five-minute window",
 				)
 				state["fallback_evaluated"] = True
-			elif not required_minutes.issubset(observed_minutes):
+			elif not observed_minutes:
 				_log_action(
 					service_folder, now_utc=now, window_key=window_key, phase="fallback",
 					dry_run=dry_run, open_position_count=len(positions), candidate=None,
 					result="incomplete_window",
-					message="Loss fallback skipped because the full five-minute window was not observed",
+					message="Loss fallback skipped because no position scan ran before minute 30",
 				)
 				state["fallback_evaluated"] = True
 			else:
