@@ -8,11 +8,12 @@ import math
 import os
 import threading
 from dataclasses import dataclass
-from datetime import datetime, time, timezone
+from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable, Iterable, Optional, Protocol, cast
 
 import MetaTrader5 as mt5
+import pytz
 
 from position_costs import get_position_charged_costs
 from swap_rollover import PRAGUE_TZ
@@ -24,6 +25,7 @@ DEFAULT_DRY_RUN = True
 MIN_OPEN_POSITIONS = 7
 MIN_POSITION_AGE_SECONDS = 60 * 60
 MAX_FALLBACK_CLOSE_ATTEMPTS = 2
+DEFAULT_SERVER_TIME_OFFSET_FROM_PRAGUE_HOURS = 1
 ACTIVE_START = time(hour=7, minute=25)
 ACTIVE_END = time(hour=20, minute=34)
 PROFIT_WINDOW_START_MINUTE = 25
@@ -214,6 +216,33 @@ def _normalize_now(now_utc: Optional[datetime]) -> datetime:
 	return now.astimezone(timezone.utc)
 
 
+def _position_time_to_utc(position_time: float) -> datetime:
+	raw_offset = os.getenv("POSITION_ROTATION_SERVER_OFFSET_FROM_PRAGUE_HOURS")
+	if raw_offset is None:
+		raw_offset = _load_dotenv_value("POSITION_ROTATION_SERVER_OFFSET_FROM_PRAGUE_HOURS")
+	if raw_offset is None:
+		offset_hours = DEFAULT_SERVER_TIME_OFFSET_FROM_PRAGUE_HOURS
+	else:
+		try:
+			offset_hours = float(raw_offset)
+		except ValueError as exc:
+			raise RuntimeError(
+				"Invalid POSITION_ROTATION_SERVER_OFFSET_FROM_PRAGUE_HOURS: "
+				f"{raw_offset!r}"
+			) from exc
+	if not math.isfinite(offset_hours) or not -14 <= offset_hours <= 14:
+		raise RuntimeError(
+			"POSITION_ROTATION_SERVER_OFFSET_FROM_PRAGUE_HOURS must be between -14 and 14"
+		)
+
+	server_wall_time = datetime.fromtimestamp(position_time, tz=timezone.utc).replace(tzinfo=None)
+	prague_wall_time = server_wall_time - timedelta(hours=offset_hours)
+	try:
+		return PRAGUE_TZ.localize(prague_wall_time, is_dst=None).astimezone(timezone.utc)
+	except (pytz.AmbiguousTimeError, pytz.NonExistentTimeError) as exc:
+		raise ValueError(f"Position time cannot be resolved in the Prague timezone: {exc}") from exc
+
+
 def is_position_rotation_active(now_utc: datetime) -> bool:
 	now_prague = _normalize_now(now_utc).astimezone(PRAGUE_TZ)
 	local_time = time(hour=now_prague.hour, minute=now_prague.minute)
@@ -237,14 +266,19 @@ def _snapshot_positions(now_utc: datetime) -> list[PositionSnapshot]:
 	snapshots: list[PositionSnapshot] = []
 	for position in positions:
 		try:
-			opened_at = float(position.time)
+			server_opened_at = float(position.time)
 			profit = float(position.profit)
 			swap = float(position.swap)
 			volume = float(position.volume)
 			charged_costs = float(get_position_charged_costs(position))
-			values = (opened_at, profit, swap, volume, charged_costs)
-			if not all(math.isfinite(value) for value in values) or opened_at <= 0 or volume <= 0:
+			values = (server_opened_at, profit, swap, volume, charged_costs)
+			if (
+				not all(math.isfinite(value) for value in values)
+				or server_opened_at <= 0
+				or volume <= 0
+			):
 				raise ValueError("Position contains invalid numeric values")
+			opened_at = _position_time_to_utc(server_opened_at).timestamp()
 			snapshots.append(
 				PositionSnapshot(
 					ticket=int(position.ticket),

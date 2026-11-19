@@ -29,6 +29,7 @@ class PositionRotationStrategyTests(unittest.TestCase):
 				"POSITION_ROTATION_STRATEGY_START_MINUTE": "25",
 				"POSITION_ROTATION_STRATEGY_END_HOUR": "20",
 				"POSITION_ROTATION_STRATEGY_END_MINUTE": "34",
+				"POSITION_ROTATION_SERVER_OFFSET_FROM_PRAGUE_HOURS": "1",
 			},
 			clear=False,
 		))
@@ -45,15 +46,28 @@ class PositionRotationStrategyTests(unittest.TestCase):
 		swap: float = 0,
 	) -> SimpleNamespace:
 		opened_at = datetime(2026, 11, 19, 6, 25, tzinfo=timezone.utc) - timedelta(hours=age_hours)
+		server_wall_time = (
+			opened_at.astimezone(PRAGUE_TZ).replace(tzinfo=None) + timedelta(hours=1)
+		)
 		return SimpleNamespace(
 			ticket=ticket,
 			symbol=f"SYM{ticket}",
 			type=0,
 			volume=0.01,
-			time=opened_at.timestamp(),
+			time=server_wall_time.replace(tzinfo=timezone.utc).timestamp(),
 			profit=profit,
 			swap=swap,
 		)
+
+	def test_position_server_time_is_converted_before_calculating_age(self) -> None:
+		now = self._prague(7, 25)
+		position = self._position(1, age_hours=2, profit=1)
+		with patch(
+			"position_rotation_strategy.mt5.positions_get", return_value=(position,)
+		), patch("position_rotation_strategy.get_position_charged_costs", return_value=0):
+			snapshots = rotation._snapshot_positions(now)
+
+		self.assertAlmostEqual(snapshots[0].age_seconds, 2 * 60 * 60)
 
 	def _run_at(self, folder: str, hour: int, minute: int) -> None:
 		with patch("position_rotation_strategy._get_service_folder", return_value=Path(folder)):
@@ -349,8 +363,10 @@ class PositionRotationStrategyTests(unittest.TestCase):
 				symbol=position.symbol,
 				position_type=position.type,
 				volume=position.volume,
-				opened_at=position.time,
-				age_seconds=now.timestamp() - position.time,
+				opened_at=rotation._position_time_to_utc(position.time).timestamp(),
+				age_seconds=(
+					now.timestamp() - rotation._position_time_to_utc(position.time).timestamp()
+				),
 				profit=position.profit,
 				swap=position.swap,
 				charged_costs=0,
