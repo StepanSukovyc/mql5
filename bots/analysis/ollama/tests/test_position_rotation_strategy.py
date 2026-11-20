@@ -186,6 +186,9 @@ class PositionRotationStrategyTests(unittest.TestCase):
 			self._run_at(folder, 7, 30)
 
 		self.assertEqual([call.kwargs["position_ticket"] for call in close.call_args_list], [1, 2])
+		for call in close.call_args_list:
+			# The deployed MT5 client rejected the previous 31-byte close comment.
+			self.assertLess(len(call.kwargs["comment"].encode("ascii")), 31)
 		self.assertEqual(len(positions), 7)
 
 	def test_eight_positions_allow_only_one_fallback_close(self) -> None:

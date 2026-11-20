@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-20 (Position Rotation Loss Fallback Fix)
+
+- Shortened the loss fallback close-order comment to `Rotation loss` after the MT5 Python client rejected the previous comment as invalid.
+
 ## 2026-11-19 (Experimental Hourly Position Rotation)
 
 - **Added `position_rotation_strategy.py`** for the experimental configurable Europe/Prague position rotation window (default 07:25–20:34)

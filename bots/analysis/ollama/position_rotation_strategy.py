@@ -489,7 +489,7 @@ def _run_loss_fallback(
 				symbol=current.symbol,
 				position_type=current.position_type,
 				volume=current.volume,
-				comment="Position rotation loss fallback",
+				comment="Rotation loss",
 				on_failure=close_errors.append,
 			)
 			result = "closed" if closed else "close_failed"
