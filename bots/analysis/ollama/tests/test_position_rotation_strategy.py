@@ -212,6 +212,51 @@ class PositionRotationStrategyTests(unittest.TestCase):
 
 		close.assert_called_once()
 
+	def test_shadow_failure_does_not_change_live_fallback(self) -> None:
+		positions = [self._position(ticket, profit=-ticket) for ticket in range(1, 9)]
+		with tempfile.TemporaryDirectory() as folder, patch.dict(
+			os.environ, {"POSITION_ROTATION_SHADOW_ENABLED": "true"}
+		), patch(
+			"position_rotation_strategy._snapshot_positions",
+			side_effect=self._snapshot_side_effect(positions),
+		), patch(
+			"position_rotation_strategy.shadow.record_fallback", side_effect=OSError("Log unavailable")
+		) as record, patch("position_rotation_strategy.close_position_by_ticket", return_value=True) as close:
+			self._run_at(folder, 7, 25)
+			record.assert_not_called()
+			self._run_at(folder, 7, 30)
+
+		record.assert_called_once()
+		self.assertEqual(record.call_args.args[3], 1)
+		close.assert_called_once()
+		self.assertEqual(close.call_args.kwargs["position_ticket"], 1)
+
+	def test_shadow_runs_before_live_fallback_without_replacing_its_candidates(self) -> None:
+		positions = [self._position(ticket, profit=-ticket) for ticket in range(1, 10)]
+		events = []
+
+		def record(*_args, **_kwargs):
+			events.append("shadow")
+
+		def close_position(*, position_ticket: int, **_kwargs: object) -> bool:
+			events.append(position_ticket)
+			positions[:] = [position for position in positions if position.ticket != position_ticket]
+			return True
+
+		with tempfile.TemporaryDirectory() as folder, patch.dict(
+			os.environ, {"POSITION_ROTATION_SHADOW_ENABLED": "true"}
+		), patch(
+			"position_rotation_strategy._snapshot_positions",
+			side_effect=self._snapshot_side_effect(positions),
+		), patch(
+			"position_rotation_strategy.shadow.record_fallback", side_effect=record,
+		), patch("position_rotation_strategy.close_position_by_ticket", side_effect=close_position):
+			self._run_at(folder, 7, 25)
+			self._run_at(folder, 7, 34)
+
+		self.assertEqual(events, ["shadow", 1, 2])
+		self.assertEqual(len(positions), 7)
+
 	def test_failed_profitable_close_does_not_trigger_loss_fallback(self) -> None:
 		positions = [self._position(1, profit=1)] + [
 			self._position(ticket, profit=-ticket) for ticket in range(2, 9)

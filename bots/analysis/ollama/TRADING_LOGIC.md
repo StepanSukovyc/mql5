@@ -405,6 +405,20 @@ Pro ECN účet podle dodaného výpisu broker účtuje celou komisi při vstupn�
 
 `PROFIT_CLEANUP_STRATEGY_DRY_RUN=false` povoluje skutečné close příkazy. Výsledky a důvody obou scénářů zapisuje do `trade_logs/profit_cleanup.csv`; sloupec `fee` obsahuje skutečný součet `commission + fee` z MT5 (typicky zápornou částku).
 
+### Stínové hodnocení ztrátové rotace (Nápad V)
+
+`POSITION_ROTATION_SHADOW_ENABLED=true` zapne experiment bez obchodních příkazů. Neovlivňuje výběr ani výsledky stávající rotace. V minutách `:20–:24` služba nezávisle na účtu naplánuje nejvýše jedno hodnocení za hodinu (transport může opakovat neúspěšný pokus). Do Gemini jde pouze pevný seznam veřejných trhů FX a kovů s dostupnými daty a jejich procentní změny z uzavřených svíček H1/H4. Tickety, směry pozic, zisky, objemy ani údaje o účtu se neposílají.
+
+Rozhodnutí V vznikne jen při skutečném ztrátovém fallbacku v pražském okně `[:30, :35)` a použije jen včasné skóre stejné hodiny. Kandidátem na výstup je nejvýše jedna pozice, proti které je směrové skóre nejsilnější. Výměna se navrhne jen s konkrétním novým symbolem, který ještě není otevřený, má souhlasné směrové skóre, čerstvá lokální data a projde trendovým signálem a kontrolou objemu, rizika, nákladů a odhadované marže. Musí existovat překážka v počtu pozic nebo marži, kterou může odstranit jedno uzavření. Odhad marže po uzavření ani cílové P/L nejsou zárukou proveditelnosti nebo výnosu. V neposílá příkazy a nečeká na Gemini na úkor rotace: III provede obvyklé pokusy, i pokud V navrhne výměnu.
+
+Lokální `trade_logs/position_rotation_shadow.jsonl` obsahuje:
+
+- `market_scores` / `market_error`: podklad a výsledek modelu nebo důvod, proč chybí.
+- `comparison`: `keep` nebo dvojice k výměně (`replacement`), odhad nákladů, rizika a marže, důvody odmítnutých vstupů a kandidáti běžné rotace. Skutečné pokusy jsou v `trade_logs/position_rotation.csv` pod stejným `window_key_prague`.
+- `followup`: odhad vývoje stávajících pozic i hypotetického nového obchodu (`ticket: null`) po 1 a 3 hodinách. Přínos výměny proti držení = `estimated_net_if_held` nového obchodu (už po modelových nákladech) minus `estimated_pnl_change` nahrazované pozice. Jde o odhad z kotací, nikoli simulaci intrahodinového zásahu SL/TP, swapu ani celého účtu. Chybějící nebo zmeškaná měření mají vlastní stav.
+
+Porovnávej zejména návrh Gemini proti jedné nejméně ztrátové pozici a sleduj pokrytí i případy bez návrhu. Log obsahuje údaje o skutečných pozicích; nesdílej jej s externími službami.
+
 ### Hodinové Gemini přehodnocení všech pozic ze zisku dne
 
 [`daily_profit_exit_strategy.py`](daily_profit_exit_strategy.py) implementuje „Nápad I“: přehodnocuje všechny otevřené pozice účtu, včetně manuálních, legacy, scalping a pozic s broker-side TP. Nemění jejich ownership, TP ani velikost a neotevírá nové obchody.

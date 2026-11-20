@@ -15,9 +15,10 @@ from typing import Any, Callable, Iterable, Optional, Protocol, cast
 import MetaTrader5 as mt5
 import pytz
 
+import position_rotation_shadow as shadow
 from position_costs import get_position_charged_costs
 from swap_rollover import PRAGUE_TZ
-from trade_execution import close_position_by_ticket
+from trade_execution import close_position_by_ticket, get_max_open_positions
 
 
 DEFAULT_ENABLED = False
@@ -476,6 +477,19 @@ def _run_loss_fallback(
 			)
 			return
 
+		if attempts == 0:
+			try:
+				if _is_shadow_enabled():
+					shadow.record_fallback(
+						service_folder, now_utc, loss_candidates,
+						min(MAX_FALLBACK_CLOSE_ATTEMPTS, open_count - MIN_OPEN_POSITIONS),
+						dry_run, _position_time_to_utc,
+						open_symbols=tuple(position.symbol for position in positions),
+						position_cap=get_max_open_positions(),
+					)
+			except (OSError, RuntimeError, TypeError, ValueError, OverflowError, KeyError, AttributeError) as exc:
+				print(f"Position rotation shadow comparison failed: {exc}")
+
 		current = loss_candidates[0]
 		attempted_tickets.add(current.ticket)
 		attempts += 1
@@ -504,6 +518,20 @@ def _run_loss_fallback(
 			dry_run=dry_run, open_position_count=open_count, candidate=current,
 			result=result, message=message,
 		)
+
+
+def _is_shadow_enabled() -> bool:
+	key = "POSITION_ROTATION_SHADOW_ENABLED"
+	return _to_bool(os.getenv(key) or _load_dotenv_value(key), default=False)
+
+
+def run_position_rotation_shadow_tasks() -> None:
+	if not _is_shadow_enabled():
+		return
+	service_folder = _get_service_folder()
+	if service_folder is None:
+		raise RuntimeError("SERVICE_DEST_FOLDER is required for rotation shadow logging")
+	shadow.maintain(service_folder, datetime.now(timezone.utc), _position_time_to_utc)
 
 
 def run_position_rotation_strategy_if_due(*, now_utc: Optional[datetime] = None) -> None:
