@@ -31,6 +31,7 @@ from instrument_utils import (
 	is_cfd_symbol,
 	is_crypto_full_tp_mode_allowed,
 	is_crypto_symbol,
+	is_symbol_blacklisted,
 )
 from mt5_symbols import estimate_order_profit, get_current_price, get_symbol_info
 from mt5_positions import get_open_positions
@@ -962,6 +963,8 @@ def _build_candidate_queue(predictions: List[Dict], advisory_candidates: Optiona
 	seen: set[Tuple[str, str]] = set()
 
 	for advisory_candidate in advisory_candidates or []:
+		if is_symbol_blacklisted(advisory_candidate.symbol):
+			continue
 		key = _candidate_key(advisory_candidate.symbol, advisory_candidate.action)
 		if key in seen:
 			continue
@@ -969,6 +972,8 @@ def _build_candidate_queue(predictions: List[Dict], advisory_candidates: Optiona
 		seen.add(key)
 
 	for candidate in _build_local_candidates(predictions):
+		if is_symbol_blacklisted(candidate.symbol):
+			continue
 		key = _candidate_key(candidate.symbol, candidate.action)
 		if key in seen:
 			continue

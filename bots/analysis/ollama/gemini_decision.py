@@ -13,6 +13,7 @@ from instrument_utils import (
 	get_base_prediction_threshold,
 	get_crypto_prediction_threshold,
 	is_crypto_symbol,
+	is_symbol_blacklisted,
 )
 
 
@@ -53,6 +54,9 @@ def load_predictions(predictions_folder: Path, *, require_threshold: bool = True
 			buy_pct = prediction.get("BUY", 0)
 			sell_pct = prediction.get("SELL", 0)
 			symbol = str(prediction.get("symbol", ""))
+			if is_symbol_blacklisted(symbol):
+				print(f"  ⛔ Excluding {symbol}: MT5_SYMBOL_BLACKLIST")
+				continue
 			if calendar_service is not None:
 				risk = calendar_service.evaluate(symbol)
 				if not risk.allow_new_trade:

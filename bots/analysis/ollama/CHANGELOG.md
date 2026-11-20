@@ -4,6 +4,11 @@
 
 - Shortened the loss fallback close-order comment to `Rotation loss` after the MT5 Python client rejected the previous comment as invalid.
 
+## 2026-11-20 (Blacklist Filtering in Final Candidate Queue)
+
+- Exclude blacklisted symbols while loading prediction files and again when building the final candidate queue, so stale predictions or Gemini recommendations cannot reach strategy evaluation.
+- Today's NGAS_ecn incident came from a locally ranked prediction that remained in the queue after the Gemini advisory candidates were rejected; execution blocked it, but the queue did not yet filter it.
+
 ## 2026-11-19 (Experimental Hourly Position Rotation)
 
 - **Added `position_rotation_strategy.py`** for the experimental configurable Europe/Prague position rotation window (default 07:25–20:34)

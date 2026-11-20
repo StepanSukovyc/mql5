@@ -13,10 +13,12 @@ from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
+from gemini_decision import load_predictions
 from final_decision import (
 	RankedCandidate,
 	StrategyAttempt,
 	_build_advisory_cache_signature,
+	_build_candidate_queue,
 	_get_gemini_rejection_cooldown_minutes,
 	_is_candidate_rejected,
 	_order_strategy_attempts,
@@ -80,6 +82,46 @@ class FinalDecisionRetryTests(unittest.TestCase):
 		self.assertEqual(records[1]["reason_counts"], {})
 		self.assertIsNone(records[1]["fallback_to"])
 		self.assertIn("gemini_prediction → quant_math", output.getvalue())
+
+	def test_prediction_loader_excludes_blacklisted_symbols(self) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			predictions_folder = Path(temp_dir)
+			for symbol in ("NGAS_ecn", "CADJPY_ecn"):
+				(predictions_folder / f"{symbol}.json").write_text(
+					json.dumps(
+						{
+							"symbol": symbol,
+							"BUY": 60,
+							"SELL": 20,
+							"HOLD": 20,
+							"reasoning": "test",
+						}
+					),
+					encoding="utf-8",
+				)
+
+			with (
+				patch.dict("sys.modules", {"economic_calendar": None}),
+				patch("gemini_decision.is_symbol_blacklisted", side_effect=lambda symbol: symbol == "NGAS_ecn"),
+			):
+				predictions = load_predictions(predictions_folder)
+
+		self.assertEqual([prediction["symbol"] for prediction in predictions], ["CADJPY_ecn"])
+
+	def test_candidate_queue_excludes_blacklisted_advisory_and_local_symbols(self) -> None:
+		predictions = [
+			{"symbol": "NGAS_ecn", "BUY": 80, "SELL": 10},
+			{"symbol": "CADJPY_ecn", "BUY": 20, "SELL": 70},
+		]
+		advisory_candidates = [
+			RankedCandidate(symbol="NGAS_ecn", action="BUY", source="gemini_live_advisory", score=10_000_000.0),
+			RankedCandidate(symbol="CADJPY_ecn", action="SELL", source="gemini_live_advisory", score=9_999_999.0),
+		]
+
+		with patch("final_decision.is_symbol_blacklisted", side_effect=lambda symbol: symbol == "NGAS_ecn"):
+			candidates = _build_candidate_queue(predictions, advisory_candidates)
+
+		self.assertEqual([candidate.symbol for candidate in candidates], ["CADJPY_ecn"])
 
 	def test_last_blocked_strategy_reports_exhausted_fallback(self) -> None:
 		with tempfile.TemporaryDirectory() as temp_dir:
