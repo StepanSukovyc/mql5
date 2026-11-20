@@ -1,4 +1,4 @@
-"""Experimental virtual stop-loss management for Thursday/Friday entries.
+"""Experimental virtual stop-loss management and optional daily recording.
 
 Trades opened on Thursday or Friday (Europe/Prague) are recorded with a
 virtual stop-loss price chosen by Gemini from current market data. The synthetic
@@ -9,6 +9,7 @@ crosses the recorded level (BUY: Bid <= SL, SELL: Ask >= SL).
 State lives in its own file (`virtual_stop_loss_state.json`) so it never mixes
 with profit-protection state. Entries for positions that were closed by any
 other mechanism are removed automatically on the next monitoring pass.
+Recording-only entries are kept separately and never used by the monitor.
 """
 
 from __future__ import annotations
@@ -34,6 +35,7 @@ from trade_execution import close_position_by_ticket
 DEFAULT_ENABLED = False
 DEFAULT_DRY_RUN = True
 STATE_FILE_NAME = "virtual_stop_loss_state.json"
+RECORD_FILE_NAME = "virtual_stop_loss_records.json"
 REGISTRATION_WEEKDAYS_PRAGUE = (3, 4)  # Thursday, Friday
 LOG_HEADERS = [
 	"timestamp",
@@ -85,6 +87,11 @@ def is_virtual_stop_loss_enabled() -> bool:
 	return _to_bool(raw, default=DEFAULT_ENABLED)
 
 
+def _is_recording_enabled() -> bool:
+	key = "VIRTUAL_STOP_LOSS_RECORD_ENABLED"
+	return _to_bool(os.getenv(key) or _load_dotenv_value(key), default=False)
+
+
 def _get_dry_run() -> bool:
 	raw = os.getenv("VIRTUAL_STOP_LOSS_DRY_RUN") or _load_dotenv_value("VIRTUAL_STOP_LOSS_DRY_RUN")
 	return _to_bool(raw, default=DEFAULT_DRY_RUN)
@@ -97,25 +104,31 @@ def _get_service_folder() -> Optional[Path]:
 	return Path(raw_value)
 
 
-def _get_state_path(service_folder: Path) -> Path:
+def _get_state_path(service_folder: Path, *, record_only: bool = False) -> Path:
 	state_dir = service_folder / "trade_logs"
 	state_dir.mkdir(parents=True, exist_ok=True)
-	return state_dir / STATE_FILE_NAME
+	return state_dir / (RECORD_FILE_NAME if record_only else STATE_FILE_NAME)
 
 
-def _load_state(service_folder: Path) -> dict[str, dict[str, Any]]:
-	state_path = _get_state_path(service_folder)
+def _load_state(service_folder: Path, *, record_only: bool = False) -> dict[str, dict[str, Any]]:
+	state_path = _get_state_path(service_folder, record_only=record_only)
 	if not state_path.exists():
 		return {}
 	try:
 		payload = json.loads(state_path.read_text(encoding="utf-8"))
+		if record_only and not isinstance(payload, dict):
+			raise ValueError(f"Expected a JSON object in {state_path}")
 		return payload if isinstance(payload, dict) else {}
 	except (OSError, json.JSONDecodeError):
+		if record_only:
+			raise
 		return {}
 
 
-def _save_state(service_folder: Path, state: dict[str, dict[str, Any]]) -> None:
-	state_path = _get_state_path(service_folder)
+def _save_state(
+	service_folder: Path, state: dict[str, dict[str, Any]], *, record_only: bool = False,
+) -> None:
+	state_path = _get_state_path(service_folder, record_only=record_only)
 	state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
@@ -196,19 +209,18 @@ def register_virtual_stop_loss(
 	now_utc: Optional[datetime] = None,
 ) -> Optional[float]:
 	"""Record a virtual SL for a freshly opened trade; returns the SL price or None."""
-	if not is_virtual_stop_loss_enabled():
-		return None
 	if service_folder is None or position_ticket <= 0:
 		return None
 	now = now_utc or datetime.now(tz=timezone.utc)
-	if not is_virtual_stop_loss_registration_day(now):
+	record_only = not (is_virtual_stop_loss_enabled() and is_virtual_stop_loss_registration_day(now))
+	if record_only and not _is_recording_enabled():
 		return None
 
 	stop_loss_price = calculate_virtual_stop_loss_price(symbol, action, filled_price, synthetic_stop_distance)
 	if stop_loss_price is None or stop_loss_price <= 0:
 		return None
 
-	state = _load_state(service_folder)
+	state = _load_state(service_folder, record_only=record_only)
 	state[str(position_ticket)] = {
 		"ticket": position_ticket,
 		"symbol": symbol,
@@ -223,7 +235,7 @@ def register_virtual_stop_loss(
 		"stop_loss_source": "emergency_atr",
 		"emergency_stop_loss_price": stop_loss_price,
 	}
-	_save_state(service_folder, state)
+	_save_state(service_folder, state, record_only=record_only)
 	# Persist emergency protection before waiting for a potentially slow model request.
 	try:
 		decision = _request_ai_stop_loss(symbol, action, filled_price, stop_loss_price)
@@ -235,21 +247,21 @@ def register_virtual_stop_loss(
 		if not math.isfinite(ai_price) or ai_price <= 0 or not valid:
 			raise ValueError("AI stop loss is invalid after symbol price rounding")
 	except (GeminiVertexError, OSError, RuntimeError, TypeError, ValueError, KeyError) as exc:
-		state = _load_state(service_folder)
+		state = _load_state(service_folder, record_only=record_only)
 		if str(position_ticket) in state:
 			state[str(position_ticket)]["ai_error"] = str(exc)
-			_save_state(service_folder, state)
+			_save_state(service_folder, state, record_only=record_only)
 		print(f"Virtual SL AI failed [{strategy_id}] {symbol} ticket={position_ticket}; emergency ATR retained: {exc}")
 	else:
 		# The monitor may have closed the position while the AI request was running.
-		state = _load_state(service_folder)
+		state = _load_state(service_folder, record_only=record_only)
 		if str(position_ticket) in state:
 			state[str(position_ticket)].update({
 				"stop_loss_price": ai_price,
 				"stop_loss_source": "gemini",
 				"ai_reasoning": decision["reasoning"],
 			})
-			_save_state(service_folder, state)
+			_save_state(service_folder, state, record_only=record_only)
 			stop_loss_price = ai_price
 	print(
 		f"🛡️ Virtual SL registered [{strategy_id}] {symbol} ticket={position_ticket} "

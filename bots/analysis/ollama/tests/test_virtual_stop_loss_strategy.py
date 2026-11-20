@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from datetime import datetime, timezone
@@ -110,6 +111,7 @@ class AIStopLossContextTests(unittest.TestCase):
 
 class RegistrationTests(unittest.TestCase):
 	def setUp(self) -> None:
+		self.enterContext(patch.dict(os.environ, {"VIRTUAL_STOP_LOSS_RECORD_ENABLED": "false"}))
 		self.ai = self.enterContext(patch(
 			"virtual_stop_loss_strategy._request_ai_stop_loss",
 			return_value={"stop_loss_price": 1.195, "reasoning": "Support invalidation"},
@@ -197,6 +199,37 @@ class RegistrationTests(unittest.TestCase):
 		with tempfile.TemporaryDirectory() as temp_dir:
 			sl = self._register(Path(temp_dir), datetime(2026, 11, 12, 12, 0, tzinfo=timezone.utc))
 			self.assertIsNone(sl)
+			self.ai.assert_not_called()
+
+	@patch.dict(os.environ, {"VIRTUAL_STOP_LOSS_RECORD_ENABLED": "true"})
+	@patch("virtual_stop_loss_strategy.get_symbol_info", return_value=SimpleNamespace(digits=5))
+	@patch("virtual_stop_loss_strategy.is_virtual_stop_loss_enabled", return_value=False)
+	def test_records_gemini_stop_on_any_day_without_monitor_state(self, _enabled, _info) -> None:
+		for day in range(9, 16):  # Monday through Sunday
+			with self.subTest(day=day), tempfile.TemporaryDirectory() as temp_dir:
+				folder = Path(temp_dir)
+				sl = self._register(folder, datetime(2026, 11, day, 12, tzinfo=timezone.utc))
+				logs = folder / "trade_logs"
+				records = json.loads((logs / "virtual_stop_loss_records.json").read_text(encoding="utf-8"))
+				self.assertEqual(sl, 1.195)
+				self.assertEqual(records["123"]["stop_loss_source"], "gemini")
+				self.assertEqual(records["123"]["emergency_stop_loss_price"], 1.19)
+				self.assertFalse((logs / "virtual_stop_loss_state.json").exists())
+		self.assertEqual(self.ai.call_count, 7)
+
+	@patch.dict(os.environ, {"VIRTUAL_STOP_LOSS_RECORD_ENABLED": "true"})
+	@patch("virtual_stop_loss_strategy.get_symbol_info", return_value=SimpleNamespace(digits=5))
+	@patch("virtual_stop_loss_strategy.is_virtual_stop_loss_enabled", return_value=False)
+	def test_evidence_keeps_atr_when_gemini_fails(self, _enabled, _info) -> None:
+		self.ai.side_effect = RuntimeError("AI unavailable")
+		with tempfile.TemporaryDirectory() as temp_dir:
+			folder = Path(temp_dir)
+			sl = self._register(folder, datetime(2026, 11, 11, 12, tzinfo=timezone.utc))
+			path = folder / "trade_logs" / "virtual_stop_loss_records.json"
+			record = json.loads(path.read_text(encoding="utf-8"))["123"]
+		self.assertEqual(sl, 1.19)
+		self.assertEqual(record["stop_loss_source"], "emergency_atr")
+		self.assertEqual(record["ai_error"], "AI unavailable")
 
 
 class MonitoringTests(unittest.TestCase):
@@ -226,6 +259,18 @@ class MonitoringTests(unittest.TestCase):
 		return json.loads(
 			(Path(temp_dir) / "trade_logs" / "virtual_stop_loss_state.json").read_text(encoding="utf-8")
 		)
+
+	def test_monitor_never_closes_record_only_position(self) -> None:
+		with tempfile.TemporaryDirectory() as temp_dir:
+			logs = Path(temp_dir) / "trade_logs"
+			logs.mkdir()
+			path = logs / "virtual_stop_loss_records.json"
+			path.write_text(json.dumps({"123": _state_entry()}), encoding="utf-8")
+			mock_close = self._run(
+				temp_dir, positions=(_position(),), tick=SimpleNamespace(bid=1.189, ask=1.1895),
+			)
+			mock_close.assert_not_called()
+			self.assertIn("123", json.loads(path.read_text(encoding="utf-8")))
 
 	def test_buy_position_closes_when_bid_drops_below_stop_loss(self) -> None:
 		with tempfile.TemporaryDirectory() as temp_dir:
