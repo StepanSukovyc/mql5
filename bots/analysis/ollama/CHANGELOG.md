@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-21 (Nápad VI: Single Loss-Rotation Fallback)
+
+- Replaced the two least-losing fallback closes with at most one close: the eligible old losing position with the highest `abs(net_profit) / volume` score.
+- Keep existing fallback gates and the seven-position floor; log the selected score and volume in the rotation CSV message.
+- Removed the Nápad V Gemini shadow evaluator, its scheduler and configuration.
+
 ## 2026-11-20 (Position Rotation Loss Fallback Fix)
 
 - Shortened the loss fallback close-order comment to `Rotation loss` after the MT5 Python client rejected the previous comment as invalid.

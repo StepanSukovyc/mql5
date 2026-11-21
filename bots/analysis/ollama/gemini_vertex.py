@@ -11,7 +11,7 @@ import time
 import urllib.error
 import urllib.request
 from types import SimpleNamespace
-from typing import Any, Callable, Dict, List, Optional, TypedDict
+from typing import Any, Callable, Dict, List, Optional
 
 import httpx
 
@@ -117,61 +117,6 @@ def request_exit_decisions(config: GeminiVertexConfig, prompt: str, tickets: set
 		validator=lambda payload: _validate_exit_decisions(payload, tickets),
 		task_name="daily_profit_exit", max_output_tokens=8192,
 	)
-
-
-class RotationMarketScore(TypedDict):
-	symbol: str
-	score: int
-	reasoning: str
-
-
-def request_rotation_market_scores(
-	config: GeminiVertexConfig, features: dict[str, dict[str, list[float]]],
-) -> list[RotationMarketScore]:
-	schema = {
-		"type": "OBJECT", "required": ["scores"], "properties": {"scores": {
-			"type": "ARRAY", "items": {
-				"type": "OBJECT", "required": ["symbol", "score", "reasoning"],
-				"properties": {"symbol": {"type": "STRING"}, "score": {"type": "INTEGER"},
-					"reasoning": {"type": "STRING"}},
-			},
-		}},
-	}
-
-	def validate(payload: Dict[str, Any]) -> Dict[str, Any]:
-		rows = payload.get("scores")
-		if not isinstance(rows, list):
-			raise GeminiVertexRequestError("Public market scores must be an array")
-		scores: list[RotationMarketScore] = []
-		seen: set[str] = set()
-		for row in rows:
-			if not isinstance(row, dict):
-				raise GeminiVertexRequestError("Invalid public market score")
-			symbol, score, reasoning = row.get("symbol"), row.get("score"), row.get("reasoning")
-			if (
-				not isinstance(symbol, str) or symbol not in features or symbol in seen
-				or type(score) is not int or not -100 <= score <= 100
-				or not isinstance(reasoning, str) or not reasoning.strip()
-			):
-				raise GeminiVertexRequestError("Invalid or duplicate public market score")
-			scores.append({"symbol": symbol, "score": score, "reasoning": reasoning.strip()})
-			seen.add(symbol)
-		if seen != set(features):
-			raise GeminiVertexRequestError("Public market response did not cover all supplied symbols")
-		return {"scores": scores}
-
-	result = _request_structured_json(
-		config=config, response_schema=schema, validator=validate,
-		task_name="rotation_shadow_public_market", max_output_tokens=2048,
-		prompt=(
-			"Assess directional bias for the next 1–3 hours independently for each symbol. "
-			"These are consecutive percentage returns of completed H1 and H4 bars, oldest first. "
-			"Score -100 for strongly bearish, 100 for strongly bullish, and 0 for mixed or weak evidence. "
-			"Return one integer score and a short reason for each symbol. Use only the data supplied.\n"
-			+ json.dumps(features, allow_nan=False)
-		),
-	)
-	return result["scores"]
 
 
 def request_stop_loss_decision(

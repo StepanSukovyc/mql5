@@ -44,6 +44,7 @@ class PositionRotationStrategyTests(unittest.TestCase):
 		age_hours: float = 2,
 		profit: float = -1,
 		swap: float = 0,
+		volume: float = 0.01,
 	) -> SimpleNamespace:
 		opened_at = datetime(2026, 11, 19, 6, 25, tzinfo=timezone.utc) - timedelta(hours=age_hours)
 		server_wall_time = (
@@ -53,7 +54,7 @@ class PositionRotationStrategyTests(unittest.TestCase):
 			ticket=ticket,
 			symbol=f"SYM{ticket}",
 			type=0,
-			volume=0.01,
+			volume=volume,
 			time=server_wall_time.replace(tzinfo=timezone.utc).timestamp(),
 			profit=profit,
 			swap=swap,
@@ -162,12 +163,15 @@ class PositionRotationStrategyTests(unittest.TestCase):
 
 		self.assertEqual(close.call_count, 3)
 
-	def test_fallback_closes_two_least_losing_positions_but_keeps_seven(self) -> None:
+	def test_fallback_closes_one_position_with_highest_net_loss_per_lot(self) -> None:
 		positions = [
-			self._position(1, profit=-1),
-			self._position(2, profit=-2),
-			self._position(3, profit=-10),
-		] + [self._position(ticket, profit=-20 - ticket) for ticket in range(4, 10)]
+			self._position(1, profit=-53.76, volume=0.07),
+			self._position(2, profit=-43.46, volume=0.34),
+			self._position(3, profit=-100, volume=0.2),
+		] + [
+			self._position(ticket, profit=-20 - ticket, volume=1)
+			for ticket in range(4, 10)
+		]
 
 		def close_position(*, position_ticket: int, **_kwargs: object) -> bool:
 			positions[:] = [position for position in positions if position.ticket != position_ticket]
@@ -181,15 +185,20 @@ class PositionRotationStrategyTests(unittest.TestCase):
 		) as close, patch(
 			"position_rotation_strategy.get_position_charged_costs", return_value=0
 		):
-			for minute in range(25, 30):
-				self._run_at(folder, 7, minute)
+			self._run_at(folder, 7, 25)
 			self._run_at(folder, 7, 30)
+			with (Path(folder) / "trade_logs" / rotation.LOG_FILE_NAME).open(
+				"r", newline="", encoding="utf-8"
+			) as handle:
+				logs = list(csv.DictReader(handle))
 
-		self.assertEqual([call.kwargs["position_ticket"] for call in close.call_args_list], [1, 2])
+		self.assertEqual([call.kwargs["position_ticket"] for call in close.call_args_list], [1])
 		for call in close.call_args_list:
 			# The deployed MT5 client rejected the previous 31-byte close comment.
 			self.assertLess(len(call.kwargs["comment"].encode("ascii")), 31)
-		self.assertEqual(len(positions), 7)
+		self.assertEqual(len(positions), 8)
+		fallback = next(row for row in logs if row["phase"] == "fallback")
+		self.assertIn("score=768.00, volume=0.07", fallback["message"])
 
 	def test_eight_positions_allow_only_one_fallback_close(self) -> None:
 		positions = [self._position(ticket, profit=-ticket) for ticket in range(1, 9)]
@@ -211,50 +220,6 @@ class PositionRotationStrategyTests(unittest.TestCase):
 			self._run_at(folder, 7, 30)
 
 		close.assert_called_once()
-
-	def test_shadow_failure_does_not_change_live_fallback(self) -> None:
-		positions = [self._position(ticket, profit=-ticket) for ticket in range(1, 9)]
-		with tempfile.TemporaryDirectory() as folder, patch.dict(
-			os.environ, {"POSITION_ROTATION_SHADOW_ENABLED": "true"}
-		), patch(
-			"position_rotation_strategy._snapshot_positions",
-			side_effect=self._snapshot_side_effect(positions),
-		), patch(
-			"position_rotation_strategy.shadow.record_fallback", side_effect=OSError("Log unavailable")
-		) as record, patch("position_rotation_strategy.close_position_by_ticket", return_value=True) as close:
-			self._run_at(folder, 7, 25)
-			record.assert_not_called()
-			self._run_at(folder, 7, 30)
-
-		record.assert_called_once()
-		self.assertEqual(record.call_args.args[3], 1)
-		close.assert_called_once()
-		self.assertEqual(close.call_args.kwargs["position_ticket"], 1)
-
-	def test_shadow_runs_before_live_fallback_without_replacing_its_candidates(self) -> None:
-		positions = [self._position(ticket, profit=-ticket) for ticket in range(1, 10)]
-		events = []
-
-		def record(*_args, **_kwargs):
-			events.append("shadow")
-
-		def close_position(*, position_ticket: int, **_kwargs: object) -> bool:
-			events.append(position_ticket)
-			positions[:] = [position for position in positions if position.ticket != position_ticket]
-			return True
-
-		with tempfile.TemporaryDirectory() as folder, patch.dict(
-			os.environ, {"POSITION_ROTATION_SHADOW_ENABLED": "true"}
-		), patch(
-			"position_rotation_strategy._snapshot_positions",
-			side_effect=self._snapshot_side_effect(positions),
-		), patch(
-			"position_rotation_strategy.shadow.record_fallback", side_effect=record,
-		), patch("position_rotation_strategy.close_position_by_ticket", side_effect=close_position):
-			self._run_at(folder, 7, 25)
-			self._run_at(folder, 7, 34)
-
-		self.assertEqual(events, ["shadow", 1, 2])
 		self.assertEqual(len(positions), 7)
 
 	def test_failed_profitable_close_does_not_trigger_loss_fallback(self) -> None:
@@ -317,10 +282,11 @@ class PositionRotationStrategyTests(unittest.TestCase):
 				logs = list(csv.DictReader(handle))
 
 		failures = [row for row in logs if row["phase"] == "fallback"]
-		self.assertEqual(len(failures), 2)
-		self.assertTrue(all(row["result"] == "close_failed" for row in failures))
-		self.assertIn("Failed to get tick for closing SYM1", failures[0]["message"])
+		self.assertEqual(len(failures), 1)
+		self.assertEqual(failures[0]["result"], "close_failed")
+		self.assertIn("Failed to get tick for closing SYM8", failures[0]["message"])
 		self.assertIn("terminal unavailable", failures[0]["message"])
+		self.assertIn("selected score=800.00, volume=0.01", failures[0]["message"])
 		order_send.assert_not_called()
 
 	def test_young_profitable_position_prevents_loss_fallback(self) -> None:

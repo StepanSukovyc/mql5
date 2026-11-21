@@ -15,7 +15,6 @@ from typing import Any, Callable, Iterable, Optional, Protocol, cast
 import MetaTrader5 as mt5
 import pytz
 
-import position_rotation_shadow as shadow
 from position_costs import get_position_charged_costs
 from swap_rollover import PRAGUE_TZ
 from trade_execution import close_position_by_ticket, get_max_open_positions
@@ -25,7 +24,7 @@ DEFAULT_ENABLED = False
 DEFAULT_DRY_RUN = True
 MIN_OPEN_POSITIONS = 7
 MIN_POSITION_AGE_SECONDS = 60 * 60
-MAX_FALLBACK_CLOSE_ATTEMPTS = 2
+MAX_FALLBACK_CLOSE_ATTEMPTS = 1
 DEFAULT_SERVER_TIME_OFFSET_FROM_PRAGUE_HOURS = 1
 ACTIVE_START = time(hour=7, minute=25)
 ACTIVE_END = time(hour=20, minute=34)
@@ -466,7 +465,11 @@ def _run_loss_fallback(
 				and position.net_profit < 0
 				and position.ticket not in attempted_tickets
 			),
-			key=lambda position: position.net_profit,
+			key=lambda position: (
+				abs(position.net_profit) / position.volume,
+				abs(position.net_profit),
+				-position.ticket,
+			),
 			reverse=True,
 		)
 		if not loss_candidates:
@@ -477,25 +480,19 @@ def _run_loss_fallback(
 			)
 			return
 
-		if attempts == 0:
-			try:
-				if _is_shadow_enabled():
-					shadow.record_fallback(
-						service_folder, now_utc, loss_candidates,
-						min(MAX_FALLBACK_CLOSE_ATTEMPTS, open_count - MIN_OPEN_POSITIONS),
-						dry_run, _position_time_to_utc,
-						open_symbols=tuple(position.symbol for position in positions),
-						position_cap=get_max_open_positions(),
-					)
-			except (OSError, RuntimeError, TypeError, ValueError, OverflowError, KeyError, AttributeError) as exc:
-				print(f"Position rotation shadow comparison failed: {exc}")
-
 		current = loss_candidates[0]
+		loss_per_lot_score = abs(current.net_profit) / current.volume
+		selection_details = (
+			f"score={loss_per_lot_score:.2f}, volume={current.volume:g}"
+		)
 		attempted_tickets.add(current.ticket)
 		attempts += 1
 		if dry_run:
 			result = "dry_run"
-			message = "Least-losing old position selected; no order sent"
+			message = (
+				"Highest net loss per lot selected; no order sent "
+				f"({selection_details})"
+			)
 		else:
 			close_errors: list[str] = []
 			closed = close_position_by_ticket(
@@ -507,10 +504,14 @@ def _run_loss_fallback(
 				on_failure=close_errors.append,
 			)
 			result = "closed" if closed else "close_failed"
-			message = (
-				"Closed least-losing old position" if closed
-				else close_errors[0] if close_errors else "Position close failed; no diagnostic provided"
-			)
+			if closed:
+				message = f"Closed highest net loss per lot candidate ({selection_details})"
+			else:
+				error_message = (
+					close_errors[0] if close_errors
+					else "Position close failed; no diagnostic provided"
+				)
+				message = f"{error_message} (selected {selection_details})"
 			if closed:
 				closed_tickets.add(current.ticket)
 		_log_action(
@@ -518,21 +519,6 @@ def _run_loss_fallback(
 			dry_run=dry_run, open_position_count=open_count, candidate=current,
 			result=result, message=message,
 		)
-
-
-def _is_shadow_enabled() -> bool:
-	key = "POSITION_ROTATION_SHADOW_ENABLED"
-	return _to_bool(os.getenv(key) or _load_dotenv_value(key), default=False)
-
-
-def run_position_rotation_shadow_tasks() -> None:
-	if not _is_shadow_enabled():
-		return
-	service_folder = _get_service_folder()
-	if service_folder is None:
-		raise RuntimeError("SERVICE_DEST_FOLDER is required for rotation shadow logging")
-	shadow.maintain(service_folder, datetime.now(timezone.utc), _position_time_to_utc)
-
 
 def run_position_rotation_strategy_if_due(*, now_utc: Optional[datetime] = None) -> None:
 	"""Rotate old positions during the Prague-time hourly window, preserving seven positions."""
